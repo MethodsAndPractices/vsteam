@@ -14,35 +14,33 @@
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
-```PowerShell
-PS C:\> Get-VSTeamGitStat -ProjectName Demo -RepositoryId 011E421A-2A54-4491-B370-9256AD8A1BDD
+```powershell
+Get-VSTeamGitStat -ProjectName Demo -RepositoryId 011E421A-2A54-4491-B370-9256AD8A1BDD
 ```
 
 This command returns all the Git stats for the entire repository
 
-### -------------------------- EXAMPLE 2 --------------------------
+### Example 2
 
-```PowerShell
-PS C:\> Get-VSTeamGitStat -ProjectName Demo -RepositoryId 011E421A-2A54-4491-B370-9256AD8A1BDD -BranchName develop
+```powershell
+Get-VSTeamGitStat -ProjectName Demo -RepositoryId 011E421A-2A54-4491-B370-9256AD8A1BDD -BranchName develop
 ```
 
 This command returns all the Git stats for a specific branch
 
-### -------------------------- EXAMPLE 3 --------------------------
+### Example 3
 
-```PowerShell
-PS C:\> Get-VSTeamGitStat -ProjectName Demo -RepositoryId 011E421A-2A54-4491-B370-9256AD8A1BDD -BranchName develop -VersionType branch -Version 67cae2b029dff7eb3dc062b49403aaedca5bad8d
+```powershell
+Get-VSTeamGitStat -ProjectName Demo -RepositoryId 011E421A-2A54-4491-B370-9256AD8A1BDD -BranchName develop -VersionType branch -Version 67cae2b029dff7eb3dc062b49403aaedca5bad8d
 ```
 
 This command returns all the Git stats for a specific commit
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
-### -RepositoryId
+### RepositoryId
 
 Specifies the ID of the repository.
 
@@ -53,7 +51,7 @@ Required: true
 Accept pipeline input: true (ByPropertyName)
 ```
 
-### -BranchName
+### BranchName
 
 Name of the branch.
 
@@ -62,7 +60,7 @@ Type: String
 Required: true
 ```
 
-### -VersionOptions
+### VersionOptions
 
 Version options - Specify additional modifiers to version (e.g Previous). Valid options for this parameter are:
 
@@ -75,7 +73,7 @@ Type: String
 Parameter Sets: ByVersion
 ```
 
-### -Version
+### Version
 
 Version string identifier (name of tag/branch, SHA1 of commit)
 
@@ -84,7 +82,7 @@ Type: String
 Parameter Sets: ByVersion
 ```
 
-### -VersionType
+### VersionType
 
 Version type (branch, tag, or commit). Determines how Id is interpreted. Valid options for this parameter are:
 
@@ -97,10 +95,16 @@ Type: String
 Parameter Sets: ByVersion
 ```
 
+<!-- #include "./params/projectName.md" -->
+
 ## INPUTS
 
 ## OUTPUTS
 
 ## NOTES
 
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
+
+<!-- #include "./common/related.md" -->

@@ -1,5 +1,6 @@
 function Update-VSTeamBuildDefinition {
-   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Medium", DefaultParameterSetName = 'JSON')]
+   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Medium", DefaultParameterSetName = 'JSON',
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Update-VSTeamBuildDefinition')]
    Param(
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [int] $Id,
@@ -12,9 +13,9 @@ function Update-VSTeamBuildDefinition {
 
       [switch] $Force,
 
-      [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
-      [ProjectValidateAttribute()]
-      [ArgumentCompleter([ProjectCompleter])]
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+      [vsteam_lib.ProjectValidateAttribute($false)]
+      [ArgumentCompleter([vsteam_lib.ProjectCompleter])]
       [string] $ProjectName
    )
 
@@ -23,10 +24,20 @@ function Update-VSTeamBuildDefinition {
          # Call the REST API
 
          if ($InFile) {
-            _callAPI -Method Put -ProjectName $ProjectName -Area build -Resource definitions -Id $Id -Version $(_getApiVersion Build) -InFile $InFile -ContentType 'application/json' | Out-Null
+            _callAPI -Method PUT -ProjectName $ProjectName `
+               -Area build `
+               -Resource definitions `
+               -Id $Id `
+               -InFile $InFile `
+               -Version $(_getApiVersion Build) | Out-Null
          }
          else {
-            _callAPI -Method Put -ProjectName $ProjectName -Area build -Resource definitions -Id $Id -Version $(_getApiVersion Build) -Body $BuildDefinition -ContentType 'application/json' | Out-Null
+            _callAPI -Method PUT -ProjectName $ProjectName `
+               -Area build `
+               -Resource definitions `
+               -Id $Id `
+               -Body $BuildDefinition `
+               -Version $(_getApiVersion Build) | Out-Null
          }
       }
    }

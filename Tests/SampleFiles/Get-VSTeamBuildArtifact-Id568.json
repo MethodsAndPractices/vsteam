@@ -1,0 +1,87 @@
+{
+   "count": 5,
+   "value": [
+      {
+         "id": 1149,
+         "name": "win",
+         "source": "00000000-0000-0000-0000-000000000000",
+         "resource": {
+            "type": "Container",
+            "data": "#/3943501/win",
+            "properties": {
+               "localpath": "d:\\WinBldBox-3_Test_Service3\\2\\a",
+               "artifactsize": "23898082"
+            },
+            "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/builds/568/artifacts?artifactName=win&api-version=5.1",
+            "downloadUrl": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/builds/568/artifacts?artifactName=win&api-version=5.1&%24format=zip"
+         }
+      },
+      {
+         "id": 1150,
+         "name": "ber",
+         "source": "00000000-0000-0000-0000-000000000000",
+         "resource": {
+            "type": "Container",
+            "data": "#/3943501/ber",
+            "properties": {
+               "localpath": "d:\\WinBldBox-3_Test_Service2\\2\\a",
+               "artifactsize": "4746071"
+            },
+            "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/builds/568/artifacts?artifactName=ber&api-version=5.1",
+            "downloadUrl": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/builds/568/artifacts?artifactName=ber&api-version=5.1&%24format=zip"
+         }
+      },
+      {
+         "id": 1151,
+         "name": "Code Coverage Report_568",
+         "source": "00000000-0000-0000-0000-000000000000",
+         "resource": {
+            "_links": {
+               "web": {
+                  "href": "https://dev.azure.com/Test/_apis/Containers/3943501/Code%20Coverage%20Report_568/index.html"
+               }
+            },
+            "type": "Container",
+            "data": "#/3943501/Code Coverage Report_568",
+            "properties": {
+               "containerfolder": "Code Coverage Report_568",
+               "artifactname": "Code Coverage Report_568",
+               "artifacttype": "Container",
+               "Browsable": "True"
+            },
+            "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/builds/568/artifacts?artifactName=Code%20Coverage%20Report_568&api-version=5.1",
+            "downloadUrl": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/builds/568/artifacts?artifactName=Code%20Coverage%20Report_568&api-version=5.1&%24format=zip"
+         }
+      },
+      {
+         "id": 1152,
+         "name": "iac",
+         "source": "00000000-0000-0000-0000-000000000000",
+         "resource": {
+            "type": "Container",
+            "data": "#/3943501/iac",
+            "properties": {
+               "localpath": "/home/vsts/work/1/a/IaC",
+               "artifactsize": "30214"
+            },
+            "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/builds/568/artifacts?artifactName=iac&api-version=5.1",
+            "downloadUrl": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/builds/568/artifacts?artifactName=iac&api-version=5.1&%24format=zip"
+         }
+      },
+      {
+         "id": 1153,
+         "name": "mobile",
+         "source": "00000000-0000-0000-0000-000000000000",
+         "resource": {
+            "type": "Container",
+            "data": "#/3943501/mobile",
+            "properties": {
+               "localpath": "/Users/runner/runners/2.160.0/work/1/a",
+               "artifactsize": "79285593"
+            },
+            "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/builds/568/artifacts?artifactName=mobile&api-version=5.1",
+            "downloadUrl": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/builds/568/artifacts?artifactName=mobile&api-version=5.1&%24format=zip"
+         }
+      }
+   ]
+}

@@ -1,5 +1,6 @@
 function Update-VSTeamPullRequest {
-   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "High", DefaultParameterSetName = 'Draft')]
+   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "High", DefaultParameterSetName = 'Draft',
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Update-VSTeamPullRequest')]
    param(
       [Parameter(ValueFromPipelineByPropertyName = $true, Mandatory = $true, Position = 0)]
       [Alias('Id')]
@@ -16,7 +17,7 @@ function Update-VSTeamPullRequest {
       [Switch] $EnableAutoComplete,
 
       [Parameter(ParameterSetName = "EnableAutoComplete", Mandatory = $true)]
-      [VSTeamUser] $AutoCompleteIdentity,
+      [vsteam_lib.User] $AutoCompleteIdentity,
 
       [Parameter(ParameterSetName = "DisableAutoComplete", Mandatory = $true)]
       [Switch] $DisableAutoComplete,
@@ -50,7 +51,7 @@ function Update-VSTeamPullRequest {
 
          # Call the REST API
          $resp = _callAPI -Area git -Resource repositories -iD "$RepositoryId/pullrequests/$PullRequestId" `
-            -Method Patch -ContentType 'application/json' -body $body -Version $(_getApiVersion Git)
+            -Method PATCH -ContentType 'application/json' -body $body -Version $(_getApiVersion Git)
 
          _applyTypesToPullRequests -item $resp
 

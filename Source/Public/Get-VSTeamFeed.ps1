@@ -1,5 +1,6 @@
 function Get-VSTeamFeed {
-   [CmdletBinding(DefaultParameterSetName = 'List')]
+   [CmdletBinding(DefaultParameterSetName = 'List',
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Get-VSTeamFeed')]
    param (
       [Parameter(ParameterSetName = 'ByID', Position = 0)]
       [Alias('FeedId')]
@@ -7,24 +8,32 @@ function Get-VSTeamFeed {
    )
 
    process {
+      $commonArgs = @{
+         subDomain = 'feeds'
+         area      = 'packaging'
+         resource  = 'feeds'
+         NoProject = $true
+         version   = $(_getApiVersion Packaging)
+      }
+
       if ($id) {
          foreach ($item in $id) {
-            $resp = _callAPI -NoProject -subDomain feeds -Id $item -Area packaging -Resource feeds -Version $(_getApiVersion Packaging)
+            $resp = _callAPI @commonArgs -Id $item
 
             Write-Verbose $resp
-            $item = [VSTeamFeed]::new($resp)
+            $item = [vsteam_lib.Feed]::new($resp)
 
             Write-Output $item
          }
       }
       else {
-         $resp = _callAPI -NoProject -subDomain feeds -Area packaging -Resource feeds -Version $(_getApiVersion Packaging)
+         $resp = _callAPI @commonArgs
 
          $objs = @()
 
          foreach ($item in $resp.value) {
             Write-Verbose $item
-            $objs += [VSTeamFeed]::new($item)
+            $objs += [vsteam_lib.Feed]::new($item)
          }
 
          Write-Output $objs

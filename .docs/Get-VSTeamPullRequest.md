@@ -14,57 +14,57 @@
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
-```PowerShell
-PS C:\> Get-VSTeamPullRequest
+```powershell
+Get-VSTeamPullRequest
 ```
 
 This command returns all the open pull requests for your TFS or Team Services account.
 
-### -------------------------- EXAMPLE 2 --------------------------
+### Example 2
 
-```PowerShell
-PS C:\> Get-VSTeamPullRequest -ProjectName Demo
+```powershell
+Get-VSTeamPullRequest -ProjectName Demo
 ```
 
 This command returns all the open pull requests for the Demo team project.
 
-### -------------------------- EXAMPLE 3 --------------------------
+### Example 3
 
-```PowerShell
-PS C:\> Get-VSTeamPullRequest -ProjectName Demo -All
+```powershell
+Get-VSTeamPullRequest -ProjectName Demo -All
 ```
 
 This command returns all pull requests for the Demo team project.
 
-### -------------------------- EXAMPLE 4 --------------------------
+### Example 4
 
-```PowerShell
-PS C:\> Get-VSTeamPullRequest -ProjectName Demo -TargetBranchRef "refs/heads/mybranch"
+```powershell
+Get-VSTeamPullRequest -ProjectName Demo -TargetBranchRef "refs/heads/mybranch"
 ```
 
 This command returns all open pull requests for a specific branch
 
-### -------------------------- EXAMPLE 5 --------------------------
+### Example 5
 
-```PowerShell
-PS C:\> Get-VSTeamPullRequest -Id 123
+```powershell
+Get-VSTeamPullRequest -Id 123
 ```
 
 This command gets the pull request with an Id of 123.
 
-### -------------------------- EXAMPLE 6 --------------------------
+### Example 6
 
-```PowerShell
-PS C:\> Get-VSTeamPullRequest -Id 123 -RepositoryId "93BBA613-2729-4158-9217-751E952AB4AF" -IncludeCommits
+```powershell
+Get-VSTeamPullRequest -Id 123 -RepositoryId "93BBA613-2729-4158-9217-751E952AB4AF" -IncludeCommits
 ```
 
 This command gets the pull request with an Id of 123 and includes the commits that are part of the pull request.
 
 ## PARAMETERS
 
-### -ProjectName
+### ProjectName
 
 Specifies the team project for which this function operates.
 
@@ -80,7 +80,7 @@ Position: 0
 Accept pipeline input: true (ByPropertyName)
 ```
 
-### -Id
+### Id
 
 Specifies the pull request by ID.
 
@@ -91,7 +91,7 @@ Accept pipeline input: true (ByPropertyName)
 Parameter Sets: ById, IncludeCommits
 ```
 
-### -RepositoryId
+### RepositoryId
 
 The repository ID of the pull request's target branch.
 
@@ -100,7 +100,7 @@ Type: Guid
 Parameter Sets: SearchCriteriaWithStatus, SearchCriteriaWithAll, ById, IncludeCommits
 ```
 
-### -SourceRepositoryId
+### SourceRepositoryId
 
 If set, search for pull requests whose source branch is in this repository.
 
@@ -109,7 +109,7 @@ Type: Guid
 Parameter Sets: SearchCriteriaWithStatus, SearchCriteriaWithAll
 ```
 
-### -SourceBranchRef
+### SourceBranchRef
 
 If set, search for pull requests from this branch.
 
@@ -118,7 +118,7 @@ Type: String
 Parameter Sets: SearchCriteriaWithStatus, SearchCriteriaWithAll
 ```
 
-### -TargetBranchRef
+### TargetBranchRef
 
 If set, search for pull requests into this branch.
 
@@ -127,7 +127,7 @@ Type: String
 Parameter Sets: SearchCriteriaWithStatus, SearchCriteriaWithAll
 ```
 
-### -Status
+### Status
 
 If set, search for pull requests that are in this state. Defaults to Active if unset. Valid values for this parameter are:
 
@@ -142,14 +142,14 @@ Type: String
 Parameter Sets: SearchCriteriaWithStatus
 ```
 
-### -All
+### All
 
 ```yaml
 Type: Switch
 Parameter Sets: SearchCriteriaWithAll
 ```
 
-### -Top
+### Top
 
 The number of pull requests to retrieve.
 
@@ -158,7 +158,7 @@ Type: Int32
 Parameter Sets: SearchCriteriaWithStatus, SearchCriteriaWithAll
 ```
 
-### -Skip
+### Skip
 
 The number of pull requests to ignore. For example, to retrieve results 101-150, set top to 50 and skip to 100.
 
@@ -167,7 +167,7 @@ Type: Int32
 Parameter Sets: SearchCriteriaWithStatus, SearchCriteriaWithAll
 ```
 
-### -IncludeCommits
+### IncludeCommits
 
 If set, includes the commits that are part of the pull request. Requires the RepositoryId to be set.
 
@@ -182,7 +182,11 @@ Parameter Sets: IncludeCommits
 
 ## NOTES
 
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
+
+<!-- #include "./common/related.md" -->
 
 [Show-VSTeamPullRequest](Show-VSTeamPullRequest.md)
 [Add-VSTeamPullRequest](Add-VSTeamPullRequest.md)

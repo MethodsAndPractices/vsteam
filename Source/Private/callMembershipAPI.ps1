@@ -4,8 +4,10 @@ function _callMembershipAPI {
    param(
       [Parameter(Mandatory = $true)]
       [string] $Id,
-      [ValidateSet('Get', 'Post', 'Patch', 'Delete', 'Options', 'Put', 'Default', 'Head', 'Merge', 'Trace')]
-      [string] $Method,
+
+      [ValidateSet('GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS', 'PUT', 'DEFAULT', 'HEAD', 'MERGE', 'TRACE')]
+      [string] $Method = 'GET',
+
       [ValidateSet('', 'Up', 'Down')]
       [string] $Direction
    )
@@ -15,17 +17,18 @@ function _callMembershipAPI {
    Write-Verbose "Getting members for $Id"
 
    $query = @{}
+
    if ($Direction) {
       $query['direction'] = $Direction
    }
 
    # Call the REST API
-   $resp = _callAPI -Area 'graph' -Resource 'memberships' `
+   $resp = _callAPI -Method $Method -SubDomain vssps `
+      -Area 'graph' `
+      -Resource 'memberships' `
       -Id $Id `
-      -SubDomain "vssps" `
-      -Method $Method `
-      -Version $(_getApiVersion Graph) `
-      -QueryString $query
+      -QueryString $query `
+      -Version $(_getApiVersion Graph)
 
-   return $resp
+   return $resp.value
 }

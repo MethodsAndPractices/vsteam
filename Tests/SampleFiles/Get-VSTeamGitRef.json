@@ -1,0 +1,23 @@
+{
+   "value": [
+      {
+         "name": "refs/heads/master",
+         "objectId": "6843c66ed58214061b996508ae37b8bbd67a12c2",
+         "creator": {
+            "displayName": "Test User",
+            "url": "https://spsprodcus3.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+            "_links": {
+               "avatar": {
+                  "href": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/redacted"
+               }
+            },
+            "id": "00000000-0000-0000-0000-000000000000",
+            "uniqueName": "test@test.com",
+            "imageUrl": "https://dev.azure.com/Test/_api/_common/identityImage?id=00000000-0000-0000-0000-000000000000",
+            "descriptor": "redacted"
+         },
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/git/repositories/00000000-0000-0000-0000-000000000000/refs?filter=heads%2Fmaster"
+      }
+   ],
+   "count": 1
+}

@@ -1,1 +1,1 @@
-Queues a new release
+Queues a new release.

@@ -1,35 +1,41 @@
 function Get-VSTeamAgent {
-   [CmdletBinding(DefaultParameterSetName = 'List')]
+   [CmdletBinding(DefaultParameterSetName = 'List',
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Get-VSTeamAgent')]
    param(
-      [Parameter(Mandatory = $true, ValueFromPipeline = $true, Position = 0)]
+      [Parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true, Position = 0)]
       [int] $PoolId,
 
-      [Parameter(ParameterSetName = 'ByID', Mandatory = $true, ValueFromPipelineByPropertyName = $true, Position = 1)]
+      [Parameter(ParameterSetName = 'ByID', Mandatory = $true, Position = 1)]
       [Alias('AgentID')]
       [int] $Id
    )
 
    process {
+      $commonArgs = @{
+         NoProject = $true
+         Area      = "distributedtask/pools/$PoolId"
+         Resource  = 'agents'
+         Body      = @{ includeCapabilities = 'true' }
+         Version   = $(_getApiVersion DistributedTaskReleased)
+      }
 
       if ($id) {
-         $resp = _callAPI -Area "distributedtask/pools/$PoolId" -Resource agents -Id $id -NoProject `
-            -Body @{includeCapabilities = 'true'} -Version $(_getApiVersion DistributedTask)
+         $resp = _callAPI @commonArgs -Id $id
 
          # Storing the object before you return it cleaned up the pipeline.
          # When I just write the object from the constructor each property
          # seemed to be written
-         $item = [VSTeamAgent]::new($resp, $PoolId)
+         $item = [vsteam_lib.Agent]::new($resp, $PoolId)
 
          Write-Output $item
       }
       else {
-         $resp = _callAPI -Area "distributedtask/pools/$PoolId" -Resource agents -NoProject `
-            -Body @{includeCapabilities = 'true'} -Version $(_getApiVersion DistributedTask)
+         $resp = _callAPI @commonArgs
 
          $objs = @()
 
          foreach ($item in $resp.value) {
-            $objs += [VSTeamAgent]::new($item, $PoolId)
+            $objs += [vsteam_lib.Agent]::new($item, $PoolId)
          }
 
          Write-Output $objs

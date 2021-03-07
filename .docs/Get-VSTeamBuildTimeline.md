@@ -18,47 +18,46 @@ You can also specify a particular timeline by ID to get .
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
-```PowerShell
-PS C:\> Get-VSTeamBuildTimeline -ProjectName demo -BuildId 1 | Format-List *
+```powershell
+Get-VSTeamBuildTimeline -ProjectName demo -Id 1 | Format-List *
 ```
 
-This command gets a list of all timelines of thr build with Id 1 in the demo project.
+This command gets a list of all timelines of the build with Id 1 in the demo project.
 
 The pipeline operator (|) passes the data to the Format-List cmdlet, which
 displays all available properties (*) of the timeline objects.
 
-### -------------------------- EXAMPLE 2 --------------------------
+### Example 2
 
-```PowerShell
-PS C:\> Get-VSTeamBuildTimeline -ProjectName demo -BuildId 1 -Id 595dac0c-0f1a-4bfd-a35f-e5a838ac71d7 -ChangeId 2 -PlanId 356de525-47a9-4251-80c6-d3849a9d6382
+```powershell
+Get-VSTeamBuildTimeline -ProjectName demo -Id 1 -TimelineId 595dac0c-0f1a-4bfd-a35f-e5a838ac71d7 -ChangeId 2 -PlanId 356de525-47a9-4251-80c6-d3849a9d6382
 ```
 
-This command gets the timelines with ID 1 and timeline id 595dac0c-0f1a-4bfd-a35f-e5a838ac71d7. It is filtered with the change ID and plan ID.
+This command gets the timelines with build Id 1 and timeline Id 595dac0c-0f1a-4bfd-a35f-e5a838ac71d7. It is filtered with the change ID and plan ID.
 
-### -------------------------- EXAMPLE 3 --------------------------
+### Example 3
 
-```PowerShell
-PS C:\> Get-VSTeamBuildTimeline -ProjectName demo -BuildId 1 -ID @(1,2)
+```powershell
+Get-VSTeamBuildTimeline -ProjectName demo -Id 1 -TimelineId @(1,2)
 ```
 
 This command gets timelines with IDs 1 and 2 by using the ID parameter.
 
-## PARAMETERS
+### Example 4
 
-<!-- #include "./params/projectName.md" -->
-
-### -BuildId
-
-Build id where you get the time line from
-
-```yaml
-Type: int[]
-Parameter Sets: ByID
+```powershell
+Get-VSTeamBuild | Get-VSTeamBuildTimeline -ProjectName demo
 ```
 
-### -Id
+This command gets timelines with build Ids from the pipeline.
+
+## PARAMETERS
+
+<!-- #include "./params/BuildIds.md" -->
+
+### TimelineId
 
 Returns the timelines with the given timeline id.
 
@@ -68,7 +67,7 @@ Aliases: TimelineId
 Parameter Sets: ByID
 ```
 
-### -ChangeId
+### ChangeId
 
 Returns the timelines with the given change id.
 
@@ -77,7 +76,7 @@ Type: Int32
 Parameter Sets: ByID
 ```
 
-### -PlanId
+### PlanId
 
 Returns the timelines with the given plan id.
 
@@ -86,28 +85,22 @@ Type: Guid
 Parameter Sets: ByID
 ```
 
-<!-- #include "./params/BuildIds.md" -->
+<!-- #include "./params/projectName.md" -->
 
 ## INPUTS
 
 ## OUTPUTS
 
-### Team.Build
+### vsteam_lib.Build
 
 ## NOTES
 
-This function has a Dynamic Parameter for ProjectName that specifies the project for which this function gets builds.
-
-You can tab complete from a list of available projects.
-
-You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.
-
 You can pipe build IDs to this function.
+
+<!-- #include "./common/prerequisites.md" -->
 
 ## RELATED LINKS
 
-[Set-VSTeamAccount](Set-VSTeamAccount.md)
-
-[Set-VSTeamDefaultProject](Set-VSTeamDefaultProject.md)
+<!-- #include "./common/related.md" -->
 
 [Get-VSTeamBuild](Get-VSTeamBuild.md)

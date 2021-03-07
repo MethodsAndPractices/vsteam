@@ -1,0 +1,68 @@
+{
+  "count": 1,
+  "value": [
+    {
+      "description": null,
+      "url": "https://feeds.dev.azure.com/Test/_apis/Packaging/Feeds/00000000-0000-0000-0000-000000000000",
+      "_links": {
+        "self": {
+          "href": "https://feeds.dev.azure.com/Test/_apis/Packaging/Feeds/00000000-0000-0000-0000-000000000000"
+        },
+        "packages": {
+          "href": "https://feeds.dev.azure.com/Test/_apis/Packaging/Feeds/00000000-0000-0000-0000-000000000000/Packages"
+        },
+        "permissions": {
+          "href": "https://feeds.dev.azure.com/Test/_apis/Packaging/Feeds/00000000-0000-0000-0000-000000000000/Permissions"
+        }
+      },
+      "hideDeletedPackageVersions": true,
+      "defaultViewId": "00000000-0000-0000-0000-000000000000",
+      "id": "00000000-0000-0000-0000-000000000001",
+      "name": "ber",
+      "upstreamEnabled": true,
+      "viewId": null,
+      "viewName": null,
+      "fullyQualifiedName": "ber",
+      "fullyQualifiedId": "00000000-0000-0000-0000-000000000000",
+      "upstreamSources": [
+        {
+          "id": "00000000-0000-0000-0000-000000000010",
+          "name": "npmjs",
+          "protocol": "npm",
+          "location": "https://registry.npmjs.org/",
+          "displayLocation": "https://registry.npmjs.org/",
+          "upstreamSourceType": "public",
+          "status": "ok"
+        },
+        {
+          "id": "00000000-0000-0000-0000-000000000000",
+          "name": "NuGet Gallery",
+          "protocol": "nuget",
+          "location": "https://api.nuget.org/v3/index.json",
+          "displayLocation": "https://api.nuget.org/v3/index.json",
+          "upstreamSourceType": "public",
+          "status": "ok"
+        },
+        {
+          "id": "00000000-0000-0000-0000-000000000000",
+          "name": "PyPI",
+          "protocol": "pypi",
+          "location": "https://pypi.org/",
+          "displayLocation": "https://pypi.org/",
+          "upstreamSourceType": "public",
+          "status": "ok"
+        },
+        {
+          "id": "00000000-0000-0000-0000-000000000000",
+          "name": "Maven Central",
+          "protocol": "Maven",
+          "location": "https://repo.maven.apache.org/maven2/",
+          "displayLocation": "https://repo.maven.apache.org/maven2/",
+          "upstreamSourceType": "public",
+          "status": "ok"
+        }
+      ],
+      "capabilities": "defaultCapabilities"
+    }
+  ]
+}

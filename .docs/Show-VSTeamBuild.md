@@ -14,24 +14,40 @@
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
-```PowerShell
-PS C:\> Show-VSTeamBuild -ProjectName Demo -Id 3
+```powershell
+Show-VSTeamBuild -ProjectName Demo -Id 3
 ```
 
 This command will open a web browser with the summary of build 3.
 
 ## PARAMETERS
 
-### -Id
+### Id
 
 Specifies build by ID.
 
 ```yaml
 Type: Int32
-Parameter Sets: ByID
+Position: 0
 Aliases: BuildID
+Required: True
+Accept pipeline input: true (ByPropertyName)
+```
+
+### ProjectName
+
+Specifies the team project for which this function operates.
+
+You can tab complete from a list of available projects.
+
+You can use Set-VSTeamDefaultProject to set a default project so
+you do not have to pass the ProjectName with each call.
+
+```yaml
+Type: String
+Position: 1
 Required: True
 Accept pipeline input: true (ByPropertyName)
 ```
@@ -40,17 +56,17 @@ Accept pipeline input: true (ByPropertyName)
 
 ## OUTPUTS
 
-### Team.Build
+### vsteam_lib.Build
 
 ## NOTES
 
 You can pipe the build ID to this function.
 
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
 
-[Set-VSTeamAccount](Set-VSTeamAccount.md)
-
-[Set-VSTeamDefaultProject](Set-VSTeamDefaultProject.md)
+<!-- #include "./common/related.md" -->
 
 [Add-VSTeamBuild](Add-VSTeamBuild.md)
 

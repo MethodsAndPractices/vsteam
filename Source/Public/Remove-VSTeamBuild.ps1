@@ -1,5 +1,6 @@
 function Remove-VSTeamBuild {
-   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "High")]
+   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "High",
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Remove-VSTeamBuild')]
    param(
       [parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
       [Alias('BuildID')]
@@ -7,17 +8,20 @@ function Remove-VSTeamBuild {
 
       [switch] $Force,
 
-      [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
-      [ProjectValidateAttribute()]
-      [ArgumentCompleter([ProjectCompleter])]
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+      [vsteam_lib.ProjectValidateAttribute($false)]
+      [ArgumentCompleter([vsteam_lib.ProjectCompleter])]
       [string] $ProjectName
    )
    process {
       foreach ($item in $id) {
          if ($Force -or $pscmdlet.ShouldProcess($item, "Delete Build")) {
             try {
-               _callAPI -ProjectName $ProjectName -Area 'build' -Resource 'builds' -id $item `
-                  -Method Delete  -Version $(_getApiVersion Build) | Out-Null
+               _callAPI -Method DELETE -ProjectName $ProjectName `
+                  -Area build `
+                  -Resource builds `
+                  -id $item `
+                  -Version $(_getApiVersion Build) | Out-Null
 
                Write-Output "Deleted build $item"
             }

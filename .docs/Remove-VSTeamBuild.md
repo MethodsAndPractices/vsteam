@@ -14,21 +14,21 @@
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
-```PowerShell
-PS C:\> Get-VSTeamBuild | Remove-VSTeamBuild -Force
+```powershell
+Get-VSTeamBuild | Remove-VSTeamBuild -Force
 ```
 
 This command will delete all builds that are not marked retain indefinitely.
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
 <!-- #include "./params/BuildIds.md" -->
 
-<!-- #include "./params/force.md" -->
+<!-- #include "./params/projectName.md" -->
+
+<!-- #include "./params/forcegroup.md" -->
 
 ## INPUTS
 
@@ -38,4 +38,8 @@ This command will delete all builds that are not marked retain indefinitely.
 
 ## NOTES
 
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
+
+<!-- #include "./common/related.md" -->

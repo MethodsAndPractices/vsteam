@@ -1,5 +1,6 @@
 function Remove-VSTeamExtension {
-   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "High")]
+   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "High",
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Remove-VSTeamExtension')]
    param (
       [parameter(Mandatory = $true)]
       [string] $PublisherId,
@@ -11,9 +12,13 @@ function Remove-VSTeamExtension {
    )
 
    if ($Force -or $pscmdlet.ShouldProcess($ExtensionId, "Remove extension")) {
-      $resource = "extensionmanagement/installedextensionsbyname/$PublisherId/$ExtensionId"
+      $id = "$PublisherId/$ExtensionId"
 
-      $resp = _callAPI -NoProject -Method Delete -SubDomain 'extmgmt' -Resource $resource -Version $(_getApiVersion ExtensionsManagement)
+      $resp = _callAPI -Method DELETE -NoProject -SubDomain extmgmt `
+         -Area extensionmanagement `
+         -Resource installedextensionsbyname `
+         -Id $id `
+         -Version $(_getApiVersion ExtensionsManagement)
 
       Write-Output $resp
    }

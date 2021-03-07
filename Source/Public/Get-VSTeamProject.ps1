@@ -1,25 +1,26 @@
 function Get-VSTeamProject {
-   [CmdletBinding(DefaultParameterSetName = 'List')]
+   [CmdletBinding(DefaultParameterSetName = 'List',
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Get-VSTeamProject')]
    param(
       [Parameter(ParameterSetName = 'List')]
       [ValidateSet('WellFormed', 'CreatePending', 'Deleting', 'New', 'All')]
       [string] $StateFilter = 'WellFormed',
 
       [Parameter(ParameterSetName = 'List')]
-      [int] $Top = 100,
+      [int] $Top,
 
       [Parameter(ParameterSetName = 'List')]
-      [int] $Skip = 0,
+      [int] $Skip,
 
       [Parameter(ParameterSetName = 'ByID')]
       [Alias('ProjectID')]
       [string] $Id,
-      
+
       [switch] $IncludeCapabilities,
 
-      [Parameter(ParameterSetName = 'ByName', Mandatory = $true, Position = 0)]
-      [UncachedProjectValidateAttribute()]
-      [ArgumentCompleter([UncachedProjectCompleter])]
+      [Parameter(ParameterSetName = 'ByName', Position = 0, Mandatory = $true)]
+      [vsteam_lib.ProjectValidateAttribute($true)]
+      [ArgumentCompleter([vsteam_lib.ProjectCompleter])]
       [string] $Name
    )
 
@@ -31,6 +32,12 @@ function Get-VSTeamProject {
          $ProjectName = $id
       }
 
+      $commonArgs = @{
+         Resource             = 'projects'
+         IgnoreDefaultProject = $true
+         Version              = $(_getApiVersion Core)
+      }
+
       if ($ProjectName) {
          $queryString = @{ }
          if ($includeCapabilities.IsPresent) {
@@ -38,22 +45,20 @@ function Get-VSTeamProject {
          }
 
          # Call the REST API
-         $resp = _callAPI -Area 'projects' -id $ProjectName `
-            -Version $(_getApiVersion Core) -IgnoreDefaultProject `
+         $resp = _callAPI @commonArgs -id $ProjectName `
             -QueryString $queryString
 
          # Storing the object before you return it cleaned up the pipeline.
          # When I just write the object from the constructor each property
          # seemed to be written
-         $project = [VSTeamProject]::new($resp)
+         $project = [vsteam_lib.Project]::new($resp)
 
          Write-Output $project
       }
       else {
          try {
             # Call the REST API
-            $resp = _callAPI -Area 'projects' `
-               -Version $(_getApiVersion Core) -IgnoreDefaultProject `
+            $resp = _callAPI @commonArgs `
                -QueryString @{
                stateFilter = $stateFilter
                '$top'      = $top
@@ -61,11 +66,11 @@ function Get-VSTeamProject {
             }
 
             $objs = @()
-            
+
             foreach ($item in $resp.value) {
-               $objs += [VSTeamProject]::new($item)
+               $objs += [vsteam_lib.Project]::new($item)
             }
-            
+
             Write-Output $objs
          }
          catch {

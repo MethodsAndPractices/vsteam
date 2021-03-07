@@ -14,7 +14,7 @@
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
 ```powershell
 
@@ -33,27 +33,8 @@ This example is useful for when one wants to copy an existing task group in one 
 
 ## PARAMETERS
 
-### -ProjectName
 
-<!-- #include "./params/projectName.md" -->
-
-### -WhatIf
-
-Shows what would happen if the cmdlet runs.
-The cmdlet is not run.
-
-```yaml
-Type: SwitchParameter
-Aliases: wi
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -InFile
+### InFile
 
 The path to the json file that represents the task group
 
@@ -69,7 +50,7 @@ Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
-### -Body
+### Body
 
 The json that represents the task group as a string
 
@@ -85,10 +66,7 @@ Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
-### CommonParameters
-
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorTask, -InformationAction, -InformationTask, -OutTask, -OutBuffer, -PipelineTask, -Verbose, -WarningAction, and -WarningTask.
-For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
+<!-- #include "./params/projectName.md" -->
 
 ## INPUTS
 
@@ -100,7 +78,11 @@ For more information, see about_CommonParameters (http://go.microsoft.com/fwlink
 
 ## NOTES
 
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
+
+<!-- #include "./common/related.md" -->
 
 [Update-VSTeamTaskGroup](Update-VSTeamTaskGroup.md)
 

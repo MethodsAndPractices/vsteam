@@ -1,0 +1,119 @@
+{
+   "count": 4,
+   "value": [
+      {
+         "subjectKind": "user",
+         "domain": "AgentPool",
+         "principalName": "00000000-0000-0000-0000-000000000011",
+         "mailAddress": "",
+         "origin": "vsts",
+         "originId": "00000000-0000-0000-0000-000000000001",
+         "displayName": "Agent Pool Service (10)",
+         "_links": {
+            "self": {
+               "href": "https://vssps.dev.azure.com/Test/_apis/Graph/Users/redacted"
+            },
+            "memberships": {
+               "href": "https://vssps.dev.azure.com/Test/_apis/Graph/Memberships/redacted"
+            },
+            "membershipState": {
+               "href": "https://vssps.dev.azure.com/Test/_apis/Graph/MembershipStates/redacted"
+            },
+            "storageKey": {
+               "href": "https://vssps.dev.azure.com/Test/_apis/Graph/StorageKeys/redacted"
+            },
+            "avatar": {
+               "href": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/redacted"
+            }
+         },
+         "url": "https://vssps.dev.azure.com/Test/_apis/Graph/Users/redacted",
+         "descriptor": "redacted"
+      },
+      {
+         "subjectKind": "user",
+         "domain": "GitHub App",
+         "principalName": "00000000-0000-0000-0000-000000000000",
+         "mailAddress": "",
+         "origin": "vsts",
+         "originId": "00000000-0000-0000-0000-000000000000",
+         "displayName": "GitHub",
+         "_links": {
+            "self": {
+               "href": "https://vssps.dev.azure.com/Test/_apis/Graph/Users/Redacted"
+            },
+            "memberships": {
+               "href": "https://vssps.dev.azure.com/Test/_apis/Graph/Memberships/Redacted"
+            },
+            "membershipState": {
+               "href": "https://vssps.dev.azure.com/Test/_apis/Graph/MembershipStates/Redacted"
+            },
+            "storageKey": {
+               "href": "https://vssps.dev.azure.com/Test/_apis/Graph/StorageKeys/Redacted"
+            },
+            "avatar": {
+               "href": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/Redacted"
+            }
+         },
+         "url": "https://vssps.dev.azure.com/Test/_apis/Graph/Users/Redacted",
+         "descriptor": "Redacted"
+      },
+      {
+         "subjectKind": "user",
+         "domain": "Build",
+         "principalName": "00000000-0000-0000-0000-000000000000",
+         "mailAddress": "",
+         "origin": "vsts",
+         "originId": "00000000-0000-0000-0000-000000000000",
+         "displayName": "SmartHotel Build Service (Test)",
+         "_links": {
+            "self": {
+               "href": "https://vssps.dev.azure.com/Test/_apis/Graph/Users/Redacted"
+            },
+            "memberships": {
+               "href": "https://vssps.dev.azure.com/Test/_apis/Graph/Memberships/Redacted"
+            },
+            "membershipState": {
+               "href": "https://vssps.dev.azure.com/Test/_apis/Graph/MembershipStates/Redacted"
+            },
+            "storageKey": {
+               "href": "https://vssps.dev.azure.com/Test/_apis/Graph/StorageKeys/Redacted"
+            },
+            "avatar": {
+               "href": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/Redacted"
+            }
+         },
+         "url": "https://vssps.dev.azure.com/Test/_apis/Graph/Users/Redacted",
+         "descriptor": "Redacted"
+      },
+      {
+         "subjectKind": "user",
+         "metaType": "member",
+         "directoryAlias": "test",
+         "domain": "00000000-0000-0000-0000-000000000088",
+         "principalName": "test@microsoft.com",
+         "mailAddress": "test@microsoft.com",
+         "origin": "aad",
+         "originId": "00000000-0000-0000-0000-000000000008",
+         "displayName": "Donovan Brown",
+         "_links": {
+            "self": {
+               "href": "https://vssps.dev.azure.com/Test/_apis/Graph/Users/Redacted"
+            },
+            "memberships": {
+               "href": "https://vssps.dev.azure.com/Test/_apis/Graph/Memberships/Redacted"
+            },
+            "membershipState": {
+               "href": "https://vssps.dev.azure.com/Test/_apis/Graph/MembershipStates/Redacted"
+            },
+            "storageKey": {
+               "href": "https://vssps.dev.azure.com/Test/_apis/Graph/StorageKeys/Redacted"
+            },
+            "avatar": {
+               "href": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/Redacted"
+            }
+         },
+         "url": "https://vssps.dev.azure.com/Test/_apis/Graph/Users/Redacted",
+         "descriptor": "Redacted"
+      }
+   ]
+}

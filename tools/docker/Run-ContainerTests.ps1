@@ -157,21 +157,20 @@ function Start-DockerVSTeamTests {
          # I delete from the container so that all the correct permissions
          # are granted to delete. When I tried this from outside the container
          # I did not have permissions to delete it.
-         if (Test-Path '#Container#_result.xml') {
-            Write-Verbose 'Deleting old results file #Container#_result.xml'
-            Remove-Item '#Container#_result.xml'
+         if (Test-Path './Tests/TestResults/#Container#_result.xml') {
+            Write-Verbose 'Deleting old results file ./Tests/TestResults/#Container#_result.xml'
+            Remove-Item './Tests/TestResults/#Container#_result.xml'
          }
 
-         .\Build-Module.ps1 -installDep
+         .\Build-Module.ps1 -installDep -skipLibBuild
          $null = Import-Module Pester
 
          $pesterArgs = [PesterConfiguration]::Default
          $pesterArgs.Run.Exit = $true
-         $pesterArgs.Run.Path = '.\unit'
+         $pesterArgs.Run.Path = './Tests/function'
          $pesterArgs.Run.PassThru = $false
-         $pesterArgs.Output.Verbosity = 'Minimal'
          $pesterArgs.TestResult.Enabled = $true
-         $pesterArgs.TestResult.OutputPath = '#Container#_result.xml'
+         $pesterArgs.TestResult.OutputPath = './Tests/TestResults/#Container#_result.xml'
 
          Invoke-Pester -Configuration $pesterArgs
 
@@ -198,7 +197,7 @@ function Start-DockerVSTeamTests {
 
       docker run `
          -dit `
-         --name  $Container `
+         --name $Container `
          --volume $Volume `
          -w $DefaultWorkDir `
          $Image `
@@ -214,7 +213,8 @@ function Start-DockerVSTeamTests {
          # On Linux the logs show up in the same PowerShell window so we need it to exit 
          # On Windows new windows are opened and you want -NoExit so they stay open for you to
          # review the logs.
-         if (Get-OperatingSystem -ne 'Windows') {
+         $os = Get-OperatingSystem
+         if ($os -ne 'Windows') {
             $argList = "-Command `"`$Host.UI.RawUI.WindowTitle = 'VSTeam Unit Tests | PowerShell $($versiontable.PSEdition) $psVersion | $($versiontable.Os)'; docker logs $Container -f`""
          }
          else {
@@ -289,6 +289,8 @@ $rootDir = (Resolve-Path -Path "$scriptPath\..\..\").ToString().trim('\')
 $containerFolder = "c:/vsteam"
 $containerFilePath = "$rootDir/tools/docker"
 
+Write-Verbose "Root Dir: $rootDir"
+
 $dockerRepository = "vsteam"
 
 $WindowsImage = "$dockerRepository/wcore1903"
@@ -341,9 +343,9 @@ $null = Start-DockerVSTeamTests `
    -Wait `
    -FollowLogs:$ShowLogs
 
-$linux = Find-Numbers -fileToRead "$rootDir/vsteam_Linux_ps7_tests_result.xml"
-$winP5 = Find-Numbers -fileToRead "$rootDir/vsteam_wcore1903_ps5_tests_result.xml"
-$winP7 = Find-Numbers -fileToRead "$rootDir/vsteam_wcore1903_ps7_tests_result.xml"
+$linux = Find-Numbers -fileToRead "$rootDir/Tests/TestResults/vsteam_Linux_ps7_tests_result.xml"
+$winP5 = Find-Numbers -fileToRead "$rootDir/Tests/TestResults/vsteam_wcore1903_ps5_tests_result.xml"
+$winP7 = Find-Numbers -fileToRead "$rootDir/Tests/TestResults/vsteam_wcore1903_ps7_tests_result.xml"
    
 $totalPassed = $winP5.Passed + $linux.Passed + $winP7.Passed
 $totalFailed = $winP5.Failed + $linux.Failed + $winP7.Failed

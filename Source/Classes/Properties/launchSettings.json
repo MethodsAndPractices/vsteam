@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "vsteam-lib": {
+      "commandName": "Executable",
+      "executablePath": "C:\\Program Files\\PowerShell\\7\\pwsh.exe",
+      "commandLineArgs": "-NoExit -Command \"& { bu 5; .\\Build-Module.ps1 -skipLibBuild -ipmo; ata -profile blackshirt }\""
+    }
+  }
+}

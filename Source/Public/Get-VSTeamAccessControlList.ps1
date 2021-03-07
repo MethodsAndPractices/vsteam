@@ -1,27 +1,20 @@
 function Get-VSTeamAccessControlList {
-   [CmdletBinding(DefaultParameterSetName = 'ByNamespace')]
+   [CmdletBinding(DefaultParameterSetName = 'ByNamespace',
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Get-VSTeamAccessControlList')]
    param(
       [Parameter(ParameterSetName = 'ByNamespace', Mandatory = $true, ValueFromPipeline = $true)]
-      [VSTeamSecurityNamespace] $SecurityNamespace,
+      [vsteam_lib.SecurityNamespace] $SecurityNamespace,
 
       [Parameter(ParameterSetName = 'ByNamespaceId', Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
       [Alias('ID')]
       [guid] $SecurityNamespaceId,
 
-      [Parameter(ParameterSetName = 'ByNamespace', Mandatory = $false)]
-      [Parameter(ParameterSetName = 'ByNamespaceId', Mandatory = $false)]
       [string] $Token,
 
-      [Parameter(ParameterSetName = 'ByNamespace', Mandatory = $false)]
-      [Parameter(ParameterSetName = 'ByNamespaceId', Mandatory = $false)]
       [string[]] $Descriptors,
 
-      [Parameter(ParameterSetName = 'ByNamespace', Mandatory = $false)]
-      [Parameter(ParameterSetName = 'ByNamespaceId', Mandatory = $false)]
       [switch] $IncludeExtendedInfo,
 
-      [Parameter(ParameterSetName = 'ByNamespace', Mandatory = $false)]
-      [Parameter(ParameterSetName = 'ByNamespaceId', Mandatory = $false)]
       [switch] $Recurse
    )
 
@@ -49,15 +42,17 @@ function Get-VSTeamAccessControlList {
       }
 
       # Call the REST API
-      $resp = _callAPI -Area 'accesscontrollists' -id $SecurityNamespaceId -method GET `
-         -Version $(_getApiVersion Core) -NoProject `
-         -QueryString $queryString
+      $resp = _callAPI -NoProject `
+         -Resource accesscontrollists `
+         -id $SecurityNamespaceId `
+         -QueryString $queryString `
+         -Version $(_getApiVersion Core)
 
       try {
          $objs = @()
 
          foreach ($item in $resp.value) {
-            $objs += [VSTeamAccessControlList]::new($item)
+            $objs += [vsteam_lib.AccessControlList]::new($item)
          }
 
          Write-Output $objs

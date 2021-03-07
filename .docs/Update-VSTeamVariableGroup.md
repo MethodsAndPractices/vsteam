@@ -14,10 +14,9 @@
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
 ```powershell
-
 $methodParameters = @{
    ProjectName              = "some_project_name"
    Name        = "new_variable_group"
@@ -56,7 +55,7 @@ $methodParameters = @{
 Update-VSTeamVariableGroup @methodParameters
 ```
 
-### -------------------------- EXAMPLE 2 --------------------------
+### Example 2
 
 ```powershell
 # Copy variable group varGroupName from project sourceProjectName to project targetProjectName.  If varGroupName already exists, we'll update it; else, we'll add it.
@@ -79,7 +78,7 @@ else {
 
 ## PARAMETERS
 
-### -Confirm
+### Confirm
 
 Prompts you for confirmation before running the cmdlet.
 
@@ -94,7 +93,7 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Force
+### Force
 
 Does not prompt
 
@@ -109,11 +108,7 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ProjectName
-
-<!-- #include "./params/projectName.md" -->
-
-### -WhatIf
+### WhatIf
 
 Shows what would happen if the cmdlet runs.
 The cmdlet is not run.
@@ -129,7 +124,7 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Id
+### Id
 
 ID of the existing variable group
 
@@ -144,7 +139,7 @@ Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
-### -Description
+### Description
 
 The variable group description
 
@@ -160,7 +155,7 @@ Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
-### -Name
+### Name
 
 The variable group name
 
@@ -176,7 +171,7 @@ Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
-### -ProviderData
+### ProviderData
 
 The variable group ProviderData.  This parameter is not available in TFS2017. This should be $null for Vsts types.
 
@@ -192,7 +187,7 @@ Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
-### -Type
+### Type
 
 The variable group type.  This parameter is not available in TFS2017; all variable groups are type Vsts in this case.
 
@@ -209,7 +204,7 @@ Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
-### -Variables
+### Variables
 
 The variable group variables.
 
@@ -225,7 +220,7 @@ Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
-### -Body
+### Body
 
 The json that represents the task group as a string
 
@@ -241,10 +236,7 @@ Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
-### CommonParameters
-
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable.
-For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
+<!-- #include "./params/projectName.md" -->
 
 ## INPUTS
 
@@ -258,7 +250,11 @@ System.Collections.Hashtable
 
 ## NOTES
 
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
+
+<!-- #include "./common/related.md" -->
 
 [Add-VSTeamVariableGroup](Add-VSTeamVariableGroup.md)
 

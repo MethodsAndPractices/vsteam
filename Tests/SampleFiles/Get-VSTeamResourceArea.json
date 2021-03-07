@@ -1,0 +1,15 @@
+{
+  "count": 2,
+  "value": [
+    {
+      "id": "fb13a388-40dd-4a04-b530-013a739c72ef",
+      "name": "policy",
+      "locationUrl": "https://dev.azure.com/Test/"
+    },
+    {
+      "id": "c73a23a1-59bb-458c-8ce3-02c83215e015",
+      "name": "Licensing",
+      "locationUrl": "https://vssps.dev.azure.com/Test/"
+    }
+  ]
+}

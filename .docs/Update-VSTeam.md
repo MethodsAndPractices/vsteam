@@ -16,29 +16,19 @@
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
-### -Description
-
-The new description of the team
-
-```yaml
-Type: String
-Position: 2
-```
-
-### -Name
+### Name
 
 The name of the team to update
 
 ```yaml
 Type: String
+Position: 0
 Aliases: Id, TeamToUpdate, TeamId, TeamName
 Required: True
 Accept pipeline input: true (ByPropertyName)
 ```
 
-### -NewTeamName
+### NewTeamName
 
 The new name of the team
 
@@ -46,11 +36,17 @@ The new name of the team
 Type: String
 ```
 
-<!-- #include "./params/confirm.md" -->
+### Description
 
-<!-- #include "./params/force.md" -->
+The new description of the team
 
-<!-- #include "./params/whatIf.md" -->
+```yaml
+Type: String
+```
+
+<!-- #include "./params/projectName.md" -->
+
+<!-- #include "./params/forcegroup.md" -->
 
 ## INPUTS
 
@@ -64,8 +60,12 @@ NewTeamName
 
 ## OUTPUTS
 
-### Team.Team
+### vsteam_lib.Team
 
 ## NOTES
 
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
+
+<!-- #include "./common/related.md" -->

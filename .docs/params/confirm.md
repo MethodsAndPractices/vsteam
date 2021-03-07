@@ -1,4 +1,4 @@
-### -Confirm
+### Confirm
 
 Prompts you for confirmation before running the function.
 

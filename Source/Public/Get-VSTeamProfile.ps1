@@ -1,5 +1,5 @@
 function Get-VSTeamProfile {
-   [CmdletBinding()]
+   [CmdletBinding(HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Get-VSTeamProfile')]
    param(
       # Name is an array so I can pass an array after -Name
       # I can also use pipe
@@ -29,7 +29,7 @@ function Get-VSTeamProfile {
             if ($result) {
                $result | ForEach-Object {
                   # Setting the type lets me format it
-                  $_.PSObject.TypeNames.Insert(0, 'Team.Profile')
+                  $_.PSObject.TypeNames.Insert(0, 'vsteam_lib.Profile')
 
                   if ($_.PSObject.Properties.Match('Token').count -eq 0) {
                      # This is a profile that was created before the module supported

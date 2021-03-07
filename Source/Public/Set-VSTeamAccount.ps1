@@ -1,5 +1,6 @@
 function Set-VSTeamAccount {
-   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Low", DefaultParameterSetName = 'Secure')]
+   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Low", DefaultParameterSetName = 'Secure',
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Set-VSTeamAccount')]
    param(
       [parameter(ParameterSetName = 'Windows', Mandatory = $true, Position = 1)]
       [parameter(ParameterSetName = 'Secure', Mandatory = $true, Position = 1)]
@@ -66,7 +67,7 @@ function Set-VSTeamAccount {
    process {
       # invalidate cache when changing account/collection
       # otherwise dynamic parameters being picked for a wrong collection
-      [VSTeamProjectCache]::timestamp = -1
+      [vsteam_lib.ProjectCache]::Invalidate()
 
       # Bind the parameter to a friendly variable
       $vsteamProfile = $PSBoundParameters['Profile']
@@ -150,7 +151,7 @@ function Set-VSTeamAccount {
 
          if ($Drive) {
             # Assign to null so nothing is writen to output.
-            Write-Output "# To map a drive run the following command or pipe to iex:`nNew-PSDrive -Name $Drive -PSProvider SHiPS -Root 'VSTeam#VSTeamAccount'"
+            Write-Output "# To map a drive run the following command or pipe to iex:`nNew-PSDrive -Name $Drive -PSProvider SHiPS -Root 'VSTeam#vsteam_lib.Provider.Account' -Description $account"
          }
       }
    }

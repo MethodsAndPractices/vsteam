@@ -1,5 +1,9 @@
+# Stores your account name and personal access token as a profile for use with
+# the Add-TeamAccount function in this module.
+
 function Add-VSTeamProfile {
-   [CmdletBinding(DefaultParameterSetName = 'Secure')]
+   [CmdletBinding(DefaultParameterSetName = 'Secure',
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Add-VSTeamProfile')]
    param(
       [parameter(ParameterSetName = 'Windows', Mandatory = $true, Position = 1)]
       [parameter(ParameterSetName = 'Secure', Mandatory = $true, Position = 1)]

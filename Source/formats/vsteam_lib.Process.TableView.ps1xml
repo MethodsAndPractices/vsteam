@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Configuration>
+   <ViewDefinitions>
+      <View>
+         <Name>vsteam_lib.Process.TableView</Name>
+         <ViewSelectedBy>
+            <TypeName>vsteam_lib.Process</TypeName>
+            <TypeName>vsteam_lib.Process</TypeName>
+         </ViewSelectedBy>
+         <TableControl>
+            <AutoSize />
+            <TableHeaders>
+               <TableColumnHeader>
+                  <Label>Name</Label>
+               </TableColumnHeader>
+               <TableColumnHeader>
+                  <Label>Enabled</Label>
+               </TableColumnHeader>
+               <TableColumnHeader>
+                  <Label>Default</Label>
+               </TableColumnHeader>
+               <TableColumnHeader>
+                  <Label>Description</Label>
+               </TableColumnHeader>
+            </TableHeaders>
+            <TableRowEntries>
+               <TableRowEntry>
+                  <Wrap />
+                  <TableColumnItems>
+                     <TableColumnItem>
+                        <PropertyName>Name</PropertyName>
+                     </TableColumnItem>
+                     <TableColumnItem>
+                        <PropertyName>IsEnabled</PropertyName>
+                     </TableColumnItem>
+                     <TableColumnItem>
+                        <PropertyName>IsDefault</PropertyName>
+                     </TableColumnItem>
+                     <TableColumnItem>
+                        <PropertyName>Description</PropertyName>
+                     </TableColumnItem>
+                  </TableColumnItems>
+               </TableRowEntry>
+            </TableRowEntries>
+         </TableControl>
+      </View>
+   </ViewDefinitions>
+</Configuration>

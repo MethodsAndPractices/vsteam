@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Types>
+   <Type>
+      <Name>vsteam_lib.TeamMember</Name>
+      <Members>
+         <ScriptProperty>
+            <Name>Name</Name>
+            <GetScriptBlock>$this.identity.displayName</GetScriptBlock>
+         </ScriptProperty>
+         <ScriptProperty>
+            <Name>Unique Name</Name>
+            <GetScriptBlock>$this.identity.uniqueName</GetScriptBlock>
+         </ScriptProperty>
+         <ScriptProperty>
+            <Name>Id</Name>
+            <GetScriptBlock>$this.identity.id</GetScriptBlock>
+         </ScriptProperty>
+         <MemberSet>
+            <Name>PSStandardMembers</Name>
+            <Members>
+               <PropertySet>
+                  <Name>DefaultDisplayPropertySet</Name>
+                  <ReferencedProperties>
+                     <Name>Name</Name>
+                     <Name>Unique Name</Name>
+                     <Name>Id</Name>
+                  </ReferencedProperties>
+               </PropertySet>
+            </Members>
+         </MemberSet>
+      </Members>
+   </Type>
+</Types>

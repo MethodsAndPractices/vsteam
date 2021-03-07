@@ -1,5 +1,6 @@
 function Set-VSTeamEnvironmentStatus {
-   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Medium")]
+   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Medium",
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Set-VSTeamEnvironmentStatus')]
    param(
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [Alias('Id')]
@@ -20,8 +21,8 @@ function Set-VSTeamEnvironmentStatus {
       [switch] $Force,
 
       [Parameter(Position = 1, ValueFromPipelineByPropertyName = $true)]
-      [ProjectValidateAttribute()]
-      [ArgumentCompleter([ProjectCompleter]) ]
+      [vsteam_lib.ProjectValidateAttribute($false)]
+      [ArgumentCompleter([vsteam_lib.ProjectCompleter]) ]
       [string] $ProjectName
    )
 
@@ -32,8 +33,12 @@ function Set-VSTeamEnvironmentStatus {
          if ($force -or $pscmdlet.ShouldProcess($item, "Set Status on Environment")) {
             try {
                # Call the REST API
-               _callAPI -Method Patch -SubDomain vsrm -Area release -Resource "releases/$ReleaseId/environments" -projectName $ProjectName -id $item `
-                  -body $body -ContentType 'application/json' -Version $(_getApiVersion Release) | Out-Null
+               _callAPI -Method PATCH -SubDomain vsrm -projectName $ProjectName `
+                  -Area release `
+                  -Resource releases `
+                  -id "$ReleaseId/environments/$item" `
+                  -body $body `
+                  -Version $(_getApiVersion Release) | Out-Null
 
                Write-Output "Environment $item status changed to $status"
             }

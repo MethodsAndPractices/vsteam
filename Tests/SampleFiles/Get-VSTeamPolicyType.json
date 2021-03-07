@@ -1,0 +1,170 @@
+{
+  "count": 15,
+  "value": [
+    {
+      "description": "This policy will reject pushes to a repository for files that contain credentials or secrets.",
+      "_links": {
+        "self": {
+          "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/policy/types/00000000-0000-0000-0000-000000000000"
+        }
+      },
+      "id": "00000000-0000-0000-0000-000000000000",
+      "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/policy/types/00000000-0000-0000-0000-000000000000",
+      "displayName": "Secrets scanning restriction"
+    },
+    {
+      "description": "This policy will reject pushes to a repository for paths which exceed the specified length.",
+      "_links": {
+        "self": {
+          "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/policy/types/00000000-0000-0000-0000-000000000000"
+        }
+      },
+      "id": "00000000-0000-0000-0000-000000000000",
+      "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/policy/types/00000000-0000-0000-0000-000000000000",
+      "displayName": "Path Length restriction"
+    },
+    {
+      "description": "This policy will reject pushes to a repository for names which aren't valid on all supported client OSes.",
+      "_links": {
+        "self": {
+          "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/policy/types/00000000-0000-0000-0000-000000000000"
+        }
+      },
+      "id": "00000000-0000-0000-0000-000000000000",
+      "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/policy/types/00000000-0000-0000-0000-000000000000",
+      "displayName": "Reserved names restriction"
+    },
+    {
+      "description": "This policy ensures that pull requests use a consistent merge strategy.",
+      "_links": {
+        "self": {
+          "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/policy/types/00000000-0000-0000-0000-000000000000"
+        }
+      },
+      "id": "00000000-0000-0000-0000-000000000000",
+      "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/policy/types/00000000-0000-0000-0000-000000000000",
+      "displayName": "Require a merge strategy"
+    },
+    {
+      "description": "Check if the pull request has any active comments",
+      "_links": {
+        "self": {
+          "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/policy/types/00000000-0000-0000-0000-000000000000"
+        }
+      },
+      "id": "00000000-0000-0000-0000-000000000000",
+      "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/policy/types/00000000-0000-0000-0000-000000000000",
+      "displayName": "Comment requirements"
+    },
+    {
+      "description": "This policy will require a successfull status to be posted before updating protected refs.",
+      "_links": {
+        "self": {
+          "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/policy/types/00000000-0000-0000-0000-000000000000"
+        }
+      },
+      "id": "00000000-0000-0000-0000-000000000000",
+      "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/policy/types/00000000-0000-0000-0000-000000000000",
+      "displayName": "Status"
+    },
+    {
+      "description": "Git repository settings",
+      "_links": {
+        "self": {
+          "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/policy/types/00000000-0000-0000-0000-000000000000"
+        }
+      },
+      "id": "00000000-0000-0000-0000-000000000000",
+      "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/policy/types/00000000-0000-0000-0000-000000000000",
+      "displayName": "Git repository settings"
+    },
+    {
+      "description": "This policy will require a successful build has been performed before updating protected refs.",
+      "_links": {
+        "self": {
+          "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/policy/types/00000000-0000-0000-0000-000000000000"
+        }
+      },
+      "id": "00000000-0000-0000-0000-000000000000",
+      "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/policy/types/00000000-0000-0000-0000-000000000000",
+      "displayName": "Build"
+    },
+    {
+      "description": "This policy will reject pushes to a repository for files which exceed the specified size.",
+      "_links": {
+        "self": {
+          "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/policy/types/00000000-0000-0000-0000-000000000000"
+        }
+      },
+      "id": "00000000-0000-0000-0000-000000000000",
+      "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/policy/types/00000000-0000-0000-0000-000000000000",
+      "displayName": "File size restriction"
+    },
+    {
+      "description": "This policy will reject pushes to a repository which add file paths that match the specified patterns.",
+      "_links": {
+        "self": {
+          "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/policy/types/00000000-0000-0000-0000-000000000000"
+        }
+      },
+      "id": "00000000-0000-0000-0000-000000000000",
+      "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/policy/types/00000000-0000-0000-0000-000000000000",
+      "displayName": "File name restriction"
+    },
+    {
+      "description": "This policy will block pushes from including commits where the author email does not match the specified patterns.",
+      "_links": {
+        "self": {
+          "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/policy/types/00000000-0000-0000-0000-000000000000"
+        }
+      },
+      "id": "00000000-0000-0000-0000-000000000000",
+      "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/policy/types/00000000-0000-0000-0000-000000000000",
+      "displayName": "Commit author email validation"
+    },
+    {
+      "description": "This policy will ensure that required reviewers are added for modified files matching specified patterns.",
+      "_links": {
+        "self": {
+          "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/policy/types/00000000-0000-0000-0000-000000000000"
+        }
+      },
+      "id": "00000000-0000-0000-0000-000000000000",
+      "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/policy/types/00000000-0000-0000-0000-000000000000",
+      "displayName": "Required reviewers"
+    },
+    {
+      "description": "This policy will ensure that a minimum number of reviewers have approved a pull request before completion.",
+      "_links": {
+        "self": {
+          "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/policy/types/00000000-0000-0000-0000-000000000000"
+        }
+      },
+      "id": "00000000-0000-0000-0000-000000000000",
+      "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/policy/types/00000000-0000-0000-0000-000000000000",
+      "displayName": "Minimum number of reviewers"
+    },
+    {
+      "description": "This policy encourages developers to link commits to work items.",
+      "_links": {
+        "self": {
+          "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/policy/types/00000000-0000-0000-0000-000000000000"
+        }
+      },
+      "id": "00000000-0000-0000-0000-000000000000",
+      "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/policy/types/00000000-0000-0000-0000-000000000000",
+      "displayName": "Work item linking"
+    },
+    {
+      "description": "GitRepositorySettingsPolicyName",
+      "_links": {
+        "self": {
+          "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/policy/types/00000000-0000-0000-0000-000000000000"
+        }
+      },
+      "id": "00000000-0000-0000-0000-000000000000",
+      "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/policy/types/00000000-0000-0000-0000-000000000000",
+      "displayName": "GitRepositorySettingsPolicyName"
+    }
+  ]
+}

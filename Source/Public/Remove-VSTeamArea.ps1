@@ -1,15 +1,17 @@
 function Remove-VSTeamArea {
-   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "High")]
+   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "High",
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Remove-VSTeamArea')]
    param(
-      [Parameter(Mandatory = $false)]
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+      [Alias('NodeId')]
       [int] $ReClassifyId,
-     
-      [Parameter(Mandatory = $false)]
+
+      [Parameter(Mandatory = $true, Position = 0)]
       [string] $Path,
-      
-      [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
-      [ProjectValidateAttribute()]
-      [ArgumentCompleter([ProjectCompleter])]
+
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+      [vsteam_lib.ProjectValidateAttribute($false)]
+      [ArgumentCompleter([vsteam_lib.ProjectCompleter])]
       [string] $ProjectName,
 
       [switch] $Force
@@ -17,7 +19,11 @@ function Remove-VSTeamArea {
 
    process {
       if ($force -or $pscmdlet.ShouldProcess($Path, "Delete area")) {
-         $null = Remove-VSTeamClassificationNode -StructureGroup 'areas' -ProjectName $ProjectName -Path $Path -ReClassifyId $ReClassifyId -Force
+         $null = Remove-VSTeamClassificationNode -ProjectName $ProjectName `
+            -StructureGroup 'areas' `
+            -Path $Path `
+            -ReClassifyId $ReClassifyId `
+            -Force
       }
    }
 }

@@ -1,10 +1,20 @@
+# Create a service endpoint.
+#
+# Get-VSTeamOption 'distributedtask' 'serviceendpoints'
+# id              : dca61d2f-3444-410a-b5ec-db2fc4efb4c5
+# area            : distributedtask
+# resourceName    : serviceendpoints
+# routeTemplate   : {project}/_apis/{area}/{resource}/{endpointId}
+# https://bit.ly/Add-VSTeamServiceEndpoint
+
 function Add-VSTeamServiceFabricEndpoint {
-   [CmdletBinding(DefaultParameterSetName = 'Certificate')]
+   [CmdletBinding(DefaultParameterSetName = 'Certificate',
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Add-VSTeamServiceFabricEndpoint')]
    param(
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [Alias('displayName')]
       [string] $endpointName,
-        
+
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [string] $url,
 
@@ -30,12 +40,12 @@ function Add-VSTeamServiceFabricEndpoint {
       [Parameter(ParameterSetName = 'None', Mandatory = $false, ValueFromPipelineByPropertyName = $true)]
       [bool] $useWindowsSecurity,
 
-      [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
-      [ProjectValidateAttribute()]
-      [ArgumentCompleter([ProjectCompleter])]
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+      [vsteam_lib.ProjectValidateAttribute($false)]
+      [ArgumentCompleter([vsteam_lib.ProjectCompleter])]
       [string] $ProjectName
    )
-   
+
    process {
       switch ($PSCmdlet.ParameterSetName) {
          "Certificate" {
@@ -82,10 +92,9 @@ function Add-VSTeamServiceFabricEndpoint {
          url           = $url
       }
 
-      return Add-VSTeamServiceEndpoint `
-         -ProjectName $ProjectName `
+      return Add-VSTeamServiceEndpoint -ProjectName $ProjectName `
          -endpointName $endpointName `
-         -endpointType 'servicefabric' `
+         -endpointType servicefabric `
          -object $obj
    }
 }

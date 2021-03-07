@@ -14,9 +14,7 @@
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
-### -Depth
+### Depth
 
 Depth of children to fetch.
 
@@ -24,7 +22,7 @@ Depth of children to fetch.
 Type: int32
 ```
 
-### -Path
+### Path
 
 Path of the classification node.
 
@@ -32,13 +30,15 @@ Path of the classification node.
 Type: string
 ```
 
-### -Ids
+### Id
 
 Integer classification nodes ids.
 
 ```yaml
 Type: int32[]
 ```
+
+<!-- #include "./params/projectName.md" -->
 
 ## INPUTS
 
@@ -50,7 +50,11 @@ Type: int32[]
 
 This is a wrapper function for Get-VSTeamClassificationNode
 
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
+
+<!-- #include "./common/related.md" -->
 
 [Get-VSTeamClassificationNode](Get-VSTeamClassificationNode.md)
 

@@ -1,5 +1,6 @@
 function Update-VSTeamProfile {
-   [CmdletBinding(DefaultParameterSetName = 'Secure', SupportsShouldProcess = $true, ConfirmImpact = "Medium")]
+   [CmdletBinding(DefaultParameterSetName = 'Secure', SupportsShouldProcess = $true, ConfirmImpact = "Medium",
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Update-VSTeamProfile')]
    param(
       [parameter(ParameterSetName = 'Plain', Mandatory = $true, HelpMessage = 'Personal Access Token')]
       [string] $PersonalAccessToken,

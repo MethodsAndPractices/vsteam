@@ -1,0 +1,140 @@
+parameters:
+  name: ''
+  displayName: ''
+  pool: ''
+  account: ''
+  apiVersion: ''
+  os: ''
+  depends: ''
+  start2017: 'false'
+  stop2017: 'false'
+
+jobs:
+  - deployment: ${{ parameters.name }}
+    displayName: ${{ parameters.displayName }}
+    variables:
+      ACCT: ${{ parameters.account}}
+      API_VERSION: ${{ parameters.apiVersion }}
+    ${{ if eq(parameters['depends'], true) }}:
+    dependsOn: ${{ parameters.depends }}
+    pool:
+      vmImage: ${{ parameters.pool }}
+    environment: '${{ parameters.displayName }}'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+            - download: current
+              displayName: 'Download tests'
+              artifact: test
+
+            - task: AzureResourceGroupDeployment@2
+              displayName: 'Start TFS 2017'
+              inputs:
+                azureSubscription: 'PM_DONOVANBROWN'
+                action: Start
+                resourceGroupName: SonarQube
+              condition: and(succeeded(), eq('${{ parameters.start2017 }}', 'true'))
+
+            - task: AzureResourceGroupDeployment@2
+              displayName: 'Start TFS 2018'
+              inputs:
+                azureSubscription: 'PM_DONOVANBROWN'
+                action: Start
+                resourceGroupName: WinBldBox
+              condition: and(succeeded(), eq('${{ parameters.start2018 }}', 'true'))
+
+            - task: NuGetAuthenticate@0
+              inputs:
+                nuGetServiceConnections: 'Azure Artifacts'
+
+            - task: PowerShell@2
+              displayName: 'Register Private Repository'
+              inputs:
+                targetType: 'inline'
+                script: |
+                  $n = 'LoECDA'
+                  $url = "$(REPO_URL)"
+
+                  if(-not (Get-PSRepository | Where-Object Name -eq $n)) {
+                      Register-PSRepository -Name $n -SourceLocation $url -InstallationPolicy Trusted -Verbose
+                  }
+
+                  Get-PSRepository
+
+            - task: PowerShell@2
+              displayName: 'Install VSTeam Module'
+              inputs:
+                targetType: 'inline'
+                script: |
+                  # Load the psd1 file so you can read the version
+                  $manifest = Import-PowerShellDataFile .\$(Folder)\*.psd1
+
+                  $n = 'LoECDA'
+                  $e = "$(EMAIL)"
+                  $b = "$($manifest.ModuleVersion).$(Build.BuildId)"
+                  $pwd = ConvertTo-SecureString "$(PKG_PAT)" -AsPlainText -Force
+                  $creds = New-Object PSCredential($e, $pwd)
+
+                  Get-PSRepository
+
+                  Install-Module -Name VSTeam -Repository $n -Credential $creds -MaximumVersion $b -MinimumVersion $b -Force -Scope CurrentUser -Verbose
+                workingDirectory: '$(Pipeline.Workspace)/test'
+
+            - task: PowerShell@2
+              displayName: 'Install Pester'
+              inputs:
+                targetType: 'inline'
+                script: 'Install-Module -Name Pester -Repository PSGallery -Force -AllowPrerelease -MinimumVersion "$(PESTER_VERSION)" -Scope CurrentUser -AllowClobber -SkipPublisherCheck'
+
+            - task: PowerShell@2
+              displayName: 'Run Integration Tests'
+              inputs:
+                targetType: 'inline'
+                script: |
+                  if('${{parameters['apiVersion']}}' -eq 'TFS2017') {
+                    $env:PAT='$(2017PAT)'
+                  } elseif('${{parameters['apiVersion']}}' -eq 'TFS2018') {
+                    $env:PAT='$(2018PAT)'
+                  } elseif('${{parameters['apiVersion']}}' -eq 'VSTS') {
+                    $env:PAT='$(VSTSPAT)'
+                  }
+                  Import-Module VSTeam
+                  # This loads [PesterConfiguration] into scope
+                  Import-Module Pester
+                  $pesterArgs = [PesterConfiguration]::Default
+                  $pesterArgs.Run.Exit = $true
+                  $pesterArgs.Run.PassThru = $true
+                  $pesterArgs.Output.Verbosity = "Detailed"
+                  $pesterArgs.TestResult.Enabled = $true
+                  $pesterArgs.TestResult.OutputPath = 'test-results.xml'
+            
+                  Invoke-Pester -Configuration $pesterArgs
+                failOnStderr: true
+                workingDirectory: '$(Pipeline.Workspace)/test/Tests'
+
+            - task: PublishTestResults@2
+              displayName: 'Publish Test Results'
+              inputs:
+                testResultsFormat: NUnit
+                testResultsFiles: '**/test-results.xml'
+                searchFolder: '$(Pipeline.Workspace)/test'
+                testRunTitle: '${{ parameters.os }} Tests'
+              continueOnError: true
+              condition: succeededOrFailed()
+
+            - task: AzureResourceGroupDeployment@2
+              displayName: 'Stop and Deallocate TFS 2017'
+              inputs:
+                azureSubscription: 'PM_DONOVANBROWN'
+                action: StopWithDeallocate
+                resourceGroupName: SonarQube
+              condition: and(succeeded(), eq('${{ parameters.stop2017 }}', 'true'))
+
+            - task: AzureResourceGroupDeployment@2
+              displayName: 'Stop and Deallocate TFS 2018'
+              inputs:
+                azureSubscription: 'PM_DONOVANBROWN'
+                action: StopWithDeallocate
+                resourceGroupName: WinBldBox
+              condition: and(succeeded(), eq('${{ parameters.stop2018 }}', 'true'))

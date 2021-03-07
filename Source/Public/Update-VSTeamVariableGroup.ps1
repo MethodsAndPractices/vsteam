@@ -1,5 +1,6 @@
 function Update-VSTeamVariableGroup {
-   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Medium")]
+   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Medium",
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Update-VSTeamVariableGroup')]
    param(
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [string] $Id,
@@ -18,9 +19,9 @@ function Update-VSTeamVariableGroup {
 
       [switch] $Force,
 
-      [ProjectValidateAttribute()]
-      [ArgumentCompleter([ProjectCompleter])]
-      [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+      [vsteam_lib.ProjectValidateAttribute($false)]
+      [ArgumentCompleter([vsteam_lib.ProjectCompleter])]
       [string] $ProjectName
    )
 
@@ -48,7 +49,7 @@ function Update-VSTeamVariableGroup {
             variables   = $Variables
          }
 
-         if ([VSTeamVersions]::Version -ne "TFS2017") {
+         if ([vsteam_lib.Versions]::Version -ne "TFS2017") {
             $Type = $PSBoundParameters['Type']
             $bodyAsHashtable.Add("type", $Type)
 
@@ -63,8 +64,12 @@ function Update-VSTeamVariableGroup {
 
       if ($Force -or $pscmdlet.ShouldProcess($Id, "Update Variable Group")) {
          # Call the REST API
-         $resp = _callAPI -ProjectName $projectName -Area 'distributedtask' -Resource 'variablegroups' -Id $Id  `
-            -Method Put -ContentType 'application/json' -body $body -Version $(_getApiVersion VariableGroups)
+         $resp = _callAPI -Method PUT -ProjectName $projectName `
+            -Area distributedtask `
+            -Resource variablegroups `
+            -Id $Id `
+            -body $body `
+            -Version $(_getApiVersion VariableGroups)
 
          Write-Verbose $resp
 

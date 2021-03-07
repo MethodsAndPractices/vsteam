@@ -14,58 +14,84 @@ Get-VSTeamTfvcBranch gets a branch for a given path from TFVC source control.
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
-```PowerShell
-PS C:\> Get-VSTeamTfvcBranch -Path $/MyProject/MyBranch
+```powershell
+Get-VSTeamTfvcBranch -Path $/MyProject/MyBranch
 ```
 
 This command returns the branch object for the path $/MyProject/MyBranch
 
-### -------------------------- EXAMPLE 2 --------------------------
+### Example 2
 
-```PowerShell
-PS C:\> Get-VSTeamTfvcBranch -Path $/MyProject/MyBranch -IncludeChildren
+```powershell
+Get-VSTeamTfvcBranch -Path $/MyProject/MyBranch -IncludeChildren
 ```
 
 This command returns the branch object for the path $/MyProject/MyBranch and its child branches.
 
-### -------------------------- EXAMPLE 3 --------------------------
+### Example 3
 
-```PowerShell
-PS C:\> Get-VSTeamTfvcBranch -Path $/MyProject/MyBranch -IncludeParent
+```powershell
+Get-VSTeamTfvcBranch -Path $/MyProject/MyBranch -IncludeParent
 ```
 
 This command returns the branch object for the path $/MyProject/MyBranch and its parent.
 
-### -------------------------- EXAMPLE 4 --------------------------
+### Example 4
 
-```PowerShell
-PS C:\> Get-VSTeamTfvcBranch -Path $/MyProject/MyBranch -IncludeDeleted
+```powershell
+Get-VSTeamTfvcBranch -Path $/MyProject/MyBranch -IncludeDeleted
 ```
 
 This command returns the branch object for the path $/MyProject/MyBranch, even if it's marked as deleted.
 
-### -------------------------- EXAMPLE 5 --------------------------
+### Example 5
 
-```PowerShell
-PS C:\> '$/MyProject/MyBranch','$/AnotherProject/AnotherBranch' | Get-VSTeamTfvcBranch
+```powershell
+'$/MyProject/MyBranch','$/AnotherProject/AnotherBranch' | Get-VSTeamTfvcBranch
 ```
 
 This command returns the branch objects for the paths $/MyProject/MyBranch and $/AnotherProject/AnotherBranch by using the pipeline.
 
+### Example 6
+
+```powershell
+Get-VSTeamTfvcBranch -ProjectName TestProject
+```
+
+This command returns all the branches under a project.
+
 ## PARAMETERS
 
-### -Path
+### ProjectName
+
+Specifies the team project for which this function operates.
+
+You can tab complete from a list of available projects.
+
+You can use Set-VSTeamDefaultProject to set a default project so
+you do not have to pass the ProjectName with each call.
+
+```yaml
+Type: String
+Position: 0
+Required: True
+Parameter Sets: List
+Accept pipeline input: true (ByPropertyName)
+```
+
+### Path
 
 Full path to the branch.
 
 ```yaml
 Type: String[]
+Parameter Sets: ByPath
 Accept pipeline input: true
 ```
 
-### -IncludeChildren
+### IncludeChildren
 
 Return child branches, if there are any.
 
@@ -73,7 +99,7 @@ Return child branches, if there are any.
 Type: SwitchParameter
 ```
 
-### -IncludeParent
+### IncludeParent
 
 Return the parent branch, if there is one.
 
@@ -81,7 +107,7 @@ Return the parent branch, if there is one.
 Type: SwitchParameter
 ```
 
-### -IncludeDeleted
+### IncludeDeleted
 
 Return branches marked as deleted.
 
@@ -97,4 +123,8 @@ Type: SwitchParameter
 
 You can pipe paths to this function.
 
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
+
+<!-- #include "./common/related.md" -->

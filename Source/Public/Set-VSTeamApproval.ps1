@@ -1,5 +1,6 @@
 function Set-VSTeamApproval {
-   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Medium")]
+   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Medium",
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Set-VSTeamApproval')]
    param(
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [int[]] $Id,
@@ -14,9 +15,9 @@ function Set-VSTeamApproval {
 
       [switch] $Force,
 
-      [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
-      [ProjectValidateAttribute()]
-      [ArgumentCompleter([ProjectCompleter])]
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+      [vsteam_lib.ProjectValidateAttribute($false)]
+      [ArgumentCompleter([vsteam_lib.ProjectCompleter])]
       [string] $ProjectName
    )
 
@@ -29,8 +30,12 @@ function Set-VSTeamApproval {
          if ($force -or $pscmdlet.ShouldProcess($item, "Set Approval Status")) {
             try {
                # Call the REST API
-               _callAPI -Method Patch -SubDomain vsrm -ProjectName $ProjectName -Area release -Resource approvals `
-                  -Id $item -Version $(_getApiVersion Release) -body $body -ContentType 'application/json' | Out-Null
+               _callAPI -Method PATCH -SubDomain vsrm -ProjectName $ProjectName `
+                  -Area release `
+                  -Resource approvals `
+                  -Id $item `
+                  -body $body `
+                  -Version $(_getApiVersion Release) | Out-Null
 
                Write-Output "Approval $item status changed to $status"
             }

@@ -16,10 +16,10 @@ You must call Set-VSTeamAccount before calling this function.
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
-```PowerShell
-PS C:\> Add-VSTeamBuildDefinition -ProjectName Demo -InFile build.json
+```powershell
+Add-VSTeamBuildDefinition -ProjectName Demo -InFile build.json
 ```
 
 This command reads build.json and creates a new build definition from it
@@ -27,9 +27,7 @@ on the demo team project.
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
-### -InFile
+### InFile
 
 Path and file name to the JSON file that contains the definition to be created. If the path is omitted, the default is the current location.
 
@@ -40,6 +38,8 @@ Position: 1
 Accept pipeline input: true (ByPropertyName)
 ```
 
+<!-- #include "./params/projectName.md" -->
+
 ## INPUTS
 
 ### System.String
@@ -48,12 +48,8 @@ Accept pipeline input: true (ByPropertyName)
 
 ## NOTES
 
-This function has a Dynamic Parameter for ProjectName that specifies the
-project for which this function gets build definitions.
-
-You can tab complete from a list of available projects.
-
-You can use Set-VSTeamDefaultProject to set a default project so you do not have
-to pass the ProjectName with each call.
+<!-- #include "./common/prerequisites.md" -->
 
 ## RELATED LINKS
+
+<!-- #include "./common/related.md" -->

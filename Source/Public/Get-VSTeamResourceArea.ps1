@@ -1,5 +1,5 @@
 function Get-VSTeamResourceArea {
-   [CmdletBinding()]
+   [CmdletBinding(HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Get-VSTeamResourceArea')]
    param()
 
    # Call the REST API
@@ -7,7 +7,7 @@ function Get-VSTeamResourceArea {
 
    # Apply a Type Name so we can use custom format view and custom type extensions
    foreach ($item in $resp.value) {
-      _applyTypes -item $item -type 'Team.ResourceArea'
+      _applyTypes -item $item -type 'vsteam_lib.ResourceArea'
    }
 
    Write-Output $resp.value

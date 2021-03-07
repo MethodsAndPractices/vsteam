@@ -1,0 +1,23 @@
+[
+   {
+      "Name": "http://localhost:8080/tfs/defaultcollection",
+      "URL": "http://localhost:8080/tfs/defaultcollection",
+      "Pat": "",
+      "Type": "OnPremise",
+      "Version": "TFS2017"
+   },
+   {
+      "Name": "http://192.168.1.3:8080/tfs/defaultcollection",
+      "URL": "http://192.168.1.3:8080/tfs/defaultcollection",
+      "Pat": "OnE2cXpseHk0YXp3dHpz",
+      "Type": "Pat",
+      "Version": "TFS2017"
+   },
+   {
+      "Name": "test",
+      "URL": "https://dev.azure.com/test",
+      "Pat": "OndrejR0ZHpwbDM3bXUycGt5c3hm",
+      "Type": "Pat",
+      "Version": "VSTS"
+   }
+]

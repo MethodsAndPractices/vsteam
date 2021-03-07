@@ -16,11 +16,7 @@
 
 ## PARAMETERS
 
-<!-- #include "./params/confirm.md" -->
-
-<!-- #include "./params/force.md" -->
-
-### -UserId
+### UserId
 
 The id of the user to remove.
 
@@ -32,7 +28,7 @@ Required: True
 Accept pipeline input: true (ByPropertyName)
 ```
 
-### -Email
+### Email
 
 The email of the user to remove.
 
@@ -44,7 +40,7 @@ Required: True
 Accept pipeline input: true (ByPropertyName)
 ```
 
-<!-- #include "./params/whatIf.md" -->
+<!-- #include "./params/forcegroup.md" -->
 
 ## INPUTS
 
@@ -56,4 +52,8 @@ Accept pipeline input: true (ByPropertyName)
 
 ## NOTES
 
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
+
+<!-- #include "./common/related.md" -->

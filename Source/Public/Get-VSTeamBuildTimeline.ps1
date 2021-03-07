@@ -1,48 +1,43 @@
 function Get-VSTeamBuildTimeline {
-   [CmdletBinding(DefaultParameterSetName = 'ByID')]
+   [CmdletBinding(HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Get-VSTeamBuildTimeline')]
    param (
-      [Parameter(ParameterSetName = 'ByID', ValueFromPipeline = $true, Mandatory= $true, Position=0)]
-      [int[]] $BuildID,
+      [Parameter(ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true, Mandatory = $true, Position = 1)]
+      [int[]] $Id,
 
-      [Parameter(ParameterSetName = 'ByID')]
-      [Alias('TimelineId')]
-      [Guid] $Id,
+      [Guid] $TimelineId,
 
-      [Parameter(ParameterSetName = 'ByID')]
       [int] $ChangeId,
 
-      [Parameter(ParameterSetName = 'ByID')]
-      [Guid] $PlanId
+      [Guid] $PlanId,
+
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+      [vsteam_lib.ProjectValidateAttribute($false)]
+      [ArgumentCompleter([vsteam_lib.ProjectCompleter])]
+      [string] $ProjectName
    )
 
-   DynamicParam {
-      _buildProjectNameDynamicParam
-   }
-
    Process {
-      # Bind the parameter to a friendly variable
-      $ProjectName = $PSBoundParameters["ProjectName"]
-  
-      foreach ($item in $BuildID) {
+      foreach ($item in $Id) {
          # Build the url to return the single build
 
          $resource = "builds/$item/timeline"
 
-         if($Id){
-            $resource = "builds/$item/timeline/$Id"
+         if ($TimelineId) {
+            $resource = "builds/$item/timeline/$TimelineId"
          }
 
-         $resp = _callAPI -method Get -ProjectName $projectName -Area 'build' -Resource $resource `
-            -Version $([VSTeamVersions]::Build) `
+         $resp = _callAPI -ProjectName $projectName `
+            -Area 'build' `
+            -Resource $resource `
+            -Version $([vsteam_lib.Versions]::Build) `
             -Querystring @{
-               'changeId'                 = $ChangeId
-               'planId'                   = $PlanId              
-            }
+            'changeId' = $ChangeId
+            'planId'   = $PlanId
+         }
 
          _applyTypesToBuildTimelineResultType -item $resp
 
          Write-Output $resp
       }
-   
    }
 }

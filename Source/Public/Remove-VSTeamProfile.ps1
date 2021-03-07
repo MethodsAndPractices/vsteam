@@ -1,5 +1,6 @@
 function Remove-VSTeamProfile {
-   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Low")]
+   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Low",
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Remove-VSTeamProfile')]
    param(
       # Name is an array so I can pass an array after -Name
       # I can also use pipe

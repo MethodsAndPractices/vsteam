@@ -1,5 +1,6 @@
 function Remove-VSTeamGitRepository {
-   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "High")]
+   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "High",
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Remove-VSTeamGitRepository')]
    param(
       [parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
       [guid[]] $Id,
@@ -10,7 +11,7 @@ function Remove-VSTeamGitRepository {
       foreach ($item in $id) {
          if ($Force -or $pscmdlet.ShouldProcess($item, "Delete Repository")) {
             try {
-               _callAPI -Method Delete -Id $item -Area git -Resource repositories -Version $(_getApiVersion Git) | Out-Null
+               _callAPI -Method DELETE -Id $item -Area git -Resource repositories -Version $(_getApiVersion Git) | Out-Null
 
                Write-Output "Deleted repository $item"
             }

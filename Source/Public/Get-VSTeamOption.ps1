@@ -1,12 +1,14 @@
 function Get-VSTeamOption {
-   [CmdletBinding()]
+   [CmdletBinding(HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Get-VSTeamOption')]
    param(
       [string] $subDomain,
 
+      [ArgumentCompleter([vsteam_lib.InvokeCompleter])]
       [Parameter(Position = 0)]
       [Alias("Service")]
       [string] $area,
 
+      [ArgumentCompleter([vsteam_lib.InvokeCompleter])]
       [Parameter(Position = 1)]
       [string] $resource
    )
@@ -31,7 +33,7 @@ function Get-VSTeamOption {
 
    # Apply a Type Name so we can use custom format view and custom type extensions
    foreach ($item in $resp.value) {
-      _applyTypes -item $item -type 'Team.Option'
+      _applyTypes -item $item -type 'vsteam_lib.Option'
    }
 
    Write-Output $resp.value

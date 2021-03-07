@@ -16,7 +16,7 @@
 
 ## PARAMETERS
 
-### -PublisherId
+### PublisherId
 
 The id of the publisher.
 
@@ -25,7 +25,7 @@ Type: String
 Required: True
 ```
 
-### -ExtensionId
+### ExtensionId
 
 The id of the extension.
 
@@ -34,7 +34,7 @@ Type: String
 Required: True
 ```
 
-<!-- #include "./params/force.md" -->
+<!-- #include "./params/forcegroup.md" -->
 
 ## INPUTS
 
@@ -42,7 +42,11 @@ Required: True
 
 ## NOTES
 
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
+
+<!-- #include "./common/related.md" -->
 
 [Add-VSTeamExtension](Add-VSTeamExtension.md)
 

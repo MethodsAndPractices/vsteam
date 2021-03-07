@@ -14,17 +14,17 @@
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
-```PowerShell
-PS C:\> Show-VSTeamWorkItem -ProjectName Demo -Id 3
+```powershell
+Show-VSTeamWorkItem -ProjectName Demo -Id 3
 ```
 
 This command will open a web browser with the summary of work item 3.
 
 ## PARAMETERS
 
-### -Id
+### Id
 
 Specifies work item by ID.
 
@@ -40,17 +40,17 @@ Accept pipeline input: true (ByPropertyName)
 
 ## OUTPUTS
 
-### Team.WorkItem
+### vsteam_lib.WorkItem
 
 ## NOTES
 
 You can pipe the WorkItem ID to this function.
 
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
 
-[Set-VSTeamAccount](Set-VSTeamAccount.md)
-
-[Set-VSTeamDefaultProject](Set-VSTeamDefaultProject.md)
+<!-- #include "./common/related.md" -->
 
 [Add-VSTeamWorkItem](Add-VSTeamWorkItem.md)
 

@@ -1,0 +1,100 @@
+{
+  "value": [
+    {
+      "id": "00000000-0000-0000-0000-000000000001",
+      "name": "Bakeoff",
+      "url": "https://dev.azure.com/Test/0/_apis/git/repositories/0",
+      "project": {
+        "id": "00000000-0000-0000-0000-000000000000",
+        "name": "PeopleTracker",
+        "url": "https://dev.azure.com/Test/_apis/projects/00000000-0000-0000-0000-000000000000",
+        "state": "wellFormed",
+        "revision": 150,
+        "visibility": "private",
+        "lastUpdateTime": "2019-09-25T20:47:14.247Z"
+      },
+      "defaultBranch": "refs/heads/master",
+      "size": 1939413,
+      "remoteUrl": "https://Test@dev.azure.com/Test/PeopleTracker/_git/Bakeoff",
+      "sshUrl": "git@ssh.dev.azure.com:v3/Test/PeopleTracker/Bakeoff",
+      "webUrl": "https://dev.azure.com/Test/PeopleTracker/_git/Bakeoff"
+    },
+    {
+      "id": "00000000-0000-0000-0000-000000000000",
+      "name": "Vars",
+      "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/git/repositories/00000000-0000-0000-0000-000000000000",
+      "project": {
+        "id": "00000000-0000-0000-0000-000000000000",
+        "name": "PeopleTracker",
+        "url": "https://dev.azure.com/Test/_apis/projects/00000000-0000-0000-0000-000000000000",
+        "state": "wellFormed",
+        "revision": 150,
+        "visibility": "private",
+        "lastUpdateTime": "2019-09-25T20:47:14.247Z"
+      },
+      "defaultBranch": "refs/heads/master",
+      "size": 2704,
+      "remoteUrl": "https://Test@dev.azure.com/Test/PeopleTracker/_git/Vars",
+      "sshUrl": "git@ssh.dev.azure.com:v3/Test/PeopleTracker/Vars",
+      "webUrl": "https://dev.azure.com/Test/PeopleTracker/_git/Vars"
+    },
+    {
+      "id": "00000000-0000-0000-0000-000000000000",
+      "name": "Voting-App",
+      "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/git/repositories/00000000-0000-0000-0000-000000000000",
+      "project": {
+        "id": "00000000-0000-0000-0000-000000000000",
+        "name": "Voting-App",
+        "description": "Vote App",
+        "url": "https://dev.azure.com/Test/_apis/projects/00000000-0000-0000-0000-000000000000",
+        "state": "wellFormed",
+        "revision": 159,
+        "visibility": "private",
+        "lastUpdateTime": "2020-05-19T00:02:23.517Z"
+      },
+      "size": 0,
+      "remoteUrl": "https://Test@dev.azure.com/Test/Voting-App/_git/Voting-App",
+      "sshUrl": "git@ssh.dev.azure.com:v3/Test/Voting-App/Voting-App",
+      "webUrl": "https://dev.azure.com/Test/Voting-App/_git/Voting-App"
+    },
+    {
+      "id": "00000000-0000-0000-0000-000000000000",
+      "name": "PeopleTracker",
+      "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/git/repositories/00000000-0000-0000-0000-000000000000",
+      "project": {
+        "id": "00000000-0000-0000-0000-000000000000",
+        "name": "PeopleTracker",
+        "url": "https://dev.azure.com/Test/_apis/projects/00000000-0000-0000-0000-000000000000",
+        "state": "wellFormed",
+        "revision": 150,
+        "visibility": "private",
+        "lastUpdateTime": "2019-09-25T20:47:14.247Z"
+      },
+      "defaultBranch": "refs/heads/master",
+      "size": 24647257,
+      "remoteUrl": "https://Test@dev.azure.com/Test/PeopleTracker/_git/PeopleTracker",
+      "sshUrl": "git@ssh.dev.azure.com:v3/Test/PeopleTracker/PeopleTracker",
+      "webUrl": "https://dev.azure.com/Test/PeopleTracker/_git/PeopleTracker"
+    },
+    {
+      "id": "00000000-0000-0000-0000-000000000000",
+      "name": "ber",
+      "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/git/repositories/00000000-0000-0000-0000-000000000000",
+      "project": {
+        "id": "00000000-0000-0000-0000-000000000000",
+        "name": "PeopleTracker",
+        "url": "https://dev.azure.com/Test/_apis/projects/00000000-0000-0000-0000-000000000000",
+        "state": "wellFormed",
+        "revision": 150,
+        "visibility": "private",
+        "lastUpdateTime": "2019-09-25T20:47:14.247Z"
+      },
+      "defaultBranch": "refs/heads/master",
+      "size": 167584,
+      "remoteUrl": "https://Test@dev.azure.com/Test/PeopleTracker/_git/ber",
+      "sshUrl": "git@ssh.dev.azure.com:v3/Test/PeopleTracker/ber",
+      "webUrl": "https://dev.azure.com/Test/PeopleTracker/_git/ber"
+    }
+  ],
+  "count": 5
+}

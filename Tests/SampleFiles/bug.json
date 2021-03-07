@@ -1,0 +1,1129 @@
+{
+   "name": "Bug",
+   "referenceName": "Microsoft.VSTS.WorkItemTypes.Bug",
+   "description": "Describes a divergence between required and actual behavior, and tracks the work done to correct the defect and verify the correction.",
+   "color": "CC293D",
+   "icon": {
+      "id": "icon_insect",
+      "url": "https://tfsprodcus3.visualstudio.com/_apis/wit/workItemIcons/icon_insect?color=CC293D&v=2"
+   },
+   "isDisabled": false,
+   "xmlForm": "<FORM><Layout HideReadOnlyEmptyFields=\"true\" HideControlBorders=\"true\"><Group Margin=\"(10,0,0,0)\"><Column PercentWidth=\"94\"><Control Label=\"\" LabelPosition=\"Top\" FieldName=\"System.Title\" Type=\"FieldControl\" EmptyText=\"Enter title here\" ControlFontSize=\"large\" /></Column><Column PercentWidth=\"6\"><Control Label=\"\" LabelPosition=\"Top\" FieldName=\"System.Id\" Type=\"FieldControl\" ControlFontSize=\"large\" /></Column></Group><Group Margin=\"(10,10,0,0)\"><Column PercentWidth=\"30\"><Control Label=\"Assi&amp;gned To\" LabelPosition=\"Left\" FieldName=\"System.AssignedTo\" Type=\"FieldControl\" EmptyText=\"Unassigned\" /><Control Label=\"Stat&amp;e\" LabelPosition=\"Left\" FieldName=\"System.State\" Type=\"FieldControl\" /><Control Label=\"Reason\" LabelPosition=\"Left\" FieldName=\"System.Reason\" Type=\"FieldControl\" /></Column><Column PercentWidth=\"40\"><Control Label=\"\" LabelPosition=\"Top\" Type=\"LabelControl\" /><Control Label=\"&amp;Area\" LabelPosition=\"Left\" FieldName=\"System.AreaPath\" Type=\"WorkItemClassificationControl\" /><Control Label=\"Ite&amp;ration\" LabelPosition=\"Left\" FieldName=\"System.IterationPath\" Type=\"WorkItemClassificationControl\" /></Column><Column PercentWidth=\"30\"><Control Label=\"\" LabelPosition=\"Top\" Name=\"2\" Type=\"LabelControl\" /><Control Label=\"\" LabelPosition=\"Top\" Name=\"3\" Type=\"LabelControl\" /><Control Label=\"Last Updated Date\" LabelPosition=\"Left\" FieldName=\"System.ChangedDate\" Type=\"DateTimeControl\" ReadOnly=\"True\" /></Column></Group><TabGroup Margin=\"(0,10,0,0)\"><Tab Label=\"Details\"><Group><Column PercentWidth=\"50\"><Group><Column PercentWidth=\"100\"><Group Label=\"Repro Steps\"><Column PercentWidth=\"100\"><Control Label=\"\" LabelPosition=\"Top\" FieldName=\"Microsoft.VSTS.TCM.ReproSteps\" Type=\"HtmlFieldControl\" Margin=\"(0,0,0,10)\" /></Column></Group><Group Label=\"System Info\"><Column PercentWidth=\"100\"><Control Label=\"\" LabelPosition=\"Top\" FieldName=\"Microsoft.VSTS.TCM.SystemInfo\" Type=\"HtmlFieldControl\" Margin=\"(0,0,0,10)\" /></Column></Group></Column></Group></Column><Column PercentWidth=\"50\"><Group Margin=\"(20,0,0,0)\"><Column PercentWidth=\"25\"><Group><Column PercentWidth=\"100\"><Group Label=\"Planning\"><Column PercentWidth=\"100\"><Control Label=\"Resolved Reason\" LabelPosition=\"Top\" FieldName=\"Microsoft.VSTS.Common.ResolvedReason\" Type=\"FieldControl\" Margin=\"(0,0,0,10)\" /><Control Label=\"Story Points\" LabelPosition=\"Top\" FieldName=\"Microsoft.VSTS.Scheduling.StoryPoints\" Type=\"FieldControl\" Margin=\"(0,0,0,10)\" /><Control Label=\"Priority\" LabelPosition=\"Top\" FieldName=\"Microsoft.VSTS.Common.Priority\" Type=\"FieldControl\" Margin=\"(0,0,0,10)\" /><Control Label=\"Severity\" LabelPosition=\"Top\" FieldName=\"Microsoft.VSTS.Common.Severity\" Type=\"FieldControl\" Margin=\"(0,0,0,10)\" /><Control Label=\"Activity\" LabelPosition=\"Top\" FieldName=\"Microsoft.VSTS.Common.Activity\" Type=\"FieldControl\" Margin=\"(0,0,0,10)\" /></Column></Group><Group Label=\"Effort (Hours)\"><Column PercentWidth=\"100\"><Control Label=\"Original Estimate\" LabelPosition=\"Top\" FieldName=\"Microsoft.VSTS.Scheduling.OriginalEstimate\" Type=\"FieldControl\" Margin=\"(0,0,0,10)\" /><Control Label=\"Remaining\" LabelPosition=\"Top\" FieldName=\"Microsoft.VSTS.Scheduling.RemainingWork\" Type=\"FieldControl\" Margin=\"(0,0,0,10)\" /><Control Label=\"Completed\" LabelPosition=\"Top\" FieldName=\"Microsoft.VSTS.Scheduling.CompletedWork\" Type=\"FieldControl\" Margin=\"(0,0,0,10)\" /></Column></Group></Column></Group></Column><Column PercentWidth=\"25\"><Group><Column PercentWidth=\"100\"><Group Label=\"Deployment\"><Column PercentWidth=\"100\"><Control Label=\"\" LabelPosition=\"Top\" FieldName=\"Deployments\" Type=\"DeploymentsControl\" Margin=\"(0,0,0,10)\" /></Column></Group><Group Label=\"Development\"><Column PercentWidth=\"100\"><Control Label=\"\" LabelPosition=\"Top\" FieldName=\"Development\" Type=\"LinksControl\" Margin=\"(0,0,0,10)\"><LinksControlOptions><WorkItemLinkFilters FilterType=\"excludeAll\" /><ExternalLinkFilters FilterType=\"include\"><Filter LinkType=\"Build\" /><Filter LinkType=\"Integrated in build\" /><Filter LinkType=\"Pull Request\" /><Filter LinkType=\"Branch\" /><Filter LinkType=\"Fixed in Commit\" /><Filter LinkType=\"Fixed in Changeset\" /><Filter LinkType=\"Source Code File\" /><Filter LinkType=\"Found in build\" /><Filter LinkType=\"GitHub Pull Request\" /><Filter LinkType=\"GitHub Commit\" /></ExternalLinkFilters><LinkColumns><LinkColumn RefName=\"System.Id\" /><LinkColumn RefName=\"System.Title\" /><LinkColumn LinkAttribute=\"System.Links.Comment\" /></LinkColumns></LinksControlOptions></Control></Column></Group><Group Label=\"Related Work\"><Column PercentWidth=\"100\"><Control Label=\"\" LabelPosition=\"Top\" FieldName=\"Related Work\" Type=\"LinksControl\" Margin=\"(0,0,0,10)\"><LinksControlOptions><WorkItemLinkFilters FilterType=\"include\"><Filter LinkType=\"System.LinkTypes.Duplicate\" /><Filter LinkType=\"System.LinkTypes.Hierarchy\" /><Filter LinkType=\"Microsoft.VSTS.Common.TestedBy\" /><Filter LinkType=\"System.LinkTypes.Dependency\" /><Filter LinkType=\"System.LinkTypes.Related\" /></WorkItemLinkFilters><ExternalLinkFilters FilterType=\"include\"><Filter LinkType=\"GitHub Issue\" /></ExternalLinkFilters><LinkColumns><LinkColumn RefName=\"System.Id\" /><LinkColumn RefName=\"System.Title\" /><LinkColumn RefName=\"System.AssignedTo\" /><LinkColumn RefName=\"System.WorkItemType\" /><LinkColumn RefName=\"System.State\" /><LinkColumn RefName=\"System.ChangedDate\" /><LinkColumn LinkAttribute=\"System.Links.Comment\" /></LinkColumns></LinksControlOptions></Control></Column></Group><Group Label=\"System Info\"><Column PercentWidth=\"100\"><Control Label=\"Found in Build\" LabelPosition=\"Top\" FieldName=\"Microsoft.VSTS.Build.FoundIn\" Type=\"FieldControl\" Margin=\"(0,0,0,10)\" /><Control Label=\"Integrated in Build\" LabelPosition=\"Top\" FieldName=\"Microsoft.VSTS.Build.IntegrationBuild\" Type=\"FieldControl\" Margin=\"(0,0,0,10)\" /></Column></Group></Column></Group></Column></Group></Column></Group></Tab><Tab Label=\"History\"><Group><Column PercentWidth=\"100\"><Group><Column PercentWidth=\"100\"><Group><Column PercentWidth=\"100\"><Control Label=\"\" LabelPosition=\"Top\" FieldName=\"System.History\" Type=\"WorkItemLogControl\" Margin=\"(0,0,0,10)\" /></Column></Group></Column></Group></Column></Group></Tab><Tab Label=\"Links\"><Group><Column PercentWidth=\"100\"><Group><Column PercentWidth=\"100\"><Group><Column PercentWidth=\"100\"><Control Label=\"\" LabelPosition=\"Top\" Type=\"LinksControl\" Margin=\"(0,0,0,10)\"><LinksControlOptions><LinkColumns><LinkColumn RefName=\"System.Id\" /><LinkColumn RefName=\"System.Title\" /><LinkColumn RefName=\"System.AssignedTo\" /><LinkColumn RefName=\"System.WorkItemType\" /><LinkColumn RefName=\"System.State\" /><LinkColumn RefName=\"System.ChangedDate\" /><LinkColumn LinkAttribute=\"System.Links.Comment\" /></LinkColumns></LinksControlOptions></Control></Column></Group></Column></Group></Column></Group></Tab><Tab Label=\"Attachments\"><Group><Column PercentWidth=\"100\"><Group><Column PercentWidth=\"100\"><Group><Column PercentWidth=\"100\"><Control Label=\"Attachments\" LabelPosition=\"Top\" Type=\"AttachmentsControl\" Margin=\"(0,0,0,10)\" /></Column></Group></Column></Group></Column></Group></Tab></TabGroup></Layout></FORM>",
+   "fields": [
+      {
+         "defaultValue": null,
+         "helpText": "The iteration within which this bug will be fixed",
+         "alwaysRequired": false,
+         "referenceName": "System.IterationPath",
+         "name": "Iteration Path",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/System.IterationPath"
+      },
+      {
+         "defaultValue": null,
+         "alwaysRequired": true,
+         "referenceName": "System.IterationId",
+         "name": "Iteration ID",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/System.IterationId"
+      },
+      {
+         "defaultValue": null,
+         "alwaysRequired": false,
+         "referenceName": "System.ExternalLinkCount",
+         "name": "External Link Count",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/System.ExternalLinkCount"
+      },
+      {
+         "defaultValue": null,
+         "alwaysRequired": false,
+         "referenceName": "System.IterationLevel7",
+         "name": "Iteration Level 7",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/System.IterationLevel7"
+      },
+      {
+         "defaultValue": null,
+         "alwaysRequired": false,
+         "referenceName": "System.IterationLevel6",
+         "name": "Iteration Level 6",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/System.IterationLevel6"
+      },
+      {
+         "defaultValue": null,
+         "alwaysRequired": false,
+         "referenceName": "System.IterationLevel5",
+         "name": "Iteration Level 5",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/System.IterationLevel5"
+      },
+      {
+         "defaultValue": null,
+         "alwaysRequired": false,
+         "referenceName": "System.IterationLevel4",
+         "name": "Iteration Level 4",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/System.IterationLevel4"
+      },
+      {
+         "defaultValue": null,
+         "alwaysRequired": false,
+         "referenceName": "System.IterationLevel3",
+         "name": "Iteration Level 3",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/System.IterationLevel3"
+      },
+      {
+         "defaultValue": null,
+         "alwaysRequired": false,
+         "referenceName": "System.IterationLevel2",
+         "name": "Iteration Level 2",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/System.IterationLevel2"
+      },
+      {
+         "defaultValue": null,
+         "alwaysRequired": false,
+         "referenceName": "System.IterationLevel1",
+         "name": "Iteration Level 1",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/System.IterationLevel1"
+      },
+      {
+         "defaultValue": null,
+         "alwaysRequired": false,
+         "referenceName": "System.AreaLevel7",
+         "name": "Area Level 7",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/System.AreaLevel7"
+      },
+      {
+         "defaultValue": null,
+         "alwaysRequired": false,
+         "referenceName": "System.AreaLevel6",
+         "name": "Area Level 6",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/System.AreaLevel6"
+      },
+      {
+         "defaultValue": null,
+         "alwaysRequired": false,
+         "referenceName": "System.AreaLevel5",
+         "name": "Area Level 5",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/System.AreaLevel5"
+      },
+      {
+         "defaultValue": null,
+         "alwaysRequired": false,
+         "referenceName": "System.AreaLevel4",
+         "name": "Area Level 4",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/System.AreaLevel4"
+      },
+      {
+         "defaultValue": null,
+         "alwaysRequired": false,
+         "referenceName": "System.AreaLevel3",
+         "name": "Area Level 3",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/System.AreaLevel3"
+      },
+      {
+         "defaultValue": null,
+         "alwaysRequired": false,
+         "referenceName": "System.AreaLevel2",
+         "name": "Area Level 2",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/System.AreaLevel2"
+      },
+      {
+         "defaultValue": null,
+         "alwaysRequired": false,
+         "referenceName": "System.AreaLevel1",
+         "name": "Area Level 1",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/System.AreaLevel1"
+      },
+      {
+         "defaultValue": null,
+         "alwaysRequired": false,
+         "referenceName": "System.TeamProject",
+         "name": "Team Project",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/System.TeamProject"
+      },
+      {
+         "defaultValue": null,
+         "alwaysRequired": false,
+         "referenceName": "System.Parent",
+         "name": "Parent",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/System.Parent"
+      },
+      {
+         "defaultValue": null,
+         "alwaysRequired": false,
+         "referenceName": "System.RemoteLinkCount",
+         "name": "Remote Link Count",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/System.RemoteLinkCount"
+      },
+      {
+         "defaultValue": null,
+         "alwaysRequired": false,
+         "referenceName": "System.CommentCount",
+         "name": "Comment Count",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/System.CommentCount"
+      },
+      {
+         "defaultValue": null,
+         "alwaysRequired": false,
+         "referenceName": "System.HyperLinkCount",
+         "name": "Hyperlink Count",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/System.HyperLinkCount"
+      },
+      {
+         "defaultValue": null,
+         "alwaysRequired": false,
+         "referenceName": "System.AttachedFileCount",
+         "name": "Attached File Count",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/System.AttachedFileCount"
+      },
+      {
+         "defaultValue": null,
+         "alwaysRequired": false,
+         "referenceName": "System.NodeName",
+         "name": "Node Name",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/System.NodeName"
+      },
+      {
+         "defaultValue": null,
+         "helpText": "The area of the product with which this bug is associated",
+         "alwaysRequired": false,
+         "referenceName": "System.AreaPath",
+         "name": "Area Path",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/System.AreaPath"
+      },
+      {
+         "defaultValue": null,
+         "alwaysRequired": false,
+         "referenceName": "System.RevisedDate",
+         "name": "Revised Date",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/System.RevisedDate"
+      },
+      {
+         "defaultValue": null,
+         "alwaysRequired": false,
+         "referenceName": "System.ChangedDate",
+         "name": "Changed Date",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/System.ChangedDate"
+      },
+      {
+         "defaultValue": null,
+         "alwaysRequired": false,
+         "referenceName": "System.Id",
+         "name": "ID",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/System.Id"
+      },
+      {
+         "defaultValue": null,
+         "alwaysRequired": true,
+         "referenceName": "System.AreaId",
+         "name": "Area ID",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/System.AreaId"
+      },
+      {
+         "defaultValue": null,
+         "alwaysRequired": false,
+         "referenceName": "System.AuthorizedAs",
+         "name": "Authorized As",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/System.AuthorizedAs"
+      },
+      {
+         "defaultValue": null,
+         "helpText": "Stories affected and how",
+         "alwaysRequired": true,
+         "referenceName": "System.Title",
+         "name": "Title",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/System.Title"
+      },
+      {
+         "defaultValue": "New",
+         "helpText": "New = for triage; Active = not yet fixed; Resolved = fixed not yet verified; Closed = fix verified.",
+         "alwaysRequired": true,
+         "referenceName": "System.State",
+         "name": "State",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/System.State"
+      },
+      {
+         "defaultValue": null,
+         "alwaysRequired": false,
+         "referenceName": "System.AuthorizedDate",
+         "name": "Authorized Date",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/System.AuthorizedDate"
+      },
+      {
+         "defaultValue": null,
+         "alwaysRequired": false,
+         "referenceName": "System.Watermark",
+         "name": "Watermark",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/System.Watermark"
+      },
+      {
+         "defaultValue": null,
+         "alwaysRequired": false,
+         "referenceName": "System.Rev",
+         "name": "Rev",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/System.Rev"
+      },
+      {
+         "defaultValue": null,
+         "alwaysRequired": false,
+         "referenceName": "System.ChangedBy",
+         "name": "Changed By",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/System.ChangedBy"
+      },
+      {
+         "defaultValue": null,
+         "helpText": "The reason why the bug is in the current state",
+         "alwaysRequired": false,
+         "referenceName": "System.Reason",
+         "name": "Reason",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/System.Reason"
+      },
+      {
+         "defaultValue": null,
+         "helpText": "The person currently working on this bug",
+         "alwaysRequired": false,
+         "referenceName": "System.AssignedTo",
+         "name": "Assigned To",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/System.AssignedTo"
+      },
+      {
+         "defaultValue": null,
+         "alwaysRequired": false,
+         "referenceName": "System.WorkItemType",
+         "name": "Work Item Type",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/System.WorkItemType"
+      },
+      {
+         "defaultValue": null,
+         "alwaysRequired": false,
+         "referenceName": "System.CreatedDate",
+         "name": "Created Date",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/System.CreatedDate"
+      },
+      {
+         "defaultValue": null,
+         "alwaysRequired": false,
+         "referenceName": "System.CreatedBy",
+         "name": "Created By",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/System.CreatedBy"
+      },
+      {
+         "defaultValue": null,
+         "alwaysRequired": false,
+         "referenceName": "System.Description",
+         "name": "Description",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/System.Description"
+      },
+      {
+         "defaultValue": null,
+         "helpText": "Discussion thread plus automatic record of changes",
+         "alwaysRequired": false,
+         "referenceName": "System.History",
+         "name": "History",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/System.History"
+      },
+      {
+         "defaultValue": null,
+         "alwaysRequired": false,
+         "referenceName": "System.RelatedLinkCount",
+         "name": "Related Link Count",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/System.RelatedLinkCount"
+      },
+      {
+         "defaultValue": null,
+         "alwaysRequired": false,
+         "referenceName": "System.Tags",
+         "name": "Tags",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/System.Tags"
+      },
+      {
+         "defaultValue": null,
+         "alwaysRequired": false,
+         "referenceName": "System.BoardColumn",
+         "name": "Board Column",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/System.BoardColumn"
+      },
+      {
+         "defaultValue": null,
+         "alwaysRequired": false,
+         "referenceName": "System.BoardColumnDone",
+         "name": "Board Column Done",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/System.BoardColumnDone"
+      },
+      {
+         "defaultValue": null,
+         "alwaysRequired": false,
+         "referenceName": "System.BoardLane",
+         "name": "Board Lane",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/System.BoardLane"
+      },
+      {
+         "defaultValue": null,
+         "helpText": "The size of work estimated for fixing the bug",
+         "alwaysRequired": false,
+         "referenceName": "Microsoft.VSTS.Scheduling.StoryPoints",
+         "name": "Story Points",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/Microsoft.VSTS.Scheduling.StoryPoints"
+      },
+      {
+         "defaultValue": null,
+         "helpText": "An estimate of the number of units of work remaining to complete this bug",
+         "alwaysRequired": false,
+         "referenceName": "Microsoft.VSTS.Scheduling.RemainingWork",
+         "name": "Remaining Work",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/Microsoft.VSTS.Scheduling.RemainingWork"
+      },
+      {
+         "defaultValue": null,
+         "helpText": "Initial value for Remaining Work - set once, when work begins",
+         "alwaysRequired": false,
+         "referenceName": "Microsoft.VSTS.Scheduling.OriginalEstimate",
+         "name": "Original Estimate",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/Microsoft.VSTS.Scheduling.OriginalEstimate"
+      },
+      {
+         "defaultValue": null,
+         "helpText": "The number of units of work that have been spent on this bug",
+         "alwaysRequired": false,
+         "referenceName": "Microsoft.VSTS.Scheduling.CompletedWork",
+         "name": "Completed Work",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/Microsoft.VSTS.Scheduling.CompletedWork"
+      },
+      {
+         "defaultValue": null,
+         "helpText": "Type of work involved",
+         "alwaysRequired": false,
+         "referenceName": "Microsoft.VSTS.Common.Activity",
+         "name": "Activity",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/Microsoft.VSTS.Common.Activity"
+      },
+      {
+         "defaultValue": null,
+         "helpText": "Test context, provided automatically by test infrastructure",
+         "alwaysRequired": false,
+         "referenceName": "Microsoft.VSTS.TCM.SystemInfo",
+         "name": "System Info",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/Microsoft.VSTS.TCM.SystemInfo"
+      },
+      {
+         "defaultValue": null,
+         "helpText": "How to see the bug. End by contrasting expected with actual behavior.",
+         "alwaysRequired": false,
+         "referenceName": "Microsoft.VSTS.TCM.ReproSteps",
+         "name": "Repro Steps",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/Microsoft.VSTS.TCM.ReproSteps"
+      },
+      {
+         "defaultValue": null,
+         "alwaysRequired": false,
+         "referenceName": "Microsoft.VSTS.Common.StateChangeDate",
+         "name": "State Change Date",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/Microsoft.VSTS.Common.StateChangeDate"
+      },
+      {
+         "defaultValue": null,
+         "alwaysRequired": false,
+         "referenceName": "Microsoft.VSTS.Common.ActivatedDate",
+         "name": "Activated Date",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/Microsoft.VSTS.Common.ActivatedDate"
+      },
+      {
+         "defaultValue": null,
+         "alwaysRequired": false,
+         "referenceName": "Microsoft.VSTS.Common.ActivatedBy",
+         "name": "Activated By",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/Microsoft.VSTS.Common.ActivatedBy"
+      },
+      {
+         "defaultValue": null,
+         "alwaysRequired": false,
+         "referenceName": "Microsoft.VSTS.Common.ResolvedDate",
+         "name": "Resolved Date",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/Microsoft.VSTS.Common.ResolvedDate"
+      },
+      {
+         "defaultValue": null,
+         "alwaysRequired": false,
+         "referenceName": "Microsoft.VSTS.Common.ResolvedBy",
+         "name": "Resolved By",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/Microsoft.VSTS.Common.ResolvedBy"
+      },
+      {
+         "defaultValue": null,
+         "helpText": "The reason why the bug was resolved",
+         "alwaysRequired": false,
+         "referenceName": "Microsoft.VSTS.Common.ResolvedReason",
+         "name": "Resolved Reason",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/Microsoft.VSTS.Common.ResolvedReason"
+      },
+      {
+         "defaultValue": null,
+         "alwaysRequired": false,
+         "referenceName": "Microsoft.VSTS.Common.ClosedDate",
+         "name": "Closed Date",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/Microsoft.VSTS.Common.ClosedDate"
+      },
+      {
+         "defaultValue": null,
+         "alwaysRequired": false,
+         "referenceName": "Microsoft.VSTS.Common.ClosedBy",
+         "name": "Closed By",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/Microsoft.VSTS.Common.ClosedBy"
+      },
+      {
+         "defaultValue": "2",
+         "helpText": "Business importance. 1=must fix; 4=unimportant.",
+         "alwaysRequired": false,
+         "referenceName": "Microsoft.VSTS.Common.Priority",
+         "name": "Priority",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/Microsoft.VSTS.Common.Priority"
+      },
+      {
+         "defaultValue": "3 - Medium",
+         "helpText": "Assessment of the effect of the bug on the project.",
+         "alwaysRequired": false,
+         "referenceName": "Microsoft.VSTS.Common.Severity",
+         "name": "Severity",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/Microsoft.VSTS.Common.Severity"
+      },
+      {
+         "defaultValue": null,
+         "helpText": "Work first on items with lower-valued stack rank. Set in triage.",
+         "alwaysRequired": false,
+         "referenceName": "Microsoft.VSTS.Common.StackRank",
+         "name": "Stack Rank",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/Microsoft.VSTS.Common.StackRank"
+      },
+      {
+         "defaultValue": "Business",
+         "helpText": "The type should be set to Business primarily to represent customer-facing issues. Work to change the architecture should be added as a Requirement",
+         "alwaysRequired": true,
+         "referenceName": "Microsoft.VSTS.Common.ValueArea",
+         "name": "Value Area",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/Microsoft.VSTS.Common.ValueArea"
+      },
+      {
+         "defaultValue": null,
+         "helpText": "The build in which the bug was fixed",
+         "alwaysRequired": false,
+         "referenceName": "Microsoft.VSTS.Build.IntegrationBuild",
+         "name": "Integration Build",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/Microsoft.VSTS.Build.IntegrationBuild"
+      },
+      {
+         "defaultValue": null,
+         "helpText": "The build in which the bug was found",
+         "alwaysRequired": false,
+         "referenceName": "Microsoft.VSTS.Build.FoundIn",
+         "name": "Found In",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/Microsoft.VSTS.Build.FoundIn"
+      }
+   ],
+   "fieldInstances": [
+      {
+         "defaultValue": null,
+         "helpText": "The iteration within which this bug will be fixed",
+         "alwaysRequired": false,
+         "referenceName": "System.IterationPath",
+         "name": "Iteration Path",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/System.IterationPath"
+      },
+      {
+         "defaultValue": null,
+         "alwaysRequired": true,
+         "referenceName": "System.IterationId",
+         "name": "Iteration ID",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/System.IterationId"
+      },
+      {
+         "defaultValue": null,
+         "alwaysRequired": false,
+         "referenceName": "System.ExternalLinkCount",
+         "name": "External Link Count",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/System.ExternalLinkCount"
+      },
+      {
+         "defaultValue": null,
+         "alwaysRequired": false,
+         "referenceName": "System.IterationLevel7",
+         "name": "Iteration Level 7",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/System.IterationLevel7"
+      },
+      {
+         "defaultValue": null,
+         "alwaysRequired": false,
+         "referenceName": "System.IterationLevel6",
+         "name": "Iteration Level 6",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/System.IterationLevel6"
+      },
+      {
+         "defaultValue": null,
+         "alwaysRequired": false,
+         "referenceName": "System.IterationLevel5",
+         "name": "Iteration Level 5",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/System.IterationLevel5"
+      },
+      {
+         "defaultValue": null,
+         "alwaysRequired": false,
+         "referenceName": "System.IterationLevel4",
+         "name": "Iteration Level 4",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/System.IterationLevel4"
+      },
+      {
+         "defaultValue": null,
+         "alwaysRequired": false,
+         "referenceName": "System.IterationLevel3",
+         "name": "Iteration Level 3",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/System.IterationLevel3"
+      },
+      {
+         "defaultValue": null,
+         "alwaysRequired": false,
+         "referenceName": "System.IterationLevel2",
+         "name": "Iteration Level 2",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/System.IterationLevel2"
+      },
+      {
+         "defaultValue": null,
+         "alwaysRequired": false,
+         "referenceName": "System.IterationLevel1",
+         "name": "Iteration Level 1",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/System.IterationLevel1"
+      },
+      {
+         "defaultValue": null,
+         "alwaysRequired": false,
+         "referenceName": "System.AreaLevel7",
+         "name": "Area Level 7",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/System.AreaLevel7"
+      },
+      {
+         "defaultValue": null,
+         "alwaysRequired": false,
+         "referenceName": "System.AreaLevel6",
+         "name": "Area Level 6",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/System.AreaLevel6"
+      },
+      {
+         "defaultValue": null,
+         "alwaysRequired": false,
+         "referenceName": "System.AreaLevel5",
+         "name": "Area Level 5",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/System.AreaLevel5"
+      },
+      {
+         "defaultValue": null,
+         "alwaysRequired": false,
+         "referenceName": "System.AreaLevel4",
+         "name": "Area Level 4",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/System.AreaLevel4"
+      },
+      {
+         "defaultValue": null,
+         "alwaysRequired": false,
+         "referenceName": "System.AreaLevel3",
+         "name": "Area Level 3",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/System.AreaLevel3"
+      },
+      {
+         "defaultValue": null,
+         "alwaysRequired": false,
+         "referenceName": "System.AreaLevel2",
+         "name": "Area Level 2",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/System.AreaLevel2"
+      },
+      {
+         "defaultValue": null,
+         "alwaysRequired": false,
+         "referenceName": "System.AreaLevel1",
+         "name": "Area Level 1",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/System.AreaLevel1"
+      },
+      {
+         "defaultValue": null,
+         "alwaysRequired": false,
+         "referenceName": "System.TeamProject",
+         "name": "Team Project",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/System.TeamProject"
+      },
+      {
+         "defaultValue": null,
+         "alwaysRequired": false,
+         "referenceName": "System.Parent",
+         "name": "Parent",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/System.Parent"
+      },
+      {
+         "defaultValue": null,
+         "alwaysRequired": false,
+         "referenceName": "System.RemoteLinkCount",
+         "name": "Remote Link Count",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/System.RemoteLinkCount"
+      },
+      {
+         "defaultValue": null,
+         "alwaysRequired": false,
+         "referenceName": "System.CommentCount",
+         "name": "Comment Count",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/System.CommentCount"
+      },
+      {
+         "defaultValue": null,
+         "alwaysRequired": false,
+         "referenceName": "System.HyperLinkCount",
+         "name": "Hyperlink Count",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/System.HyperLinkCount"
+      },
+      {
+         "defaultValue": null,
+         "alwaysRequired": false,
+         "referenceName": "System.AttachedFileCount",
+         "name": "Attached File Count",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/System.AttachedFileCount"
+      },
+      {
+         "defaultValue": null,
+         "alwaysRequired": false,
+         "referenceName": "System.NodeName",
+         "name": "Node Name",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/System.NodeName"
+      },
+      {
+         "defaultValue": null,
+         "helpText": "The area of the product with which this bug is associated",
+         "alwaysRequired": false,
+         "referenceName": "System.AreaPath",
+         "name": "Area Path",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/System.AreaPath"
+      },
+      {
+         "defaultValue": null,
+         "alwaysRequired": false,
+         "referenceName": "System.RevisedDate",
+         "name": "Revised Date",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/System.RevisedDate"
+      },
+      {
+         "defaultValue": null,
+         "alwaysRequired": false,
+         "referenceName": "System.ChangedDate",
+         "name": "Changed Date",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/System.ChangedDate"
+      },
+      {
+         "defaultValue": null,
+         "alwaysRequired": false,
+         "referenceName": "System.Id",
+         "name": "ID",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/System.Id"
+      },
+      {
+         "defaultValue": null,
+         "alwaysRequired": true,
+         "referenceName": "System.AreaId",
+         "name": "Area ID",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/System.AreaId"
+      },
+      {
+         "defaultValue": null,
+         "alwaysRequired": false,
+         "referenceName": "System.AuthorizedAs",
+         "name": "Authorized As",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/System.AuthorizedAs"
+      },
+      {
+         "defaultValue": null,
+         "helpText": "Stories affected and how",
+         "alwaysRequired": true,
+         "referenceName": "System.Title",
+         "name": "Title",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/System.Title"
+      },
+      {
+         "defaultValue": "New",
+         "helpText": "New = for triage; Active = not yet fixed; Resolved = fixed not yet verified; Closed = fix verified.",
+         "alwaysRequired": true,
+         "referenceName": "System.State",
+         "name": "State",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/System.State"
+      },
+      {
+         "defaultValue": null,
+         "alwaysRequired": false,
+         "referenceName": "System.AuthorizedDate",
+         "name": "Authorized Date",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/System.AuthorizedDate"
+      },
+      {
+         "defaultValue": null,
+         "alwaysRequired": false,
+         "referenceName": "System.Watermark",
+         "name": "Watermark",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/System.Watermark"
+      },
+      {
+         "defaultValue": null,
+         "alwaysRequired": false,
+         "referenceName": "System.Rev",
+         "name": "Rev",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/System.Rev"
+      },
+      {
+         "defaultValue": null,
+         "alwaysRequired": false,
+         "referenceName": "System.ChangedBy",
+         "name": "Changed By",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/System.ChangedBy"
+      },
+      {
+         "defaultValue": null,
+         "helpText": "The reason why the bug is in the current state",
+         "alwaysRequired": false,
+         "referenceName": "System.Reason",
+         "name": "Reason",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/System.Reason"
+      },
+      {
+         "defaultValue": null,
+         "helpText": "The person currently working on this bug",
+         "alwaysRequired": false,
+         "referenceName": "System.AssignedTo",
+         "name": "Assigned To",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/System.AssignedTo"
+      },
+      {
+         "defaultValue": null,
+         "alwaysRequired": false,
+         "referenceName": "System.WorkItemType",
+         "name": "Work Item Type",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/System.WorkItemType"
+      },
+      {
+         "defaultValue": null,
+         "alwaysRequired": false,
+         "referenceName": "System.CreatedDate",
+         "name": "Created Date",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/System.CreatedDate"
+      },
+      {
+         "defaultValue": null,
+         "alwaysRequired": false,
+         "referenceName": "System.CreatedBy",
+         "name": "Created By",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/System.CreatedBy"
+      },
+      {
+         "defaultValue": null,
+         "alwaysRequired": false,
+         "referenceName": "System.Description",
+         "name": "Description",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/System.Description"
+      },
+      {
+         "defaultValue": null,
+         "helpText": "Discussion thread plus automatic record of changes",
+         "alwaysRequired": false,
+         "referenceName": "System.History",
+         "name": "History",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/System.History"
+      },
+      {
+         "defaultValue": null,
+         "alwaysRequired": false,
+         "referenceName": "System.RelatedLinkCount",
+         "name": "Related Link Count",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/System.RelatedLinkCount"
+      },
+      {
+         "defaultValue": null,
+         "alwaysRequired": false,
+         "referenceName": "System.Tags",
+         "name": "Tags",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/System.Tags"
+      },
+      {
+         "defaultValue": null,
+         "alwaysRequired": false,
+         "referenceName": "System.BoardColumn",
+         "name": "Board Column",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/System.BoardColumn"
+      },
+      {
+         "defaultValue": null,
+         "alwaysRequired": false,
+         "referenceName": "System.BoardColumnDone",
+         "name": "Board Column Done",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/System.BoardColumnDone"
+      },
+      {
+         "defaultValue": null,
+         "alwaysRequired": false,
+         "referenceName": "System.BoardLane",
+         "name": "Board Lane",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/System.BoardLane"
+      },
+      {
+         "defaultValue": null,
+         "helpText": "The size of work estimated for fixing the bug",
+         "alwaysRequired": false,
+         "referenceName": "Microsoft.VSTS.Scheduling.StoryPoints",
+         "name": "Story Points",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/Microsoft.VSTS.Scheduling.StoryPoints"
+      },
+      {
+         "defaultValue": null,
+         "helpText": "An estimate of the number of units of work remaining to complete this bug",
+         "alwaysRequired": false,
+         "referenceName": "Microsoft.VSTS.Scheduling.RemainingWork",
+         "name": "Remaining Work",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/Microsoft.VSTS.Scheduling.RemainingWork"
+      },
+      {
+         "defaultValue": null,
+         "helpText": "Initial value for Remaining Work - set once, when work begins",
+         "alwaysRequired": false,
+         "referenceName": "Microsoft.VSTS.Scheduling.OriginalEstimate",
+         "name": "Original Estimate",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/Microsoft.VSTS.Scheduling.OriginalEstimate"
+      },
+      {
+         "defaultValue": null,
+         "helpText": "The number of units of work that have been spent on this bug",
+         "alwaysRequired": false,
+         "referenceName": "Microsoft.VSTS.Scheduling.CompletedWork",
+         "name": "Completed Work",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/Microsoft.VSTS.Scheduling.CompletedWork"
+      },
+      {
+         "defaultValue": null,
+         "helpText": "Type of work involved",
+         "alwaysRequired": false,
+         "referenceName": "Microsoft.VSTS.Common.Activity",
+         "name": "Activity",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/Microsoft.VSTS.Common.Activity"
+      },
+      {
+         "defaultValue": null,
+         "helpText": "Test context, provided automatically by test infrastructure",
+         "alwaysRequired": false,
+         "referenceName": "Microsoft.VSTS.TCM.SystemInfo",
+         "name": "System Info",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/Microsoft.VSTS.TCM.SystemInfo"
+      },
+      {
+         "defaultValue": null,
+         "helpText": "How to see the bug. End by contrasting expected with actual behavior.",
+         "alwaysRequired": false,
+         "referenceName": "Microsoft.VSTS.TCM.ReproSteps",
+         "name": "Repro Steps",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/Microsoft.VSTS.TCM.ReproSteps"
+      },
+      {
+         "defaultValue": null,
+         "alwaysRequired": false,
+         "referenceName": "Microsoft.VSTS.Common.StateChangeDate",
+         "name": "State Change Date",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/Microsoft.VSTS.Common.StateChangeDate"
+      },
+      {
+         "defaultValue": null,
+         "alwaysRequired": false,
+         "referenceName": "Microsoft.VSTS.Common.ActivatedDate",
+         "name": "Activated Date",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/Microsoft.VSTS.Common.ActivatedDate"
+      },
+      {
+         "defaultValue": null,
+         "alwaysRequired": false,
+         "referenceName": "Microsoft.VSTS.Common.ActivatedBy",
+         "name": "Activated By",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/Microsoft.VSTS.Common.ActivatedBy"
+      },
+      {
+         "defaultValue": null,
+         "alwaysRequired": false,
+         "referenceName": "Microsoft.VSTS.Common.ResolvedDate",
+         "name": "Resolved Date",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/Microsoft.VSTS.Common.ResolvedDate"
+      },
+      {
+         "defaultValue": null,
+         "alwaysRequired": false,
+         "referenceName": "Microsoft.VSTS.Common.ResolvedBy",
+         "name": "Resolved By",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/Microsoft.VSTS.Common.ResolvedBy"
+      },
+      {
+         "defaultValue": null,
+         "helpText": "The reason why the bug was resolved",
+         "alwaysRequired": false,
+         "referenceName": "Microsoft.VSTS.Common.ResolvedReason",
+         "name": "Resolved Reason",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/Microsoft.VSTS.Common.ResolvedReason"
+      },
+      {
+         "defaultValue": null,
+         "alwaysRequired": false,
+         "referenceName": "Microsoft.VSTS.Common.ClosedDate",
+         "name": "Closed Date",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/Microsoft.VSTS.Common.ClosedDate"
+      },
+      {
+         "defaultValue": null,
+         "alwaysRequired": false,
+         "referenceName": "Microsoft.VSTS.Common.ClosedBy",
+         "name": "Closed By",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/Microsoft.VSTS.Common.ClosedBy"
+      },
+      {
+         "defaultValue": "2",
+         "helpText": "Business importance. 1=must fix; 4=unimportant.",
+         "alwaysRequired": false,
+         "referenceName": "Microsoft.VSTS.Common.Priority",
+         "name": "Priority",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/Microsoft.VSTS.Common.Priority"
+      },
+      {
+         "defaultValue": "3 - Medium",
+         "helpText": "Assessment of the effect of the bug on the project.",
+         "alwaysRequired": false,
+         "referenceName": "Microsoft.VSTS.Common.Severity",
+         "name": "Severity",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/Microsoft.VSTS.Common.Severity"
+      },
+      {
+         "defaultValue": null,
+         "helpText": "Work first on items with lower-valued stack rank. Set in triage.",
+         "alwaysRequired": false,
+         "referenceName": "Microsoft.VSTS.Common.StackRank",
+         "name": "Stack Rank",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/Microsoft.VSTS.Common.StackRank"
+      },
+      {
+         "defaultValue": "Business",
+         "helpText": "The type should be set to Business primarily to represent customer-facing issues. Work to change the architecture should be added as a Requirement",
+         "alwaysRequired": true,
+         "referenceName": "Microsoft.VSTS.Common.ValueArea",
+         "name": "Value Area",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/Microsoft.VSTS.Common.ValueArea"
+      },
+      {
+         "defaultValue": null,
+         "helpText": "The build in which the bug was fixed",
+         "alwaysRequired": false,
+         "referenceName": "Microsoft.VSTS.Build.IntegrationBuild",
+         "name": "Integration Build",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/Microsoft.VSTS.Build.IntegrationBuild"
+      },
+      {
+         "defaultValue": null,
+         "helpText": "The build in which the bug was found",
+         "alwaysRequired": false,
+         "referenceName": "Microsoft.VSTS.Build.FoundIn",
+         "name": "Found In",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/fields/Microsoft.VSTS.Build.FoundIn"
+      }
+   ],
+   "transitions": {
+      "Active": [
+         {
+            "to": "Active",
+            "actions": null
+         },
+         {
+            "to": "Closed",
+            "actions": null
+         },
+         {
+            "to": "Resolved",
+            "actions": [
+               "Microsoft.VSTS.Actions.Checkin"
+            ]
+         },
+         {
+            "to": "New",
+            "actions": [
+               "Microsoft.VSTS.Actions.StopWork"
+            ]
+         }
+      ],
+      "Closed": [
+         {
+            "to": "Closed",
+            "actions": null
+         },
+         {
+            "to": "Resolved",
+            "actions": null
+         },
+         {
+            "to": "Active",
+            "actions": null
+         },
+         {
+            "to": "New",
+            "actions": null
+         }
+      ],
+      "New": [
+         {
+            "to": "New",
+            "actions": null
+         },
+         {
+            "to": "Closed",
+            "actions": null
+         },
+         {
+            "to": "Resolved",
+            "actions": [
+               "Microsoft.VSTS.Actions.Checkin"
+            ]
+         },
+         {
+            "to": "Active",
+            "actions": [
+               "Microsoft.VSTS.Actions.StartWork"
+            ]
+         }
+      ],
+      "Resolved": [
+         {
+            "to": "Resolved",
+            "actions": null
+         },
+         {
+            "to": "Closed",
+            "actions": null
+         },
+         {
+            "to": "Active",
+            "actions": null
+         },
+         {
+            "to": "New",
+            "actions": null
+         }
+      ]
+   },
+   "states": [
+      {
+         "name": "New",
+         "color": "b2b2b2",
+         "category": "Proposed"
+      },
+      {
+         "name": "Active",
+         "color": "007acc",
+         "category": "InProgress"
+      },
+      {
+         "name": "Resolved",
+         "color": "ff9d00",
+         "category": "Resolved"
+      },
+      {
+         "name": "Closed",
+         "color": "339933",
+         "category": "Completed"
+      }
+   ],
+   "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/workItemTypes/Bug"
+}

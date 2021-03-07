@@ -14,19 +14,17 @@
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
-```PowerShell
-PS R:\repos\vsteam> Get-WorkItemType -ProjectName test -WorkItemType 'Code Review Response'
+```powershell
+Get-VSTeamWorkItemType -ProjectName test -WorkItemType 'Code Review Response'
 ```
 
 This command gets a single work item type.
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
-### -WorkItemType
+### WorkItemType
 
 The type of work item to retrieve.
 
@@ -34,6 +32,8 @@ The type of work item to retrieve.
 Type: String
 Parameter Sets: ByType
 ```
+
+<!-- #include "./params/projectName.md" -->
 
 ## INPUTS
 
@@ -49,6 +49,8 @@ The JSON returned has empty named items i.e.
 "": "To Do"
 This causes issues with the ConvertFrom-Json CmdLet.  Therefore, all "": are replaced with "_end":
 
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
 
-[Set-VSTeamAccount](Set-VSTeamAccount.md)
+<!-- #include "./common/related.md" -->

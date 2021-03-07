@@ -1,0 +1,509 @@
+{
+   "count": 12,
+   "value": [
+      {
+         "createdOn": "2018-08-21T18:09:14.907Z",
+         "autoProvision": true,
+         "autoUpdate": true,
+         "autoSize": true,
+         "targetSize": null,
+         "agentCloudId": null,
+         "createdBy": {
+            "displayName": "Microsoft.VisualStudio.Services.TFS",
+            "url": "https://spsprodcus3.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+            "_links": {
+               "avatar": {
+                  "href": "https://dev.azure.com/BlackShirt/_apis/GraphProfile/MemberAvatars/redacted"
+               }
+            },
+            "id": "00000000-0000-0000-0000-000000000000",
+            "uniqueName": "00000000-0000-0000-0000-000000000000@00000000-0000-0000-0000-000000000000",
+            "imageUrl": "https://dev.azure.com/BlackShirt/_apis/GraphProfile/MemberAvatars/redacted",
+            "descriptor": "redacted"
+         },
+         "owner": {
+            "displayName": "Microsoft.VisualStudio.Services.TFS",
+            "url": "https://spsprodcus3.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+            "_links": {
+               "avatar": {
+                  "href": "https://dev.azure.com/BlackShirt/_apis/GraphProfile/MemberAvatars/redacted"
+               }
+            },
+            "id": "00000000-0000-0000-0000-000000000000",
+            "uniqueName": "00000000-0000-0000-0000-000000000000@00000000-0000-0000-0000-000000000000",
+            "imageUrl": "https://dev.azure.com/BlackShirt/_apis/GraphProfile/MemberAvatars/redacted",
+            "descriptor": "redacted"
+         },
+         "id": 1,
+         "scope": "00000000-0000-0000-0000-000000000000",
+         "name": "Default",
+         "isHosted": false,
+         "poolType": "automation",
+         "size": 4,
+         "isLegacy": false,
+         "options": "none"
+      },
+      {
+         "createdOn": "2018-08-21T18:09:14.953Z",
+         "autoProvision": true,
+         "autoUpdate": true,
+         "autoSize": true,
+         "targetSize": null,
+         "agentCloudId": 1,
+         "createdBy": {
+            "displayName": "Microsoft.VisualStudio.Services.TFS",
+            "url": "https://spsprodcus3.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+            "_links": {
+               "avatar": {
+                  "href": "https://dev.azure.com/BlackShirt/_apis/GraphProfile/MemberAvatars/redacted"
+               }
+            },
+            "id": "00000000-0000-0000-0000-000000000000",
+            "uniqueName": "00000000-0000-0000-0000-000000000000@00000000-0000-0000-0000-000000000000",
+            "imageUrl": "https://dev.azure.com/BlackShirt/_apis/GraphProfile/MemberAvatars/redacted",
+            "descriptor": "redacted"
+         },
+         "owner": {
+            "displayName": "Microsoft.VisualStudio.Services.TFS",
+            "url": "https://spsprodcus3.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+            "_links": {
+               "avatar": {
+                  "href": "https://dev.azure.com/BlackShirt/_apis/GraphProfile/MemberAvatars/redacted"
+               }
+            },
+            "id": "00000000-0000-0000-0000-000000000000",
+            "uniqueName": "00000000-0000-0000-0000-000000000000@00000000-0000-0000-0000-000000000000",
+            "imageUrl": "https://dev.azure.com/BlackShirt/_apis/GraphProfile/MemberAvatars/redacted",
+            "descriptor": "redacted"
+         },
+         "id": 2,
+         "scope": "00000000-0000-0000-0000-000000000000",
+         "name": "Hosted",
+         "isHosted": true,
+         "poolType": "automation",
+         "size": 15,
+         "isLegacy": true,
+         "options": "none"
+      },
+      {
+         "createdOn": "2018-08-21T18:09:15.08Z",
+         "autoProvision": true,
+         "autoUpdate": true,
+         "autoSize": true,
+         "targetSize": null,
+         "agentCloudId": 1,
+         "createdBy": {
+            "displayName": "Microsoft.VisualStudio.Services.TFS",
+            "url": "https://spsprodcus3.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+            "_links": {
+               "avatar": {
+                  "href": "https://dev.azure.com/BlackShirt/_apis/GraphProfile/MemberAvatars/redacted"
+               }
+            },
+            "id": "00000000-0000-0000-0000-000000000000",
+            "uniqueName": "00000000-0000-0000-0000-000000000000@00000000-0000-0000-0000-000000000000",
+            "imageUrl": "https://dev.azure.com/BlackShirt/_apis/GraphProfile/MemberAvatars/redacted",
+            "descriptor": "redacted"
+         },
+         "owner": {
+            "displayName": "Microsoft.VisualStudio.Services.TFS",
+            "url": "https://spsprodcus3.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+            "_links": {
+               "avatar": {
+                  "href": "https://dev.azure.com/BlackShirt/_apis/GraphProfile/MemberAvatars/redacted"
+               }
+            },
+            "id": "00000000-0000-0000-0000-000000000000",
+            "uniqueName": "00000000-0000-0000-0000-000000000000@00000000-0000-0000-0000-000000000000",
+            "imageUrl": "https://dev.azure.com/BlackShirt/_apis/GraphProfile/MemberAvatars/redacted",
+            "descriptor": "redacted"
+         },
+         "id": 4,
+         "scope": "00000000-0000-0000-0000-000000000000",
+         "name": "Hosted VS2017",
+         "isHosted": true,
+         "poolType": "automation",
+         "size": 15,
+         "isLegacy": true,
+         "options": "none"
+      },
+      {
+         "createdOn": "2018-08-21T18:09:15.157Z",
+         "autoProvision": true,
+         "autoUpdate": true,
+         "autoSize": true,
+         "targetSize": null,
+         "agentCloudId": 1,
+         "createdBy": {
+            "displayName": "Microsoft.VisualStudio.Services.TFS",
+            "url": "https://spsprodcus3.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+            "_links": {
+               "avatar": {
+                  "href": "https://dev.azure.com/BlackShirt/_apis/GraphProfile/MemberAvatars/redacted"
+               }
+            },
+            "id": "00000000-0000-0000-0000-000000000000",
+            "uniqueName": "00000000-0000-0000-0000-000000000000@00000000-0000-0000-0000-000000000000",
+            "imageUrl": "https://dev.azure.com/BlackShirt/_apis/GraphProfile/MemberAvatars/redacted",
+            "descriptor": "redacted"
+         },
+         "owner": {
+            "displayName": "Microsoft.VisualStudio.Services.TFS",
+            "url": "https://spsprodcus3.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+            "_links": {
+               "avatar": {
+                  "href": "https://dev.azure.com/BlackShirt/_apis/GraphProfile/MemberAvatars/redacted"
+               }
+            },
+            "id": "00000000-0000-0000-0000-000000000000",
+            "uniqueName": "00000000-0000-0000-0000-000000000000@00000000-0000-0000-0000-000000000000",
+            "imageUrl": "https://dev.azure.com/BlackShirt/_apis/GraphProfile/MemberAvatars/redacted",
+            "descriptor": "redacted"
+         },
+         "id": 5,
+         "scope": "00000000-0000-0000-0000-000000000000",
+         "name": "Hosted Windows Container",
+         "isHosted": true,
+         "poolType": "automation",
+         "size": 15,
+         "isLegacy": true,
+         "options": "none"
+      },
+      {
+         "createdOn": "2018-08-21T18:09:15.3Z",
+         "autoProvision": true,
+         "autoUpdate": true,
+         "autoSize": true,
+         "targetSize": null,
+         "agentCloudId": 1,
+         "createdBy": {
+            "displayName": "Microsoft.VisualStudio.Services.TFS",
+            "url": "https://spsprodcus3.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+            "_links": {
+               "avatar": {
+                  "href": "https://dev.azure.com/BlackShirt/_apis/GraphProfile/MemberAvatars/redacted"
+               }
+            },
+            "id": "00000000-0000-0000-0000-000000000000",
+            "uniqueName": "00000000-0000-0000-0000-000000000000@00000000-0000-0000-0000-000000000000",
+            "imageUrl": "https://dev.azure.com/BlackShirt/_apis/GraphProfile/MemberAvatars/redacted",
+            "descriptor": "redacted"
+         },
+         "owner": {
+            "displayName": "Microsoft.VisualStudio.Services.TFS",
+            "url": "https://spsprodcus3.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+            "_links": {
+               "avatar": {
+                  "href": "https://dev.azure.com/BlackShirt/_apis/GraphProfile/MemberAvatars/redacted"
+               }
+            },
+            "id": "00000000-0000-0000-0000-000000000000",
+            "uniqueName": "00000000-0000-0000-0000-000000000000@00000000-0000-0000-0000-000000000000",
+            "imageUrl": "https://dev.azure.com/BlackShirt/_apis/GraphProfile/MemberAvatars/redacted",
+            "descriptor": "redacted"
+         },
+         "id": 6,
+         "scope": "00000000-0000-0000-0000-000000000000",
+         "name": "Hosted macOS",
+         "isHosted": true,
+         "poolType": "automation",
+         "size": 15,
+         "isLegacy": true,
+         "options": "none"
+      },
+      {
+         "createdOn": "2018-08-29T23:18:18.163Z",
+         "autoProvision": true,
+         "autoUpdate": true,
+         "autoSize": true,
+         "targetSize": null,
+         "agentCloudId": 1,
+         "createdBy": {
+            "displayName": "Microsoft.VisualStudio.Services.TFS",
+            "url": "https://spsprodcus3.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+            "_links": {
+               "avatar": {
+                  "href": "https://dev.azure.com/BlackShirt/_apis/GraphProfile/MemberAvatars/redacted"
+               }
+            },
+            "id": "00000000-0000-0000-0000-000000000000",
+            "uniqueName": "00000000-0000-0000-0000-000000000000@00000000-0000-0000-0000-000000000000",
+            "imageUrl": "https://dev.azure.com/BlackShirt/_apis/GraphProfile/MemberAvatars/redacted",
+            "descriptor": "redacted"
+         },
+         "owner": {
+            "displayName": "Microsoft.VisualStudio.Services.TFS",
+            "url": "https://spsprodcus3.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+            "_links": {
+               "avatar": {
+                  "href": "https://dev.azure.com/BlackShirt/_apis/GraphProfile/MemberAvatars/redacted"
+               }
+            },
+            "id": "00000000-0000-0000-0000-000000000000",
+            "uniqueName": "00000000-0000-0000-0000-000000000000@00000000-0000-0000-0000-000000000000",
+            "imageUrl": "https://dev.azure.com/BlackShirt/_apis/GraphProfile/MemberAvatars/redacted",
+            "descriptor": "redacted"
+         },
+         "id": 7,
+         "scope": "00000000-0000-0000-0000-000000000000",
+         "name": "Hosted Ubuntu 1604",
+         "isHosted": true,
+         "poolType": "automation",
+         "size": 15,
+         "isLegacy": true,
+         "options": "none"
+      },
+      {
+         "createdOn": "2018-09-22T17:34:20.457Z",
+         "autoProvision": false,
+         "autoUpdate": true,
+         "autoSize": true,
+         "targetSize": null,
+         "agentCloudId": null,
+         "createdBy": {
+            "displayName": "Sachin Raj",
+            "url": "https://spsprodcus3.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+            "_links": {
+               "avatar": {
+                  "href": "https://dev.azure.com/BlackShirt/_apis/GraphProfile/MemberAvatars/aad.NWZiYzQ4NzQtNTIwZC03MDQxLTg3ZjUtNzhiNjhmZDdlMDNi"
+               }
+            },
+            "id": "00000000-0000-0000-0000-000000000000",
+            "uniqueName": "sraj@microsoft.com",
+            "imageUrl": "https://dev.azure.com/BlackShirt/_apis/GraphProfile/MemberAvatars/aad.NWZiYzQ4NzQtNTIwZC03MDQxLTg3ZjUtNzhiNjhmZDdlMDNi",
+            "descriptor": "aad.NWZiYzQ4NzQtNTIwZC03MDQxLTg3ZjUtNzhiNjhmZDdlMDNi"
+         },
+         "owner": {
+            "displayName": "Sachin Raj",
+            "url": "https://spsprodcus3.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+            "_links": {
+               "avatar": {
+                  "href": "https://dev.azure.com/BlackShirt/_apis/GraphProfile/MemberAvatars/aad.NWZiYzQ4NzQtNTIwZC03MDQxLTg3ZjUtNzhiNjhmZDdlMDNi"
+               }
+            },
+            "id": "00000000-0000-0000-0000-000000000000",
+            "uniqueName": "sraj@microsoft.com",
+            "imageUrl": "https://dev.azure.com/BlackShirt/_apis/GraphProfile/MemberAvatars/aad.NWZiYzQ4NzQtNTIwZC03MDQxLTg3ZjUtNzhiNjhmZDdlMDNi",
+            "descriptor": "aad.NWZiYzQ4NzQtNTIwZC03MDQxLTg3ZjUtNzhiNjhmZDdlMDNi"
+         },
+         "id": 8,
+         "scope": "00000000-0000-0000-0000-000000000000",
+         "name": "HostedVS2017",
+         "isHosted": false,
+         "poolType": "automation",
+         "size": 0,
+         "isLegacy": false,
+         "options": "none"
+      },
+      {
+         "createdOn": "2019-02-20T05:13:15.64Z",
+         "autoProvision": true,
+         "autoUpdate": true,
+         "autoSize": true,
+         "targetSize": null,
+         "agentCloudId": 1,
+         "createdBy": {
+            "displayName": "Microsoft.VisualStudio.Services.TFS",
+            "url": "https://spsprodcus3.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+            "_links": {
+               "avatar": {
+                  "href": "https://dev.azure.com/BlackShirt/_apis/GraphProfile/MemberAvatars/redacted"
+               }
+            },
+            "id": "00000000-0000-0000-0000-000000000000",
+            "uniqueName": "00000000-0000-0000-0000-000000000000@00000000-0000-0000-0000-000000000000",
+            "imageUrl": "https://dev.azure.com/BlackShirt/_apis/GraphProfile/MemberAvatars/redacted",
+            "descriptor": "redacted"
+         },
+         "owner": {
+            "displayName": "Microsoft.VisualStudio.Services.TFS",
+            "url": "https://spsprodcus3.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+            "_links": {
+               "avatar": {
+                  "href": "https://dev.azure.com/BlackShirt/_apis/GraphProfile/MemberAvatars/redacted"
+               }
+            },
+            "id": "00000000-0000-0000-0000-000000000000",
+            "uniqueName": "00000000-0000-0000-0000-000000000000@00000000-0000-0000-0000-000000000000",
+            "imageUrl": "https://dev.azure.com/BlackShirt/_apis/GraphProfile/MemberAvatars/redacted",
+            "descriptor": "redacted"
+         },
+         "id": 9,
+         "scope": "00000000-0000-0000-0000-000000000000",
+         "name": "Hosted Windows 2019 with VS2019",
+         "isHosted": true,
+         "poolType": "automation",
+         "size": 15,
+         "isLegacy": true,
+         "options": "none"
+      },
+      {
+         "createdOn": "2019-03-23T20:59:36.817Z",
+         "autoProvision": false,
+         "autoUpdate": true,
+         "autoSize": true,
+         "targetSize": null,
+         "agentCloudId": null,
+         "createdBy": {
+            "displayName": "Donovan Brown",
+            "url": "https://spsprodcus3.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+            "_links": {
+               "avatar": {
+                  "href": "https://dev.azure.com/BlackShirt/_apis/GraphProfile/MemberAvatars/redacted"
+               }
+            },
+            "id": "00000000-0000-0000-0000-000000000000",
+            "uniqueName": "test@test.com",
+            "imageUrl": "https://dev.azure.com/BlackShirt/_apis/GraphProfile/MemberAvatars/redacted",
+            "descriptor": "redacted"
+         },
+         "owner": {
+            "displayName": "Donovan Brown",
+            "url": "https://spsprodcus3.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+            "_links": {
+               "avatar": {
+                  "href": "https://dev.azure.com/BlackShirt/_apis/GraphProfile/MemberAvatars/redacted"
+               }
+            },
+            "id": "00000000-0000-0000-0000-000000000000",
+            "uniqueName": "test@test.com",
+            "imageUrl": "https://dev.azure.com/BlackShirt/_apis/GraphProfile/MemberAvatars/redacted",
+            "descriptor": "redacted"
+         },
+         "id": 11,
+         "scope": "00000000-0000-0000-0000-000000000000",
+         "name": "Private Ubuntu 1604",
+         "isHosted": false,
+         "poolType": "automation",
+         "size": 1,
+         "isLegacy": false,
+         "options": "none"
+      },
+      {
+         "createdOn": "2019-03-25T15:16:04.827Z",
+         "autoProvision": false,
+         "autoUpdate": true,
+         "autoSize": true,
+         "targetSize": null,
+         "agentCloudId": null,
+         "createdBy": {
+            "displayName": "Donovan Brown",
+            "url": "https://spsprodcus3.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+            "_links": {
+               "avatar": {
+                  "href": "https://dev.azure.com/BlackShirt/_apis/GraphProfile/MemberAvatars/redacted"
+               }
+            },
+            "id": "00000000-0000-0000-0000-000000000000",
+            "uniqueName": "test@test.com",
+            "imageUrl": "https://dev.azure.com/BlackShirt/_apis/GraphProfile/MemberAvatars/redacted",
+            "descriptor": "redacted"
+         },
+         "owner": {
+            "displayName": "Donovan Brown",
+            "url": "https://spsprodcus3.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+            "_links": {
+               "avatar": {
+                  "href": "https://dev.azure.com/BlackShirt/_apis/GraphProfile/MemberAvatars/redacted"
+               }
+            },
+            "id": "00000000-0000-0000-0000-000000000000",
+            "uniqueName": "test@test.com",
+            "imageUrl": "https://dev.azure.com/BlackShirt/_apis/GraphProfile/MemberAvatars/redacted",
+            "descriptor": "redacted"
+         },
+         "id": 12,
+         "scope": "00000000-0000-0000-0000-000000000000",
+         "name": "Private macOS",
+         "isHosted": false,
+         "poolType": "automation",
+         "size": 1,
+         "isLegacy": false,
+         "options": "none"
+      },
+      {
+         "createdOn": "2019-03-29T23:31:59.223Z",
+         "autoProvision": true,
+         "autoUpdate": true,
+         "autoSize": true,
+         "targetSize": 1,
+         "agentCloudId": 1,
+         "createdBy": {
+            "displayName": "Microsoft.VisualStudio.Services.TFS",
+            "url": "https://spsprodcus3.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+            "_links": {
+               "avatar": {
+                  "href": "https://dev.azure.com/BlackShirt/_apis/GraphProfile/MemberAvatars/redacted"
+               }
+            },
+            "id": "00000000-0000-0000-0000-000000000000",
+            "uniqueName": "00000000-0000-0000-0000-000000000000@00000000-0000-0000-0000-000000000000",
+            "imageUrl": "https://dev.azure.com/BlackShirt/_apis/GraphProfile/MemberAvatars/redacted",
+            "descriptor": "redacted"
+         },
+         "owner": {
+            "displayName": "Microsoft.VisualStudio.Services.TFS",
+            "url": "https://spsprodcus3.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+            "_links": {
+               "avatar": {
+                  "href": "https://dev.azure.com/BlackShirt/_apis/GraphProfile/MemberAvatars/redacted"
+               }
+            },
+            "id": "00000000-0000-0000-0000-000000000000",
+            "uniqueName": "00000000-0000-0000-0000-000000000000@00000000-0000-0000-0000-000000000000",
+            "imageUrl": "https://dev.azure.com/BlackShirt/_apis/GraphProfile/MemberAvatars/redacted",
+            "descriptor": "redacted"
+         },
+         "id": 13,
+         "scope": "00000000-0000-0000-0000-000000000000",
+         "name": "Hosted macOS High Sierra",
+         "isHosted": true,
+         "poolType": "automation",
+         "size": 15,
+         "isLegacy": true,
+         "options": "none"
+      },
+      {
+         "createdOn": "2019-07-03T21:15:30.913Z",
+         "autoProvision": true,
+         "autoUpdate": true,
+         "autoSize": true,
+         "targetSize": 1,
+         "agentCloudId": 1,
+         "createdBy": {
+            "displayName": "Microsoft.VisualStudio.Services.TFS",
+            "url": "https://spsprodcus3.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+            "_links": {
+               "avatar": {
+                  "href": "https://dev.azure.com/BlackShirt/_apis/GraphProfile/MemberAvatars/redacted"
+               }
+            },
+            "id": "00000000-0000-0000-0000-000000000000",
+            "uniqueName": "00000000-0000-0000-0000-000000000000@00000000-0000-0000-0000-000000000000",
+            "imageUrl": "https://dev.azure.com/BlackShirt/_apis/GraphProfile/MemberAvatars/redacted",
+            "descriptor": "redacted"
+         },
+         "owner": {
+            "displayName": "Microsoft.VisualStudio.Services.TFS",
+            "url": "https://spsprodcus3.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+            "_links": {
+               "avatar": {
+                  "href": "https://dev.azure.com/BlackShirt/_apis/GraphProfile/MemberAvatars/redacted"
+               }
+            },
+            "id": "00000000-0000-0000-0000-000000000000",
+            "uniqueName": "00000000-0000-0000-0000-000000000000@00000000-0000-0000-0000-000000000000",
+            "imageUrl": "https://dev.azure.com/BlackShirt/_apis/GraphProfile/MemberAvatars/redacted",
+            "descriptor": "redacted"
+         },
+         "id": 14,
+         "scope": "00000000-0000-0000-0000-000000000000",
+         "name": "Azure Pipelines",
+         "isHosted": true,
+         "poolType": "automation",
+         "size": 15,
+         "isLegacy": false,
+         "options": "none"
+      }
+   ]
+}

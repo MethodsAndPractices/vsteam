@@ -1,5 +1,6 @@
 function Set-VSTeamAlias {
-   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Low")]
+   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Low",
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Set-VSTeamAlias')]
    param(
       [switch] $Force
    )

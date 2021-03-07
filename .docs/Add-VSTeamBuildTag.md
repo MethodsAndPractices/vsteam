@@ -16,17 +16,13 @@ Adds a tag to a build.
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
 <!-- #include "./params/BuildIds.md" -->
 
-<!-- #include "./params/buildTags.md" -->
+<!-- #include "./params/BuildTags.md" -->
 
-<!-- #include "./params/confirm.md" -->
+<!-- #include "./params/projectName.md" -->
 
-<!-- #include "./params/force.md" -->
-
-<!-- #include "./params/whatIf.md" -->
+<!-- #include "./params/forcegroup.md" -->
 
 ## INPUTS
 
@@ -36,4 +32,8 @@ Adds a tag to a build.
 
 ## NOTES
 
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
+
+<!-- #include "./common/related.md" -->

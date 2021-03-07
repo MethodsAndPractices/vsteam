@@ -1,6 +1,128 @@
 # Changelog
 
+## 7.1.2
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/366) from [Jhoneill](https://github.com/jhoneill) which included the following:
+
+- Fix Query Cache [#365](https://github.com/DarqueWarrior/vsteam/issues/365)
+
+Changed Get-VSTeamProject to return all projects by default instead of just the top 100. This change was made to address issue #363. If your project name was not in the top 100 projects validation would fail. Returning all projects can have performance issues. You can set the value for top used by setting a PowerShell default value:
+
+```powershell
+$Global:PSDefaultParameterValues["*-vsteam*:top"] = 500
+```
+
+Fixed issue #360 but updating the way DateTimes are tested.
+
+## 7.1.1
+
+Fixed bug in Test-VSTeamYamlPipeline by adding a Pipelines version value.
+
+## 7.1.0
+
+Added:
+
+- Get-VSTeamPackage to return packages of a feed.
+- Show-VSTeamPackage to open package in default browser.
+- Get-VSTeamPackageVersion to return all the versions of a package.
+- Update-VSTeamNuGetPackageVersion to list and un-list versions.
+
+## 7.0.1
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/354)
+
+- Fixed bug [353](https://github.com/MethodsAndPractices/vsteam/issues/353)
+- Added TriggerInfo to vsteam_lib.Build class
+
+## 7.0.0
+
+## Breaking changes
+
+All classes are moved to a new C# class library.
+
+You must have [.netCore](dot.net) installed to build the class lib on macOS, Linux and Windows.
+
+All types were changed from 'Team.' to 'vsteam_lib.' this will make it easy when moving types from PowerShell to C#.
+
+VSTeamDescriptor is now vsteam_lib.Descriptor and no longer has a Descriptor property. Use the Id, Name or ToString() property in its place.
+
+ProjectName is now a named parameter for most functions. This freed position 0 for other parameters to make functions easier to use.
+
+User2 is now vsteam_lib.User
+
+Removed CUID from vsteam_lib.User.
+
+Removed RequestedFor from vsteam_lib.Release
+
+Disable-VSTeamAgent now requires -Force.
+
+ReleaseIdsFilter changed to ReleaseId on Get-VSTeamApproval
+
+Changed Ids parameter to Id on the following functions to be consistent with other functions:
+
+- Get-VSTeamArea
+- Get-VSTeamIteration
+- Get-VSTeamGitCommit
+- Get-VSTeamClassificationNode
+
+ReClassifyId and Path are now required on Remove-VSTeamArea.
+
+Get-VSTeamGitCommit removed Id alias on RepositoryId parameter.
+
+Renamed parameters on Get-VSTeamBuildTimeline to make it easier to pipe results of Get-VSTeamBuild into Get-VSTeamBuildTimeline. $Id of type Guid is now $TimelineId. $BuildId of type int[] is now $Id.
+
+Removed Type parameter from Get-VSTeamBuildDefinition.
+
+Removed the Top and Skip parameters from Get-VSTeamProcess.
+
+Get-VSTeamMembership now returns a collection. There is no need to .value with results.
+
+### Core changes
+
+The folder structure of the project was changed to support the new C# class library.
+
+All the tests and sample files are under the Tests folder.
+
+There is a new packages folder that contains required libs to build the C# project that do not live in NuGet.
+
+The Build folder is now the .build folder.
+
+Build-Module script builds the class lib project as well.
+
+The C# solution files is in the root of the project vsteam_lib.sln.
+
+The lib is in the classes folder under source and the tests are under the library folder under Tests.
+
+You can now call Get-VSTeamTfvcBranch with no parameters.
+
+Added -force to Remove-VSTeamAccessControlEntry so you don't have to use -confirm:$false. This make it consistent with the rest of the functions
+
+Get-VSTeamUser and Get-VSTeamGroup can now take Descriptor from pipeline.
+
+All unit tests were reviewed and all now use sample files where possible instead of inline objects.
+
+Added -Force to Stop-VSTeamBuild
+
+### Docs changes
+
+Added HelpUri to all public functions
+
+Deleted the docs folder because all docs are now available [here](https://methodsandpractices.github.io/vsteam-docs/)
+
+Added examples to all the help files.
+
+## 6.5.1
+
+Fixed bug [337](https://github.com/MethodsAndPractices/vsteam/issues/337)
+Fixed bug [345](https://github.com/MethodsAndPractices/vsteam/issues/345)
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/335) from [Sebastian Schütze](https://github.com/SebastianSchuetze) which included the following:
+
+- Fixed bug [326](https://github.com/MethodsAndPractices/vsteam/issues/326)
+
 ## 6.5.0
+
+Added a default 60 second timeout on _callAPI. You can override the value with Set-VSTeamDefaultAPITimeout and clear with Clear-VSTeamDefaultAPITimeout.
 
 Changed the completers to quote all values.
 
@@ -18,15 +140,19 @@ Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/315) from [Jh
 
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/317) from [Brittan DeYoung](https://github.com/brittandeyoung) which included the following:
 
-- Adds a new function Stop-VSTeamBuild which allows cancelling a build using the build id.
+- Adds a new function Stop-VSTeamBuild which allows cancelling a build using the build id
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/333) from [Daniel Sturm](https://github.com/danstur) which included the following:
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/322) from [Jhoneill](https://github.com/jhoneill) which included the following:
 
-- Adds -IncludeCommits switch to Get-VSTeamPullRequest.
+- Enhance Get-VSTeamProcess
 
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/328) from [Sebastian Schütze](https://github.com/SebastianSchuetze) which included the following:
 
 - Run unit tests in Docker containers Locally
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/333) from [Daniel Sturm](https://github.com/danstur) which included the following:
+
+- Adds -IncludeCommits switch to Get-VSTeamPullRequest
 
 ## 6.4.8
 

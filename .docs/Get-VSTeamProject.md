@@ -18,27 +18,25 @@ You must call Set-VSTeamAccount before calling this function.
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
-```PowerShell
-PS C:\> Get-VSTeamProject
+```powershell
+Get-VSTeamProject
 ```
 
 This will return all the WellFormed team projects.
 
-### -------------------------- EXAMPLE 2 --------------------------
+### Example 2
 
-```PowerShell
-PS C:\> Get-VSTeamProject -top 5 | Format-Wide
+```powershell
+Get-VSTeamProject -top 5 | Format-Wide
 ```
 
 This will return the top five WellFormed team projects only showing their name
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
-### -StateFilter
+### StateFilter
 
 Returns team projects in a specific team project state.  The acceptable values for this parameter are:
 
@@ -54,27 +52,25 @@ Parameter Sets: List
 Default value: WellFormed
 ```
 
-### -Top
+### Top
 
 Specifies the maximum number to return.
 
 ```yaml
 Type: Int32
 Parameter Sets: List
-Default value: 100
 ```
 
-### -Skip
+### Skip
 
 Defines the number of team projects to skip. The default value is 0
 
 ```yaml
 Type: Int32
 Parameter Sets: List
-Default value: 0
 ```
 
-### -Id
+### Id
 
 The id of the project to return.
 
@@ -84,7 +80,7 @@ Parameter Sets: ByID
 Aliases: ProjectID
 ```
 
-### -IncludeCapabilities
+### IncludeCapabilities
 
 Will return additional information about the project.
 
@@ -93,15 +89,25 @@ Type: SwitchParameter
 Parameter Sets: ByID
 ```
 
+<!-- #include "./params/projectName.md" -->
+
 ## INPUTS
 
 ## OUTPUTS
 
 ## NOTES
 
+You can use PowerShell default values to set top to any value you like.
+
+$Global:PSDefaultParameterValues["*-vsteam*:top"] = 500
+
+However, this function is called by the Project cache which is used by the project validation code. If the value of top is not high enough validation may fail. By default this function returns all projects.
+
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
 
-[Set-VSTeamAccount](Set-VSTeamAccount.md)
+<!-- #include "./common/related.md" -->
 
 [Add-VSTeamProject](Add-VSTeamProject.md)
 

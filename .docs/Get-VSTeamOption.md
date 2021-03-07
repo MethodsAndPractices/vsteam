@@ -12,7 +12,7 @@
 
 <!-- #include "./synopsis/Get-VSTeamOption.md" -->
 
-There are two table formats defined for the Team.Option type, Default and Versions.
+There are two table formats defined for the vsteam_lib.Option type, Default and Versions.
 
 Default view contains Name, Area, Max Version and URI Template.
 
@@ -20,49 +20,49 @@ Version view contains Name, Area, Min Version, Max Version, Released Version and
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
-```PowerShell
-PS C:\> Get-VSTeamOption
+```powershell
+Get-VSTeamOption
 ```
 
 This will display all the versions of supported APIs for your account using the 'Default' table format.
 
-### -------------------------- EXAMPLE 2 --------------------------
+### Example 2
 
-```PowerShell
-PS C:\> Get-VSTeamOption | Format-Table -View Versions
+```powershell
+Get-VSTeamOption | Format-Table -View Versions
 ```
 
 This will display all the versions of supported APIs for your account using the 'Versions' custom table format.
 
-### -------------------------- EXAMPLE 3 --------------------------
+### Example 3
 
-```PowerShell
-PS C:\> Get-VSTeamOption -SubDomain vsrm
+```powershell
+Get-VSTeamOption -SubDomain vsrm
 ```
 
 This will display all the versions of supported APIs for the release management service.
 
-### -------------------------- EXAMPLE 4 --------------------------
+### Example 4
 
-```PowerShell
-PS C:\> Get-VSTeamOption -Area core
+```powershell
+Get-VSTeamOption -Area core
 ```
 
 This will display all the versions of supported APIs for the area core.
 
-### -------------------------- EXAMPLE 5 --------------------------
+### Example 5
 
-```PowerShell
-PS C:\> Get-VSTeamOption -Area core -Resource teams
+```powershell
+Get-VSTeamOption -Area core -Resource teams
 ```
 
 This will display all the versions of supported APIs for resources teams under the area core.
 
 ## PARAMETERS
 
-### -SubDomain
+### SubDomain
 
 Returns options for that sub domain APIs. Some examples include:
 
@@ -77,7 +77,7 @@ Type: String
 Required: false
 ```
 
-### -Area
+### Area
 
 Returns options for that area's APIs.
 
@@ -86,7 +86,7 @@ Type: String
 Required: false
 ```
 
-### -Resource
+### Resource
 
 Returns options for that resource's APIs.
 
@@ -101,6 +101,8 @@ Required: false
 
 ## NOTES
 
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
 
-[Set-VSTeamAccount](Set-VSTeamAccount.md)
+<!-- #include "./common/related.md" -->

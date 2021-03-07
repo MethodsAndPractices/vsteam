@@ -1,5 +1,15 @@
+# Create a service endpoint.
+#
+# Get-VSTeamOption 'distributedtask' 'serviceendpoints'
+# id              : dca61d2f-3444-410a-b5ec-db2fc4efb4c5
+# area            : distributedtask
+# resourceName    : serviceendpoints
+# routeTemplate   : {project}/_apis/{area}/{resource}/{endpointId}
+# https://bit.ly/Add-VSTeamServiceEndpoint
+
 function Add-VSTeamSonarQubeEndpoint {
-   [CmdletBinding(DefaultParameterSetName = 'Secure')]
+   [CmdletBinding(DefaultParameterSetName = 'Secure',
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Add-VSTeamSonarQubeEndpoint')]
    param(
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [string] $endpointName,
@@ -13,9 +23,9 @@ function Add-VSTeamSonarQubeEndpoint {
       [parameter(ParameterSetName = 'Secure', Mandatory = $true, HelpMessage = 'Personal Access Token')]
       [securestring] $securePersonalAccessToken,
 
-      [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
-      [ProjectValidateAttribute()]
-      [ArgumentCompleter([ProjectCompleter])]
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+      [vsteam_lib.ProjectValidateAttribute($false)]
+      [ArgumentCompleter([vsteam_lib.ProjectCompleter])]
       [string] $ProjectName
    )
    process {
@@ -43,10 +53,9 @@ function Add-VSTeamSonarQubeEndpoint {
       }
 
       try {
-         return Add-VSTeamServiceEndpoint `
-            -ProjectName $ProjectName `
+         return Add-VSTeamServiceEndpoint -ProjectName $ProjectName `
             -endpointName $endpointName `
-            -endpointType 'sonarqube' `
+            -endpointType sonarqube `
             -object $obj
       }
       catch [System.Net.WebException] {

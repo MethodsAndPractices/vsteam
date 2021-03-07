@@ -1,0 +1,15 @@
+{
+  "value": [
+    {
+      "id": "5e8a8081-3851-4626-b677-9891cc04102e",
+      "area": "git",
+      "resourceName": "annotatedTags",
+      "routeTemplate": "{project}/_apis/{area}/repositories/{repositoryId}/{resource}/{objectId}",
+      "resourceVersion": 1,
+      "minVersion": "3.1",
+      "maxVersion": "6.1",
+      "releasedVersion": "0.0"
+    }
+  ],
+  "count": 1
+}

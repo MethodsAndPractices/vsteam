@@ -14,19 +14,17 @@
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
-```PowerShell
-PS C:\> Get-VSTeamApproval -ProjectName Demo | Show-VSTeamApproval
+```powershell
+Get-VSTeamApproval -ProjectName Demo | Show-VSTeamApproval
 ```
 
 This command opens a web browser showing the release requiring approval.
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
-### -ReleaseDefinitionId
+### ReleaseDefinitionId
 
 Only approvals for the release id provided will be returned.
 
@@ -38,27 +36,23 @@ Position: 1
 Accept pipeline input: true (ByPropertyName, ByValue)
 ```
 
+<!-- #include "./params/projectName.md" -->
+
 ## INPUTS
 
 ## OUTPUTS
 
-### Team.BuildDefinition
+### vsteam_lib.BuildDefinition
 
 ## NOTES
 
-This function has a Dynamic Parameter for ProjectName that specifies the project for which this function gets build definitions.
-
-You can tab complete from a list of available projects.
-
-You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.
-
 You can pipe build definition IDs to this function.
+
+<!-- #include "./common/prerequisites.md" -->
 
 ## RELATED LINKS
 
-[Set-VSTeamAccount](Set-VSTeamAccount.md)
-
-[Set-VSTeamDefaultProject](Set-VSTeamDefaultProject.md)
+<!-- #include "./common/related.md" -->
 
 [Add-VSTeamBuildDefinition](Add-VSTeamBuildDefinition.md)
 

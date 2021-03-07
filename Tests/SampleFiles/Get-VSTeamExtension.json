@@ -1,0 +1,326 @@
+{
+  "count": 3,
+  "value": [
+    {
+      "extensionId": "asg-cloudtest-attachments",
+      "extensionName": "Files and Folders View for Test Attachments",
+      "publisherId": "asg-cloudtest",
+      "publisherName": "CloudTest",
+      "version": "20200807.2",
+      "registrationId": "00000000-0000-0000-0000-000000000000",
+      "manifestVersion": 1.0,
+      "baseUri": "https://asg-cloudtest.gallerycdn.vsassets.io/extensions/asg-cloudtest/asg-cloudtest-attachments/20200807.2/1597083746942",
+      "fallbackBaseUri": "https://asg-cloudtest.gallery.vsassets.io/_apis/public/gallery/publisher/asg-cloudtest/extension/asg-cloudtest-attachments/20200807.2/assetbyname",
+      "scopes": [
+        "vso.test",
+        "vso.test_write"
+      ],
+      "contributions": [
+        {
+          "id": "asg-cloudtest.asg-cloudtest-attachments.asg-cloudtest.asg-cloudtest-attachments",
+          "type": "ms.vss-web.tab",
+          "targets": [
+            "ms.vss-test-web.test-result-details-tab-items"
+          ],
+          "properties": {
+            "name": "Attachments*",
+            "uri": "dist/index.html",
+            "height": "100%",
+            "::Attributes": 0,
+            "::Version": "20200807.2"
+          },
+          "constraints": [
+            {
+              "name": "ExtensionLicensed",
+              "properties": {
+                "extensionId": "asg-cloudtest.asg-cloudtest-attachments"
+              }
+            }
+          ],
+          "restrictedTo": [
+            "member"
+          ]
+        }
+      ],
+      "installState": {
+        "flags": "none",
+        "lastUpdated": "2020-08-10T20:31:07.787Z"
+      },
+      "contributionTypes": [],
+      "lastPublished": "2020-08-10T18:22:26.937Z",
+      "files": []
+    },
+    {
+      "extensionId": "colinsalmcorner-buildtasks",
+      "extensionName": "Colin's ALM Corner Build & Release Tools",
+      "publisherId": "colinsalmcorner",
+      "publisherName": "Colin's ALM Corner",
+      "version": "1.4.114",
+      "registrationId": "00000000-0000-0000-0000-000000000000",
+      "manifestVersion": 1.0,
+      "baseUri": "https://colinsalmcorner.gallerycdn.vsassets.io/extensions/colinsalmcorner/colinsalmcorner-buildtasks/1.4.114/1567964986237",
+      "fallbackBaseUri": "https://colinsalmcorner.gallery.vsassets.io/_apis/public/gallery/publisher/colinsalmcorner/extension/colinsalmcorner-buildtasks/1.4.114/assetbyname",
+      "scopes": [],
+      "contributions": [
+        {
+          "id": "colinsalmcorner.colinsalmcorner-buildtasks.replace-tokens-task",
+          "type": "ms.vss-distributed-task.task",
+          "targets": [
+            "ms.vss-distributed-task.tasks"
+          ],
+          "properties": {
+            "name": "Tasks/ReplaceTokens",
+            "::Attributes": 16,
+            "::Version": "1.4.114"
+          },
+          "constraints": [
+            {
+              "name": "ExtensionLicensed",
+              "properties": {
+                "extensionId": "colinsalmcorner.colinsalmcorner-buildtasks"
+              }
+            }
+          ],
+          "restrictedTo": [
+            "member"
+          ]
+        },
+        {
+          "id": "colinsalmcorner.colinsalmcorner-buildtasks.version-assemblies-task",
+          "type": "ms.vss-distributed-task.task",
+          "targets": [
+            "ms.vss-distributed-task.tasks"
+          ],
+          "properties": {
+            "name": "Tasks/VersionAssemblies",
+            "::Attributes": 16,
+            "::Version": "1.4.114"
+          },
+          "constraints": [
+            {
+              "name": "ExtensionLicensed",
+              "properties": {
+                "extensionId": "colinsalmcorner.colinsalmcorner-buildtasks"
+              }
+            }
+          ],
+          "restrictedTo": [
+            "member"
+          ]
+        },
+        {
+          "id": "colinsalmcorner.colinsalmcorner-buildtasks.dacpac-report-task",
+          "type": "ms.vss-distributed-task.task",
+          "targets": [
+            "ms.vss-distributed-task.tasks"
+          ],
+          "properties": {
+            "name": "Tasks/DacPacReport",
+            "::Attributes": 16,
+            "::Version": "1.4.114"
+          },
+          "constraints": [
+            {
+              "name": "ExtensionLicensed",
+              "properties": {
+                "extensionId": "colinsalmcorner.colinsalmcorner-buildtasks"
+              }
+            }
+          ],
+          "restrictedTo": [
+            "member"
+          ]
+        },
+        {
+          "id": "colinsalmcorner.colinsalmcorner-buildtasks.tokenizer-task",
+          "type": "ms.vss-distributed-task.task",
+          "targets": [
+            "ms.vss-distributed-task.tasks"
+          ],
+          "properties": {
+            "name": "Tasks/Tokenizer",
+            "::Attributes": 16,
+            "::Version": "1.4.114"
+          },
+          "constraints": [
+            {
+              "name": "ExtensionLicensed",
+              "properties": {
+                "extensionId": "colinsalmcorner.colinsalmcorner-buildtasks"
+              }
+            }
+          ],
+          "restrictedTo": [
+            "member"
+          ]
+        },
+        {
+          "id": "colinsalmcorner.colinsalmcorner-buildtasks.coverage-gate-task",
+          "type": "ms.vss-distributed-task.task",
+          "targets": [
+            "ms.vss-distributed-task.tasks"
+          ],
+          "properties": {
+            "name": "Tasks/CoverageGate",
+            "::Attributes": 16,
+            "::Version": "1.4.114"
+          },
+          "constraints": [
+            {
+              "name": "ExtensionLicensed",
+              "properties": {
+                "extensionId": "colinsalmcorner.colinsalmcorner-buildtasks"
+              }
+            }
+          ],
+          "restrictedTo": [
+            "member"
+          ]
+        },
+        {
+          "id": "colinsalmcorner.colinsalmcorner-buildtasks.tag-build-task",
+          "type": "ms.vss-distributed-task.task",
+          "targets": [
+            "ms.vss-distributed-task.tasks"
+          ],
+          "properties": {
+            "name": "Tasks/TagBuild",
+            "::Attributes": 16,
+            "::Version": "1.4.114"
+          },
+          "constraints": [
+            {
+              "name": "ExtensionLicensed",
+              "properties": {
+                "extensionId": "colinsalmcorner.colinsalmcorner-buildtasks"
+              }
+            }
+          ],
+          "restrictedTo": [
+            "member"
+          ]
+        },
+        {
+          "id": "colinsalmcorner.colinsalmcorner-buildtasks.azure-webdeploy-task",
+          "type": "ms.vss-distributed-task.task",
+          "targets": [
+            "ms.vss-distributed-task.tasks"
+          ],
+          "properties": {
+            "name": "Tasks/AzureWebDeploy",
+            "::Attributes": 16,
+            "::Version": "1.4.114"
+          },
+          "constraints": [
+            {
+              "name": "ExtensionLicensed",
+              "properties": {
+                "extensionId": "colinsalmcorner.colinsalmcorner-buildtasks"
+              }
+            }
+          ],
+          "restrictedTo": [
+            "member"
+          ]
+        },
+        {
+          "id": "colinsalmcorner.colinsalmcorner-buildtasks.docker-publish-task",
+          "type": "ms.vss-distributed-task.task",
+          "targets": [
+            "ms.vss-distributed-task.tasks"
+          ],
+          "properties": {
+            "name": "Tasks/DockerPublish",
+            "::Attributes": 16,
+            "::Version": "1.4.114"
+          },
+          "constraints": [
+            {
+              "name": "ExtensionLicensed",
+              "properties": {
+                "extensionId": "colinsalmcorner.colinsalmcorner-buildtasks"
+              }
+            }
+          ],
+          "restrictedTo": [
+            "member"
+          ]
+        },
+        {
+          "id": "colinsalmcorner.colinsalmcorner-buildtasks.route-traffic-task",
+          "type": "ms.vss-distributed-task.task",
+          "targets": [
+            "ms.vss-distributed-task.tasks"
+          ],
+          "properties": {
+            "name": "Tasks/RouteTraffic",
+            "::Attributes": 16,
+            "::Version": "1.4.114"
+          },
+          "constraints": [
+            {
+              "name": "ExtensionLicensed",
+              "properties": {
+                "extensionId": "colinsalmcorner.colinsalmcorner-buildtasks"
+              }
+            }
+          ],
+          "restrictedTo": [
+            "member"
+          ]
+        }
+      ],
+      "installState": {
+        "flags": "none",
+        "lastUpdated": "2019-09-09T00:05:10.06Z"
+      },
+      "contributionTypes": [],
+      "lastPublished": "2019-09-08T17:49:46.227Z",
+      "files": []
+    },
+    {
+      "extensionId": "arm-outputs",
+      "extensionName": "ARM Outputs",
+      "publisherId": "keesschollaart",
+      "publisherName": "Kees Schollaart",
+      "version": "6.0.0",
+      "registrationId": "00000000-0000-0000-0000-000000000000",
+      "manifestVersion": 1.0,
+      "baseUri": "https://keesschollaart.gallerycdn.vsassets.io/extensions/keesschollaart/arm-outputs/6.0.0/1595768715839",
+      "fallbackBaseUri": "https://keesschollaart.gallery.vsassets.io/_apis/public/gallery/publisher/keesschollaart/extension/arm-outputs/6.0.0/assetbyname",
+      "scopes": [],
+      "contributions": [
+        {
+          "id": "keesschollaart.arm-outputs.arm-outputs",
+          "type": "ms.vss-distributed-task.task",
+          "targets": [
+            "ms.vss-distributed-task.tasks"
+          ],
+          "properties": {
+            "name": "arm-outputs",
+            "::Attributes": 16,
+            "::Version": "6.0.0"
+          },
+          "constraints": [
+            {
+              "name": "ExtensionLicensed",
+              "properties": {
+                "extensionId": "keesschollaart.arm-outputs"
+              }
+            }
+          ],
+          "restrictedTo": [
+            "member"
+          ]
+        }
+      ],
+      "installState": {
+        "flags": "none",
+        "lastUpdated": "2020-07-26T23:28:05.687Z"
+      },
+      "contributionTypes": [],
+      "lastPublished": "2020-07-26T13:05:15.833Z",
+      "files": []
+    }
+  ]
+}

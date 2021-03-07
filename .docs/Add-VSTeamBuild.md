@@ -18,11 +18,11 @@ To have the BuildDefinition and QueueNames tab complete you must set a default p
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
-```PowerShell
-PS C:\> Set-VSTeamDefaultProject Demo
-PS C:\> Add-VSTeamBuild -BuildDefinition Demo-CI
+```powershell
+Set-VSTeamDefaultProject Demo
+Add-VSTeamBuild -BuildDefinition Demo-CI
 
 Build Definition Build Number  Status     Result
 ---------------- ------------  ------     ------
@@ -31,11 +31,11 @@ Demo-CI           Demo-CI-45   notStarted
 
 This example sets the default project so you can tab complete the BuildDefinition parameter.
 
-### -------------------------- EXAMPLE 2 --------------------------
+### Example 2
 
-```PowerShell
-PS C:\> Set-VSTeamDefaultProject Demo
-PS C:\> Add-VSTeamBuild -BuildDefinition Demo-CI -SourceBranch refs/heads/develop
+```powershell
+Set-VSTeamDefaultProject Demo
+Add-VSTeamBuild -BuildDefinition Demo-CI -SourceBranch refs/heads/develop
 
 Build Definition Build Number  Status     Result
 ---------------- ------------  ------     ------
@@ -44,11 +44,11 @@ Demo-CI           Demo-CI-45   notStarted
 
 This example queues the build for the 'develop' branch, overriding the default branch in the build definition.
 
-### -------------------------- EXAMPLE 3 --------------------------
+### Example 3
 
-```PowerShell
-PS C:\> Set-VSTeamDefaultProject Demo
-PS C:\> Add-VSTeamBuild -BuildDefinition Demo-CI -BuildParameters @{msg="hello world!"; 'system.debug'='true'}
+```powershell
+Set-VSTeamDefaultProject Demo
+Add-VSTeamBuild -BuildDefinition Demo-CI -BuildParameters @{msg="hello world!"; 'system.debug'='true'}
 
 Build Definition Build Number  Status     Result
 ---------------- ------------  ------     ------
@@ -59,9 +59,7 @@ This example queues the build and sets the system.debug variable to true and msg
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
-### -BuildDefinitionName
+### BuildDefinitionName
 
 The name of the build definition to use to queue to build.
 
@@ -72,7 +70,7 @@ Aliases: BuildDefinition
 Accept pipeline input: true (ByPropertyName)
 ```
 
-### -QueueName
+### QueueName
 
 The name of the queue to use for this build.
 
@@ -81,7 +79,7 @@ Type: String
 Accept pipeline input: true (ByPropertyName)
 ```
 
-### -BuildDefinitionId
+### BuildDefinitionId
 
 The Id of the build definition to use to queue to build.
 
@@ -92,7 +90,7 @@ Aliases: Id
 Accept pipeline input: true (ByPropertyName)
 ```
 
-### -SourceBranch
+### SourceBranch
 
 Which source branch to use for this build. Overrides default branch in build definition.
 
@@ -100,13 +98,15 @@ Which source branch to use for this build. Overrides default branch in build def
 Type: String
 ```
 
-### -BuildParameters
+### BuildParameters
 
 A hashtable with build parameters.
 
 ```yaml
 Type: System.Collection.Hashtable
 ```
+
+<!-- #include "./params/projectName.md" -->
 
 ## INPUTS
 
@@ -130,12 +130,16 @@ Build Parameters
 
 ## OUTPUTS
 
-### Team.Build
+### vsteam_lib.Build
 
 ## NOTES
 
 BuildDefinition and QueueName are dynamic parameters and use the default project value to query their validate set.
 
-If you do not set the default project by called Set-VSTeamDefaultProject before calling Add-VSTeamBuild you will have to type in the names.
+If you do not set the default project by called Set-VSTeamDefaultProject you must pass in -ProjectName or you will have to type in the names.
+
+<!-- #include "./common/prerequisites.md" -->
 
 ## RELATED LINKS
+
+<!-- #include "./common/related.md" -->

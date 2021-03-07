@@ -14,33 +14,33 @@
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
-```PowerShell
-PS C:\> Remove-VSTeamWorkItem -Id 47,48 -Force
+```powershell
+Remove-VSTeamWorkItem -Id 47,48 -Force
 ```
 
 This command deletes work items with IDs 47 and 48 by using the IDs parameter.
 
-### -------------------------- EXAMPLE 2 --------------------------
+### Example 2
 
-```PowerShell
-PS C:\> Remove-VSTeamWorkItem -Id 47
+```powershell
+Remove-VSTeamWorkItem -Id 47
 ```
 
 This command deletes the work item with ID 47 by using the ID parameter.
 
-### -------------------------- EXAMPLE 3 --------------------------
+### Example 3
 
-```PowerShell
-PS C:\> Remove-VSTeamWorkItem -Id 47 -Destroy -Force
+```powershell
+Remove-VSTeamWorkItem -Id 47 -Destroy -Force
 ```
 
 This command deletes work item with IDs 47 **permanently** by using the Destroy parameter.
 
 ## PARAMETERS
 
-### -Id
+### Id
 
 The id of one or more work items.
 
@@ -51,7 +51,7 @@ Required: True
 Accept pipeline input: true (ByPropertyName, ByValue)
 ```
 
-### -Destroy
+### Destroy
 
 Optional parameter, if set to true, the work item is deleted permanently. **Please note: the destroy action is PERMANENT and cannot be undone.**
 
@@ -59,11 +59,7 @@ Optional parameter, if set to true, the work item is deleted permanently. **Plea
 Type: Switch
 ```
 
-<!-- #include "./params/force.md" -->
-
-<!-- #include "./params/confirm.md" -->
-
-<!-- #include "./params/whatif.md" -->
+<!-- #include "./params/forcegroup.md" -->
 
 ## INPUTS
 
@@ -77,4 +73,8 @@ ProjectName
 
 If you do not set the default project by called Set-VSTeamDefaultProject before calling Get-VSTeamWorkItem you will have to type in the names.
 
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
+
+<!-- #include "./common/related.md" -->

@@ -12,7 +12,7 @@
    RootModule           = 'VSTeam.psm1'
 
    # Version number of this module.
-   ModuleVersion        = '6.5.0'
+   ModuleVersion        = '7.1.2'
 
    # Supported PSEditions
    CompatiblePSEditions = @('Core', 'Desktop')
@@ -66,7 +66,7 @@
    FormatsToProcess     = @('.\vsteam.format.ps1xml')
 
    # Modules to import as nested modules of the module specified in RootModule/ModuleToProcess
-   # NestedModules     = @()
+   NestedModules     = @('.\bin\vsteam-lib.dll')
 
    # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
    # This wildcard will be replaced during the build process in AzD
@@ -104,16 +104,16 @@
          # ExternalModuleDependencies = @('SHiPS')
 
          # A URL to the license for this module.
-         LicenseUri   = 'https://github.com/DarqueWarrior/vsteam/blob/master/LICENSE'
+         LicenseUri   = 'https://github.com/MethodsAndPractices/vsteam/blob/trunk/LICENSE'
 
          # A URL to the main website for this project.
-         ProjectUri   = 'https://github.com/DarqueWarrior/vsteam'
+         ProjectUri   = 'https://github.com/MethodsAndPractices/vsteam'
 
          # A URL to an icon representing this module.
          # IconUri = ''
 
          # ReleaseNotes of this module
-         ReleaseNotes = 'https://github.com/DarqueWarrior/vsteam/blob/master/CHANGELOG.md'
+         ReleaseNotes = 'https://github.com/MethodsAndPractices/vsteam/blob/trunk/CHANGELOG.md'
 
       } # End of PSData hashtable
 

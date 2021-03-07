@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Configuration>
+   <ViewDefinitions>
+      <View>
+         <Name>vsteam_lib.Team.ListView</Name>
+         <ViewSelectedBy>
+            <TypeName>vsteam_lib.Team</TypeName>
+            <TypeName>vsteam_lib.Provider.Team</TypeName>
+         </ViewSelectedBy>
+         <ListControl>
+            <ListEntries>
+               <ListEntry>
+                  <ListItems>
+                     <ListItem>
+                        <PropertyName>Name</PropertyName>
+                     </ListItem>
+                     <ListItem>
+                        <PropertyName>Description</PropertyName>
+                     </ListItem>
+                     <ListItem>
+                        <PropertyName>ProjectName</PropertyName>
+                     </ListItem>
+                     <ListItem>
+                        <PropertyName>Id</PropertyName>
+                     </ListItem>
+                  </ListItems>
+               </ListEntry>
+            </ListEntries>
+         </ListControl>
+      </View>
+   </ViewDefinitions>
+</Configuration>

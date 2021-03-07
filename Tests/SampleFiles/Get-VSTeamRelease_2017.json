@@ -1,0 +1,42 @@
+{
+  "count": 1,
+  "value": [
+    {
+      "source": "userInterface",
+      "id": 1,
+      "revision": 2,
+      "name": "CD",
+      "description": null,
+      "createdBy": {
+        "id": "fc43189b-9a5a-4887-933c-efaabf280e6e",
+        "displayName": "Administrator",
+        "uniqueName": "TFS2017\\Administrator",
+        "url": "http://tfs2017:8080/tfs/DefaultCollection/_apis/Identities/fc43189b-9a5a-4887-933c-efaabf280e6e",
+        "imageUrl": "http://tfs2017:8080/tfs/DefaultCollection/_api/_common/identityImage?id=fc43189b-9a5a-4887-933c-efaabf280e6e"
+      },
+      "createdOn": "2020-09-07T14:23:07.98Z",
+      "modifiedBy": {
+        "id": "fc43189b-9a5a-4887-933c-efaabf280e6e",
+        "displayName": "Administrator",
+        "uniqueName": "TFS2017\\Administrator",
+        "url": "http://tfs2017:8080/tfs/DefaultCollection/_apis/Identities/fc43189b-9a5a-4887-933c-efaabf280e6e",
+        "imageUrl": "http://tfs2017:8080/tfs/DefaultCollection/_api/_common/identityImage?id=fc43189b-9a5a-4887-933c-efaabf280e6e"
+      },
+      "modifiedOn": "2020-09-07T14:23:24.92Z",
+      "lastRelease": null,
+      "path": "\\",
+      "variableGroups": null,
+      "releaseNameFormat": "Release-$(rev:r)",
+      "url": "http://tfs2017:8080/tfs/DefaultCollection/6d9e468a-4961-4b69-a855-96b15e758f63/_apis/Release/definitions/1",
+      "_links": {
+        "self": {
+          "href": "http://tfs2017:8080/tfs/DefaultCollection/6d9e468a-4961-4b69-a855-96b15e758f63/_apis/Release/definitions/1"
+        },
+        "web": {
+          "href": "http://tfs2017:8080/tfs/DefaultCollection/6d9e468a-4961-4b69-a855-96b15e758f63/_release?definitionId=1"
+        }
+      },
+      "properties": {}
+    }
+  ]
+}

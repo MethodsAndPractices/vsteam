@@ -1,0 +1,64 @@
+{
+   "count": 2,
+   "value": [
+      {
+         "variables": {
+            "key1": {
+               "value": "value1"
+            },
+            "key2": {
+               "value": null,
+               "isSecret": true
+            }
+         },
+         "id": 1,
+         "type": "Vsts",
+         "name": "TestVariableGroup1",
+         "description": "A test variable group",
+         "createdBy": {
+            "displayName": "Test User",
+            "id": "3965414d-7e1b-480b-a9fb-f9193b7a1b41",
+            "uniqueName": "test.user@the.cloud"
+         },
+         "createdOn": "2019-06-28T21:04:30.56Z",
+         "modifiedBy": {
+            "displayName": "Test User",
+            "id": "3965414d-7e1b-480b-a9fb-f9193b7a1b41",
+            "uniqueName": "test.user@the.cloud"
+         },
+         "modifiedOn": "2019-06-28T21:04:30.56Z",
+         "isShared": false
+      },
+      {
+         "variables": {
+            "key3": {
+               "enabled": true,
+               "contentType": "",
+               "value": null,
+               "isSecret": true
+            }
+         },
+         "id": 2,
+         "type": "AzureKeyVault",
+         "name": "TestVariableGroup2",
+         "description": "A test variable group linked to an Azure KeyVault",
+         "providerData": {
+            "serviceEndpointId": "0228e842-65a7-4c64-90f7-0f07f3aa4e10",
+            "vault": "keyVaultName"
+         },
+         "createdBy": {
+            "displayName": "Test User",
+            "id": "3965414d-7e1b-480b-a9fb-f9193b7a1b41",
+            "uniqueName": "test.user@the.cloud"
+         },
+         "createdOn": "2019-06-21T05:51:23.8866667Z",
+         "modifiedBy": {
+            "displayName": "Test User",
+            "id": "3965414d-7e1b-480b-a9fb-f9193b7a1b41",
+            "uniqueName": "test.user@the.cloud"
+         },
+         "modifiedOn": "2019-06-21T05:51:24.5666667Z",
+         "isShared": false
+      }
+   ]
+}

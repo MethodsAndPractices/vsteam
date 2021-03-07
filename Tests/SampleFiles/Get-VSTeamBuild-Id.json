@@ -1,0 +1,128 @@
+{
+   "_links": {
+      "self": {
+         "href": "https://dev.azure.com/LoECDA/00000000-0000-0000-0000-000000000000/_apis/build/Builds/2272"
+      },
+      "web": {
+         "href": "https://dev.azure.com/LoECDA/00000000-0000-0000-0000-000000000000/_build/results?buildId=2272"
+      },
+      "sourceVersionDisplayUri": {
+         "href": "https://dev.azure.com/LoECDA/00000000-0000-0000-0000-000000000000/_apis/build/builds/2272/sources"
+      },
+      "timeline": {
+         "href": "https://dev.azure.com/LoECDA/00000000-0000-0000-0000-000000000000/_apis/build/builds/2272/Timeline"
+      },
+      "badge": {
+         "href": "https://dev.azure.com/LoECDA/00000000-0000-0000-0000-000000000000/_apis/build/status/65"
+      }
+   },
+   "properties": {},
+   "tags": [],
+   "validationResults": [],
+   "plans": [
+      {
+         "planId": "00000000-0000-0000-0000-000000000000"
+      }
+   ],
+   "triggerInfo": {},
+   "id": 2272,
+   "buildNumber": "2272",
+   "status": "inProgress",
+   "queueTime": "2020-09-23T15:44:09.2919724Z",
+   "startTime": "2020-09-23T15:44:45.2487227Z",
+   "url": "https://dev.azure.com/LoECDA/00000000-0000-0000-0000-000000000000/_apis/build/Builds/2272",
+   "definition": {
+      "drafts": [],
+      "id": 65,
+      "name": "Team Module-CI (1)",
+      "url": "https://dev.azure.com/LoECDA/00000000-0000-0000-0000-000000000000/_apis/build/Definitions/65?revision=7",
+      "uri": "vstfs:///Build/Definition/65",
+      "path": "\\",
+      "type": "build",
+      "queueStatus": "enabled",
+      "revision": 7,
+      "project": {
+         "id": "00000000-0000-0000-0000-000000000000",
+         "name": "Team Module",
+         "description": "This is a PowerShell module named Team for using TFS and VSTS from PowerShell.  The code is Open source in GitHub.",
+         "url": "https://dev.azure.com/LoECDA/_apis/projects/00000000-0000-0000-0000-000000000000",
+         "state": "wellFormed",
+         "revision": 357,
+         "visibility": "public",
+         "lastUpdateTime": "2019-06-18T13:57:23.407Z"
+      }
+   },
+   "project": {
+      "id": "00000000-0000-0000-0000-000000000000",
+      "name": "Team Module",
+      "description": "This is a PowerShell module named Team for using TFS and VSTS from PowerShell.  The code is Open source in GitHub.",
+      "url": "https://dev.azure.com/LoECDA/_apis/projects/00000000-0000-0000-0000-000000000000",
+      "state": "wellFormed",
+      "revision": 357,
+      "visibility": "public",
+      "lastUpdateTime": "2019-06-18T13:57:23.407Z"
+   },
+   "uri": "vstfs:///Build/Build/2272",
+   "sourceBranch": "refs/heads/master",
+   "sourceVersion": "ace10a62d0f840e0c63ffc088983d3a20d4463d5",
+   "priority": "normal",
+   "reason": "manual",
+   "requestedFor": {
+      "displayName": "Donovan Brown",
+      "url": "https://spsprodcus1.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+      "_links": {
+         "avatar": {
+            "href": "https://dev.azure.com/LoECDA/_apis/GraphProfile/MemberAvatars/aad.redacted"
+         }
+      },
+      "id": "00000000-0000-0000-0000-000000000000",
+      "uniqueName": "test@test.com",
+      "imageUrl": "https://dev.azure.com/LoECDA/_apis/GraphProfile/MemberAvatars/aad.redacted",
+      "descriptor": "aad.redacted"
+   },
+   "requestedBy": {
+      "displayName": "Donovan Brown",
+      "url": "https://spsprodcus1.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+      "_links": {
+         "avatar": {
+            "href": "https://dev.azure.com/LoECDA/_apis/GraphProfile/MemberAvatars/aad.redacted"
+         }
+      },
+      "id": "00000000-0000-0000-0000-000000000000",
+      "uniqueName": "test@test.com",
+      "imageUrl": "https://dev.azure.com/LoECDA/_apis/GraphProfile/MemberAvatars/aad.redacted",
+      "descriptor": "aad.redacted"
+   },
+   "lastChangedDate": "2020-09-23T15:44:45.26Z",
+   "lastChangedBy": {
+      "displayName": "Microsoft.VisualStudio.Services.TFS",
+      "url": "https://spsprodcus1.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+      "_links": {
+         "avatar": {
+            "href": "https://dev.azure.com/LoECDA/_apis/GraphProfile/MemberAvatars/s2s.MDAwMDAwMDItMDAwMC04ODg4LTgwMDAtMDAwMDAwMDAwMDAwQDJjODk1OTA4LTA0ZTAtNDk1Mi04OWZkLTU0YjAwNDZkNjI4OA"
+         }
+      },
+      "id": "00000000-0000-0000-0000-000000000000",
+      "uniqueName": "00000000-0000-0000-0000-000000000000@00000000-0000-0000-0000-000000000000",
+      "imageUrl": "https://dev.azure.com/LoECDA/_apis/GraphProfile/MemberAvatars/s2s.MDAwMDAwMDItMDAwMC04ODg4LTgwMDAtMDAwMDAwMDAwMDAwQDJjODk1OTA4LTA0ZTAtNDk1Mi04OWZkLTU0YjAwNDZkNjI4OA",
+      "descriptor": "s2s.MDAwMDAwMDItMDAwMC04ODg4LTgwMDAtMDAwMDAwMDAwMDAwQDJjODk1OTA4LTA0ZTAtNDk1Mi04OWZkLTU0YjAwNDZkNjI4OA"
+   },
+   "parameters": "{\"system.debug\":\"false\"}",
+   "orchestrationPlan": {
+      "planId": "00000000-0000-0000-0000-000000000000"
+   },
+   "logs": {
+      "id": 0,
+      "type": "Container",
+      "url": "https://dev.azure.com/LoECDA/00000000-0000-0000-0000-000000000000/_apis/build/builds/2272/logs"
+   },
+   "repository": {
+      "id": "MethodsAndPractices/vsteam",
+      "type": "GitHub",
+      "clean": null,
+      "checkoutSubmodules": false
+   },
+   "keepForever": false,
+   "retainedByRelease": false,
+   "triggeredByBuild": null
+}

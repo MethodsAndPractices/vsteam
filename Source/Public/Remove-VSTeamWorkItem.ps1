@@ -1,5 +1,6 @@
 function Remove-VSTeamWorkItem {
-   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "High", DefaultParameterSetName = 'ByID')]
+   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "High", DefaultParameterSetName = 'ByID',
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Remove-VSTeamWorkItem')]
    param(
       [Parameter(Mandatory = $true, ValueFromPipeline = $true, Position = 0)]
       [int[]] $Id,
@@ -14,11 +15,12 @@ function Remove-VSTeamWorkItem {
       foreach ($item in $Id) {
          if ($Force -or $pscmdlet.ShouldProcess($item, "Delete Work Item")) {
             try {
-               _callAPI -Method Delete -Area wit -Resource workitems `
-                  -Version $(_getApiVersion Core) -id $item `
-                  -Querystring @{
-                  destroy = $Destroy
-               } | Out-Null
+               _callAPI -Method DELETE `
+                  -Area "wit" `
+                  -Resource "workitems" `
+                  -id $item `
+                  -Querystring @{ destroy = $Destroy } `
+                  -Version $(_getApiVersion Core) | Out-Null
 
                Write-Output "Deleted Work item with ID $item"
             }

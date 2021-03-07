@@ -14,27 +14,25 @@
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
-```PowerShell
-PS C:\> Remove-VSTeamClassificationNode -ProjectName Demo -StructureGroup "iterations" -Path "\MyIteration\Path"
+```powershell
+Remove-VSTeamClassificationNode -ProjectName Demo -StructureGroup "iterations" -Path "\MyIteration\Path"
 ```
 
 This command removes an existing iteration with the path MyIteration/Path to the Demo project. Any work items that are assigned to that path get reassigned to the root iteration, since no reclassification id has been given.
 
-### -------------------------- EXAMPLE 2 --------------------------
+### Example 2
 
-```PowerShell
-PS C:\> Remove-VSTeamClassificationNode -ProjectName "Demo" -StructureGroup "areas" -Path "\MyIteration\Path" -ReClassifyId 19
+```powershell
+Remove-VSTeamClassificationNode -ProjectName "Demo" -StructureGroup "areas" -Path "\MyIteration\Path" -ReClassifyId 19
 ```
 
 This command removes an existing area with the path \MyIteration\Path to the Demo project. Any work items that are assigned to that path get reassigned to the area with the id 19.
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
-### -StructureGroup
+### StructureGroup
 
 Structure group of the classification node.
 
@@ -43,7 +41,7 @@ Type: string
 Accepted values: iterations, areas
 ```
 
-### -Path
+### Path
 
 Path of the classification node.
 
@@ -51,7 +49,7 @@ Path of the classification node.
 Type: string
 ```
 
-### -ReClassifyId
+### ReClassifyId
 
 Id of a classification node where work items should be reassigned to if they are currently assigned to the node being deleted.
 
@@ -59,7 +57,9 @@ Id of a classification node where work items should be reassigned to if they are
 Type: int
 ```
 
-<!-- #include "./params/force.md" -->
+<!-- #include "./params/projectName.md" -->
+
+<!-- #include "./params/forcegroup.md" -->
 
 ## INPUTS
 
@@ -71,7 +71,11 @@ Type: int
 
 This function is the base function for Remove-VSTeamArea and Remove-VSTeamIteration.
 
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
+
+<!-- #include "./common/related.md" -->
 
 [Remove-VSTeamArea](Remove-VSTeamArea.md)
 

@@ -1,5 +1,6 @@
 function Update-VSTeamProject {
-   [CmdletBinding(DefaultParameterSetName = 'ByName', SupportsShouldProcess = $true, ConfirmImpact = "High")]
+   [CmdletBinding(DefaultParameterSetName = 'ByName', SupportsShouldProcess = $true, ConfirmImpact = "High",
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Update-VSTeamProject')]
    param(
       [string] $NewName = '',
 
@@ -10,16 +11,13 @@ function Update-VSTeamProject {
       [Parameter(ParameterSetName = 'ByID', ValueFromPipelineByPropertyName = $true)]
       [string] $Id,
 
-      [Alias('ProjectName')]
-      [ProjectValidateAttribute()]
-      [ArgumentCompleter([ProjectCompleter]) ]
       [Parameter(ParameterSetName = 'ByName', Position = 0, ValueFromPipelineByPropertyName = $true)]
-      [string] $Name
+      [vsteam_lib.ProjectValidateAttribute($false)]
+      [ArgumentCompleter([vsteam_lib.ProjectCompleter]) ]
+      [Alias('Name')]
+      [string] $ProjectName
    )
    process {
-      # Bind the parameter to a friendly variable
-      $ProjectName = $PSBoundParameters["Name"]
-
       if ($id) {
          $ProjectName = $id
       }
@@ -54,13 +52,16 @@ function Update-VSTeamProject {
          }
 
          # Call the REST API
-         $resp = _callAPI -Area 'projects' -id $id -NoProject `
-            -Method Patch -ContentType 'application/json' -body $body -Version $(_getApiVersion Core)
+         $resp = _callAPI -Method PATCH -NoProject `
+            -Resource projects `
+            -id $id `
+            -body $body `
+            -Version $(_getApiVersion Core)
 
          _trackProjectProgress -resp $resp -title 'Updating team project' -msg $msg
 
          # Invalidate any cache of projects.
-         [VSTeamProjectCache]::timestamp = -1
+         [vsteam_lib.ProjectCache]::Invalidate()
 
          # Return the project now that it has been updated
          return Get-VSTeamProject -Id $finalName

@@ -14,19 +14,19 @@ This will create a new Team Project in your Team Foundation Server or Team Servi
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
-```PowerShell
-PS C:\> Add-VSTeamProject 'MyProject'
+```powershell
+Add-VSTeamProject 'MyProject'
 ```
 
 This will add a project name MyProject with no description using the Scrum process
 template and Git source control.
 
-### -------------------------- EXAMPLE 2 --------------------------
+### Example 2
 
-```PowerShell
-PS C:\> Add-VSTeamProject 'MyProject' -TFVC -ProcessTemplate Agile
+```powershell
+Add-VSTeamProject 'MyProject' -TFVC -ProcessTemplate Agile
 ```
 
 This will add a project name MyProject with no description using the Agile process
@@ -34,7 +34,7 @@ template and TFVC source control.
 
 ## PARAMETERS
 
-### -ProjectName
+### ProjectName
 
 The name of the project to create.
 
@@ -45,7 +45,7 @@ Required: True
 Position: 0
 ```
 
-### -ProcessTemplate
+### ProcessTemplate
 
 The name of the process template to use for the project.
 
@@ -56,7 +56,7 @@ Type: String
 Default value: Scrum
 ```
 
-### -Description
+### Description
 
 The description of the team project.
 
@@ -64,7 +64,7 @@ The description of the team project.
 Type: String
 ```
 
-### -TFVC
+### TFVC
 
 Switches the source control from Git to TFVC.
 
@@ -78,9 +78,11 @@ Type: SwitchParameter
 
 ## NOTES
 
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
 
-[Set-VSTeamAccount](Set-VSTeamAccount.md)
+<!-- #include "./common/related.md" -->
 
 [Remove-VSTeamProject](Remove-VSTeamProject.md)
 

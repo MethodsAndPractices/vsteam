@@ -14,66 +14,71 @@
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
-```PowerShell
-PS C:\> Add-VSTeamClassificationNode -ProjectName Demo -Name "NewIteration" -StructureGroup "iteration" -Path "MyIteration/Path"
+```powershell
+Add-VSTeamClassificationNode -ProjectName Demo -Name "NewIteration" -StructureGroup "iteration" -Path "MyIteration/Path"
 ```
 
 This command adds a new iteration named NewIteration to the Demo project under the iteration path MyIteration/Path.
 
-### -------------------------- EXAMPLE 2 --------------------------
+### Example 2
 
-```PowerShell
-PS C:\> Add-VSTeamClassificationNode -ProjectName "Demo" -FinishDate (Get-Date "31.01.2020") -StartDate (Get-Date "01.01.2020") -Name "NewIteration" -StructureGroup "iterations"
+```powershell
+Add-VSTeamClassificationNode -ProjectName "Demo" -FinishDate (Get-Date "31.01.2020") -StartDate (Get-Date "01.01.2020") -Name "NewIteration" -StructureGroup "iterations"
 ```
 
 This command adds a new iteration named NewIteration to the Demo project with the start date 01.01.2020 and finish date 31.01.2020.
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
-### -Name
+### Name
 
 Name of the new classification node.
 
 ```yaml
 Type: string
+Required: True
 ```
 
-### -StructureGroup
+### StructureGroup
 
 Structure group of the classification node.
 
 ```yaml
 Type: string
+Required: True
 Accepted values: iterations, areas
 ```
 
-### -Path
+### Path
 
 Path of the classification node.
 
 ```yaml
 Type: string
+Required: False
 ```
 
-### -StartDate
+### StartDate
 
-Start date of the classification node.
+Start date of the iteration.
 
 ```yaml
 Type: datetime
+Required: False
 ```
 
-### -FinishDate
+### FinishDate
 
-Finish date of the classification node.
+Finish date of the iteration.
 
 ```yaml
 Type: datetime
+Required: False
 ```
+
+<!-- #include "./params/projectName.md" -->
 
 ## INPUTS
 
@@ -85,7 +90,11 @@ Type: datetime
 
 This function is the base function for Add-VSTeamArea and Add-VSTeamIteration.
 
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
+
+<!-- #include "./common/related.md" -->
 
 [Add-VSTeamArea](Add-VSTeamArea.md)
 

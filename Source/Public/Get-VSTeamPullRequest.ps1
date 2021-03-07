@@ -1,11 +1,12 @@
 function Get-VSTeamPullRequest {
-   [CmdletBinding(DefaultParameterSetName = "SearchCriteriaWithStatus")]
+   [CmdletBinding(DefaultParameterSetName = "SearchCriteriaWithStatus",
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Get-VSTeamPullRequest')]
    param (
       [Alias('PullRequestId')]
       [Parameter(ParameterSetName = "ById")]
       [Parameter(ParameterSetName = "IncludeCommits")]
       [string] $Id,
-      
+
       [Parameter(ParameterSetName = "SearchCriteriaWithStatus")]
       [Parameter(ParameterSetName = "SearchCriteriaWithAll")]
       [Parameter(ParameterSetName = "ById")]
@@ -44,12 +45,12 @@ function Get-VSTeamPullRequest {
       [Parameter(ParameterSetName = "SearchCriteriaWithStatus")]
       [int] $Skip,
 
-      [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
-      [ProjectValidateAttribute()]
-      [ArgumentCompleter([ProjectCompleter])]
+      [Parameter(ValueFromPipelineByPropertyName = $true)]
+      [vsteam_lib.ProjectValidateAttribute($false)]
+      [ArgumentCompleter([vsteam_lib.ProjectCompleter])]
       [string] $ProjectName
    )
-   
+
    process {
       try {
          if ($Id) {
@@ -57,7 +58,7 @@ function Get-VSTeamPullRequest {
                $queryString = @{
                   'includeCommits' = $IncludeCommits
                }
-               $resp = _callAPI -Id "$RepositoryId/pullRequests/$Id" -Area git -Resource repositories -Version $(_getApiVersion Git) -QueryString $queryString 
+               $resp = _callAPI -Id "$RepositoryId/pullRequests/$Id" -Area git -Resource repositories -Version $(_getApiVersion Git) -QueryString $queryString
             }
             elseif ($ProjectName) {
                $resp = _callAPI -ProjectName $ProjectName -Area git -Resource pullRequests -Version $(_getApiVersion Git) -Id $Id
@@ -112,4 +113,3 @@ function Get-VSTeamPullRequest {
       }
    }
 }
-

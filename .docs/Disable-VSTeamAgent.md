@@ -16,7 +16,7 @@
 
 ## PARAMETERS
 
-### -PoolId
+### PoolId
 
 Id of the pool.
 
@@ -26,7 +26,7 @@ Required: True
 Accept pipeline input: true (ByValue)
 ```
 
-### -Id
+### Id
 
 Id of the agent to disable.
 
@@ -37,6 +37,8 @@ Required: True
 Accept pipeline input: true (ByPropertyName)
 ```
 
+<!-- #include "./params/forcegroup.md" -->
+
 ## INPUTS
 
 ### System.String
@@ -45,4 +47,8 @@ Accept pipeline input: true (ByPropertyName)
 
 ## NOTES
 
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
+
+<!-- #include "./common/related.md" -->

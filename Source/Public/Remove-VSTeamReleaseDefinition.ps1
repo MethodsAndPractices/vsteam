@@ -1,14 +1,15 @@
 function Remove-VSTeamReleaseDefinition {
-   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "High")]
+   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "High",
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Remove-VSTeamReleaseDefinition')]
    param(
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [int[]] $Id,
 
       [switch] $Force,
 
-      [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
-      [ProjectValidateAttribute()]
-      [ArgumentCompleter([ProjectCompleter])]
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+      [vsteam_lib.ProjectValidateAttribute($false)]
+      [ArgumentCompleter([vsteam_lib.ProjectCompleter])]
       [string] $ProjectName
    )
 
@@ -17,7 +18,11 @@ function Remove-VSTeamReleaseDefinition {
 
       foreach ($item in $id) {
          if ($force -or $pscmdlet.ShouldProcess($item, "Delete Release Definition")) {
-            _callAPI -Method Delete -subDomain vsrm -Area release -Resource definitions -Version $(_getApiVersion Release) -projectName $ProjectName -id $item | Out-Null
+            _callAPI -Method DELETE -subDomain vsrm -projectName $ProjectName `
+               -Area release `
+               -Resource definitions `
+               -id $item `
+               -Version $(_getApiVersion Release) | Out-Null
 
             Write-Output "Deleted release definition $item"
          }

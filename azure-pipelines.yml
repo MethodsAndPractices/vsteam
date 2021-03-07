@@ -1,7 +1,7 @@
 name: $(Build.BuildID)
 
 trigger:
-- master
+- trunk
 
 resources:
 - repo: self
@@ -9,51 +9,35 @@ resources:
 variables:
   Folder: 'dist'
   TEAM_CIBUILD: 'true'
-  PESTER_VERSION: '5.0.0-rc9'
+  PESTER_VERSION: '5.0.2'
 
 stages:
 - stage: Build
   displayName: Build Stage
 
   jobs:
-  - job: macOS_Linux_Phase
-    displayName: 'Build'
-    strategy:
-      matrix:
-        macOS:
-          OS: 'macOS'
-          vmImageName: 'macOS-latest'
-        Linux:
-          OS: 'Linux'
-          vmImageName: 'ubuntu-16.04'
-      maxParallel: 2
+  - job: Linux_Phase
+    displayName: Build Linux
     pool:
-      vmImage: $(vmImageName)
-    steps:
-    - template: build/unitTests.yml
-      parameters:
-        os: '$(OS)'
-
-  - job: Windows_Phase
-    displayName: Build Windows
-    pool:
-      vmImage: 'windows-latest'
+      vmImage: 'ubuntu-16.04'
 
     steps:
-    - template: build/unitTests.yml
+    - template: .build/unitTests.yml
       parameters:
-        os: 'Windows'
-        buildHelp: 'true'
+        os: 'Linux'
+        buildHelp: 'false'
 
     - task: PowerShell@2
       displayName: 'Install PSScriptAnalyzer'
       inputs:
+        pwsh: true
         targetType: 'inline'
         script: 'Install-Module -Name PSScriptAnalyzer -Repository PSGallery -Force -Scope CurrentUser -Verbose'
 
     - task: PowerShell@2
       displayName: 'Run Static Code Analysis'
       inputs:
+        pwsh: true
         targetType: 'inline'
         script: |
           # Has to happen in this task for it to take effect
@@ -71,26 +55,16 @@ stages:
             Write-Host "##vso[task.complete result=Failed;]Static Code Analysis with error count = $count"
           }
 
-    - task: CredScan@2
-      displayName: 'Run CredScan'
-      inputs:
-        toolMajorVersion: 'V2'
-        suppressionsFile: '$(Build.SourcesDirectory)/build/credscan-supression.json'
+  - job: macOS_Phase
+    displayName: Build macOS
+    pool:
+      vmImage: 'macOS-latest'
 
-    - task: SdtReport@1
-      displayName: 'Create Security Analysis Report'
-      inputs:
-        AllTools: false
-        CredScan: true
-
-    - task: PublishSecurityAnalysisLogs@2
-      displayName: 'Publish Security Analysis Logs'
-
-    - task: PostAnalysis@1
-      displayName: 'Post Analysis'
-      inputs:
-        AllTools: false
-        CredScan: true
+    steps:
+    - template: .build/unitTests.yml
+      parameters:
+        os: 'macOS'
+        buildHelp: 'true'
 
     - task: CopyFiles@2
       displayName: 'Copy Module to Artifacts Folder'
@@ -98,7 +72,7 @@ stages:
         Contents: |
           README.md
           .gitignore
-          dist\**
+          dist/**
         TargetFolder: '$(build.artifactstagingdirectory)/VSTeam'
         flattenFolders: false
       condition: and(succeeded(), eq(variables['System.PullRequest.IsFork'], false))
@@ -114,8 +88,16 @@ stages:
       displayName: 'Copy Integration Tests Artifacts Folder'
       inputs:
         Contents: |
-          dist\*.psd1
-          integration\**
+          Tests/SampleFiles/**
+          Tests/integration/tests/**
+        TargetFolder: '$(build.artifactstagingdirectory)/Tests'
+      condition: and(succeeded(), eq(variables['System.PullRequest.IsFork'], false))
+
+    - task: CopyFiles@2
+      displayName: 'Copy psd1 to Integration Tests Artifacts Folder'
+      inputs:
+        Contents: |
+          dist/*.psd1
         TargetFolder: '$(build.artifactstagingdirectory)/Tests'
       condition: and(succeeded(), eq(variables['System.PullRequest.IsFork'], false))
 
@@ -125,6 +107,29 @@ stages:
         targetPath: '$(Build.ArtifactStagingDirectory)/Tests'
         artifact: 'test'
       condition: and(succeeded(), eq(variables['System.PullRequest.IsFork'], false))
+
+  - job: Windows_Phase
+    displayName: Build Windows
+    pool:
+      vmImage: 'windows-latest'
+
+    steps:
+    - template: .build/unitTests.yml
+      parameters:
+        os: 'Windows'
+        buildHelp: 'false'
+
+    - task: CredScan@2
+      displayName: 'Run CredScan'
+      inputs:
+        toolMajorVersion: 'V2'
+        suppressionsFile: '$(Build.SourcesDirectory)/.build/credscan-supression.json'
+
+    - task: PostAnalysis@1
+      displayName: 'Post Analysis'
+      inputs:
+        AllTools: false
+        CredScan: true
 
 - stage: Package
   displayName: Package Management
@@ -140,6 +145,10 @@ stages:
       runOnce:
         deploy:
           steps:
+          - download: current
+            displayName: 'Download module'
+            artifact: module
+
           - task: NuGetToolInstaller@0
             displayName: 'Install NuGet 5.2.0'
             inputs:
@@ -148,41 +157,49 @@ stages:
           - task: PowerShell@2
             displayName: 'Install Module Dependencies'
             inputs:
+              pwsh: true
               targetType: 'inline'
               script: |
                 # Load the psd1 file so you can read the required modules and install them
                 $manifest = Import-PowerShellDataFile .\$(Folder)\*.psd1
 
                 # Install each module
-                $manifest.RequiredModules | ForEach-Object { Install-Module -Name $_ -Repository PSGallery -F -Scope CurrentUser }
-              workingDirectory: '$(Pipeline.Workspace)/Module'
+                $manifest.RequiredModules | ForEach-Object { Install-Module -Name $_ -Repository PSGallery -Force -Scope CurrentUser -Verbose }
+              workingDirectory: '$(Pipeline.Workspace)/module'
 
           - task: PowerShell@2
             displayName: 'Compute Version Number'
             inputs:
+              pwsh: true
               targetType: 'inline'
               script: |
                 # Load the psd1 file so you can read the version
                 $manifest = Import-PowerShellDataFile .\$(Folder)\*.psd1
 
+                Write-Host "Package Version Number: $($manifest.ModuleVersion).$(Build.BuildId)"
+
                 Write-Host "##vso[task.setvariable variable=PACKAGE_VERSION;isOutput=false]$($manifest.ModuleVersion).$(Build.BuildId)"
-              workingDirectory: '$(Pipeline.Workspace)/Module'
+              workingDirectory: '$(Pipeline.Workspace)/module'
 
           - task: PowerShell@2
             displayName: 'Create NuSpec from PSD1'
             inputs:
+              pwsh: true
               targetType: 'inline'
               script: |
                 Install-Module -Name Trackyon.Nuget -Scope CurrentUser -Force -Verbose
-                ConvertTo-NuSpec -Path ./$(Folder)/VSTeam.psd1
-              workingDirectory: '$(Pipeline.Workspace)/Module'
+
+                Write-Host "Convert psd1 into a NuSpec"
+
+                ConvertTo-NuSpec -Path ./$(Folder)/VSTeam.psd1 -Verbose
+              workingDirectory: '$(Pipeline.Workspace)/module'
 
           - task: NuGetCommand@2
             displayName: 'Pack Module'
             inputs:
               command: pack
-              packagesToPack: '$(Pipeline.Workspace)/Module/$(Folder)/VSTeam.nuspec'
-              packDestination: '$(Pipeline.Workspace)/Module/$(Folder)'
+              packagesToPack: '$(Pipeline.Workspace)/module/$(Folder)/VSTeam.nuspec'
+              packDestination: '$(Pipeline.Workspace)/module/$(Folder)'
               versioningScheme: byEnvVar
               versionEnvVar: 'PACKAGE_VERSION'
 
@@ -190,7 +207,7 @@ stages:
             displayName: 'Push Module'
             inputs:
               command: push
-              packagesToPush: '$(Pipeline.Workspace)/Module/$(Folder)/*.nupkg'
+              packagesToPush: '$(Pipeline.Workspace)/module/$(Folder)/*.nupkg'
               publishVstsFeed: 'vsteam'
               allowPackageConflicts: true
 
@@ -199,49 +216,18 @@ stages:
   dependsOn: Package
   jobs:
 
-  - template: build/integrationTests.yml
+  - template: .build/integrationTests.yml
     parameters:
-      displayName: 'Linux TFS 2017'
+      displayName: 'Linux TFS 2018'
       os: 'Linux'
-      name: 'LinuxTFS2017'
       pool: 'ubuntu-16.04'
-      stop2017: 'true'
-      apiVersion: 'TFS2017'
-      depends: 'WindowsTFS2017'
-      account: 'http://sonarqube.eastus2.cloudapp.azure.com:8080/tfs/defaultcollection'
-
-  - template: build/integrationTests.yml
-    parameters:
-      displayName: 'Windows TFS 2017'
-      os: 'Windows'
-      name: 'WindowsTFS2017'
-      pool: 'windows-latest'
-      apiVersion: 'TFS2017'
-      depends: 'macOSTFS2017'
-      account: 'http://sonarqube.eastus2.cloudapp.azure.com:8080/tfs/defaultcollection'
-
-  - template: build/integrationTests.yml
-    parameters:
-      displayName: 'macOS TFS 2017'
-      os: 'macOS'
-      pool: 'macOS-latest'
-      start2017: 'true'
-      name: 'macOSTFS2017'
-      apiVersion: 'TFS2017'
-      account: 'http://sonarqube.eastus2.cloudapp.azure.com:8080/tfs/defaultcollection'
-
-  - template: build/integrationTests.yml
-    parameters:
-      displayName: 'Windows TFS 2018'
-      os: 'Windows'
-      pool: 'windows-latest'
       start2018: 'true'
       stop2018: 'true'
-      name: 'windowsTFS2018'
+      name: 'LinuxTFS2018'
       apiVersion: 'TFS2018'
       account: 'http://winbldbox3.centralus.cloudapp.azure.com:8080/tfs/defaultcollection'
 
-  - template: build/integrationTests.yml
+  - template: .build/integrationTests.yml
     parameters:
       displayName: 'Windows AzD'
       os: 'Windows'
@@ -250,10 +236,21 @@ stages:
       apiVersion: 'VSTS'
       account: 'tooltester'
 
+  - template: .build/integrationTests.yml
+    parameters:
+      displayName: 'macOS TFS 2017'
+      os: 'macOS'
+      pool: 'macOS-latest'
+      start2017: 'true'
+      stop2017: 'true'
+      name: 'macOSTFS2017'
+      apiVersion: 'TFS2017'
+      account: 'http://sonarqube.eastus2.cloudapp.azure.com:8080/tfs/vsteam'
+
 - stage: Production
   displayName: PowerShell Gallery / GitHub Release
   dependsOn: Testing
-  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/trunk'))
   jobs:
   - deployment: Deploy
     displayName: PowerShell Gallery / GitHub Release
@@ -264,6 +261,9 @@ stages:
       runOnce:
         deploy:
           steps:
+          - download: current
+            artifact: module
+
           - task: NuGetToolInstaller@0
             displayName: 'Install NuGet 5.2.0'
             inputs:
@@ -272,6 +272,7 @@ stages:
           - task: PowerShell@2
             displayName: 'Install Module Dependencies'
             inputs:
+              pwsh: true
               targetType: 'inline'
               script: |
                 # Load the psd1 file so you can read the required modules and install them
@@ -279,11 +280,12 @@ stages:
 
                 # Install each module
                 $manifest.RequiredModules | ForEach-Object { Install-Module -Name $_ -Repository PSGallery -F -Scope CurrentUser }
-              workingDirectory: '$(Pipeline.Workspace)/Module'
+              workingDirectory: '$(Pipeline.Workspace)/module'
 
           - task: PowerShell@2
             displayName: 'Create NuSpec from PSD1'
             inputs:
+              pwsh: true
               targetType: 'inline'
               script: |
                 Install-Module -Name Trackyon.Nuget -Scope CurrentUser -Force -Verbose
@@ -293,20 +295,27 @@ stages:
                 $manifest = Import-PowerShellDataFile ./$(Folder)/VSTeam.psd1
 
                 Write-Host "##vso[task.setvariable variable=PACKAGE_VERSION;isOutput=false]$($manifest.ModuleVersion)"
-              workingDirectory: '$(Pipeline.Workspace)/Module'
+              workingDirectory: '$(Pipeline.Workspace)/module'
 
           - task: NuGetCommand@2
             displayName: 'Pack Module'
             inputs:
               command: pack
-              packagesToPack: '$(Pipeline.Workspace)/Module/$(Folder)/VSTeam.nuspec'
-              packDestination: '$(Pipeline.Workspace)/Module/$(Folder)'
+              packagesToPack: '$(Pipeline.Workspace)/module/$(Folder)/VSTeam.nuspec'
+              packDestination: '$(Pipeline.Workspace)/module/$(Folder)'
+
+          - task: PublishPipelineArtifact@1
+            displayName: 'Publish nupkg Artifact'
+            inputs:
+              targetPath: '$(Pipeline.Workspace)/module/$(Folder)'
+              artifact: 'Package'
+              publishLocation: 'pipeline'
 
           - task: NuGetCommand@2
             displayName: 'Push Module'
             inputs:
               command: push
-              packagesToPush: '$(Pipeline.Workspace)/Module/$(Folder)/*.nupkg'
+              packagesToPush: '$(Pipeline.Workspace)/module/$(Folder)/*.nupkg'
               nuGetFeedType: external
               publishFeedCredentials: 'PowerShell Gallery'
 
@@ -314,10 +323,10 @@ stages:
             displayName: 'Create GitHub Release'
             inputs:
               gitHubConnection: Darquewarrior
-              repositoryName: DarqueWarrior/vsteam
+              repositoryName: MethodsAndPractices/vsteam
               tagSource: manual
               tag: v$(PACKAGE_VERSION)
               addChangeLog: true
               compareWith: 'lastFullRelease'
               assets: |
-                $(Pipeline.Workspace)/Module/$(Folder)/*.nupkg
+                $(Pipeline.Workspace)/module/$(Folder)/*.nupkg

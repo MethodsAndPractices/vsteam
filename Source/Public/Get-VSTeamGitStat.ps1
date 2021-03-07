@@ -1,5 +1,6 @@
 function Get-VSTeamGitStat {
-   [CmdletBinding(DefaultParameterSetName = "ByOptionalName")]
+   [CmdletBinding(DefaultParameterSetName = "ByOptionalName",
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Get-VSTeamGitStat')]
    param (
       [Parameter(ParameterSetName = "ByVersion", ValueFromPipelineByPropertyName = $true, Mandatory = $true)]
       [Parameter(ParameterSetName = "ByOptionalName", ValueFromPipelineByPropertyName = $true, Mandatory = $true)]
@@ -20,10 +21,10 @@ function Get-VSTeamGitStat {
       [Parameter(ParameterSetName = 'ByVersion', Mandatory = $true)]
       [ValidateSet("branch", "commit", "tag")]
       [string] $VersionType,
-      
-      [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
-      [ProjectValidateAttribute()]
-      [ArgumentCompleter([ProjectCompleter])]
+
+      [Parameter(ValueFromPipelineByPropertyName = $true)]
+      [vsteam_lib.ProjectValidateAttribute($false)]
+      [ArgumentCompleter([vsteam_lib.ProjectCompleter])]
       [string] $ProjectName
    )
 
@@ -45,13 +46,13 @@ function Get-VSTeamGitStat {
          $hasValueProp = $resp.PSObject.Properties.Match('value')
 
          if (0 -eq $hasValueProp.count) {
-            _applyTypes $resp "VSTeam.GitStat"
+            _applyTypes $resp "vsteam_lib.GitStat"
             Write-Output $resp
          }
          else {
             $obj = @()
             foreach ($item in $resp.value) {
-               _applyTypes $item "VSTeam.GitStat"
+               _applyTypes $item "vsteam_lib.GitStat"
                $obj += $item
             }
 

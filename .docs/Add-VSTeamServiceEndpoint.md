@@ -16,9 +16,7 @@ The cmdlet adds a new generic connection between TFS/AzD and a third party servi
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
-### -Object
+### Object
 
 Hashtable of Payload for REST call
 
@@ -28,7 +26,7 @@ Required: True
 Accept pipeline input: true (ByPropertyName)
 ```
 
-### -EndpointName
+### EndpointName
 
 The name displayed on the services page. In AzD this is the Connection Name.
 
@@ -37,7 +35,7 @@ Type: String
 Position: 2
 ```
 
-### -EndpointType
+### EndpointType
 
 Type of endpoint (eg. `kubernetes`, `sonarqube`). See AzD service page for supported endpoints.
 
@@ -46,15 +44,21 @@ Type: String
 Position: 3
 ```
 
+<!-- #include "./params/projectName.md" -->
+
 ## INPUTS
 
 ## OUTPUTS
 
-### Team.ServiceEndpoint
+### vsteam_lib.ServiceEndpoint
 
 ## NOTES
 
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
+
+<!-- #include "./common/related.md" -->
 
 [Get-VSTeamServiceEndpoint](Get-VSTeamServiceEndpoint.md)
 

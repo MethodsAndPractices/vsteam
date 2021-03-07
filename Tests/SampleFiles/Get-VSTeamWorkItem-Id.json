@@ -1,0 +1,97 @@
+{
+  "count": 2,
+  "value": [
+    {
+      "id": 179,
+      "rev": 1,
+      "fields": {
+        "System.AreaPath": "iStay",
+        "System.TeamProject": "iStay",
+        "System.IterationPath": "iStay",
+        "System.WorkItemType": "Task",
+        "System.State": "New",
+        "System.Reason": "New",
+        "System.CreatedDate": "2020-09-09T17:40:58.497Z",
+        "System.CreatedBy": {
+          "displayName": "Donovan Brown",
+          "url": "https://spsprodwus21.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+          "_links": {
+            "avatar": {
+              "href": "https://dev.azure.com/toolTester/_apis/GraphProfile/MemberAvatars/add.redacted"
+            }
+          },
+          "id": "00000000-0000-0000-0000-000000000000",
+          "uniqueName": "Test@test.com",
+          "imageUrl": "https://dev.azure.com/toolTester/_apis/GraphProfile/MemberAvatars/add.redacted",
+          "descriptor": "add.redacted"
+        },
+        "System.ChangedDate": "2020-09-09T17:40:58.497Z",
+        "System.ChangedBy": {
+          "displayName": "Donovan Brown",
+          "url": "https://spsprodwus21.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+          "_links": {
+            "avatar": {
+              "href": "https://dev.azure.com/toolTester/_apis/GraphProfile/MemberAvatars/add.redacted"
+            }
+          },
+          "id": "00000000-0000-0000-0000-000000000000",
+          "uniqueName": "Test@test.com",
+          "imageUrl": "https://dev.azure.com/toolTester/_apis/GraphProfile/MemberAvatars/add.redacted",
+          "descriptor": "add.redacted"
+        },
+        "System.CommentCount": 0,
+        "System.Title": "Run Unit Tests",
+        "Microsoft.VSTS.Common.StateChangeDate": "2020-09-09T17:40:58.497Z",
+        "Microsoft.VSTS.Common.Priority": 2
+      },
+      "url": "https://dev.azure.com/toolTester/00000000-0000-0000-0000-000000000000/_apis/wit/workItems/179"
+    },
+    {
+      "id": 180,
+      "rev": 1,
+      "fields": {
+        "System.AreaPath": "iStay",
+        "System.TeamProject": "iStay",
+        "System.IterationPath": "iStay",
+        "System.WorkItemType": "Bug",
+        "System.State": "New",
+        "System.Reason": "New",
+        "System.CreatedDate": "2020-09-09T17:41:56.017Z",
+        "System.CreatedBy": {
+          "displayName": "Donovan Brown",
+          "url": "https://spsprodwus21.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+          "_links": {
+            "avatar": {
+              "href": "https://dev.azure.com/toolTester/_apis/GraphProfile/MemberAvatars/add.redacted"
+            }
+          },
+          "id": "00000000-0000-0000-0000-000000000000",
+          "uniqueName": "Test@test.com",
+          "imageUrl": "https://dev.azure.com/toolTester/_apis/GraphProfile/MemberAvatars/add.redacted",
+          "descriptor": "add.redacted"
+        },
+        "System.ChangedDate": "2020-09-09T17:41:56.017Z",
+        "System.ChangedBy": {
+          "displayName": "Donovan Brown",
+          "url": "https://spsprodwus21.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+          "_links": {
+            "avatar": {
+              "href": "https://dev.azure.com/toolTester/_apis/GraphProfile/MemberAvatars/add.redacted"
+            }
+          },
+          "id": "00000000-0000-0000-0000-000000000000",
+          "uniqueName": "Test@test.com",
+          "imageUrl": "https://dev.azure.com/toolTester/_apis/GraphProfile/MemberAvatars/add.redacted",
+          "descriptor": "add.redacted"
+        },
+        "System.CommentCount": 0,
+        "System.Title": "Fix failed tests",
+        "Microsoft.VSTS.Common.StateChangeDate": "2020-09-09T17:41:56.017Z",
+        "Microsoft.VSTS.Common.Priority": 2,
+        "Microsoft.VSTS.Common.Severity": "3 - Medium",
+        "Microsoft.VSTS.Common.ValueArea": "Business"
+      },
+      "url": "https://dev.azure.com/toolTester/00000000-0000-0000-0000-000000000000/_apis/wit/workItems/180"
+    }
+  ]
+}

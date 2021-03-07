@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Configuration>
+   <ViewDefinitions>
+      <View>
+         <Name>vsteam_lib.Agent.TableView</Name>
+         <ViewSelectedBy>
+            <TypeName>vsteam_lib.Agent</TypeName>
+         </ViewSelectedBy>
+         <TableControl>
+            <AutoSize />
+            <TableHeaders>
+               <TableColumnHeader>
+                  <Label>Name</Label>
+               </TableColumnHeader>
+               <TableColumnHeader>
+                  <Label>Enabled</Label>
+               </TableColumnHeader>
+               <TableColumnHeader>
+                  <Label>Version</Label>
+               </TableColumnHeader>
+               <TableColumnHeader>
+                  <Label>OS</Label>
+               </TableColumnHeader>
+               <TableColumnHeader>
+                  <Label>Id</Label>
+               </TableColumnHeader>
+            </TableHeaders>
+            <TableRowEntries>
+               <TableRowEntry>
+                  <Wrap />
+                  <TableColumnItems>
+                     <TableColumnItem>
+                        <PropertyName>name</PropertyName>
+                     </TableColumnItem>
+                     <TableColumnItem>
+                        <PropertyName>enabled</PropertyName>
+                     </TableColumnItem>
+                     <TableColumnItem>
+                        <PropertyName>version</PropertyName>
+                     </TableColumnItem>
+                     <TableColumnItem>
+                        <PropertyName>os</PropertyName>
+                     </TableColumnItem>
+                     <TableColumnItem>
+                        <PropertyName>agentId</PropertyName>
+                     </TableColumnItem>
+                  </TableColumnItems>
+               </TableRowEntry>
+            </TableRowEntries>
+         </TableControl>
+      </View>
+   </ViewDefinitions>
+</Configuration>

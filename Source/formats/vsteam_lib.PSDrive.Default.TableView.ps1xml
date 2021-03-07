@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Configuration>
+   <ViewDefinitions>
+      <View>
+         <Name>vsteam_lib.PSDrive.Default.TableView</Name>
+         <ViewSelectedBy>
+            <TypeName>Microsoft.PowerShell.SHiPS.SHiPSLeaf</TypeName>
+            <TypeName>Microsoft.PowerShell.SHiPS.SHiPSDirectory</TypeName>
+            <TypeName>vsteam_lib.Provider.Directory</TypeName>
+            <TypeName>vsteam_lib.Queues</TypeName>
+            <TypeName>vsteam_lib.Provider.Queue</TypeName>
+            <TypeName>vsteam_lib.Provider.Pool</TypeName>
+            <TypeName>vsteam_lib.Provider.Pools</TypeName>
+            <TypeName>vsteam_lib.Builds</TypeName>
+            <TypeName>vsteam_lib.Provider.BuildDefinitions</TypeName>
+            <TypeName>vsteam_lib.Releases</TypeName>
+            <TypeName>vsteam_lib.ReleaseDefinitions</TypeName>
+            <TypeName>vsteam_lib.Repositories</TypeName>
+            <TypeName>vsteam_lib.Teams</TypeName>
+            <TypeName>vsteam_lib.Permissions</TypeName>
+            <TypeName>vsteam_lib.Groups</TypeName>
+            <TypeName>vsteam_lib.Users</TypeName>
+            <TypeName>vsteam_lib.Provider.Group</TypeName>
+            <TypeName>vsteam_lib.Provider.User</TypeName>
+            <TypeName>vsteam_lib.Provider.Package</TypeName>
+            <TypeName>vsteam_lib.Provider.PackageVersion</TypeName>
+         </ViewSelectedBy>
+         <TableControl>
+            <AutoSize />
+            <TableHeaders>
+               <TableColumnHeader>
+                  <Label>Mode</Label>
+               </TableColumnHeader>
+               <TableColumnHeader>
+                  <Label>Name</Label>
+               </TableColumnHeader>
+            </TableHeaders>
+            <TableRowEntries>
+               <TableRowEntry>
+                  <Wrap />
+                  <TableColumnItems>
+                     <TableColumnItem>
+                        <PropertyName>DisplayMode</PropertyName>
+                     </TableColumnItem>
+                     <TableColumnItem>
+                        <PropertyName>Name</PropertyName>
+                     </TableColumnItem>
+                  </TableColumnItems>
+               </TableRowEntry>
+            </TableRowEntries>
+         </TableControl>
+      </View>
+   </ViewDefinitions>
+</Configuration>

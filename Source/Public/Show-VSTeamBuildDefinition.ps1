@@ -1,5 +1,6 @@
 function Show-VSTeamBuildDefinition {
-   [CmdletBinding(DefaultParameterSetName = 'List')]
+   [CmdletBinding(DefaultParameterSetName = 'List',
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Show-VSTeamBuildDefinition')]
    param(
       [Parameter(ParameterSetName = 'List')]
       [ValidateSet('Mine', 'All', 'Queued', 'XAML')]
@@ -12,9 +13,9 @@ function Show-VSTeamBuildDefinition {
       [Parameter(ParameterSetName = 'List')]
       [string] $Path = '\',
 
-      [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
-      [ProjectValidateAttribute()]
-      [ArgumentCompleter([ProjectCompleter])]
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+      [vsteam_lib.ProjectValidateAttribute($false)]
+      [ArgumentCompleter([vsteam_lib.ProjectCompleter])]
       [string] $ProjectName
    )
    process {

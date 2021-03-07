@@ -16,56 +16,56 @@
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
-### -AreaID
+### AreaID
 
 ```yaml
 Type: Int32
 Required: True
 ```
 
-### -AreaPath
+### AreaPath
 
 ```yaml
 Type: String
 Required: True
 ```
 
-### -Descriptor
+### Descriptor
 
 ```yaml
 Type: String
 Required: True
 ```
 
-### -User
+### User
 
 ```yaml
 Type: VSTeamUser
 Required: True
 ```
 
-### -Group
+### Group
 
 ```yaml
 Type: VSTeamGroup
 Required: True
 ```
 
-### -Allow
+### Allow
 
 ```yaml
 Type: VSTeamWorkItemAreaPermissions
 Required: True
 ```
 
-### -Deny
+### Deny
 
 ```yaml
 Type: VSTeamWorkItemAreaPermissions
 Required: True
 ```
+
+<!-- #include "./params/projectName.md" -->
 
 ## INPUTS
 
@@ -75,4 +75,8 @@ Required: True
 
 ## NOTES
 
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
+
+<!-- #include "./common/related.md" -->

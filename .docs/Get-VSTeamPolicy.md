@@ -14,27 +14,25 @@
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
-```PowerShell
-PS C:\> Get-VSTeamPolicy -ProjectName Demo
+```powershell
+Get-VSTeamPolicy -ProjectName Demo
 ```
 
 This command returns all the policies for the Demo project in your TFS or Team Services account.
 
-### -------------------------- EXAMPLE 2 --------------------------
+### Example 2
 
-```PowerShell
-PS C:\> Get-VSTeamPolicy -ProjectName Demo -Id 1
+```powershell
+Get-VSTeamPolicy -ProjectName Demo -Id 1
 ```
 
 This command gets the policy with an id of 1 within the Demo project.
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
-### -Id
+### Id
 
 Specifies one code policy by id.
 
@@ -46,13 +44,19 @@ Parameter Sets: ByID
 Accept pipeline input: true (ByPropertyName)
 ```
 
+<!-- #include "./params/projectName.md" -->
+
 ## INPUTS
 
 ## OUTPUTS
 
 ## NOTES
 
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
+
+<!-- #include "./common/related.md" -->
 
 [Add-VSTeamPolicy](Add-VSTeamPolicy.md)
 

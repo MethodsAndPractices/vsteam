@@ -16,7 +16,7 @@
 
 ## PARAMETERS
 
-### -PublisherId
+### PublisherId
 
 The id of the publisher.
 
@@ -26,7 +26,7 @@ Required: True
 Parameter Sets: GetById
 ```
 
-### -ExtensionId
+### ExtensionId
 
 The id of the extension.
 
@@ -36,7 +36,7 @@ Required: True
 Parameter Sets: GetById
 ```
 
-### -IncludeInstallationIssues
+### IncludeInstallationIssues
 
 If true (the default), include installed extensions with issues.
 
@@ -45,7 +45,7 @@ Type: Switch
 Parameter Sets: List
 ```
 
-### -IncludeDisabledExtensions
+### IncludeDisabledExtensions
 
 If true (the default), include disabled extensions in the results.
 
@@ -54,7 +54,7 @@ Type: Switch
 Parameter Sets: List
 ```
 
-### -IncludeErrors
+### IncludeErrors
 
 If true, include installed extensions with errors.
 
@@ -69,7 +69,11 @@ Parameter Sets: List
 
 ## NOTES
 
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
+
+<!-- #include "./common/related.md" -->
 
 [Add-VSTeamExtension](Add-VSTeamExtension.md)
 

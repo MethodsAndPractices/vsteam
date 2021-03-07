@@ -1,5 +1,6 @@
 function Update-VSTeamTaskGroup {
-   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Low")]
+   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Low",
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Update-VSTeamTaskGroup')]
    param(
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [string] $Id,
@@ -12,19 +13,28 @@ function Update-VSTeamTaskGroup {
 
       [switch] $Force,
 
-      [ProjectValidateAttribute()]
-      [ArgumentCompleter([ProjectCompleter])]
-      [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+      [vsteam_lib.ProjectValidateAttribute($false)]
+      [ArgumentCompleter([vsteam_lib.ProjectCompleter])]
       [string] $ProjectName
    )
 
    Process {
+      $commonArgs = @{
+         Id          = $Id
+         Method      = 'Put'
+         Area        = 'distributedtask'
+         Resource    = 'taskgroups'
+         ProjectName = $ProjectName
+         Version     = $(_getApiVersion TaskGroups)
+      }
+
       if ($Force -or $pscmdlet.ShouldProcess("Update Task Group")) {
          if ($InFile) {
-            $resp = _callAPI -Method Put -ProjectName $ProjectName -Area distributedtask -Resource taskgroups -Version $(_getApiVersion TaskGroups) -InFile $InFile -ContentType 'application/json' -Id $Id
+            $resp = _callAPI @commonArgs -InFile $InFile
          }
          else {
-            $resp = _callAPI -Method Put -ProjectName $ProjectName -Area distributedtask -Resource taskgroups -Version $(_getApiVersion TaskGroups) -Body $Body -ContentType 'application/json' -Id $Id
+            $resp = _callAPI @commonArgs -Body $Body
          }
       }
 

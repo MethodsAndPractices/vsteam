@@ -14,25 +14,25 @@
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
-```PowerShell
-PS C:\> Show-VSTeamPullRequest 3
+```powershell
+Show-VSTeamPullRequest 3
 ```
 
 This command will open a web browser with the pull request id of 3.
 
-### -------------------------- EXAMPLE 2 --------------------------
+### Example 2
 
-```PowerShell
-PS C:\> Show-VSTeamPullRequest -Id 3
+```powershell
+Show-VSTeamPullRequest -Id 3
 ```
 
 This command will open a web browser with the pull request id of 3.
 
 ## PARAMETERS
 
-### -PullRequestId
+### PullRequestId
 
 Specifies pull request by ID.
 
@@ -47,12 +47,14 @@ Accept pipeline input: true (ByPropertyName)
 
 ## OUTPUTS
 
-### Team.Release
-
 ## NOTES
 
 You can pipe the pull request ID to this function.
 
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
+
+<!-- #include "./common/related.md" -->
 
 [Get-VSTeamPullRequest](Get-VSTeamPullRequest.md)

@@ -39,7 +39,7 @@ PS C:\> Merge-File -InputFile .\Source\Classes\classes.json
    Write-Verbose "Full Path: $fullPath"
 
    $fileOrder = Get-Content $fullPath -Raw | ConvertFrom-Json
-   Write-Output "Processing: $($fileOrder.fileType) in $fullPath"
+   Write-Output "Processing: $($fileOrder.fileType) => $($fileOrder.outputFile)"
 
    $workingDir = Split-Path $fullPath
    Write-Verbose "Working Directory: $workingDir"
@@ -53,7 +53,13 @@ PS C:\> Merge-File -InputFile .\Source\Classes\classes.json
       $files = $()
 
       foreach ($file in $fileOrder.files) {
-         foreach ($item in $(Get-ChildItem -Filter $file)) {
+         $children = $(Get-ChildItem -Filter $file)
+
+         if ($children.Length -eq 0) {
+            Write-Warning "Could not find $file"
+         }
+
+         foreach ($item in $children) {
             $files += , (Resolve-Path $item.FullName)
          }
       }
@@ -63,7 +69,7 @@ PS C:\> Merge-File -InputFile .\Source\Classes\classes.json
       # This makes sure the file is there and empty.
       # If the file already exisit it will be overwritten.
       $null = New-Item -ItemType file -Path $output -Force
-      Write-Output "Creating: $output"
+      Write-Verbose "Creating: $output"
 
       switch ($fileOrder.fileType) {
          'formats' {
@@ -151,15 +157,29 @@ function Merge-Function {
    process {
       $contents = New-Object System.Text.StringBuilder
 
-      ForEach ($file in $files) {
+      foreach ($file in $files) {
          Write-Verbose -Message "Merging from $file"
          $fileContents = Get-Content $file
 
+         $foundCmdletBinding = $false
+
+         if($null -ne $($fileContents | Select-String -Pattern 'CmdletBinding')){
+            $foundCmdletBinding = $true
+         }
+
          foreach ($line in $fileContents) {
+
+
+
+
             $line = ($line -replace ' +$', '')
             if ($null -ne $line.Trim() -and '' -ne $line.Trim()) {
                $contents.AppendLine($line) | Out-Null
             }
+         }
+
+         if(-not $foundCmdletBinding) {
+            Write-Warning -Message "CmdletBinding not found in $file"
          }
       }
 
@@ -203,7 +223,7 @@ function Merge-Class {
 
          # Remove all trailing whitespace
          $newFileContents = ($newFileContents -replace ' +$', '')
-         
+
          # This not only removes the comment but any whitespace before it.
          $newFileContents = ($newFileContents -replace ' +#.+', '')
          foreach ($line in $newFileContents) {

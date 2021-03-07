@@ -1,5 +1,5 @@
 function Test-VSTeamMembership {
-   [CmdletBinding()]
+   [CmdletBinding(HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Test-VSTeamMembership')]
    [OutputType([System.Boolean])]
    param(
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = "MemberDescriptor")]
@@ -12,21 +12,23 @@ function Test-VSTeamMembership {
       $PrevWarningPreference = $WarningPreference
       try {
          $WarningPreference = "SilentlyContinue" # avoid 404 warning, since that indicates it doesn't exist
-         $null = _callMembershipAPI -Id "$MemberDescriptor/$ContainerDescriptor" -Method Head
+         $null = _callMembershipAPI -Id "$MemberDescriptor/$ContainerDescriptor" -Method HEAD
          return $true
-      } catch {
+      }
+      catch {
          $WarningPreference = $PrevWarningPreference
          $e = $_
          try {
-            if ($e.Exception -and $e.Exception.Response -and $e.Exception.Response.StatusCode -eq [System.Net.HttpStatusCode]::NotFound)
-            {
+            if ($e.Exception -and $e.Exception.Response -and $e.Exception.Response.StatusCode -eq [System.Net.HttpStatusCode]::NotFound) {
                return $false
             }
-         } catch {
+         }
+         catch {
             Write-Warning "Nested exception $_"
          }
          throw $e
-      } finally {
+      }
+      finally {
          $WarningPreference = $PrevWarningPreference
       }
    }

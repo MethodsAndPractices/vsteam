@@ -1,14 +1,15 @@
 function Remove-VSTeamServiceEndpoint {
-   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "High")]
+   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "High",
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Remove-VSTeamServiceEndpoint')]
    param(
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [string[]] $id,
 
       [switch] $Force,
 
-      [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
-      [ProjectValidateAttribute()]
-      [ArgumentCompleter([ProjectCompleter])]
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+      [vsteam_lib.ProjectValidateAttribute($false)]
+      [ArgumentCompleter([vsteam_lib.ProjectCompleter])]
       [string] $ProjectName
    )
 
@@ -17,7 +18,7 @@ function Remove-VSTeamServiceEndpoint {
          if ($Force -or $pscmdlet.ShouldProcess($item, "Delete Service Endpoint")) {
             # Call the REST API
             _callAPI -projectName $projectName -Area 'distributedtask' -Resource 'serviceendpoints' -Id $item  `
-               -Method Delete -Version $(_getApiVersion ServiceEndpoints) | Out-Null
+               -Method DELETE -Version $(_getApiVersion ServiceEndpoints) | Out-Null
 
             Write-Output "Deleted service endpoint $item"
          }

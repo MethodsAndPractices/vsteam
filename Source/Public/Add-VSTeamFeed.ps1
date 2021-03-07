@@ -1,5 +1,14 @@
+# Adds a new feed to package management.
+#
+# Get-VSTeamOption 'packaging' 'feeds' -subDomain 'feeds'
+# id              : c65009a7-474a-4ad1-8b42-7d852107ef8c
+# area            : Packaging
+# resourceName    : Feeds
+# routeTemplate   : {project}/_apis/{area}/{resource}/{feedId}
+# http://bit.ly/Add-VSTeamFeed
+
 function Add-VSTeamFeed {
-   [CmdletBinding()]
+   [CmdletBinding(HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Add-VSTeamFeed')]
    param (
       [Parameter(Position = 0, Mandatory = $true)]
       [string] $Name,
@@ -43,12 +52,15 @@ function Add-VSTeamFeed {
          )
       }
 
-      $bodyAsJson = $body | ConvertTo-Json
+      $bodyAsJson = $body | ConvertTo-Json -Compress -Depth 100
 
       # Call the REST API
-      $resp = _callAPI -subDomain feeds -Area packaging -Resource feeds `
-         -Method Post -ContentType 'application/json' -body $bodyAsJson -Version $(_getApiVersion Packaging)
+      $resp = _callAPI -Method POST -subDomain "feeds" `
+         -Area "packaging" `
+         -Resource "feeds" `
+         -body $bodyAsJson `
+         -Version $(_getApiVersion Packaging)
 
-      return [VSTeamFeed]::new($resp)
+      Write-Output [vsteam_lib.Feed]::new($resp)
    }
 }

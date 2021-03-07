@@ -1,10 +1,10 @@
 function Invoke-VSTeamRequest {
-   [CmdletBinding()]
+   [CmdletBinding(HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Invoke-VSTeamRequest')]
    param(
-      [ArgumentCompleter([InvokeCompleter])]
+      [ArgumentCompleter([vsteam_lib.InvokeCompleter])]
       [string] $resource,
 
-      [ArgumentCompleter([InvokeCompleter])]
+      [ArgumentCompleter([vsteam_lib.InvokeCompleter])]
       [string] $area,
 
       [string] $id,
@@ -34,14 +34,14 @@ function Invoke-VSTeamRequest {
       [object] $QueryString,
 
       [string] $Team,
-      
-      [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
-      [ProjectValidateAttribute()]
-      [ArgumentCompleter([ProjectCompleter])]
+
+      [Parameter(ValueFromPipelineByPropertyName = $true)]
+      [vsteam_lib.ProjectValidateAttribute($false)]
+      [ArgumentCompleter([vsteam_lib.ProjectCompleter])]
       [string] $ProjectName,
-      
+
       [switch] $UseProjectId,
-      
+
       [switch] $NoProject)
 
    process {

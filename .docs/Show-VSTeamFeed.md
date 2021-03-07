@@ -14,17 +14,17 @@
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
-```PowerShell
-PS C:\> Show-VSTeamFeed -Name Demo
+```powershell
+Show-VSTeamFeed -Name Demo
 ```
 
 This command will open a web browser with this feed showing.
 
 ## PARAMETERS
 
-### -Id
+### Id
 
 Specifies feed by ID or Name.
 
@@ -40,12 +40,14 @@ Accept pipeline input: true (ByPropertyName)
 
 ## OUTPUTS
 
-### Team.Feed
+### vsteam_lib.Feed
 
 ## NOTES
 
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
 
-[Set-VSTeamAccount](Set-VSTeamAccount.md)
+<!-- #include "./common/related.md" -->
 
 [Add-VSTeamFeed](Add-VSTeamFeed.md)

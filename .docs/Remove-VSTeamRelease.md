@@ -16,10 +16,10 @@ The project name is a Dynamic Parameter which may not be displayed in the syntax
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
-```PowerShell
-PS C:\> Get-VSTeamRelease -ProjectName demo | Remove-VSTeamRelease
+```powershell
+Get-VSTeamRelease -ProjectName demo | Remove-VSTeamRelease
 ```
 
 This command gets a list of all releases in the demo project.
@@ -28,9 +28,7 @@ The pipeline operator (|) passes the data to the Remove-VSTeamRelease function, 
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
-### -Id
+### Id
 
 Specifies one or more releases by ID.
 
@@ -44,7 +42,9 @@ Required: True
 Accept pipeline input: true (ByPropertyName)
 ```
 
-<!-- #include "./params/force.md" -->
+<!-- #include "./params/projectName.md" -->
+
+<!-- #include "./params/forcegroup.md" -->
 
 ## INPUTS
 
@@ -54,19 +54,13 @@ Accept pipeline input: true (ByPropertyName)
 
 ## NOTES
 
-This function has a Dynamic Parameter for ProjectName that specifies the project for which this function gets releases.
-
-You can tab complete from a list of available projects.
-
-You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.
-
 You can pipe release definition IDs to this function.
+
+<!-- #include "./common/prerequisites.md" -->
 
 ## RELATED LINKS
 
-[Set-VSTeamAccount](Set-VSTeamAccount.md)
-
-[Set-VSTeamDefaultProject](Set-VSTeamDefaultProject.md)
+<!-- #include "./common/related.md" -->
 
 [Add-VSTeamRelease](Add-VSTeamRelease.md)
 

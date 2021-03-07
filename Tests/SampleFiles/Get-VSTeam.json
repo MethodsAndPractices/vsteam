@@ -1,0 +1,14 @@
+{
+   "value": [
+      {
+         "id": "00000000-0000-0000-0000-000000000000",
+         "name": "Test Team",
+         "url": "https://dev.azure.com/Test/_apis/projects/00000000-0000-0000-0000-000000000000/teams/00000000-0000-0000-0000-000000000000",
+         "description": "The default project team.",
+         "identityUrl": "https://spsprodcus3.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+         "projectName": "Test",
+         "projectId": "00000000-0000-0000-0000-000000000000"
+      }
+   ],
+   "count": 1
+}

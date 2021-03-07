@@ -1,5 +1,5 @@
 function Show-VSTeam {
-   [CmdletBinding()]
+   [CmdletBinding(HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Show-VSTeam')]
    param ()
 
    process {

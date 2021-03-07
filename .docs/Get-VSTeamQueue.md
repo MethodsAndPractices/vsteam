@@ -16,9 +16,7 @@
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
-### -QueueName
+### QueueName
 
 Name of the queue to return.
 
@@ -27,7 +25,7 @@ Type: String
 Parameter Sets: List
 ```
 
-### -ActionFilter
+### ActionFilter
 
 None, Manage or Use.
 
@@ -36,7 +34,7 @@ Type: String
 Parameter Sets: List
 ```
 
-### -Id
+### Id
 
 Id of the queue to return.
 
@@ -46,12 +44,18 @@ Parameter Sets: ByID
 Aliases: QueueID
 ```
 
+<!-- #include "./params/projectName.md" -->
+
 ## INPUTS
 
 ## OUTPUTS
 
-### Team.Queue
+### vsteam_lib.Queue
 
 ## NOTES
 
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
+
+<!-- #include "./common/related.md" -->

@@ -1,4 +1,4 @@
-### -Name
+### Name
 
 Specifies the process template name for which this function operates.
 

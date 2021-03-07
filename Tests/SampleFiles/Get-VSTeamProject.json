@@ -1,0 +1,24 @@
+{
+  "count": 2,
+  "value": [
+    {
+      "id": "00000000-0000-0000-0000-000000000001",
+      "name": "Voting-App",
+      "description": "Vote App",
+      "url": "https://dev.azure.com/Test/_apis/projects/00000000-0000-0000-0000-000000000001",
+      "state": "wellFormed",
+      "revision": 159,
+      "visibility": "private",
+      "lastUpdateTime": "2020-05-19T00:02:23.517Z"
+    },
+    {
+      "id": "00000000-0000-0000-0000-000000000002",
+      "name": "PeopleTracker",
+      "url": "https://dev.azure.com/Test/_apis/projects/00000000-0000-0000-0000-000000000002",
+      "state": "wellFormed",
+      "revision": 150,
+      "visibility": "private",
+      "lastUpdateTime": "2019-09-25T20:47:14.247Z"
+    }
+  ]
+}

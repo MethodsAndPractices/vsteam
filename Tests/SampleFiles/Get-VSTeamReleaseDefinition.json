@@ -1,0 +1,172 @@
+{
+   "count": 2,
+   "value": [
+      {
+         "source": "userInterface",
+         "revision": 118,
+         "description": null,
+         "createdBy": {
+            "displayName": "Donovan Brown",
+            "url": "https://spsprodcus3.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+            "_links": {
+               "avatar": {
+                  "href": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/aad.redacted"
+               }
+            },
+            "id": "00000000-0000-0000-0000-000000000000",
+            "uniqueName": "Test@Test.com",
+            "imageUrl": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/aad.redacted",
+            "descriptor": "aad.redacted"
+         },
+         "createdOn": "2019-03-24T16:46:08.79Z",
+         "modifiedBy": {
+            "displayName": "Donovan Brown",
+            "url": "https://spsprodcus3.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+            "_links": {
+               "avatar": {
+                  "href": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/aad.redacted"
+               }
+            },
+            "id": "00000000-0000-0000-0000-000000000000",
+            "uniqueName": "Test@Test.com",
+            "imageUrl": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/aad.redacted",
+            "descriptor": "aad.redacted"
+         },
+         "modifiedOn": "2019-09-16T14:32:37.323Z",
+         "isDeleted": true,
+         "variableGroups": null,
+         "artifacts": [
+            {
+               "sourceId": "00000000-0000-0000-0000-000000000000:ptrackeracra7617e.azurecr.io:peopletracker",
+               "type": "AzureContainerRepository",
+               "alias": "acr",
+               "definitionReference": {
+                  "connection": {
+                     "id": "00000000-0000-0000-0000-000000000000",
+                     "name": "ca-dbrown-demo-test"
+                  },
+                  "defaultVersionType": {
+                     "id": "latestType",
+                     "name": "Latest"
+                  },
+                  "definition": {
+                     "id": "peopletracker",
+                     "name": "peopletracker"
+                  },
+                  "registryurl": {
+                     "id": "ptrackeracra7617e.azurecr.io",
+                     "name": "ptrackeracra7617e"
+                  },
+                  "resourcegroup": {
+                     "id": "PTracker-Common",
+                     "name": "PTracker-Common"
+                  }
+               },
+               "isRetained": false
+            },
+            {
+               "sourceId": "00000000-0000-0000-0000-000000000000:23",
+               "type": "Build",
+               "alias": "artifact",
+               "definitionReference": {
+                  "artifactSourceDefinitionUrl": {
+                     "id": "https://dev.azure.com/Test/_permalink/_build/index?collectionId=00000000-0000-0000-0000-000000000000&projectId=00000000-0000-0000-0000-000000000000&definitionId=23",
+                     "name": ""
+                  },
+                  "defaultVersionBranch": {
+                     "id": "",
+                     "name": ""
+                  },
+                  "defaultVersionSpecific": {
+                     "id": "",
+                     "name": ""
+                  },
+                  "defaultVersionTags": {
+                     "id": "",
+                     "name": ""
+                  },
+                  "defaultVersionType": {
+                     "id": "latestType",
+                     "name": "Latest"
+                  },
+                  "definition": {
+                     "id": "23",
+                     "name": "azcliTest-CI"
+                  },
+                  "project": {
+                     "id": "00000000-0000-0000-0000-000000000000",
+                     "name": "azcliTest"
+                  }
+               },
+               "isPrimary": true,
+               "isRetained": false
+            }
+         ],
+         "releaseNameFormat": "Release-$(rev:r)",
+         "properties": {},
+         "id": 2,
+         "name": "PTracker-CD",
+         "path": "\\",
+         "projectReference": null,
+         "url": "https://vsrm.dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/Release/definitions/2",
+         "_links": {
+            "self": {
+               "href": "https://vsrm.dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/Release/definitions/2"
+            },
+            "web": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_release?definitionId=2"
+            }
+         }
+      },
+      {
+         "source": "userInterface",
+         "revision": 6,
+         "description": null,
+         "createdBy": {
+            "displayName": "Donovan Brown",
+            "url": "https://spsprodcus3.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+            "_links": {
+               "avatar": {
+                  "href": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/aad.redacted"
+               }
+            },
+            "id": "00000000-0000-0000-0000-000000000000",
+            "uniqueName": "Test@Test.com",
+            "imageUrl": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/aad.redacted",
+            "descriptor": "aad.redacted"
+         },
+         "createdOn": "2019-08-09T21:36:56.31Z",
+         "modifiedBy": {
+            "displayName": "Donovan Brown",
+            "url": "https://spsprodcus3.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+            "_links": {
+               "avatar": {
+                  "href": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/aad.redacted"
+               }
+            },
+            "id": "00000000-0000-0000-0000-000000000000",
+            "uniqueName": "Test@Test.com",
+            "imageUrl": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/aad.redacted",
+            "descriptor": "aad.redacted"
+         },
+         "modifiedOn": "2019-08-09T22:16:43.213Z",
+         "isDeleted": false,
+         "variableGroups": null,
+         "releaseNameFormat": "Release-$(rev:r)",
+         "properties": {},
+         "id": 7,
+         "name": "PTracker-CD - NoMobile",
+         "path": "\\",
+         "projectReference": null,
+         "url": "https://vsrm.dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/Release/definitions/7",
+         "_links": {
+            "self": {
+               "href": "https://vsrm.dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/Release/definitions/7"
+            },
+            "web": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_release?definitionId=7"
+            }
+         }
+      }
+   ]
+}

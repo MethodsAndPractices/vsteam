@@ -1,5 +1,6 @@
 function Update-VSTeamExtension {
-   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Medium")]
+   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Medium",
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Update-VSTeamExtension')]
    param (
       [parameter(Mandatory = $true)]
       [string] $PublisherId,
@@ -25,9 +26,13 @@ function Update-VSTeamExtension {
 
       $body = $obj | ConvertTo-Json
 
-      $resp = _callAPI -Method Patch -body $body -SubDomain 'extmgmt' -Area 'extensionmanagement' -Resource 'installedextensions' -Version $(_getApiVersion ExtensionsManagement) -ContentType "application/json"
+      $resp = _callAPI -Method PATCH -SubDomain extmgmt `
+         -Area extensionmanagement `
+         -Resource installedextensions `
+         -Body $body `
+         -Version $(_getApiVersion ExtensionsManagement)
 
-      $item = [VSTeamExtension]::new($resp)
+      $item = [vsteam_lib.Extension]::new($resp)
 
       Write-Output $item
    }

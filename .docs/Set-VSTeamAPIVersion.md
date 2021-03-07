@@ -14,25 +14,25 @@ Set-VSTeamAPIVersion sets the versions of APIs used.
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
-```PowerShell
-PS C:\> Set-VSTeamAPIVersion AzD
+```powershell
+Set-VSTeamAPIVersion AzD
 ```
 
 This command sets the API versions to support AzD.
 
-### -------------------------- EXAMPLE 2 --------------------------
+### Example 2
 
-```PowerShell
-PS C:\> Set-VSTeamAPIVersion -Service Release -Version '5.0'
+```powershell
+Set-VSTeamAPIVersion -Service Release -Version '5.0'
 ```
 
 This command sets the version of the Release calls to 5.0.
 
 ## PARAMETERS
 
-### -Target
+### Target
 
 Specifies the version to use. The acceptable values for this parameter are:
 
@@ -57,7 +57,7 @@ Parameter Sets: Target
 Default value: TFS2017
 ```
 
-### -Service
+### Service
 
 Specifies the service to change. The acceptable values for this parameter are:
 
@@ -78,7 +78,7 @@ Required: True
 Parameter Sets: Service
 ```
 
-### -Version
+### Version
 
 Specifies the version to use.
 
@@ -88,7 +88,7 @@ Required: True
 Parameter Sets: Service
 ```
 
-<!-- #include "./params/force.md" -->
+<!-- #include "./params/forcegroup.md" -->
 
 ## INPUTS
 
@@ -96,4 +96,8 @@ Parameter Sets: Service
 
 ## NOTES
 
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
+
+<!-- #include "./common/related.md" -->

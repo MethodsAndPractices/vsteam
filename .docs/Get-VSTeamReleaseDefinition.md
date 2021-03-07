@@ -20,37 +20,35 @@ You can also specify a particular release definition by ID.
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
-```PowerShell
-PS C:\> Get-VSTeamReleaseDefinition -ProjectName demo | Format-List *
+```powershell
+Get-VSTeamReleaseDefinition -ProjectName demo | Format-List *
 ```
 
 This command gets a list of all release definitions in the demo project.
 
 The pipeline operator (|) passes the data to the Format-List cmdlet, which displays all available properties (*) of the release definition objects.
 
-### -------------------------- EXAMPLE 2 --------------------------
+### Example 2
 
-```PowerShell
-PS C:\> Get-VSTeamReleaseDefinition -ProjectName Demo -id 2 -Json
+```powershell
+Get-VSTeamReleaseDefinition -ProjectName Demo -id 2 -Json
 ```
 
 This command returns the raw object returned from the server formatted as a JSON string.
 
-### -------------------------- EXAMPLE 3 --------------------------
+### Example 3
 
-```PowerShell
-PS C:\> Get-VSTeamReleaseDefinition -ProjectName Demo -id 2 -Raw
+```powershell
+Get-VSTeamReleaseDefinition -ProjectName Demo -id 2 -Raw
 ```
 
 This command returns the raw object returned from the server.
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
-### -Expand
+### Expand
 
 Specifies which property should be expanded in the list of Release Definition (environments, artifacts, none).
 
@@ -59,7 +57,7 @@ Type: String
 Parameter Sets: List
 ```
 
-### -Id
+### Id
 
 Specifies one or more release definitions by ID.
 
@@ -74,17 +72,16 @@ Aliases: ReleaseDefinitionID
 Accept pipeline input: true (ByPropertyName)
 ```
 
-### -JSON
+### JSON
 
 Converts the raw response into JSON and displays in the console. This is required when you need to use the object to send back.  Without this switch the JSON produced from the returned object will not match the expected shape of the JSON for sending back to server.
 
 ```yaml
 Type: Switch
 Required: True
-Parameter Sets: ByIDJson
 ```
 
-### -Raw
+### Raw
 
 Returns the raw response. This is required when you need to use the object to send back.  Without this switch the object produced from the returned object will not match the expected shape of the JSON for sending back to server.
 
@@ -94,21 +91,23 @@ Required: True
 Parameter Sets: ByIDRaw
 ```
 
+<!-- #include "./params/projectName.md" -->
+
 ## INPUTS
 
 ### Int[]
 
 ## OUTPUTS
 
-### Team.ReleaseDefinition
+### vsteam_lib.ReleaseDefinition
 
 ## NOTES
 
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
 
-[Set-VSTeamAccount](Set-VSTeamAccount.md)
-
-[Set-VSTeamDefaultProject](Set-VSTeamDefaultProject.md)
+<!-- #include "./common/related.md" -->
 
 [Add-VSTeamReleaseDefinition](Add-VSTeamReleaseDefinition.md)
 

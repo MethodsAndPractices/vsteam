@@ -14,25 +14,25 @@
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
-```PowerShell
-PS C:\> Get-VSTeamAPIVersion
+```powershell
+Get-VSTeamAPIVersion
 ```
 
 This command gets the API versions currently in use.
 
-### -------------------------- EXAMPLE 2 --------------------------
+### Example 2
 
-```PowerShell
-PS C:\> Get-VSTeamAPIVersion -Service Release
+```powershell
+Get-VSTeamAPIVersion -Service Release
 ```
 
 This command gets the version of the Release API currently in use.
 
 ## PARAMETERS
 
-### -Service
+### Service
 
 Specifies the service to change. The acceptable values for this parameter are:
 
@@ -59,4 +59,8 @@ Parameter Sets: Service
 
 ## NOTES
 
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
+
+<!-- #include "./common/related.md" -->

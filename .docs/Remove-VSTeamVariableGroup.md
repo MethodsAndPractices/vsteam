@@ -14,10 +14,9 @@
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
 ```powershell
-
 $methodParameters = @{
    ProjectName              = "some_project_name"
    Name        = "new_variable_group"
@@ -44,15 +43,7 @@ Remove-VSTeamVariableGroup @methodParameters
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
-<!-- #include "./params/force.md" -->
-
-<!-- #include "./params/confirm.md" -->
-
-<!-- #include "./params/whatif.md" -->
-
-### -Id
+### Id
 
 ID of the existing variable group
 
@@ -67,10 +58,9 @@ Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
-### CommonParameters
+<!-- #include "./params/projectName.md" -->
 
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable.
-For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
+<!-- #include "./params/forcegroup.md" -->
 
 ## INPUTS
 
@@ -84,7 +74,11 @@ System.String
 
 ## NOTES
 
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
+
+<!-- #include "./common/related.md" -->
 
 [Add-VSTeamVariableGroup](Add-VSTeamVariableGroup.md)
 

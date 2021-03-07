@@ -16,56 +16,56 @@
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
-### -IterationID
+### IterationID
 
 ```yaml
 Type: Int32
 Required: True
 ```
 
-### -IterationPath
+### IterationPath
 
 ```yaml
 Type: String
 Required: True
 ```
 
-### -Descriptor
+### Descriptor
 
 ```yaml
 Type: String
 Required: True
 ```
 
-### -User
+### User
 
 ```yaml
 Type: VSTeamUser
 Required: True
 ```
 
-### -Group
+### Group
 
 ```yaml
 Type: VSTeamGroup
 Required: True
 ```
 
-### -Allow
+### Allow
 
 ```yaml
 Type: VSTeamWorkItemIterationPermissions
 Required: True
 ```
 
-### -Deny
+### Deny
 
 ```yaml
 Type: VSTeamWorkItemIterationPermissions
 Required: True
 ```
+
+<!-- #include "./params/projectName.md" -->
 
 ## INPUTS
 
@@ -75,4 +75,8 @@ Required: True
 
 ## NOTES
 
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
+
+<!-- #include "./common/related.md" -->

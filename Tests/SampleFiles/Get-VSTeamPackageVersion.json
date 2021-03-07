@@ -1,0 +1,265 @@
+{
+  "count": 5,
+  "value": [
+    {
+      "author": "@DonovanBrown",
+      "description": "Adds functionality for working with Visual Studio Team Services and Team Foundation Server.",
+      "protocolMetadata": {
+        "schemaVersion": 1,
+        "data": {
+          "copyright": "(c) 2016 Donovan Brown. All rights reserved.",
+          "projectUrl": "https://github.com/DarqueWarrior/vsteam",
+          "releaseNotes": "",
+          "requireLicenseAcceptance": false
+        }
+      },
+      "tags": [],
+      "url": "https://feeds.dev.azure.com/LoECDA/_apis/Packaging/Feeds/76045f1e-5b7c-0000-9ea5df04e6b6c3f3/Packages/6c163345-4ec5-0000-84a92693e6f066d0/Versions/998abe34-23de-0000-9668b73891e2dada",
+      "dependencies": [
+        {
+          "packageName": "SHiPS",
+          "versionRange": "(, )"
+        },
+        {
+          "packageName": "Trackyon.Utils",
+          "versionRange": "(, )"
+        }
+      ],
+      "_links": {
+        "self": {
+          "href": "https://feeds.dev.azure.com/LoECDA/_apis/Packaging/Feeds/76045f1e-5b7c-0000-9ea5df04e6b6c3f3/Packages/6c163345-4ec5-0000-84a92693e6f066d0/Versions/998abe34-23de-0000-9668b73891e2dada"
+        },
+        "feed": {
+          "href": "https://feeds.dev.azure.com/LoECDA/_apis/Packaging/Feeds/76045f1e-5b7c-0000-9ea5df04e6b6c3f3"
+        },
+        "package": {
+          "href": "https://feeds.dev.azure.com/LoECDA/_apis/Packaging/Feeds/76045f1e-5b7c-0000-9ea5df04e6b6c3f3/Packages/6c163345-4ec5-0000-84a92693e6f066d0"
+        }
+      },
+      "sourceChain": [],
+      "id": "998abe34-23de-0000-9668b73891e2dada",
+      "normalizedVersion": "1137.0.0",
+      "version": "1137.0.0",
+      "isLatest": true,
+      "isListed": true,
+      "storageId": "redacted",
+      "views": [
+        {
+          "id": "bc893e8d-51b3-0000-9ece72d018f3d216",
+          "name": "Local",
+          "url": null,
+          "type": "implicit"
+        }
+      ],
+      "publishDate": "2018-09-07T13:33:39.7955324Z"
+    },
+    {
+      "author": "@DonovanBrown",
+      "description": "Adds functionality for working with Azure DevOps and Team Foundation Server.",
+      "protocolMetadata": {
+        "schemaVersion": 1,
+        "data": {
+          "copyright": "(c) 2020 Donovan Brown. All rights reserved.",
+          "projectUrl": "https://github.com/MethodsAndPractices/vsteam",
+          "releaseNotes": "",
+          "requireLicenseAcceptance": false
+        }
+      },
+      "tags": [],
+      "url": "https://feeds.dev.azure.com/LoECDA/_apis/Packaging/Feeds/76045f1e-5b7c-0000-9ea5df04e6b6c3f3/Packages/6c163345-4ec5-0000-84a92693e6f066d0/Versions/753b8579-44dc-0000-a7c6049c9c611fa3",
+      "dependencies": [
+        {
+          "packageName": "SHiPS",
+          "versionRange": "(, )"
+        },
+        {
+          "packageName": "Trackyon.Utils",
+          "versionRange": "(, )"
+        }
+      ],
+      "_links": {
+        "self": {
+          "href": "https://feeds.dev.azure.com/LoECDA/_apis/Packaging/Feeds/76045f1e-5b7c-0000-9ea5df04e6b6c3f3/Packages/6c163345-4ec5-0000-84a92693e6f066d0/Versions/753b8579-44dc-0000-a7c6049c9c611fa3"
+        },
+        "feed": {
+          "href": "https://feeds.dev.azure.com/LoECDA/_apis/Packaging/Feeds/76045f1e-5b7c-0000-9ea5df04e6b6c3f3"
+        },
+        "package": {
+          "href": "https://feeds.dev.azure.com/LoECDA/_apis/Packaging/Feeds/76045f1e-5b7c-0000-9ea5df04e6b6c3f3/Packages/6c163345-4ec5-0000-84a92693e6f066d0"
+        }
+      },
+      "sourceChain": [],
+      "id": "753b8579-44dc-0000-a7c6049c9c611fa3",
+      "normalizedVersion": "7.0.1.2294",
+      "version": "7.0.1.2294",
+      "isLatest": false,
+      "isListed": true,
+      "storageId": "redacted",
+      "views": [
+        {
+          "id": "bc893e8d-51b3-0000-9ece72d018f3d216",
+          "name": "Local",
+          "url": null,
+          "type": "implicit"
+        }
+      ],
+      "publishDate": "2020-09-27T01:10:24.0813578Z"
+    },
+    {
+      "author": "@DonovanBrown",
+      "description": "Adds functionality for working with Azure DevOps and Team Foundation Server.",
+      "protocolMetadata": {
+        "schemaVersion": 1,
+        "data": {
+          "copyright": "(c) 2020 Donovan Brown. All rights reserved.",
+          "projectUrl": "https://github.com/MethodsAndPractices/vsteam",
+          "releaseNotes": "",
+          "requireLicenseAcceptance": false
+        }
+      },
+      "tags": [],
+      "url": "https://feeds.dev.azure.com/LoECDA/_apis/Packaging/Feeds/76045f1e-5b7c-0000-9ea5df04e6b6c3f3/Packages/6c163345-4ec5-0000-84a92693e6f066d0/Versions/2b26f897-a684-0000-9930350f2e88e0ec",
+      "dependencies": [
+        {
+          "packageName": "SHiPS",
+          "versionRange": "(, )"
+        },
+        {
+          "packageName": "Trackyon.Utils",
+          "versionRange": "(, )"
+        }
+      ],
+      "_links": {
+        "self": {
+          "href": "https://feeds.dev.azure.com/LoECDA/_apis/Packaging/Feeds/76045f1e-5b7c-0000-9ea5df04e6b6c3f3/Packages/6c163345-4ec5-0000-84a92693e6f066d0/Versions/2b26f897-a684-0000-9930350f2e88e0ec"
+        },
+        "feed": {
+          "href": "https://feeds.dev.azure.com/LoECDA/_apis/Packaging/Feeds/76045f1e-5b7c-0000-9ea5df04e6b6c3f3"
+        },
+        "package": {
+          "href": "https://feeds.dev.azure.com/LoECDA/_apis/Packaging/Feeds/76045f1e-5b7c-0000-9ea5df04e6b6c3f3/Packages/6c163345-4ec5-0000-84a92693e6f066d0"
+        }
+      },
+      "sourceChain": [],
+      "id": "2b26f897-a684-0000-9930350f2e88e0ec",
+      "normalizedVersion": "7.0.1.2293",
+      "version": "7.0.1.2293",
+      "isLatest": false,
+      "isListed": true,
+      "storageId": "redacted",
+      "views": [
+        {
+          "id": "bc893e8d-51b3-0000-9ece72d018f3d216",
+          "name": "Local",
+          "url": null,
+          "type": "implicit"
+        }
+      ],
+      "publishDate": "2020-09-27T00:45:53.4380688Z"
+    },
+    {
+      "author": "@DonovanBrown",
+      "description": "Adds functionality for working with Azure DevOps and Team Foundation Server.",
+      "protocolMetadata": {
+        "schemaVersion": 1,
+        "data": {
+          "copyright": "(c) 2020 Donovan Brown. All rights reserved.",
+          "projectUrl": "https://github.com/MethodsAndPractices/vsteam",
+          "releaseNotes": "",
+          "requireLicenseAcceptance": false
+        }
+      },
+      "tags": [],
+      "url": "https://feeds.dev.azure.com/LoECDA/_apis/Packaging/Feeds/76045f1e-5b7c-0000-9ea5df04e6b6c3f3/Packages/6c163345-4ec5-0000-84a92693e6f066d0/Versions/950ce35f-5cf8-0000-b5d23589b6096ffa",
+      "dependencies": [
+        {
+          "packageName": "SHiPS",
+          "versionRange": "(, )"
+        },
+        {
+          "packageName": "Trackyon.Utils",
+          "versionRange": "(, )"
+        }
+      ],
+      "_links": {
+        "self": {
+          "href": "https://feeds.dev.azure.com/LoECDA/_apis/Packaging/Feeds/76045f1e-5b7c-0000-9ea5df04e6b6c3f3/Packages/6c163345-4ec5-0000-84a92693e6f066d0/Versions/950ce35f-5cf8-0000-b5d23589b6096ffa"
+        },
+        "feed": {
+          "href": "https://feeds.dev.azure.com/LoECDA/_apis/Packaging/Feeds/76045f1e-5b7c-0000-9ea5df04e6b6c3f3"
+        },
+        "package": {
+          "href": "https://feeds.dev.azure.com/LoECDA/_apis/Packaging/Feeds/76045f1e-5b7c-0000-9ea5df04e6b6c3f3/Packages/6c163345-4ec5-0000-84a92693e6f066d0"
+        }
+      },
+      "sourceChain": [],
+      "id": "950ce35f-5cf8-0000-b5d23589b6096ffa",
+      "normalizedVersion": "7.0.1.2292",
+      "version": "7.0.1.2292",
+      "isLatest": false,
+      "isListed": true,
+      "storageId": "redacted",
+      "views": [
+        {
+          "id": "bc893e8d-51b3-0000-9ece72d018f3d216",
+          "name": "Local",
+          "url": null,
+          "type": "implicit"
+        }
+      ],
+      "publishDate": "2020-09-27T00:39:24.6338328Z"
+    },
+    {
+      "author": "@DonovanBrown",
+      "description": "Adds functionality for working with Azure DevOps and Team Foundation Server.",
+      "protocolMetadata": {
+        "schemaVersion": 1,
+        "data": {
+          "copyright": "(c) 2020 Donovan Brown. All rights reserved.",
+          "projectUrl": "https://github.com/MethodsAndPractices/vsteam",
+          "releaseNotes": "",
+          "requireLicenseAcceptance": false
+        }
+      },
+      "tags": [],
+      "url": "https://feeds.dev.azure.com/LoECDA/_apis/Packaging/Feeds/76045f1e-5b7c-0000-9ea5df04e6b6c3f3/Packages/6c163345-4ec5-0000-84a92693e6f066d0/Versions/8302e225-7c97-0000-a728b709d8e4d2a2",
+      "dependencies": [
+        {
+          "packageName": "SHiPS",
+          "versionRange": "(, )"
+        },
+        {
+          "packageName": "Trackyon.Utils",
+          "versionRange": "(, )"
+        }
+      ],
+      "_links": {
+        "self": {
+          "href": "https://feeds.dev.azure.com/LoECDA/_apis/Packaging/Feeds/76045f1e-5b7c-0000-9ea5df04e6b6c3f3/Packages/6c163345-4ec5-0000-84a92693e6f066d0/Versions/8302e225-7c97-0000-a728b709d8e4d2a2"
+        },
+        "feed": {
+          "href": "https://feeds.dev.azure.com/LoECDA/_apis/Packaging/Feeds/76045f1e-5b7c-0000-9ea5df04e6b6c3f3"
+        },
+        "package": {
+          "href": "https://feeds.dev.azure.com/LoECDA/_apis/Packaging/Feeds/76045f1e-5b7c-0000-9ea5df04e6b6c3f3/Packages/6c163345-4ec5-0000-84a92693e6f066d0"
+        }
+      },
+      "sourceChain": [],
+      "id": "8302e225-7c97-0000-a728b709d8e4d2a2",
+      "normalizedVersion": "7.0.1.2291",
+      "version": "7.0.1.2291",
+      "isLatest": false,
+      "isListed": true,
+      "storageId": "redacted",
+      "views": [
+        {
+          "id": "bc893e8d-51b3-0000-9ece72d018f3d216",
+          "name": "Local",
+          "url": null,
+          "type": "implicit"
+        }
+      ],
+      "publishDate": "2020-09-26T20:45:43.0056532Z"
+    }
+  ]
+}

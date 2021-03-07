@@ -1,5 +1,6 @@
 function Get-VSTeamBuild {
-   [CmdletBinding(DefaultParameterSetName = 'List')]
+   [CmdletBinding(DefaultParameterSetName = 'List',
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Get-VSTeamBuild')]
    param (
       [Parameter(ParameterSetName = 'List')]
       [int] $Top,
@@ -22,7 +23,7 @@ function Get-VSTeamBuild {
       [Parameter(ParameterSetName = 'List')]
       [int[]] $Definitions,
 
-      [ArgumentCompleter([BuildCompleter])]
+      [ArgumentCompleter([vsteam_lib.BuildCompleter])]
       [Parameter(ParameterSetName = 'List')]
       [string] $BuildNumber,
 
@@ -41,9 +42,9 @@ function Get-VSTeamBuild {
 
       [int[]] $Id,
 
-      [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
-      [ProjectValidateAttribute()]
-      [ArgumentCompleter([ProjectCompleter])]
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+      [vsteam_lib.ProjectValidateAttribute($false)]
+      [ArgumentCompleter([vsteam_lib.ProjectCompleter])]
       [string] $ProjectName
    )
 
@@ -52,19 +53,20 @@ function Get-VSTeamBuild {
          if ($id) {
             foreach ($item in $id) {
                # Build the url to return the single build
-               $resp = _callAPI -ProjectName $projectName -Area 'build' -Resource 'builds' -id $item `
+               $resp = _callAPI -ProjectName $projectName `
+                  -Area build `
+                  -Resource builds `
+                  -id $item `
                   -Version $(_getApiVersion Build)
 
-               _applyTypesToBuild -item $resp
+               $build = [vsteam_lib.Build]::new($resp, $ProjectName)
 
-               Write-Output $resp
+               Write-Output $build
             }
          }
          else {
             # Build the url to list the builds
-            $resp = _callAPI -ProjectName $projectName -Area 'build' -Resource 'builds' `
-               -Version $(_getApiVersion Build) `
-               -Querystring @{
+            $querystring = @{
                '$top'                   = $top
                'type'                   = $type
                'buildNumber'            = $buildNumber
@@ -77,12 +79,19 @@ function Get-VSTeamBuild {
                'definitions'            = ($definitions -join ',')
             }
 
-            # Apply a Type Name so we can use custom format view and custom type extensions
+            $resp = _callAPI -ProjectName $projectName `
+               -Area build `
+               -Resource builds `
+               -Querystring $queryString `
+               -Version $(_getApiVersion Build)
+
+            $objs = @()
+
             foreach ($item in $resp.value) {
-               _applyTypesToBuild -item $item
+               $objs += [vsteam_lib.Build]::new($item, $ProjectName)
             }
 
-            Write-Output $resp.value
+            Write-Output $objs
          }
       }
       catch {

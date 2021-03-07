@@ -14,19 +14,17 @@
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
-```PowerShell
-PS C:\> Set-VSTeamEnvironmentStatus -ReleaseId 54 -Id 5 -status inProgress
+```powershell
+Set-VSTeamEnvironmentStatus -ReleaseId 54 -Id 5 -status inProgress
 ```
 
 This command will set the status of environment with id 5 of release 54 to inProgress. You can use this call to redeploy an environment.
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
-### -EnvironmentId
+### EnvironmentId
 
 Specifies one or more environments by ID you wish to deploy.
 
@@ -43,7 +41,7 @@ Required: True
 Accept pipeline input: true (ByPropertyName)
 ```
 
-### -ReleaseId
+### ReleaseId
 
 Specifies the release by ID.
 
@@ -53,7 +51,7 @@ Required: True
 Accept pipeline input: true (ByPropertyName)
 ```
 
-### -Status
+### Status
 
 The status to set for the environment to canceled, inProgress, notStarted, partiallySucceeded, queued, rejected, scheduled, succeeded or undefined.
 
@@ -61,7 +59,7 @@ The status to set for the environment to canceled, inProgress, notStarted, parti
 Type: String
 ```
 
-### -Comment
+### Comment
 
 The comment to set for the status change.
 
@@ -69,7 +67,7 @@ The comment to set for the status change.
 Type: String
 ```
 
-### -ScheduledDeploymentTime
+### ScheduledDeploymentTime
 
 The date and time to schedule when setting the status to scheduled.
 
@@ -77,7 +75,9 @@ The date and time to schedule when setting the status to scheduled.
 Type: DateTime
 ```
 
-<!-- #include "./params/force.md" -->
+<!-- #include "./params/projectName.md" -->
+
+<!-- #include "./params/forcegroup.md" -->
 
 ## INPUTS
 
@@ -85,10 +85,8 @@ Type: DateTime
 
 ## NOTES
 
-This function has a Dynamic Parameter for ProjectName that specifies the project for which this function gets releases.
-
-You can tab complete from a list of available projects.
-
-You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.
+<!-- #include "./common/prerequisites.md" -->
 
 ## RELATED LINKS
+
+<!-- #include "./common/related.md" -->

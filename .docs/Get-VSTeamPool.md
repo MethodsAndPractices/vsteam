@@ -16,7 +16,7 @@
 
 ## PARAMETERS
 
-### -Id
+### Id
 
 Id of the pool to return.
 
@@ -38,8 +38,12 @@ Accept pipeline input: true (ByPropertyName)
 
 ## NOTES
 
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
 
 [Remove-VSTeamAccount](Remove-VSTeamAccount.md)
 [Update-VSTeamAccount](Update-VSTeamAccount.md)
 [Add-VSTeamAccount](Add-VSTeamAccount.md)
+
+<!-- #include "./common/related.md" -->

@@ -1,5 +1,6 @@
 function Update-VSTeamReleaseDefinition {
-   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Medium", DefaultParameterSetName = 'JSON')]
+   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Medium", DefaultParameterSetName = 'JSON',
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Update-VSTeamReleaseDefinition')]
    Param(
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, ParameterSetName = 'File')]
       [string] $InFile,
@@ -9,20 +10,29 @@ function Update-VSTeamReleaseDefinition {
 
       [switch] $Force,
 
-      [ProjectValidateAttribute()]
-      [ArgumentCompleter([ProjectCompleter])]
-      [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+      [vsteam_lib.ProjectValidateAttribute($false)]
+      [ArgumentCompleter([vsteam_lib.ProjectCompleter])]
       [string] $ProjectName
    )
 
    Process {
+      $commonArgs = @{
+         Method      = 'Put'
+         subDomain   = 'vsrm'
+         area        = 'release'
+         resource    = 'definitions'
+         ProjectName = $ProjectName
+         version     = $(_getApiVersion Release)
+      }
+
       if ($Force -or $pscmdlet.ShouldProcess('', "Update Release Definition")) {
          # Call the REST API
          if ($InFile) {
-            _callAPI -Method Put -ProjectName $ProjectName -SubDomain vsrm -Area Release -Resource definitions -Version $(_getApiVersion Release) -InFile $InFile -ContentType 'application/json' | Out-Null
+            _callAPI @commonArgs -InFile $InFile | Out-Null
          }
          else {
-            _callAPI -Method Put -ProjectName $ProjectName -SubDomain vsrm -Area Release -Resource definitions -Version $(_getApiVersion Release) -Body $ReleaseDefinition -ContentType 'application/json' | Out-Null
+            _callAPI @commonArgs -Body $ReleaseDefinition | Out-Null
          }
       }
    }

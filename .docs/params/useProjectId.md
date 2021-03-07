@@ -1,4 +1,4 @@
-### -UseProjectId
+### UseProjectId
 
 Converts the project name to project id before building the URI for the REST API call.
 

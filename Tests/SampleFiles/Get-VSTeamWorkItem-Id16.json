@@ -1,0 +1,44 @@
+{
+   "id": 16,
+   "rev": 1,
+   "fields": {
+      "System.AreaPath": "TeamModuleIntegration-9ee352af251",
+      "System.TeamProject": "TeamModuleIntegration-9ee352af251",
+      "System.IterationPath": "TeamModuleIntegration-9ee352af251",
+      "System.WorkItemType": "Task",
+      "System.State": "To Do",
+      "System.Reason": "New task",
+      "System.CreatedDate": "2020-09-07T15:05:42.213Z",
+      "System.CreatedBy": "Administrator <TFS2017\\Administrator>",
+      "System.ChangedDate": "2020-09-07T15:05:42.213Z",
+      "System.ChangedBy": "Administrator <TFS2017\\Administrator>",
+      "System.Title": "Test",
+      "Microsoft.VSTS.Common.Priority": 2,
+      "Microsoft.VSTS.Common.StateChangeDate": "2020-09-07T15:05:42.213Z",
+      "System.Description": "Unit testing"
+   },
+   "_links": {
+      "self": {
+         "href": "http://tfs2017:8080/tfs/DefaultCollection/_apis/wit/workItems/16"
+      },
+      "workItemUpdates": {
+         "href": "http://tfs2017:8080/tfs/DefaultCollection/_apis/wit/workItems/16/updates"
+      },
+      "workItemRevisions": {
+         "href": "http://tfs2017:8080/tfs/DefaultCollection/_apis/wit/workItems/16/revisions"
+      },
+      "workItemHistory": {
+         "href": "http://tfs2017:8080/tfs/DefaultCollection/_apis/wit/workItems/16/history"
+      },
+      "html": {
+         "href": "http://tfs2017:8080/tfs/web/wi.aspx?pcguid=383b3ccd-9646-4a84-b6af-4a5683c8baf9&id=16"
+      },
+      "workItemType": {
+         "href": "http://tfs2017:8080/tfs/DefaultCollection/6d9e468a-4961-4b69-a855-96b15e758f63/_apis/wit/workItemTypes/Task"
+      },
+      "fields": {
+         "href": "http://tfs2017:8080/tfs/DefaultCollection/_apis/wit/fields"
+      }
+   },
+   "url": "http://tfs2017:8080/tfs/DefaultCollection/_apis/wit/workItems/16"
+}

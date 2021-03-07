@@ -14,17 +14,17 @@
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
-```PowerShell
-PS C:\> Remove-VSTeamFeed -id '00000000-0000-0000-0000-000000000000'
+```powershell
+Remove-VSTeamFeed -id '00000000-0000-0000-0000-000000000000'
 ```
 
 This command remove the package feed from the account.
 
 ## PARAMETERS
 
-### -FeedId
+### FeedId
 
 Specifies the ID of the feed.
 
@@ -40,4 +40,8 @@ Accept pipeline input: true (ByPropertyName)
 
 ## NOTES
 
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
+
+<!-- #include "./common/related.md" -->

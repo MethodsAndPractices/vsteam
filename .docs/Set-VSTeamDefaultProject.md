@@ -16,10 +16,10 @@ By setting a default project you can omit that parameter from your function call
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
-```PowerShell
-PS C:\> Set-VSTeamDefaultProject Demo
+```powershell
+Set-VSTeamDefaultProject Demo
 ```
 
 This command sets Demo as the default project.
@@ -28,15 +28,11 @@ You can now call other functions that require a project name without passing the
 
 ## PARAMETERS
 
-<!-- #include "./params/force.md" -->
-
-### -Project
+### Project
 
 Specifies the team project for which this function operates.
 
 You can tab complete from a list of available projects.
-
-You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.
 
 ```yaml
 Type: String
@@ -44,7 +40,7 @@ Required: True
 Accept pipeline input: true (ByPropertyName)
 ```
 
-### -Level
+### Level
 
 On Windows allows you to store your default project at the Process, User or Machine levels.
 
@@ -53,6 +49,8 @@ When saved at the User or Machine level your default project will be in any futu
 ```yaml
 Type: String
 ```
+
+<!-- #include "./params/forcegroup.md" -->
 
 ## INPUTS
 
@@ -64,6 +62,8 @@ Type: String
 
 ## NOTES
 
-Setting a default project also enables tab completion of dynamic parameters when you call Add-VSTeamBuild.
+<!-- #include "./common/prerequisites.md" -->
 
 ## RELATED LINKS
+
+<!-- #include "./common/related.md" -->

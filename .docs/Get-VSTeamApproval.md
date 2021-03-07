@@ -18,7 +18,7 @@ When using with AzD "IncludeMyGroupApprovals" will be added to the request when 
 
 When using with TFS "IncludeMyGroupApprovals" will be added to the request when Assigned To Filter, Release Id Filter are not empty and Status Filter equals Pending.
 
-The Team.Approval type has three custom table formats:
+The vsteam_lib.Approval type has three custom table formats:
 
 - Pending: ID, Status, Release Name, Environment, Type, Approver Name, Release Definitions
 - Approved: Release Name, Environment, Is Automated, Approval Type, Approver Name, Release Definitions, Comments
@@ -26,35 +26,33 @@ The Team.Approval type has three custom table formats:
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
-```PowerShell
-PS C:\> Get-VSTeamApproval -ProjectName Demo
+```powershell
+Get-VSTeamApproval -ProjectName Demo
 ```
 
 This command gets a list of all pending approvals.
 
-### -------------------------- EXAMPLE 2 --------------------------
+### Example 2
 
-```PowerShell
-PS C:\> Get-VSTeamApproval -ProjectName Demo -StatusFilter Approved | Format-Table -View Approved
+```powershell
+Get-VSTeamApproval -ProjectName Demo -StatusFilter Approved | Format-Table -View Approved
 ```
 
 This command gets a list of all approved approvals using a custom table format.
 
-### -------------------------- EXAMPLE 3 --------------------------
+### Example 3
 
-```PowerShell
-PS C:\> Get-VSTeamApproval -ProjectName Demo -AssignedToFilter Administrator -StatusFilter Rejected | FT -View Rejected
+```powershell
+Get-VSTeamApproval -ProjectName Demo -AssignedToFilter Administrator -StatusFilter Rejected | FT -View Rejected
 ```
 
 This command gets a list of all approvals rejected by Administrator using a custom table format.
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
-### -StatusFilter
+### StatusFilter
 
 By default the function returns Pending approvals.
 
@@ -66,16 +64,15 @@ There is a custom table view for each status.
 Type: String
 ```
 
-### -ReleaseIdsFilter
+### ReleaseId
 
 Only approvals for the release ids provided will be returned.
 
 ```yaml
 Type: Int32[]
-Aliases: ReleaseIdFilter
 ```
 
-### -AssignedToFilter
+### AssignedToFilter
 
 Approvals are filtered to only those assigned to this user.
 
@@ -83,27 +80,23 @@ Approvals are filtered to only those assigned to this user.
 Type: String
 ```
 
+<!-- #include "./params/projectName.md" -->
+
 ## INPUTS
 
 ## OUTPUTS
 
-### Team.BuildDefinition
+### vsteam_lib.BuildDefinition
 
 ## NOTES
 
-This function has a Dynamic Parameter for ProjectName that specifies the project for which this function gets build definitions.
-
-You can tab complete from a list of available projects.
-
-You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.
-
 You can pipe build definition IDs to this function.
+
+<!-- #include "./common/prerequisites.md" -->
 
 ## RELATED LINKS
 
-[Set-VSTeamAccount](Set-VSTeamAccount.md)
-
-[Set-VSTeamDefaultProject](Set-VSTeamDefaultProject.md)
+<!-- #include "./common/related.md" -->
 
 [Add-VSTeamBuildDefinition](Add-VSTeamBuildDefinition.md)
 

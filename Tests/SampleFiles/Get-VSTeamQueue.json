@@ -1,0 +1,170 @@
+{
+  "count": 11,
+  "value": [
+    {
+      "id": 81,
+      "projectId": "00000000-0000-0000-0000-000000000000",
+      "name": "Default",
+      "pool": {
+        "id": 1,
+        "scope": "00000000-0000-0000-0000-000000000000",
+        "name": "DefaultPool",
+        "isHosted": false,
+        "poolType": "automation",
+        "size": 4,
+        "isLegacy": false,
+        "options": "none"
+      }
+    },
+    {
+      "id": 82,
+      "projectId": "00000000-0000-0000-0000-000000000000",
+      "name": "Hosted",
+      "pool": {
+        "id": 2,
+        "scope": "00000000-0000-0000-0000-000000000000",
+        "name": "Hosted",
+        "isHosted": true,
+        "poolType": "automation",
+        "size": 15,
+        "isLegacy": true,
+        "options": "none"
+      }
+    },
+    {
+      "id": 83,
+      "projectId": "00000000-0000-0000-0000-000000000000",
+      "name": "Hosted VS2017",
+      "pool": {
+        "id": 4,
+        "scope": "00000000-0000-0000-0000-000000000000",
+        "name": "Hosted VS2017",
+        "isHosted": true,
+        "poolType": "automation",
+        "size": 15,
+        "isLegacy": true,
+        "options": "none"
+      }
+    },
+    {
+      "id": 84,
+      "projectId": "00000000-0000-0000-0000-000000000000",
+      "name": "Hosted Windows Container",
+      "pool": {
+        "id": 5,
+        "scope": "00000000-0000-0000-0000-000000000000",
+        "name": "Hosted Windows Container",
+        "isHosted": true,
+        "poolType": "automation",
+        "size": 15,
+        "isLegacy": true,
+        "options": "none"
+      }
+    },
+    {
+      "id": 85,
+      "projectId": "00000000-0000-0000-0000-000000000000",
+      "name": "Hosted macOS",
+      "pool": {
+        "id": 6,
+        "scope": "00000000-0000-0000-0000-000000000000",
+        "name": "Hosted macOS",
+        "isHosted": true,
+        "poolType": "automation",
+        "size": 15,
+        "isLegacy": true,
+        "options": "none"
+      }
+    },
+    {
+      "id": 86,
+      "projectId": "00000000-0000-0000-0000-000000000000",
+      "name": "Hosted Ubuntu 1604",
+      "pool": {
+        "id": 7,
+        "scope": "00000000-0000-0000-0000-000000000000",
+        "name": "Hosted Ubuntu 1604",
+        "isHosted": true,
+        "poolType": "automation",
+        "size": 15,
+        "isLegacy": true,
+        "options": "none"
+      }
+    },
+    {
+      "id": 87,
+      "projectId": "00000000-0000-0000-0000-000000000000",
+      "name": "Hosted Windows 2019 with VS2019",
+      "pool": {
+        "id": 9,
+        "scope": "00000000-0000-0000-0000-000000000000",
+        "name": "Hosted Windows 2019 with VS2019",
+        "isHosted": true,
+        "poolType": "automation",
+        "size": 15,
+        "isLegacy": true,
+        "options": "none"
+      }
+    },
+    {
+      "id": 88,
+      "projectId": "00000000-0000-0000-0000-000000000000",
+      "name": "Private Ubuntu 1604",
+      "pool": {
+        "id": 11,
+        "scope": "00000000-0000-0000-0000-000000000000",
+        "name": "Private Ubuntu 1604",
+        "isHosted": false,
+        "poolType": "automation",
+        "size": 1,
+        "isLegacy": false,
+        "options": "none"
+      }
+    },
+    {
+      "id": 89,
+      "projectId": "00000000-0000-0000-0000-000000000000",
+      "name": "Private macOS",
+      "pool": {
+        "id": 12,
+        "scope": "00000000-0000-0000-0000-000000000000",
+        "name": "Private macOS",
+        "isHosted": false,
+        "poolType": "automation",
+        "size": 1,
+        "isLegacy": false,
+        "options": "none"
+      }
+    },
+    {
+      "id": 95,
+      "projectId": "00000000-0000-0000-0000-000000000000",
+      "name": "Hosted macOS High Sierra",
+      "pool": {
+        "id": 13,
+        "scope": "00000000-0000-0000-0000-000000000000",
+        "name": "Hosted macOS High Sierra",
+        "isHosted": true,
+        "poolType": "automation",
+        "size": 15,
+        "isLegacy": true,
+        "options": "none"
+      }
+    },
+    {
+      "id": 98,
+      "projectId": "00000000-0000-0000-0000-000000000000",
+      "name": "Azure Pipelines",
+      "pool": {
+        "id": 14,
+        "scope": "00000000-0000-0000-0000-000000000000",
+        "name": "Azure Pipelines",
+        "isHosted": true,
+        "poolType": "automation",
+        "size": 15,
+        "isLegacy": false,
+        "options": "none"
+      }
+    }
+  ]
+}

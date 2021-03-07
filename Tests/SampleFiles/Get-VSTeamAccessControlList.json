@@ -1,0 +1,35 @@
+{
+   "count": 2,
+   "value": [
+      {
+         "inheritPermissions": true,
+         "token": "$/00000000-0000-0000-0000-000000000001",
+         "acesDictionary": {
+            "Microsoft.TeamFoundation.Identity;S-00000000-0000-0000-0000-000000000000-00000000-0000-0000-0000-000000000000-0-3": {
+               "descriptor": "Microsoft.TeamFoundation.Identity;S-00000000-0000-0000-0000-000000000000-00000000-0000-0000-0000-000000000000-0-3",
+               "allow": 1,
+               "deny": 0,
+               "extendedInfo": {
+                  "effectiveAllow": 1
+               }
+            }
+         },
+         "includeExtendedInfo": true
+      },
+      {
+         "inheritPermissions": true,
+         "token": "$/00000000-0000-0000-0000-000000000002",
+         "acesDictionary": {
+            "Microsoft.TeamFoundation.Identity;S-00000000-0000-0000-0000-000000000000-00000000-0000-0000-0000-000000000000-0-3": {
+               "descriptor": "Microsoft.TeamFoundation.Identity;S-00000000-0000-0000-0000-000000000000-00000000-0000-0000-0000-000000000000-0-3",
+               "allow": 1,
+               "deny": 0,
+               "extendedInfo": {
+                  "effectiveAllow": 1
+               }
+            }
+         },
+         "includeExtendedInfo": true
+      }
+   ]
+}

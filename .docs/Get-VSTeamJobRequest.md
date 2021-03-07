@@ -14,17 +14,17 @@
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
-```PowerShell
-PS C:\> Get-VSTeamJobRequest 1 111
+```powershell
+Get-VSTeamJobRequest 1 111
 ```
 
 This will display all the job request of agent with id 111 under the pool with id 1.
 
 ## PARAMETERS
 
-### -PoolId
+### PoolId
 
 Id of the pool.
 
@@ -34,7 +34,7 @@ Required: True
 Accept pipeline input: true (ByPropertyName)
 ```
 
-### -AgentId
+### AgentId
 
 Id of the agent to return.
 
@@ -44,7 +44,7 @@ Required: True
 Accept pipeline input: true (ByValue)
 ```
 
-### -CompletedRequestCount
+### CompletedRequestCount
 
 The number of requests to return.
 
@@ -62,4 +62,8 @@ Type: Int32
 
 ## NOTES
 
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
+
+<!-- #include "./common/related.md" -->

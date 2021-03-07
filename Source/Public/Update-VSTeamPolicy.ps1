@@ -1,5 +1,6 @@
 function Update-VSTeamPolicy {
-   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Medium")]
+   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Medium",
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Update-VSTeamPolicy')]
    param(
       [Parameter(Mandatory = $true)]
       [int] $id,
@@ -16,9 +17,9 @@ function Update-VSTeamPolicy {
 
       [switch] $Force,
 
-      [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
-      [ProjectValidateAttribute()]
-      [ArgumentCompleter([ProjectCompleter])]
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+      [vsteam_lib.ProjectValidateAttribute($false)]
+      [ArgumentCompleter([vsteam_lib.ProjectCompleter])]
       [string] $ProjectName
    )
 
@@ -40,8 +41,12 @@ function Update-VSTeamPolicy {
       try {
          if ($Force -or $pscmdlet.ShouldProcess($id, "Update Policy")) {
             # Call the REST API
-            $resp = _callAPI -ProjectName $ProjectName -Area 'policy' -id $id -Resource 'configurations' `
-               -Method Put -ContentType 'application/json' -Body $body -Version $(_getApiVersion Git)
+            $resp = _callAPI -Method PUT -ProjectName $ProjectName `
+               -Area policy `
+               -Resource configurations `
+               -id $id `
+               -Body $body `
+               -Version $(_getApiVersion Policy)
 
             Write-Output $resp
          }

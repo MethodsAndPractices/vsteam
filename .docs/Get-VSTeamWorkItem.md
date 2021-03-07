@@ -14,17 +14,17 @@
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
-```PowerShell
-PS C:\> Get-VSTeamWorkItem -Id 47,48
+```powershell
+Get-VSTeamWorkItem -Id 47,48
 ```
 
 This command gets work items with IDs 47 and 48 by using the IDs parameter.
 
 ## PARAMETERS
 
-### -Id
+### Id
 
 The id of one or more work items.
 
@@ -35,7 +35,7 @@ Required: True
 Accept pipeline input: true (ByPropertyName, ByValue)
 ```
 
-### -ErrorPolicy
+### ErrorPolicy
 
 The flag to control error policy in a bulk get work items request.  The acceptable values for this parameter are:
 
@@ -49,7 +49,7 @@ Required: True
 Default value: omit
 ```
 
-### -Fields
+### Fields
 
 Comma-separated list of requested fields.
 
@@ -57,7 +57,7 @@ Comma-separated list of requested fields.
 Type: String[]
 ```
 
-### -Expand
+### Expand
 
 Comma-separated list of requested fields.  The acceptable values for this parameter are:
 
@@ -69,12 +69,6 @@ Comma-separated list of requested fields.  The acceptable values for this parame
 
 ```yaml
 Type: String
-```
-
-### -AsOf
-
-```yaml
-Type: DateTime
 ```
 
 ## INPUTS
@@ -91,6 +85,10 @@ WorkItemType
 
 WorkItemType is a dynamic parameter and use the default project value to query their validate set.
 
-If you do not set the default project by called Set-VSTeamDefaultProject before calling Get-VSTeamWorkItem you will have to type in the names.
+If you do not set the default project by called Set-VSTeamDefaultProject you must provide -ProjectName or you will have to type in the names.
+
+<!-- #include "./common/prerequisites.md" -->
 
 ## RELATED LINKS
+
+<!-- #include "./common/related.md" -->

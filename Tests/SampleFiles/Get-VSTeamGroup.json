@@ -1,0 +1,57 @@
+{
+  "count": 2,
+  "value": [
+    {
+      "subjectKind": "group",
+      "description": "Members of this group should include accounts for people who should be able to administer the build resources.",
+      "domain": "vstfs:///Framework/IdentityDomain/00000000-0000-0000-0000-000000000000",
+      "principalName": "[Test]\\Project Collection Build Administrators",
+      "mailAddress": null,
+      "origin": "vsts",
+      "originId": "00000000-0000-0000-0000-000000000000",
+      "displayName": "Project Collection Build Administrators",
+      "_links": {
+        "self": {
+          "href": "https://vssps.dev.azure.com/Test/_apis/Graph/Groups/redacted"
+        },
+        "memberships": {
+          "href": "https://vssps.dev.azure.com/Test/_apis/Graph/Memberships/redacted"
+        },
+        "membershipState": {
+          "href": "https://vssps.dev.azure.com/Test/_apis/Graph/MembershipStates/redacted"
+        },
+        "storageKey": {
+          "href": "https://vssps.dev.azure.com/Test/_apis/Graph/StorageKeys/redacted"
+        }
+      },
+      "url": "https://vssps.dev.azure.com/Test/_apis/Graph/Groups/redacted",
+      "descriptor": "redacted"
+    },
+    {
+      "subjectKind": "group",
+      "description": "Members of this group can create, modify and delete build definitions and manage queued and completed builds.",
+      "domain": "vstfs:///Classification/TeamProject/00000000-0000-0000-0000-000000000000",
+      "principalName": "[PeopleTracker]\\Build Administrators",
+      "mailAddress": null,
+      "origin": "vsts",
+      "originId": "00000000-0000-0000-0000-000000000000",
+      "displayName": "Build Administrators",
+      "_links": {
+        "self": {
+          "href": "https://vssps.dev.azure.com/Test/_apis/Graph/Groups/redacted"
+        },
+        "memberships": {
+          "href": "https://vssps.dev.azure.com/Test/_apis/Graph/Memberships/redacted"
+        },
+        "membershipState": {
+          "href": "https://vssps.dev.azure.com/Test/_apis/Graph/MembershipStates/redacted"
+        },
+        "storageKey": {
+          "href": "https://vssps.dev.azure.com/Test/_apis/Graph/StorageKeys/redacted"
+        }
+      },
+      "url": "https://vssps.dev.azure.com/Test/_apis/Graph/Groups/redacted",
+      "descriptor": "redacted"
+    }
+  ]
+}

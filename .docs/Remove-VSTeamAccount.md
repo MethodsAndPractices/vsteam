@@ -16,17 +16,17 @@ To remove from the Machine level you must be running PowerShell as administrator
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
-```PowerShell
-PS C:\> Remove-VSTeamAccount
+```powershell
+Remove-VSTeamAccount
 ```
 
 This will clear your account name and personal access token.
 
 ## PARAMETERS
 
-### -Level
+### Level
 
 On Windows allows you to clear your account information at the Process, User or Machine levels.
 
@@ -34,7 +34,7 @@ On Windows allows you to clear your account information at the Process, User or 
 Type: String
 ```
 
-<!-- #include "./params/force.md" -->
+<!-- #include "./params/forcegroup.md" -->
 
 ## INPUTS
 
@@ -42,6 +42,8 @@ Type: String
 
 ## NOTES
 
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
 
-[Set-VSTeamAccount](Set-VSTeamAccount.md)
+<!-- #include "./common/related.md" -->

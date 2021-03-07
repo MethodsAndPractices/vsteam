@@ -1,1 +1,1 @@
-Create a new Pull Request
+Creates a new Pull Request.

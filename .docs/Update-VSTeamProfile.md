@@ -12,33 +12,33 @@
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
-```PowerShell
-PS C:\> Update-VSTeamProfile -Name ProfileName
+```powershell
+Update-VSTeamProfile -Name ProfileName
 ```
 
 You will be prompted for the account name and personal access token.
 
-### -------------------------- EXAMPLE 2 --------------------------
+### Example 2
 
-```PowerShell
-PS C:\> Update-VSTeamProfile -Name mydemos -PersonalAccessToken 7a8ilh6db4aforlrnrqmdrxdztkjvcc4uhlh5vgbteserp3mziwnga
+```powershell
+Update-VSTeamProfile -Name mydemos -PersonalAccessToken 7a8ilh6db4aforlrnrqmdrxdztkjvcc4uhlh5vgbteserp3mziwnga
 ```
 
 Allows you to provide all the information on the command line.
 
-### -------------------------- EXAMPLE 3 --------------------------
+### Example 3
 
-```PowerShell
-PS C:\> Get-VSTeamProfile | Where-Object version -eq vsts | Select-Object -skip 1 | Update-VSTeamProfile -PersonalAccessToken 7a8ilh6db4aforlrnrqmdrxdztkjvcc4uhlh5vgbteserp3mziwnga -Force
+```powershell
+Get-VSTeamProfile | Where-Object version -eq vsts | Select-Object -skip 1 | Update-VSTeamProfile -PersonalAccessToken 7a8ilh6db4aforlrnrqmdrxdztkjvcc4uhlh5vgbteserp3mziwnga -Force
 ```
 
 This will update all but the first AzD profile
 
 ## PARAMETERS
 
-### -PAT
+### PAT
 
 A secured string to capture your personal access token.
 
@@ -53,7 +53,7 @@ Parameter Sets: Secure
 Required: True
 ```
 
-### -PersonalAccessToken
+### PersonalAccessToken
 
 The personal access token from AzD/TFS to use to access this account.
 
@@ -64,7 +64,7 @@ Required: True
 Position: 2
 ```
 
-### -Name
+### Name
 
 Name of the profile to be updated
 
@@ -74,7 +74,7 @@ Required: True
 Position: 3
 ```
 
-<!-- #include "./params/Force.md" -->
+<!-- #include "./params/forcegroup.md" -->
 
 ## INPUTS
 
@@ -82,7 +82,11 @@ Position: 3
 
 ## NOTES
 
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
+
+<!-- #include "./common/related.md" -->
 
 [Update-VSTeamAccount](Set-VSTeamAccount.md)
 
