@@ -1,5 +1,6 @@
 function Add-VSTeamPool {
-   [CmdletBinding()]
+   [CmdletBinding(
+      HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Add-VSTeamPool')]
    param(
       [Parameter(Mandatory = $true, Position = 1)]
       [string] $Name,
