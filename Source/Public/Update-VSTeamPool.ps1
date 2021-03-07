@@ -29,15 +29,15 @@ function Update-VSTeamPool {
          $body.name = $Name
       }
 
-      $bodyAsJson = $body | ConvertTo-Json
+      $bodyAsJson = $body | ConvertTo-Json -Compress
 
-      $resp = _callAPI -Method Patch -NoProject -Area distributedtask -Resource pools -Version $(_getApiVersion DistributedTask) -Id $Id -Body $bodyAsJson -ContentType 'application/json;charset=utf-8'
+      $resp = _callAPI -Method Patch -NoProject -Area distributedtask -Resource pools -Version $(_getApiVersion DistributedTask) -Id $Id -Body $bodyAsJson
 
-      $pool = [VSTeamPool]::new($resp)
+      $pool = [vsteam_lib.AgentPool]::new($resp)
 
       if ($resp -and $Description) {
          $descriptionAsJson = $Description | ConvertTo-Json
-         $null = _callAPI -Method Put -NoProject -Area distributedtask -Resource pools -Id "$($pool.id)/poolmetadata" -Version $(_getApiVersion DistributedTask) -Body $descriptionAsJson -ContentType 'application/json;charset=utf-8'
+         $null = _callAPI -Method Put -NoProject -Area distributedtask -Resource pools -Id "$($pool.id)/poolmetadata" -Version $(_getApiVersion DistributedTask) -Body $descriptionAsJson
       }
 
       Write-Output $pool

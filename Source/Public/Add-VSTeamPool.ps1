@@ -20,6 +20,7 @@ function Add-VSTeamPool {
    process {
 
       $body = @{
+         name = $Name
          autoProvision = $AutoProvision.IsPresent
          autoUpdate = !$NoAutoUpdates.IsPresent
          properties = @{
@@ -27,15 +28,15 @@ function Add-VSTeamPool {
          }
       }
 
-      $bodyAsJson = $body | ConvertTo-Json
+      $bodyAsJson = $body | ConvertTo-Json -Compress
 
-      $resp = _callAPI -Method Post -NoProject -Area distributedtask -Resource pools -Version $(_getApiVersion DistributedTask) -Body $bodyAsJson -ContentType 'application/json;charset=utf-8'
+      $resp = _callAPI -Method Post -NoProject -Area distributedtask -Resource pools -Version $(_getApiVersion DistributedTask) -Body $bodyAsJson
 
-      $pool = [VSTeamPool]::new($resp)
+      $pool = [vsteam_lib.AgentPool]::new($resp)
 
       if ($resp -and $Description) {
-         $descriptionAsJson = $Description | ConvertTo-Json
-         $null = _callAPI -Method Put -NoProject -Area distributedtask -Resource pools -Id "$($pool.id)/poolmetadata" -Version $(_getApiVersion DistributedTask) -Body $descriptionAsJson -ContentType 'application/json;charset=utf-8'
+         $descriptionAsJson = $Description | ConvertTo-Json -Compress
+         $null = _callAPI -Method Put -NoProject -Area distributedtask -Resource pools -Id "$($pool.id)/poolmetadata" -Version $(_getApiVersion DistributedTask) -Body $descriptionAsJson
       }
 
       Write-Output $pool
