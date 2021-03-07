@@ -83,6 +83,6 @@ Required: True
 
 ## RELATED LINKS
 
-[Remove-VSTeamAccount](Remove-VSTeamAccount.md)
-[ADd-VSTeamAccount](Add-VSTeamAccount.md)
-[Get-VSTeamAccount](Get-VSTeamAccount.md)
+[Remove-VSTeamPool](Remove-VSTeamPool.md)
+[Add-VSTeamPool](Add-VSTeamPool.md)
+[Get-VSTeamPool](Get-VSTeamPool.md)
