@@ -14,6 +14,13 @@
 
 ## EXAMPLES
 
+### Example 1
+
+```powershell
+Update-VSTeamPool -Id 13 -Name "UpdatedTestPoolName" -Description "Test Description" -AutoProvision -NoAutoUpdates
+```
+Updates the pool with id 13 with the name new "UpdatedTestPoolName" that is auto-provisioning to every project and agent software is not updating automatically.
+
 ## PARAMETERS
 
 ### -Id

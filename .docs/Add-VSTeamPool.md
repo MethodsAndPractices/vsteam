@@ -14,6 +14,14 @@
 
 ## EXAMPLES
 
+### Example 1
+
+```powershell
+Add-VSTeamPool -Name "TestPool" -Description "Test Description" -AutoProvision -AutoAuthorize -NoAutoUpdates
+```
+
+It's creating an agent pool with the name "TestPool" that is auto provisioning to every project and also pre-authorized to be used with every pipeline. Agent software is not updated automatically.
+
 ## PARAMETERS
 
 ### -Name
