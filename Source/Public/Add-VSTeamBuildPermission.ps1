@@ -12,34 +12,37 @@
 # routeTemplate   : _apis/{resource}/{securityNamespaceId}
 # https://bit.ly/Add-VSTeamAccessControlEntry
 
-function Add-VSTeamProjectPermission {
+function Add-VSTeamBuildPermission {
    [CmdletBinding(DefaultParameterSetName = 'ByProjectAndUser',
-      HelpUri = 'https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Add-VSTeamProjectPermission')]
+      HelpUri = 'https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Add-VSTeamBuildPermission')]
    param(
       [parameter(Mandatory = $true)]
-      [vsteam_lib.Project]$Project,
+      [string]$ProjectID,
+
+      [parameter(Mandatory = $false)]
+      [string]$BuildID,
 
       [parameter(Mandatory = $true, ParameterSetName = "ByProjectAndDescriptor")]
       [string]$Descriptor,
 
       [parameter(Mandatory = $true, ParameterSetName = "ByProjectAndGroup")]
-      [vsteam_lib.Group]$Group,
+      [object]$Group,
 
       [parameter(Mandatory = $true, ParameterSetName = "ByProjectAndUser")]
-      [vsteam_lib.User]$User,
+      [object]$User,
 
       [parameter(Mandatory = $false)]
-      [vsteam_lib.ProjectPermissions]$Allow,
+      [vsteam_lib.BuildPermissions]$Allow,
 
       [parameter(Mandatory = $false)]
-      [vsteam_lib.ProjectPermissions]$Deny
+      [vsteam_lib.BuildPermissions]$Deny
    )
 
    process {
-      # SecurityNamespaceID: 52d39943-cb85-4d7f-8fa8-c6baac873819
-      # Token: $PROJECT:vstfs:///Classification/TeamProject/<projectId>
+      # SecurityNamespaceID: 33344d9c-fc72-4d6f-aba5-fa317101a7e9
+      # Token: <projectId>/<pipelineId>
 
-      $securityNamespaceId = "52d39943-cb85-4d7f-8fa8-c6baac873819"
+      $securityNamespaceId = "33344d9c-fc72-4d6f-aba5-fa317101a7e9"
 
       # Resolve Group to Descriptor
       if ($Group) {
@@ -51,7 +54,13 @@ function Add-VSTeamProjectPermission {
          $Descriptor = _getDescriptorForACL -User $User
       }
 
-      $token = "`$PROJECT:vstfs:///Classification/TeamProject/$($Project.ID)"
+      $token = $null
+      if ($BuildID) {
+         $token = "$ProjectID/$($BuildID)"
+      }
+      else {
+         $token = "$ProjectID"
+      }
 
       Add-VSTeamAccessControlEntry -SecurityNamespaceId $securityNamespaceId `
          -Descriptor $Descriptor `
