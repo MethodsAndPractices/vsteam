@@ -30,16 +30,15 @@ Accept pipeline input: true (ByPropertyName)
 
 ## INPUTS
 
-### System.String
-
 ## OUTPUTS
-
-### System.Object
 
 ## NOTES
 
 ## RELATED LINKS
 
-[Add-VSTeamAccount](Add-VSTeamAccount.md)
-[Update-VSTeamAccount](Update-VSTeamAccount.md)
-[Get-VSTeamAccount](Get-VSTeamAccount.md)
+[Add-VSTeamPool](Add-VSTeamPool.md)
+[Update-VSTeamPool](Update-VSTeamPool.md)
+[Get-VSTeamPool](Get-VSTeamPool.md)
+
+
+<!-- #include "./common/related.md" -->

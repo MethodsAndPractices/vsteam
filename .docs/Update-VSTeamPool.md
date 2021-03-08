@@ -37,7 +37,7 @@ Accept pipeline input: true (ByPropertyName)
 
 ### -Name
 
-Name of the pool to create.
+Name of the pool to update.
 
 ```yaml
 Type: string
@@ -46,7 +46,7 @@ Required: True
 
 ### -Description
 
-Description of the pool to create.
+Description of the pool to update.
 
 ```yaml
 Type: string
@@ -86,3 +86,5 @@ Required: True
 [Remove-VSTeamPool](Remove-VSTeamPool.md)
 [Add-VSTeamPool](Add-VSTeamPool.md)
 [Get-VSTeamPool](Get-VSTeamPool.md)
+
+<!-- #include "./common/related.md" -->
