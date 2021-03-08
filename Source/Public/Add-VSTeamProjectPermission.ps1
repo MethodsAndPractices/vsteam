@@ -14,7 +14,7 @@
 
 function Add-VSTeamProjectPermission {
    [CmdletBinding(DefaultParameterSetName = 'ByProjectAndUser',
-    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Add-VSTeamProjectPermission')]
+      HelpUri = 'https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Add-VSTeamProjectPermission')]
    param(
       [parameter(Mandatory = $true)]
       [vsteam_lib.Project]$Project,
@@ -28,10 +28,10 @@ function Add-VSTeamProjectPermission {
       [parameter(Mandatory = $true, ParameterSetName = "ByProjectAndUser")]
       [vsteam_lib.User]$User,
 
-      [parameter(Mandatory = $true)]
+      [parameter(Mandatory = $false)]
       [vsteam_lib.ProjectPermissions]$Allow,
 
-      [parameter(Mandatory = $true)]
+      [parameter(Mandatory = $false)]
       [vsteam_lib.ProjectPermissions]$Deny
    )
 
