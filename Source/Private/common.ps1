@@ -945,7 +945,13 @@ function _getDescriptorForACL {
       switch ($User.Origin) {
          "vsts" {
             $sid = _getVSTeamIdFromDescriptor -Descriptor $User.Descriptor
-            $descriptor = "Microsoft.TeamFoundation.Identity;$sid"
+
+            if ($User.Descriptor.StartsWith('svc.')) {
+               $descriptor = "Microsoft.TeamFoundation.ServiceIdentity;$sid"
+            }
+            else {
+               $descriptor = "Microsoft.TeamFoundation.Identity;$sid"
+            }
          }
          "aad" {
             $descriptor = "Microsoft.IdentityModel.Claims.ClaimsIdentity;$($User.Domain)\\$($User.PrincipalName)"
