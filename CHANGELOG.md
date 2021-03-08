@@ -6,6 +6,20 @@ Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/384) from [Se
 
 - Add-VSTeamPool, Remove-VSTeamPool and Update-VSTeampool for handling agent pools on Azure DevOps
 
+## 7.1.4
+
+Combined all the build json files (_types.json, _formats.json and _functions.json) into a single file called config.json in the root folder.
+Fixed issue #376
+
+## 7.1.3
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/350) from [Daniel Silva](https://github.com/DanielSSilva) which included the following:
+
+- Fixed exception thrown by the Update-VSTeamPullRequest when status is set to "completed", by adding the missing "lastMergeSourceCommit" property to body.
+
+Also added Clear-VSTeamDefaultProjectCount and Set-VSTeamDefaultProjectCount to control the default number of projects returned for tab completion and validation. By default only 100 projects are returned and the 100 returned is nondeterministic. But calling Set-VSTeamDefaultProjectCount you can increase the number of projects returned.
+
+
 ## 7.1.2
 
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/366) from [Jhoneill](https://github.com/jhoneill) which included the following:
@@ -18,7 +32,7 @@ Changed Get-VSTeamProject to return all projects by default instead of just the 
 $Global:PSDefaultParameterValues["*-vsteam*:top"] = 500
 ```
 
-Fixed issue #360 but updating the way DateTimes are tested.
+Fixed issue #360 by updating the way DateTimes are tested.
 
 ## 7.1.1
 

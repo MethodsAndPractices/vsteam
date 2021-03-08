@@ -7,7 +7,7 @@ function Get-VSTeamProject {
       [string] $StateFilter = 'WellFormed',
 
       [Parameter(ParameterSetName = 'List')]
-      [int] $Top,
+      [int] $Top = $env:TEAM_PROJECTCOUNT,
 
       [Parameter(ParameterSetName = 'List')]
       [int] $Skip,
