@@ -47,15 +47,22 @@ function Set-VSTeamAgentPoolMaintenance {
       if ($force -or $pscmdlet.ShouldProcess($Id, "Set Pool Maintenance")) {
 
          $isEnabled = $true
-         if ($Disable.IsPresent) {
-            $isEnabled = $false
-         }
 
          $resp = _callAPI -Method Get -NoProject -Area distributedtask -Resource pools -Id "$Id/maintenancedefinitions" -Version $(_getApiVersion DistributedTask)
-         _applyTypesToAgentPoolMaintenance -item $resp
+         $hasSchedule = $resp.count -gt 0
 
-         if ($resp.count -eq 0) {
+         if ($Disable.IsPresent -and $false -eq $hasSchedule) {
+            Write-Error "Cannot deactivate. No Maintenance Schedule existing!"
+         }
 
+         $body = $null
+         if ($Disable.IsPresent) {
+            $isEnabled = $false
+
+            $body = $resp.value[0]
+            $body.PSObject.Properties.Remove('pool')
+            $body.enabled = $isEnabled
+         }else {
             $body = @{
                id = 0
                enabled = $isEnabled
@@ -68,27 +75,30 @@ function Set-VSTeamAgentPoolMaintenance {
                   workingDirectoryExpirationInDays = $WorkingDirectoryExpirationInDays
                }
                scheduleSetting = @{
-                  scheduleJobId = "feb6af1b-fc8f-4251-879e-aaf6ca947058"
+                  scheduleJobId = (New-Guid).ToString()
                   startHours = $StartHours
                   startMinutes = $StartMinutes
                   daysToBuild = ([int]$WeekDaysToBuild)
                   timeZoneId = $TimeZoneId
                }
             }
-
-            $bodyAsJson = $body | ConvertTo-Json -Compress -Depth 50
-            $null = _callAPI -Method Post -NoProject -Area distributedtask -Resource pools -Id "$Id/maintenancedefinitions" -Version $(_getApiVersion DistributedTask) -Body $bodyAsJson
-         }else {
-
-            $body = $resp.value[0]
-            $body.PSObject.Properties.Remove('pool')
-            $body.enabled = $isEnabled
-
-            $bodyAsJson = $body | ConvertTo-Json -Compress -Depth 50
-            $null = _callAPI -Method Put -NoProject -Area distributedtask -Resource pools -Id "$Id/maintenancedefinitions/$($resp.value[0].id)" -Version $(_getApiVersion DistributedTask) -Body $bodyAsJson
          }
+
+         $param = @{ Id = ""; Method = ""}
+         if ($hasSchedule) {
+            $param.Id = "$Id/maintenancedefinitions"
+            $param.Method = "Post"
+         }else {
+            $param.Id = "$Id/maintenancedefinitions/$($resp.value[0].id)"
+            $param.Method = "Put"
+         }
+
+         $bodyAsJson = $body | ConvertTo-Json -Compress -Depth 50
+         $updateResp = _callAPI -NoProject -Area distributedtask -Resource pools -Body $bodyAsJson -Version $(_getApiVersion DistributedTask) @param
+         _applyTypesToAgentPoolMaintenance -item $updateResp
+
+         Write-Output updateResp
       }
-      Set-VSTeamPoolMaintenance -Id -Enable -
    }
 
 
