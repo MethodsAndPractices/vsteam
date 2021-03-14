@@ -6,9 +6,6 @@ function Set-VSTeamAgentPoolMaintenance {
       [Alias('PoolID')]
       [int] $Id,
 
-      [Parameter(Mandatory = $false, ParameterSetName = "Enabled")]
-      [switch] $Enable,
-
       [Parameter(Mandatory = $false, ParameterSetName = "Disabled")]
       [switch] $Disable,
 
@@ -49,9 +46,11 @@ function Set-VSTeamAgentPoolMaintenance {
 
       if ($force -or $pscmdlet.ShouldProcess($Id, "Set Pool Maintenance")) {
 
-         $isEnabled = $false
-         if ($Enable.IsPresent) {
-            $isEnabled = $true
+         $isEnabled = $true
+         if ($Disable.IsPresent) {
+            $isEnabled = $false
+         }else {
+
          }
 
          $resp = _callAPI -Method Get -NoProject -Area distributedtask -Resource pools -Id "$Id/maintenancedefinitions" -Version $(_getApiVersion DistributedTask)
@@ -75,7 +74,7 @@ function Set-VSTeamAgentPoolMaintenance {
                   startHours = $StartHours
                   startMinutes = $StartMinutes
                   daysToBuild = ([int]$WeekDaysToBuild)
-                  timeZoneId = "Hawaiian Standard Time"
+                  timeZoneId = $TimeZoneId
                }
             }
 
