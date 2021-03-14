@@ -52,20 +52,18 @@ function Set-VSTeamAgentPoolMaintenance {
          $hasSchedule = $resp.count -gt 0
 
          if ($Disable.IsPresent -and $false -eq $hasSchedule) {
-            Write-Error "Cannot deactivate. No Maintenance Schedule existing!"
+            Throw "Cannot deactivate. No Maintenance Schedule existing!"
          }
 
          $body = $null
          if ($Disable.IsPresent) {
-            $isEnabled = $false
-
             $body = $resp.value[0]
             $body.PSObject.Properties.Remove('pool')
-            $body.enabled = $isEnabled
+            $body.enabled = $false
          }else {
             $body = @{
                id = 0
-               enabled = $isEnabled
+               enabled = $true
                jobTimeoutInMinutes = $JobTimeoutInMinutes
                maxConcurrentAgentsPercentage = $MaxConcurrentAgentsPercentage
                retentionPolicy = @{
@@ -86,11 +84,13 @@ function Set-VSTeamAgentPoolMaintenance {
 
          $param = @{ Id = ""; Method = ""}
          if ($hasSchedule) {
-            $param.Id = "$Id/maintenancedefinitions"
-            $param.Method = "Post"
-         }else {
+            #reuse existing schedule id
+            $body.scheduleSetting.scheduleJobId = $resp.value[0].scheduleSetting.scheduleJobId
             $param.Id = "$Id/maintenancedefinitions/$($resp.value[0].id)"
             $param.Method = "Put"
+         }else {
+            $param.Id = "$Id/maintenancedefinitions"
+            $param.Method = "Post"
          }
 
          $bodyAsJson = $body | ConvertTo-Json -Compress -Depth 50

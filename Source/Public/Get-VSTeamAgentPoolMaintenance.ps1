@@ -10,7 +10,12 @@ function Get-VSTeamAgentPoolMaintenance {
    process {
 
       $resp = _callAPI -Method Get -NoProject -Area distributedtask -Resource pools -Id "$Id/maintenancedefinitions" -Version $(_getApiVersion DistributedTask)
-      _applyTypesToAgentPoolMaintenance -item $resp
+
+      if ($resp -and $resp.count -gt 0) {
+         foreach ($schedule in $resp.value) {
+            _applyTypesToAgentPoolMaintenance -item $schedule
+         }
+      }
 
       Write-Output $resp.value
    }
