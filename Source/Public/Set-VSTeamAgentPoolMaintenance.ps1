@@ -46,8 +46,6 @@ function Set-VSTeamAgentPoolMaintenance {
 
       if ($force -or $pscmdlet.ShouldProcess($Id, "Set Pool Maintenance")) {
 
-         $isEnabled = $true
-
          $resp = _callAPI -Method Get -NoProject -Area distributedtask -Resource pools -Id "$Id/maintenancedefinitions" -Version $(_getApiVersion DistributedTask)
          $hasSchedule = $resp.count -gt 0
 
