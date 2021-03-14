@@ -37,8 +37,8 @@ function Set-VSTeamAgentPoolMaintenance {
       [int] $StartMinutes,
 
       [Parameter(Mandatory = $true, ParameterSetName = "Enabled")]
-      [vsteam_lib.AgentPoolTimeZoneValidateAttribute()]
-      [ArgumentCompleter([vsteam_lib.AgentPoolTimeZoneCompleter])]
+      [vsteam_lib.TimeZoneValidateAttribute()]
+      [ArgumentCompleter([vsteam_lib.TimeZoneCompleter])]
       [string] $TimeZoneId,
 
       [Parameter(Mandatory = $true, ParameterSetName = "Enabled")]

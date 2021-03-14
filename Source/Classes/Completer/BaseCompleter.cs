@@ -40,9 +40,32 @@ namespace vsteam_lib
          {
             if (string.IsNullOrEmpty(wordToComplete) || word.StartsWith(wordToComplete, true, CultureInfo.InvariantCulture))
             {
-               // Only wrap in single quotes if they have a space. This makes it easier
-               // to use on macOs
-               values.Add(new CompletionResult(word.Contains(" ") ? $"'{word}'" : word));
+               values.Add(GetCompletionResult(wordToComplete, word));
+            }
+         }
+      }
+
+      private static CompletionResult GetCompletionResult(string wordToComplete, string word, string wordLabel = null, CompletionResultType resultType = CompletionResultType.Text)
+      {
+         if (wordLabel == null)
+         {
+            wordLabel = word;
+         }
+         // Only wrap in single quotes if they have a space. This makes it easier
+         // to use on macOs
+         return (new CompletionResult(word.Contains(" ") ? $"'{word}'" : word, wordLabel, resultType, wordLabel + ": " + word));
+
+      }
+
+      protected static void SelectValues(string wordToComplete,
+                                          Dictionary<string, string> words,
+                                          List<CompletionResult> values)
+      {
+         foreach (var word in words)
+         {
+            if (string.IsNullOrEmpty(wordToComplete) || word.Key.StartsWith(wordToComplete, true, CultureInfo.InvariantCulture))
+            {
+               values.Add(GetCompletionResult(wordToComplete, word.Key, word.Value, CompletionResultType.Text));
             }
          }
       }

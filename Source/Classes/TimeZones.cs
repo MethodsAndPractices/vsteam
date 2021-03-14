@@ -1,14 +1,17 @@
-﻿using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace vsteam_lib
 {
-   public class AgentPoolTimeZoneValidateAttribute : BaseValidateArgumentsAttribute
+   public static class TimeZones
    {
-      public Dictionary<string, string> GetTimeZones()
+
+      public static Dictionary<string, string> GetTimeZones()
       {
 
          var timeZones = new Dictionary<string, string>(){
+
             {
                "Dateline Standard Time", "(UTC-12:00) International Date Line West"
             },
@@ -298,20 +301,9 @@ namespace vsteam_lib
 
       }
 
-      public string GetTimeZoneIdByDisplayName(string timeZone)
+      internal static IEnumerable<string> GetTimeZoneIds()
       {
-         var timeZoneObj = GetTimeZones().Where(t => t.Value == timeZone).FirstOrDefault();
-
-         if (timeZoneObj.Equals(default(KeyValuePair<string, string>)))
-         {
-            return timeZoneObj.Key;
-         }
-         else
-         {
-            return null;
-         }
+         return TimeZones.GetTimeZones().Keys.ToList();
       }
-      internal override IEnumerable<string> GetValues() => this.GetTimeZones().Values;
    }
-
 }
