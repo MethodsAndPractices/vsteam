@@ -49,8 +49,6 @@ function Set-VSTeamAgentPoolMaintenance {
          $isEnabled = $true
          if ($Disable.IsPresent) {
             $isEnabled = $false
-         }else {
-
          }
 
          $resp = _callAPI -Method Get -NoProject -Area distributedtask -Resource pools -Id "$Id/maintenancedefinitions" -Version $(_getApiVersion DistributedTask)
