@@ -10,6 +10,10 @@ Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/374) fr
 $buildId = Get-VSTeamBuild -Top 1
 Get-VSTeamRelease -artifactVersionId $buildId.Id
 ```
+## 7.1.4
+
+Combined all the build json files (_types.json, _formats.json and _functions.json) into a single file called config.json in the root folder.
+Fixed issue #376
 
 ## 7.1.3
 
