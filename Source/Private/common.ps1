@@ -24,7 +24,7 @@ function _callAPI {
       [string]$Team,
       [string]$Url,
       [object]$QueryString,
-      [hashtable]$AdditionalHeaders,
+      [hashtable]$AdditionalHeaders = @{},
       # Some API calls require the Project ID and not the project name.
       # However, the dynamic project name parameter only shows you names
       # and not the Project IDs. Using this flag the project name provided
@@ -37,10 +37,7 @@ function _callAPI {
       # that project name to be used in building the URI that would lead to
       # 404 because the URI would not be correct.
       [Alias('IgnoreDefaultProject')]
-      [switch]$NoProject,
-      # this makes sure that you can use your own bearer token on the request if needed
-      # some undocumented internal IPs use their own token based on the PAT
-      [switch]$CustomBearer
+      [switch]$NoProject
    )
 
    process {
@@ -75,7 +72,11 @@ function _callAPI {
 
       #dont use header when requested. Then bearer must be provided with additional headers
       $params.Add('Headers', @{ })
-      if(!$CustomBearer)
+
+      #checking if an authorization token is provided already with the additional headers
+      #use case: sometimes other tokens for certain APIs have to be used (bying pipelines) in order to work
+      #some parts of internal APIs use their own token based on the PAT
+      if(!$AdditionalHeaders.ContainsKey("Authorization"))
       {
          if (_useWindowsAuthenticationOnPremise)
          {
@@ -973,4 +974,28 @@ function _getDescriptorForACL {
    }
 
    return $descriptor
+}
+
+function _getBillingToken {
+   # get a billing access token by using the given PAT.
+   # this token can be used for buying pipelines or artifacts
+   # or other things used for billing (except user access levels)
+
+   $sessionToken = @{
+      appId        = 00000000 - 0000 - 0000 - 0000 - 000000000000
+      force        = $false
+      tokenType    = 0
+      namedTokenId = "CommerceDeploymentProfile"
+   }
+
+   $billingToken = _callAPI `
+      -NoProject `
+      -method POST `
+      -ContentType "application/json" `
+      -area "WebPlatformAuth" `
+      -resource "SessionToken" `
+      -version '3.2-preview.1' `
+      -body ($sessionToken | ConvertTo-Json -Depth 50 -Compress)
+
+   return $billingToken
 }

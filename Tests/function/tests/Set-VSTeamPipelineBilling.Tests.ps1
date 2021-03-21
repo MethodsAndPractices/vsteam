@@ -1,6 +1,6 @@
 Set-StrictMode -Version Latest
 
-Describe 'VSTeamBilling' -Tag 'unit', 'billing' {
+Describe 'VSTeamPipelineBilling' -Tag 'unit', 'billing' {
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
 
@@ -9,16 +9,15 @@ Describe 'VSTeamBilling' -Tag 'unit', 'billing' {
       Mock _getInstance { return 'https://dev.azure.com' }
 
       Mock Invoke-RestMethod {
-         Write-Host $args
          return $null
       }
 
-      Mock Get-VSTeamBillingToken { Open-SampleFile 'Get-VSTeamBillingToken.json' }
+      Mock _getBillingToken { Open-SampleFile 'getBillingToken.json' }
    }
 
-   Context 'Set-VSTeamBilling' {
+   Context 'Set-VSTeamPipelineBilling' {
       It 'should set hosted pipeline' {
-         Set-VSTeamBilling `
+         Set-VSTeamPipelineBilling `
             -Type "HostedPipeline" `
             -OrganizationId "68c631ce-4886-4825-a471-94a74fb6ecda" `
             -SubscriptionId "fbafed90-9c59-4889-8187-8e74e2cf06e7" `
@@ -39,7 +38,7 @@ Describe 'VSTeamBilling' -Tag 'unit', 'billing' {
       }
 
       It 'should set private pipeline' {
-         Set-VSTeamBilling `
+         Set-VSTeamPipelineBilling `
             -Type "PrivatePipeline" `
             -OrganizationId "68c631ce-4886-4825-a471-94a74fb6ecda" `
             -SubscriptionId "fbafed90-9c59-4889-8187-8e74e2cf06e7" `
@@ -57,13 +56,5 @@ Describe 'VSTeamBilling' -Tag 'unit', 'billing' {
             $Uri -like "*skipSubscriptionValidation=True*"
          }
       }
-   }
-
-   Context 'Set-VSTeamBilling handles exception' {
-      BeforeAll {
-         Mock _handleException
-         Mock Invoke-RestMethod { throw 'testing error handling' }
-      }
-
    }
 }

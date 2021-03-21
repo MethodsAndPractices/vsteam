@@ -60,8 +60,6 @@ Gets all organizations where the user is the owner.
 
 <!-- #include "./common/related.md" -->
 
-[Get-VSTeamBillingToken](Get-VSTeamBillingToken.md)
-
 [Get-VSTeamUserProfile](Get-VSTeamUserProfile.md)
 
-[Set-VSTeamBilling](Set-VSTeamBilling.md)
+[Set-VSTeamPipelineBilling](Set-VSTeamPipelineBilling.md)

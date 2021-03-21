@@ -4,8 +4,7 @@
 
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/371) from [Sebastian Schütze](https://github.com/SebastianSchuetze) which included the following:
 
-- Added Get-VSTeamBillingToken to get a billing token to submit billing operations
-- Added Set-VSTeamBilling to buy or release Microsoft-hosted and self-hosted agents
+- Added Set-VSTeamPipelineBilling to buy or release Microsoft-hosted and self-hosted agents
 - Added Get-VSTeamAccounts to get the organizations where the user has access. Where the given user is either a member or an owner
 - Added Get-VSTeamUserProfile that gets the users profile of an account.
 - fixed filenames of files to work on linux (casing)
