@@ -3,13 +3,14 @@ function Get-VSTeamAccounts {
    param(
       [Parameter(Mandatory = $true, ParameterSetName = "MemberId")]
       [string] $MemberId,
+
       [Parameter(Mandatory = $true, ParameterSetName = "OwnerId")]
       [string] $OwnerId
    )
 
    process {
+      $queryString = @{ }
 
-      $queryString = @{}
       if ($PsCmdlet.ParameterSetName -eq "MemberId") {
          $queryString = @{
             memberId = $MemberId
@@ -24,17 +25,16 @@ function Get-VSTeamAccounts {
 
       try {
          # Call the REST API
-         $resp = _callAPI `
-            -Method GET `
-            -Url "https://vssps.dev.azure.com/_apis/accounts?api-version=$(_getApiVersion Core)" `
-            -QueryString $queryString
+         $resp = _callAPI -NoProject `
+            -area 'accounts' `
+            -subDomain 'vssps' `
+            -QueryString $queryString `
+            -version $(_getApiVersion Core)
 
          Write-Output $resp.value
       }
       catch {
          _handleException $_
       }
-
-
    }
 }
