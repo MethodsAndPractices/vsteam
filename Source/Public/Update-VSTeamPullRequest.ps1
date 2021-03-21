@@ -1,6 +1,6 @@
 function Update-VSTeamPullRequest {
    [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "High", DefaultParameterSetName = 'Draft',
-    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Update-VSTeamPullRequest')]
+      HelpUri = 'https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Update-VSTeamPullRequest')]
    param(
       [Parameter(ValueFromPipelineByPropertyName = $true, Mandatory = $true, Position = 0)]
       [Alias('Id')]
@@ -46,7 +46,13 @@ function Update-VSTeamPullRequest {
          }
 
          if ($Status) {
-            $body = '{"status": "' + $Status + '"}'
+            if ($Status -eq "completed") {
+               $lastMergeSourceCommit = Get-VSTeamPullRequest -RepositoryId $RepositoryId | Where-Object { $_.pullRequestId -eq $PullRequestId } | Select-Object -ExpandProperty lastMergeSourceCommit | ConvertTo-Json
+               $body = '{"status": "' + $Status + '", "lastMergeSourceCommit": ' + $lastMergeSourceCommit + '}'
+            }
+            else {
+               $body = '{"status": "' + $Status + '"}'
+            }
          }
 
          # Call the REST API
