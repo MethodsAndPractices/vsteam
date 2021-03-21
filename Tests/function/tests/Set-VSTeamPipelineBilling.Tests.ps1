@@ -33,7 +33,6 @@ Describe 'VSTeamPipelineBilling' -Tag 'unit', 'billing' {
             $Uri -like "https://commerceprodwus21.vscommerce.visualstudio.com/_apis/OfferSubscription/OfferSubscription?api-version=5.1-preview.1*" -and
             $Uri -like "*billingTarget=68c631ce-4886-4825-a471-94a74fb6ecda*" -and
             $Uri -like "*skipSubscriptionValidation=True*"
-
          }
       }
 

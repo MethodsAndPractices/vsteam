@@ -1,11 +1,11 @@
-function Set-VSTeamPipelineBilling
-{
+function Set-VSTeamPipelineBilling {
    [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "High",
       HelpUri = 'https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Set-VSTeamPipelineBilling')]
    param(
       [Parameter(Mandatory = $true)]
       [ValidateSet('HostedPipeline', 'PrivatePipeline')]
       [string] $Type,
+
       [Parameter(Mandatory = $true)]
       [string] $OrganizationId,
 
@@ -18,11 +18,8 @@ function Set-VSTeamPipelineBilling
       [switch] $Force
    )
 
-   process
-   {
-
+   process {
       $billingToken = _getBillingToken
-
 
       $body = @{
          azureSubscriptionId = $SubscriptionId
@@ -33,13 +30,11 @@ function Set-VSTeamPipelineBilling
          renewalGroup        = $null
       }
 
-      if ($Type -eq "HostedPipeline")
-      {
+      if ($Type -eq "HostedPipeline") {
          $body.offerMeter.galleryId = "ms.build-release-hosted-pipelines"
       }
 
-      if ($Type -eq "PrivatePipeline")
-      {
+      if ($Type -eq "PrivatePipeline") {
          $body.offerMeter.galleryId = "ms.build-release-private-pipelines"
       }
 
@@ -50,23 +45,20 @@ function Set-VSTeamPipelineBilling
 
       Write-Verbose $body
 
-      if ($force -or $pscmdlet.ShouldProcess($Quantity, "Quantity"))
-      {
-         try
-         {
+      if ($force -or $pscmdlet.ShouldProcess($Quantity, "Quantity")) {
+         try {
             # Call the REST API
             _callAPI `
                -NoProject `
                -Method POST `
                -Url 'https://commerceprodwus21.vscommerce.visualstudio.com/_apis/OfferSubscription/OfferSubscription?api-version=5.1-preview.1' `
                -QueryString $queryString `
-               -body ($body| ConvertTo-Json -Depth 50 -Compress) `
-               -AdditionalHeaders @{ Authorization = "Bearer $($billingToken.token)"} | Out-Null
-         } catch
-         {
+               -body ($body | ConvertTo-Json -Depth 50 -Compress) `
+               -AdditionalHeaders @{ Authorization = "Bearer $($billingToken.token)" } | Out-Null
+         }
+         catch {
             _handleException $_
          }
       }
-
    }
 }

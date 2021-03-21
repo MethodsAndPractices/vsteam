@@ -8,6 +8,7 @@ Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/371) from [Se
 - Added Get-VSTeamAccounts to get the organizations where the user has access. Where the given user is either a member or an owner
 - Added Get-VSTeamUserProfile that gets the users profile of an account.
 - fixed filenames of files to work on linux (casing)
+
 ## 7.1.4
 
 Combined all the build json files (_types.json, _formats.json and _functions.json) into a single file called config.json in the root folder.

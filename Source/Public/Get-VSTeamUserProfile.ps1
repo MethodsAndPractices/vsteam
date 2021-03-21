@@ -3,15 +3,14 @@ function Get-VSTeamUserProfile {
    param(
       [Parameter(Mandatory = $true, ParameterSetName = "Id")]
       [string] $Id,
+
       [Parameter(Mandatory = $true, ParameterSetName = "Me")]
       [switch] $MyProfile
    )
 
    process {
-
       try {
-
-         if($MyProfile){
+         if ($MyProfile) {
             $Id = 'me'
          }
 
@@ -30,6 +29,5 @@ function Get-VSTeamUserProfile {
       catch {
          _handleException $_
       }
-
    }
 }

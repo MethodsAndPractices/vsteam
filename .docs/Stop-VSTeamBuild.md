@@ -27,11 +27,11 @@ This example cancels the build with build id 1.
 
 ```powershell
 Set-VSTeamDefaultProject Demo
-$buildsToCancel = Get-VSTeamBuild -StatusFilter "inProgress" | where-object definitionName -eq Build-Defenition-Name
+$buildsToCancel = Get-VSTeamBuild -StatusFilter "inProgress" | where-object definitionName -eq Build-Definition-Name
 ForEach($build in $buildsToCancel) { Stop-VSTeamBuild -id $build.id }
 ```
 
-This example will find all builds with a status of "inProgress" and a defenitionName of "Build-Defenition-Name" and then cancel each of these builds.
+This example will find all builds with a status of "inProgress" and a definitionName of "Build-Definition-Name" and then cancel each of these builds.
 
 ## PARAMETERS
 

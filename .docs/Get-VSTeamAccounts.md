@@ -35,9 +35,9 @@ $orgs = Get-VSTeamAccounts -OwnerId $myProfile.id
 Gets all organizations where the user is a member.
 
 ```yaml
-   Type: string
-   Parameter sets: MemberId
-   Required: true
+Type: string
+Parameter sets: MemberId
+Required: true
 ```
 
 ### -OwnerId
@@ -45,9 +45,9 @@ Gets all organizations where the user is a member.
 Gets all organizations where the user is the owner.
 
 ```yaml
-   Type: string
-   Parameter sets: OwnerId
-   Required: true
+Type: string
+Parameter sets: OwnerId
+Required: true
 ```
 
 ## INPUTS

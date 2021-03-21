@@ -337,7 +337,6 @@ Describe 'Common' {
          $token.tokenType | Should -Be 'session' -Because 'tokenType should be set'
          $token.namedTokenId | Should -Be 'CommerceDeploymentProfile' -Because 'namedTokenId should be set'
 
-
          Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 `
             -ParameterFilter {
             $Method -eq 'Post' -and

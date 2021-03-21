@@ -33,9 +33,9 @@ $myProfile = Get-VSTeamUserProfile -MyProfile
 Gets the user profile with the given id.
 
 ```yaml
-   Type: string
-   Parameter sets: Id
-   Required: true
+Type: string
+Parameter sets: Id
+Required: true
 ```
 
 ### -MyProfile
@@ -43,9 +43,9 @@ Gets the user profile with the given id.
 Gets all organizations where the user is the owner.
 
 ```yaml
-   Type: switch
-   Parameter sets: Me
-   Required: true
+Type: switch
+Parameter sets: Me
+Required: true
 ```
 
 ## INPUTS

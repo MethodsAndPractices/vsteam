@@ -122,7 +122,7 @@ Parameter Sets: List
 
 Returns the build with this build number.
 
-You can also use * for a starts with search.
+You can also use \* for a starts with search.
 For example: 2015*
 Will return all build numbers that start with 2015.
 

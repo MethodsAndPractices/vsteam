@@ -40,9 +40,9 @@ Sets the concurrent jobs for private agents on organization `9de24e7c-2e01-496c-
 The type of billing that is supposed to be set.
 
 ```yaml
-   Type: string
-   Accepted values: HostedPipeline, PrivatePipeline
-   Required: true
+Type: string
+Accepted values: HostedPipeline, PrivatePipeline
+Required: true
 ```
 
 ### -OrganizationId
@@ -50,8 +50,8 @@ The type of billing that is supposed to be set.
 The organization where the billing should be set.
 
 ```yaml
-   Type: string
-   Required: true
+Type: string
+Required: true
 ```
 
 ### -SubscriptionId
@@ -59,8 +59,8 @@ The organization where the billing should be set.
 The subscription id which the organization is using.
 
 ```yaml
-   Type: string
-   Required: true
+Type: string
+Required: true
 ```
 
 ### -Quantity
@@ -68,8 +68,8 @@ The subscription id which the organization is using.
 The quantity to which the billing should be set. E.g. for Microsoft-hosted pipelines you would set the concurred jobs.
 
 ```yaml
-   Type: int
-   Required: true
+Type: int
+Required: true
 ```
 
 ## INPUTS

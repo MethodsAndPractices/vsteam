@@ -24,7 +24,7 @@ function _callAPI {
       [string]$Team,
       [string]$Url,
       [object]$QueryString,
-      [hashtable]$AdditionalHeaders = @{},
+      [hashtable]$AdditionalHeaders = @{ },
       # Some API calls require the Project ID and not the project name.
       # However, the dynamic project name parameter only shows you names
       # and not the Project IDs. Using this flag the project name provided
@@ -65,28 +65,26 @@ function _callAPI {
       $params.Add('UserAgent', (_getUserAgent))
       $params.Add('TimeoutSec', (_getDefaultTimeout))
 
-      #always use utf8 and json as default content type instead of xml
+      # always use utf8 and json as default content type instead of xml
       if ($false -eq $PSBoundParameters.ContainsKey("ContentType")) {
          $params.Add('ContentType', 'application/json; charset=utf-8')
       }
 
-      #dont use header when requested. Then bearer must be provided with additional headers
+      # do not use header when requested. Then bearer must be provided with additional headers
       $params.Add('Headers', @{ })
 
-      #checking if an authorization token is provided already with the additional headers
-      #use case: sometimes other tokens for certain APIs have to be used (bying pipelines) in order to work
-      #some parts of internal APIs use their own token based on the PAT
-      if(!$AdditionalHeaders.ContainsKey("Authorization"))
-      {
-         if (_useWindowsAuthenticationOnPremise)
-         {
+      # checking if an authorization token is provided already with the additional headers
+      # use case: sometimes other tokens for certain APIs have to be used (buying pipelines) in order to work
+      # some parts of internal APIs use their own token based on the PAT
+      if (!$AdditionalHeaders.ContainsKey("Authorization")) {
+         if (_useWindowsAuthenticationOnPremise) {
             $params.Add('UseDefaultCredentials', $true)
-         } elseif (_useBearerToken)
-         {
-            $params['Headers'].Add("Authorization","Bearer $env:TEAM_TOKEN")
-         } else
-         {
-            $params['Headers'].Add("Authorization","Basic $env:TEAM_PAT")
+         }
+         elseif (_useBearerToken) {
+            $params['Headers'].Add("Authorization", "Bearer $env:TEAM_TOKEN")
+         }
+         else {
+            $params['Headers'].Add("Authorization", "Basic $env:TEAM_PAT")
          }
       }
 
@@ -97,7 +95,7 @@ function _callAPI {
       }
 
       # We have to remove any extra parameters not used by Invoke-RestMethod
-      $extra = 'NoProject', 'UseProjectId', 'Area', 'Resource', 'SubDomain', 'Id', 'Version', 'JSON', 'ProjectName', 'Team', 'Url', 'QueryString', 'AdditionalHeaders','CustomBearer'
+      $extra = 'NoProject', 'UseProjectId', 'Area', 'Resource', 'SubDomain', 'Id', 'Version', 'JSON', 'ProjectName', 'Team', 'Url', 'QueryString', 'AdditionalHeaders', 'CustomBearer'
       foreach ($e in $extra) { $params.Remove($e) | Out-Null }
 
       try {
