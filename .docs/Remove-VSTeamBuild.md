@@ -24,7 +24,7 @@ This command will delete all builds that are not marked retain indefinitely.
 
 ## PARAMETERS
 
-<!-- #include "./params/BuildIds.md" -->
+<!-- #include "./params/buildIds.md" -->
 
 <!-- #include "./params/projectName.md" -->
 

@@ -36,7 +36,7 @@ Describe 'Common' {
          }
       }
    }
-   
+
    Context '_getPermissionInheritanceInfo' {
       BeforeAll {
          Mock Get-VSTeamBuildDefinition { Open-SampleFile 'Get-BuildDefinition_AzD.json' -ReturnValue }
@@ -132,7 +132,7 @@ Describe 'Common' {
    Context '_buildProjectNameDynamicParam' {
       BeforeAll {
          # PreFill the project cache with desired list. This will make sure
-         # the project name used will pass validation and Get-VSTeamProject 
+         # the project name used will pass validation and Get-VSTeamProject
          # will not need to be called.
          [vsteam_lib.ProjectCache]::Update([string[]]@("Demo", "Universal"))
       }
@@ -145,7 +145,7 @@ Describe 'Common' {
    Context '_buildDynamicParam no defaults' {
       BeforeAll {
          # PreFill the project cache with desired list. This will make sure
-         # the project name used will pass validation and Get-VSTeamProject 
+         # the project name used will pass validation and Get-VSTeamProject
          # will not need to be called.
          [vsteam_lib.ProjectCache]::Update([string[]]@("Demo", "Universal"))
 
@@ -195,7 +195,7 @@ Describe 'Common' {
    Context '_buildDynamicParam defaults' {
       BeforeAll {
          # PreFill the project cache with desired list. This will make sure
-         # the project name used will pass validation and Get-VSTeamProject 
+         # the project name used will pass validation and Get-VSTeamProject
          # will not need to be called.
          [vsteam_lib.ProjectCache]::Update([string[]]@("Demo", "Universal"))
 
@@ -323,5 +323,27 @@ Describe 'Common' {
          _isVSTS 'http://localhost:8080/tfs/defaultcollection' | Should -Be $false
       }
    }
-}
 
+   Context '_getBillingToken' {
+      BeforeAll {
+         Mock Invoke-RestMethod { Open-SampleFile 'getBillingToken.json' }
+         Mock _getApiVersion { return '1.0-unitTests' }
+         Mock _getInstance { return 'https://dev.azure.com' }
+      }
+
+      It 'should get billing token' {
+         $token = _getBillingToken
+
+         $token.tokenType | Should -Be 'session' -Because 'tokenType should be set'
+         $token.namedTokenId | Should -Be 'CommerceDeploymentProfile' -Because 'namedTokenId should be set'
+
+         Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 `
+            -ParameterFilter {
+            $Method -eq 'Post' -and
+            $Body -like '*"namedTokenId":"CommerceDeploymentProfile"*' -and
+            $Body -like '*"tokenType":0*' -and
+            $Uri -eq "https://dev.azure.com/_apis/WebPlatformAuth/SessionToken?api-version=3.2-preview.1"
+         }
+      }
+   }
+}
