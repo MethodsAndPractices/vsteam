@@ -37,7 +37,11 @@ function _callAPI {
       # that project name to be used in building the URI that would lead to
       # 404 because the URI would not be correct.
       [Alias('IgnoreDefaultProject')]
-      [switch]$NoProject
+      [switch]$NoProject,
+      # This flag makes sure that no specific account is used
+      # some APIs do not have an account in their API uri because
+      # they are not account specific in the url path itself. (e.g. user profile, pipeline billing)
+      [switch]$NoAccount
    )
 
    process {
@@ -95,7 +99,7 @@ function _callAPI {
       }
 
       # We have to remove any extra parameters not used by Invoke-RestMethod
-      $extra = 'NoProject', 'UseProjectId', 'Area', 'Resource', 'SubDomain', 'Id', 'Version', 'JSON', 'ProjectName', 'Team', 'Url', 'QueryString', 'AdditionalHeaders', 'CustomBearer'
+      $extra = 'NoAccount', 'NoProject', 'UseProjectId', 'Area', 'Resource', 'SubDomain', 'Id', 'Version', 'JSON', 'ProjectName', 'Team', 'Url', 'QueryString', 'AdditionalHeaders', 'CustomBearer'
       foreach ($e in $extra) { $params.Remove($e) | Out-Null }
 
       try {
@@ -238,7 +242,8 @@ function _buildRequestURI {
       $ProjectName,
 
       [switch]$UseProjectId,
-      [switch]$NoProject
+      [switch]$NoProject,
+      [switch]$NoAccount
    )
 
    process {
@@ -246,14 +251,19 @@ function _buildRequestURI {
 
       $sb = New-Object System.Text.StringBuilder
 
-      $sb.Append($(_addSubDomain -subDomain $subDomain -instance $(_getInstance))) | Out-Null
+      $instance = "https://dev.azure.com"
+      if ($NoAccount.IsPresent -eq $false) {
+         $instance = _getInstance
+      }
+
+      $sb.Append($(_addSubDomain -subDomain $subDomain -instance $instance)) | Out-Null
 
       # There are some APIs that must not have the project added to the URI.
       # However, if they caller set the default project it will be passed in
       # here and added to the URI by mistake. Functions that need the URI
       # created without the project even if the default project is set needs
       # to pass the -NoProject switch.
-      if ($ProjectName -and $NoProject.IsPresent -eq $false) {
+      if ($ProjectName -and $NoProject.IsPresent -eq $false -and $NoAccount.IsPresent -eq $false) {
          if ($UseProjectId.IsPresent) {
             $projectId = (Get-VSTeamProject -Name $ProjectName | Select-Object -ExpandProperty id)
             $sb.Append("/$projectId") | Out-Null
@@ -1017,12 +1027,21 @@ function _getBillingToken {
    # get a billing access token by using the given PAT.
    # this token can be used for buying pipelines or artifacts
    # or other things used for billing (except user access levels)
+   [CmdletBinding()]
+   param (
+      #billing token can have different scopes. They are defined by named token ids.
+      #They should be validated to be specific by it's name
+      [Parameter(Mandatory=$true)]
+      [string]
+      [ValidateSet('AzCommDeploymentProfile','CommerceDeploymentProfile')]
+      $NamedTokenId
+   )
 
    $sessionToken = @{
       appId        = 00000000 - 0000 - 0000 - 0000 - 000000000000
       force        = $false
       tokenType    = 0
-      namedTokenId = "CommerceDeploymentProfile"
+      namedTokenId = $NamedTokenId
    }
 
    $billingToken = _callAPI `

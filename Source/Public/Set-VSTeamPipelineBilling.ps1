@@ -5,54 +5,53 @@ function Set-VSTeamPipelineBilling {
       [Parameter(Mandatory = $true)]
       [ValidateSet('HostedPipeline', 'PrivatePipeline')]
       [string] $Type,
-
-      [Parameter(Mandatory = $true)]
+      [Parameter(Mandatory = $false)]
       [string] $OrganizationId,
-
       [Parameter(Mandatory = $true)]
-      [string] $SubscriptionId,
-
-      [Parameter(Mandatory = $true)]
+      [ValidateRange()]
       [int] $Quantity,
 
       [switch] $Force
    )
 
    process {
-      $billingToken = _getBillingToken
-
-      $body = @{
-         azureSubscriptionId = $SubscriptionId
-         committedQuantity   = $Quantity
-         offerMeter          = @{
-            galleryId = $null
-         }
-         renewalGroup        = $null
-      }
-
-      if ($Type -eq "HostedPipeline") {
-         $body.offerMeter.galleryId = "ms.build-release-hosted-pipelines"
-      }
-
-      if ($Type -eq "PrivatePipeline") {
-         $body.offerMeter.galleryId = "ms.build-release-private-pipelines"
-      }
-
-      $queryString = @{
-         billingTarget              = $OrganizationId
-         skipSubscriptionValidation = $true
-      }
-
-      Write-Verbose $body
 
       if ($force -or $pscmdlet.ShouldProcess($Quantity, "Quantity")) {
+
+         $billingToken = _getBillingToken -NamedTokenId 'AzCommDeploymentProfile'
+
+         if ([string]::IsNullOrEmpty($OrganizationId)) {
+            $userProfile = Get-VSTeamUserProfile -MyProfile
+            $currentOrg = Get-VSTeamAccounts -MemberId  $userProfile.id | Where-Object {
+               $instanceUrl = _getInstance
+               return $instanceUrl.EndsWith($_.accountName)
+            }
+
+            $OrganizationId = $currentOrg.accountId
+         }
+
+         $body = @{
+            meterId = $null
+            purchaseQuantity   = $Quantity
+         }
+
+         if ($Type -eq "HostedPipeline") {
+            $body.meterId = "4bad9897-8d87-43bb-80be-5e6e8fefa3de"
+         }
+
+         if ($Type -eq "PrivatePipeline") {
+            $body.meterId = "f44a67f2-53ae-4044-bd58-1c8aca386b98"
+         }
+
+         Write-Verbose $body
+
          try {
             # Call the REST API
+            #Full URL needs to be used, since the organization ID is accepted only
             _callAPI `
                -NoProject `
-               -Method POST `
-               -Url 'https://commerceprodwus21.vscommerce.visualstudio.com/_apis/OfferSubscription/OfferSubscription?api-version=5.1-preview.1' `
-               -QueryString $queryString `
+               -Method PATCH `
+               -Url "https://azdevopscommerce.dev.azure.com/$OrganizationId/_apis/AzComm/MeterResource?api-version=5.1-preview.1" `
                -body ($body | ConvertTo-Json -Depth 50 -Compress) `
                -AdditionalHeaders @{ Authorization = "Bearer $($billingToken.token)" } | Out-Null
          }
@@ -60,5 +59,6 @@ function Set-VSTeamPipelineBilling {
             _handleException $_
          }
       }
+
    }
 }
