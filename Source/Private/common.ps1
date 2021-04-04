@@ -99,8 +99,10 @@ function _callAPI {
       }
 
       # We have to remove any extra parameters not used by Invoke-RestMethod
+
       $extra = 'NoAccount', 'NoProject', 'UseProjectId', 'Area', 'Resource', 'SubDomain', 'Id', 'Version', 'JSON', 'ProjectName', 'Team', 'Url', 'QueryString', 'AdditionalHeaders', 'CustomBearer'
-      foreach ($e in $extra) { $params.Remove($e) | Out-Null }
+
+   foreach ($e in $extra) { $params.Remove($e) | Out-Null }
 
       try {
          $resp = Invoke-RestMethod @params

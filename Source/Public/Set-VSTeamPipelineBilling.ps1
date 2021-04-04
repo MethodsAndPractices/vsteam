@@ -59,6 +59,5 @@ function Set-VSTeamPipelineBilling {
             _handleException $_
          }
       }
-
    }
 }

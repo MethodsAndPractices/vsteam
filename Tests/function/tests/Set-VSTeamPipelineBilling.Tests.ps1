@@ -6,7 +6,6 @@ Describe 'VSTeamPipelineBilling' -Tag 'unit', 'billing' {
       . "$baseFolder/Source/Public/Get-VSTeamUserProfile.ps1"
       . "$baseFolder/Source/Public/Get-VSTeamAccounts.ps1"
 
-
       # Set the account to use for testing. A normal user would do this
       # using the Set-VSTeamAccount function.
       Mock _getInstance { return 'https://dev.azure.com' }
@@ -52,7 +51,6 @@ Describe 'VSTeamPipelineBilling' -Tag 'unit', 'billing' {
             $Body -like '*"purchaseQuantity":2*' -and
             $Body -like '*"meterId":"4bad9897-8d87-43bb-80be-5e6e8fefa3de"*' -and
             $Uri -like "https://azdevopscommerce.dev.azure.com/81d6e09f-266a-4dd2-886c-b3d62341681e/_apis/AzComm/MeterResource?api-version=5.1-preview.1*"
-
          }
       }
 
