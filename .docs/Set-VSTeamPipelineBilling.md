@@ -89,4 +89,4 @@ Beware that these operations are potentially producing costs. This is why you ne
 
 [Get-VSTeamUserProfile](Get-VSTeamAccounts.md)
 
-[Get-VSTeamUserProfile](Get-VSTeamAccountBilling.md)
+[Get-VSTeamAccountBilling](Get-VSTeamAccountBilling.md)

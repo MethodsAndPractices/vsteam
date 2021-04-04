@@ -1,16 +1,16 @@
 <!-- #include "./common/header.md" -->
 
-# Set-VSTeamPipelineBilling
+# Get-VSTeamAccountBilling
 
 ## SYNOPSIS
 
-<!-- #include "./synopsis/Set-VSTeamPipelineBilling.md" -->
+<!-- #include "./synopsis/Set-VSTeamAccountBilling.md" -->
 
 ## SYNTAX
 
 ## DESCRIPTION
 
-<!-- #include "./synopsis/Set-VSTeamPipelineBilling.md" --> This cmdlet get Information of the current billing setup. Meaning what subscription the organization is connected. It also shows when the organization is not connected to a subscription.
+<!-- #include "./synopsis/Set-VSTeamAccountBilling.md" --> This cmdlet get Information of the current billing setup. Meaning what subscription the organization is connected. It also shows when the organization is not connected to a subscription.
 
 ## EXAMPLES
 
@@ -42,4 +42,4 @@ Beware that these operations are potentially producing costs. This is why you ne
 
 [Get-VSTeamUserProfile](Get-VSTeamAccounts.md)
 
-[Get-VSTeamUserProfile](Get-VSTeamAccountBilling.md)
+[Set-VSTeamPipelineBilling](Set-VSTeamPipelineBilling.md)
