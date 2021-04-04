@@ -11,7 +11,6 @@ Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/371) and (htt
 - fixed filenames of files to work on linux (casing)
 - added the possibility to call _callApi with a custom bearer token
 - added the possibility to call _callApi without the account name in the url
-- fixed filenames of files to work on linux (casing)
 
 ## 7.1.4
 
