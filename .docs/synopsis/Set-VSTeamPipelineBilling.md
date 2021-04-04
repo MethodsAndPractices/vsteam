@@ -1,1 +1,1 @@
-Sets billing operations on the organization level.
+Buys concurrent jobs for pipelines.

@@ -10,7 +10,7 @@
 
 ## DESCRIPTION
 
-<!-- #include "./synopsis/Set-VSTeamPipelineBilling.md" --> This cmdlet covers what can be bought on the billing tab on organization level. At least owner or project collection administrator permissions are needed to trigger billing actions.
+<!-- #include "./synopsis/Set-VSTeamPipelineBilling.md" --> This cmdlet makes it possible to buy private and microsoft hosted concurrent jobs. At least owner or project collection administrator permissions are needed to trigger billing actions.
 
 ## EXAMPLES
 
