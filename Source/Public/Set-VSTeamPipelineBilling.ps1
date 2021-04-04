@@ -8,9 +8,8 @@ function Set-VSTeamPipelineBilling {
       [Parameter(Mandatory = $false)]
       [string] $OrganizationId,
       [Parameter(Mandatory = $true)]
-      [ValidateRange()]
+      [ValidateRange(0,200)]
       [int] $Quantity,
-
       [switch] $Force
    )
 
@@ -30,17 +29,22 @@ function Set-VSTeamPipelineBilling {
             $OrganizationId = $currentOrg.accountId
          }
 
-         $body = @{
-            meterId = $null
-            purchaseQuantity   = $Quantity
-         }
+         $body = @{ }
 
          if ($Type -eq "HostedPipeline") {
-            $body.meterId = "4bad9897-8d87-43bb-80be-5e6e8fefa3de"
+            $body = @{
+               meterId = "4bad9897-8d87-43bb-80be-5e6e8fefa3de"
+               purchaseQuantity   = $Quantity
+            }
          }
 
          if ($Type -eq "PrivatePipeline") {
-            $body.meterId = "f44a67f2-53ae-4044-bd58-1c8aca386b98"
+            $body = @{
+               meterId = "f44a67f2-53ae-4044-bd58-1c8aca386b98"
+               #internally the minimum is one. One concurrent private job is always there (for free).
+               #strangely this is not handled by the backend internally. Buying one means zero paid private jobs.
+               purchaseQuantity   = $Quantity + 1
+            }
          }
 
          Write-Verbose $body

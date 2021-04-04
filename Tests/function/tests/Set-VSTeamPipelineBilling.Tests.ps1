@@ -24,6 +24,7 @@ Describe 'VSTeamPipelineBilling' -Tag 'unit', 'billing' {
 
    Context 'Set-VSTeamPipelineBilling' {
       It 'should set hosted pipeline' {
+
          Set-VSTeamPipelineBilling `
             -Type "HostedPipeline" `
             -OrganizationId "68c631ce-4886-4825-a471-94a74fb6ecda" `
@@ -32,7 +33,7 @@ Describe 'VSTeamPipelineBilling' -Tag 'unit', 'billing' {
 
          Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 `
             -ParameterFilter {
-            $Method -eq 'Post' -and
+            $Method -eq 'Patch' -and
             $Body -like '*"purchaseQuantity":2*' -and
             $Body -like '*"meterId":"4bad9897-8d87-43bb-80be-5e6e8fefa3de"*' -and
             $Uri -like "https://azdevopscommerce.dev.azure.com/68c631ce-4886-4825-a471-94a74fb6ecda/_apis/AzComm/MeterResource?api-version=5.1-preview.1*"
@@ -47,10 +48,11 @@ Describe 'VSTeamPipelineBilling' -Tag 'unit', 'billing' {
 
          Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 `
             -ParameterFilter {
-            $Method -eq 'Post' -and
+            $Method -eq 'Patch' -and
             $Body -like '*"purchaseQuantity":2*' -and
             $Body -like '*"meterId":"4bad9897-8d87-43bb-80be-5e6e8fefa3de"*' -and
             $Uri -like "https://azdevopscommerce.dev.azure.com/81d6e09f-266a-4dd2-886c-b3d62341681e/_apis/AzComm/MeterResource?api-version=5.1-preview.1*"
+
          }
       }
 
@@ -63,8 +65,8 @@ Describe 'VSTeamPipelineBilling' -Tag 'unit', 'billing' {
 
          Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 `
             -ParameterFilter {
-            $Method -eq 'Post' -and
-            $Body -like '*"purchaseQuantity":2*' -and
+            $Method -eq 'Patch' -and
+            $Body -like '*"purchaseQuantity":3*' -and
             $Body -like '*"meterId":"f44a67f2-53ae-4044-bd58-1c8aca386b98"*' -and
             $Uri -like "https://azdevopscommerce.dev.azure.com/68c631ce-4886-4825-a471-94a74fb6ecda/_apis/AzComm/MeterResource?api-version=5.1-preview.1*"
          }
