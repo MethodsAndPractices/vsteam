@@ -14,19 +14,19 @@ jobs:
       shell: pwsh
       run: dotnet restore --no-cache # have to use no cache of the build will fail on Windows
     - name: Build module with help
+      if: ${{ matrix.os == 'windows-latest'}}
       shell: pwsh
       run: ./Build-Module.ps1 -installDep -configuration Release -buildHelp
-      if: ${{ matrix.os == 'windows-latest'}}
     - name: Build module without help
+      if: ${{ matrix.os != 'windows-latest'}}
       shell: pwsh
       run: ./Build-Module.ps1 -installDep -configuration Release
-      if: ${{ matrix.os != 'windows-latest'}}
     - name: Run C# unit tests
       shell: pwsh
       run: dotnet test --logger "trx;LogFileName=test-results.trx"
     - name: Publish C# test results
-      uses: dorny/test-reporter@v1
       if: success() || failure()                  # run this step even if previous step failed
+      uses: dorny/test-reporter@v1
       with:
         name: C# tests results (${{ matrix.os }}) # name of the check run which will be created
         path: '**/test-results.trx'               # path to test results
@@ -48,20 +48,46 @@ jobs:
 
         Invoke-Pester -Configuration $pesterArgs
     - name: Publish PowerShell test results
-      uses: dorny/test-reporter@v1
       if: success() || failure()                          # run this step even if previous step failed
+      uses: dorny/test-reporter@v1
       with:
         name: PowerShell tests results (${{ matrix.os }}) # name of the check run which will be created
         path: '**/test-results.xml'                       # path to test results
         reporter: jest-junit                              # format of test results
+
+    - name: Copy Module to Artifacts Folder
+      if: ${{ matrix.os == 'macos-latest'}}
+      shell: pwsh
+      run: |
+        New-Item -Path "staging/VSTeam" -ItemType Directory
+        Copy-Item -Path ".\dist\",".\.gitignore",".\README.md" -Destination .\staging\VSTeam\ -Recurse -Force
+    - name: Publish Module
+      if: ${{ matrix.os == 'macos-latest'}}
+      uses: actions/upload-artifact@v2
+      with:
+        name: module
+        path: "./staging/VSTeam"
+
+
+
+
+
+  # Store the module
   package-stage:
     name: Package Management
     needs: build-stage
     runs-on: ubuntu-latest
     steps:
-    - name: Publish
+    - name: Package
       shell: pwsh
       run: Write-Output "Package module"
+
+
+
+
+
+
+
   testing-stage:
     name: Testing
     needs: package-stage
@@ -70,9 +96,18 @@ jobs:
       matrix:
         os: [macos-latest, ubuntu-latest, windows-latest]
     steps:
-    - name: Publish
+    - name: Test
       shell: pwsh
       run: Write-Output "Run Tests on ${{ matrix.os }}"
+
+
+
+
+
+
+
+
+
   publish-stage:
     name: PowerShell Gallery
     needs: testing-stage
