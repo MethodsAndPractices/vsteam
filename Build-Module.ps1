@@ -154,7 +154,7 @@ if (-not $skipLibBuild.IsPresent) {
       New-Item -Path $output\bin -ItemType Directory | Out-Null
    }
 
-   $buildOutput = dotnet build --nologo --verbosity quiet --configuration $configuration | Out-String
+   $buildOutput = dotnet build --nologo --verbosity diag --configuration $configuration | Out-String
 
    tree .\Source\Classes\bin\
 
