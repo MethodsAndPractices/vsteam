@@ -1,23 +1,23 @@
 name: build
 on: [push]
 jobs:
-  linux-phase:
+  build-stage:
     name: Build
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [macos-latest, ubuntu-16.04, windows-latest]
+        os: [macos-latest, ubuntu-latest, windows-latest]
     steps:
     - name: Clone repo
       uses: actions/checkout@v2
     - name: .NET Restore
       shell: pwsh
       run: dotnet restore --no-cache # have to use no cache of the build will fail on Windows
-    - name: Build module
+    - name: Build module with help
       shell: pwsh
       run: ./Build-Module.ps1 -installDep -configuration Release -buildHelp
       if: ${{ matrix.os == 'windows-latest'}}
-    - name: Build module
+    - name: Build module without help
       shell: pwsh
       run: ./Build-Module.ps1 -installDep -configuration Release
       if: ${{ matrix.os != 'windows-latest'}}
@@ -54,3 +54,18 @@ jobs:
         name: PowerShell tests results (${{ matrix.os }}) # name of the check run which will be created
         path: '**/test-results.xml'                       # path to test results
         reporter: jest-junit                              # format of test results
+  package-stage:
+    name: Package Management
+    needs: build-stage
+    runs-on: ubuntu-latest
+  testing-stage:
+    name: Testing
+    needs: package-stage
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [macos-latest, ubuntu-latest, windows-latest]
+  publish-stage:
+    name: PowerShell Gallery
+    needs: testing-stage
+    runs-on: ubuntu-latest
