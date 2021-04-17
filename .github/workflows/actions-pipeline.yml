@@ -1,6 +1,9 @@
 name: build
+
 on: [push]
+
 jobs:
+###############################################################################
   build-stage:
     name: Build
     runs-on: ${{ matrix.os }}
@@ -10,20 +13,25 @@ jobs:
     steps:
     - name: Clone repo
       uses: actions/checkout@v2
+
     - name: .NET Restore
       shell: pwsh
       run: dotnet restore --no-cache # have to use no cache of the build will fail on Windows
+
     - name: Build module with help
       if: ${{ matrix.os == 'windows-latest'}}
       shell: pwsh
       run: ./Build-Module.ps1 -installDep -configuration Release -buildHelp
+
     - name: Build module without help
       if: ${{ matrix.os != 'windows-latest'}}
       shell: pwsh
       run: ./Build-Module.ps1 -installDep -configuration Release
+
     - name: Run C# unit tests
       shell: pwsh
       run: dotnet test --logger "trx;LogFileName=test-results.trx"
+
     - name: Publish C# test results
       if: success() || failure()                  # run this step even if previous step failed
       uses: dorny/test-reporter@v1
@@ -31,6 +39,7 @@ jobs:
         name: C# tests results (${{ matrix.os }}) # name of the check run which will be created
         path: '**/test-results.trx'               # path to test results
         reporter: dotnet-trx                      # format of test results
+
     - name: Run PowerShell unit tests
       shell: pwsh
       run: |
@@ -47,6 +56,7 @@ jobs:
         $pesterArgs.TestResult.OutputPath = 'test-results.xml'
 
         Invoke-Pester -Configuration $pesterArgs
+
     - name: Publish PowerShell test results
       if: success() || failure()                          # run this step even if previous step failed
       uses: dorny/test-reporter@v1
@@ -55,12 +65,16 @@ jobs:
         path: '**/test-results.xml'                       # path to test results
         reporter: jest-junit                              # format of test results
 
-    - name: Copy Module to Artifacts Folder
+    - name: Copy files to staging folders
       if: ${{ matrix.os == 'windows-latest'}}
       shell: pwsh
       run: |
         Copy-Item -Path "./dist/" -Destination ./staging/VSTeam/dist/ -Recurse -Force
         Copy-Item -Path "./.gitignore","./README.md" -Destination ./staging/VSTeam/ -Recurse -Force
+        Copy-Item -Path "./Tests/SampleFiles/" -Destination ./staging/test/Tests/SampleFiles -Recurse -Force
+        Copy-Item -Path "./Tests/integration/tests/" -Destination ./staging/test/Tests/integration -Recurse -Force
+        Copy-Item -Path "./dist/*.psd1" -Destination ./staging/test/dist -Recurse -Force
+
     - name: Publish Module
       if: ${{ matrix.os == 'windows-latest'}}
       uses: actions/upload-artifact@v2
@@ -68,13 +82,6 @@ jobs:
         name: module
         path: "./staging/VSTeam"
 
-    - name: Copy Integration Tests Artifacts Folder
-      if: ${{ matrix.os == 'windows-latest'}}
-      shell: pwsh
-      run: |
-        Copy-Item -Path "./Tests/SampleFiles/" -Destination ./staging/test/Tests/SampleFiles -Recurse -Force
-        Copy-Item -Path "./Tests/integration/tests/" -Destination ./staging/test/Tests/integration -Recurse -Force
-        Copy-Item -Path "./dist/*.psd1" -Destination ./staging/test/dist -Recurse -Force
     - name: Publish Module
       if: ${{ matrix.os == 'windows-latest'}}
       uses: actions/upload-artifact@v2
@@ -82,11 +89,34 @@ jobs:
         name: test
         path: "./staging/test"
 
+    - name: Install PSScriptAnalyzer
+      if: ${{ matrix.os == 'ubuntu-latest'}}
+      shell: pwsh
+      run: Install-Module -Name PSScriptAnalyzer -Repository PSGallery -Force -Scope CurrentUser -Verbose
 
+    - name: Run Static Code Analysis
+      if: ${{ matrix.os == 'windows-latest'}}
+      shell: pwsh
+      run: |
+        # Has to happen in this task for it to take effect
+        # Load the psd1 file so you can read the required modules and import them
+        $manifest = Import-PowerShellDataFile .\dist\*.psd1
 
+        # Import each module
+        $manifest.RequiredModules | ForEach-Object { Import-Module -Name $_ }
 
+        $count = 0
+        $r = Invoke-ScriptAnalyzer –Path ./dist –Recurse | Where-Object severity -ne "Information"
+        $r | ForEach-Object {
+          Write-Host "::error file=$($_.ScriptPath),line=$($_.Line),col=$($_.Column)::$($_.Message)"
+          $count++
+        }
 
-  # Store the module
+        if($count -ne 0) {
+          Write-Host "::setFailed Static Code Analysis with error count = $count"
+        }
+
+###############################################################################
   package-stage:
     name: Package Management
     needs: build-stage
@@ -160,11 +190,11 @@ jobs:
 
 
 
-
+###############################################################################
   publish-stage:
     name: PowerShell Gallery
     needs: testing-stage
-    environment: 'PowerShell Gallery'
+    # environment: 'PowerShell Gallery'
     runs-on: ubuntu-latest
     steps:
     - name: Publish
