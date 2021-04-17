@@ -87,9 +87,26 @@ jobs:
     needs: build-stage
     runs-on: ubuntu-latest
     steps:
-    - name: Package
+    - name: Download module
+      uses: actions/download-artifact@v2
+      with:
+        name: module
+    - name: Display structure of downloaded files
       shell: pwsh
-      run: Write-Output "Package module"
+      run: ls -R
+    - name: Install NuGet 5.2.0
+      uses: nuget/setup-nuget@v1
+      with:
+        nuget-version: '5.2.0'
+    - name: Install Module Dependencies
+      shell: pwsh
+      run: |
+        # Load the psd1 file so you can read the required modules and install them
+        $manifest = Import-PowerShellDataFile ./dist/*.psd1
+
+        # Install each module
+        $manifest.RequiredModules | ForEach-Object { Install-Module -Name $_ -Repository PSGallery -Force -Scope CurrentUser -Verbose }
+
 
 
 
