@@ -56,26 +56,26 @@ jobs:
         reporter: jest-junit                              # format of test results
 
     - name: Copy Module to Artifacts Folder
-      if: ${{ matrix.os == 'macos-latest'}}
+      if: ${{ matrix.os == windows-latest'}}
       shell: pwsh
       # It is important to use \ slashes here otherwise the dist folder will be
       # flattened
       run: Copy-Item -Path ".\dist",".\.gitignore",".\README.md" -Destination .\staging\VSTeam\ -Recurse -Force
     - name: Publish Module
-      if: ${{ matrix.os == 'macos-latest'}}
+      if: ${{ matrix.os == windows-latest'}}
       uses: actions/upload-artifact@v2
       with:
         name: module
         path: "./staging/VSTeam"
 
     - name: Copy Integration Tests Artifacts Folder
-      if: ${{ matrix.os == 'macos-latest'}}
+      if: ${{ matrix.os == windows-latest'}}
       shell: pwsh
       # It is important to use \ slashes here otherwise the folders will be
       # flattened
       run: Copy-Item -Path ".\Tests\SampleFiles","Tests\integration\tests","dist/*.psd1" -Destination .\staging\Tests\ -Recurse -Force
     - name: Publish Module
-      if: ${{ matrix.os == 'macos-latest'}}
+      if: ${{ matrix.os == windows-latest'}}
       uses: actions/upload-artifact@v2
       with:
         name: test
