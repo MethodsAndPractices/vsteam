@@ -1,90 +1,90 @@
 name: cicd
 on: [push]
 jobs:
-  linux-phase:
-    name: Build Linux
-    runs-on: ubuntu-16.04
-    steps:
-    - name: Clone repo
-      uses: actions/checkout@v2
-    - name: Build module
-      shell: pwsh
-      run: ./Build-Module.ps1 -installDep -configuration Release
-    - name: Run C# unit tests
-      shell: pwsh
-      run: dotnet test --logger "trx;LogFileName=test-results.trx"
-    - name: Publish C# test results
-      uses: dorny/test-reporter@v1
-      if: success() || failure()    # run this step even if previous step failed
-      with:
-        name: C# tests results      # Name of the check run which will be created
-        path: '**/test-results.trx' # Path to test results
-        reporter: dotnet-trx        # Format of test results
-    - name: Run PowerShell unit tests
-      shell: pwsh
-      run: |
-        Import-Module .\dist\*.psd1
-        # This loads [PesterConfiguration] into scope
-        Import-Module Pester
-        $pesterArgs = [PesterConfiguration]::Default
-        $pesterArgs.Run.Exit = $true
-        $pesterArgs.Run.PassThru = $false
-        $pesterArgs.TestResult.Enabled = $true
-        $pesterArgs.Output.Verbosity = "Normal"
-        $pesterArgs.Run.Path = './Tests/function'
-        $pesterArgs.TestResult.OutputFormat = 'JUnitXml'
-        $pesterArgs.TestResult.OutputPath = 'test-results.xml'
+  # linux-phase:
+  #   name: Build Linux
+  #   runs-on: ubuntu-16.04
+  #   steps:
+  #   - name: Clone repo
+  #     uses: actions/checkout@v2
+  #   - name: Build module
+  #     shell: pwsh
+  #     run: ./Build-Module.ps1 -installDep -configuration Release
+  #   - name: Run C# unit tests
+  #     shell: pwsh
+  #     run: dotnet test --logger "trx;LogFileName=test-results.trx"
+  #   - name: Publish C# test results
+  #     uses: dorny/test-reporter@v1
+  #     if: success() || failure()       # run this step even if previous step failed
+  #     with:
+  #       name: C# tests results (Linux) # Name of the check run which will be created
+  #       path: '**/test-results.trx'    # Path to test results
+  #       reporter: dotnet-trx           # Format of test results
+  #   - name: Run PowerShell unit tests
+  #     shell: pwsh
+  #     run: |
+  #       Import-Module .\dist\*.psd1
+  #       # This loads [PesterConfiguration] into scope
+  #       Import-Module Pester
+  #       $pesterArgs = [PesterConfiguration]::Default
+  #       $pesterArgs.Run.Exit = $true
+  #       $pesterArgs.Run.PassThru = $false
+  #       $pesterArgs.TestResult.Enabled = $true
+  #       $pesterArgs.Output.Verbosity = "Normal"
+  #       $pesterArgs.Run.Path = './Tests/function'
+  #       $pesterArgs.TestResult.OutputFormat = 'JUnitXml'
+  #       $pesterArgs.TestResult.OutputPath = 'test-results.xml'
 
-        Invoke-Pester -Configuration $pesterArgs
-    - name: Publish PowerShell test results
-      uses: dorny/test-reporter@v1
-      if: success() || failure()       # run this step even if previous step failed
-      with:
-        name: PowerShell tests results # Name of the check run which will be created
-        path: '**/test-results.xml'    # Path to test results
-        reporter: jest-junit           # Format of test results
-  macOS-phase:
-    name: Build macOS
-    runs-on: macos-latest
-    steps:
-    - name: Clone repo
-      uses: actions/checkout@v2
-    - name: Build module
-      shell: pwsh
-      run: ./Build-Module.ps1 -installDep -configuration Release
-    - name: Run C# unit tests
-      shell: pwsh
-      run: dotnet test --logger "trx;LogFileName=test-results.trx"
-    - name: Publish C# test results
-      uses: dorny/test-reporter@v1
-      if: success() || failure()    # run this step even if previous step failed
-      with:
-        name: C# tests results      # Name of the check run which will be created
-        path: '**/test-results.trx' # Path to test results
-        reporter: dotnet-trx        # Format of test results
-    - name: Run PowerShell unit tests
-      shell: pwsh
-      run: |
-        Import-Module .\dist\*.psd1
-        # This loads [PesterConfiguration] into scope
-        Import-Module Pester
-        $pesterArgs = [PesterConfiguration]::Default
-        $pesterArgs.Run.Exit = $true
-        $pesterArgs.Run.PassThru = $false
-        $pesterArgs.TestResult.Enabled = $true
-        $pesterArgs.Output.Verbosity = "Normal"
-        $pesterArgs.Run.Path = './Tests/function'
-        $pesterArgs.TestResult.OutputFormat = 'JUnitXml'
-        $pesterArgs.TestResult.OutputPath = 'test-results.xml'
+  #       Invoke-Pester -Configuration $pesterArgs
+  #   - name: Publish PowerShell test results
+  #     uses: dorny/test-reporter@v1
+  #     if: success() || failure()               # run this step even if previous step failed
+  #     with:
+  #       name: PowerShell tests results (Linux) # Name of the check run which will be created
+  #       path: '**/test-results.xml'            # Path to test results
+  #       reporter: jest-junit                   # Format of test results
+  # macOS-phase:
+  #   name: Build macOS
+  #   runs-on: macos-latest
+  #   steps:
+  #   - name: Clone repo
+  #     uses: actions/checkout@v2
+  #   - name: Build module
+  #     shell: pwsh
+  #     run: ./Build-Module.ps1 -installDep -configuration Release
+  #   - name: Run C# unit tests
+  #     shell: pwsh
+  #     run: dotnet test --logger "trx;LogFileName=test-results.trx"
+  #   - name: Publish C# test results
+  #     uses: dorny/test-reporter@v1
+  #     if: success() || failure()       # run this step even if previous step failed
+  #     with:
+  #       name: C# tests results (macOS) # Name of the check run which will be created
+  #       path: '**/test-results.trx'    # Path to test results
+  #       reporter: dotnet-trx           # Format of test results
+  #   - name: Run PowerShell unit tests
+  #     shell: pwsh
+  #     run: |
+  #       Import-Module .\dist\*.psd1
+  #       # This loads [PesterConfiguration] into scope
+  #       Import-Module Pester
+  #       $pesterArgs = [PesterConfiguration]::Default
+  #       $pesterArgs.Run.Exit = $true
+  #       $pesterArgs.Run.PassThru = $false
+  #       $pesterArgs.TestResult.Enabled = $true
+  #       $pesterArgs.Output.Verbosity = "Normal"
+  #       $pesterArgs.Run.Path = './Tests/function'
+  #       $pesterArgs.TestResult.OutputFormat = 'JUnitXml'
+  #       $pesterArgs.TestResult.OutputPath = 'test-results.xml'
 
-        Invoke-Pester -Configuration $pesterArgs
-    - name: Publish PowerShell test results
-      uses: dorny/test-reporter@v1
-      if: success() || failure()       # run this step even if previous step failed
-      with:
-        name: PowerShell tests results # Name of the check run which will be created
-        path: '**/test-results.xml'    # Path to test results
-        reporter: jest-junit           # Format of test results
+  #       Invoke-Pester -Configuration $pesterArgs
+  #   - name: Publish PowerShell test results
+  #     uses: dorny/test-reporter@v1
+  #     if: success() || failure()               # run this step even if previous step failed
+  #     with:
+  #       name: PowerShell tests results (macOS) # Name of the check run which will be created
+  #       path: '**/test-results.xml'            # Path to test results
+  #       reporter: jest-junit                   # Format of test results
   windows-phase:
     name: Build Windows
     runs-on: windows-latest
@@ -93,17 +93,17 @@ jobs:
       uses: actions/checkout@v2
     - name: Build module
       shell: pwsh
-      run: ./Build-Module.ps1 -installDep -configuration Release
+      run: ./Build-Module.ps1 -installDep -buildHelp -configuration Release -verbose
     - name: Run C# unit tests
       shell: pwsh
-      run: dotnet test --logger "trx;LogFileName=test-results.trx"
+      run: dotnet test --collect:"Code Coverage" --logger "trx;LogFileName=test-results.trx"
     - name: Publish C# test results
       uses: dorny/test-reporter@v1
-      if: success() || failure()    # run this step even if previous step failed
+      if: success() || failure()         # run this step even if previous step failed
       with:
-        name: C# tests results      # Name of the check run which will be created
-        path: '**/test-results.trx' # Path to test results
-        reporter: dotnet-trx        # Format of test results
+        name: C# tests results (Windows) # Name of the check run which will be created
+        path: '**/test-results.trx'      # Path to test results
+        reporter: dotnet-trx             # Format of test results
     - name: Run PowerShell unit tests
       shell: pwsh
       run: |
@@ -118,12 +118,16 @@ jobs:
         $pesterArgs.Run.Path = './Tests/function'
         $pesterArgs.TestResult.OutputFormat = 'JUnitXml'
         $pesterArgs.TestResult.OutputPath = 'test-results.xml'
+        $pesterArgs.CodeCoverage.Enabled = $true
+        $pesterArgs.CodeCoverage.OutputFormat = 'JaCoCo'
+        $pesterArgs.CodeCoverage.OutputPath = "coverage.xml"
+        $pesterArgs.CodeCoverage.Path = ".\dist\*.ps*1"
 
         Invoke-Pester -Configuration $pesterArgs
     - name: Publish PowerShell test results
       uses: dorny/test-reporter@v1
-      if: success() || failure()       # run this step even if previous step failed
+      if: success() || failure()                 # run this step even if previous step failed
       with:
-        name: PowerShell tests results # Name of the check run which will be created
-        path: '**/test-results.xml'    # Path to test results
-        reporter: jest-junit           # Format of test results
+        name: PowerShell tests results (Windows) # Name of the check run which will be created
+        path: '**/test-results.xml'              # Path to test results
+        reporter: jest-junit                     # Format of test results
