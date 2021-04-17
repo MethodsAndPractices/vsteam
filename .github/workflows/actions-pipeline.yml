@@ -129,14 +129,13 @@ jobs:
 
         ConvertTo-NuSpec -Path ./dist/VSTeam.psd1 -Verbose
 
-        Get-ChildItem -recurse
-
         Write-Host "Pack module"
 
         Write-Host "nuget.exe pack ./dist/VSTeam.nuspec -NonInteractive -OutputDirectory ./dist -version $package_version -Verbosity Detailed"
 
-        nuget.exe pack ./dist/VSTeam.nuspec -NonInteractive -OutputDirectory ./dist -version $package_version -Verbosity Detailed
+        nuget pack ./dist/VSTeam.nuspec -NonInteractive -OutputDirectory ./dist -version $package_version -Verbosity Detailed
 
+        Get-ChildItem -recurse
 
   testing-stage:
     name: Testing
