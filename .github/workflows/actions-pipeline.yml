@@ -12,7 +12,14 @@ jobs:
       run: ./Build-Module.ps1 -installDep -configuration Release
     - name: Run C# unit tests
       shell: pwsh
-      run: dotnet test
+      run: dotnet test --logger "trx;LogFileName=test-results.trx"
+    - name: Publish C# test results
+      uses: dorny/test-reporter@v1
+      if: success() || failure()    # run this step even if previous step failed
+      with:
+        name: C# tests results      # Name of the check run which will be created
+        path: '**/test-results.trx' # Path to test results
+        reporter: dotnet-trx        # Format of test results
     - name: Run PowerShell unit tests
       shell: pwsh
       run: |
@@ -29,10 +36,10 @@ jobs:
         $pesterArgs.TestResult.OutputPath = 'test-results.xml'
 
         Invoke-Pester -Configuration $pesterArgs
-    - name: Publish test results
+    - name: Publish PowerShell test results
       uses: dorny/test-reporter@v1
-      if: success() || failure()    # run this step even if previous step failed
+      if: success() || failure()       # run this step even if previous step failed
       with:
-        name: PowerShell tests      # Name of the check run which will be created
-        path: '**/test-results.xml' # Path to test results
-        reporter: jest-junit        # Format of test results
+        name: PowerShell tests results # Name of the check run which will be created
+        path: '**/test-results.xml'    # Path to test results
+        reporter: jest-junit           # Format of test results
