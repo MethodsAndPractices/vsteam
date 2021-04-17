@@ -21,10 +21,18 @@ jobs:
         Import-Module Pester
         $pesterArgs = [PesterConfiguration]::Default
         $pesterArgs.Run.Exit = $true
-        $pesterArgs.Run.Path = './Tests/function'
         $pesterArgs.Run.PassThru = $false
-        $pesterArgs.Output.Verbosity = "Normal"
         $pesterArgs.TestResult.Enabled = $true
+        $pesterArgs.Output.Verbosity = "Normal"
+        $pesterArgs.Run.Path = './Tests/function'
+        $pesterArgs.TestResult.OutputFormat = 'JUnitXml'
         $pesterArgs.TestResult.OutputPath = 'test-results.xml'
 
         Invoke-Pester -Configuration $pesterArgs
+    - name: Publish test results
+      uses: dorny/test-reporter@v1
+      if: success() || failure()    # run this step even if previous step failed
+      with:
+        name: PowerShell tests      # Name of the check run which will be created
+        path: '**/test-results.xml' # Path to test results
+        reporter: jest-junit        # Format of test results
