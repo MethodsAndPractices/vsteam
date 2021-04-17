@@ -10,3 +10,6 @@ jobs:
     - name: Build module
       shell: pwsh
       run: ./Build-Module.ps1 -installDep -configuration Release
+    - name: Run C# unit tests
+      shell: pwsh
+      run: dotnet test
