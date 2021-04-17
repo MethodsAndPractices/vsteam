@@ -98,25 +98,13 @@ jobs:
       if: ${{ matrix.os == 'ubuntu-latest'}}
       shell: pwsh
       run: |
-        # Has to happen in this task for it to take effect
-        # Load the psd1 file so you can read the required modules and import them
         $manifest = Import-PowerShellDataFile ./dist/*.psd1
-
-        # Import each module
         $manifest.RequiredModules | ForEach-Object { Import-Module -Name $_ }
-
         $count = 0
         $r = Invoke-ScriptAnalyzer –Path ./dist –Recurse | Where-Object severity -ne "Information"
-        $r | ForEach-Object {
-          Write-Host "::error file=$($_.ScriptPath),line=$($_.Line),col=$($_.Column)::$($_.Message)"
-          $count++
-        }
+        $r | ForEach-Object { Write-Host "::error file=$($_.ScriptPath),line=$($_.Line),col=$($_.Column)::$($_.Message)"; $count++ }
+        if($count -ne 0) { Write-Host "::setFailed Static Code Analysis with error count = $count" }
 
-        if($count -ne 0) {
-          Write-Host "::setFailed Static Code Analysis with error count = $count"
-        }
-
-###############################################################################
   package-stage:
     name: Package Management
     needs: build-stage
@@ -183,14 +171,6 @@ jobs:
       shell: pwsh
       run: Write-Output "Run Tests on ${{ matrix.os }}"
 
-
-
-
-
-
-
-
-###############################################################################
   publish-stage:
     name: PowerShell Gallery
     needs: testing-stage
