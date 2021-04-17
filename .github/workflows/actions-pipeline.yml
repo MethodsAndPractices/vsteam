@@ -94,7 +94,7 @@ jobs:
     - name: Setup .NET SDK
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: '3.1.x' # SDK Version to use; x will use the latest version of the 3.1 channel
+        dotnet-version: '2.1.x'
     - name: Build module
       shell: pwsh
       run: ./Build-Module.ps1 -installDep -buildHelp -configuration Release
