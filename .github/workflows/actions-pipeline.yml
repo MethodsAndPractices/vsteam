@@ -72,9 +72,9 @@ jobs:
       if: ${{ matrix.os == 'windows-latest'}}
       shell: pwsh
       run: |
-        Copy-Item -Path "dist/*.psd1" -Destination ./staging/Tests/ -Recurse -Force
         Copy-Item -Path "./Tests/SampleFiles/" -Destination ./staging/Tests/ -Recurse -Force
         Copy-Item -Path "./Tests/integration/tests/" -Destination ./staging/Tests/ -Recurse -Force
+        Copy-Item -Path "./dist/*.psd1" -Destination ./staging/Tests/ -Recurse -Force
     - name: Publish Module
       if: ${{ matrix.os == 'windows-latest'}}
       uses: actions/upload-artifact@v2
