@@ -80,7 +80,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: test
-        path: "./staging/Tests"
+        path: "./staging/test"
 
 
 
@@ -112,11 +112,32 @@ jobs:
         # Install each module
         $manifest.RequiredModules | ForEach-Object { Install-Module -Name $_ -Repository PSGallery -Force -Scope CurrentUser -Verbose }
 
+    - name: Compute Version Number
+      shell: pwsh
+      run: |
+        # Load the psd1 file so you can read the version
+        $manifest = Import-PowerShellDataFile ./dist/*.psd1
 
+        Write-Host "Package Version Number: $($manifest.ModuleVersion).${{ github.run_id }}"
 
+        $env:PACKAGE_VERSION = "$($manifest.ModuleVersion).${{ github.run_id }}"
+      working-directory: ./module
 
+    - name: Create NuSpec from PSD1
+      shell: pwsh
+      run: |
+        Install-Module -Name Trackyon.Nuget -Scope CurrentUser -Force -Verbose
 
+        Write-Host "Convert psd1 into a NuSpec"
 
+        ConvertTo-NuSpec -Path ./dist/VSTeam.psd1 -Verbose
+      working-directory: ./module
+
+    - name: Pack module
+      shell: pwsh
+      run: |
+        nuget.exe pack ./dist/VSTeam.nuspec -NonInteractive -OutputDirectory ./dist -version $($env:PACKAGE_VERSION) -Verbosity Detailed
+      working-directory: ./module
 
 
   testing-stage:
