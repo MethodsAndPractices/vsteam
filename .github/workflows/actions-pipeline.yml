@@ -76,6 +76,7 @@ jobs:
   publish-stage:
     name: PowerShell Gallery
     needs: testing-stage
+    environment: 'PowerShell Gallery'
     runs-on: ubuntu-latest
     steps:
     - name: Publish
