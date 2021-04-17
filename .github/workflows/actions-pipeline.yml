@@ -102,7 +102,7 @@ jobs:
         $count = 0
         $r = Invoke-ScriptAnalyzer –Path ./dist –Recurse
         $r | ForEach-Object { Write-Host "::error file=$($_.ScriptPath),line=$($_.Line),col=$($_.Column)::$($_.Message)"; $count++ }
-        if($count -ne 0) { Write-Host "::set-failed Static Code Analysis with error count = $count" }
+        return $count # This should fail the step if not zero
 
   package-stage:
     name: Package Management
