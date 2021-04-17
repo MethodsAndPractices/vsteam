@@ -3,7 +3,6 @@ name: build
 on: [push]
 
 jobs:
-###############################################################################
   build-stage:
     name: Build
     runs-on: ${{ matrix.os }}
@@ -101,7 +100,7 @@ jobs:
         $manifest = Import-PowerShellDataFile ./dist/*.psd1
         $manifest.RequiredModules | ForEach-Object { Import-Module -Name $_ }
         $count = 0
-        $r = Invoke-ScriptAnalyzer –Path ./dist –Recurse | Where-Object severity -ne "Information"
+        $r = Invoke-ScriptAnalyzer –Path ./dist –Recurse
         $r | ForEach-Object { Write-Host "::error file=$($_.ScriptPath),line=$($_.Line),col=$($_.Column)::$($_.Message)"; $count++ }
         if($count -ne 0) { Write-Host "::setFailed Static Code Analysis with error count = $count" }
 
