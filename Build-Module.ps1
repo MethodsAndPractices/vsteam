@@ -156,13 +156,13 @@ if (-not $skipLibBuild.IsPresent) {
 
    $buildOutput = dotnet restore --no-cache | Out-String
 
-   if (($buildOutput | Select-String -Pattern 'error')) {
+   if (($buildOutput | Select-String -Pattern 'error') -or $Verbose.IsPresent) {
       Write-Output $buildOutput
    }
 
-   $buildOutput = dotnet build --nologo --verbosity d --configuration $configuration | Out-String
+   $buildOutput = dotnet build --nologo --configuration $configuration | Out-String
 
-   if (-not ($buildOutput | Select-String -Pattern 'succeeded')) {
+   if (-not ($buildOutput | Select-String -Pattern 'succeeded') -or $Verbose.IsPresent) {
       Write-Output $buildOutput
    }
 
