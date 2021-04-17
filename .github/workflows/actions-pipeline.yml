@@ -91,10 +91,9 @@ jobs:
     steps:
     - name: Clone repo
       uses: actions/checkout@v2
-    - name: Setup .NET SDK
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: '2.1.x'
+    - name: Restore
+      shell: pwsh
+      run: dotnet restore --no-cache -v d
     - name: Build module
       shell: pwsh
       run: ./Build-Module.ps1 -installDep -buildHelp -configuration Release
