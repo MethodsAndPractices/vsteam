@@ -156,6 +156,8 @@ if (-not $skipLibBuild.IsPresent) {
 
    $buildOutput = dotnet build --nologo --verbosity quiet --configuration $configuration | Out-String
 
+   tree .\Source\Classes\bin\
+
    Copy-Item -Destination "$output\bin\vsteam-lib.dll" -Path ".\Source\Classes\bin\$configuration\netstandard2.0\vsteam-lib.dll" -Force
    Copy-Item -Destination "$output\bin\Trackyon.System.Management.Automation.Abstractions.dll" -Path ".\Source\Classes\bin\$configuration\netstandard2.0\Trackyon.System.Management.Automation.Abstractions.dll" -Force
 
