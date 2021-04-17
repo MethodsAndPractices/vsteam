@@ -135,7 +135,7 @@ jobs:
 
         nuget pack ./dist/VSTeam.nuspec -NonInteractive -OutputDirectory ./dist -version $package_version -Verbosity Detailed
 
-        nuget push ./dist/*.nupkg -NonInteractive -api-key ${{secrets.NUGET_TOKEN}} -source "github" -Verbosity Detailed
+        nuget push ./dist/*.nupkg -NonInteractive -ApiKey ${{secrets.NUGET_TOKEN}} -Source "github" -Verbosity Detailed
 
   testing-stage:
     name: Testing
