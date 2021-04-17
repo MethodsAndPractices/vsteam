@@ -100,7 +100,7 @@ jobs:
         $manifest = Import-PowerShellDataFile ./dist/*.psd1
         $manifest.RequiredModules | ForEach-Object { Import-Module -Name $_ }
         $count = 0
-        $r = Invoke-ScriptAnalyzer –Path ./dist –Recurse
+        $r = Invoke-ScriptAnalyzer –Path ./dist –Recurse | Where-Object severity -ne "Information"
         $r | ForEach-Object { Write-Host "::error file=$($_.ScriptPath),line=$($_.Line),col=$($_.Column)::$($_.Message)"; $count++ }
         if($count -ne 0) { throw "Static Code Analysis with error count = $count" }
 
