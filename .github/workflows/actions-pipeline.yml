@@ -95,12 +95,12 @@ jobs:
       run: Install-Module -Name PSScriptAnalyzer -Repository PSGallery -Force -Scope CurrentUser -Verbose
 
     - name: Run Static Code Analysis
-      if: ${{ matrix.os == 'windows-latest'}}
+      if: ${{ matrix.os == 'ubuntu-latest'}}
       shell: pwsh
       run: |
         # Has to happen in this task for it to take effect
         # Load the psd1 file so you can read the required modules and import them
-        $manifest = Import-PowerShellDataFile .\dist\*.psd1
+        $manifest = Import-PowerShellDataFile ./dist/*.psd1
 
         # Import each module
         $manifest.RequiredModules | ForEach-Object { Import-Module -Name $_ }
