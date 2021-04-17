@@ -118,10 +118,9 @@ jobs:
         # Load the psd1 file so you can read the version
         $manifest = Import-PowerShellDataFile ./dist/*.psd1
 
-        Write-Host "Package Version Number: $($manifest.ModuleVersion).${{ github.run_id }}"
+        Write-Host "Package Version Number: $($manifest.ModuleVersion).${{ github.run_number }}"
 
-        $env:PACKAGE_VERSION = "$($manifest.ModuleVersion).${{ github.run_id }}"
-      working-directory: ./module
+        $env:PACKAGE_VERSION = "$($manifest.ModuleVersion).${{ github.run_number }}"
 
     - name: Create NuSpec from PSD1
       shell: pwsh
@@ -131,13 +130,11 @@ jobs:
         Write-Host "Convert psd1 into a NuSpec"
 
         ConvertTo-NuSpec -Path ./dist/VSTeam.psd1 -Verbose
-      working-directory: ./module
 
     - name: Pack module
       shell: pwsh
       run: |
         nuget.exe pack ./dist/VSTeam.nuspec -NonInteractive -OutputDirectory ./dist -version $($env:PACKAGE_VERSION) -Verbosity Detailed
-      working-directory: ./module
 
 
   testing-stage:
