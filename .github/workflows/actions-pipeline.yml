@@ -1,0 +1,12 @@
+name: cicd
+on: [push]
+jobs:
+  linux-phase:
+    name: Build Linux
+    runs-on: ubuntu-16.04
+    steps:
+    - name: Clone repo
+      uses: actions/checkout@v2
+    - name: Build module
+      shell: pwsh
+      run: ./Build-Module.ps1 -installDep -configuration Release
