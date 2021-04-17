@@ -127,15 +127,17 @@ jobs:
 
         Write-Host "Convert psd1 into a NuSpec"
 
-        ConvertTo-NuSpec -Path ./dist/VSTeam.psd1 -Verbose
+        ConvertTo-NuSpec -Path ./dist/VSTeam.psd1
 
         Write-Host "Pack module"
 
-        Write-Host "nuget.exe pack ./dist/VSTeam.nuspec -NonInteractive -OutputDirectory ./dist -version $package_version -Verbosity Detailed"
+        Write-Host "nuget pack ./dist/VSTeam.nuspec -NonInteractive -OutputDirectory ./dist -version $package_version -Verbosity Detailed"
 
         nuget pack ./dist/VSTeam.nuspec -NonInteractive -OutputDirectory ./dist -version $package_version -Verbosity Detailed
 
-        nuget push ./dist/*.nupkg -NonInteractive -ApiKey ${{secrets.NUGET_TOKEN}} -Source "github" -Verbosity Detailed
+        Write-Host "nuget push ./dist/*.nupkg -NonInteractive -Source "github" -Verbosity Detailed -ApiKey ${{secrets.NUGET_TOKEN}}"
+
+        nuget push ./dist/*.nupkg -NonInteractive -Source "github" -Verbosity Detailed -ApiKey ${{secrets.NUGET_TOKEN}}
 
   testing-stage:
     name: Testing
