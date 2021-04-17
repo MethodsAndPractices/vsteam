@@ -58,6 +58,10 @@ jobs:
     name: Package Management
     needs: build-stage
     runs-on: ubuntu-latest
+    steps:
+    - name: Publish
+      shell: pwsh
+      run: Write-Output "Package module"
   testing-stage:
     name: Testing
     needs: package-stage
@@ -65,7 +69,15 @@ jobs:
     strategy:
       matrix:
         os: [macos-latest, ubuntu-latest, windows-latest]
+    steps:
+    - name: Publish
+      shell: pwsh
+      run: Write-Output "Run Tests on ${{ matrix.os }}"
   publish-stage:
     name: PowerShell Gallery
     needs: testing-stage
     runs-on: ubuntu-latest
+    steps:
+    - name: Publish
+      shell: pwsh
+      run: Write-Output "Publish to PowerShell Gallery"
