@@ -9,7 +9,7 @@ jobs:
       uses: actions/checkout@v2
     - name: Build module
       shell: pwsh
-      run: ./Build-Module.ps1 -installDep -configuration Release -Verbose
+      run: ./Build-Module.ps1 -installDep -configuration Release
     - name: Run C# unit tests
       shell: pwsh
       run: dotnet test --logger "trx;LogFileName=test-results.trx"
@@ -51,7 +51,7 @@ jobs:
       uses: actions/checkout@v2
     - name: Build module
       shell: pwsh
-      run: ./Build-Module.ps1 -installDep -configuration Release -Verbose
+      run: ./Build-Module.ps1 -installDep -configuration Release
     - name: Run C# unit tests
       shell: pwsh
       run: dotnet test --logger "trx;LogFileName=test-results.trx"
@@ -93,7 +93,7 @@ jobs:
       uses: actions/checkout@v2
     - name: Build module
       shell: pwsh
-      run: ./Build-Module.ps1 -installDep -buildHelp -configuration Release -Verbose
+      run: ./Build-Module.ps1 -installDep -buildHelp -configuration Release
     - name: Run C# unit tests
       shell: pwsh
       run: dotnet test --collect:"Code Coverage" --logger "trx;LogFileName=test-results.trx"
