@@ -154,6 +154,12 @@ if (-not $skipLibBuild.IsPresent) {
       New-Item -Path $output\bin -ItemType Directory | Out-Null
    }
 
+   $buildOutput = dotnet restore --no-cache | Out-String
+
+   if (($buildOutput | Select-String -Pattern 'error')) {
+      Write-Output $buildOutput
+   }
+
    $buildOutput = dotnet build --nologo --verbosity d --configuration $configuration | Out-String
 
    if (-not ($buildOutput | Select-String -Pattern 'succeeded')) {
