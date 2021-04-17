@@ -112,29 +112,29 @@ jobs:
         # Install each module
         $manifest.RequiredModules | ForEach-Object { Install-Module -Name $_ -Repository PSGallery -Force -Scope CurrentUser -Verbose }
 
-    - name: Compute Version Number
+    - name: Pack and push module
       shell: pwsh
       run: |
+        Write-Host "Compute Version Number"
+
         # Load the psd1 file so you can read the version
         $manifest = Import-PowerShellDataFile ./dist/*.psd1
 
-        Write-Host "Package Version Number: $($manifest.ModuleVersion).${{ github.run_number }}"
+        $package_version = "$($manifest.ModuleVersion).${{ github.run_number }}"
 
-        $env:PACKAGE_VERSION = "$($manifest.ModuleVersion).${{ github.run_number }}"
+        Write-Host "Package Version Number: $package_version"
 
-    - name: Create NuSpec from PSD1
-      shell: pwsh
-      run: |
+        Write-Host "Create NuSpec from PSD1"
+
         Install-Module -Name Trackyon.Nuget -Scope CurrentUser -Force -Verbose
 
         Write-Host "Convert psd1 into a NuSpec"
 
         ConvertTo-NuSpec -Path ./dist/VSTeam.psd1 -Verbose
 
-    - name: Pack module
-      shell: pwsh
-      run: |
-        nuget.exe pack ./dist/VSTeam.nuspec -NonInteractive -OutputDirectory ./dist -version $($env:PACKAGE_VERSION) -Verbosity Detailed
+        Write-Host "Pack module"
+
+        nuget.exe pack ./dist/VSTeam.nuspec -NonInteractive -OutputDirectory ./dist -version $package_version -Verbosity Detailed
 
 
   testing-stage:
