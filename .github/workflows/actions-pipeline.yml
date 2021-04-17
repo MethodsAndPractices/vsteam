@@ -96,9 +96,6 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: module
-    - name: Display structure of downloaded files
-      shell: pwsh
-      run: ls -R
     - name: Install NuGet 5.2.0
       uses: nuget/setup-nuget@v1
       with:
@@ -126,13 +123,17 @@ jobs:
 
         Write-Host "Create NuSpec from PSD1"
 
-        Install-Module -Name Trackyon.Nuget -Scope CurrentUser -Force -Verbose
+        Install-Module -Name Trackyon.Nuget -Scope CurrentUser -Force
 
         Write-Host "Convert psd1 into a NuSpec"
 
         ConvertTo-NuSpec -Path ./dist/VSTeam.psd1 -Verbose
 
+        Get-ChildItem -recurse
+
         Write-Host "Pack module"
+
+        Write-Host "nuget.exe pack ./dist/VSTeam.nuspec -NonInteractive -OutputDirectory ./dist -version $package_version -Verbosity Detailed"
 
         nuget.exe pack ./dist/VSTeam.nuspec -NonInteractive -OutputDirectory ./dist -version $package_version -Verbosity Detailed
 
