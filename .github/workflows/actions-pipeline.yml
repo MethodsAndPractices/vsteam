@@ -34,7 +34,7 @@ jobs:
     - name: Run PowerShell unit tests
       shell: pwsh
       run: |
-        Import-Module .\dist\*.psd1
+        Import-Module ./dist/*.psd1
         # This loads [PesterConfiguration] into scope
         Import-Module Pester
         $pesterArgs = [PesterConfiguration]::Default
@@ -58,15 +58,24 @@ jobs:
     - name: Copy Module to Artifacts Folder
       if: ${{ matrix.os == 'macos-latest'}}
       shell: pwsh
-      run: |
-        New-Item -Path "staging/VSTeam" -ItemType Directory
-        Copy-Item -Path ".\dist\",".\.gitignore",".\README.md" -Destination .\staging\VSTeam\ -Recurse -Force
+      run: Copy-Item -Path "./dist/","./.gitignore","./README.md" -Destination ./staging/VSTeam/ -Recurse -Force
     - name: Publish Module
       if: ${{ matrix.os == 'macos-latest'}}
       uses: actions/upload-artifact@v2
       with:
         name: module
         path: "./staging/VSTeam"
+
+    - name: Copy Integration Tests Artifacts Folder
+      if: ${{ matrix.os == 'macos-latest'}}
+      shell: pwsh
+      run: Copy-Item -Path "./Tests/SampleFiles/","Tests/integration/tests/","dist/*.psd1" -Destination ./staging/Tests/ -Recurse -Force
+    - name: Publish Module
+      if: ${{ matrix.os == 'macos-latest'}}
+      uses: actions/upload-artifact@v2
+      with:
+        name: test
+        path: "./staging/Tests"
 
 
 
