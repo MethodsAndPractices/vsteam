@@ -53,7 +53,9 @@ param(
    [string]$configuration = "LibOnly",
 
    [ValidateSet('Diagnostic', 'Detailed', 'Normal', 'Minimal', 'None', 'ErrorsOnly')]
-   [string]$testOutputLevel = "ErrorsOnly"
+   [string]$testOutputLevel = "ErrorsOnly",
+
+   [switch]$ci
 )
 
 function Import-Pester {
@@ -159,7 +161,7 @@ if (-not $skipLibBuild.IsPresent) {
    Copy-Item -Destination "$output\bin\vsteam-lib.dll" -Path ".\Source\Classes\bin\$configuration\netstandard2.0\vsteam-lib.dll" -Force
    Copy-Item -Destination "$output\bin\Trackyon.System.Management.Automation.Abstractions.dll" -Path ".\Source\Classes\bin\$configuration\netstandard2.0\Trackyon.System.Management.Automation.Abstractions.dll" -Force
 
-   if (-not ($buildOutput | Select-String -Pattern 'succeeded')) {
+   if (-not ($buildOutput | Select-String -Pattern 'succeeded') -or $ci.IsPressent) {
       Write-Output $buildOutput
    }
 }
