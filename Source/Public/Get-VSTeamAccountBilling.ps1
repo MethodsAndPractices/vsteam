@@ -4,6 +4,9 @@ function Get-VSTeamAccountBilling {
    param()
 
    process {
+      # This will throw if this account does not support the Billing API
+      _supportsBilling
+
       $userProfileId = (Get-VSTeamUserProfile -MyProfile).id
       $currentAccount = (Get-VSTeamAccounts -MemberId $userProfileId) | Where-Object { (_getInstance).EndsWith($_.accountName) }
 

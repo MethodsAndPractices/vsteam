@@ -14,6 +14,9 @@ function Set-VSTeamPipelineBilling {
    )
 
    process {
+      # This will throw if this account does not support the Billing API
+      _supportsBilling
+
       if ($force -or $pscmdlet.ShouldProcess($Quantity, "Quantity")) {
 
          $billingToken = _getBillingToken -NamedTokenId 'AzCommDeploymentProfile'

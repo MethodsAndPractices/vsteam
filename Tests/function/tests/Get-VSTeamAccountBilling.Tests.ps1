@@ -35,5 +35,11 @@ Describe 'VSTeamAccountBilling' -Tag 'unit', 'billing' {
             $Uri -like "*api-version=5.1-preview.1*"
          }
       }
+
+      It 'should throw' {
+         Mock _getApiVersion { return '' } -ParameterFilter { $Service -eq 'Billing' }
+
+         { Get-VSTeamAccountBilling } | Should -Throw
+      }
    }
 }

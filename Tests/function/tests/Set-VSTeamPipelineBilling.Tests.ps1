@@ -71,5 +71,17 @@ Describe 'VSTeamPipelineBilling' -Tag 'unit', 'billing' {
             $Uri -like "https://azdevopscommerce.dev.azure.com/68c631ce-4886-4825-a471-94a74fb6ecda/_apis/AzComm/MeterResource?api-version=5.1-preview.1*"
          }
       }
+
+      It 'should throw' {
+         Mock _getApiVersion { return '' } -ParameterFilter { $Service -eq 'Billing' }
+
+         {
+            Set-VSTeamPipelineBilling `
+            -Type "PrivatePipeline" `
+            -OrganizationId "68c631ce-4886-4825-a471-94a74fb6ecda" `
+            -Quantity 2 `
+            -Force
+         } | Should -Throw
+      }
    }
 }

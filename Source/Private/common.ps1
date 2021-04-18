@@ -138,7 +138,7 @@ function _testGraphSupport {
 function _supportsHierarchyQuery {
    _hasAccount
    if ($false -eq $(_testHierarchyQuerySupport)) {
-      throw 'This account does not support the graph API.'
+      throw 'This account does not support the hierarchy query API.'
    }
 }
 
@@ -149,7 +149,7 @@ function _testHierarchyQuerySupport {
 function _supportsBilling {
    _hasAccount
    if ($false -eq $(_testBillingSupport)) {
-      throw 'This account does not support the graph API.'
+      throw 'This account does not support the billing API.'
    }
 }
 
