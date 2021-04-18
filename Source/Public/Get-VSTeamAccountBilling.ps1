@@ -12,7 +12,7 @@ function Get-VSTeamAccountBilling {
          # the account GUID instead of the clear name in the url
          # _callAPI does not support this, hence full URL is used
          _callAPI `
-            -Url "https://azdevopscommerce.dev.azure.com/$($currentAccount.accountId)/_apis/AzComm/BillingSetup?api-version=5.1-preview.1"
+            -Url "https://azdevopscommerce.dev.azure.com/$($currentAccount.accountId)/_apis/AzComm/BillingSetup?api-version=$(_getApiVersion Billing)"
       }
       catch {
          _handleException $_

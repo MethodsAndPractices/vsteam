@@ -20,6 +20,7 @@ Describe 'VSTeamPipelineBilling' -Tag 'unit', 'billing' {
       Mock _getInstance { return "https://dev.azure.com/TestOrg01" }
       Mock Get-VSTeamUserProfile { Open-SampleFile 'Get-VSTeamUserProfile.json' }
       Mock Get-VSTeamAccounts { return $accounts }
+      Mock _getApiVersion { return '5.1-preview.1' } -ParameterFilter { $Service -eq 'Billing' }
    }
 
    Context 'Set-VSTeamPipelineBilling' {

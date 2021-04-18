@@ -54,7 +54,7 @@ function Set-VSTeamPipelineBilling {
             _callAPI `
                -NoProject `
                -Method PATCH `
-               -Url "https://azdevopscommerce.dev.azure.com/$OrganizationId/_apis/AzComm/MeterResource?api-version=5.1-preview.1" `
+               -Url "https://azdevopscommerce.dev.azure.com/$OrganizationId/_apis/AzComm/MeterResource?api-version=$(_getApiVersion Billing)" `
                -body ($body | ConvertTo-Json -Depth 50 -Compress) `
                -AdditionalHeaders @{ Authorization = "Bearer $($billingToken.token)" } | Out-Null
          }
