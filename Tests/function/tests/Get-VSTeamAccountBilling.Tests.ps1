@@ -6,7 +6,6 @@ Describe 'VSTeamAccountBilling' -Tag 'unit', 'billing' {
       . "$baseFolder/Source/Public/Get-VSTeamUserProfile.ps1"
       . "$baseFolder/Source/Public/Get-VSTeamAccounts.ps1"
 
-
       # Set the account to use for testing. A normal user would do this
       # using the Set-VSTeamAccount function.
       Mock _getInstance { return 'https://dev.azure.com' }
@@ -26,6 +25,8 @@ Describe 'VSTeamAccountBilling' -Tag 'unit', 'billing' {
    Context 'Get-VSTeamAccountBilling' {
       It 'should set hosted pipeline' {
          $accountBilling = Get-VSTeamAccountBilling
+
+         $accountBilling | Should -not -Be $null
 
          Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 `
             -ParameterFilter {

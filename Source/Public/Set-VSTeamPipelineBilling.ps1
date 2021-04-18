@@ -14,7 +14,6 @@ function Set-VSTeamPipelineBilling {
    )
 
    process {
-
       if ($force -or $pscmdlet.ShouldProcess($Quantity, "Quantity")) {
 
          $billingToken = _getBillingToken -NamedTokenId 'AzCommDeploymentProfile'

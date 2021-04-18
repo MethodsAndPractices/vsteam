@@ -24,7 +24,6 @@ Describe 'VSTeamPipelineBilling' -Tag 'unit', 'billing' {
 
    Context 'Set-VSTeamPipelineBilling' {
       It 'should set hosted pipeline' {
-
          Set-VSTeamPipelineBilling `
             -Type "HostedPipeline" `
             -OrganizationId "68c631ce-4886-4825-a471-94a74fb6ecda" `

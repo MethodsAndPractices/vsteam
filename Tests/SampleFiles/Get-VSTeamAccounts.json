@@ -1,20 +1,20 @@
 [
    {
-   "accountId": "81d6e09f-266a-4dd2-886c-b3d62341681e",
-   "accountUri": "https://vssps.dev.azure.com:443/TestOrg01/",
-   "accountName": "TestOrg01",
-   "properties": {}
-},
-{
-   "accountId": "c6ab928c-0360-42d1-86b6-e4d7ad3eb3a2",
-   "accountUri": "https://vssps.dev.azure.com:443/TestOrg02/",
-   "accountName": "TestOrg02",
-   "properties": {}
-},
-{
-   "accountId": "43454feb-867f-42b9-ae24-13f7ff638dde",
-   "accountUri": "https://vssps.dev.azure.com:443/TestOrg03/",
-   "accountName": "TestOrg03",
-   "properties": {}
-}
+      "accountId": "81d6e09f-266a-4dd2-886c-b3d62341681e",
+      "accountUri": "https://vssps.dev.azure.com:443/TestOrg01/",
+      "accountName": "TestOrg01",
+      "properties": {}
+   },
+   {
+      "accountId": "c6ab928c-0360-42d1-86b6-e4d7ad3eb3a2",
+      "accountUri": "https://vssps.dev.azure.com:443/TestOrg02/",
+      "accountName": "TestOrg02",
+      "properties": {}
+   },
+   {
+      "accountId": "43454feb-867f-42b9-ae24-13f7ff638dde",
+      "accountUri": "https://vssps.dev.azure.com:443/TestOrg03/",
+      "accountName": "TestOrg03",
+      "properties": {}
+   }
 ]
