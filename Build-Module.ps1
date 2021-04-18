@@ -156,7 +156,9 @@ if (-not $skipLibBuild.IsPresent) {
       New-Item -Path $output\bin -ItemType Directory | Out-Null
    }
 
-   $buildOutput = dotnet build --nologo --configuration $configuration | Out-String
+   # Once build machines were updated to .NET 5.0 builds started failing.
+   $buildOutput = dotnet restore --no-cache | Out-String
+   $buildOutput += dotnet build --nologo --configuration $configuration | Out-String
 
    if (-not ($buildOutput | Select-String -Pattern 'succeeded') -or $ci.IsPresent) {
       Write-Output $buildOutput
