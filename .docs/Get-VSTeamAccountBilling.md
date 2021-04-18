@@ -10,7 +10,7 @@
 
 ## DESCRIPTION
 
-<!-- #include "./synopsis/Get-VSTeamAccountBilling.md" --> This cmdlet get Information of the current billing setup. Meaning what subscription the organization is connected. It also shows when the organization is not connected to a subscription.
+<!-- #include "./synopsis/Get-VSTeamAccountBilling.md" --> This includes what subscription the organization is connected. It also shows when the organization is not connected to a subscription.
 
 ## EXAMPLES
 
