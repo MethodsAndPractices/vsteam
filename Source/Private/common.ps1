@@ -146,6 +146,17 @@ function _testHierarchyQuerySupport {
    (_getApiVersion HierarchyQuery) -as [boolean]
 }
 
+function _supportsBilling {
+   _hasAccount
+   if ($false -eq $(_testBillingSupport)) {
+      throw 'This account does not support the graph API.'
+   }
+}
+
+function _testBillingSupport {
+   (_getApiVersion Billing) -as [boolean]
+}
+
 function _supportVariableGroups {
    _hasAccount
    if ($false -eq $(_testVariableGroupsSupport)) {
@@ -190,7 +201,7 @@ function _getApiVersion {
          'DistributedTaskReleased', 'VariableGroups', 'Tfvc',
          'Packaging', 'MemberEntitlementManagement',
          'ExtensionsManagement', 'ServiceEndpoints', 'Graph',
-         'TaskGroups', 'Policy', 'Processes', 'HierarchyQuery', 'Pipelines')]
+         'TaskGroups', 'Policy', 'Processes', 'HierarchyQuery', 'Pipelines', 'Billing')]
       [string] $Service,
 
       [parameter(ParameterSetName = 'Target')]
