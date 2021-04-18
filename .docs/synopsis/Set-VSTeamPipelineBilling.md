@@ -1,1 +1,1 @@
-Buys concurrent jobs for pipelines.
+Purchases private and Microsoft hosted concurrent jobs for pipelines.
