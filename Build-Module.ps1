@@ -156,14 +156,14 @@ if (-not $skipLibBuild.IsPresent) {
       New-Item -Path $output\bin -ItemType Directory | Out-Null
    }
 
-   $buildOutput = dotnet build --nologo --verbosity quiet --configuration $configuration | Out-String
+   $buildOutput = dotnet build --nologo --configuration $configuration | Out-String
+
+   if (-not ($buildOutput | Select-String -Pattern 'succeeded') -or $ci.IsPresent) {
+      Write-Output $buildOutput
+   }
 
    Copy-Item -Destination "$output\bin\vsteam-lib.dll" -Path ".\Source\Classes\bin\$configuration\netstandard2.0\vsteam-lib.dll" -Force
    Copy-Item -Destination "$output\bin\Trackyon.System.Management.Automation.Abstractions.dll" -Path ".\Source\Classes\bin\$configuration\netstandard2.0\Trackyon.System.Management.Automation.Abstractions.dll" -Force
-
-   if (-not ($buildOutput | Select-String -Pattern 'succeeded') -or $ci.IsPressent) {
-      Write-Output $buildOutput
-   }
 }
 
 Write-Output "Publishing: Complete to $output"
