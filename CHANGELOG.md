@@ -2,12 +2,15 @@
 
 ## 7.2.0
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/371) from [Sebastian Schütze](https://github.com/SebastianSchuetze) which included the following:
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/371) and (https://github.com/DarqueWarrior/vsteam/pull/389) from [Sebastian Schütze](https://github.com/SebastianSchuetze) which included the following:
 
 - Added Set-VSTeamPipelineBilling to buy or release Microsoft-hosted and self-hosted agents
 - Added Get-VSTeamAccounts to get the organizations where the user has access. Where the given user is either a member or an owner
 - Added Get-VSTeamUserProfile that gets the users profile of an account.
+- Added Get-VSTeamBillingAccount to get information whether the account is connected to a subscription or not.
 - fixed filenames of files to work on linux (casing)
+- added the possibility to call _callApi with a custom bearer token
+- added the possibility to call _callApi without the account name in the url
 
 ## 7.1.4
 

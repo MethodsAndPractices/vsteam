@@ -331,8 +331,8 @@ Describe 'Common' {
          Mock _getInstance { return 'https://dev.azure.com' }
       }
 
-      It 'should get billing token' {
-         $token = _getBillingToken
+      It 'should get billing token by named token id' {
+         $token = _getBillingToken -NamedTokenId 'CommerceDeploymentProfile'
 
          $token.tokenType | Should -Be 'session' -Because 'tokenType should be set'
          $token.namedTokenId | Should -Be 'CommerceDeploymentProfile' -Because 'namedTokenId should be set'

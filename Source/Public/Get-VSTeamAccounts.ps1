@@ -25,7 +25,8 @@ function Get-VSTeamAccounts {
 
       try {
          # Call the REST API
-         $resp = _callAPI -NoProject `
+         $resp = _callAPI -NoAccount `
+            -NoProject `
             -area 'accounts' `
             -subDomain 'vssps' `
             -QueryString $queryString `
