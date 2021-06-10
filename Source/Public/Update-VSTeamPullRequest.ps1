@@ -47,7 +47,7 @@ function Update-VSTeamPullRequest {
 
          if ($Status) {
             if ($Status -eq "completed") {
-               $lastMergeSourceCommit = Get-VSTeamPullRequest -RepositoryId $RepositoryId | Where-Object { $_.pullRequestId -eq $PullRequestId } | Select-Object -ExpandProperty lastMergeSourceCommit | ConvertTo-Json
+               $lastMergeSourceCommit = Get-VSTeamPullRequest -RepositoryId $RepositoryId | Where-Object { $_.pullRequestId -eq $PullRequestId } | Select-Object -ExpandProperty lastMergeSourceCommit | ConvertTo-Json -Depth 100
                $body = '{"status": "' + $Status + '", "lastMergeSourceCommit": ' + $lastMergeSourceCommit + '}'
             }
             else {

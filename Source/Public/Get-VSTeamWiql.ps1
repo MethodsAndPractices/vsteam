@@ -35,7 +35,7 @@ function Get-VSTeamWiql {
       }
 
       if ($Query) {
-         $params['body'] = @{query = $Query } | ConvertTo-Json
+         $params['body'] = @{query = $Query } | ConvertTo-Json -Depth 100
          $params['method'] = 'POST'
          $params['ContentType'] = 'application/json'
       }
