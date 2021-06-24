@@ -69,7 +69,7 @@ function Update-VSTeamUserEntitlement {
          }
       }
 
-      $body = ConvertTo-Json -InputObject @($obj)
+      $body = ConvertTo-Json -InputObject @($obj) -Depth 100
 
       $msg = "$( $user.userName ) ($( $user.email ))"
 

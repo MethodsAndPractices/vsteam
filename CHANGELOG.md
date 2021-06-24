@@ -2,6 +2,10 @@
 
 ## 7.3.0
 
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/396) from [Markus Blaschke](https://github.com/mblaschke) which included the following:
+
+- Fixed the problem of JSON serialization with the message "WARNING: Resulting JSON is truncated as serialization has exceeded the set depth of 2" for most the cmdlets that post complex json bodies.
+
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/384) from [Sebastian Schütze](https://github.com/SebastianSchuetze) which included the following:
 
 - Add-VSTeamPool, Remove-VSTeamPool and Update-VSTeampool for handling agent pools on Azure DevOps

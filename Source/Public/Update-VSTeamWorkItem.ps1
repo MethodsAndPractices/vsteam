@@ -74,7 +74,7 @@ function Update-VSTeamWorkItem {
       # You must call ConvertTo-Json passing in the value and not
       # not using pipeline.
       # https://stackoverflow.com/questions/18662967/convertto-json-an-array-with-a-single-item
-      $json = ConvertTo-Json @($body) -Compress
+      $json = ConvertTo-Json @($body) -Compress -Depth 100
 
       # Call the REST API
       if ($Force -or $pscmdlet.ShouldProcess($Id, "Update-WorkItem")) {

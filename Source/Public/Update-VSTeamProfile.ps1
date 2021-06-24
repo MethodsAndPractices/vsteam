@@ -70,7 +70,7 @@ function Update-VSTeamProfile {
 
             $vsteamProfiles += $newProfile
 
-            $contents = ConvertTo-Json $vsteamProfiles
+            $contents = ConvertTo-Json $vsteamProfiles -Depth 100
 
             Set-Content -Path $profilesPath -Value $contents
          }
