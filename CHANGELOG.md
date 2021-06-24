@@ -1,6 +1,6 @@
 # Changelog
 
-## 7.2.0
+## 7.3.0
 
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/396) from [Markus Blaschke](https://github.com/mblaschke) which included the following:
 
