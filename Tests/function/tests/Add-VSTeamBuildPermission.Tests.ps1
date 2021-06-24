@@ -103,7 +103,7 @@ Describe 'VSTeamBuildPermission' {
          }
       }
 
-      It 'by ProjectUser only with Deny should return ACEs with a warning' {
+      It 'by ProjectUser only with Deny should return ACEs' {
 
          Add-VSTeamBuildPermission -Project $projectResultObject -User $userSingleResultObject -Deny StopBuilds, QueueBuilds, EditBuildDefinition
 
@@ -118,7 +118,7 @@ Describe 'VSTeamBuildPermission' {
          }
       }
 
-      It 'by ProjectUser without Deny and Allow should return ACEs' {
+      It 'by ProjectUser without Deny and Allow should return ACEs with a warning' {
 
          $warnings = $null
          Add-VSTeamBuildPermission -Project $projectResultObject -User $userSingleResultObject `
@@ -180,4 +180,5 @@ Describe 'VSTeamBuildPermission' {
          }
       }
    }
+   
 }
