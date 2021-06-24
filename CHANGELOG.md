@@ -2,6 +2,12 @@
 
 ## 7.2.0
 
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/396) from [Markus Blaschke](https://github.com/mblaschke) which included the following:
+
+- Fixed the problem of JSON serialization with the message "WARNING: Resulting JSON is truncated as serialization has exceeded the set depth of 2" for most the cmdlets that post complex json bodies.
+
+## 7.2.0
+
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/371) and (https://github.com/DarqueWarrior/vsteam/pull/389) from [Sebastian Schütze](https://github.com/SebastianSchuetze) which included the following:
 
 - Added Set-VSTeamPipelineBilling to buy or release Microsoft-hosted and self-hosted agents
