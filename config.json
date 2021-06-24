@@ -102,6 +102,7 @@
          "vsteam_lib.Process.ListView.ps1xml",
          "vsteam_lib.AgentPool.TableView.ps1xml",
          "vsteam_lib.Provider.AgentPool.TableView.ps1xml",
+         "vsteam_lib.AgentPoolMaintenance.TableView.ps1xml",
          "vsteam_lib.Extension.TableView.ps1xml",
          "vsteam_lib.Provider.Extension.TableView.ps1xml",
          "vsteam_lib.PSDrive.Default.TableView.ps1xml",
