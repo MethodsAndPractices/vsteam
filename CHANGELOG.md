@@ -25,6 +25,10 @@ Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/386) from [Se
 - changed internal permission (ACL) functions to not have deny or allow permissions to be mandatory, because this caused not to be able to only add allow or deny permissions.
 - allowed to handle user accounts from typ 'srv' which are service accounts of Azure DevOps. Now these can be permitted as well to all functions using ACLs
 
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/397) from [Sebastian Schütze](https://github.com/SebastianSchuetze) which included the following:
+
+- Fixes encoding problem with special charcters on Add-VSTeamWorkItem, Update-VSTeamWorkItem, Update-VSTeamUserEntitlement [#397](https://github.com/DarqueWarrior/vsteam/issues/365)
+
 ## 7.2.0
 
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/371) and (https://github.com/DarqueWarrior/vsteam/pull/389) from [Sebastian Schütze](https://github.com/SebastianSchuetze) which included the following:

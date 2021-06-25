@@ -24,7 +24,7 @@ Describe 'VSTeamWorkItem' {
             $Method -eq 'Patch' -and
             $Body -like '`[*' -and # Make sure the body is an array
             $Body -like '*`]' -and # Make sure the body is an array
-            $ContentType -eq 'application/json-patch+json' -and
+            $ContentType -eq 'application/json-patch+json; charset=utf-8' -and
             $Uri -eq "https://dev.azure.com/test/_apis/wit/workitems/1?api-version=$(_getApiVersion Core)"
          }
       }
@@ -32,7 +32,7 @@ Describe 'VSTeamWorkItem' {
       It 'With Default Project should update work item' {
          ## Arrange
          $Global:PSDefaultParameterValues["*-vsteam*:projectName"] = 'test'
-         
+
          ## Act
          Update-VSTeamWorkItem 1 -Title Test1 -Description Testing -Force
 
@@ -45,7 +45,7 @@ Describe 'VSTeamWorkItem' {
             $Body -like '*/fields/System.Title*' -and
             $Body -like '*/fields/System.Description*' -and
             $Body -like '*`]' -and # Make sure the body is an array
-            $ContentType -eq 'application/json-patch+json' -and
+            $ContentType -eq 'application/json-patch+json; charset=utf-8' -and
             $Uri -eq "https://dev.azure.com/test/_apis/wit/workitems/1?api-version=$(_getApiVersion Core)"
          }
       }
@@ -54,7 +54,7 @@ Describe 'VSTeamWorkItem' {
          ## Arrange
          $Global:PSDefaultParameterValues["*-vsteam*:projectName"] = 'test'
          $additionalFields = @{"System.Tags" = "TestTag"; "System.AreaPath" = "Project\\MyPath" }
-         
+
          ## Act
          Update-VSTeamWorkItem 1 -Title Test1 -Description Testing -AdditionalFields $additionalFields
 
@@ -69,7 +69,7 @@ Describe 'VSTeamWorkItem' {
             $Body -like '*/fields/System.Tags*' -and
             $Body -like '*/fields/System.AreaPath*' -and
             $Body -like '*`]' -and # Make sure the body is an array
-            $ContentType -eq 'application/json-patch+json' -and
+            $ContentType -eq 'application/json-patch+json; charset=utf-8' -and
             $Uri -eq "https://dev.azure.com/test/_apis/wit/workitems/1?api-version=$(_getApiVersion Core)"
          }
       }
@@ -91,7 +91,7 @@ Describe 'VSTeamWorkItem' {
             $Body -like '*/fields/System.Tags*' -and
             $Body -like '*/fields/System.AreaPath*' -and
             $Body -like '*`]' -and # Make sure the body is an array
-            $ContentType -eq 'application/json-patch+json' -and
+            $ContentType -eq 'application/json-patch+json; charset=utf-8' -and
             $Uri -eq "https://dev.azure.com/test/_apis/wit/workitems/1?api-version=$(_getApiVersion Core)"
          }
       }
@@ -111,7 +111,7 @@ Describe 'VSTeamWorkItem' {
             $Body -like '*/fields/System.Tags*' -and
             $Body -like '*/fields/System.AreaPath*' -and
             $Body -like '*`]' -and # Make sure the body is an array
-            $ContentType -eq 'application/json-patch+json' -and
+            $ContentType -eq 'application/json-patch+json; charset=utf-8' -and
             $Uri -eq "https://dev.azure.com/test/_apis/wit/workitems/1?api-version=$(_getApiVersion Core)"
          }
       }
