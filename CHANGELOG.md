@@ -19,6 +19,12 @@ $buildId = Get-VSTeamBuild -Top 1
 Get-VSTeamRelease -artifactVersionId $buildId.Id
 ```
 
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/386) from [Sebastian Schütze](https://github.com/SebastianSchuetze) which included the following:
+
+- added the cmdlet Add-VSTeamBuildPermission following the other cmdlet like Add-VSTeamProjectPermission
+- changed internal permission (ACL) functions to not have deny or allow permissions to be mandatory, because this caused not to be able to only add allow or deny permissions.
+- allowed to handle user accounts from typ 'srv' which are service accounts of Azure DevOps. Now these can be permitted as well to all functions using ACLs
+
 ## 7.2.0
 
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/371) and (https://github.com/DarqueWarrior/vsteam/pull/389) from [Sebastian Schütze](https://github.com/SebastianSchuetze) which included the following:
