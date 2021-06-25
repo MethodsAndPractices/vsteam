@@ -82,7 +82,7 @@ function Update-VSTeamWorkItem {
             -Area wit `
             -Resource workitems `
             -id $Id `
-            -ContentType 'application/json-patch+json' `
+            -ContentType 'application/json-patch+json; charset=utf-8' `
             -Body $json `
             -Version $(_getApiVersion Core)
 

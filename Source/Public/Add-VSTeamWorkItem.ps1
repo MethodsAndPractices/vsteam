@@ -114,7 +114,7 @@ function Add-VSTeamWorkItem {
          -Resource "workitems" `
          -id $fullWorkItemType `
          -Body $json `
-         -ContentType 'application/json-patch+json' `
+         -ContentType 'application/json-patch+json; charset=utf-8' `
          -Version $(_getApiVersion Core)
 
       _applyTypesToWorkItem -item $resp
