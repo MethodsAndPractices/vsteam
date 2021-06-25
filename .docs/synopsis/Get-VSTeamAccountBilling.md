@@ -1,0 +1,1 @@
+Gets the current account billing setup.

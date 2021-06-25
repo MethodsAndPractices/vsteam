@@ -29,7 +29,7 @@ function Add-VSTeamServiceEndpoint {
       $object['name'] = $endpointName
       $object['type'] = $endpointType
 
-      $body = $object | ConvertTo-Json
+      $body = $object | ConvertTo-Json -Depth 100
 
       # Call the REST API
       $resp = _callAPI -Method POST -ProjectName $projectName `

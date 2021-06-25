@@ -74,7 +74,7 @@ function Add-VSTeamBuild {
       }
 
       if ($BuildParameters) {
-         $body.Add('parameters', ($BuildParameters | ConvertTo-Json -Compress))
+         $body.Add('parameters', ($BuildParameters | ConvertTo-Json -Depth 100 -Compress))
       }
 
       $resp = _callAPI -Method POST -ProjectName $ProjectName `

@@ -26,7 +26,7 @@ function Update-VSTeamNuGetPackageVersion {
                listed = $isListed
             }
 
-            $body = $obj | ConvertTo-Json -Compress
+            $body = $obj | ConvertTo-Json -Compress -Depth 100
 
             _callAPI -Method PATCH -SubDomain pkgs `
                -Area "packaging/feeds/$FeedId/nuget" `

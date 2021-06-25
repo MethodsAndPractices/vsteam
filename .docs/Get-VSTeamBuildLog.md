@@ -27,7 +27,7 @@ displays the logs.
 
 ## PARAMETERS
 
-<!-- #include "./params/BuildIds.md" -->
+<!-- #include "./params/buildIds.md" -->
 
 ### Index
 

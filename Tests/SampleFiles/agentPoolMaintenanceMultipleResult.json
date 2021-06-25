@@ -1,0 +1,30 @@
+{
+   "count": 1,
+   "value": [{
+      "options": {
+         "workingDirectoryExpirationInDays": 30
+      },
+      "retentionPolicy": {
+         "numberOfHistoryRecordsToKeep": 10
+      },
+      "scheduleSetting": {
+         "scheduleJobId": "a69f552a-bc2f-4b85-af66-66f7e8657060",
+         "timeZoneId": "UTC",
+         "startHours": 1,
+         "startMinutes": 0,
+         "daysToBuild": 28
+      },
+      "id": 4,
+      "pool": {
+         "id": 14,
+         "isHosted": false,
+         "poolType": 1,
+         "size": 0,
+         "isLegacy": null,
+         "options": null
+      },
+      "enabled": true,
+      "jobTimeoutInMinutes": 60,
+      "maxConcurrentAgentsPercentage": 26
+   }]
+}

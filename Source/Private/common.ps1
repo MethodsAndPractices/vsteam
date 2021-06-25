@@ -24,7 +24,7 @@ function _callAPI {
       [string]$Team,
       [string]$Url,
       [object]$QueryString,
-      [hashtable]$AdditionalHeaders,
+      [hashtable]$AdditionalHeaders = @{ },
       # Some API calls require the Project ID and not the project name.
       # However, the dynamic project name parameter only shows you names
       # and not the Project IDs. Using this flag the project name provided
@@ -37,7 +37,11 @@ function _callAPI {
       # that project name to be used in building the URI that would lead to
       # 404 because the URI would not be correct.
       [Alias('IgnoreDefaultProject')]
-      [switch]$NoProject
+      [switch]$NoProject,
+      # This flag makes sure that no specific account is used
+      # some APIs do not have an account in their API uri because
+      # they are not account specific in the url path itself. (e.g. user profile, pipeline billing)
+      [switch]$NoAccount
    )
 
    process {
@@ -65,20 +69,27 @@ function _callAPI {
       $params.Add('UserAgent', (_getUserAgent))
       $params.Add('TimeoutSec', (_getDefaultTimeout))
 
-      #always use utf8 and json as default content type instead of xml
+      # always use utf8 and json as default content type instead of xml
       if ($false -eq $PSBoundParameters.ContainsKey("ContentType")) {
          $params.Add('ContentType', 'application/json; charset=utf-8')
       }
 
-      if (_useWindowsAuthenticationOnPremise) {
-         $params.Add('UseDefaultCredentials', $true)
-         $params.Add('Headers', @{ })
-      }
-      elseif (_useBearerToken) {
-         $params.Add('Headers', @{Authorization = "Bearer $env:TEAM_TOKEN" })
-      }
-      else {
-         $params.Add('Headers', @{Authorization = "Basic $env:TEAM_PAT" })
+      # do not use header when requested. Then bearer must be provided with additional headers
+      $params.Add('Headers', @{ })
+
+      # checking if an authorization token is provided already with the additional headers
+      # use case: sometimes other tokens for certain APIs have to be used (buying pipelines) in order to work
+      # some parts of internal APIs use their own token based on the PAT
+      if (!$AdditionalHeaders.ContainsKey("Authorization")) {
+         if (_useWindowsAuthenticationOnPremise) {
+            $params.Add('UseDefaultCredentials', $true)
+         }
+         elseif (_useBearerToken) {
+            $params['Headers'].Add("Authorization", "Bearer $env:TEAM_TOKEN")
+         }
+         else {
+            $params['Headers'].Add("Authorization", "Basic $env:TEAM_PAT")
+         }
       }
 
       if ($AdditionalHeaders -and $AdditionalHeaders.PSObject.Properties.name -match "Keys") {
@@ -88,7 +99,8 @@ function _callAPI {
       }
 
       # We have to remove any extra parameters not used by Invoke-RestMethod
-      $extra = 'NoProject', 'UseProjectId', 'Area', 'Resource', 'SubDomain', 'Id', 'Version', 'JSON', 'ProjectName', 'Team', 'Url', 'QueryString', 'AdditionalHeaders'
+      $extra = 'NoAccount', 'NoProject', 'UseProjectId', 'Area', 'Resource', 'SubDomain', 'Id', 'Version', 'JSON', 'ProjectName', 'Team', 'Url', 'QueryString', 'AdditionalHeaders', 'CustomBearer'
+
       foreach ($e in $extra) { $params.Remove($e) | Out-Null }
 
       try {
@@ -125,12 +137,23 @@ function _testGraphSupport {
 function _supportsHierarchyQuery {
    _hasAccount
    if ($false -eq $(_testHierarchyQuerySupport)) {
-      throw 'This account does not support the graph API.'
+      throw 'This account does not support the hierarchy query API.'
    }
 }
 
 function _testHierarchyQuerySupport {
    (_getApiVersion HierarchyQuery) -as [boolean]
+}
+
+function _supportsBilling {
+   _hasAccount
+   if ($false -eq $(_testBillingSupport)) {
+      throw 'This account does not support the billing API.'
+   }
+}
+
+function _testBillingSupport {
+   (_getApiVersion Billing) -as [boolean]
 }
 
 function _supportVariableGroups {
@@ -177,7 +200,7 @@ function _getApiVersion {
          'DistributedTaskReleased', 'VariableGroups', 'Tfvc',
          'Packaging', 'MemberEntitlementManagement',
          'ExtensionsManagement', 'ServiceEndpoints', 'Graph',
-         'TaskGroups', 'Policy', 'Processes', 'HierarchyQuery', 'Pipelines')]
+         'TaskGroups', 'Policy', 'Processes', 'HierarchyQuery', 'Pipelines', 'Billing')]
       [string] $Service,
 
       [parameter(ParameterSetName = 'Target')]
@@ -231,7 +254,8 @@ function _buildRequestURI {
       $ProjectName,
 
       [switch]$UseProjectId,
-      [switch]$NoProject
+      [switch]$NoProject,
+      [switch]$NoAccount
    )
 
    process {
@@ -239,14 +263,19 @@ function _buildRequestURI {
 
       $sb = New-Object System.Text.StringBuilder
 
-      $sb.Append($(_addSubDomain -subDomain $subDomain -instance $(_getInstance))) | Out-Null
+      $instance = "https://dev.azure.com"
+      if ($NoAccount.IsPresent -eq $false) {
+         $instance = _getInstance
+      }
+
+      $sb.Append($(_addSubDomain -subDomain $subDomain -instance $instance)) | Out-Null
 
       # There are some APIs that must not have the project added to the URI.
       # However, if they caller set the default project it will be passed in
       # here and added to the URI by mistake. Functions that need the URI
       # created without the project even if the default project is set needs
       # to pass the -NoProject switch.
-      if ($ProjectName -and $NoProject.IsPresent -eq $false) {
+      if ($ProjectName -and $NoProject.IsPresent -eq $false -and $NoAccount.IsPresent -eq $false) {
          if ($UseProjectId.IsPresent) {
             $projectId = (Get-VSTeamProject -Name $ProjectName | Select-Object -ExpandProperty id)
             $sb.Append("/$projectId") | Out-Null
@@ -448,6 +477,46 @@ function _getWorkItemTypes {
    catch {
       Write-Verbose $_
       Write-Output @()
+   }
+}
+
+function _buildLevelDynamicParam {
+   param ()
+   # # Only add these options on Windows Machines
+   if (_isOnWindows) {
+      $ParameterName = 'Level'
+
+      # Create the dictionary
+      $RuntimeParameterDictionary = New-Object System.Management.Automation.RuntimeDefinedParameterDictionary
+
+      # Create the collection of attributes
+      $AttributeCollection = New-Object System.Collections.ObjectModel.Collection[System.Attribute]
+
+      # Create and set the parameters' attributes
+      $ParameterAttribute = New-Object System.Management.Automation.ParameterAttribute
+      $ParameterAttribute.Mandatory = $false
+      $ParameterAttribute.HelpMessage = "On Windows machines allows you to store the default project at the process, user or machine level. Not available on other platforms."
+
+      # Add the attributes to the attributes collection
+      $AttributeCollection.Add($ParameterAttribute)
+
+      # Generate and set the ValidateSet
+      if (_testAdministrator) {
+         $arrSet = "Process", "User", "Machine"
+      }
+      else {
+         $arrSet = "Process", "User"
+      }
+
+      $ValidateSetAttribute = New-Object System.Management.Automation.ValidateSetAttribute($arrSet)
+
+      # Add the ValidateSet to the attributes collection
+      $AttributeCollection.Add($ValidateSetAttribute)
+
+      # Create and return the dynamic parameter
+      $RuntimeParameter = New-Object System.Management.Automation.RuntimeDefinedParameter($ParameterName, [string], $AttributeCollection)
+      $RuntimeParameterDictionary.Add($ParameterName, $RuntimeParameter)
+      return $RuntimeParameterDictionary
    }
 }
 
@@ -971,4 +1040,37 @@ function _getDescriptorForACL {
    }
 
    return $descriptor
+}
+
+function _getBillingToken {
+   # get a billing access token by using the given PAT.
+   # this token can be used for buying pipelines or artifacts
+   # or other things used for billing (except user access levels)
+   [CmdletBinding()]
+   param (
+      #billing token can have different scopes. They are defined by named token ids.
+      #They should be validated to be specific by it's name
+      [Parameter(Mandatory=$true)]
+      [string]
+      [ValidateSet('AzCommDeploymentProfile','CommerceDeploymentProfile')]
+      $NamedTokenId
+   )
+
+   $sessionToken = @{
+      appId        = 00000000 - 0000 - 0000 - 0000 - 000000000000
+      force        = $false
+      tokenType    = 0
+      namedTokenId = $NamedTokenId
+   }
+
+   $billingToken = _callAPI `
+      -NoProject `
+      -method POST `
+      -ContentType "application/json" `
+      -area "WebPlatformAuth" `
+      -resource "SessionToken" `
+      -version '3.2-preview.1' `
+      -body ($sessionToken | ConvertTo-Json -Depth 50 -Compress)
+
+   return $billingToken
 }

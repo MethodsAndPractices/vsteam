@@ -1,5 +1,41 @@
 # Changelog
 
+## 7.3.0
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/396) from [Markus Blaschke](https://github.com/mblaschke) which included the following:
+
+- Fixed the problem of JSON serialization with the message "WARNING: Resulting JSON is truncated as serialization has exceeded the set depth of 2" for most the cmdlets that post complex json bodies.
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/384) from [Sebastian Schütze](https://github.com/SebastianSchuetze) which included the following:
+
+- Add-VSTeamPool, Remove-VSTeamPool and Update-VSTeampool for handling agent pools on Azure DevOps
+
+## 7.2.0
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/371) and (https://github.com/DarqueWarrior/vsteam/pull/389) from [Sebastian Schütze](https://github.com/SebastianSchuetze) which included the following:
+
+- Added Set-VSTeamPipelineBilling to buy or release Microsoft-hosted and self-hosted agents
+- Added Get-VSTeamAccounts to get the organizations where the user has access. Where the given user is either a member or an owner
+- Added Get-VSTeamUserProfile that gets the users profile of an account.
+- Added Get-VSTeamBillingAccount to get information whether the account is connected to a subscription or not.
+- fixed filenames of files to work on linux (casing)
+- added the possibility to call _callApi with a custom bearer token
+- added the possibility to call _callApi without the account name in the url
+
+## 7.1.4
+
+Combined all the build json files (_types.json, _formats.json and _functions.json) into a single file called config.json in the root folder.
+Fixed issue #376
+
+## 7.1.3
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/350) from [Daniel Silva](https://github.com/DanielSSilva) which included the following:
+
+- Fixed exception thrown by the Update-VSTeamPullRequest when status is set to "completed", by adding the missing "lastMergeSourceCommit" property to body.
+
+Also added Clear-VSTeamDefaultProjectCount and Set-VSTeamDefaultProjectCount to control the default number of projects returned for tab completion and validation. By default only 100 projects are returned and the 100 returned is nondeterministic. But calling Set-VSTeamDefaultProjectCount you can increase the number of projects returned.
+
+
 ## 7.1.2
 
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/366) from [Jhoneill](https://github.com/jhoneill) which included the following:
@@ -12,7 +48,7 @@ Changed Get-VSTeamProject to return all projects by default instead of just the 
 $Global:PSDefaultParameterValues["*-vsteam*:top"] = 500
 ```
 
-Fixed issue #360 but updating the way DateTimes are tested.
+Fixed issue #360 by updating the way DateTimes are tested.
 
 ## 7.1.1
 

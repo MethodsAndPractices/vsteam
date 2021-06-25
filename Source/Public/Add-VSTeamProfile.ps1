@@ -136,7 +136,7 @@ function Add-VSTeamProfile {
 
       $profiles += $newProfile
 
-      $contents = ConvertTo-Json $profiles
+      $contents = ConvertTo-Json $profiles -Depth 100
 
       Set-Content -Path $profilesPath -Value $contents
    }

@@ -42,4 +42,8 @@ Accept pipeline input: true (ByPropertyName)
 
 ## RELATED LINKS
 
+[Remove-VSTeamAccount](Remove-VSTeamAccount.md)
+[Update-VSTeamAccount](Update-VSTeamAccount.md)
+[Add-VSTeamAccount](Add-VSTeamAccount.md)
+
 <!-- #include "./common/related.md" -->

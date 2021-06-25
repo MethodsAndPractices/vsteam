@@ -14,7 +14,7 @@ function Set-VSTeamAPIVersion {
                    'Packaging', 'MemberEntitlementManagement',
                    'ExtensionsManagement', 'ServiceEndpoints', 'Graph',
                    'TaskGroups', 'Policy', 'Processes', 'HierarchyQuery',
-                   'Pipelines')]
+                   'Pipelines', 'Billing')]
       [string] $Service,
 
       [parameter(ParameterSetName = 'Service', Mandatory = $true, Position = 1)]
@@ -50,6 +50,7 @@ function Set-VSTeamAPIVersion {
                [vsteam_lib.Versions]::Graph = ''
                [vsteam_lib.Versions]::Policy = '5.0'
                [vsteam_lib.Versions]::Processes = '5.0-preview'
+               [vsteam_lib.Versions]::Billing = ''
             }
             'AzD2019U1' {
                [vsteam_lib.Versions]::Version = 'AzD2019'
@@ -71,6 +72,7 @@ function Set-VSTeamAPIVersion {
                [vsteam_lib.Versions]::Graph = ''
                [vsteam_lib.Versions]::Policy = '5.1'
                [vsteam_lib.Versions]::Processes = '5.1-preview'
+               [vsteam_lib.Versions]::Billing = ''
             }
             { $_ -eq 'TFS2018' -or $_ -eq 'TFS2018U1' } {
                [vsteam_lib.Versions]::Version = 'TFS2018'
@@ -92,6 +94,7 @@ function Set-VSTeamAPIVersion {
                [vsteam_lib.Versions]::Graph = ''
                [vsteam_lib.Versions]::Policy = '4.0'
                [vsteam_lib.Versions]::Processes = '4.0-preview'
+               [vsteam_lib.Versions]::Billing = ''
             }
             { $_ -eq 'TFS2018U2' -or $_ -eq 'TFS2018U3' } {
                [vsteam_lib.Versions]::Version = 'TFS2018'
@@ -113,6 +116,7 @@ function Set-VSTeamAPIVersion {
                [vsteam_lib.Versions]::Graph = ''
                [vsteam_lib.Versions]::Policy = '4.1'
                [vsteam_lib.Versions]::Processes = '4.1-preview'
+               [vsteam_lib.Versions]::Billing = ''
             }
             'TFS2017' {
                [vsteam_lib.Versions]::Version = 'TFS2017'
@@ -134,6 +138,7 @@ function Set-VSTeamAPIVersion {
                [vsteam_lib.Versions]::Graph = ''
                [vsteam_lib.Versions]::Policy = '3.0'
                [vsteam_lib.Versions]::Processes = ''
+               [vsteam_lib.Versions]::Billing = ''
             }
             'TFS2017U1' {
                [vsteam_lib.Versions]::Version = 'TFS2017'
@@ -155,6 +160,7 @@ function Set-VSTeamAPIVersion {
                [vsteam_lib.Versions]::Graph = '' # SubDomain vssps
                [vsteam_lib.Versions]::Policy = '3.1'
                [vsteam_lib.Versions]::Processes = ''
+               [vsteam_lib.Versions]::Billing = ''
             }
             # Update 3 of TFS 2017 did not introduce a new API Version
             { $_ -eq 'TFS2017U2' -or $_ -eq 'TFS2017U3' } {
@@ -177,6 +183,7 @@ function Set-VSTeamAPIVersion {
                [vsteam_lib.Versions]::Graph = '' # SubDomain vssps
                [vsteam_lib.Versions]::Policy = '3.2'
                [vsteam_lib.Versions]::Processes = ''
+               [vsteam_lib.Versions]::Billing = ''
             }
             # AZD, VSTS
             Default {
@@ -202,6 +209,7 @@ function Set-VSTeamAPIVersion {
                [vsteam_lib.Versions]::Graph = '6.0-preview' # SubDomain vssps
                [vsteam_lib.Versions]::Policy = '5.1'
                [vsteam_lib.Versions]::Processes = '6.0-preview'
+               [vsteam_lib.Versions]::Billing = '5.1-preview.1'
             }
          }
       }
@@ -254,6 +262,9 @@ function Set-VSTeamAPIVersion {
 
    # Get-VSTeamOption -area 'Contribution' -resource 'HierarchyQuery'
    Write-Verbose "HierarchyQuery: $([vsteam_lib.Versions]::HierarchyQuery)"
+
+   # Undocumented billing API
+   Write-Verbose "Billing: $([vsteam_lib.Versions]::Billing)"
 
    # These are distributed task, resources that are in preview
    # Get-VSTeamOption -area 'distributedtask' -resource 'queues'

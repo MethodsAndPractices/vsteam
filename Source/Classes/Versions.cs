@@ -7,7 +7,7 @@ namespace vsteam_lib
       Build, Release, Core, Git, DistributedTask, DistributedTaskReleased,
       VariableGroups, Tfvc, Packaging, MemberEntitlementManagement,
       ExtensionsManagement, ServiceEndpoints, Graph, TaskGroups, Policy,
-      Processes, Version, HierarchyQuery, Pipelines
+      Processes, Version, HierarchyQuery, Pipelines, Billing
    }
 
    public static class Versions
@@ -16,6 +16,9 @@ namespace vsteam_lib
       {
          switch (service)
          {
+            case APIs.Billing:
+               Billing = version;
+               break;
             case APIs.HierarchyQuery:
                HierarchyQuery = version;
                break;
@@ -77,6 +80,8 @@ namespace vsteam_lib
       {
          switch (service)
          {
+            case APIs.Billing:
+               return Billing;
             case APIs.HierarchyQuery:
                return HierarchyQuery;
             case APIs.Build:
@@ -135,6 +140,7 @@ namespace vsteam_lib
       public static string Core { get; set; } = "3.0";
       public static string Build { get; set; } = "3.0";
       public static string HierarchyQuery { get; set; } = "";
+      public static string Billing { get; set; } = "";
       public static string Release { get; set; } = "3.0-preview";
       public static string DistributedTask { get; set; } = "3.0-preview";
       public static string DistributedTaskReleased { get; set; } = "";

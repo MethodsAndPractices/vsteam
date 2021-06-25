@@ -182,3 +182,9 @@ function _applyTypesToBuildTimelineResultType {
       }
    }
 }
+
+function _applyTypesToAgentPoolMaintenance {
+   [CmdletBinding()]
+   param($item)
+      $item.PSObject.TypeNames.Insert(0, 'vsteam_lib.AgentPoolMaintenance')
+}
