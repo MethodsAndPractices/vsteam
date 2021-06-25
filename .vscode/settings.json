@@ -56,5 +56,6 @@
    ],
    "powershell.pester.useLegacyCodeLens": false,
    "powershell.pester.outputVerbosity": "Detailed",
-   "powershell.codeFormatting.addWhitespaceAroundPipe": true
+   "powershell.codeFormatting.addWhitespaceAroundPipe": true,
+   "gitdoc.enabled": false
 }

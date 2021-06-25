@@ -56,7 +56,7 @@ function Add-VSTeamUserEntitlement {
          }
       }
 
-      $body = $obj | ConvertTo-Json
+      $body = $obj | ConvertTo-Json -Depth 100
 
       # Call the REST API
       _callAPI -Method POST -SubDomain "vsaex" `

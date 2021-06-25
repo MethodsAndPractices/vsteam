@@ -23,7 +23,7 @@ function Remove-VSTeamProfile {
    }
 
    end {
-      $contents = ConvertTo-Json $profiles
+      $contents = ConvertTo-Json $profiles -Depth 100
 
       # As of version 7.0 of PowerShell core To-Json contains the string null
       if ([string]::isnullorempty($contents) -or 'null' -eq $contents) {

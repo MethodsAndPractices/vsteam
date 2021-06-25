@@ -55,7 +55,7 @@ This command gets timelines with build Ids from the pipeline.
 
 ## PARAMETERS
 
-<!-- #include "./params/BuildIds.md" -->
+<!-- #include "./params/buildIds.md" -->
 
 ### TimelineId
 

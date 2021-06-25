@@ -17,7 +17,7 @@ function Update-VSTeamServiceEndpoint {
    )
 
    Process {
-      $body = $object | ConvertTo-Json
+      $body = $object | ConvertTo-Json -Depth 100
 
       if ($Force -or $pscmdlet.ShouldProcess($id, "Update Service Endpoint")) {
          # Call the REST API

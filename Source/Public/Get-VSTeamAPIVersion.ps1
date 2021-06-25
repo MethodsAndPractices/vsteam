@@ -8,7 +8,7 @@ function Get-VSTeamAPIVersion {
                    'Packaging', 'MemberEntitlementManagement',
                    'ExtensionsManagement', 'ServiceEndpoints', 'Graph',
                    'TaskGroups', 'Policy', 'Processes', 'HierarchyQuery',
-                   'Pipelines')]
+                   'Pipelines', 'Billing')]
       [string] $Service
    )
 
@@ -16,26 +16,30 @@ function Get-VSTeamAPIVersion {
       return $(_getApiVersion $Service)
    }
    else {
-      return @{
-         Version                     = $(_getApiVersion -Target)
+      # Casting to a [PSCustomObject] returns the properties in this
+      # exact order. If not this is a hashtable and the order is
+      # nondeterministic
+      return [PSCustomObject]@{
+         Billing                     = $(_getApiVersion Billing)
          Build                       = $(_getApiVersion Build)
-         Release                     = $(_getApiVersion Release)
          Core                        = $(_getApiVersion Core)
-         Git                         = $(_getApiVersion Git)
          DistributedTask             = $(_getApiVersion DistributedTask)
          DistributedTaskReleased     = $(_getApiVersion DistributedTaskReleased)
-         VariableGroups              = $(_getApiVersion VariableGroups)
-         Tfvc                        = $(_getApiVersion Tfvc)
-         Packaging                   = $(_getApiVersion Packaging)
-         TaskGroups                  = $(_getApiVersion TaskGroups)
-         MemberEntitlementManagement = $(_getApiVersion MemberEntitlementManagement)
          ExtensionsManagement        = $(_getApiVersion ExtensionsManagement)
-         ServiceEndpoints            = $(_getApiVersion ServiceEndpoints)
+         Git                         = $(_getApiVersion Git)
          Graph                       = $(_getApiVersion Graph)
+         HierarchyQuery              = $(_getApiVersion HierarchyQuery)
+         MemberEntitlementManagement = $(_getApiVersion MemberEntitlementManagement)
+         Packaging                   = $(_getApiVersion Packaging)
+         Pipelines                   = $(_getApiVersion Pipelines)
          Policy                      = $(_getApiVersion Policy)
          Processes                   = $(_getApiVersion Processes)
-         HierarchyQuery              = $(_getApiVersion HierarchyQuery)
-         Pipelines                   = $(_getApiVersion Pipelines)
+         Release                     = $(_getApiVersion Release)
+         ServiceEndpoints            = $(_getApiVersion ServiceEndpoints)
+         TaskGroups                  = $(_getApiVersion TaskGroups)
+         Tfvc                        = $(_getApiVersion Tfvc)
+         VariableGroups              = $(_getApiVersion VariableGroups)
+         Version                     = $(_getApiVersion -Target)
       }
    }
 }

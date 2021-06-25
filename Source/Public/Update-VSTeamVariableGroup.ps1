@@ -59,7 +59,7 @@ function Update-VSTeamVariableGroup {
             }
          }
 
-         $body = $bodyAsHashtable | ConvertTo-Json
+         $body = $bodyAsHashtable | ConvertTo-Json -Depth 100
       }
 
       if ($Force -or $pscmdlet.ShouldProcess($Id, "Update Variable Group")) {
