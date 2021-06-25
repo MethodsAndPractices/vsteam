@@ -10,6 +10,15 @@ Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/384) from [Se
 
 - Add-VSTeamPool, Remove-VSTeamPool and Update-VSTeampool for handling agent pools on Azure DevOps
 
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/374) from [hkarthik7](https://github.com/hkarthik7) which includes the following:
+
+- Added a new parameter artifactVersionId to Get-VSTeamRelease cmdlet. This will help to return the release for passed artifact Id. For instance the release details of a build can be retrieved by passing build Id to the cmdlet.
+
+```powershell
+$buildId = Get-VSTeamBuild -Top 1
+Get-VSTeamRelease -artifactVersionId $buildId.Id
+```
+
 ## 7.2.0
 
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/371) and (https://github.com/DarqueWarrior/vsteam/pull/389) from [Sebastian Schütze](https://github.com/SebastianSchuetze) which included the following:
