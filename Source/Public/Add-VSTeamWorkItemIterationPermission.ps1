@@ -41,10 +41,10 @@ function Add-VSTeamWorkItemIterationPermission {
       [parameter(Mandatory = $true, ParameterSetName = "ByProjectAndIterationIdAndUser")]
       [vsteam_lib.User]$User,
 
-      [parameter(Mandatory = $true)]
+      [parameter(Mandatory = $false)]
       [vsteam_lib.WorkItemIterationPermissions]$Allow,
 
-      [parameter(Mandatory = $true)]
+      [parameter(Mandatory = $false)]
       [vsteam_lib.WorkItemIterationPermissions]$Deny
    )
 

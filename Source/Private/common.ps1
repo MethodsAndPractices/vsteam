@@ -99,10 +99,9 @@ function _callAPI {
       }
 
       # We have to remove any extra parameters not used by Invoke-RestMethod
-
       $extra = 'NoAccount', 'NoProject', 'UseProjectId', 'Area', 'Resource', 'SubDomain', 'Id', 'Version', 'JSON', 'ProjectName', 'Team', 'Url', 'QueryString', 'AdditionalHeaders', 'CustomBearer'
 
-   foreach ($e in $extra) { $params.Remove($e) | Out-Null }
+      foreach ($e in $extra) { $params.Remove($e) | Out-Null }
 
       try {
          $resp = Invoke-RestMethod @params
@@ -596,6 +595,7 @@ function _buildProjectNameDynamicParam {
       }
    #>
 }
+
 function _buildProcessNameDynamicParam {
    param(
       [string] $ParameterName = 'ProcessName',
@@ -1014,7 +1014,13 @@ function _getDescriptorForACL {
       switch ($User.Origin) {
          "vsts" {
             $sid = _getVSTeamIdFromDescriptor -Descriptor $User.Descriptor
-            $descriptor = "Microsoft.TeamFoundation.Identity;$sid"
+
+            if ($User.Descriptor.StartsWith('svc.')) {
+               $descriptor = "Microsoft.TeamFoundation.ServiceIdentity;$sid"
+            }
+            else {
+               $descriptor = "Microsoft.TeamFoundation.Identity;$sid"
+            }
          }
          "aad" {
             $descriptor = "Microsoft.IdentityModel.Claims.ClaimsIdentity;$($User.Domain)\\$($User.PrincipalName)"
