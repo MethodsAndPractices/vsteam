@@ -83,6 +83,8 @@ PipelineId
 
 Currently the API that is used by this cmdlet is only supporting YAML pipelines without template references. This will be supported soon. see the issue in GitHub: [https://github.com/microsoft/azure-pipelines-yaml/issues/34#issuecomment-591092498](https://github.com/microsoft/azure-pipelines-yaml/issues/34#issuecomment-591092498)
 
+This cmdlet is not starting a pipeline run, but rather trying to resolve the full YAML code. It will not check if the task themselves work. See here for more info [https://www.razorspoint.com/2020/03/13/how-to-preview-and-test-a-changing-yaml-pipeline-on-azure-devops/](https://www.razorspoint.com/2020/03/13/how-to-preview-and-test-a-changing-yaml-pipeline-on-azure-devops/)
+
 <!-- #include "./common/prerequisites.md" -->
 
 ## RELATED LINKS
