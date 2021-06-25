@@ -52,7 +52,7 @@ This command returns the raw object returned from the server formatted as JSON.
 Get-VSTeamRelease -ProjectName demo -artifactVersionId 7
 ```
 
-This command returns the associated release object for given build Id.
+This command returns the associated release for given Id. If the artifact type is a "Build" (Azure Pipelines) then it is the id of the build.
 
 ## PARAMETERS
 
