@@ -16,10 +16,10 @@ Describe "VSTeamUserEntitlement" -Tag 'VSTeamUserEntitlement' {
          Mock _callAPI -ParameterFilter { $Method -eq 'Patch' }
 
          # Get-VSTeamUserEntitlement by email
-         Mock _callAPI { Write-Host $args;Open-SampleFile 'Get-VSTeamUserEntitlement.json' }
+         Mock _callAPI { Open-SampleFile 'Get-VSTeamUserEntitlement.json' }
 
          # Get-VSTeamUserEntitlement by id
-         Mock _callAPI { Write-Host $args;Open-SampleFile 'Get-VSTeamUserEntitlement-Id.json' } -ParameterFilter {
+         Mock _callAPI { Open-SampleFile 'Get-VSTeamUserEntitlement-Id.json' } -ParameterFilter {
             $id -eq '00000000-0000-0000-0000-000000000000'
          }
       }

@@ -78,9 +78,9 @@ function Update-VSTeamUserEntitlement {
             -Body $body `
             -Version $(_getApiVersion MemberEntitlementManagement) | Out-Null
 
-         Write-Output "Updated user license for $( $user.userName ) ($( $user.email )) from LicenseType: ($licenseTypeOriginal) to ($newLicenseType)"
-         Write-Output "Updated user license for $( $user.userName ) ($( $user.email )) from LicenseSource: ($licenseSourceOriginal) to ($newLicenseSource)"
-         Write-Output "Updated user license for $( $user.userName ) ($( $user.email )) from MSDNLicenseType: ($msdnLicenseTypeOriginal) to ($newMSDNLicenseType)"
+         Write-Information "Updated user license for $( $user.userName ) ($( $user.email )) from LicenseType: ($licenseTypeOriginal) to ($newLicenseType)"
+         Write-Information "Updated user license for $( $user.userName ) ($( $user.email )) from LicenseSource: ($licenseSourceOriginal) to ($newLicenseSource)"
+         Write-Information "Updated user license for $( $user.userName ) ($( $user.email )) from MSDNLicenseType: ($msdnLicenseTypeOriginal) to ($newMSDNLicenseType)"
       }
    }
 }
