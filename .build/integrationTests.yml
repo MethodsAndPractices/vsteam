@@ -28,18 +28,18 @@ jobs:
               displayName: 'Download tests'
               artifact: test
 
-            - task: AzureResourceManagerTemplateDeployment@2
+            - task: AzureResourceGroupDeployment@2
               displayName: 'Start TFS 2017'
               inputs:
-                azureResourceManagerConnection: 'PM_DONOVANBROWN'
+                azureSubscription: 'PM_DONOVANBROWN'
                 action: Start
                 resourceGroupName: SonarQube
               condition: and(succeeded(), eq('${{ parameters.start2017 }}', 'true'))
 
-            - task: AzureResourceManagerTemplateDeployment@2
+            - task: AzureResourceGroupDeployment@2
               displayName: 'Start TFS 2018'
               inputs:
-                azureResourceManagerConnection: 'PM_DONOVANBROWN'
+                azureSubscription: 'PM_DONOVANBROWN'
                 action: Start
                 resourceGroupName: WinBldBox
               condition: and(succeeded(), eq('${{ parameters.start2018 }}', 'true'))
@@ -123,18 +123,18 @@ jobs:
               continueOnError: true
               condition: succeededOrFailed()
 
-            - task: AzureResourceManagerTemplateDeployment@2
+            - task: AzureResourceGroupDeployment@2
               displayName: 'Stop and Deallocate TFS 2017'
               inputs:
-                azureResourceManagerConnection: 'PM_DONOVANBROWN'
+                azureSubscription: 'PM_DONOVANBROWN'
                 action: StopWithDeallocate
                 resourceGroupName: SonarQube
               condition: and(succeeded(), eq('${{ parameters.stop2017 }}', 'true'))
 
-            - task: AzureResourceManagerTemplateDeployment@2
+            - task: AzureResourceGroupDeployment@2
               displayName: 'Stop and Deallocate TFS 2018'
               inputs:
-                azureResourceManagerConnection: 'PM_DONOVANBROWN'
+                azureSubscription: 'PM_DONOVANBROWN'
                 action: StopWithDeallocate
                 resourceGroupName: WinBldBox
               condition: and(succeeded(), eq('${{ parameters.stop2018 }}', 'true'))
