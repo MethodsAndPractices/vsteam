@@ -28,7 +28,7 @@ jobs:
               displayName: 'Download tests'
               artifact: test
 
-            - task: AzureResourceManagerTemplateDeployment@2
+            - task: AzureResourceManagerTemplateDeployment@3
               displayName: 'Start TFS 2017'
               inputs:
                 azureResourceManagerConnection: 'PM_DONOVANBROWN'
@@ -36,7 +36,7 @@ jobs:
                 resourceGroupName: SonarQube
               condition: and(succeeded(), eq('${{ parameters.start2017 }}', 'true'))
 
-            - task: AzureResourceManagerTemplateDeployment@2
+            - task: AzureResourceManagerTemplateDeployment@3
               displayName: 'Start TFS 2018'
               inputs:
                 azureResourceManagerConnection: 'PM_DONOVANBROWN'
@@ -123,7 +123,7 @@ jobs:
               continueOnError: true
               condition: succeededOrFailed()
 
-            - task: AzureResourceManagerTemplateDeployment@2
+            - task: AzureResourceManagerTemplateDeployment@3
               displayName: 'Stop and Deallocate TFS 2017'
               inputs:
                 azureResourceManagerConnection: 'PM_DONOVANBROWN'
@@ -131,7 +131,7 @@ jobs:
                 resourceGroupName: SonarQube
               condition: and(succeeded(), eq('${{ parameters.stop2017 }}', 'true'))
 
-            - task: AzureResourceManagerTemplateDeployment@2
+            - task: AzureResourceManagerTemplateDeployment@3
               displayName: 'Stop and Deallocate TFS 2018'
               inputs:
                 azureResourceManagerConnection: 'PM_DONOVANBROWN'
