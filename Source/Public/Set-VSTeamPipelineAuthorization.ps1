@@ -1,5 +1,5 @@
 function Set-VSTeamPipelineAuthorization {
-   [CmdletBinding(DefaultParameterSetName = 'AuthorizeResource', SupportsShouldProcess = $true, ConfirmImpact = "Mediem",
+   [CmdletBinding(DefaultParameterSetName = 'AuthorizeResource', SupportsShouldProcess = $true, ConfirmImpact = "Medium",
       HelpUri = 'https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Set-VSTeamPipelineBilling')]
    param (
       [Parameter(ParameterSetName = 'AuthorizeResource', Mandatory = $true, ValueFromPipeline = $true, Position = 0)]
@@ -32,11 +32,13 @@ function Set-VSTeamPipelineAuthorization {
          pipelines    = @( )
       }
 
-      $permPipeBody.pipelines = $PipelineIds | ForEach-Object {
-         @{
-            id         = $_
-            authorized = $Authorize
-         }
+      if ($PipelineIds) {
+         $permPipeBody.pipelines = @($PipelineIds | ForEach-Object {
+               @{
+                  id         = $_
+                  authorized = $Authorize
+               }
+            })
       }
 
       $permPipeJsonBody = $permPipeBody | ConvertTo-Json -Compress -Depth 100
@@ -44,13 +46,13 @@ function Set-VSTeamPipelineAuthorization {
       if ($PSCmdlet.ShouldProcess("$ResourceType $ResourceId with Pipeline $PipelineId", $Authorized)) {
 
          $resp = _callAPI -Method PATCH -NoProject `
-            -Area 'Pipelines'
+            -Area 'Pipelines' `
             -Resource 'pipelinePermissions' `
             -Id "$ResourceType/$ResourceId" `
             -Body $permPipeJsonBody `
-            -Version $(_getApiVersion Core)
+            -Version $(_getApiVersion Pipelines)
 
-            Write-Output $resp
+         Write-Output $resp
       }
    }
 }
