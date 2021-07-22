@@ -38,13 +38,12 @@ function Set-VSTeamPipelineAuthorization {
       }
 
       if ($PipelineIds) {
-
-         $permPipeBody.pipelines = @($PipelineIds | ForEach-Object {
-               @{
-                  id         = $_
-                  authorized = $Authorize
-               }
-            })
+         foreach ($id in $PipelineIds) {
+            $permPipeBody.pipelines += @{
+               id         = $id
+               authorized = $Authorize
+            }
+         }
       }
 
       $permPipeJsonBody = $permPipeBody | ConvertTo-Json -Compress -Depth 100
@@ -52,11 +51,11 @@ function Set-VSTeamPipelineAuthorization {
       $completeResourceId = $null
 
       switch ($ResourceType) {
-         "Repository"{
+         "Repository" {
             $projectId = (Get-VSTeamProject -Name $ProjectName).id
             $completeResourceId = "$ResourceType/$projectId." + $ResourceId
          }
-         Default{
+         Default {
             $completeResourceId = "$ResourceType/" + $ResourceId
          }
       }
