@@ -1,6 +1,6 @@
 function Set-VSTeamPipelineAuthorization {
    [CmdletBinding(DefaultParameterSetName = 'AuthorizeResource', SupportsShouldProcess = $true, ConfirmImpact = "Medium",
-      HelpUri = 'https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Set-VSTeamPipelineBilling')]
+      HelpUri = 'https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Set-VSTeamPipelineAuthorization')]
    param (
       [Parameter(ParameterSetName = 'AuthorizeResource', Mandatory = $true, ValueFromPipeline = $true, Position = 0)]
       [int[]] $PipelineIds,

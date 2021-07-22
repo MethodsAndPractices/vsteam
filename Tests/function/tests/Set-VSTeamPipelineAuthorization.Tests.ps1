@@ -31,7 +31,7 @@ Describe 'VSTeamPipelineAuthorization' -Tag 'unit', 'pipeline', 'security' {
             -ParameterFilter {
             $Method -eq 'Patch' -and
             $Body -like '*allPipelines":{"authorized":false*' -and
-            $Body -like '*pipelines":{"authorized":true*'
+            $Body -like '*pipelines":`[{"authorized":true*' -and
             $Uri -like "*/_apis/Pipelines/pipelinePermissions/*/$resourceId*" -and
             $Uri -like "*api-version=$(_getApiVersion Pipelines)*"
          }
@@ -48,7 +48,7 @@ Describe 'VSTeamPipelineAuthorization' -Tag 'unit', 'pipeline', 'security' {
             $Method -eq 'Patch' -and
             $Body -like '*id":1*' -and
             $Body -like '*allPipelines":{"authorized":false*' -and
-            $Body -like '*pipelines":{"authorized":false*' -and
+            $Body -like '*pipelines":`[{"authorized":false*' -and
             $Uri -like "*/_apis/Pipelines/pipelinePermissions/*/$resourceId*" -and
             $Uri -like "*api-version=$(_getApiVersion Pipelines)*"
 
@@ -57,35 +57,33 @@ Describe 'VSTeamPipelineAuthorization' -Tag 'unit', 'pipeline', 'security' {
 
       It 'should authorize pipeline for Queue' {
 
-         $resourceTypes | ForEach-Object {
-            Set-VSTeamPipelineAuthorization -PipelineIds 1 `
+         Set-VSTeamPipelineAuthorization -PipelineIds 1 `
             -ResourceId $resourceId `
             -ResourceType Queue -Authorize $true
-         }
 
-         Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 6 `
+         Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 `
             -ParameterFilter {
             $Method -eq 'Patch' -and
             $Body -like '*allPipelines":{"authorized":false*' -and
-            $Body -like '*pipelines":{"authorized":true*'
+            $Body -like '*pipelines":`[{"authorized":true*' -and
             $Uri -like "*/_apis/Pipelines/pipelinePermissions/Queue/$resourceId*" -and
             $Uri -like "*api-version=$(_getApiVersion Pipelines)*"
          }
       }
 
+
+
       It 'should authorize pipeline for Endpoint' {
 
-         $resourceTypes | ForEach-Object {
-            Set-VSTeamPipelineAuthorization -PipelineIds 1 `
+         Set-VSTeamPipelineAuthorization -PipelineIds 1 `
             -ResourceId $resourceId `
             -ResourceType Endpoint -Authorize $true
-         }
 
-         Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 6 `
+         Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 `
             -ParameterFilter {
             $Method -eq 'Patch' -and
             $Body -like '*allPipelines":{"authorized":false*' -and
-            $Body -like '*pipelines":{"authorized":true*'
+            $Body -like '*pipelines":`[{"authorized":true*' -and
             $Uri -like "*/_apis/Pipelines/pipelinePermissions/Endpoint/$resourceId*" -and
             $Uri -like "*api-version=$(_getApiVersion Pipelines)*"
          }
@@ -93,17 +91,15 @@ Describe 'VSTeamPipelineAuthorization' -Tag 'unit', 'pipeline', 'security' {
 
       It 'should authorize pipeline for Environment' {
 
-         $resourceTypes | ForEach-Object {
-            Set-VSTeamPipelineAuthorization -PipelineIds 1 `
+         Set-VSTeamPipelineAuthorization -PipelineIds 1 `
             -ResourceId $resourceId `
             -ResourceType Environment -Authorize $true
-         }
 
-         Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 6 `
+         Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 `
             -ParameterFilter {
             $Method -eq 'Patch' -and
             $Body -like '*allPipelines":{"authorized":false*' -and
-            $Body -like '*pipelines":{"authorized":true*'
+            $Body -like '*pipelines":`[{"authorized":true*' -and
             $Uri -like "*/_apis/Pipelines/pipelinePermissions/Environment/$resourceId*" -and
             $Uri -like "*api-version=$(_getApiVersion Pipelines)*"
          }
@@ -111,17 +107,15 @@ Describe 'VSTeamPipelineAuthorization' -Tag 'unit', 'pipeline', 'security' {
 
       It 'should authorize pipeline for VariableGroup' {
 
-         $resourceTypes | ForEach-Object {
-            Set-VSTeamPipelineAuthorization -PipelineIds 1 `
+         Set-VSTeamPipelineAuthorization -PipelineIds 1 `
             -ResourceId $resourceId `
             -ResourceType VariableGroup -Authorize $true
-         }
 
-         Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 6 `
+         Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 `
             -ParameterFilter {
             $Method -eq 'Patch' -and
             $Body -like '*allPipelines":{"authorized":false*' -and
-            $Body -like '*pipelines":{"authorized":true*'
+            $Body -like '*pipelines":`[{"authorized":true*' -and
             $Uri -like "*/_apis/Pipelines/pipelinePermissions/VariableGroup/$resourceId*" -and
             $Uri -like "*api-version=$(_getApiVersion Pipelines)*"
          }
@@ -129,17 +123,15 @@ Describe 'VSTeamPipelineAuthorization' -Tag 'unit', 'pipeline', 'security' {
 
       It 'should authorize pipeline for SecureFile' {
 
-         $resourceTypes | ForEach-Object {
-            Set-VSTeamPipelineAuthorization -PipelineIds 1 `
+         Set-VSTeamPipelineAuthorization -PipelineIds 1 `
             -ResourceId $resourceId `
             -ResourceType SecureFile -Authorize $true
-         }
 
-         Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 6 `
+         Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 `
             -ParameterFilter {
             $Method -eq 'Patch' -and
             $Body -like '*allPipelines":{"authorized":false*' -and
-            $Body -like '*pipelines":{"authorized":true*'
+            $Body -like '*pipelines":`[{"authorized":true*' -and
             $Uri -like "*/_apis/Pipelines/pipelinePermissions/SecureFile/$resourceId*" -and
             $Uri -like "*api-version=$(_getApiVersion Pipelines)*"
          }
@@ -147,17 +139,56 @@ Describe 'VSTeamPipelineAuthorization' -Tag 'unit', 'pipeline', 'security' {
 
       It 'should authorize pipeline for Repository' {
 
-         $resourceTypes | ForEach-Object {
-            Set-VSTeamPipelineAuthorization -PipelineIds 1 `
+         Set-VSTeamPipelineAuthorization -PipelineIds 1 `
             -ResourceId $resourceId `
             -ResourceType Repository -Authorize $true
-         }
 
-         Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 6 `
+
+         Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 `
             -ParameterFilter {
             $Method -eq 'Patch' -and
             $Body -like '*allPipelines":{"authorized":false*' -and
-            $Body -like '*pipelines":{"authorized":true*'
+            $Body -like '*pipelines":`[{"authorized":true*' -and
+            $Uri -like "*/_apis/Pipelines/pipelinePermissions/Repository/$resourceId*" -and
+            $Uri -like "*api-version=$(_getApiVersion Pipelines)*"
+         }
+      }
+
+      It 'should authorize given pipeline Id list via piping for Repository' {
+
+         $pipelineIdsCount = 4
+
+         @(1..$pipelineIdsCount) | Set-VSTeamPipelineAuthorization `
+            -ResourceId $resourceId `
+            -ResourceType Repository -Authorize $true
+
+
+         Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times $pipelineIdsCount `
+            -ParameterFilter {
+            $Method -eq 'Patch' -and
+            $Body -like '*allPipelines":{"authorized":false*' -and
+            $Body -like '*pipelines":`[{"authorized":true*' -and
+            $Uri -like "*/_apis/Pipelines/pipelinePermissions/Repository/$resourceId*" -and
+            $Uri -like "*api-version=$(_getApiVersion Pipelines)*"
+         }
+      }
+
+      It 'should authorize given pipeline Id list via IDs for Repository' {
+
+         $pipelineIdsCount = 7
+
+         Set-VSTeamPipelineAuthorization -PipelineIds (@(1..$pipelineIdsCount)) `
+            -ResourceId $resourceId `
+            -ResourceType Repository -Authorize $true
+
+
+         Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 `
+            -ParameterFilter {
+            $Method -eq 'Patch' -and
+            # asserts the number of pipelines in the body are equal to the given Ids count
+            (ConvertFrom-Json $Body -Depth 50).pipelines.Count -eq $pipelineIdsCount -and
+            $Body -like '*allPipelines":{"authorized":false*' -and
+            $Body -like '*pipelines":`[{"authorized":true*' -and
             $Uri -like "*/_apis/Pipelines/pipelinePermissions/Repository/$resourceId*" -and
             $Uri -like "*api-version=$(_getApiVersion Pipelines)*"
          }
@@ -186,13 +217,13 @@ Describe 'VSTeamPipelineAuthorization' -Tag 'unit', 'pipeline', 'security' {
       It 'should close authorization for pipeline and all resource types' {
 
          $resourceTypes | ForEach-Object {
-            Set-VSTeamPipelineAuthorization -ResourceId $resourceId -ResourceType $_ -AuthorizeAll $true
+            Set-VSTeamPipelineAuthorization -ResourceId $resourceId -ResourceType $_ -AuthorizeAll $false
          }
 
          Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 6 `
             -ParameterFilter {
             $Method -eq 'Patch' -and
-            $Body -like '*allPipelines":{"authorized":true*' -and
+            $Body -like '*allPipelines":{"authorized":false*' -and
             $Body -like '*"pipelines":`[`]*' -and
             $Uri -like "*/_apis/Pipelines/pipelinePermissions/*/$resourceId*" -and
             $Uri -like "*api-version=$(_getApiVersion Pipelines)*"
