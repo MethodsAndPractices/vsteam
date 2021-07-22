@@ -4,9 +4,14 @@ function Set-VSTeamPipelineAuthorization {
    param (
       [Parameter(ParameterSetName = 'AuthorizeResource', Mandatory = $true, ValueFromPipeline = $true, Position = 0)]
       [int[]] $PipelineIds,
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+      [vsteam_lib.ProjectValidateAttribute($false)]
+      [ArgumentCompleter([vsteam_lib.ProjectCompleter])]
+      [string] $ProjectName,
       [Parameter(ParameterSetName = 'AuthorizeResource', Mandatory = $true)]
       [Parameter(ParameterSetName = 'AuthorizeAll', Mandatory = $true)]
       [string]
+
       $ResourceId,
       [Parameter(ParameterSetName = 'AuthorizeResource', Mandatory = $true)]
       [Parameter(ParameterSetName = 'AuthorizeAll', Mandatory = $true)]
@@ -33,6 +38,7 @@ function Set-VSTeamPipelineAuthorization {
       }
 
       if ($PipelineIds) {
+
          $permPipeBody.pipelines = @($PipelineIds | ForEach-Object {
                @{
                   id         = $_
@@ -43,12 +49,25 @@ function Set-VSTeamPipelineAuthorization {
 
       $permPipeJsonBody = $permPipeBody | ConvertTo-Json -Compress -Depth 100
 
+      $completeResourceId = $null
+
+      switch ($ResourceType) {
+         "Repository"{
+            $projectId = (Get-VSTeamProject -Name $ProjectName).id
+            $completeResourceId = "$ResourceType/$projectId." + $ResourceId
+         }
+         Default{
+            $completeResourceId = "$ResourceType/" + $ResourceId
+         }
+      }
+
       if ($PSCmdlet.ShouldProcess("$ResourceType $ResourceId with Pipeline $PipelineId", $Authorized)) {
 
-         $resp = _callAPI -Method PATCH -NoProject `
+         $resp = _callAPI -Method PATCH `
+            -ProjectName $ProjectName `
             -Area 'Pipelines' `
             -Resource 'pipelinePermissions' `
-            -Id "$ResourceType/$ResourceId" `
+            -Id $completeResourceId `
             -Body $permPipeJsonBody `
             -Version $(_getApiVersion Pipelines)
 
