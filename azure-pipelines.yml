@@ -19,7 +19,7 @@ stages:
   - job: Linux_Phase
     displayName: Build Linux
     pool:
-      vmImage: 'ubuntu-16.04'
+      vmImage: 'ubuntu-latest'
 
     steps:
     - template: .build/unitTests.yml
@@ -139,7 +139,7 @@ stages:
   - deployment: Deploy
     displayName: Package Management
     pool:
-      vmImage: 'ubuntu-16.04'
+      vmImage: 'ubuntu-latest'
     environment: 'Default'
     strategy:
       runOnce:
@@ -220,7 +220,7 @@ stages:
     parameters:
       displayName: 'Linux TFS 2018'
       os: 'Linux'
-      pool: 'ubuntu-16.04'
+      pool: 'ubuntu-latest'
       start2018: 'true'
       stop2018: 'true'
       name: 'LinuxTFS2018'
