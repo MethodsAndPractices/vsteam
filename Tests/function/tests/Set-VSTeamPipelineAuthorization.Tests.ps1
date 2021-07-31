@@ -37,7 +37,8 @@ Describe 'VSTeamPipelineAuthorization' -Tag 'unit', 'pipeline', 'security' {
             -ParameterFilter {
             $Method -eq 'Patch' -and
             $Body -like '*allPipelines":{"authorized":false*' -and
-            $Body -like "*{""id"":$pipelineId,""authorized"":true}*" -and
+            ($Body -like "*{""id"":$pipelineId,""authorized"":true}*" -or
+            $Body -like "*{""authorized"":true,""id"":$pipelineId}*") -and
             $Uri -like "*/_apis/Pipelines/pipelinePermissions/*$resourceId*" -and
             $Uri -like "*api-version=$(_getApiVersion Pipelines)*"
          }
@@ -55,7 +56,8 @@ Describe 'VSTeamPipelineAuthorization' -Tag 'unit', 'pipeline', 'security' {
             $Method -eq 'Patch' -and
             $Body -like '*id":1*' -and
             $Body -like '*allPipelines":{"authorized":false*' -and
-            $Body -like "*{""id"":$pipelineId,""authorized"":false}*" -and
+            ($Body -like "*{""id"":$pipelineId,""authorized"":false}*" -or
+            $Body -like "*{""authorized"":false,""id"":$pipelineId}*") -and
             $Uri -like "*/_apis/Pipelines/pipelinePermissions/*$resourceId*" -and
             $Uri -like "*api-version=$(_getApiVersion Pipelines)*"
 
@@ -73,7 +75,8 @@ Describe 'VSTeamPipelineAuthorization' -Tag 'unit', 'pipeline', 'security' {
             -ParameterFilter {
             $Method -eq 'Patch' -and
             $Body -like '*allPipelines":{"authorized":false*' -and
-            $Body -like "*{""id"":$pipelineId,""authorized"":true}*" -and
+            ($Body -like "*{""id"":$pipelineId,""authorized"":true}*" -or
+            $Body -like "*{""authorized"":true,""id"":$pipelineId}*") -and
             $Uri -like "*/_apis/Pipelines/pipelinePermissions/Queue/$resourceId*" -and
             $Uri -like "*api-version=$(_getApiVersion Pipelines)*"
          }
@@ -92,7 +95,8 @@ Describe 'VSTeamPipelineAuthorization' -Tag 'unit', 'pipeline', 'security' {
             -ParameterFilter {
             $Method -eq 'Patch' -and
             $Body -like '*allPipelines":{"authorized":false*' -and
-            $Body -like "*{""id"":$pipelineId,""authorized"":true}*" -and
+            ($Body -like "*{""id"":$pipelineId,""authorized"":true}*" -or
+            $Body -like "*{""authorized"":true,""id"":$pipelineId}*") -and
             $Uri -like "*/_apis/Pipelines/pipelinePermissions/Endpoint/$resourceId*" -and
             $Uri -like "*api-version=$(_getApiVersion Pipelines)*"
          }
@@ -109,7 +113,8 @@ Describe 'VSTeamPipelineAuthorization' -Tag 'unit', 'pipeline', 'security' {
             -ParameterFilter {
             $Method -eq 'Patch' -and
             $Body -like '*allPipelines":{"authorized":false*' -and
-            $Body -like "*{""id"":$pipelineId,""authorized"":true}*" -and
+            ($Body -like "*{""id"":$pipelineId,""authorized"":true}*" -or
+            $Body -like "*{""authorized"":true,""id"":$pipelineId}*") -and
             $Uri -like "*/_apis/Pipelines/pipelinePermissions/Environment/$resourceId*" -and
             $Uri -like "*api-version=$(_getApiVersion Pipelines)*"
          }
@@ -126,7 +131,8 @@ Describe 'VSTeamPipelineAuthorization' -Tag 'unit', 'pipeline', 'security' {
             -ParameterFilter {
             $Method -eq 'Patch' -and
             $Body -like '*allPipelines":{"authorized":false*' -and
-            $Body -like "*{""id"":$pipelineId,""authorized"":true}*" -and
+            ($Body -like "*{""id"":$pipelineId,""authorized"":true}*" -or
+            $Body -like "*{""authorized"":true,""id"":$pipelineId}*") -and
             $Uri -like "*/_apis/Pipelines/pipelinePermissions/VariableGroup/$resourceId*" -and
             $Uri -like "*api-version=$(_getApiVersion Pipelines)*"
          }
@@ -143,7 +149,8 @@ Describe 'VSTeamPipelineAuthorization' -Tag 'unit', 'pipeline', 'security' {
             -ParameterFilter {
             $Method -eq 'Patch' -and
             $Body -like '*allPipelines":{"authorized":false*' -and
-            $Body -like "*{""id"":$pipelineId,""authorized"":true}*" -and
+            ($Body -like "*{""id"":$pipelineId,""authorized"":true}*" -or
+            $Body -like "*{""authorized"":true,""id"":$pipelineId}*") -and
             $Uri -like "*/_apis/Pipelines/pipelinePermissions/SecureFile/$resourceId*" -and
             $Uri -like "*api-version=$(_getApiVersion Pipelines)*"
          }
@@ -161,7 +168,8 @@ Describe 'VSTeamPipelineAuthorization' -Tag 'unit', 'pipeline', 'security' {
             -ParameterFilter {
             $Method -eq 'Patch' -and
             $Body -like '*allPipelines":{"authorized":false*' -and
-            $Body -like "*{""id"":$pipelineId,""authorized"":true}*" -and
+            ($Body -like "*{""id"":$pipelineId,""authorized"":true}*" -or
+            $Body -like "*{""authorized"":true,""id"":$pipelineId}*") -and
             $Uri -like "*/_apis/Pipelines/pipelinePermissions/Repository/*.$resourceId*" -and
             $Uri -like "*api-version=$(_getApiVersion Pipelines)*"
          }
@@ -181,7 +189,8 @@ Describe 'VSTeamPipelineAuthorization' -Tag 'unit', 'pipeline', 'security' {
             -ParameterFilter {
             $Method -eq 'Patch' -and
             $Body -like '*allPipelines":{"authorized":false*' -and
-            $Body -like "*`[{""id"":*,""authorized"":true}`]*" -and
+            ($Body -like "*`[{""id"":*,""authorized"":true}`]*" -or
+            $Body -like "*`[{""authorized"":true,""id"":*}`]*") -and
             $Uri -like "*/_apis/Pipelines/pipelinePermissions/Repository/*.$resourceId*" -and
             $Uri -like "*api-version=$(_getApiVersion Pipelines)*"
          }
@@ -203,7 +212,8 @@ Describe 'VSTeamPipelineAuthorization' -Tag 'unit', 'pipeline', 'security' {
             # asserts the number of pipelines in the body are equal to the given Ids count
             (ConvertFrom-Json $Body -Depth 50).pipelines.Count -eq $pipelineIdsCount -and
             $Body -like '*allPipelines":{"authorized":false*' -and
-            $Body -like "*{""id"":$pipelineId,""authorized"":true}*" -and
+            ($Body -like "*{""id"":$pipelineId,""authorized"":true}*" -or
+            $Body -like "*{""authorized"":true,""id"":$pipelineId}*") -and
             $Uri -like "*/_apis/Pipelines/pipelinePermissions/Repository/*.$resourceId*" -and
             $Uri -like "*api-version=$(_getApiVersion Pipelines)*"
          }
