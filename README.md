@@ -2,7 +2,7 @@
 
 [![Build Status](https://dev.azure.com/LoECDA/Team%20Module/_apis/build/status/MethodsAndPractices.vsteam?branchName=trunk)](https://dev.azure.com/LoECDA/Team%20Module/_build/latest?definitionId=62&branchName=trunk)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/MethodsAndPractices/vsteam/blob/trunk/LICENSE)
-[![Documentation - VSTeam](https://img.shields.io/badge/Documentation-VSTeam-blue.svg)](https://github.com/MethodsAndPractices/vsteam/blob/trunk/docs/readme.md)
+[![Documentation - VSTeam](https://img.shields.io/badge/Documentation-VSTeam-blue.svg)](https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/index)
 [![PowerShell Gallery - VSTeam](https://img.shields.io/badge/PowerShell%20Gallery-VSTeam-blue.svg)](https://www.powershellgallery.com/packages/VSTeam)
 [![Minimum Supported PowerShell Version](https://img.shields.io/badge/PowerShell-5.0-blue.svg)](https://github.com/PowerShell/PowerShell)
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg)](CODE_OF_CONDUCT.md)
@@ -15,7 +15,7 @@ The VSTeam module is also a provider allowing users to navigate their [Azure Dev
 
 To get started you can visit this blog [PowerShell I would like you to meet TFS and VSTS](http://www.donovanbrown.com/post/PowerShell-I-would-like-you-to-meet-TFS-and-VSTS)
 
-Documentation of the cmdlets can be found in the [docs README](https://github.com/MethodsAndPractices/vsteam/blob/trunk/docs/readme.md) or using `Get-Help VSTeam` once the module is installed.
+Documentation of the cmdlets can be found on the [GitHub pages](https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/index) for the module or using `Get-Help VSTeam` once the module is installed.
 
 ## Requirements
 
