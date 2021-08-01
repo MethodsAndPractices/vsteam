@@ -50,7 +50,7 @@ function Get-VSTeamWiql {
       $resp = _callAPI  @params
 
       #expand only when at least one workitem has been found
-      if ($Expand && $resp.workItems.Count -gt 0) {
+      if ($Expand -and $resp.workItems.Count -gt 0) {
          # Handle queries for work item links also allow for the tests not Setting the query result type.
          if ($resp.psobject.Properties['queryResultType'] -and $resp.queryResultType -eq 'workItemLink') {
             Add-Member -InputObject $resp -MemberType NoteProperty -Name Workitems -Value @()
