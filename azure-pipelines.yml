@@ -9,7 +9,7 @@ resources:
 variables:
   Folder: 'dist'
   TEAM_CIBUILD: 'true'
-  PESTER_VERSION: '5.1.1'
+  PESTER_VERSION: '5.2.2'
 
 stages:
 - stage: Build
@@ -118,6 +118,7 @@ stages:
       parameters:
         os: 'Windows'
         buildHelp: 'false'
+        CodeCoverage: 'true'
 
     - task: CredScan@2
       displayName: 'Run CredScan'
