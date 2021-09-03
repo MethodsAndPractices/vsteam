@@ -40,7 +40,7 @@ namespace vsteam_lib
                   string fieldShortname = afterLastDot.Replace(fieldreferenceName,"$1").ToLower();
                   RefNames.Add(fieldreferenceName.ToLower(), fieldreferenceName);
                   ShortNames.Add(fieldShortname, fieldreferenceName);
-                  if (fieldDisplayName != fieldShortname)
+                  if (fieldDisplayName != fieldShortname && ! ShortNames.ContainsKey(fieldDisplayName))
                   {
                      ShortNames.Add(fieldDisplayName, fieldreferenceName);
                   }
