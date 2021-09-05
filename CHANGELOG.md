@@ -1,12 +1,24 @@
 # Changelog
 
-- Get-VSTeamWiki, Add-VSTeamWiki, Remove-VSTeamWiki, for interacting with Wikis
+## 7.5.0
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/414) from [Guillermo Diaz](https://github.com/gm0d) which included the following:
+
+- Added Get-VSTeamWiki, Add-VSTeamWiki, Remove-VSTeamWiki, for interacting with Wikis
  
-## 7.3.1
+## 7.4.0
 
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/400) from [Sebastian Schütze](https://github.com/SebastianSchuetze) which included the following:
 
 - Fixes ambiguity of parameter sets in VSTeamUserEntitlement cmdlets [#393](https://github.com/DarqueWarrior/vsteam/issues/393)
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/406) from [Sebastian Schütze](https://github.com/SebastianSchuetze) which included the following:
+
+- Fixes Get-VSTeamWiql with only one work item expanded causing and exception [#392](https://github.com/DarqueWarrior/vsteam/issues/392)
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/408) from [Sebastian Schütze](https://github.com/SebastianSchuetze) which included the following:
+
+- Added `Set-VSTeamPipelineAuthorization` to set pipeline authorizations.
 
 ## 7.3.0
 
