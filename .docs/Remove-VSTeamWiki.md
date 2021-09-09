@@ -34,7 +34,7 @@ This will Un-publish a wiki by Id
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->`
+<!-- #include "./params/projectName.md" -->
 
 ### WikiName
 
@@ -44,7 +44,7 @@ Name of the Wiki to Un-publish
 Type: String
 Required: True
 Position: named
-Alias: Name
+Aliases: Name
 Parameter Sets: ByName
 ```
 
@@ -56,7 +56,7 @@ Id of the Wiki to Un-publish
 Type: String
 Required: True
 Position: named
-Alias: Id
+Aliases: Id
 Parameter Sets: ById
 ```
 

@@ -44,7 +44,7 @@ This will return the specified wiki in the project provided
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->`
+<!-- #include "./params/projectName.md" -->
 
 ### Name
 

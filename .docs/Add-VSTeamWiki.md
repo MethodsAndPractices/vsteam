@@ -34,7 +34,7 @@ This will create a code wiki from main branch and publish '.Docs' folder
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->`
+<!-- #include "./params/projectName.md" -->
 
 ### Name
 
