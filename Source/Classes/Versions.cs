@@ -160,7 +160,6 @@ namespace vsteam_lib
       public static string Graph { get; set; } = "";
       public static string Policy { get; set; } = "3.0";
       public static string Processes { get; set; } = "";
-
       public static string Wiki { get; set; } = "6.0";
    }
 }

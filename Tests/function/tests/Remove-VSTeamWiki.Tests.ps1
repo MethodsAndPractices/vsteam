@@ -80,5 +80,13 @@ Describe 'VSTeamWiki' {
             $Id -eq $FakeProjectWikiId
          }
       }
+
+      It 'invalid wiki, should trigger exception'{
+         ## Act
+         { Remove-VSTeamWiki -WikiId '00000000-0000-0000-0000-000000000002' } |  # WikiId that does not exist in the Sample File
+         
+         ## Assert
+          Should -Throw "Wiki not found in project provided"
+      }
    }
 }
