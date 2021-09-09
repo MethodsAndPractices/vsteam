@@ -1,5 +1,6 @@
 function Remove-VSTeamWiki {
-   [CmdletBinding(HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Remove-VSTeamWiki')]
+   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Low",
+      HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Remove-VSTeamWiki')]
    param(      
       [Parameter(Mandatory = $true, ParameterSetName = 'ByName')]
       [Alias('Name')]
