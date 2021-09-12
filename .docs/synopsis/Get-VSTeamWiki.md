@@ -1,0 +1,1 @@
+Returns a list of wikis for the selected project.

@@ -7,7 +7,7 @@ namespace vsteam_lib
       Build, Release, Core, Git, DistributedTask, DistributedTaskReleased,
       VariableGroups, Tfvc, Packaging, MemberEntitlementManagement,
       ExtensionsManagement, ServiceEndpoints, Graph, TaskGroups, Policy,
-      Processes, Version, HierarchyQuery, Pipelines, Billing
+      Processes, Version, HierarchyQuery, Pipelines, Billing, Wiki
    }
 
    public static class Versions
@@ -73,6 +73,9 @@ namespace vsteam_lib
             case APIs.Processes:
                Processes = version;
                break;
+            case APIs.Wiki:
+               Wiki = version;
+               break;
          }
       }
 
@@ -118,6 +121,8 @@ namespace vsteam_lib
                return Policy;
             case APIs.Processes:
                return Processes;
+            case APIs.Wiki:
+               return Wiki;
             default:
                return Version;
          }
@@ -155,5 +160,6 @@ namespace vsteam_lib
       public static string Graph { get; set; } = "";
       public static string Policy { get; set; } = "3.0";
       public static string Processes { get; set; } = "";
+      public static string Wiki { get; set; } = "6.0";
    }
 }
