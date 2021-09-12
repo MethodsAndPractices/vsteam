@@ -1,4 +1,5 @@
 function Get-VSTeamAccounts {
+   [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseSingularNouns", "")]
    [CmdletBinding(HelpUri = 'https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Get-VSTeamAccounts')]
    param(
       [Parameter(Mandatory = $true, ParameterSetName = "MemberId")]
