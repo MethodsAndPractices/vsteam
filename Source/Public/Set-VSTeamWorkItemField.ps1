@@ -38,29 +38,27 @@ function Set-VSTeamWorkItemField {
                name = $field.Name
             }
             if ($PSBoundParameters.ContainsKey('required')) {
-                  $body['required']      = $Required    -as [bool]
+                  $body['required']      = $Required       -as [bool]
             }
-            else {$body['required']      = $field.required}
+            else {$body['required']      = $field.required -as [bool]}
             if ($PSBoundParameters.ContainsKey('AllowedValues')) {
                   $body['allowedValues']  =  @()+ $AllowedValues
             }
             else {$body['allowedValues']  = $field.allowedValues}
-            if ($PSBoundParameters.ContainsKey('$DefaultValue')) {
+            if ($PSBoundParameters.ContainsKey('DefaultValue')) {
                   $body['defaultValue']  = $DefaultValue
             }
             elseif ($field.psobject.properties['defaultValue']) {
                $body['defaultValue']  = $field.defaultValue
             }
-
             if ($PSBoundParameters.ContainsKey('allowGroups')) {
                   $body['allowGroups']   = $AllowGroups -as [bool]
              }
             elseif ($field.psobject.properties['allowGroups']) {
-                  $body['allowGroups']   = $field.allow -as [bool]
+                  $body['allowGroups']   = $field.allowGroups
             }
-
             if ($PSBoundParameters.ContainsKey('readOnly')) {
-                  $body['readOnly']      = $ReadOnly    -as [bool]
+                  $body['readOnly']      = $ReadOnly          -as [bool]
             }
             elseif ($field.psobject.properties['readOnly']) {
                   $body['readOnly']   = $field.readOnly
