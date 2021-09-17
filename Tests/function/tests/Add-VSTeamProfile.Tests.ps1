@@ -69,7 +69,7 @@ Describe 'VSTeamProfile' {
       }
    }
 
-   Context 'Add-VSTeamProfile TFS default to TFS2017 with Windows Auth' {
+   Context 'Add-VSTeamProfile TFS defaults to TFS2017 with Windows Auth' {
       BeforeAll {
          Mock _isOnWindows { return $true }
          Mock Get-VSTeamProfile { return '[{"Name":"test","URL":"https://dev.azure.com/test/","Type":"Pat","Pat":"12345","Version":"VSTS"}]' | ConvertFrom-Json | ForEach-Object { $_ } }
@@ -84,7 +84,7 @@ Describe 'VSTeamProfile' {
       }
    }
 
-   Context 'Add-VSTeamProfile TFS default to TFS2017' {
+   Context 'Add-VSTeamProfile TFS defaults to TFS2017' {
       BeforeAll {
          Mock Get-VSTeamProfile { return '[{"Name":"test","URL":"https://dev.azure.com/test/","Type":"Pat","Pat":"12345","Version":"VSTS"}]' | ConvertFrom-Json | ForEach-Object { $_ } }
       }

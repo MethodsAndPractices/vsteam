@@ -1,6 +1,6 @@
 Prerequisites: 
 
-Set the account and version that all calls will use with Set-VSTeamAccount. If you do not set the version it default to 3.0, TFS2017. Using the default could limit API functionality.
+Set the account and version that all calls will use with Set-VSTeamAccount. If you do not set the version it will default to 3.0, TFS2017. Using the default could limit API functionality.
 
 You can check what version of the API that will be called with Get-VSTeamAPIVersion, or Get-VSTeamInfo.
 
