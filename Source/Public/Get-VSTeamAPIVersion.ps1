@@ -8,7 +8,7 @@ function Get-VSTeamAPIVersion {
                    'Packaging', 'MemberEntitlementManagement',
                    'ExtensionsManagement', 'ServiceEndpoints', 'Graph',
                    'TaskGroups', 'Policy', 'Processes', 'HierarchyQuery',
-                   'Pipelines', 'Billing')]
+                   'Pipelines', 'Billing', 'Wiki', 'WorkItemTracking')]
       [string] $Service
    )
 
@@ -39,7 +39,9 @@ function Get-VSTeamAPIVersion {
          TaskGroups                  = $(_getApiVersion TaskGroups)
          Tfvc                        = $(_getApiVersion Tfvc)
          VariableGroups              = $(_getApiVersion VariableGroups)
-         Version                     = $(_getApiVersion -Target)
+         Version                     = $(_getApiVersion Version)
+         Wiki                        = $(_getApiVersion Wiki)
+         WorkItemTracking            = $(_getApiVersion WorkItemTracking)
       }
    }
 }

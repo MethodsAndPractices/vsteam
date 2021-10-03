@@ -2,10 +2,14 @@
 
 ## 7.5.0
 
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/TBD) from [Sander Holvoet](https://github.com/smholvoet) which included the following:
+
+- Added `Get-VSTeamWorkItemTag`, `Update-VSTeamWorkItemTag` and `Remove-VSTeamWorkItemTag` cmdlets which  allow you to [manage work item tags]([#296](https://github.com/DarqueWarrior/vsteam/issues/296).
+
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/414) from [Guillermo Diaz](https://github.com/gm0d) which included the following:
 
 - Added Get-VSTeamWiki, Add-VSTeamWiki, Remove-VSTeamWiki, for interacting with Wikis
- 
+
 ## 7.4.0
 
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/400) from [Sebastian Schütze](https://github.com/SebastianSchuetze) which included the following:
