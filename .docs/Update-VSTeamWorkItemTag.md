@@ -12,8 +12,6 @@
 
 Updates a work item tag.
 
-You must call `Set-VSTeamAccount` before calling this function.
-
 ## EXAMPLES
 
 ### Example 1

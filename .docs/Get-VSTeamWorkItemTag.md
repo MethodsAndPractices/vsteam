@@ -14,8 +14,6 @@ Returns a list of work item tags in a project.
 
 A single tag can be returned by providing the tag name or id.
 
-You must call `Set-VSTeamAccount` before calling this function.
-
 ## EXAMPLES
 
 ### Example 1

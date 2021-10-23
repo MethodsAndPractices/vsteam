@@ -14,7 +14,7 @@ function Remove-VSTeamWorkItemTag {
    )
 
    Process {
-      if ($Force -or $pscmdlet.ShouldProcess($item, "Delete Work Item Tag")) {
+      if ($Force -or $pscmdlet.ShouldProcess($item, "Delete work item tag from all work items in this team project")) {
          try {
             _callAPI -Method DELETE `
                -Area "wit" `

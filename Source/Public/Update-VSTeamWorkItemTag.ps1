@@ -14,7 +14,7 @@ function Update-VSTeamWorkItemTag {
    )
 
    process {
-      if ($Force -or $pscmdlet.ShouldProcess($Id, "Update Work Item Tag")) {
+      if ($Force -or $pscmdlet.ShouldProcess($Id, "Update work item tag in all work items in this team project")) {
          $resp = _callAPI -Method PATCH -ProjectName $ProjectName `
             -Area wit `
             -Resource tags `

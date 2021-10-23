@@ -14,10 +14,8 @@ Describe 'VSTeamWorkItemTag' {
    Context 'Remove-VSTeamWorkItemTag' {
       BeforeAll {
          $FakeProjectName = 'test'
-         $FakeTagId = '00000000-0000-0000-0000-000000000000'         
-         $FakeTagName = 'myTag'         
-         
-         #TODO
+         $FakeTagId = '00000000-0000-0000-0000-000000000000'   
+         $FakeTagName = 'myTag'
       }
       
       It 'remove by id, should remove tag' {
@@ -26,7 +24,7 @@ Describe 'VSTeamWorkItemTag' {
          
          ## Assert
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
-            $Uri -eq "https://dev.azure.com/$($FakeOrg)/_apis/wit/tags/$($FakeCodeWikiId)?api-version=$(_getApiVersion Work Item Tracking)"  -and
+            $Uri -eq "https://dev.azure.com/$($FakeOrg)/_apis/wit/tags/$($FakeTagId)?api-version=$(_getApiVersion Work Item Tracking)"  -and
             $Method -eq 'DELETE' 
          }
       }
@@ -37,7 +35,7 @@ Describe 'VSTeamWorkItemTag' {
          
          ## Assert
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
-            $Uri -eq "https://dev.azure.com/$($FakeOrg)/_apis/wit/tags/$($FakeCodeWikiId)?api-version=$(_getApiVersion Work Item Tracking)"  -and
+            $Uri -eq "https://dev.azure.com/$($FakeOrg)/_apis/wit/tags/$($FakeTagName)?api-version=$(_getApiVersion Work Item Tracking)"  -and
             $Method -eq 'DELETE' 
          }
       }
