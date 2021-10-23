@@ -14,7 +14,7 @@ Describe "VSTeamWorkItemTag" {
             Mock Invoke-RestMethod { Open-SampleFile 'Get-VSTeamWorkItemTag.json' -Index 0 }
             Mock Get-VSTeam { return New-Object -TypeName PSObject -Prop @{
                   projectname = "TestProject"
-                  name        = "OldTeamName"
+                  name        = "OldTagName"
                }
             }
          }
@@ -24,10 +24,10 @@ Describe "VSTeamWorkItemTag" {
             $expectedBody = '{ "name": "NewTagName" }'
 
             ## Act
-            $team = Update-VSTeam -ProjectName Test -TeamToUpdate "OldTagName" -NewTeamName "NewTagName"
+            $tag = Update-VSTeamWorkItemTag -ProjectName "TestProject" -TagIdOrName "OldTagName" -NewTagName "NewTagName"
 
             ## Assert
-            $team.Name | Should -Be 'Test Team' -Because 'Name should be set'
+            $tag.Name | Should -Be 'NewTagName' -Because 'Name should be set'
 
             Should -Invoke Invoke-RestMethod -Exactly 1 -ParameterFilter {
                $Uri -eq "https://dev.azure.com/test/_apis/wit/tags/OldTagName?api-version=$(_getApiVersion Work Item Tracking)" -and

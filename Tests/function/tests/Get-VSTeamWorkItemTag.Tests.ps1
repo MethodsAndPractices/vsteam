@@ -27,7 +27,7 @@ Describe 'VSTeamWorkItemTag' {
       
       It 'Project name parameter should return all work item tags for the selected project' {
          ## Act
-         Get-VSTeamWorkItemTag -projectName $FakeProject
+         Get-VSTeamWorkItemTag -ProjectName $FakeProject
 
          ## Assert
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
@@ -37,7 +37,7 @@ Describe 'VSTeamWorkItemTag' {
 
       It 'Passing a name should return work item tag details' {
          ## Act
-         Get-VSTeamWorkItemTag -projectName $FakeProject -name $FakeName
+         Get-VSTeamWorkItemTag -ProjectName $FakeProject -TagIdOrName $FakeName
 
          ## Assert
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
@@ -48,7 +48,7 @@ Describe 'VSTeamWorkItemTag' {
       It 'Passing an Id should return work item tag details' {
          $FakeId = 1111
          ## Act
-         Get-VSTeamWorkItemTag -projectName $FakeProject -id $FakeId
+         Get-VSTeamWorkItemTag -ProjectName $FakeProject -TagIdOrName $FakeId
 
          ## Assert
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {

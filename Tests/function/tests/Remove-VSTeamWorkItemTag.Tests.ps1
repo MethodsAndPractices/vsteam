@@ -16,6 +16,14 @@ Describe 'VSTeamWorkItemTag' {
          $FakeProjectName = 'test'
          $FakeTagId = '00000000-0000-0000-0000-000000000000'   
          $FakeTagName = 'myTag'
+
+         Mock Invoke-RestMethod { Open-SampleFile 'Get-VSTeamWorkItemTag.json' }
+         Mock Invoke-RestMethod { Open-SampleFile 'Get-VSTeamWorkItemTag.json' -Index 0 } -ParameterFilter { 
+            $Uri -like "*$FakeName*" 
+         }
+         Mock Invoke-RestMethod { Open-SampleFile 'Get-VSTeamWorkItemTag.json' -Index 0 } -ParameterFilter { 
+            $Uri -like "*$FakeId*" 
+         }
       }
       
       It 'remove by id, should remove tag' {

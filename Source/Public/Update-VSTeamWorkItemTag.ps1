@@ -5,6 +5,9 @@ function Update-VSTeamWorkItemTag {
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [string] $TagIdOrName,
 
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+      [string] $NewTagName,
+
       [switch] $Force,
 
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
@@ -15,6 +18,9 @@ function Update-VSTeamWorkItemTag {
 
    process {
       if ($Force -or $pscmdlet.ShouldProcess($Id, "Update work item tag in all work items in this team project")) {
+
+         $body = '{ "name": "' + $NewTagName + '" }'
+
          $resp = _callAPI -Method PATCH -ProjectName $ProjectName `
             -Area wit `
             -Resource tags `

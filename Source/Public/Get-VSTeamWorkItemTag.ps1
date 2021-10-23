@@ -1,8 +1,6 @@
 function Get-VSTeamWorkItemTag {
    [CmdletBinding(HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Get-VSTeamWorkItemTag')]
    param (
-
-
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [Alias('TagName')]
       [Alias('TagId')]
