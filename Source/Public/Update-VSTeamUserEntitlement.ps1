@@ -1,32 +1,28 @@
 function Update-VSTeamUserEntitlement {
-   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "High", DefaultParameterSetName = 'ByEmailLicenseOnly',
-    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Update-VSTeamUserEntitlement')]
+   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "High", DefaultParameterSetName = 'ByEmail',
+      HelpUri = 'https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Update-VSTeamUserEntitlement')]
    param (
-      [Parameter(ParameterSetName = 'ByIdLicenseOnly', Mandatory = $True, ValueFromPipelineByPropertyName = $true)]
-      [Parameter(ParameterSetName = 'ByIdWithSource', Mandatory = $True, ValueFromPipelineByPropertyName = $true)]
+      [Parameter(ParameterSetName = 'ById', Mandatory = $True, ValueFromPipelineByPropertyName = $true)]
       [Alias('UserId')]
       [string]$Id,
 
-      [Parameter(ParameterSetName = 'ByEmailLicenseOnly', Mandatory = $True, ValueFromPipelineByPropertyName = $true)]
-      [Parameter(ParameterSetName = 'ByEmailWithSource', Mandatory = $True, ValueFromPipelineByPropertyName = $true)]
+      [Parameter(ParameterSetName = 'ByEmail', Mandatory = $True, ValueFromPipelineByPropertyName = $true)]
       [Alias('UserEmail')]
       [string]$Email,
 
-      [Parameter(ParameterSetName = 'ByIdLicenseOnly', Mandatory = $true)]
-      [Parameter(ParameterSetName = 'ByIdWithSource')]
-      [Parameter(ParameterSetName = 'ByEmailLicenseOnly', Mandatory = $true)]
-      [Parameter(ParameterSetName = 'ByEmailWithSource')]
+      [Parameter(ParameterSetName = 'ById', Mandatory = $false)]
+      [Parameter(ParameterSetName = 'ByEmail', Mandatory = $false)]
       [ValidateSet('Advanced', 'EarlyAdopter', 'Express', 'None', 'Professional', 'StakeHolder')]
       [string]$License,
 
       [ValidateSet('account', 'auto', 'msdn', 'none', 'profile', 'trial')]
-      [Parameter(ParameterSetName = 'ByIdWithSource')]
-      [Parameter(ParameterSetName = 'ByEmailWithSource')]
+      [Parameter(ParameterSetName = 'ById', Mandatory = $false)]
+      [Parameter(ParameterSetName = 'ByEmail')]
       [string]$LicensingSource,
 
       [ValidateSet('eligible', 'enterprise', 'none', 'platforms', 'premium', 'professional', 'testProfessional', 'ultimate')]
-      [Parameter(ParameterSetName = 'ByIdWithSource')]
-      [Parameter(ParameterSetName = 'ByEmailWithSource')]
+      [Parameter(ParameterSetName = 'ById', Mandatory = $false)]
+      [Parameter(ParameterSetName = 'ByEmail')]
       [string]$MSDNLicenseType,
 
       [switch]$Force
@@ -54,9 +50,9 @@ function Update-VSTeamUserEntitlement {
       $licenseSourceOriginal = $user.accessLevel.licensingSource
       $msdnLicenseTypeOriginal = $user.accessLevel.msdnLicenseType
 
-      $newLicenseType = if ($License) { $License } else { $licenseTypeOriginal }
-      $newLicenseSource = if ($LicensingSource) { $LicensingSource } else { $licenseSourceOriginal }
-      $newMSDNLicenseType = if ($MSDNLicenseType) { $MSDNLicenseType } else { $msdnLicenseTypeOriginal }
+      $newLicenseType = if ($false -eq [string]::IsNullOrEmpty($License)) { $License } else { $licenseTypeOriginal }
+      $newLicenseSource = if ($false -eq [string]::IsNullOrEmpty($LicensingSource)) { $LicensingSource } else { $licenseSourceOriginal }
+      $newMSDNLicenseType = if ($false -eq [string]::IsNullOrEmpty($MSDNLicenseType)) { $MSDNLicenseType } else { $msdnLicenseTypeOriginal }
 
       $obj = @{
          from  = ""
@@ -69,7 +65,7 @@ function Update-VSTeamUserEntitlement {
          }
       }
 
-      $body = ConvertTo-Json -InputObject @($obj)
+      $body = ConvertTo-Json -InputObject @($obj) -Depth 100 -Compress
 
       $msg = "$( $user.userName ) ($( $user.email ))"
 
@@ -78,13 +74,13 @@ function Update-VSTeamUserEntitlement {
          _callAPI -Method PATCH -SubDomain vsaex -NoProject `
             -Resource userentitlements `
             -Id $id `
-            -ContentType 'application/json-patch+json' `
+            -ContentType 'application/json-patch+; charset=utf-8' `
             -Body $body `
             -Version $(_getApiVersion MemberEntitlementManagement) | Out-Null
 
-         Write-Output "Updated user license for $( $user.userName ) ($( $user.email )) from LicenseType: ($licenseTypeOriginal) to ($newLicenseType)"
-         Write-Output "Updated user license for $( $user.userName ) ($( $user.email )) from LicenseSource: ($licenseSourceOriginal) to ($newLicenseSource)"
-         Write-Output "Updated user license for $( $user.userName ) ($( $user.email )) from MSDNLicenseType: ($msdnLicenseTypeOriginal) to ($newMSDNLicenseType)"
+         Write-Information "Updated user license for $( $user.userName ) ($( $user.email )) from LicenseType: ($licenseTypeOriginal) to ($newLicenseType)"
+         Write-Information "Updated user license for $( $user.userName ) ($( $user.email )) from LicenseSource: ($licenseSourceOriginal) to ($newLicenseSource)"
+         Write-Information "Updated user license for $( $user.userName ) ($( $user.email )) from MSDNLicenseType: ($msdnLicenseTypeOriginal) to ($newMSDNLicenseType)"
       }
    }
 }

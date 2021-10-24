@@ -7,7 +7,7 @@ namespace vsteam_lib
       Build, Release, Core, Git, DistributedTask, DistributedTaskReleased,
       VariableGroups, Tfvc, Packaging, MemberEntitlementManagement,
       ExtensionsManagement, ServiceEndpoints, Graph, TaskGroups, Policy,
-      Processes, Version, HierarchyQuery, Pipelines
+      Processes, Version, HierarchyQuery, Pipelines, Billing, Wiki
    }
 
    public static class Versions
@@ -16,6 +16,9 @@ namespace vsteam_lib
       {
          switch (service)
          {
+            case APIs.Billing:
+               Billing = version;
+               break;
             case APIs.HierarchyQuery:
                HierarchyQuery = version;
                break;
@@ -70,6 +73,9 @@ namespace vsteam_lib
             case APIs.Processes:
                Processes = version;
                break;
+            case APIs.Wiki:
+               Wiki = version;
+               break;
          }
       }
 
@@ -77,6 +83,8 @@ namespace vsteam_lib
       {
          switch (service)
          {
+            case APIs.Billing:
+               return Billing;
             case APIs.HierarchyQuery:
                return HierarchyQuery;
             case APIs.Build:
@@ -113,6 +121,8 @@ namespace vsteam_lib
                return Policy;
             case APIs.Processes:
                return Processes;
+            case APIs.Wiki:
+               return Wiki;
             default:
                return Version;
          }
@@ -135,6 +145,7 @@ namespace vsteam_lib
       public static string Core { get; set; } = "3.0";
       public static string Build { get; set; } = "3.0";
       public static string HierarchyQuery { get; set; } = "";
+      public static string Billing { get; set; } = "";
       public static string Release { get; set; } = "3.0-preview";
       public static string DistributedTask { get; set; } = "3.0-preview";
       public static string DistributedTaskReleased { get; set; } = "";
@@ -149,5 +160,6 @@ namespace vsteam_lib
       public static string Graph { get; set; } = "";
       public static string Policy { get; set; } = "3.0";
       public static string Processes { get; set; } = "";
+      public static string Wiki { get; set; } = "6.0";
    }
 }

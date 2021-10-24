@@ -106,7 +106,7 @@ function Add-VSTeamWorkItem {
       # You must call ConvertTo-Json passing in the value and not
       # not using pipeline.
       # https://stackoverflow.com/questions/18662967/convertto-json-an-array-with-a-single-item
-      $json = ConvertTo-Json @($body) -Compress
+      $json = ConvertTo-Json @($body) -Compress -Depth 100
 
       # Call the REST API
       $resp = _callAPI -Method POST -ProjectName $ProjectName `
@@ -114,7 +114,7 @@ function Add-VSTeamWorkItem {
          -Resource "workitems" `
          -id $fullWorkItemType `
          -Body $json `
-         -ContentType 'application/json-patch+json' `
+         -ContentType 'application/json-patch+json; charset=utf-8' `
          -Version $(_getApiVersion Core)
 
       _applyTypesToWorkItem -item $resp

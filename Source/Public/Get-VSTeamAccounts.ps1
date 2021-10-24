@@ -1,4 +1,5 @@
 function Get-VSTeamAccounts {
+   [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseSingularNouns", "")]
    [CmdletBinding(HelpUri = 'https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Get-VSTeamAccounts')]
    param(
       [Parameter(Mandatory = $true, ParameterSetName = "MemberId")]
@@ -25,7 +26,8 @@ function Get-VSTeamAccounts {
 
       try {
          # Call the REST API
-         $resp = _callAPI -NoProject `
+         $resp = _callAPI -NoAccount `
+            -NoProject `
             -area 'accounts' `
             -subDomain 'vssps' `
             -QueryString $queryString `

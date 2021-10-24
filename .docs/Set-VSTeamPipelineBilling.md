@@ -10,7 +10,7 @@
 
 ## DESCRIPTION
 
-<!-- #include "./synopsis/Set-VSTeamPipelineBilling.md" --> This cmdlet covers what can be bought on the billing tab on organization level. At least owner or project collection administrator permissions are needed to trigger billing actions.
+<!-- #include "./synopsis/Set-VSTeamPipelineBilling.md" --> A minimum of owner or project collection administrator permissions are required to trigger billing actions.
 
 ## EXAMPLES
 
@@ -19,25 +19,33 @@
 ```powershell
 $myProfile = Get-VSTeamUserProfile -MyProfile
 $orgs = Get-VSTeamAccounts -MemberId $myProfile.id
-Set-VSTeamPipelineBilling -Type HostedPipeline -Quantity 1 -OrganizationId $orgs[0].accountId -SubscriptionId ebd42dd8-e50e-4608-aa5d-cf0c28e9aeef
+Set-VSTeamPipelineBilling -Type HostedPipeline -Quantity 1 -OrganizationId $orgs[0].accountId
 ```
 
-Sets the concurrent jobs on organization `$orgs[0].accountId` and subscription `ebd42dd8-e50e-4608-aa5d-cf0c28e9aeef` for hosted pipelines to 1. This means depending on what was configured before either the number has been reduced or new concurrent jobs have been bought.
-The cmdlet needs the organization id and the connected subscription for the organization. To get the id you can use `Get-VSTeamAccounts` and `Get-VSTeamUserProfile` to get the required data.
+Sets the concurrent jobs on organization `$orgs[0].accountId` for hosted pipelines to 1. Depending on the original value either the number has been reduced or new concurrent jobs have been purchased.
+The organization id and the connected subscription for the organization are required. To get the id you can use `Get-VSTeamAccounts` and `Get-VSTeamUserProfile`.
 
 ### Example 2: Set private hosted pipeline jobs
 
 ```powershell
-Set-VSTeamPipelineBilling -Type PrivatePipeline -Quantity 1 -OrganizationId 9de24e7c-2e01-496c-bde5-71f92195ae2c -SubscriptionId ebd42dd8-e50e-4608-aa5d-cf0c28e9aeef
+Set-VSTeamPipelineBilling -Type PrivatePipeline -Quantity 1 -OrganizationId 9de24e7c-2e01-496c-bde5-71f92195ae2c
 ```
 
-Sets the concurrent jobs for private agents on organization `9de24e7c-2e01-496c-bde5-71f92195ae2c` and subscription `ebd42dd8-e50e-4608-aa5d-cf0c28e9aeef` for hosted pipelines to 1. This means depending on what was configured before either the number has ben reduced of new concurrent jobs have been bought.
+Sets the concurrent jobs for private agents on organization `9de24e7c-2e01-496c-bde5-71f92195ae2c` for hosted pipelines to 1. Depending on the original value either the number has been reduced or new concurrent jobs have been purchased.
+
+### Example 3: Set private hosted pipeline jobs with current organization
+
+```powershell
+Set-VSTeamPipelineBilling -Type PrivatePipeline -Quantity 1
+```
+
+Sets the concurrent jobs for private agents on the current set organization for hosted pipelines to 1. Depending on the original value either the number has been reduced or new concurrent jobs have been purchased.
 
 ## PARAMETERS
 
 ### -Type
 
-The type of billing that is supposed to be set.
+The type of billing to be set.
 
 ```yaml
 Type: string
@@ -47,16 +55,7 @@ Required: true
 
 ### -OrganizationId
 
-The organization where the billing should be set.
-
-```yaml
-Type: string
-Required: true
-```
-
-### -SubscriptionId
-
-The subscription id which the organization is using.
+The organization to be billed.
 
 ```yaml
 Type: string
@@ -89,3 +88,5 @@ Beware that these operations are potentially producing costs. This is why you ne
 [Get-VSTeamUserProfile](Get-VSTeamUserProfile.md)
 
 [Get-VSTeamUserProfile](Get-VSTeamAccounts.md)
+
+[Get-VSTeamAccountBilling](Get-VSTeamAccountBilling.md)

@@ -1,1 +1,1 @@
-Sets billing operations on the organization level.
+Purchases private and Microsoft hosted concurrent jobs for pipelines.

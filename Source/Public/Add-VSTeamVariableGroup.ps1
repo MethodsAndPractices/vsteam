@@ -63,7 +63,7 @@ function Add-VSTeamVariableGroup {
             }
          }
 
-         $body = $bodyAsHashtable | ConvertTo-Json
+         $body = $bodyAsHashtable | ConvertTo-Json -Depth 100
       }
 
       # Call the REST API

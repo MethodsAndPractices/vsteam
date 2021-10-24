@@ -1,0 +1,48 @@
+{
+   "Id": 13,
+   "PoolId": 13,
+   "Count": 0,
+   "IsHosted": false,
+   "ProjectName": null,
+   "InternalObject": {
+      "properties": {
+         "System.AutoAuthorize": "@{$type=System.Boolean; $value=False}"
+      },
+      "createdOn": "2021-03-07T20:06:15.037Z",
+      "autoProvision": false,
+      "autoUpdate": true,
+      "autoSize": true,
+      "targetSize": null,
+      "agentCloudId": null,
+      "createdBy": {
+         "displayName": "Sebastian Schütze",
+         "url": "https://spsprodweu2.vssps.visualstudio.com/A53c67424-6037-4f44-83bd-90b9dfc7d35d/_apis/Identities/da4833c6-8d06-6cc1-ada5-162ecac0b242",
+         "_links": "@{avatar=}",
+         "id": "da4833c6-8d06-6cc1-ada5-162ecac0b242",
+         "uniqueName": "Sebastian.S.Schuetze@deutschebahn.com",
+         "imageUrl": "https://dev.azure.com/SebastianSSchuetze/_apis/GraphProfile/MemberAvatars/aad.ZGE0ODMzYzYtOGQwNi03Y2MxLWFkYTUtMTYyZWNhYzBiMjQy",
+         "descriptor": "aad.ZGE0ODMzYzYtOGQwNi03Y2MxLWFkYTUtMTYyZWNhYzBiMjQy"
+      },
+      "owner": {
+         "displayName": "Sebastian Schütze",
+         "url": "https://spsprodweu2.vssps.visualstudio.com/A53c67424-6037-4f44-83bd-90b9dfc7d35d/_apis/Identities/da4833c6-8d06-6cc1-ada5-162ecac0b242",
+         "_links": "@{avatar=}",
+         "id": "da4833c6-8d06-6cc1-ada5-162ecac0b242",
+         "uniqueName": "Sebastian.S.Schuetze@deutschebahn.com",
+         "imageUrl": "https://dev.azure.com/SebastianSSchuetze/_apis/GraphProfile/MemberAvatars/aad.ZGE0ODMzYzYtOGQwNi03Y2MxLWFkYTUtMTYyZWNhYzBiMjQy",
+         "descriptor": "aad.ZGE0ODMzYzYtOGQwNi03Y2MxLWFkYTUtMTYyZWNhYzBiMjQy"
+      },
+      "id": 13,
+      "scope": "e92af8b7-7289-4e25-97c7-7970a2c953a0",
+      "name": "tutu2",
+      "isHosted": false,
+      "poolType": "automation",
+      "size": 0,
+      "isLegacy": false,
+      "options": "none"
+   },
+   "DisplayMode": "d-----",
+   "Command": "Get-VSTeamAgent",
+   "TypeName": "vsteam_lib.Provider.Agent",
+   "Name": "tutu2"
+}

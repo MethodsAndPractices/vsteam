@@ -14,7 +14,7 @@
 
 function Add-VSTeamAccessControlEntry {
    [CmdletBinding(DefaultParameterSetName = 'ByNamespace',
-    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Add-VSTeamAccessControlEntry')]
+      HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Add-VSTeamAccessControlEntry')]
    param(
       [Parameter(ParameterSetName = 'ByNamespace', Mandatory = $true, ValueFromPipeline = $true)]
       [vsteam_lib.SecurityNamespace] $SecurityNamespace,
@@ -37,6 +37,11 @@ function Add-VSTeamAccessControlEntry {
       [int] $DenyMask
    )
    process {
+
+      if ($AllowMask -eq 0 -and $DenyMask -eq 0) {
+         Write-Warning "Permission masks for Allow and Deny do not inlude any permission. No Permission will change!"
+      }
+
       if ($SecurityNamespace) {
          $SecurityNamespaceId = $SecurityNamespace.ID
       }

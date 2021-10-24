@@ -21,6 +21,9 @@ function Get-VSTeamRelease {
       [int] $definitionId,
 
       [Parameter(ParameterSetName = 'List')]
+      [string] $artifactVersionId,
+
+      [Parameter(ParameterSetName = 'List')]
       [int] $top,
 
       [Parameter(ParameterSetName = 'List')]
@@ -94,6 +97,7 @@ function Get-VSTeamRelease {
             'minCreatedTime'    = $minCreatedTime
             'maxCreatedTime'    = $maxCreatedTime
             'continuationToken' = $continuationToken
+            'artifactVersionId' = $artifactVersionId
          }
 
          # Call the REST API

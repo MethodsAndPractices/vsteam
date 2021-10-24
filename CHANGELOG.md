@@ -1,13 +1,65 @@
 # Changelog
 
+## 7.5.0
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/414) from [Guillermo Diaz](https://github.com/gm0d) which included the following:
+
+- Added Get-VSTeamWiki, Add-VSTeamWiki, Remove-VSTeamWiki, for interacting with Wikis
+ 
+## 7.4.0
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/400) from [Sebastian Schütze](https://github.com/SebastianSchuetze) which included the following:
+
+- Fixes ambiguity of parameter sets in VSTeamUserEntitlement cmdlets [#393](https://github.com/DarqueWarrior/vsteam/issues/393)
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/406) from [Sebastian Schütze](https://github.com/SebastianSchuetze) which included the following:
+
+- Fixes Get-VSTeamWiql with only one work item expanded causing and exception [#392](https://github.com/DarqueWarrior/vsteam/issues/392)
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/408) from [Sebastian Schütze](https://github.com/SebastianSchuetze) which included the following:
+
+- Added `Set-VSTeamPipelineAuthorization` to set pipeline authorizations.
+
+## 7.3.0
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/396) from [Markus Blaschke](https://github.com/mblaschke) which included the following:
+
+- Fixed the problem of JSON serialization with the message "WARNING: Resulting JSON is truncated as serialization has exceeded the set depth of 2" for most the cmdlets that post complex json bodies.
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/384) from [Sebastian Schütze](https://github.com/SebastianSchuetze) which included the following:
+
+- Add-VSTeamPool, Remove-VSTeamPool and Update-VSTeampool for handling agent pools on Azure DevOps
+
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/374) from [hkarthik7](https://github.com/hkarthik7) which includes the following:
+
+- Added a new parameter artifactVersionId to Get-VSTeamRelease cmdlet. This will help to return the release for passed artifact Id. For instance the release details of a build can be retrieved by passing build Id to the cmdlet.
+
+```powershell
+$buildId = Get-VSTeamBuild -Top 1
+Get-VSTeamRelease -artifactVersionId $buildId.Id
+```
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/386) from [Sebastian Schütze](https://github.com/SebastianSchuetze) which included the following:
+
+- added the cmdlet Add-VSTeamBuildPermission following the other cmdlet like Add-VSTeamProjectPermission
+- changed internal permission (ACL) functions to not have deny or allow permissions to be mandatory, because this caused not to be able to only add allow or deny permissions.
+- allowed to handle user accounts from typ 'srv' which are service accounts of Azure DevOps. Now these can be permitted as well to all functions using ACLs
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/397) from [Sebastian Schütze](https://github.com/SebastianSchuetze) which included the following:
+
+- Fixes encoding problem with special charcters on Add-VSTeamWorkItem, Update-VSTeamWorkItem, Update-VSTeamUserEntitlement [#397](https://github.com/DarqueWarrior/vsteam/issues/365)
+
 ## 7.2.0
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/371) from [Sebastian Schütze](https://github.com/SebastianSchuetze) which included the following:
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/371) and (https://github.com/DarqueWarrior/vsteam/pull/389) from [Sebastian Schütze](https://github.com/SebastianSchuetze) which included the following:
 
 - Added Set-VSTeamPipelineBilling to buy or release Microsoft-hosted and self-hosted agents
 - Added Get-VSTeamAccounts to get the organizations where the user has access. Where the given user is either a member or an owner
 - Added Get-VSTeamUserProfile that gets the users profile of an account.
+- Added Get-VSTeamBillingAccount to get information whether the account is connected to a subscription or not.
 - fixed filenames of files to work on linux (casing)
+- added the possibility to call _callApi with a custom bearer token
+- added the possibility to call _callApi without the account name in the url
 
 ## 7.1.4
 
@@ -21,6 +73,7 @@ Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/350) from [Da
 - Fixed exception thrown by the Update-VSTeamPullRequest when status is set to "completed", by adding the missing "lastMergeSourceCommit" property to body.
 
 Also added Clear-VSTeamDefaultProjectCount and Set-VSTeamDefaultProjectCount to control the default number of projects returned for tab completion and validation. By default only 100 projects are returned and the 100 returned is nondeterministic. But calling Set-VSTeamDefaultProjectCount you can increase the number of projects returned.
+
 
 ## 7.1.2
 

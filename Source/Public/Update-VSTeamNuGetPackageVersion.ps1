@@ -16,6 +16,11 @@ function Update-VSTeamNuGetPackageVersion {
       [parameter(Mandatory = $true)]
       [bool] $isListed,
 
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+      [vsteam_lib.ProjectValidateAttribute($false)]
+      [ArgumentCompleter([vsteam_lib.ProjectCompleter])]
+      [string] $ProjectName,
+
       [switch] $Force
    )
    process {
@@ -26,9 +31,10 @@ function Update-VSTeamNuGetPackageVersion {
                listed = $isListed
             }
 
-            $body = $obj | ConvertTo-Json -Compress
+            $body = $obj | ConvertTo-Json -Compress -Depth 100
 
             _callAPI -Method PATCH -SubDomain pkgs `
+               -ProjectName $ProjectName `
                -Area "packaging/feeds/$FeedId/nuget" `
                -Resource "packages/$PackageName/versions" `
                -Id $item `

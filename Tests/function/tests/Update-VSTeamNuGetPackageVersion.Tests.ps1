@@ -20,7 +20,7 @@ Describe 'VSTeamNuGetPackageVersion' {
       # resourceName    : Versions
       # routeTemplate   : {project}/_apis/packaging/feeds/{feedId}/{area}/packages/{packageName}/{resource}/{packageVersion}
       It 'Should unlist version' {
-         Update-VSTeamNuGetPackageVersion -FeedId 'feedName' -packageName 'packageName' -packageVersion '1137.0.0' -isListed $false -Force
+         Update-VSTeamNuGetPackageVersion -FeedId 'feedName' -packageName 'packageName' -packageVersion '1137.0.0' -isListed $false -Force -ProjectName project
 
          Should -Invoke _callAPI -Exactly 1 -Scope It -ParameterFilter {
             $Method -eq 'Patch' -and
