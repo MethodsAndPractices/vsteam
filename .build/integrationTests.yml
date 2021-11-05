@@ -55,7 +55,7 @@ jobs:
                 script: |
                   [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
                   $n = 'LoECDA'
-                  $url = "$(REPO_URL)"
+                  $url = "https://loecda.pkgs.visualstudio.com/_packaging/7739278f-e062-769f-ae8f-20133f78ea8e/nuget/v2" #"$(REPO_URL)"
 
                   if(-not (Get-PSRepository | Where-Object Name -eq $n)) {
                       Register-PSRepository -Name $n -SourceLocation $url -InstallationPolicy Trusted -Verbose
