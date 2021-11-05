@@ -179,11 +179,11 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: VSTeamPackage
-        path: $RUNNER_TEMP/module
+        path: ${RUNNER_TEMP}/module
     - name: Install module
       shell: pwsh
       run: |
-        $nugetFile = Get-ChildItem -Filter vsteam.*.nupkg -LiteralPath "$RUNNER_TEMP/module"
+        $nugetFile = Get-ChildItem -Filter vsteam.*.nupkg -LiteralPath "${RUNNER_TEMP}/module"
         Expand-Archive -Path $nugetFile.FullName -DestinationPath "$($nugetFile.Directory)/$($nugetFile.BaseName)" -Force
         Import-Module -Path "$($nugetFile.Directory)/$($nugetFile.BaseName)/VSTeam.psd1"
 
