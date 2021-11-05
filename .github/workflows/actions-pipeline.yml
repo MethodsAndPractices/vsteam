@@ -188,6 +188,7 @@ jobs:
         $GitHubRepoVSTeamUri = "https://nuget.pkg.github.com/MethodsAndPractices/vsteam/index.json"
         $User = "notused"
 
+        Write-Host "create temp path"
         New-Item -Path "$env:TEMP\InstallModuleWorkaround" -Type Directory | Out-Null
         New-Item -Path "$env:TEMP\InstallModuleWorkaround\repo" -Type Directory | Out-Null
         Set-Location -Path "$env:TEMP\InstallModuleWorkaround"
@@ -208,25 +209,30 @@ jobs:
         </configuration>
         "@
 
+        Write-Host "Setting nuget config"
         Set-Content -Value $NugetConfig -Path ".\nuget.config"
 
         foreach ($ModuleName in $ModuleNames) {
-            nuget install $ModuleName -prerelease
+            nuget install $ModuleName
         }
 
+        Write-Host "Register-PSRepository------"
         Register-PSRepository -Name "InstallModuleWorkaround" -SourceLocation "$env:TEMP\InstallModuleWorkaround\repo"
+        Write-Host "nuget sources add ------"
         nuget sources add -name "InstallModuleWorkaround" -source "$env:TEMP\InstallModuleWorkaround\repo"
 
         $ModuleFolders = Get-ChildItem -Directory | Where-Object {$_.Name -ne "repo"}
 
+        Write-Host "rename folders ------"
         foreach ($Folder in $ModuleFolders) {
             $ShortName = $Folder.Name -replace '(.*)(\.\d+){3,4}', '$1'
             Move-Item -Path $Folder.Name -Destination $ShortName
         }
 
+        Write-Host "publish and install ------"
         foreach ($ModuleName in $ModuleNames) {
             Publish-Module -Path $ModuleName -Repository "InstallModuleWorkaround"
-            Install-Module -Name $ModuleName -Repository "InstallModuleWorkaround" -AllowPrerelease -AllowClobber -SkipPublisherCheck -Force -Scope CurrentUser
+            Install-Module -Name $ModuleName -Repository "InstallModuleWorkaround" -AllowClobber -SkipPublisherCheck -Force -Scope CurrentUser
         }
 
         Set-Location -Path "$env:TEMP"
