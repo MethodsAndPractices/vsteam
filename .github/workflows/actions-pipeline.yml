@@ -212,8 +212,6 @@ jobs:
         Write-Host "Setting nuget config"
         Set-Content -Value $NugetConfig -Path ".\nuget.config"
 
-        dotnet nuget add source --username USERNAME --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text --name github $GitHubRepoVSTeamUri
-
         foreach ($ModuleName in $ModuleNames) {
             nuget install $ModuleName -Source github
         }
