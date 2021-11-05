@@ -58,8 +58,6 @@ jobs:
                   $url = "$(REPO_URL)"
 
                   if(-not (Get-PSRepository | Where-Object Name -eq $n)) {
-                      Register-PSRepository -Default -Verbose
-                      Set-PSRepository -Name "PSGallery" -InstallationPolicy Trusted
                       Register-PSRepository -Name $n -SourceLocation $url -InstallationPolicy Trusted -Verbose
                   }
 
