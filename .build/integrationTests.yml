@@ -58,8 +58,8 @@ jobs:
                   $url = "$(REPO_URL)"
 
                   if(-not (Get-PSRepository | Where-Object Name -eq $n)) {
-                      Register-PackageSource -Name $n -Location $url -ProviderName NuGet -SkipValidate
-                      Register-PSRepository -Name $n -SourceLocation $url -InstallationPolicy Trusted -Verbose
+                      Register-PackageSource -Name $n -Location $url -ProviderName NuGet -SkipValidate -Debug
+                      Register-PSRepository -Name $n -SourceLocation $url -InstallationPolicy Trusted -Verbose -Debug
                   }
 
                   Get-PSRepository
