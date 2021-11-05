@@ -186,31 +186,13 @@ jobs:
       run: |
         $ModuleNames = @("VSTeam")
         $GitHubRepoVSTeamUri = "https://nuget.pkg.github.com/MethodsAndPractices/vsteam/index.json"
-        $User = "notused"
 
         Write-Host "create temp path"
         New-Item -Path "$env:TEMP\InstallModuleWorkaround" -Type Directory | Out-Null
         New-Item -Path "$env:TEMP\InstallModuleWorkaround\repo" -Type Directory | Out-Null
         Set-Location -Path "$env:TEMP\InstallModuleWorkaround"
 
-        $NugetConfig = @"
-        <?xml version="1.0" encoding="utf-8"?>
-        <configuration>
-            <packageSources>
-                <clear />
-                <add key="GitHubRepoVSTeam" value="$GitHubRepoVSTeamUri" />
-            </packageSources>
-            <packageSourceCredentials>
-                <GitHubRepoVSTeam>
-                    <add key="Username" value="$User" />
-                    <add key="ClearTextPassword" value="${{ secrets.GITHUB_TOKEN }}" />
-                </GitHubRepoVSTeam>
-            </packageSourceCredentials>
-        </configuration>
-        "@
-
-        Write-Host "Setting nuget config"
-        Set-Content -Value $NugetConfig -Path ".\nuget.config"
+        dotnet nuget add source --username USERNAME --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text --name github $GitHubRepoVSTeamUri
 
         foreach ($ModuleName in $ModuleNames) {
             nuget install $ModuleName -Source github
