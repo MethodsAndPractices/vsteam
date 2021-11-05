@@ -55,15 +55,17 @@ jobs:
                 script: |
                   [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
                   $n = 'LoECDA'
-                  $url = "https://loecda.pkgs.visualstudio.com/_packaging/7739278f-e062-769f-ae8f-20133f78ea8e/nuget/v2" #"$(REPO_URL)"
+                  $url = "$(REPO_URL)"
 
                   if(-not (Get-PSRepository | Where-Object Name -eq $n)) {
+                      Register-PackageSource -Name TempSource -Location $url -ProviderName NuGet -SkipValidate
                       Register-PSRepository -Name $n -SourceLocation $url -InstallationPolicy Trusted -Verbose
                   }
 
                   Get-PSRepository
 
                   Find-Module -Repository $n
+                  Unregister-PackageSource -Source TempSource -ProviderName NuGet
 
             - task: PowerShell@2
               displayName: 'Install VSTeam Module'
