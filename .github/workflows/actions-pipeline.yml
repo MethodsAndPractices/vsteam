@@ -185,6 +185,12 @@ jobs:
       run: |
         $nugetFile = Get-ChildItem -Filter vsteam.*.nupkg -LiteralPath "./module"
         Expand-Archive -Path $nugetFile.FullName -DestinationPath "$($nugetFile.Directory)/$($nugetFile.BaseName)" -Force
+
+        $manifest = Import-PowerShellDataFile $($nugetFile.Directory)/$($nugetFile.BaseName)/*.psd1
+
+        # Install each module
+        $manifest.RequiredModules | ForEach-Object { Install-Module -Name $_ -Repository PSGallery -Force -Scope CurrentUser -Verbose }
+
         Import-Module -Name "$($nugetFile.Directory)/$($nugetFile.BaseName)/VSTeam.psd1"
 
         Get-VSTeamProject
