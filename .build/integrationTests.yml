@@ -76,6 +76,7 @@ jobs:
                   $pwd = ConvertTo-SecureString "$(PKG_PAT)" -AsPlainText -Force
                   $creds = New-Object PSCredential($e, $pwd)
 
+                  [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
                   Get-PSRepository
 
                   Install-Module -Name VSTeam -Repository $n -Credential $creds -MaximumVersion $b -MinimumVersion $b -Force -Scope CurrentUser -Verbose
@@ -108,7 +109,7 @@ jobs:
                   $pesterArgs.Output.Verbosity = "Detailed"
                   $pesterArgs.TestResult.Enabled = $true
                   $pesterArgs.TestResult.OutputPath = 'test-results.xml'
-            
+
                   Invoke-Pester -Configuration $pesterArgs
                 failOnStderr: true
                 workingDirectory: '$(Pipeline.Workspace)/test/Tests'
