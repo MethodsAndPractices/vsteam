@@ -1,6 +1,6 @@
 name: build
 
-on: [push]
+on: [push,workflow_dispatch]
 
 jobs:
   build-stage:
@@ -158,6 +158,12 @@ jobs:
 
         gpr push ./dist/*.nupkg -k ${{secrets.GITHUB_TOKEN}} --repository MethodsAndPractices/vsteam
 
+    - name: upload nuget package as artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: VSTeamPackage
+        path: ./dist/*.nupkg
+
   testing-stage:
     name: Testing
     needs: package-stage
@@ -169,6 +175,10 @@ jobs:
     - name: Test
       shell: pwsh
       run: Write-Output "Run Tests on ${{ matrix.os }}"
+    - name: Download a single artifact
+      uses: actions/download-artifact@v2
+      with:
+        name: VSTeamPackage
 
   publish-stage:
     name: PowerShell Gallery
