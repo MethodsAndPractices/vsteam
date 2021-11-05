@@ -53,20 +53,27 @@ jobs:
               inputs:
                 targetType: 'inline'
                 script: |
+                  [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
                   $n = 'LoECDA'
                   $url = "$(REPO_URL)"
 
                   if(-not (Get-PSRepository | Where-Object Name -eq $n)) {
+                      Register-PSRepository -Default -Verbose
+                      Set-PSRepository -Name "PSGallery" -InstallationPolicy Trusted
                       Register-PSRepository -Name $n -SourceLocation $url -InstallationPolicy Trusted -Verbose
                   }
 
                   Get-PSRepository
+
+                  Find-Module -Repository $n
 
             - task: PowerShell@2
               displayName: 'Install VSTeam Module'
               inputs:
                 targetType: 'inline'
                 script: |
+                  [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+
                   # Load the psd1 file so you can read the version
                   $manifest = Import-PowerShellDataFile .\$(Folder)\*.psd1
 
@@ -76,7 +83,6 @@ jobs:
                   $pwd = ConvertTo-SecureString "$(PKG_PAT)" -AsPlainText -Force
                   $creds = New-Object PSCredential($e, $pwd)
 
-                  [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
                   Get-PSRepository
 
                   Install-Module -Name VSTeam -Repository $n -Credential $creds -MaximumVersion $b -MinimumVersion $b -Force -Scope CurrentUser -Verbose
