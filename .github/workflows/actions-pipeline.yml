@@ -194,7 +194,40 @@ jobs:
 
         Import-Module -Name "$($nugetFile.Directory)/$($nugetFile.BaseName)/VSTeam.psd1"
 
-        Get-VSTeamProject
+    - name: Install Pester
+      run: Install-Module -Name Pester -Repository PSGallery -Force -AllowPrerelease -MinimumVersion "${{ env.PESTER_VERSION }}" -Scope CurrentUser -AllowClobber -SkipPublisherCheck
+      shell: pwsh
+
+    - name: Run Integration Tests
+      run: |
+        $nugetFile = Get-ChildItem -Filter vsteam.*.nupkg -LiteralPath "./module"
+        $modulePath = "$($nugetFile.Directory)/$($nugetFile.BaseName)"
+        Import-Module -Name "$($nugetFile.Directory)/$($nugetFile.BaseName)/VSTeam.psd1"
+
+        $env:ACCT='razorspoint-vsteamtests'
+        $env:PAT='62hpgojrrkmx7rcoxyhzvag2ztkn2uk6fyh5w4x533pxjpcn6spq'
+
+        Import-Module VSTeam
+        # This loads [PesterConfiguration] into scope
+        Import-Module Pester
+        $pesterArgs = [PesterConfiguration]::Default
+        $pesterArgs.Run.Exit = $true
+        $pesterArgs.Run.PassThru = $true
+        $pesterArgs.Output.Verbosity = "Detailed"
+        $pesterArgs.TestResult.Enabled = $true
+        $pesterArgs.TestResult.OutputFormat = 'JUnitXml'
+        $pesterArgs.TestResult.OutputPath = 'test-results.xml'
+
+        Invoke-Pester -Configuration $pesterArgs
+      shell: pwsh
+
+    - name: Publish PowerShell test results
+      if: success() || failure()                          # run this step even if previous step failed
+      uses: dorny/test-reporter@v1
+      with:
+        name: PowerShell tests results (${{ matrix.os }}) # name of the check run which will be created
+        path: '**/test-results.xml'                       # path to test results
+        reporter: jest-junit
 
   publish-stage:
     name: PowerShell Gallery
