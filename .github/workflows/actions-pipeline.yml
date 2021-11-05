@@ -158,7 +158,7 @@ jobs:
 
         gpr push ./dist/*.nupkg -k ${{secrets.GITHUB_TOKEN}} --repository MethodsAndPractices/vsteam
 
-    - name: upload nuget package as artifact
+    - name: Upload nuget package as artifact
       uses: actions/upload-artifact@v2
       with:
         name: VSTeamPackage
@@ -175,10 +175,19 @@ jobs:
     - name: Test
       shell: pwsh
       run: Write-Output "Run Tests on ${{ matrix.os }}"
-    - name: Download a single artifact
+    - name: Download nuget package artifact
       uses: actions/download-artifact@v2
       with:
         name: VSTeamPackage
+        path: $RUNNER_TEMP/module
+    - name: Install module
+      shell: pwsh
+      run: |
+        $nugetFile = Get-ChildItem -Filter vsteam.*.nupkg -LiteralPath "$RUNNER_TEMP/module"
+        Expand-Archive -Path $nugetFile.FullName -DestinationPath "$($nugetFile.Directory)/$($nugetFile.BaseName)" -Force
+        Import-Module -Path "$($nugetFile.Directory)/$($nugetFile.BaseName)/VSTeam.psd1"
+
+        Get-VSTeamProject
 
   publish-stage:
     name: PowerShell Gallery
