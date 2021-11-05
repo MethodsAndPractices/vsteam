@@ -65,7 +65,6 @@ jobs:
                   Get-PSRepository
 
                   Find-Module -Repository $n
-                  Unregister-PackageSource -Source TempSource -ProviderName NuGet
 
             - task: PowerShell@2
               displayName: 'Install VSTeam Module'
