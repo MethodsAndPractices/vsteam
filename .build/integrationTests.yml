@@ -28,6 +28,10 @@ jobs:
               displayName: 'Download tests'
               artifact: test
 
+            - download: current
+              displayName: 'Download module'
+              artifact: module
+
             - task: AzureResourceGroupDeployment@2
               displayName: 'Start TFS 2017'
               inputs:
@@ -49,44 +53,18 @@ jobs:
                 nuGetServiceConnections: 'Azure Artifacts'
 
             - task: PowerShell@2
-              displayName: 'Register Private Repository'
-              inputs:
-                targetType: 'inline'
-                script: |
-                  [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
-                  $n = 'LoECDA'
-                  $url = "$(REPO_URL)"
-
-                  if(-not (Get-PSRepository | Where-Object Name -eq $n)) {
-                      Register-PackageSource -Name $n -Location $url -ProviderName NuGet -SkipValidate -Debug
-                      Register-PSRepository -Name $n -SourceLocation $url -InstallationPolicy Trusted -Verbose -Debug
-                  }
-
-                  Get-PSRepository
-
-                  Find-Module -Repository $n
-
-            - task: PowerShell@2
               displayName: 'Install VSTeam Module'
               inputs:
                 targetType: 'inline'
                 script: |
-                  [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+                  # Get the first folder in the PSModulePath List
+                  $modulePath = ($Env:PSModulePath -split ":")[0]
 
-                  # Load the psd1 file so you can read the version
-                  $manifest = Import-PowerShellDataFile .\$(Folder)\*.psd1
+                  # Install the VSTeam Module from the pipeline artifact.
+                  copy -r dist/ $modulePath/VSTeam
 
-                  $n = 'LoECDA'
-                  $e = "$(EMAIL)"
-                  $b = "$($manifest.ModuleVersion).$(Build.BuildId)"
-                  $pwd = ConvertTo-SecureString "$(PKG_PAT)" -AsPlainText -Force
-                  $creds = New-Object PSCredential($e, $pwd)
-
-                  Get-PSRepository
-
-                  Install-Module -Name VSTeam -Repository $n -Credential $creds -MaximumVersion $b -MinimumVersion $b -Force -Scope CurrentUser -Verbose
-                workingDirectory: '$(Pipeline.Workspace)/test'
-
+                workingDirectory: '$(Pipeline.Workspace)/module'
+                
             - task: PowerShell@2
               displayName: 'Install Pester'
               inputs:
