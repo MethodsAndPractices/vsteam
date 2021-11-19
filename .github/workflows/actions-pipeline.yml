@@ -190,30 +190,35 @@ jobs:
         Write-Host "create temp path"
         New-Item -Path "$env:TEMP\InstallModuleWorkaround" -Type Directory | Out-Null
         New-Item -Path "$env:TEMP\InstallModuleWorkaround\repo" -Type Directory | Out-Null
-        Set-Location -Path "$env:TEMP\InstallModuleWorkaround"
+        # Set-Location -Path "$env:TEMP\InstallModuleWorkaround"
+        
+        # dotnet nuget add source --username USERNAME --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text --name github $GitHubRepoVSTeamUri
+        
+        # Initialize the local nuget feed with local nupkg files
+        nuget init ./module "$env:TEMP\InstallModuleWorkaround"
 
-        dotnet nuget add source --username USERNAME --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text --name github $GitHubRepoVSTeamUri
-
-        foreach ($ModuleName in $ModuleNames) {
-            nuget install $ModuleName -Source github
-        }
+        Get-ChildItem -Directory "$env:TEMP\InstallModuleWorkaround"
+        
+        # foreach ($ModuleName in $ModuleNames) {
+        #     nuget install $ModuleName -Source github
+        # }
 
         Write-Host "Register-PSRepository------"
         Register-PSRepository -Name "InstallModuleWorkaround" -SourceLocation "$env:TEMP\InstallModuleWorkaround\repo"
         Write-Host "nuget sources add ------"
         nuget sources add -name "InstallModuleWorkaround" -source "$env:TEMP\InstallModuleWorkaround\repo"
 
-        $ModuleFolders = Get-ChildItem -Directory | Where-Object {$_.Name -ne "repo"}
+        # $ModuleFolders = Get-ChildItem -Directory | Where-Object {$_.Name -ne "repo"}
 
-        Write-Host "rename folders ------"
-        foreach ($Folder in $ModuleFolders) {
-            $ShortName = $Folder.Name -replace '(.*)(\.\d+){3,4}', '$1'
-            Move-Item -Path $Folder.Name -Destination $ShortName
-        }
+        # Write-Host "rename folders ------"
+        # foreach ($Folder in $ModuleFolders) {
+        #     $ShortName = $Folder.Name -replace '(.*)(\.\d+){3,4}', '$1'
+        #     Move-Item -Path $Folder.Name -Destination $ShortName
+        # }
 
         Write-Host "publish and install ------"
         foreach ($ModuleName in $ModuleNames) {
-            Publish-Module -Path $ModuleName -Repository "InstallModuleWorkaround"
+            # Publish-Module -Path $ModuleName -Repository "InstallModuleWorkaround"
             Install-Module -Name $ModuleName -Repository "InstallModuleWorkaround" -AllowClobber -SkipPublisherCheck -Force -Scope CurrentUser
         }
 
