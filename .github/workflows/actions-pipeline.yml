@@ -134,7 +134,11 @@ jobs:
         # Load the psd1 file so you can read the version
         $manifest = Import-PowerShellDataFile ./dist/*.psd1
 
-        $package_version = "$($manifest.ModuleVersion).${{ github.run_number }}"
+        # load as semantic version
+        [version]$sem_version = $manifest.ModuleVersion
+        
+        # Build new semantic version with build number
+        $package_version = "$($sem_version.Major).$($sem_version.Minor).${{ github.run_number }}"
 
         Write-Host "Package Version Number: $package_version"
 
@@ -156,7 +160,7 @@ jobs:
 
         dotnet tool install gpr -g
 
-        gpr push ./dist/*.nupkg -k ${{secrets.GITHUB_TOKEN}} --repository MethodsAndPractices/vsteam
+        # gpr push ./dist/*.nupkg -k ${{secrets.GITHUB_TOKEN}} --repository MethodsAndPractices/vsteam
 
     - name: Upload nuget package as artifact
       uses: actions/upload-artifact@v2
@@ -184,48 +188,74 @@ jobs:
     - name: Install module
       shell: pwsh
       run: |
+        # Install Module Dependencies
+        Install-Module -Name SHiPS -Force
+        Install-Module -Name Trackyon.Utils -Force
+
+        # Import required modules
+        Import-Module -Name SHiPS
+        Import-Module -Name Trackyon.Utils
+
         $ModuleNames = @("VSTeam")
         $GitHubRepoVSTeamUri = "https://nuget.pkg.github.com/MethodsAndPractices/vsteam/index.json"
 
-        Write-Host "create temp path"
-        New-Item -Path "$env:TEMP\InstallModuleWorkaround" -Type Directory | Out-Null
-        New-Item -Path "$env:TEMP\InstallModuleWorkaround\repo" -Type Directory | Out-Null
-        # Set-Location -Path "$env:TEMP\InstallModuleWorkaround"
-        
-        # dotnet nuget add source --username USERNAME --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text --name github $GitHubRepoVSTeamUri
-        
-        # Initialize the local nuget feed with local nupkg files
-        nuget init ./module "$env:TEMP\InstallModuleWorkaround"
+        Write-Host "create temp path for Nuget feed"
+        New-Item -Path "$env:TEMP\InstallModuleWorkaround\nuget" -Type Directory | Out-Null
 
-        Get-ChildItem -Directory "$env:TEMP\InstallModuleWorkaround"
+        Write-Host "create temp path for Powershell Module Repo"
+        New-Item -Path "$env:TEMP\InstallModuleWorkaround\repo" -Type Directory | Out-Null
         
-        # foreach ($ModuleName in $ModuleNames) {
-        #     nuget install $ModuleName -Source github
-        # }
+        Write-Host "create temp path for Nuget Install"
+        New-Item -Path "$env:TEMP\InstallModuleWorkaround\install" -Type Directory | Out-Null
+
+        # Local Nuget since I do not have access to github nuget
+        # Initialize the local nuget feed with local nupkg files
+        nuget init ./module "$env:TEMP\InstallModuleWorkaround\nuget"
+
+        # Add Nuget Source
+        # dotnet nuget add source --username USERNAME --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text --name github $GitHubRepoVSTeamUri
+        Write-Host "nuget sources add ------"
+        nuget sources Add -Name "LocalNugetSource" -Source "$env:TEMP\InstallModuleWorkaround\nuget"
+        nuget sources Add -Name "PSGallery" -Source 'https://www.powershellgallery.com/api/v2/'
+
+        # install Dependencies
+        nuget install SHiPS -Source "PSGallery" -OutputDirectory "$env:TEMP\InstallModuleWorkaround\install"
+        nuget install Trackyon.Utils -Source "PSGallery" -OutputDirectory "$env:TEMP\InstallModuleWorkaround\install"
+
+        # Add Dependencies to local nuget feed as these Dependencies are specified as not external
+        nuget init $env:TEMP\InstallModuleWorkaround\install "$env:TEMP\InstallModuleWorkaround\nuget"
+
+        foreach ($ModuleName in $ModuleNames) {
+            # $feedName = "github"
+            $feedName = "LocalNugetSource"
+            nuget install $ModuleName -Source $feedName -OutputDirectory "$env:TEMP\InstallModuleWorkaround\install"
+        }
+
+        $ModuleFolders = Get-ChildItem "$env:TEMP\InstallModuleWorkaround\install" -Directory
+        Write-Host "rename folders ------"
+        Set-Location -Path "$env:TEMP\InstallModuleWorkaround\install"
+        foreach ($Folder in $ModuleFolders) {
+            $ShortName = $Folder.Name -replace '(.*)(\.\d+){3,4}', '$1'
+            Move-Item -Path $Folder.Name -Destination $ShortName
+        }
 
         Write-Host "Register-PSRepository------"
         Register-PSRepository -Name "InstallModuleWorkaround" -SourceLocation "$env:TEMP\InstallModuleWorkaround\repo"
-        Write-Host "nuget sources add ------"
-        nuget sources add -name "InstallModuleWorkaround" -source "$env:TEMP\InstallModuleWorkaround\repo"
 
-        # $ModuleFolders = Get-ChildItem -Directory | Where-Object {$_.Name -ne "repo"}
-
-        # Write-Host "rename folders ------"
-        # foreach ($Folder in $ModuleFolders) {
-        #     $ShortName = $Folder.Name -replace '(.*)(\.\d+){3,4}', '$1'
-        #     Move-Item -Path $Folder.Name -Destination $ShortName
-        # }
+        # Install Dependencies
+        Publish-Module -Path $env:TEMP\InstallModuleWorkaround\install\SHiPS   -Repository "InstallModuleWorkaround"  
+        Publish-Module -Path $env:TEMP\InstallModuleWorkaround\install\Trackyon.Utils   -Repository "InstallModuleWorkaround"
 
         Write-Host "publish and install ------"
         foreach ($ModuleName in $ModuleNames) {
-            # Publish-Module -Path $ModuleName -Repository "InstallModuleWorkaround"
+            Publish-Module -Path $env:TEMP\InstallModuleWorkaround\install\$ModuleName -Repository "InstallModuleWorkaround"
             Install-Module -Name $ModuleName -Repository "InstallModuleWorkaround" -AllowClobber -SkipPublisherCheck -Force -Scope CurrentUser
         }
 
         Set-Location -Path "$env:TEMP"
         Remove-Item -Path "$env:TEMP\InstallModuleWorkaround" -Recurse -Force
 
-        nuget sources remove -name "InstallModuleWorkaround"
+        nuget sources remove -name "LocalNugetSource"
         Unregister-PSRepository -Name "InstallModuleWorkaround"
 
     - name: Install module
