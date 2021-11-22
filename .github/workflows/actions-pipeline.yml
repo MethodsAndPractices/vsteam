@@ -291,11 +291,11 @@ jobs:
         $pesterArgs = [PesterConfiguration]::Default
         $pesterArgs.Run.Exit = $true
         $pesterArgs.Run.PassThru = $true
+        $pesterArgs.Run.Path = './test/integration/*'
         $pesterArgs.Output.Verbosity = "Detailed"
         $pesterArgs.TestResult.Enabled = $true
         $pesterArgs.TestResult.OutputFormat = 'JUnitXml'
         $pesterArgs.TestResult.OutputPath = 'test-results.xml'
-        $pesterArgs.Path = './test/integration/*'
 
         Invoke-Pester -Configuration $pesterArgs
       shell: pwsh
