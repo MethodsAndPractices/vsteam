@@ -295,8 +295,9 @@ jobs:
         $pesterArgs.TestResult.Enabled = $true
         $pesterArgs.TestResult.OutputFormat = 'JUnitXml'
         $pesterArgs.TestResult.OutputPath = 'test-results.xml'
+        $pesterArgs.Path = './test/integration/*'
 
-        Invoke-Pester -Path ./test/integration/* -Configuration $pesterArgs
+        Invoke-Pester -Configuration $pesterArgs
       shell: pwsh
 
     - name: Publish PowerShell test results
