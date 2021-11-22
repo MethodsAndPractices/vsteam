@@ -184,6 +184,10 @@ jobs:
       with:
         name: VSTeamPackage
         path: ./module
+    - name: Download test
+      uses: actions/download-artifact@v2
+      with:
+        name: test
 
     - name: Install module
       shell: pwsh
@@ -292,7 +296,7 @@ jobs:
         $pesterArgs.TestResult.OutputFormat = 'JUnitXml'
         $pesterArgs.TestResult.OutputPath = 'test-results.xml'
 
-        Invoke-Pester -Configuration $pesterArgs
+        Invoke-Pester -Path ./test/integration/* -Configuration $pesterArgs
       shell: pwsh
 
     - name: Publish PowerShell test results
