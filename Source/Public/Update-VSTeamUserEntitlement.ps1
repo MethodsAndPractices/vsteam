@@ -74,7 +74,7 @@ function Update-VSTeamUserEntitlement {
          _callAPI -Method PATCH -SubDomain vsaex -NoProject `
             -Resource userentitlements `
             -Id $id `
-            -ContentType 'application/json-patch+; charset=utf-8' `
+            -ContentType 'application/json-patch+json; charset=utf-8' `
             -Body $body `
             -Version $(_getApiVersion MemberEntitlementManagement) | Out-Null
 
