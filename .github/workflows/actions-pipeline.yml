@@ -188,6 +188,7 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: test
+        path: ./test
 
     - name: Install module
       shell: pwsh
