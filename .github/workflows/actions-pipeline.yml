@@ -257,7 +257,6 @@ jobs:
             Install-Module -Name $ModuleName -Repository "InstallModuleWorkaround" -AllowClobber -SkipPublisherCheck -Force -Scope CurrentUser
         }
 
-        Set-Location -Path "$env:TEMP"
         Remove-Item -Path "$env:TEMP\InstallModuleWorkaround" -Recurse -Force
 
         nuget sources remove -name "LocalNugetSource"
@@ -283,6 +282,7 @@ jobs:
 
     - name: Run Integration Tests
       run: |
+        Get-ChildItem ./test
         $env:ACCT='razorspoint-vsteamtests'
         $env:PAT='62hpgojrrkmx7rcoxyhzvag2ztkn2uk6fyh5w4x533pxjpcn6spq'
 
