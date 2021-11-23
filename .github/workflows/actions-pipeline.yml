@@ -257,8 +257,6 @@ jobs:
             Install-Module -Name $ModuleName -Repository "InstallModuleWorkaround" -AllowClobber -SkipPublisherCheck -Force -Scope CurrentUser
         }
 
-        Remove-Item -Path "$env:TEMP\InstallModuleWorkaround" -Recurse -Force
-
         nuget sources remove -name "LocalNugetSource"
         Unregister-PSRepository -Name "InstallModuleWorkaround"
 
