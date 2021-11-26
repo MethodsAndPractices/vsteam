@@ -265,7 +265,7 @@ jobs:
 
         Invoke-Pester -Configuration $pesterArgs
       shell: pwsh
-      working-directory: './test/Tests/integration/*'
+      working-directory: './test/Tests/integration'
 
     - name: Publish PowerShell test results
       if: success() || failure()                          # run this step even if previous step failed
