@@ -196,7 +196,7 @@ jobs:
         $localFeedName = "LocalNugetSource"
         $LocalPSGallery = "LocalPSGallery"
         $moduleName = "VSTeam"
-
+        $dependencies = @("SHiPS","Trackyon.Utils")
 
         Write-Host "----- create temp folder for local feeds"
         New-Item -Path "$env:TEMP\InstallModuleWorkaround\nuget" -Type Directory | Out-Null
@@ -209,8 +209,7 @@ jobs:
 
         Write-Host "----- Download module dependencies as nuget packages"
         nuget sources Add -Name "PSGallery" -Source 'https://www.powershellgallery.com/api/v2/'
-        nuget install SHiPS -Source "PSGallery" -OutputDirectory "$env:TEMP\InstallModuleWorkaround\install" -Verbosity quiet
-        nuget install Trackyon.Utils -Source "PSGallery" -OutputDirectory "$env:TEMP\InstallModuleWorkaround\install" -Verbosity quiet
+        $dependencies | ForEach-Object { nuget install $_ -Source PSGallery -OutputDirectory "$env:TEMP\InstallModuleWorkaround\install" }
 
 
         Write-Host "----- Add dependencies to local nuget feed as these dependencies are specified as not external"
@@ -232,12 +231,13 @@ jobs:
         Register-PSRepository -Name $LocalPSGallery -SourceLocation "$env:TEMP\InstallModuleWorkaround\repo"
 
         Write-Host "----- Publish Dependencies to $$LocalPSGallery"
-        Publish-Module -Path $env:TEMP\InstallModuleWorkaround\install\SHiPS -Repository $LocalPSGallery
-        Publish-Module -Path $env:TEMP\InstallModuleWorkaround\install\Trackyon.Utils -Repository $LocalPSGallery
+        $dependencies | ForEach-Object { Publish-Module -Path $env:TEMP\InstallModuleWorkaround\install\$_ -Repository $LocalPSGallery}
 
         Write-Host "----- publish and install VSTeam to $LocalPSGallery"
-        Publish-Module -Path $env:TEMP\InstallModuleWorkaround\install\$moduleName -Repository $LocalPSGallery
-        Install-Module -Name $moduleName -Repository "InstallModuleWorkaround" -AllowClobber -SkipPublisherCheck -Force -Scope CurrentUser
+        $dependencies | Install-Module
+        Publish-Module -Path $env:TEMP\InstallModuleWorkaround\install\$moduleName -Repository $LocalPSGallery -Verbose
+        $dependencies | Uninstall-Module
+        Install-Module -Name $moduleName -Repository $LocalPSGallery -AllowClobber -SkipPublisherCheck -Force -Scope CurrentUser -Verbose
 
 
         nuget sources remove -name $localFeedName
