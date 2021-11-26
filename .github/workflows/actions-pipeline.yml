@@ -136,7 +136,7 @@ jobs:
 
         # load as semantic version
         [version]$sem_version = $manifest.ModuleVersion
-        
+
         # Build new semantic version with build number
         $package_version = "$($sem_version.Major).$($sem_version.Minor).${{ github.run_number }}"
 
@@ -160,7 +160,7 @@ jobs:
 
         dotnet tool install gpr -g
 
-        # gpr push ./dist/*.nupkg -k ${{secrets.GITHUB_TOKEN}} --repository MethodsAndPractices/vsteam
+        gpr push ./dist/*.nupkg -k ${{secrets.GITHUB_TOKEN}} --repository MethodsAndPractices/vsteam
 
     - name: Upload nuget package as artifact
       uses: actions/upload-artifact@v2
@@ -184,7 +184,7 @@ jobs:
       with:
         name: VSTeamPackage
         path: ./module
-    - name: Download test
+    - name: Download integration tests
       uses: actions/download-artifact@v2
       with:
         name: test
@@ -193,86 +193,55 @@ jobs:
     - name: Install module
       shell: pwsh
       run: |
-        # Install Module Dependencies
-        Install-Module -Name SHiPS -Force
-        Install-Module -Name Trackyon.Utils -Force
+        $localFeedName = "LocalNugetSource"
+        $LocalPSGallery = "LocalPSGallery"
+        $moduleName = "VSTeam"
 
-        # Import required modules
-        Import-Module -Name SHiPS
-        Import-Module -Name Trackyon.Utils
 
-        $ModuleNames = @("VSTeam")
-        $GitHubRepoVSTeamUri = "https://nuget.pkg.github.com/MethodsAndPractices/vsteam/index.json"
-
-        Write-Host "create temp path for Nuget feed"
+        Write-Host "----- create temp folder for local feeds"
         New-Item -Path "$env:TEMP\InstallModuleWorkaround\nuget" -Type Directory | Out-Null
-
-        Write-Host "create temp path for Powershell Module Repo"
         New-Item -Path "$env:TEMP\InstallModuleWorkaround\repo" -Type Directory | Out-Null
-        
-        Write-Host "create temp path for Nuget Install"
         New-Item -Path "$env:TEMP\InstallModuleWorkaround\install" -Type Directory | Out-Null
 
-        # Local Nuget since I do not have access to github nuget
-        # Initialize the local nuget feed with local nupkg files
+        Write-Host "----- Initialize the local nuget feed with VSTeam nupkg and add as local feed"
         nuget init ./module "$env:TEMP\InstallModuleWorkaround\nuget"
+        nuget sources Add -Name $localFeedName -Source "$env:TEMP\InstallModuleWorkaround\nuget"
 
-        # Add Nuget Source
-        # dotnet nuget add source --username USERNAME --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text --name github $GitHubRepoVSTeamUri
-        Write-Host "nuget sources add ------"
-        nuget sources Add -Name "LocalNugetSource" -Source "$env:TEMP\InstallModuleWorkaround\nuget"
+        Write-Host "----- Download module dependencies as nuget packages"
         nuget sources Add -Name "PSGallery" -Source 'https://www.powershellgallery.com/api/v2/'
+        nuget install SHiPS -Source "PSGallery" -OutputDirectory "$env:TEMP\InstallModuleWorkaround\install" -Verbosity quiet
+        nuget install Trackyon.Utils -Source "PSGallery" -OutputDirectory "$env:TEMP\InstallModuleWorkaround\install" -Verbosity quiet
 
-        # install Dependencies
-        nuget install SHiPS -Source "PSGallery" -OutputDirectory "$env:TEMP\InstallModuleWorkaround\install"
-        nuget install Trackyon.Utils -Source "PSGallery" -OutputDirectory "$env:TEMP\InstallModuleWorkaround\install"
 
-        # Add Dependencies to local nuget feed as these Dependencies are specified as not external
+        Write-Host "----- Add dependencies to local nuget feed as these dependencies are specified as not external"
         nuget init $env:TEMP\InstallModuleWorkaround\install "$env:TEMP\InstallModuleWorkaround\nuget"
 
-        foreach ($ModuleName in $ModuleNames) {
-            # $feedName = "github"
-            $feedName = "LocalNugetSource"
-            nuget install $ModuleName -Source $feedName -OutputDirectory "$env:TEMP\InstallModuleWorkaround\install"
-        }
+
+        nuget install $moduleName -Source $localFeedName -OutputDirectory "$env:TEMP\InstallModuleWorkaround\install"
+
 
         $ModuleFolders = Get-ChildItem "$env:TEMP\InstallModuleWorkaround\install" -Directory
-        Write-Host "rename folders ------"
+        Write-Host "----- rename folders"
         Set-Location -Path "$env:TEMP\InstallModuleWorkaround\install"
         foreach ($Folder in $ModuleFolders) {
             $ShortName = $Folder.Name -replace '(.*)(\.\d+){3,4}', '$1'
             Move-Item -Path $Folder.Name -Destination $ShortName
         }
 
-        Write-Host "Register-PSRepository------"
-        Register-PSRepository -Name "InstallModuleWorkaround" -SourceLocation "$env:TEMP\InstallModuleWorkaround\repo"
+        Write-Host "----- Register-PSRepository"
+        Register-PSRepository -Name $LocalPSGallery -SourceLocation "$env:TEMP\InstallModuleWorkaround\repo"
 
-        # Install Dependencies
-        Publish-Module -Path $env:TEMP\InstallModuleWorkaround\install\SHiPS   -Repository "InstallModuleWorkaround"  
-        Publish-Module -Path $env:TEMP\InstallModuleWorkaround\install\Trackyon.Utils   -Repository "InstallModuleWorkaround"
+        Write-Host "----- Publish Dependencies to $$LocalPSGallery"
+        Publish-Module -Path $env:TEMP\InstallModuleWorkaround\install\SHiPS -Repository $LocalPSGallery
+        Publish-Module -Path $env:TEMP\InstallModuleWorkaround\install\Trackyon.Utils -Repository $LocalPSGallery
 
-        Write-Host "publish and install ------"
-        foreach ($ModuleName in $ModuleNames) {
-            Publish-Module -Path $env:TEMP\InstallModuleWorkaround\install\$ModuleName -Repository "InstallModuleWorkaround"
-            Install-Module -Name $ModuleName -Repository "InstallModuleWorkaround" -AllowClobber -SkipPublisherCheck -Force -Scope CurrentUser
-        }
+        Write-Host "----- publish and install VSTeam to $LocalPSGallery"
+        Publish-Module -Path $env:TEMP\InstallModuleWorkaround\install\$moduleName -Repository $LocalPSGallery
+        Install-Module -Name $moduleName -Repository "InstallModuleWorkaround" -AllowClobber -SkipPublisherCheck -Force -Scope CurrentUser
 
-        nuget sources remove -name "LocalNugetSource"
-        Unregister-PSRepository -Name "InstallModuleWorkaround"
 
-    - name: Install module
-      shell: pwsh
-      run: |
-        $nugetFile = Get-ChildItem -Filter vsteam.*.nupkg -LiteralPath "./module"
-        $modulePath = "$($nugetFile.Directory)/$($nugetFile.BaseName)"
-        Expand-Archive -Path $nugetFile.FullName -DestinationPath $modulePath -Force
-
-        $manifest = Import-PowerShellDataFile -Path "$modulePath/*.psd1"
-
-        # Install each module
-        $manifest.RequiredModules | ForEach-Object { Install-Module -Name $_ -Repository PSGallery -Force -Scope CurrentUser -Verbose }
-
-        Import-Module -Name "$($nugetFile.Directory)/$($nugetFile.BaseName)/VSTeam.psd1"
+        nuget sources remove -name $localFeedName
+        Unregister-PSRepository -Name $LocalPSGallery
 
     - name: Install Pester
       run: Install-Module -Name Pester -Repository PSGallery -Force -AllowPrerelease -MinimumVersion "${{ env.PESTER_VERSION }}" -Scope CurrentUser -AllowClobber -SkipPublisherCheck
@@ -280,7 +249,6 @@ jobs:
 
     - name: Run Integration Tests
       run: |
-        Get-ChildItem ./test
         $env:ACCT='razorspoint-vsteamtests'
         $env:PAT='62hpgojrrkmx7rcoxyhzvag2ztkn2uk6fyh5w4x533pxjpcn6spq'
 
@@ -290,7 +258,6 @@ jobs:
         $pesterArgs = [PesterConfiguration]::Default
         $pesterArgs.Run.Exit = $true
         $pesterArgs.Run.PassThru = $true
-        $pesterArgs.Run.Path = './test/Tests/integration/*'
         $pesterArgs.Output.Verbosity = "Detailed"
         $pesterArgs.TestResult.Enabled = $true
         $pesterArgs.TestResult.OutputFormat = 'JUnitXml'
@@ -298,6 +265,7 @@ jobs:
 
         Invoke-Pester -Configuration $pesterArgs
       shell: pwsh
+      working-directory: './test/Tests/integration/*'
 
     - name: Publish PowerShell test results
       if: success() || failure()                          # run this step even if previous step failed
