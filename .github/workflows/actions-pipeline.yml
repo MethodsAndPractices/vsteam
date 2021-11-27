@@ -13,36 +13,37 @@ jobs:
     - name: Clone repo
       uses: actions/checkout@v2
 
-    - name: Run Integration Tests
-      run: |
+    # - name: Run Integration Tests
+    #   run: |
 
 
-        Write-Host "env:PAT $($env:PAT)"
-        Write-Host "env:EMAIL $($env:EMAIL)"
-        Write-Host "env:API_VERSION $($env:API_VERSION)"
-        Write-Host "env:ACCT $($env:ACCT)"
+    #     Write-Host "env:PAT $($env:PAT)"
+    #     Write-Host "env:EMAIL $($env:EMAIL)"
+    #     Write-Host "env:API_VERSION $($env:API_VERSION)"
+    #     Write-Host "env:ACCT $($env:ACCT)"
 
-        Install-Module VSTeam -Force -Scope CurrentUser
-        Import-Module VSTeam
-        #This loads [PesterConfiguration] into scope
-        Install-Module Pester -Force -Scope CurrentUser
-        Import-Module Pester
-        $pesterArgs = [PesterConfiguration]::Default
-        $pesterArgs.Run.Exit = $true
-        $pesterArgs.Run.PassThru = $true
-        $pesterArgs.Output.Verbosity = "Detailed"
-        $pesterArgs.TestResult.Enabled = $true
-        $pesterArgs.TestResult.OutputFormat = 'JUnitXml'
-        $pesterArgs.TestResult.OutputPath = 'test-results.xml'
+    #     Install-Module VSTeam -Force -Scope CurrentUser
+    #     Import-Module VSTeam
+    #     #This loads [PesterConfiguration] into scope
+    #     Install-Module Pester -Force -Scope CurrentUser
+    #     Import-Module Pester
+    #     $pesterArgs = [PesterConfiguration]::Default
+    #     $pesterArgs.Run.Exit = $true
+    #     $pesterArgs.Run.PassThru = $true
+    #     $pesterArgs.Output.Verbosity = "Detailed"
+    #     $pesterArgs.TestResult.Enabled = $true
+    #     $pesterArgs.TestResult.OutputFormat = 'JUnitXml'
+    #     $pesterArgs.TestResult.OutputPath = 'test-results.xml'
 
-        Invoke-Pester -Configuration $pesterArgs
-      shell: pwsh
-      env:
-        PAT: ${{ secrets.RSAZDOPAT }}
-        EMAIL: ${{ secrets.RSEMAIL }}
-        API_VERSION: VSTS
-        ACCT: razorspoint-vsteamtests
-      working-directory: './Tests/integration'
+    #     Invoke-Pester -Configuration $pesterArgs
+    #   shell: pwsh
+    #   env:
+    #     PAT: ${{ secrets.RSAZDOPAT }}
+    #     EMAIL: ${{ secrets.RSEMAIL }}
+    #     API_VERSION: VSTS
+    #     ACCT: razorspoint-vsteamtests
+    #   working-directory: './Tests/integration'
+
 
     - name: .NET Restore
       shell: pwsh
@@ -248,7 +249,7 @@ jobs:
 
 
         nuget install $moduleName -Source $localFeedName -OutputDirectory "$env:TEMP\InstallModuleWorkaround\install"
-
+        nuget sources remove -name $localFeedName
 
         $ModuleFolders = Get-ChildItem "$env:TEMP\InstallModuleWorkaround\install" -Directory
         Write-Host "----- rename folders"
@@ -271,9 +272,6 @@ jobs:
         Install-Module -Name $moduleName -Repository $LocalPSGallery -AllowClobber -SkipPublisherCheck -Force -Scope CurrentUser
 
 
-        nuget sources remove -name $localFeedName
-        Unregister-PSRepository -Name $LocalPSGallery
-
     - name: Install Pester
       run: Install-Module -Name Pester -Repository PSGallery -Force -AllowPrerelease -MinimumVersion "${{ env.PESTER_VERSION }}" -Scope CurrentUser -AllowClobber -SkipPublisherCheck
       shell: pwsh
@@ -286,7 +284,7 @@ jobs:
         Write-Host "env:API_VERSION $($env:API_VERSION)"
         Write-Host "env:ACCT $($env:ACCT)"
 
-        Import-Module VSTeam
+        Install-Module -Name VSTeam -Repository LocalPSGallery -Force -Scope CurrentUser
         #This loads [PesterConfiguration] into scope
         Import-Module Pester
         $pesterArgs = [PesterConfiguration]::Default
