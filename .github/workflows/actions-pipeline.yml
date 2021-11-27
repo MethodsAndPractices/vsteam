@@ -208,9 +208,6 @@ jobs:
       matrix:
         os: [windows-latest]
     steps:
-    - name: Test
-      shell: pwsh
-      run: Write-Output "Run Tests on ${{ matrix.os }}"
     - name: Download nuget package artifact
       uses: actions/download-artifact@v2
       with:
@@ -273,7 +270,6 @@ jobs:
         $dependencies | Foreach-Object { Uninstall-Module $_ }
         Install-Module -Name $moduleName -Repository $LocalPSGallery -AllowClobber -SkipPublisherCheck -Force -Scope CurrentUser
 
-
     - name: Install Pester
       run: Install-Module -Name Pester -Repository PSGallery -Force -AllowPrerelease -MinimumVersion "${{ env.PESTER_VERSION }}" -Scope CurrentUser -AllowClobber -SkipPublisherCheck
       shell: pwsh
@@ -282,7 +278,8 @@ jobs:
       run: |
 
         Install-Module -Name VSTeam -Repository LocalPSGallery -Force -Scope CurrentUser
-        Import-Module VSTeam -Verbose
+        Import-Module VSTeam
+
         #This loads [PesterConfiguration] into scope
         Import-Module Pester
         $pesterArgs = [PesterConfiguration]::Default
@@ -296,11 +293,15 @@ jobs:
         Invoke-Pester -Configuration $pesterArgs
       shell: pwsh
       env:
-        PAT: ${{ secrets.AZDOPAT }}
-        EMAIL: ${{ secrets.EMAIL }}
+        PAT: ${{ secrets.RSAZDOPAT }}
+        EMAIL: ${{ secrets.RSEMAIL }}
         API_VERSION: VSTS
-        ACCT: tooltester
+        ACCT: razorspoint-vsteamtests
       working-directory: './test/Tests/integration'
+
+    - name: Prepare test result publishing
+      run: git init
+      shell: pwsh
 
     - name: Publish PowerShell test results
       if: success() || failure()                          # run this step even if previous step failed
