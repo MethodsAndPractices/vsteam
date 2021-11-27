@@ -13,6 +13,36 @@ jobs:
     - name: Clone repo
       uses: actions/checkout@v2
 
+    - name: Run Integration Tests
+      run: |
+
+
+        Write-Host "env:PAT $($env:PAT)"
+        Write-Host "env:EMAIL $($env:EMAIL)"
+        Write-Host "env:API_VERSION $($env:API_VERSION)"
+        Write-Host "env:ACCT $($env:ACCT)"
+
+        Install-Module VSTeam
+        Import-Module VSTeam
+        #This loads [PesterConfiguration] into scope
+        Import-Module Pester
+        $pesterArgs = [PesterConfiguration]::Default
+        $pesterArgs.Run.Exit = $true
+        $pesterArgs.Run.PassThru = $true
+        $pesterArgs.Output.Verbosity = "Detailed"
+        $pesterArgs.TestResult.Enabled = $true
+        $pesterArgs.TestResult.OutputFormat = 'JUnitXml'
+        $pesterArgs.TestResult.OutputPath = 'test-results.xml'
+
+        Invoke-Pester -Configuration $pesterArgs
+      shell: pwsh
+      env:
+        PAT: ${{ secrets.RSAZDOPAT }}
+        EMAIL: ${{ secrets.RSEMAIL }}
+        API_VERSION: VSTS
+        ACCT: razorspoint-vsteamtests
+      working-directory: './Tests/integration'
+
     - name: .NET Restore
       shell: pwsh
       run: dotnet restore --no-cache # have to use no cache of the build will fail on Windows
