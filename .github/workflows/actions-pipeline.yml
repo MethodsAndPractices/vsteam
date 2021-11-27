@@ -284,7 +284,8 @@ jobs:
         Write-Host "env:API_VERSION $($env:API_VERSION)"
         Write-Host "env:ACCT $($env:ACCT)"
 
-        Install-Module -Name VSTeam -Repository LocalPSGallery -Force -Scope CurrentUser
+        Install-Module -Name VSTeam -Repository LocalPSGallery -Force -Scope CurrentUser -Verbose
+        Import-Module VSTeam
         #This loads [PesterConfiguration] into scope
         Import-Module Pester
         $pesterArgs = [PesterConfiguration]::Default
