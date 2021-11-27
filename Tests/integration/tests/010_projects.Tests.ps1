@@ -12,15 +12,15 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
       . "$PSScriptRoot/_testInitialize.ps1"
 
       Set-TestPrep
-      
+
       $acct = $env:ACCT
       $email = $env:EMAIL
       $api = $env:API_VERSION
-      
+
       Write-Verbose "      SkippedOnTFS: $($global:skippedOnTFS)"
       Write-Verbose "SkipVariableGroups: $($global:skipVariableGroups)"
       Write-Verbose "   SkipReleaseDefs: $($global:skipReleaseDefs)"
-      
+
       $originalLocation = Get-Location
 
       $target = Set-Project
@@ -54,11 +54,11 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
       BeforeAll {
          # Everytime you run the test a new "$newProjectName" is generated.
          # This is fine if you are running all the tests but not if you just
-         # want to run these. So if the newProjectName can't be found in the 
+         # want to run these. So if the newProjectName can't be found in the
          # target system change newProjectName to equal the name of the project
          # found with the correct description.
          $newProjectName = Get-ProjectName
-            
+
          $global:id = (Get-VSTeam -ProjectName $newProjectName).Id
       }
 
@@ -144,24 +144,24 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
       BeforeAll {
          # Everytime you run the test a new "$newProjectName" is generated.
          # This is fine if you are running all the tests but not if you just
-         # want to run these. So if the newProjectName can't be found in the 
+         # want to run these. So if the newProjectName can't be found in the
          # target system change newProjectName to equal the name of the project
          # found with the correct description.
          $newProjectName = Get-ProjectName
-            
+
          $global:reClassifyId = (Get-VSTeamArea -ProjectName $newProjectName).Id
       }
 
       It 'Add-VSTeamArea Should return add iteration' {
          $actual = Add-VSTeamArea -ProjectName $newProjectName -Name 'UnitTest'
-         
+
          $actual | Should -Not -Be $null
          $global:areaId = $actual.Id
       }
 
       It 'Get-VSTeamArea Should return one iteration' {
          $actual = Get-VSTeamArea -ProjectName $newProjectName -Depth 1
-         
+
          $actual | Should -Not -Be $null
          $actual.count | Should -Be 1
          $actual.Children | Should -Not -Be $null
@@ -171,7 +171,7 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
       # if you pass in ids
       It 'Get-VSTeamArea by id Should return one iteration' -Skip:$skip2017Bugs {
          $actual = Get-VSTeamArea -ProjectName $newProjectName -Id $global:areaId
-         
+
          $actual | Should -Not -Be $null
          $actual.count | Should -Be 1
       }
@@ -181,7 +181,7 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
             -ReClassifyId $global:reClassifyId `
             -Path 'UnitTest' `
             -Force
-         
+
          $(Get-VSTeamArea -ProjectName $newProjectName -Depth 1).Children | Should -Be $null
       }
    }
@@ -190,11 +190,11 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
       BeforeAll {
          # Everytime you run the test a new "$newProjectName" is generated.
          # This is fine if you are running all the tests but not if you just
-         # want to run these. So if the newProjectName can't be found in the 
+         # want to run these. So if the newProjectName can't be found in the
          # target system change newProjectName to equal the name of the project
          # found with the correct description.
          $newProjectName = Get-ProjectName
-            
+
          Add-VSTeamGitRepository -ProjectName $newProjectName -Name 'CI'
          $project = $repo = Get-VSTeamProject -Name $newProjectName
          $repo = Get-VSTeamGitRepository -ProjectName $newProjectName -Name 'CI'
@@ -267,24 +267,24 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
       BeforeAll {
          # Everytime you run the test a new "$newProjectName" is generated.
          # This is fine if you are running all the tests but not if you just
-         # want to run these. So if the newProjectName can't be found in the 
+         # want to run these. So if the newProjectName can't be found in the
          # target system change newProjectName to equal the name of the project
          # found with the correct description.
          $newProjectName = Get-ProjectName
-            
+
          $global:reClassifyId = (Get-VSTeamIteration -ProjectName $newProjectName).Id
       }
 
       It 'Add-VSTeamIteration Should return add iteration' {
          $actual = Add-VSTeamIteration -ProjectName $newProjectName -Name 'UnitTest'
-         
+
          $actual | Should -Not -Be $null
          $global:iterationId = $actual.Id
       }
 
       It 'Get-VSTeamIteration Should return one iteration' {
          $actual = Get-VSTeamIteration -ProjectName $newProjectName -Depth 1
-         
+
          $actual | Should -Not -Be $null
          $actual.count | Should -Be 1 -Because 'Count: Only top should be returned'
          $actual.Children | Should -Not -Be $null
@@ -295,7 +295,7 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
       # if you pass in ids
       It 'Get-VSTeamIteration by id Should return one iteration' -Skip:$skip2017Bugs {
          $actual = Get-VSTeamIteration -ProjectName $newProjectName -Id $global:iterationId
-         
+
          $actual | Should -Not -Be $null
          $actual.count | Should -Be 1
       }
@@ -305,7 +305,7 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
             -ReClassifyId $global:reClassifyId `
             -Path 'UnitTest' `
             -Force
-         
+
          $($(Get-VSTeamIteration -ProjectName $newProjectName -Depth 1).Children | Measure-Object).Count | Should -Be 6
       }
    }
@@ -314,7 +314,7 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
       BeforeAll {
          # Everytime you run the test a new "$newProjectName" is generated.
          # This is fine if you are running all the tests but not if you just
-         # want to run these. So if the newProjectName can't be found in the 
+         # want to run these. So if the newProjectName can't be found in the
          # target system change newProjectName to equal the name of the project
          # found with the correct description.
          $newProjectName = Get-ProjectName
@@ -342,7 +342,7 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
       BeforeAll {
          # Everytime you run the test a new "$newProjectName" is generated.
          # This is fine if you are running all the tests but not if you just
-         # want to run these. So if the newProjectName can't be found in the 
+         # want to run these. So if the newProjectName can't be found in the
          # target system change newProjectName to equal the name of the project
          # found with the correct description.
          $newProjectName = Get-ProjectName
@@ -403,14 +403,14 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
       BeforeAll {
          # Everytime you run the test a new "$newProjectName" is generated.
          # This is fine if you are running all the tests but not if you just
-         # want to run these. So if the newProjectName can't be found in the 
+         # want to run these. So if the newProjectName can't be found in the
          # target system change newProjectName to equal the name of the project
          # found with the correct description.
          $newProjectName = Get-ProjectName
 
          # It is important for these tests that this returns a value.
          # This will allow the validator to run which was a source of
-         # a bug we needed to fix. 
+         # a bug we needed to fix.
          Set-VSTeamDefaultProject  $newProjectName
       }
 
@@ -449,7 +449,7 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
       BeforeAll {
          # Everytime you run the test a new "$newProjectName" is generated.
          # This is fine if you are running all the tests but not if you just
-         # want to run these. So if the newProjectName can't be found in the 
+         # want to run these. So if the newProjectName can't be found in the
          # target system change newProjectName to equal the name of the project
          # found with the correct description.
          $newProjectName = Get-ProjectName
@@ -485,7 +485,7 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
       BeforeAll {
          # Everytime you run the test a new "$newProjectName" is generated.
          # This is fine if you are running all the tests but not if you just
-         # want to run these. So if the newProjectName can't be found in the 
+         # want to run these. So if the newProjectName can't be found in the
          # target system change newProjectName to equal the name of the project
          # found with the correct description.
          $newProjectName = Get-ProjectName
@@ -504,11 +504,11 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
       BeforeAll {
          # Everytime you run the test a new "$newProjectName" is generated.
          # This is fine if you are running all the tests but not if you just
-         # want to run these. So if the newProjectName can't be found in the 
+         # want to run these. So if the newProjectName can't be found in the
          # target system change newProjectName to equal the name of the project
          # found with the correct description.
          $newProjectName = Get-ProjectName
-               
+
          $variableGroupName = "TestVariableGroup1"
          $variableGroupUpdatedName = "TestVariableGroup2"
       }
@@ -609,7 +609,7 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
          $newPolicy = Get-VSTeamPolicy -ProjectName $newProjectName
 
          Start-Sleep -Seconds 2
-         
+
          $typeId = $($actualTypes | Where-Object displayName -eq 'Minimum number of reviewers' | Select-Object -ExpandProperty id)
          $newPolicy = Update-VSTeamPolicy -id $newPolicy.Id -ProjectName $newProjectName -type $typeId -enabled -blocking `
             -settings @{MinimumApproverCount = 2; Scope = @(@{repositoryId = $repoId; matchKind = "Exact"; refName = "refs/heads/master" }) }
@@ -619,11 +619,11 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
 
       It 'Remove-VSTeamPolicy' {
          $newPolicy = Get-VSTeamPolicy -ProjectName $newProjectName
-         
+
          Start-Sleep -Seconds 2
 
          Remove-VSTeamPolicy -id $newPolicy.Id -ProjectName $newProjectName
-         
+
          # If you call Get-VSTeamPolicy too quickly it will return the item
          # we just deleted.
          Start-Sleep -Seconds 2
@@ -668,11 +668,6 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
 
       It 'Remove-VSTeamUserEntitlement should fail' {
          { Remove-VSTeamUserEntitlement -Email fake@NoteReal.foo -Force } | Should -Throw
-      }
-
-      It 'Remove-VSTeamUserEntitlement should delete the user' {
-         Remove-VSTeamUserEntitlement -Email $email -Force
-         Get-VSTeamUserEntitlement | Where-Object Email -eq $email | Should -Be $null
       }
 
       It 'Add-VSTeamUserEntitlement should add a user' {
@@ -724,7 +719,7 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
       BeforeAll {
          # Everytime you run the test a new "$newProjectName" is generated.
          # This is fine if you are running all the tests but not if you just
-         # want to run these. So if the newProjectName can't be found in the 
+         # want to run these. So if the newProjectName can't be found in the
          # target system change newProjectName to equal the name of the project
          # found with the correct description.
          $newProjectName = Get-ProjectName
