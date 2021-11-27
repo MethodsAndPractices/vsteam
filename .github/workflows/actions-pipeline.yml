@@ -251,7 +251,7 @@ jobs:
       run: |
 
         Import-Module VSTeam
-        # This loads [PesterConfiguration] into scope
+        #This loads [PesterConfiguration] into scope
         Import-Module Pester
         $pesterArgs = [PesterConfiguration]::Default
         $pesterArgs.Run.Exit = $true
