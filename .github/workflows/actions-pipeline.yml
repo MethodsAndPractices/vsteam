@@ -22,9 +22,10 @@ jobs:
         Write-Host "env:API_VERSION $($env:API_VERSION)"
         Write-Host "env:ACCT $($env:ACCT)"
 
-        Install-Module VSTeam
+        Install-Module VSTeam -Force -Scope CurrentUser
         Import-Module VSTeam
         #This loads [PesterConfiguration] into scope
+        Install-Module Pester -Force -Scope CurrentUser
         Import-Module Pester
         $pesterArgs = [PesterConfiguration]::Default
         $pesterArgs.Run.Exit = $true
