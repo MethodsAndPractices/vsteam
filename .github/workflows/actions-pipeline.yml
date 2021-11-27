@@ -281,12 +281,7 @@ jobs:
     - name: Run Integration Tests
       run: |
 
-        Write-Host "env:PAT $($env:PAT)"
-        Write-Host "env:EMAIL $($env:EMAIL)"
-        Write-Host "env:API_VERSION $($env:API_VERSION)"
-        Write-Host "env:ACCT $($env:ACCT)"
-
-        Install-Module -Name VSTeam -Repository LocalPSGallery -Force -Scope CurrentUser -Verbose
+        Install-Module -Name VSTeam -Repository LocalPSGallery -Force -Scope CurrentUser
         Import-Module VSTeam -Verbose
         #This loads [PesterConfiguration] into scope
         Import-Module Pester
@@ -301,8 +296,8 @@ jobs:
         Invoke-Pester -Configuration $pesterArgs
       shell: pwsh
       env:
-        PAT: ${{ secrets.RSAZDOPAT }}
-        EMAIL: ${{ secrets.RSEMAIL }}
+        PAT: ${{ secrets.AZDOPAT }}
+        EMAIL: ${{ secrets.EMAIL }}
         API_VERSION: VSTS
         ACCT: razorspoint-vsteamtests
       working-directory: './test/Tests/integration'
