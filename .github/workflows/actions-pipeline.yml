@@ -299,7 +299,7 @@ jobs:
         PAT: ${{ secrets.AZDOPAT }}
         EMAIL: ${{ secrets.EMAIL }}
         API_VERSION: VSTS
-        ACCT: razorspoint-vsteamtests
+        ACCT: tooltester
       working-directory: './test/Tests/integration'
 
     - name: Publish PowerShell test results
