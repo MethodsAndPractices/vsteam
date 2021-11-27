@@ -208,12 +208,12 @@ jobs:
         nuget sources Add -Name $localFeedName -Source "$env:TEMP\InstallModuleWorkaround\nuget"
 
         Write-Host "----- Download module dependencies as nuget packages"
-        #nuget sources Add -Name "PSGallery" -Source 'https://www.powershellgallery.com/api/v2/'
-        #$dependencies | ForEach-Object { nuget install $_ -Source PSGallery -OutputDirectory "$env:TEMP\InstallModuleWorkaround\install" }
+        nuget sources Add -Name "PSGallery" -Source 'https://www.powershellgallery.com/api/v2/'
+        $dependencies | ForEach-Object { nuget install $_ -Source PSGallery -OutputDirectory "$env:TEMP\InstallModuleWorkaround\install" }
 
 
         Write-Host "----- Add dependencies to local nuget feed as these dependencies are specified as not external"
-        #nuget init $env:TEMP\InstallModuleWorkaround\install "$env:TEMP\InstallModuleWorkaround\nuget"
+        nuget init $env:TEMP\InstallModuleWorkaround\install "$env:TEMP\InstallModuleWorkaround\nuget"
 
 
         nuget install $moduleName -Source $localFeedName -OutputDirectory "$env:TEMP\InstallModuleWorkaround\install"
@@ -231,12 +231,12 @@ jobs:
         Register-PSRepository -Name $LocalPSGallery -SourceLocation "$env:TEMP\InstallModuleWorkaround\repo"
 
         Write-Host "----- Publish Dependencies to $$LocalPSGallery"
-        #$dependencies | ForEach-Object { Publish-Module -Path $env:TEMP\InstallModuleWorkaround\install\$_ -Repository $LocalPSGallery}
+        $dependencies | ForEach-Object { Publish-Module -Path $env:TEMP\InstallModuleWorkaround\install\$_ -Repository $LocalPSGallery}
 
         Write-Host "----- publish and install VSTeam to $LocalPSGallery"
         $dependencies | Foreach-Object { Install-Module $_ -Force -Scope CurrentUser }
         Publish-Module -Path $env:TEMP\InstallModuleWorkaround\install\$moduleName -Repository $LocalPSGallery
-        # $dependencies | Foreach-Object { Uninstall-Module $_ }
+        $dependencies | Foreach-Object { Uninstall-Module $_ }
         Install-Module -Name $moduleName -Repository $LocalPSGallery -AllowClobber -SkipPublisherCheck -Force -Scope CurrentUser -Verbose
 
 
