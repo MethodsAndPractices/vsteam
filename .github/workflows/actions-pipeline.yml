@@ -249,8 +249,6 @@ jobs:
 
     - name: Run Integration Tests
       run: |
-        $env:ACCT='razorspoint-vsteamtests'
-        $env:PAT='62hpgojrrkmx7rcoxyhzvag2ztkn2uk6fyh5w4x533pxjpcn6spq'
 
         Import-Module VSTeam
         # This loads [PesterConfiguration] into scope
@@ -265,6 +263,11 @@ jobs:
 
         Invoke-Pester -Configuration $pesterArgs
       shell: pwsh
+      env:
+        PAT: ${{ secrets.RSAZDOPAT }}
+        EMAIL: ${{ secrets.RSEMAIL }}
+        API_VERSION: VSTS
+        ACCT: razorspoint-vsteamtests
       working-directory: './test/Tests/integration'
 
     - name: Publish PowerShell test results
