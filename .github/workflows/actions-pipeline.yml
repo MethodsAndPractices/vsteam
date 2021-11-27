@@ -234,7 +234,7 @@ jobs:
         $dependencies | ForEach-Object { Publish-Module -Path $env:TEMP\InstallModuleWorkaround\install\$_ -Repository $LocalPSGallery}
 
         Write-Host "----- publish and install VSTeam to $LocalPSGallery"
-        $dependencies | Foreach-Object { Install-Module $_ -Force -Scope CurrentUser }
+        $dependencies | Foreach-Object { Install-Module $_ -Force -Scope CurrentUser -Repository $LocalPSGallery }
         Publish-Module -Path $env:TEMP\InstallModuleWorkaround\install\$moduleName -Repository $LocalPSGallery
         $dependencies | Foreach-Object { Uninstall-Module $_ }
         Install-Module -Name $moduleName -Repository $LocalPSGallery -AllowClobber -SkipPublisherCheck -Force -Scope CurrentUser -Verbose
