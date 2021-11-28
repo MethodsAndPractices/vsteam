@@ -103,7 +103,7 @@ jobs:
         Copy-Item -Path "./dist/" -Destination ./staging/VSTeam/dist/ -Recurse -Force
         Copy-Item -Path "./.gitignore","./README.md" -Destination ./staging/VSTeam/ -Recurse -Force
         Copy-Item -Path "./Tests/SampleFiles/" -Destination ./staging/test/Tests/SampleFiles -Recurse -Force
-        Copy-Item -Path "./Tests/integration/tests/" -Destination ./staging/test/Tests/integration -Recurse -Force
+        Copy-Item -Path "./Tests/integration/tests/" -Destination ./staging/test/Tests/integration/tests -Recurse -Force
         Copy-Item -Path "./dist/*.psd1" -Destination ./staging/test/dist -Recurse -Force
 
     - name: Publish Module
