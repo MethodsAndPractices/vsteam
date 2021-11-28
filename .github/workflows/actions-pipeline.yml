@@ -204,7 +204,9 @@ jobs:
     - name: Module test installation
       shell: pwsh
       run: |
-        ./Test-InstallFromLocalFeed.ps1 -GitHubToken $github.token -RunnerTempPath $runner.temp
+        ./Test-InstallFromLocalFeed.ps1 -GitHubToken $env:GITHUB_TOKEN -RunnerTempPath $RUNNER_TEMP
+      env:
+        GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
       working-directory: './tools/scripts'
 
     - name: Install Pester
