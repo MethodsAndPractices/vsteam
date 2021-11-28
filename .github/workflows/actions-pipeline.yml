@@ -8,42 +8,10 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [windows-latest]
+        os: [windows-latest, linux-latest, macos-latest]
     steps:
     - name: Clone repo
       uses: actions/checkout@v2
-
-    # - name: Run Integration Tests
-    #   run: |
-
-
-    #     Write-Host "env:PAT $($env:PAT)"
-    #     Write-Host "env:EMAIL $($env:EMAIL)"
-    #     Write-Host "env:API_VERSION $($env:API_VERSION)"
-    #     Write-Host "env:ACCT $($env:ACCT)"
-
-    #     Install-Module VSTeam -Force -Scope CurrentUser
-    #     Import-Module VSTeam
-    #     #This loads [PesterConfiguration] into scope
-    #     Install-Module Pester -Force -Scope CurrentUser
-    #     Import-Module Pester
-    #     $pesterArgs = [PesterConfiguration]::Default
-    #     $pesterArgs.Run.Exit = $true
-    #     $pesterArgs.Run.PassThru = $true
-    #     $pesterArgs.Output.Verbosity = "Detailed"
-    #     $pesterArgs.TestResult.Enabled = $true
-    #     $pesterArgs.TestResult.OutputFormat = 'JUnitXml'
-    #     $pesterArgs.TestResult.OutputPath = 'test-results.xml'
-
-    #     Invoke-Pester -Configuration $pesterArgs
-    #   shell: pwsh
-    #   env:
-    #     PAT: ${{ secrets.RSAZDOPAT }}
-    #     EMAIL: ${{ secrets.RSEMAIL }}
-    #     API_VERSION: VSTS
-    #     ACCT: razorspoint-vsteamtests
-    #   working-directory: './Tests/integration'
-
 
     - name: .NET Restore
       shell: pwsh
@@ -64,12 +32,12 @@ jobs:
       run: dotnet test --logger "trx;LogFileName=test-results.trx"
 
     - name: Publish C# test results
-      if: success() || failure()                  # run this step even if previous step failed
+      if: success() || failure()
       uses: dorny/test-reporter@v1
       with:
-        name: C# tests results (${{ matrix.os }}) # name of the check run which will be created
-        path: '**/test-results.trx'               # path to test results
-        reporter: dotnet-trx                      # format of test results
+        name: C# tests results (${{ matrix.os }})
+        path: '**/test-results.trx'
+        reporter: dotnet-trx
 
     - name: Run PowerShell unit tests
       shell: pwsh
@@ -89,12 +57,12 @@ jobs:
         Invoke-Pester -Configuration $pesterArgs
 
     - name: Publish PowerShell test results
-      if: success() || failure()                          # run this step even if previous step failed
+      if: success() || failure()
       uses: dorny/test-reporter@v1
       with:
-        name: PowerShell tests results (${{ matrix.os }}) # name of the check run which will be created
-        path: '**/test-results.xml'                       # path to test results
-        reporter: jest-junit                              # format of test results
+        name: PowerShell tests results (${{ matrix.os }})
+        path: '**/test-results.xml'
+        reporter: jest-junit
 
     - name: Copy files to staging folders
       if: ${{ matrix.os == 'windows-latest'}}
@@ -104,6 +72,7 @@ jobs:
         Copy-Item -Path "./.gitignore","./README.md" -Destination ./staging/VSTeam/ -Recurse -Force
         Copy-Item -Path "./Tests/SampleFiles/" -Destination ./staging/test/Tests/SampleFiles -Recurse -Force
         Copy-Item -Path "./Tests/integration/tests/" -Destination ./staging/test/Tests/integration/tests -Recurse -Force
+        Copy-Item -Path "./tools/scripts/" -Destination ./staging/tools/scripts -Recurse -Force
         Copy-Item -Path "./dist/*.psd1" -Destination ./staging/test/dist -Recurse -Force
 
     - name: Publish Module
@@ -113,12 +82,19 @@ jobs:
         name: module
         path: "./staging/VSTeam"
 
-    - name: Publish Module
+    - name: Publish unit tests
       if: ${{ matrix.os == 'windows-latest'}}
       uses: actions/upload-artifact@v2
       with:
         name: test
         path: "./staging/test"
+
+    - name: Publish pipeline scripts
+      if: ${{ matrix.os == 'windows-latest'}}
+      uses: actions/upload-artifact@v2
+      with:
+        name: pipeline-scripts
+        path: "./staging/tools"
 
     - name: Install PSScriptAnalyzer
       if: ${{ matrix.os == 'ubuntu-latest'}}
@@ -219,56 +195,17 @@ jobs:
         name: test
         path: ./test
 
-    - name: Install module
+    - name: Download pipeline scripts
+      uses: actions/download-artifact@v2
+      with:
+        name: pipeline-scripts
+        path: ./tools
+
+    - name: Module test installation
       shell: pwsh
       run: |
-        $localFeedName = "LocalNugetSource"
-        $LocalPSGallery = "LocalPSGallery"
-        $moduleName = "VSTeam"
-        $dependencies = @("SHiPS","Trackyon.Utils")
-
-        $tempFolder = "$env:TEMP\InstallModuleWorkaround"
-
-        Write-Host "----- create temp folder for local feeds"
-        New-Item -Path "$tempFolder\nuget" -Type Directory | Out-Null
-        New-Item -Path "$tempFolder\repo" -Type Directory | Out-Null
-        New-Item -Path "$tempFolder\install" -Type Directory | Out-Null
-
-        Write-Host "----- Initialize the local nuget feed with VSTeam nupkg and add as local feed"
-        nuget init ./module "$tempFolder\nuget"
-        nuget sources Add -Name $localFeedName -Source "$tempFolder\nuget"
-
-        Write-Host "----- Download module dependencies as nuget packages"
-        nuget sources Add -Name "PSGallery" -Source 'https://www.powershellgallery.com/api/v2/'
-        $dependencies | ForEach-Object { nuget install $_ -Source PSGallery -OutputDirectory "$tempFolder\install" }
-
-
-        Write-Host "----- Add dependencies to local nuget feed as these dependencies are specified as not external"
-        nuget init $tempFolder\install "$tempFolder\nuget"
-
-
-        nuget install $moduleName -Source $localFeedName -OutputDirectory "$tempFolder\install"
-        nuget sources remove -name $localFeedName
-
-        $ModuleFolders = Get-ChildItem "$tempFolder\install" -Directory
-        Write-Host "----- rename folders"
-        Set-Location -Path "$tempFolder\install"
-        foreach ($Folder in $ModuleFolders) {
-            $ShortName = $Folder.Name -replace '(.*)(\.\d+){3,4}', '$1'
-            Move-Item -Path $Folder.Name -Destination $ShortName
-        }
-
-        Write-Host "----- Register-PSRepository"
-        Register-PSRepository -Name $LocalPSGallery -SourceLocation "$tempFolder\repo"
-
-        Write-Host "----- Publish Dependencies to $$LocalPSGallery"
-        $dependencies | ForEach-Object { Publish-Module -Path $tempFolder\install\$_ -Repository $LocalPSGallery}
-
-        Write-Host "----- publish and install VSTeam to $LocalPSGallery"
-        $dependencies | Foreach-Object { Install-Module $_ -Force -Scope CurrentUser -Repository $LocalPSGallery }
-        Publish-Module -Path $tempFolder\install\$moduleName -Repository $LocalPSGallery
-        $dependencies | Foreach-Object { Uninstall-Module $_ }
-        Install-Module -Name $moduleName -Repository $LocalPSGallery -AllowClobber -SkipPublisherCheck -Force -Scope CurrentUser
+        ./Test-InstallFromLocalFeed.ps1 -GitHubToken $github.token -RunnerTempPath $runner.temp
+      working-directory: './tools/scripts'
 
     - name: Install Pester
       run: Install-Module -Name Pester -Repository PSGallery -Force -AllowPrerelease -MinimumVersion "${{ env.PESTER_VERSION }}" -Scope CurrentUser -AllowClobber -SkipPublisherCheck
@@ -296,7 +233,7 @@ jobs:
         PAT: ${{ secrets.RSAZDOPAT }}
         EMAIL: ${{ secrets.RSEMAIL }}
         API_VERSION: VSTS
-        ACCT: razorspoint-vsteamtests
+        ACCT: ${{ secrets.RSORG }}
       working-directory: './test/Tests/integration'
 
     - name: Prepare test result publishing
