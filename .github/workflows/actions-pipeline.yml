@@ -60,7 +60,7 @@ jobs:
       if: success() || failure()
       uses: dorny/test-reporter@v1
       with:
-        name: PowerShell tests results (${{ matrix.os }})
+        name: PS tests results (${{ matrix.os }})
         path: '**/test-results.xml'
         reporter: jest-junit
 
@@ -227,7 +227,7 @@ jobs:
       if: success() || failure()                          # run this step even if previous step failed
       uses: dorny/test-reporter@v1
       with:
-        name: PowerShell tests results (${{ matrix.os }}) # name of the check run which will be created
+        name: PS integration-tests results (${{ matrix.os }}) # name of the check run which will be created
         path: '**/test-results.xml'                       # path to test results
         reporter: jest-junit
 
