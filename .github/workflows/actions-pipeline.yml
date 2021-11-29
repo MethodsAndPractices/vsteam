@@ -251,6 +251,11 @@ jobs:
         name: pipeline-scripts
         path: ./tools
 
+    - name: Show folder tree
+      shell: pwsh
+      run: |
+        tree \
+
     - name: Publish module
       shell: pwsh
       run: |
