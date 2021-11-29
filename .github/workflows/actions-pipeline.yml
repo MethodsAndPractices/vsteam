@@ -256,7 +256,7 @@ jobs:
     - name: Show folder tree
       shell: pwsh
       run: |
-        tree \
+        tree /home/runner/work/vsteam
 
     - name: Publish module
       shell: pwsh
