@@ -56,5 +56,8 @@
    "powershell.pester.useLegacyCodeLens": false,
    "powershell.pester.outputVerbosity": "Detailed",
    "powershell.codeFormatting.addWhitespaceAroundPipe": true,
-   "gitdoc.enabled": false
+   "gitdoc.enabled": false,
+   "github-actions.workflows.pinned.workflows": [
+      ".github/workflows/actions-pipeline.yml"
+   ]
 }

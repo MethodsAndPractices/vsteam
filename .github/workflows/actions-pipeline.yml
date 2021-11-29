@@ -160,7 +160,6 @@ jobs:
   testing-stage:
     name: Testing
     needs: package-stage
-    if: failure()
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -186,6 +185,7 @@ jobs:
         path: ./tools
 
     - name: Module test installation
+      if: ${{ false }}
       shell: pwsh
       run: |
         ./Test-InstallFromLocalFeed.ps1 -GitHubToken $env:GITHUB_TOKEN -RunnerTempPath $RUNNER_TEMP
@@ -198,6 +198,7 @@ jobs:
       shell: pwsh
 
     - name: Run Integration Tests
+      if: ${{ false }}
       run: |
 
         Import-Module VSTeam
@@ -222,15 +223,16 @@ jobs:
       working-directory: './test/Tests/integration'
 
     - name: Prepare test result publishing
+      if: ${{ false }}
       run: git init
       shell: pwsh
 
     - name: Publish PowerShell test results
-      if: success() || failure()                          # run this step even if previous step failed
+      if: ${{ false }}
       uses: dorny/test-reporter@v1
       with:
-        name: PS integration-tests results (${{ matrix.os }}) # name of the check run which will be created
-        path: '**/test-results.xml'                       # path to test results
+        name: PS integration-tests results (${{ matrix.os }})
+        path: '**/test-results.xml'
         reporter: jest-junit
 
   publish-stage:
