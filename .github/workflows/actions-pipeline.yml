@@ -144,7 +144,7 @@ jobs:
     - name: Pack and push module
       shell: pwsh
       run: |
-        ./Invoke-BuildAndPublishModule -GitHubToken $env:GITHUB_TOKEN -RevisionNumber ${{ github.run_number }} -WorkingDirectory "./../../"
+        ./Invoke-BuildAndPublishModule -GitHubToken $env:GITHUB_TOKEN -RevisionNumber ${{ github.run_number }} -ModulePath "./../../"
       env:
         GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
       working-directory: './tools/scripts'
@@ -249,7 +249,7 @@ jobs:
     - name: Publish module
       shell: pwsh
       run: |
-        ./Invoke-BuildAndPublishModule -PSGalleryApiKey $env:NUGETAPIKEY -WorkingDirectory "./../../" -WhatIf
+        ./Invoke-BuildAndPublishModule -PSGalleryApiKey $env:NUGETAPIKEY -ModulePath "../../module" -WhatIf
       env:
         NUGETAPIKEY: ${{secrets.NUGETAPIKEY}}
       working-directory: './tools/scripts'

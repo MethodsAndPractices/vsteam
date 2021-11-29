@@ -15,7 +15,7 @@ param (
    # path to the module wihtout the name e.g. "C:\path\without\name" and not "C:\path\without\name\VSTeam"
    [Parameter(Mandatory = $true)]
    [string]
-   $WorkingDirectory
+   $ModulePath
 )
 Write-Host "Compute Version Number"
 
@@ -25,7 +25,7 @@ if ($null -eq (Get-Module -Name Metadata -ListAvailable)) {
 }
 
 # Load the psd1 file so you can read the version
-$manifest = Import-Metadata -Path "$WorkingDirectory/dist/VSTeam.psd1"
+$manifest = Import-Metadata -Path "$ModulePath/dist/VSTeam.psd1"
 # load as semantic version
 [version]$sem_version = $manifest.ModuleVersion
 
@@ -36,7 +36,7 @@ if ($RevisionNumber -and $RevisionNumber -ne -1) {
 }
 $manifest.ModuleVersion = $package_version
 Write-Host "Package Version Number: $package_version"
-Export-Metadata -Path "$WorkingDirectory/dist/VSTeam.psd1" -InputObject $manifest
+Export-Metadata -Path "$ModulePath/dist/VSTeam.psd1" -InputObject $manifest
 
 
 if ($PsCmdlet.ParameterSetName -eq "PublishGithub") {
@@ -44,17 +44,17 @@ if ($PsCmdlet.ParameterSetName -eq "PublishGithub") {
    #create nuspec file
    Write-Host "Create NuSpec from PSD1"
    Install-Module -Name Trackyon.Nuget -Scope CurrentUser -Force
-   ConvertTo-NuSpec -Path "$WorkingDirectory/dist/VSTeam.psd1"
+   ConvertTo-NuSpec -Path "$ModulePath/dist/VSTeam.psd1"
 
    Write-Host "Pack module"
-   Write-Host "nuget pack "$WorkingDirectory/dist/VSTeam.nuspec" -NonInteractive -OutputDirectory "$WorkingDirectory/dist" -version $package_version -Verbosity Detailed"
-   nuget pack "$WorkingDirectory/dist/VSTeam.nuspec" -NonInteractive -OutputDirectory "$WorkingDirectory/dist" -version $package_version -Verbosity Detailed
+   Write-Host "nuget pack "$ModulePath/dist/VSTeam.nuspec" -NonInteractive -OutputDirectory "$ModulePath/dist" -version $package_version -Verbosity Detailed"
+   nuget pack "$ModulePath/dist/VSTeam.nuspec" -NonInteractive -OutputDirectory "$ModulePath/dist" -version $package_version -Verbosity Detailed
 
    Write-Host "Push module to GitHub Package feed"
 
    if ($PSCmdlet.ShouldProcess("Module publishing to nuget Github feed")) {
       dotnet tool install gpr -g
-      gpr push "$WorkingDirectory/dist/*.nupkg" -k $GitHubToken --repository "MethodsAndPractices/vsteam"
+      gpr push "$ModulePath/dist/*.nupkg" -k $GitHubToken --repository "MethodsAndPractices/vsteam"
    }
    else {
       Write-Host "Publish to repository 'MethodsAndPractices/vsteam' skipped"
@@ -64,12 +64,12 @@ if ($PsCmdlet.ParameterSetName -eq "PublishGithub") {
 elseif ($PsCmdlet.ParameterSetName -eq "PublishPSGallery") {
 
    Write-Host "Publish module to PSGallery"
-   Copy-Item -Path "$WorkingDirectory/dist" -Destination "$WorkingDirectory/VSTeam" -Recurse
+   Copy-Item -Path "$ModulePath/dist" -Destination "$ModulePath/VSTeam" -Recurse
 
    if ($PSCmdlet.ShouldProcess("Module publishing to PS gallery")) {
-      Publish-Module -NuGetApiKey $PSGalleryApiKey -Path "$WorkingDirectory/VSTeam"
+      Publish-Module -NuGetApiKey $PSGalleryApiKey -Path "$ModulePath/VSTeam"
    }
    else {
-      Publish-Module -NuGetApiKey $PSGalleryApiKey -Path "$WorkingDirectory/VSTeam" -WhatIf
+      Publish-Module -NuGetApiKey $PSGalleryApiKey -Path "$ModulePath/VSTeam" -WhatIf
    }
 }
