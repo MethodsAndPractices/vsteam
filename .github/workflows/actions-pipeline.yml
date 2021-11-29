@@ -18,12 +18,12 @@ jobs:
       run: dotnet restore --no-cache # have to use no cache of the build will fail on Windows
 
     - name: Build module with help
-      if: ${{ matrix.os == 'windows-latest'}}
+      if: ${{ matrix.os != 'windows-latest'}}
       shell: pwsh
       run: ./Build-Module.ps1 -installDep -configuration Release -buildHelp
 
     - name: Build module without help
-      if: ${{ matrix.os != 'windows-latest'}}
+      if: ${{ matrix.os == 'windows-latest'}}
       shell: pwsh
       run: ./Build-Module.ps1 -installDep -configuration Release
 
@@ -40,6 +40,7 @@ jobs:
         reporter: dotnet-trx
 
     - name: Run PowerShell unit tests
+      if: failure()
       shell: pwsh
       run: |
         Import-Module ./dist/*.psd1
@@ -57,7 +58,7 @@ jobs:
         Invoke-Pester -Configuration $pesterArgs
 
     - name: Publish PowerShell test results
-      if: success() || failure()
+      if: failure()
       uses: dorny/test-reporter@v1
       with:
         name: PS tests results (${{ matrix.os }})
@@ -159,6 +160,7 @@ jobs:
   testing-stage:
     name: Testing
     needs: package-stage
+    if: failure()
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
