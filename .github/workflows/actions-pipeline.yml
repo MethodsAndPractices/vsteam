@@ -244,7 +244,7 @@ jobs:
     - name: Download PS module artifact
       uses: actions/download-artifact@v2
       with:
-        name: VSTeamPackage
+        name: module
         path: ./module
 
     - name: Download pipeline scripts
