@@ -216,7 +216,6 @@ jobs:
     - name: Run Integration Tests
       run: |
 
-        Install-Module -Name VSTeam -Repository LocalPSGallery -Force -Scope CurrentUser
         Import-Module VSTeam
 
         #This loads [PesterConfiguration] into scope
