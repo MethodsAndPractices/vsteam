@@ -22,7 +22,7 @@ Write-Host "Compute Version Number"
 if ($null -eq (Get-Module -Name Metadata -ListAvailable))
 {
    Write-Host "Metadata module not installed, installing it"
-   Install-Module -Name Metadata
+   Install-Module -Name Metadata -Scope CurrentUser -Force
 }
 
 # Load the psd1 file so you can read the version
