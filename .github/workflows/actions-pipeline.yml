@@ -121,6 +121,13 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: module
+
+    - name: Download pipeline scripts
+      uses: actions/download-artifact@v2
+      with:
+        name: pipeline-scripts
+        path: ./tools
+
     - name: Install NuGet 5.2.0
       uses: nuget/setup-nuget@v1
       with:
