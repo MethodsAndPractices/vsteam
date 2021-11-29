@@ -75,6 +75,22 @@ jobs:
         Copy-Item -Path "./tools/scripts/" -Destination ./staging/tools/scripts -Recurse -Force
         Copy-Item -Path "./dist/*.psd1" -Destination ./staging/test/dist -Recurse -Force
 
+    - name: Install PSScriptAnalyzer
+      if: ${{ matrix.os == 'ubuntu-latest'}}
+      shell: pwsh
+      run: Install-Module -Name PSScriptAnalyzer -Repository PSGallery -Force -Scope CurrentUser -Verbose
+
+    - name: Run Static Code Analysis
+      if: ${{ matrix.os == 'ubuntu-latest'}}
+      shell: pwsh
+      run: |
+        $manifest = Import-PowerShellDataFile ./dist/*.psd1
+        $manifest.RequiredModules | ForEach-Object { Import-Module -Name $_ }
+        $count = 0
+        $r = Invoke-ScriptAnalyzer –Path ./dist –Recurse | Where-Object severity -ne "Information"
+        $r | ForEach-Object { Write-Host "::error file=$($_.ScriptPath),line=$($_.Line),col=$($_.Column)::$($_.Message)"; $count++ }
+        if($count -ne 0) { throw "Static Code Analysis with error count = $count" }
+
     - name: Publish Module
       if: ${{ matrix.os == 'windows-latest'}}
       uses: actions/upload-artifact@v2
@@ -96,22 +112,6 @@ jobs:
         name: pipeline-scripts
         path: "./staging/tools"
 
-    - name: Install PSScriptAnalyzer
-      if: ${{ matrix.os == 'ubuntu-latest'}}
-      shell: pwsh
-      run: Install-Module -Name PSScriptAnalyzer -Repository PSGallery -Force -Scope CurrentUser -Verbose
-
-    - name: Run Static Code Analysis
-      if: ${{ matrix.os == 'ubuntu-latest'}}
-      shell: pwsh
-      run: |
-        $manifest = Import-PowerShellDataFile ./dist/*.psd1
-        $manifest.RequiredModules | ForEach-Object { Import-Module -Name $_ }
-        $count = 0
-        $r = Invoke-ScriptAnalyzer –Path ./dist –Recurse | Where-Object severity -ne "Information"
-        $r | ForEach-Object { Write-Host "::error file=$($_.ScriptPath),line=$($_.Line),col=$($_.Column)::$($_.Message)"; $count++ }
-        if($count -ne 0) { throw "Static Code Analysis with error count = $count" }
-
   package-stage:
     name: Package Management
     needs: build-stage
@@ -132,6 +132,7 @@ jobs:
       uses: nuget/setup-nuget@v1
       with:
         nuget-version: '5.2.0'
+
     - name: Install Module Dependencies
       shell: pwsh
       run: |
@@ -163,11 +164,13 @@ jobs:
       matrix:
         os: [windows-latest]
     steps:
+
     - name: Download nuget package artifact
       uses: actions/download-artifact@v2
       with:
         name: VSTeamPackage
         path: ./module
+
     - name: Download integration tests
       uses: actions/download-artifact@v2
       with:
