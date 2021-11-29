@@ -137,38 +137,10 @@ jobs:
     - name: Pack and push module
       shell: pwsh
       run: |
-        Write-Host "Compute Version Number"
-
-        # Load the psd1 file so you can read the version
-        $manifest = Import-PowerShellDataFile ./dist/*.psd1
-
-        # load as semantic version
-        [version]$sem_version = $manifest.ModuleVersion
-
-        # Build new semantic version with build number
-        $package_version = "$($sem_version.Major).$($sem_version.Minor).${{ github.run_number }}"
-
-        Write-Host "Package Version Number: $package_version"
-
-        Write-Host "Create NuSpec from PSD1"
-
-        Install-Module -Name Trackyon.Nuget -Scope CurrentUser -Force
-
-        Write-Host "Convert psd1 into a NuSpec"
-
-        ConvertTo-NuSpec -Path ./dist/VSTeam.psd1
-
-        Write-Host "Pack module"
-
-        Write-Host "nuget pack ./dist/VSTeam.nuspec -NonInteractive -OutputDirectory ./dist -version $package_version -Verbosity Detailed"
-
-        nuget pack ./dist/VSTeam.nuspec -NonInteractive -OutputDirectory ./dist -version $package_version -Verbosity Detailed
-
-        Write-Host "Push module"
-
-        dotnet tool install gpr -g
-
-        gpr push ./dist/*.nupkg -k ${{secrets.GITHUB_TOKEN}} --repository MethodsAndPractices/vsteam
+        ./Invoke-BuildAndPublishModule -GitHubToken $env:GITHUB_TOKEN -RevisionNumber ${{ github.run_number }} -WorkingDirectory "./../../"
+      env:
+        GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+      working-directory: './tools/scripts'
 
     - name: Upload nuget package as artifact
       uses: actions/upload-artifact@v2
