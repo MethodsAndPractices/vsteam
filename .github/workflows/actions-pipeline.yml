@@ -234,6 +234,22 @@ jobs:
     # environment: 'PowerShell Gallery'
     runs-on: ubuntu-latest
     steps:
-    - name: Publish
+    - name: Download PS module artifact
+      uses: actions/download-artifact@v2
+      with:
+        name: VSTeamPackage
+        path: ./module
+
+    - name: Download pipeline scripts
+      uses: actions/download-artifact@v2
+      with:
+        name: pipeline-scripts
+        path: ./tools
+
+    - name: Publish module
       shell: pwsh
-      run: Write-Output "Publish to PowerShell Gallery"
+      run: |
+        ./Invoke-BuildAndPublishModule -PSGalleryApiKey $env:NUGETAPIKEY -WorkingDirectory "./../../" -WhatIf
+      env:
+        NUGETAPIKEY: ${{secrets.NUGETAPIKEY}}
+      working-directory: './tools/scripts'

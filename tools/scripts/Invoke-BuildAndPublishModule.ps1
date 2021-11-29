@@ -1,4 +1,4 @@
-[CmdletBinding(DefaultParameterSetName = "PublishPSGallery")]
+[CmdletBinding(DefaultParameterSetName = "PublishPSGallery", SupportsShouldProcess)]
 param (
    # give a revision number if needed for test and build purposes
    [Parameter(Mandatory = $false)]
@@ -19,8 +19,7 @@ param (
 )
 Write-Host "Compute Version Number"
 
-if ($null -eq (Get-Module -Name Metadata -ListAvailable))
-{
+if ($null -eq (Get-Module -Name Metadata -ListAvailable)) {
    Write-Host "Metadata module not installed, installing it"
    Install-Module -Name Metadata -Scope CurrentUser -Force
 }
@@ -52,13 +51,25 @@ if ($PsCmdlet.ParameterSetName -eq "PublishGithub") {
    nuget pack "$WorkingDirectory/dist/VSTeam.nuspec" -NonInteractive -OutputDirectory "$WorkingDirectory/dist" -version $package_version -Verbosity Detailed
 
    Write-Host "Push module to GitHub Package feed"
-   dotnet tool install gpr -g
-   gpr push "$WorkingDirectory/dist/*.nupkg" -k $GitHubToken --repository "MethodsAndPractices/vsteam"
+
+   if ($PSCmdlet.ShouldProcess("Module publishing to nuget Github feed")) {
+      dotnet tool install gpr -g
+      gpr push "$WorkingDirectory/dist/*.nupkg" -k $GitHubToken --repository "MethodsAndPractices/vsteam"
+   }
+   else {
+      Write-Host "Publish to repository 'MethodsAndPractices/vsteam' skipped"
+   }
 
 }
 elseif ($PsCmdlet.ParameterSetName -eq "PublishPSGallery") {
 
    Write-Host "Publish module to PSGallery"
    Copy-Item -Path "$WorkingDirectory/dist" -Destination "$WorkingDirectory/VSTeam" -Recurse
-   Publish-Module -NuGetApiKey $PSGalleryApiKey -Path "$WorkingDirectory/VSTeam"
+
+   if ($PSCmdlet.ShouldProcess("Module publishing to PS gallery")) {
+      Publish-Module -NuGetApiKey $PSGalleryApiKey -Path "$WorkingDirectory/VSTeam"
+   }
+   else {
+      Publish-Module -NuGetApiKey $PSGalleryApiKey -Path "$WorkingDirectory/VSTeam" -WhatIf
+   }
 }
