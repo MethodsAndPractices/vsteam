@@ -7,7 +7,6 @@ on:
       - actions
   workflow_dispatch:
   pull_request:
-    types: [labeled]
     branches:
       - trunk
       - actions
@@ -18,7 +17,6 @@ env:
 
 jobs:
   build-stage:
-    if: ${{ contains(github.event.pull_request.labels.*.name, 'manual-build') }}
     name: Build
     runs-on: ${{ matrix.os }}
     strategy:
