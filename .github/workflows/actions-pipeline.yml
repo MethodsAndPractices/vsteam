@@ -270,7 +270,7 @@ jobs:
     - name: Install Module Dependencies
       shell: pwsh
       run: |
-        ./Install-ModuleDependencies.ps1 -ModulePath "./../../dist"
+        ./Install-ModuleDependencies.ps1 -ModulePath "../../module/dist"
       working-directory: './tools/scripts'
 
     - name: Show folder tree
