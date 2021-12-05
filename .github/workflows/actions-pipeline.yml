@@ -33,12 +33,12 @@ jobs:
       run: dotnet restore --no-cache # have to use no cache of the build will fail on Windows
 
     - name: Build module with help
-      if: ${{ matrix.os != 'windows-latest'}}
+      if: ${{ matrix.os == 'windows-latest'}}
       shell: pwsh
       run: ./Build-Module.ps1 -installDep -configuration Release -buildHelp
 
     - name: Build module without help
-      if: ${{ matrix.os == 'windows-latest'}}
+      if: ${{ matrix.os != 'windows-latest'}}
       shell: pwsh
       run: ./Build-Module.ps1 -installDep -configuration Release
 
