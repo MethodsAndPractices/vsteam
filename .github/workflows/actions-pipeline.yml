@@ -1,10 +1,6 @@
 name: build
 
 on:
-  push:
-    branches:
-      - trunk
-      - actions
   workflow_dispatch:
   pull_request:
     branches:
