@@ -129,6 +129,9 @@ jobs:
   package-stage:
     name: Package Management
     needs: build-stage
+    # run from here only if it's not a dependabot or a forked repo
+    # head.repo.full_name would be the forked repo name and 'github.repository' is equal to our repository
+    if: github.event.pull_request.head.repo.full_name == github.repository && github.actor != 'dependabot[bot]'
     runs-on: ubuntu-latest
     steps:
     - name: Download module
@@ -246,7 +249,7 @@ jobs:
   publish-stage:
     name: PowerShell Gallery
     needs: testing-stage
-    # environment: 'PowerShell Gallery'
+    environment: 'PowerShell Gallery'
     runs-on: ubuntu-latest
     steps:
     - name: Download PS module artifact
