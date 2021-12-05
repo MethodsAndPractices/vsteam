@@ -18,7 +18,7 @@ env:
 
 jobs:
   build-stage:
-    if: ${{ !contains(github.event.pull_request.labels.*.name, 'test') }}
+    if: ${{ contains(github.event.pull_request.labels.*.name, 'manual-build') }}
     name: Build
     runs-on: ${{ matrix.os }}
     strategy:
@@ -131,7 +131,7 @@ jobs:
     needs: build-stage
     # run from here only if it's not a a forked repo
     # head.repo.full_name would be the forked repo name and 'github.repository' is equal to our repository
-    if: github.event.pull_request.head.repo.full_name != github.repository
+    if: github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ubuntu-latest
     steps:
     - name: Download module
