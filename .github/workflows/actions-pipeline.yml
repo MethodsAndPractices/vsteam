@@ -9,6 +9,9 @@ on:
   pull_request:
     types: [labeled]
 
+env:
+  module_version: ""
+
 jobs:
   build-stage:
     if: ${{ !contains(github.event.pull_request.labels.*.name, 'test') }}
@@ -145,16 +148,15 @@ jobs:
     - name: Install Module Dependencies
       shell: pwsh
       run: |
-        # Load the psd1 file so you can read the required modules and install them
-        $manifest = Import-PowerShellDataFile ./dist/*.psd1
-
-        # Install each module
-        $manifest.RequiredModules | ForEach-Object { Install-Module -Name $_ -Repository PSGallery -Force -Scope CurrentUser -Verbose }
+        ./Install-ModuleDependencies -ModulePath "./../../dist"
+      working-directory: './tools/scripts'
 
     - name: Pack and push module
       shell: pwsh
       run: |
-        ./Invoke-BuildAndPublishModule -GitHubToken $env:GITHUB_TOKEN -RevisionNumber ${{ github.run_number }} -ModulePath "./../../"
+        $version = ./Set-VersionNumber.ps1 -RevisionNumber ${{ github.run_number }} -ModulePath "./../../"
+        Write-Host "::set-output name=module_version::$version"
+        ./Invoke-PublishModule.ps1 -GitHubToken $env:GITHUB_TOKEN -Version $version -ModulePath "./../../"
       env:
         GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
       working-directory: './tools/scripts'
@@ -261,6 +263,12 @@ jobs:
         name: pipeline-scripts
         path: ./tools
 
+    - name: Install Module Dependencies
+      shell: pwsh
+      run: |
+        ./Install-ModuleDependencies.ps1 -ModulePath "./../../dist"
+      working-directory: './tools/scripts'
+
     - name: Show folder tree
       shell: pwsh
       run: |
@@ -269,7 +277,16 @@ jobs:
     - name: Publish module
       shell: pwsh
       run: |
-        ./Invoke-BuildAndPublishModule -PSGalleryApiKey $env:NUGETAPIKEY -ModulePath "../../module" -WhatIf
+        Write-Host "$module_version"
+        ./Invoke-PublishModule.ps1 -PSGalleryApiKey $env:NUGETAPIKEY -ModulePath "../../module" -WhatIf
       env:
         NUGETAPIKEY: ${{secrets.NUGETAPIKEY}}
       working-directory: './tools/scripts'
+
+    - uses: ncipollo/release-action@v1
+      with:
+        artifacts: "../../module"
+        tag: ${{ env.module_version }}
+        draft: true
+        generateReleaseNotes: true
+        token: ${{ secrets.GITHUB_TOKEN }}

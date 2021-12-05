@@ -1,9 +1,9 @@
 [CmdletBinding(DefaultParameterSetName = "PublishPSGallery", SupportsShouldProcess)]
 param (
-   # give a revision number if needed for test and build purposes
-   [Parameter(Mandatory = $false)]
-   [int]
-   $RevisionNumber = -1,
+   # version number that should be used when publishing to github
+   [Parameter(Mandatory = $true, ParameterSetName = "PublishGithub")]
+   [version]
+   $Version,
    #github token
    [Parameter(Mandatory = $false, ParameterSetName = "PublishGithub")]
    [string]
@@ -17,27 +17,6 @@ param (
    [string]
    $ModulePath
 )
-Write-Host "Compute Version Number"
-
-if ($null -eq (Get-Module -Name Metadata -ListAvailable)) {
-   Write-Host "Metadata module not installed, installing it"
-   Install-Module -Name Metadata -Scope CurrentUser -Force
-}
-
-# Load the psd1 file so you can read the version
-$manifest = Import-Metadata -Path "$ModulePath/dist/VSTeam.psd1"
-# load as semantic version
-[version]$sem_version = $manifest.ModuleVersion
-
-# Build new semantic version with build number
-$package_version = "$($sem_version.Major).$($sem_version.Minor).$($sem_version.Build)"
-if ($RevisionNumber -and $RevisionNumber -ne -1) {
-   $package_version = "$($sem_version.Major).$($sem_version.Minor).$($sem_version.Build).$($RevisionNumber)"
-}
-$manifest.ModuleVersion = $package_version
-Write-Host "Package Version Number: $package_version"
-Export-Metadata -Path "$ModulePath/dist/VSTeam.psd1" -InputObject $manifest
-
 
 if ($PsCmdlet.ParameterSetName -eq "PublishGithub") {
 
@@ -47,8 +26,8 @@ if ($PsCmdlet.ParameterSetName -eq "PublishGithub") {
    ConvertTo-NuSpec -Path "$ModulePath/dist/VSTeam.psd1"
 
    Write-Host "Pack module"
-   Write-Host "nuget pack "$ModulePath/dist/VSTeam.nuspec" -NonInteractive -OutputDirectory "$ModulePath/dist" -version $package_version -Verbosity Detailed"
-   nuget pack "$ModulePath/dist/VSTeam.nuspec" -NonInteractive -OutputDirectory "$ModulePath/dist" -version $package_version -Verbosity Detailed
+   Write-Host "nuget pack "$ModulePath/dist/VSTeam.nuspec" -NonInteractive -OutputDirectory "$ModulePath/dist" -version $Version -Verbosity Detailed"
+   nuget pack "$ModulePath/dist/VSTeam.nuspec" -NonInteractive -OutputDirectory "$ModulePath/dist" -version $Version -Verbosity Detailed
 
    Write-Host "Push module to GitHub Package feed"
 
