@@ -64,7 +64,7 @@ if ($PsCmdlet.ParameterSetName -eq "PublishGithub") {
 elseif ($PsCmdlet.ParameterSetName -eq "PublishPSGallery") {
 
    Write-Host "Publish module to PSGallery"
-   Copy-Item -Path "$ModulePath/dist" -Destination "$ModulePath/VSTeam" -Recurse
+   Copy-Item -Path "$ModulePath/dist" -Destination "$ModulePath/VSTeam" -Recurse -WhatIf:$false
 
    if ($PSCmdlet.ShouldProcess("Module publishing to PS gallery")) {
       Publish-Module -NuGetApiKey $PSGalleryApiKey -Path "$ModulePath/VSTeam"
