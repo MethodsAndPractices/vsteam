@@ -18,6 +18,7 @@ jobs:
     strategy:
       matrix:
         os: [windows-latest]
+      fail-fast: true
     steps:
     - name: Clone repo
       uses: actions/checkout@v2
@@ -173,6 +174,7 @@ jobs:
     strategy:
       matrix:
         os: [windows-latest]
+      fail-fast: true
     steps:
 
     - name: Download nuget package artifact
@@ -272,12 +274,25 @@ jobs:
     - name: Publish module
       shell: pwsh
       run: |
-        Write-Host "$module_version"
-        ./Invoke-PublishModule.ps1 -TestPublishPSGalleryApiKey $env:RSNUGETAPIKEY -ModulePath "../../module"
+        Write-Host "Publishing Version: $module_version"
+        # ./Invoke-PublishModule.ps1 -PublishPSGalleryApiKey $env:RSNUGETAPIKEY -ModulePath "../../module"
       env:
         NUGETAPIKEY: ${{secrets.NUGETAPIKEY}}
         RSNUGETAPIKEY: ${{secrets.RSNUGETAPIKEY}}
+        moduleVersion: ${{ env.module_version }}
+
       working-directory: './tools/scripts'
+
+    # - name: Create tag
+    #   uses: actions/github-script@v5
+    #   with:
+    #     script: |
+    #       github.rest.git.createRef({
+    #         owner: context.repo.owner,
+    #         repo: context.repo.repo,
+    #         ref: 'refs/tags/<tagname>',
+    #         sha: context.sha
+    #       })
 
     - uses: ncipollo/release-action@v1
       with:
