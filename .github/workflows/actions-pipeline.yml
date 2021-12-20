@@ -156,6 +156,7 @@ jobs:
       run: |
         $version = ./Set-VersionNumber.ps1 -RevisionNumber ${{ github.run_number }} -ModulePath "./../../"
         Write-Host "::set-output name=module_version::$version"
+        Write-Host "module_version=$version" >> $GITHUB_ENV
         ./Invoke-PublishModule.ps1 -GitHubToken $env:GITHUB_TOKEN -Version $version -ModulePath "./../../"
       env:
         GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
@@ -274,12 +275,11 @@ jobs:
     - name: Publish module
       shell: pwsh
       run: |
-        Write-Host "Publishing Version: $module_version"
+        Write-Host "Publishing Version: ${{ env.module_version }}"
         # ./Invoke-PublishModule.ps1 -PublishPSGalleryApiKey $env:RSNUGETAPIKEY -ModulePath "../../module"
       env:
         NUGETAPIKEY: ${{secrets.NUGETAPIKEY}}
         RSNUGETAPIKEY: ${{secrets.RSNUGETAPIKEY}}
-        moduleVersion: ${{ env.module_version }}
 
       working-directory: './tools/scripts'
 
