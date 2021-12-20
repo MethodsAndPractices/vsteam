@@ -15,7 +15,11 @@ param (
    # path to the module wihtout the name e.g. "C:\path\without\name" and not "C:\path\without\name\VSTeam"
    [Parameter(Mandatory = $true)]
    [string]
-   $ModulePath
+   $ModulePath,
+   # if set then the module will be published as a test to the gallery
+   [Parameter(Mandatory = $true, ParameterSetName = "TestPublishPSGallery")]
+   [string]
+   $TestPublishPSGalleryApiKey
 )
 
 if ($PsCmdlet.ParameterSetName -eq "PublishGithub") {
@@ -40,15 +44,39 @@ if ($PsCmdlet.ParameterSetName -eq "PublishGithub") {
    }
 
 }
-elseif ($PsCmdlet.ParameterSetName -eq "PublishPSGallery") {
+elseif ($PsCmdlet.ParameterSetName -eq "PublishPSGallery" -or $PsCmdlet.ParameterSetName -eq "TestPublishPSGallery") {
 
-   Write-Host "Publish module to PSGallery"
-   Copy-Item -Path "$ModulePath/dist" -Destination "$ModulePath/VSTeam" -Recurse -WhatIf:$false
+
+   $DestinationPath = "$ModulePath/VSTeam"
+
+   Copy-Item -Path "$ModulePath/dist" -Destination $DestinationPath -Recurse -WhatIf:$false
+
+   # replace VSTeam occurences in the module name in the files with VSTeam1
+   # to make a test publish
+   if ($PsCmdlet.ParameterSetName -eq "TestPublishPSGallery") {
+      Write-Host "Publish module to PSGallery as test"
+      $PSGalleryApiKey = $TestPublishPSGalleryApiKey
+
+      $testPublishName = "VSTeam1"
+
+      # rename only minimal required contents to fulfill the test publish when publishing to gallery
+      # replace root module folder
+      (Get-Content -Path "$DestinationPath\VSTeam.psd1") -replace "'VSTeam.psm1'", "'$testPublishName.psm1'" | Set-Content -Path "$DestinationPath\VSTeam.psd1"
+      # rename psm1 file and psd1 file and folder
+      Rename-Item -Path "$DestinationPath\VSTeam.psm1" -NewName "$testPublishName.psm1"
+      Rename-Item -Path "$DestinationPath\VSTeam.psd1" -NewName "$testPublishName.psd1"
+      Rename-Item -Path "$ModulePath\VSTeam" -NewName $testPublishName
+
+      $DestinationPath = "$ModulePath\$testPublishName"
+
+   }else {
+      Write-Host "Publish module to PSGallery"
+   }
 
    if ($PSCmdlet.ShouldProcess("Module publishing to PS gallery")) {
-      Publish-Module -NuGetApiKey $PSGalleryApiKey -Path "$ModulePath/VSTeam"
+      Publish-Module -NuGetApiKey $PSGalleryApiKey -Path $DestinationPath
    }
    else {
-      Publish-Module -NuGetApiKey $PSGalleryApiKey -Path "$ModulePath/VSTeam" -WhatIf
+      Publish-Module -NuGetApiKey $PSGalleryApiKey -Path $DestinationPath -WhatIf
    }
 }

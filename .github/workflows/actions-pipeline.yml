@@ -273,9 +273,10 @@ jobs:
       shell: pwsh
       run: |
         Write-Host "$module_version"
-        ./Invoke-PublishModule.ps1 -PSGalleryApiKey $env:NUGETAPIKEY -ModulePath "../../module" -WhatIf
+        ./Invoke-PublishModule.ps1 -TestPublishPSGalleryApiKey $env:RSNUGETAPIKEY -ModulePath "../../module"
       env:
         NUGETAPIKEY: ${{secrets.NUGETAPIKEY}}
+        RSNUGETAPIKEY: ${{secrets.RSNUGETAPIKEY}}
       working-directory: './tools/scripts'
 
     - uses: ncipollo/release-action@v1
