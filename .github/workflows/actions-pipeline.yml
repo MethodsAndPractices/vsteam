@@ -7,10 +7,6 @@ on:
       - trunk
       - actions
 
-
-env:
-  module_version: ""
-
 jobs:
   build-stage:
     name: Build
@@ -155,8 +151,6 @@ jobs:
       shell: pwsh
       run: |
         $version = ./Set-VersionNumber.ps1 -RevisionNumber ${{ github.run_number }} -ModulePath "./../../"
-        Write-Host "::set-output name=module_version::$version"
-        Write-Host "module_version=$version" >> $GITHUB_ENV
         ./Invoke-PublishModule.ps1 -GitHubToken $env:GITHUB_TOKEN -Version $version -ModulePath "./../../"
       env:
         GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
@@ -275,7 +269,8 @@ jobs:
     - name: Publish module
       shell: pwsh
       run: |
-        Write-Host "Publishing Version: ${{ env.module_version }}"
+        $version = ./Set-VersionNumber.ps1 -RevisionNumber ${{ github.run_number }} -ModulePath "../../module"
+        Write-Host "module_version=$version" >> $GITHUB_ENV
         # ./Invoke-PublishModule.ps1 -PublishPSGalleryApiKey $env:RSNUGETAPIKEY -ModulePath "../../module"
       env:
         NUGETAPIKEY: ${{secrets.NUGETAPIKEY}}
@@ -298,6 +293,5 @@ jobs:
       with:
         artifacts: "../../module"
         tag: ${{ env.module_version }}
-        draft: true
         generateReleaseNotes: true
         token: ${{ secrets.GITHUB_TOKEN }}
