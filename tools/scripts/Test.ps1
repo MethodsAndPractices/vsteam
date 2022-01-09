@@ -1,1 +1,0 @@
-& .\Invoke-BuildAndPublishModule.ps1 -PSGalleryApiKey "ferfrgr" -ModulePath "../.." -WhatIf
