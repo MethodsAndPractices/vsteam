@@ -242,6 +242,8 @@ jobs:
     needs: testing-stage
     environment: 'PowerShell Gallery'
     runs-on: ubuntu-latest
+    env:
+      module_version: ""
     steps:
     - name: Download PS module artifact
       uses: actions/download-artifact@v2
@@ -270,7 +272,7 @@ jobs:
       shell: pwsh
       run: |
         $version = ./Set-VersionNumber.ps1 -RevisionNumber ${{ github.run_number }} -ModulePath "../../module"
-        Write-Host "module_version=$version" >> $GITHUB_ENV
+        echo "module_version=$version" >> $GITHUB_ENV
         # ./Invoke-PublishModule.ps1 -PublishPSGalleryApiKey $env:RSNUGETAPIKEY -ModulePath "../../module"
       env:
         NUGETAPIKEY: ${{secrets.NUGETAPIKEY}}
@@ -291,8 +293,8 @@ jobs:
 
     - uses: ncipollo/release-action@v1
       with:
-        artifacts: "../../module"
-        tag: 8.0.0 #${{ env.module_version }}
+        artifacts: "./module"
+        tag: "${{ env.module_version }}"
         draft: true
         generateReleaseNotes: true
         token: ${{ secrets.GITHUB_TOKEN }}
