@@ -251,6 +251,12 @@ jobs:
         name: module
         path: ./module
 
+    - name: Download nuget package artifact
+      uses: actions/download-artifact@v2
+      with:
+        name: VSTeamPackage
+        path: ./nuget
+
     - name: Download pipeline scripts
       uses: actions/download-artifact@v2
       with:
@@ -282,11 +288,11 @@ jobs:
 
     - uses: ncipollo/release-action@v1
       with:
-        artifacts: 'module/*'
+        artifacts: 'nuget/*'
         artifactErrorsFailBuild: true
         allowUpdates: true
         commit: trunk
-        tag: "v${{ env.module_version }}"
+        tag: "v${{ env.module_version }}-1"
         discussionCategory: "Announcements"
         draft: true
         generateReleaseNotes: true
