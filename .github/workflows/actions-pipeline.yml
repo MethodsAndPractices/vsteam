@@ -272,7 +272,7 @@ jobs:
       shell: pwsh
       run: |
         $version = ./Set-VersionNumber.ps1 -RevisionNumber ${{ github.run_number }} -ModulePath "../../module"
-        echo "module_version=$version" >> $GITHUB_ENV
+        echo "module_version=$version" | Out-File -FilePath $env:GITHUB_ENV -Append
         # ./Invoke-PublishModule.ps1 -PublishPSGalleryApiKey $env:RSNUGETAPIKEY -ModulePath "../../module"
       env:
         NUGETAPIKEY: ${{secrets.NUGETAPIKEY}}
