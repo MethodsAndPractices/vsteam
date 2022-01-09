@@ -125,7 +125,8 @@ jobs:
     # run from here only if it's not a a forked repo
     # head.repo.full_name would be the forked repo name and 'github.repository' is equal to our repository
     if: |
-      github.event.pull_request.head.repo.full_name == github.repository
+      github.event.pull_request.head.repo.full_name == github.repository ||
+      github.ref == 'refs/heads/trunk'
     runs-on: ubuntu-latest
     steps:
     - name: Download module
