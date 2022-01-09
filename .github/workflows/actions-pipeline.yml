@@ -2,10 +2,12 @@ name: build
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - trunk
   pull_request:
     branches:
       - trunk
-      - actions
 
 jobs:
   build-stage:
@@ -13,7 +15,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [windows-latest]
+        os: [windows-latest,ubuntu-latest,macos-latest]
       fail-fast: true
     steps:
     - name: Clone repo
@@ -92,7 +94,7 @@ jobs:
         $manifest = Import-PowerShellDataFile ./dist/*.psd1
         $manifest.RequiredModules | ForEach-Object { Import-Module -Name $_ }
         $count = 0
-        $r = Invoke-ScriptAnalyzer –Path ./dist –Recurse | Where-Object severity -ne "Information"
+        $r = Invoke-ScriptAnalyzer -Path ./dist -Recurse | Where-Object severity -ne "Information"
         $r | ForEach-Object { Write-Host "::error file=$($_.ScriptPath),line=$($_.Line),col=$($_.Column)::$($_.Message)"; $count++ }
         if($count -ne 0) { throw "Static Code Analysis with error count = $count" }
 
@@ -122,7 +124,8 @@ jobs:
     needs: build-stage
     # run from here only if it's not a a forked repo
     # head.repo.full_name would be the forked repo name and 'github.repository' is equal to our repository
-    if: github.event.pull_request.head.repo.full_name == github.repository
+    if: |
+      github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ubuntu-latest
     steps:
     - name: Download module
@@ -163,12 +166,12 @@ jobs:
         path: ./dist/*.nupkg
 
   testing-stage:
-    name: Testing
+    name: Testing API
     needs: package-stage
-    runs-on: ${{ matrix.os }}
+    runs-on: windows-latest
     strategy:
       matrix:
-        os: [windows-latest]
+        api_version: [VSTS]
       fail-fast: true
     steps:
 
@@ -222,7 +225,7 @@ jobs:
       env:
         PAT: ${{ secrets.RSAZDOPAT }}
         EMAIL: ${{ secrets.RSEMAIL }}
-        API_VERSION: VSTS
+        API_VERSION: ${{ matrix.api_version }}
         ACCT: ${{ secrets.RSORG }}
       working-directory: './test/Tests/integration'
 
@@ -233,7 +236,7 @@ jobs:
     - name: Publish PowerShell test results
       uses: dorny/test-reporter@v1
       with:
-        name: PS integration-tests results (${{ matrix.os }})
+        name: PS integration-tests results - (${{ matrix.api_version }})
         path: '**/test-results.xml'
         reporter: jest-junit
 
@@ -269,20 +272,14 @@ jobs:
         ./Install-ModuleDependencies.ps1 -ModulePath "../../module/dist"
       working-directory: './tools/scripts'
 
-    - name: Show folder tree
-      shell: pwsh
-      run: |
-        tree /home/runner/work/vsteam
-
     - name: Publish module
       shell: pwsh
       run: |
         $version = ./Set-VersionNumber.ps1 -ModulePath "../../module"
         echo "module_version=$version" | Out-File -FilePath $env:GITHUB_ENV -Append
-        # ./Invoke-PublishModule.ps1 -PublishPSGalleryApiKey $env:RSNUGETAPIKEY -ModulePath "../../module"
+        ./Invoke-PublishModule.ps1 -PSGalleryApiKey $env:NUGETAPIKEY -ModulePath "../../module"
       env:
         NUGETAPIKEY: ${{secrets.NUGETAPIKEY}}
-        RSNUGETAPIKEY: ${{secrets.RSNUGETAPIKEY}}
 
       working-directory: './tools/scripts'
 
@@ -292,8 +289,7 @@ jobs:
         artifactErrorsFailBuild: true
         allowUpdates: true
         commit: trunk
-        tag: "v${{ env.module_version }}-1"
+        tag: "v${{ env.module_version }}"
         discussionCategory: "Announcements"
-        draft: true
         generateReleaseNotes: true
         token: ${{ secrets.GITHUB_TOKEN }}
