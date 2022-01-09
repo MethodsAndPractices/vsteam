@@ -1,6 +1,6 @@
 # VSTeam
 
-[![Build Status](https://dev.azure.com/LoECDA/Team%20Module/_apis/build/status/MethodsAndPractices.vsteam?branchName=trunk)](https://dev.azure.com/LoECDA/Team%20Module/_build/latest?definitionId=62&branchName=trunk)
+[![build](https://github.com/MethodsAndPractices/vsteam/actions/workflows/actions-pipeline.yml/badge.svg)](https://github.com/MethodsAndPractices/vsteam/actions/workflows/actions-pipeline.yml)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/MethodsAndPractices/vsteam/blob/trunk/LICENSE)
 [![Documentation - VSTeam](https://img.shields.io/badge/Documentation-VSTeam-blue.svg)](https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/index)
 [![PowerShell Gallery - VSTeam](https://img.shields.io/badge/PowerShell%20Gallery-VSTeam-blue.svg)](https://www.powershellgallery.com/packages/VSTeam)
@@ -20,15 +20,18 @@ Documentation of the cmdlets can be found on the [GitHub pages](https://methodsa
 ## Requirements
 
 - Windows PowerShell 5.0 or newer.
-- PowerShell Core.
 
 ## Installation
 
 Install this module from the [PowerShell Gallery](https://www.powershellgallery.com/packages/VSTeam)
 
+```powershell
+Install-Module -Name VSTeam -Repository PSGallery -Scope CurrentUser
+```
+
 ## Change Log
 
-[Change Log](CHANGELOG.md)
+Look at the [Change Log](CHANGELOG.md) file or the release notes on the [GitHub releases](https://github.com/MethodsAndPractices/vsteam/releases).
 
 ## Module Dependencies
 
@@ -107,9 +110,9 @@ Runs the tests, but executes only the unit tests that have the description "work
 
 You can [run your unit tests also locally](/tools/docker/RunTestsLocally.md) and cross-platform in a standardized environment.
 
-## Contributors
+## Contributions
 
-[Guidelines](.github/CONTRIBUTING.md)
+Check the [Guidelines](.github/CONTRIBUTING.md) if you want to contribute.
 
 ## Maintainers
 

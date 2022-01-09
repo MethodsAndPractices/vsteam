@@ -1,7 +1,7 @@
 Write-Verbose 'Clearing old files'
 
 if ((Test-Path ..\docs) -eq $false) {
-   New-Item -ItemType Directory -Name ..\docs
+   New-Item -ItemType Directory -Name ..\docs | Out-Null
 }
 
 Get-ChildItem ..\docs | Remove-Item

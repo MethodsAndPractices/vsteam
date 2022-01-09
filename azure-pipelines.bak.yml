@@ -1,7 +1,11 @@
 name: $(Build.BuildID)
 
 trigger:
-- trunk
+  branches:
+    include:
+      - trunk
+    exclude:
+      - actions
 
 resources:
 - repo: self
