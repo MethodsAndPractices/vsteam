@@ -292,6 +292,7 @@ jobs:
     - uses: ncipollo/release-action@v1
       with:
         artifacts: "../../module"
-        tag: ${{ env.module_version }}
+        tag: 8.0.0 #${{ env.module_version }}
+        draft: true
         generateReleaseNotes: true
         token: ${{ secrets.GITHUB_TOKEN }}
