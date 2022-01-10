@@ -17,6 +17,8 @@ jobs:
       matrix:
         os: [windows-latest,ubuntu-latest,macos-latest]
       fail-fast: true
+    permissions:
+      checks: write
     steps:
     - name: Clone repo
       uses: actions/checkout@v2
@@ -46,6 +48,7 @@ jobs:
         name: C# tests results (${{ matrix.os }})
         path: '**/test-results.trx'
         reporter: dotnet-trx
+        token: ${{secrets.PULLREQUESTPAT}}
 
     - name: Run PowerShell unit tests
       shell: pwsh
@@ -70,6 +73,7 @@ jobs:
         name: PS tests results (${{ matrix.os }})
         path: '**/test-results.xml'
         reporter: jest-junit
+        token: ${{secrets.PULLREQUESTPAT}}
 
     - name: Copy files to staging folders
       if: ${{ matrix.os == 'windows-latest'}}
