@@ -39,16 +39,16 @@ jobs:
 
     - name: Run C# unit tests
       shell: pwsh
-      run: dotnet test --logger "trx;LogFileName=test-results.trx"
+      run: dotnet test --logger "trx;LogFileName=test-results.trx" --logger "console;verbosity=detailed"
 
-    - name: Publish C# test results
-      if: success() || failure()
-      uses: dorny/test-reporter@v1
-      with:
-        name: C# tests results (${{ matrix.os }})
-        path: '**/test-results.trx'
-        reporter: dotnet-trx
-        token: ${{secrets.PULLREQUESTPAT}}
+    # - name: Publish C# test results
+    #   if: success() || failure()
+    #   uses: dorny/test-reporter@v1
+    #   with:
+    #     name: C# tests results (${{ matrix.os }})
+    #     path: '**/test-results.trx'
+    #     reporter: dotnet-trx
+
 
     - name: Run PowerShell unit tests
       shell: pwsh
@@ -58,22 +58,22 @@ jobs:
         Import-Module Pester
         $pesterArgs = [PesterConfiguration]::Default
         $pesterArgs.Run.Exit = $true
+        $pesterArgs.Run.Throw = $true
         $pesterArgs.Run.PassThru = $false
         $pesterArgs.TestResult.Enabled = $true
-        $pesterArgs.Output.Verbosity = "Normal"
+        $pesterArgs.Output.Verbosity = 'Normal'
         $pesterArgs.Run.Path = './Tests/function'
         $pesterArgs.TestResult.OutputFormat = 'JUnitXml'
         $pesterArgs.TestResult.OutputPath = 'test-results.xml'
 
         Invoke-Pester -Configuration $pesterArgs
 
-    - name: Publish PowerShell test results
-      uses: dorny/test-reporter@v1
-      with:
-        name: PS tests results (${{ matrix.os }})
-        path: '**/test-results.xml'
-        reporter: jest-junit
-        token: ${{secrets.PULLREQUESTPAT}}
+    # - name: Publish PowerShell test results
+    #   uses: dorny/test-reporter@v1
+    #   with:
+    #     name: PS tests results (${{ matrix.os }})
+    #     path: '**/test-results.xml'
+    #     reporter: jest-junit
 
     - name: Copy files to staging folders
       if: ${{ matrix.os == 'windows-latest'}}
