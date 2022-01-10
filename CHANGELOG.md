@@ -5,6 +5,10 @@
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/414) from [Guillermo Diaz](https://github.com/gm0d) which included the following:
 
 - Added Get-VSTeamWiki, Add-VSTeamWiki, Remove-VSTeamWiki, for interacting with Wikis
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/430) from [thahif Diaz](https://github.com/thahif) which included the following:
+
+- Updated Update-VSTeamUserEntitlement to correctly use contentype application/json-patch+json
  
 ## 7.4.0
 

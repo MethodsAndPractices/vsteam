@@ -1,4 +1,4 @@
-function Update-VSTeamUserEntitlement {
+function Update-VSTeamUserEntitlement { 
    [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "High", DefaultParameterSetName = 'ByEmail',
       HelpUri = 'https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Update-VSTeamUserEntitlement')]
    param (
@@ -74,7 +74,7 @@ function Update-VSTeamUserEntitlement {
          _callAPI -Method PATCH -SubDomain vsaex -NoProject `
             -Resource userentitlements `
             -Id $id `
-            -ContentType 'application/json-patch+; charset=utf-8' `
+            -ContentType 'application/json-patch+json; charset=utf-8' `
             -Body $body `
             -Version $(_getApiVersion MemberEntitlementManagement) | Out-Null
 
