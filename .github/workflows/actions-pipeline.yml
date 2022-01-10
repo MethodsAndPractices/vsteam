@@ -103,21 +103,21 @@ jobs:
         if($count -ne 0) { throw "Static Code Analysis with error count = $count" }
 
     - name: Publish Module
-      if: ${{ matrix.os == 'windows-latest'}}
+      if: ${{ matrix.os == 'windows-latest'}} && github.event_name != 'pull_request'
       uses: actions/upload-artifact@v2
       with:
         name: module
         path: "./staging/VSTeam"
 
     - name: Publish unit tests
-      if: ${{ matrix.os == 'windows-latest'}}
+      if: ${{ matrix.os == 'windows-latest'}} && github.event_name != 'pull_request'
       uses: actions/upload-artifact@v2
       with:
         name: test
         path: "./staging/test"
 
     - name: Publish pipeline scripts
-      if: ${{ matrix.os == 'windows-latest'}}
+      if: ${{ matrix.os == 'windows-latest'}} && github.event_name != 'pull_request'
       uses: actions/upload-artifact@v2
       with:
         name: pipeline-scripts
