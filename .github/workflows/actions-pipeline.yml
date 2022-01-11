@@ -1,0 +1,299 @@
+name: 'build module'
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - trunk
+      - feature/*
+      - hotfix/*
+  pull_request:
+    branches:
+      - trunk
+
+jobs:
+  build-stage:
+    name: Build
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [windows-latest,ubuntu-latest,macos-latest]
+      fail-fast: true
+    permissions:
+      checks: write
+    steps:
+    - name: Clone repo
+      uses: actions/checkout@v2
+
+    - name: .NET Restore
+      shell: pwsh
+      run: dotnet restore --no-cache # have to use no cache of the build will fail on Windows
+
+    - name: Build module with help
+      if: ${{ matrix.os == 'windows-latest'}}
+      shell: pwsh
+      run: ./Build-Module.ps1 -installDep -configuration Release -buildHelp
+
+    - name: Build module without help
+      if: ${{ matrix.os != 'windows-latest'}}
+      shell: pwsh
+      run: ./Build-Module.ps1 -installDep -configuration Release
+
+    - name: Run C# unit tests
+      shell: pwsh
+      run: dotnet test --logger "trx;LogFileName=test-results.trx" --logger "console;verbosity=detailed"
+
+    # - name: Publish C# test results
+    #   if: success() || failure()
+    #   uses: dorny/test-reporter@v1
+    #   with:
+    #     name: C# tests results (${{ matrix.os }})
+    #     path: '**/test-results.trx'
+    #     reporter: dotnet-trx
+
+
+    - name: Run PowerShell unit tests
+      shell: pwsh
+      run: |
+        Import-Module ./dist/*.psd1
+        # This loads [PesterConfiguration] into scope
+        Import-Module Pester
+        $pesterArgs = [PesterConfiguration]::Default
+        $pesterArgs.Run.Exit = $true
+        $pesterArgs.Run.Throw = $true
+        $pesterArgs.Run.PassThru = $false
+        $pesterArgs.TestResult.Enabled = $true
+        $pesterArgs.Output.Verbosity = 'Normal'
+        $pesterArgs.Run.Path = './Tests/function'
+        $pesterArgs.TestResult.OutputFormat = 'JUnitXml'
+        $pesterArgs.TestResult.OutputPath = 'test-results.xml'
+
+        Invoke-Pester -Configuration $pesterArgs
+
+    # - name: Publish PowerShell test results
+    #   uses: dorny/test-reporter@v1
+    #   with:
+    #     name: PS tests results (${{ matrix.os }})
+    #     path: '**/test-results.xml'
+    #     reporter: jest-junit
+
+    - name: Copy files to staging folders
+      if: ${{ matrix.os == 'windows-latest'}}
+      shell: pwsh
+      run: |
+        Copy-Item -Path "./dist/" -Destination ./staging/VSTeam/dist/ -Recurse -Force
+        Copy-Item -Path "./.gitignore","./README.md" -Destination ./staging/VSTeam/ -Recurse -Force
+        Copy-Item -Path "./Tests/SampleFiles/" -Destination ./staging/test/Tests/SampleFiles -Recurse -Force
+        Copy-Item -Path "./Tests/integration/tests/" -Destination ./staging/test/Tests/integration/tests -Recurse -Force
+        Copy-Item -Path "./tools/scripts/" -Destination ./staging/tools/scripts -Recurse -Force
+        Copy-Item -Path "./dist/*.psd1" -Destination ./staging/test/dist -Recurse -Force
+
+    - name: Install PSScriptAnalyzer
+      if: ${{ matrix.os == 'ubuntu-latest'}}
+      shell: pwsh
+      run: Install-Module -Name PSScriptAnalyzer -Repository PSGallery -Force -Scope CurrentUser -Verbose
+
+    - name: Run Static Code Analysis
+      if: ${{ matrix.os == 'ubuntu-latest'}}
+      shell: pwsh
+      run: |
+        $manifest = Import-PowerShellDataFile ./dist/*.psd1
+        $manifest.RequiredModules | ForEach-Object { Import-Module -Name $_ }
+        $count = 0
+        $r = Invoke-ScriptAnalyzer -Path ./dist -Recurse | Where-Object severity -ne "Information"
+        $r | ForEach-Object { Write-Host "::error file=$($_.ScriptPath),line=$($_.Line),col=$($_.Column)::$($_.Message)"; $count++ }
+        if($count -ne 0) { throw "Static Code Analysis with error count = $count" }
+
+    - name: Publish Module
+      if: ${{ matrix.os == 'windows-latest' && github.event_name != 'pull_request' }}
+      uses: actions/upload-artifact@v2
+      with:
+        name: module
+        path: "./staging/VSTeam"
+
+    - name: Publish unit tests
+      if: ${{ matrix.os == 'windows-latest'  && github.event_name != 'pull_request' }}
+      uses: actions/upload-artifact@v2
+      with:
+        name: test
+        path: "./staging/test"
+
+    - name: Publish pipeline scripts
+      if: ${{ matrix.os == 'windows-latest' && github.event_name != 'pull_request' }}
+      uses: actions/upload-artifact@v2
+      with:
+        name: pipeline-scripts
+        path: "./staging/tools"
+
+  package-stage:
+    name: Package Management
+    needs: build-stage
+    # run from here only if it's not a pull request
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+    - name: Download module
+      uses: actions/download-artifact@v2
+      with:
+        name: module
+
+    - name: Download pipeline scripts
+      uses: actions/download-artifact@v2
+      with:
+        name: pipeline-scripts
+        path: ./tools
+
+    - name: Install NuGet 5.2.0
+      uses: nuget/setup-nuget@v1
+      with:
+        nuget-version: '5.2.0'
+
+    - name: Install Module Dependencies
+      shell: pwsh
+      run: |
+        ./Install-ModuleDependencies -ModulePath "./../../dist"
+      working-directory: './tools/scripts'
+
+    - name: Pack and push module
+      shell: pwsh
+      run: |
+        $version = ./Set-VersionNumber.ps1 -RevisionNumber ${{ github.run_number }} -ModulePath "./../../"
+        ./Invoke-PublishModule.ps1 -GitHubToken $env:GITHUB_TOKEN -Version $version -ModulePath "./../../"
+      env:
+        GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+      working-directory: './tools/scripts'
+
+    - name: Upload nuget package as artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: VSTeamPackage
+        path: ./dist/*.nupkg
+
+  testing-stage:
+    name: Testing API
+    needs: package-stage
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        api_version: [VSTS]
+      fail-fast: true
+    steps:
+
+    - name: Download nuget package artifact
+      uses: actions/download-artifact@v2
+      with:
+        name: VSTeamPackage
+        path: ./module
+
+    - name: Download integration tests
+      uses: actions/download-artifact@v2
+      with:
+        name: test
+        path: ./test
+
+    - name: Download pipeline scripts
+      uses: actions/download-artifact@v2
+      with:
+        name: pipeline-scripts
+        path: ./tools
+
+    - name: Module test installation
+      shell: pwsh
+      run: |
+        ./Test-InstallFromLocalFeed.ps1 -GitHubToken $env:GITHUB_TOKEN -RunnerTempPath '${{ runner.temp }}'
+      env:
+        GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+      working-directory: './tools/scripts'
+
+    - name: Install Pester
+      run: Install-Module -Name Pester -Repository PSGallery -Force -AllowPrerelease -MinimumVersion "${{ env.PESTER_VERSION }}" -Scope CurrentUser -AllowClobber -SkipPublisherCheck
+      shell: pwsh
+
+    - name: Run Integration Tests
+      run: |
+
+        Import-Module VSTeam
+
+        #This loads [PesterConfiguration] into scope
+        Import-Module Pester
+        $pesterArgs = [PesterConfiguration]::Default
+        $pesterArgs.Run.Exit = $true
+        $pesterArgs.Run.PassThru = $true
+        $pesterArgs.Output.Verbosity = "Detailed"
+        $pesterArgs.TestResult.Enabled = $true
+        $pesterArgs.TestResult.OutputFormat = 'JUnitXml'
+        $pesterArgs.TestResult.OutputPath = 'test-results.xml'
+
+        Invoke-Pester -Configuration $pesterArgs
+      shell: pwsh
+      env:
+        PAT: ${{ secrets.RSAZDOPAT }}
+        EMAIL: ${{ secrets.RSEMAIL }}
+        API_VERSION: ${{ matrix.api_version }}
+        ACCT: ${{ secrets.RSORG }}
+      working-directory: './test/Tests/integration'
+
+    - name: Prepare test result publishing
+      run: git init
+      shell: pwsh
+
+    - name: Publish PowerShell test results
+      uses: dorny/test-reporter@v1
+      with:
+        name: PS integration-tests results - (${{ matrix.api_version }})
+        path: '**/test-results.xml'
+        reporter: jest-junit
+
+  publish-stage:
+    name: PowerShell Gallery
+    needs: testing-stage
+    environment: 'PowerShell Gallery'
+    runs-on: ubuntu-latest
+    env:
+      module_version: ""
+    steps:
+    - name: Download PS module artifact
+      uses: actions/download-artifact@v2
+      with:
+        name: module
+        path: ./module
+
+    - name: Download nuget package artifact
+      uses: actions/download-artifact@v2
+      with:
+        name: VSTeamPackage
+        path: ./nuget
+
+    - name: Download pipeline scripts
+      uses: actions/download-artifact@v2
+      with:
+        name: pipeline-scripts
+        path: ./tools
+
+    - name: Install Module Dependencies
+      shell: pwsh
+      run: |
+        ./Install-ModuleDependencies.ps1 -ModulePath "../../module/dist"
+      working-directory: './tools/scripts'
+
+    - name: Publish module
+      shell: pwsh
+      run: |
+        $version = ./Set-VersionNumber.ps1 -ModulePath "../../module"
+        echo "module_version=$version" | Out-File -FilePath $env:GITHUB_ENV -Append
+        ./Invoke-PublishModule.ps1 -PSGalleryApiKey $env:NUGETAPIKEY -ModulePath "../../module"
+      env:
+        NUGETAPIKEY: ${{secrets.NUGETAPIKEY}}
+
+      working-directory: './tools/scripts'
+
+    - uses: ncipollo/release-action@v1
+      with:
+        artifacts: 'nuget/*'
+        artifactErrorsFailBuild: true
+        allowUpdates: true
+        commit: trunk
+        tag: "v${{ env.module_version }}"
+        discussionCategory: "Announcements"
+        generateReleaseNotes: true
+        token: ${{ secrets.GITHUB_TOKEN }}

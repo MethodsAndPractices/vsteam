@@ -2,7 +2,6 @@
    "files.exclude": {
       "**/.vscode": true,
       "**/.vs": true,
-      "**/.github": true,
       "**/docs": true,
       "**/package-lock.json": true
    },
@@ -57,5 +56,8 @@
    "powershell.pester.useLegacyCodeLens": false,
    "powershell.pester.outputVerbosity": "Detailed",
    "powershell.codeFormatting.addWhitespaceAroundPipe": true,
-   "gitdoc.enabled": false
+   "gitdoc.enabled": false,
+   "github-actions.workflows.pinned.workflows": [
+      ".github/workflows/actions-pipeline.yml"
+   ]
 }
