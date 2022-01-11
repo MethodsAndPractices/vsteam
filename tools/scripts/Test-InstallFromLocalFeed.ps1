@@ -21,6 +21,10 @@ param (
 $LocalPSGallery = "LocalPSGallery"
 $moduleName = "VSTeam"
 
+# turn of first time experience which shows verbose uneeded text in every job
+$env:DOTNET_NOLOGO = $true
+$env:DOTNET_SKIP_FIRST_TIME_EXPERIENCE = $true
+
 Write-Host "`n##### Download module and all it's dependencies"
 dotnet nuget add source --username USERNAME --password $GitHubToken --store-password-in-clear-text --name GitHub-VSTeam "https://nuget.pkg.github.com/MethodsAndPractices/index.json"
 nuget install $moduleName -Source GitHub-VSTeam -OutputDirectory "$RunnerTempPath/install"
