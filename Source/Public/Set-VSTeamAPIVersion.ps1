@@ -51,6 +51,7 @@ function Set-VSTeamAPIVersion {
                [vsteam_lib.Versions]::Policy = '5.0'
                [vsteam_lib.Versions]::Processes = '5.0-preview'
                [vsteam_lib.Versions]::Billing = ''
+               [vsteam_lib.Versions]::Wiki = '5.0'
                [vsteam_lib.Versions]::WorkItemTracking = '5.0'
             }
             'AzD2019U1' {
@@ -74,6 +75,7 @@ function Set-VSTeamAPIVersion {
                [vsteam_lib.Versions]::Policy = '5.1'
                [vsteam_lib.Versions]::Processes = '5.1-preview'
                [vsteam_lib.Versions]::Billing = ''
+               [vsteam_lib.Versions]::Wiki = '5.1'
                [vsteam_lib.Versions]::WorkItemTracking = '5.1-preview'
             }
             { $_ -eq 'TFS2018' -or $_ -eq 'TFS2018U1' } {
@@ -97,6 +99,7 @@ function Set-VSTeamAPIVersion {
                [vsteam_lib.Versions]::Policy = '4.0'
                [vsteam_lib.Versions]::Processes = '4.0-preview'
                [vsteam_lib.Versions]::Billing = ''
+               [vsteam_lib.Versions]::Wiki = ''
                [vsteam_lib.Versions]::WorkItemTracking = '4.0-preview'
             }
             { $_ -eq 'TFS2018U2' -or $_ -eq 'TFS2018U3' } {
@@ -120,6 +123,7 @@ function Set-VSTeamAPIVersion {
                [vsteam_lib.Versions]::Policy = '4.1'
                [vsteam_lib.Versions]::Processes = '4.1-preview'
                [vsteam_lib.Versions]::Billing = ''
+               [vsteam_lib.Versions]::Wiki = '4.1'
                [vsteam_lib.Versions]::WorkItemTracking = '4.1-preview.1'
             }
             'TFS2017' {
@@ -143,6 +147,7 @@ function Set-VSTeamAPIVersion {
                [vsteam_lib.Versions]::Policy = '3.0'
                [vsteam_lib.Versions]::Processes = ''
                [vsteam_lib.Versions]::Billing = ''
+               [vsteam_lib.Versions]::Wiki = ''
                [vsteam_lib.Versions]::WorkItemTracking = '3.0'
             }
             'TFS2017U1' {
@@ -166,6 +171,7 @@ function Set-VSTeamAPIVersion {
                [vsteam_lib.Versions]::Policy = '3.1'
                [vsteam_lib.Versions]::Processes = ''
                [vsteam_lib.Versions]::Billing = ''
+               [vsteam_lib.Versions]::Wiki = ''
                [vsteam_lib.Versions]::WorkItemTracking = '3.1'
             }
             # Update 3 of TFS 2017 did not introduce a new API Version
@@ -190,6 +196,7 @@ function Set-VSTeamAPIVersion {
                [vsteam_lib.Versions]::Policy = '3.2'
                [vsteam_lib.Versions]::Processes = ''
                [vsteam_lib.Versions]::Billing = ''
+               [vsteam_lib.Versions]::Wiki = ''
                [vsteam_lib.Versions]::WorkItemTracking = '3.2'
             }
             # AZD, VSTS
@@ -217,6 +224,7 @@ function Set-VSTeamAPIVersion {
                [vsteam_lib.Versions]::Policy = '5.1'
                [vsteam_lib.Versions]::Processes = '6.0-preview'
                [vsteam_lib.Versions]::Billing = '5.1-preview.1'
+               [vsteam_lib.Versions]::Wiki = '6.0'
                [vsteam_lib.Versions]::WorkItemTracking = '6.0-preview.1'
             }
          }
