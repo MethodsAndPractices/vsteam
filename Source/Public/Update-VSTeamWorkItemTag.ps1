@@ -21,7 +21,8 @@ function Update-VSTeamWorkItemTag {
 
          $body = '{ "name": "' + $NewTagName + '" }'
 
-         $resp = _callAPI -Method PATCH -ProjectName $ProjectName `
+         $resp = _callAPI -Method PATCH `
+            -ProjectName $ProjectName `
             -Area wit `
             -Resource tags `
             -Id $TagIdOrName `
