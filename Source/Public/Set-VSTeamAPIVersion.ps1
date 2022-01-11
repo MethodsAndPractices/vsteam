@@ -14,7 +14,7 @@ function Set-VSTeamAPIVersion {
                    'Packaging', 'MemberEntitlementManagement',
                    'ExtensionsManagement', 'ServiceEndpoints', 'Graph',
                    'TaskGroups', 'Policy', 'Processes', 'HierarchyQuery',
-                   'Pipelines', 'Billing')]
+                   'Pipelines', 'Billing', 'Wiki', 'WorkItemTracking')]
       [string] $Service,
 
       [parameter(ParameterSetName = 'Service', Mandatory = $true, Position = 1)]

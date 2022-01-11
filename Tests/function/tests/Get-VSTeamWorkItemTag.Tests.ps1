@@ -2,12 +2,12 @@ Set-StrictMode -Version Latest
 
 Describe 'VSTeamWorkItemTag' {
    BeforeAll {
-      $FakeOrg = 'myOrg'           
-      
+      $FakeOrg = 'myOrg'
+
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
-      
-      Mock _getInstance { return "https://dev.azure.com/$($FakeOrg)" }      
-      Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Work Item Tracking' }
+
+      Mock _getInstance { return "https://dev.azure.com/$($FakeOrg)" }
+      Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'WorkItemTracking' }
    }
 
    Context 'Get-VSTeamWorkItemTag' {
@@ -17,23 +17,23 @@ Describe 'VSTeamWorkItemTag' {
          $FakeName = 'tagName'
 
          Mock Invoke-RestMethod { Open-SampleFile 'Get-VSTeamWorkItemTag.json' }
-         Mock Invoke-RestMethod { Open-SampleFile 'Get-VSTeamWorkItemTag.json' -Index 0 } -ParameterFilter { 
-            $Uri -like "*$FakeName*" 
+         Mock Invoke-RestMethod { Open-SampleFile 'Get-VSTeamWorkItemTag.json' -Index 0 } -ParameterFilter {
+            $Uri -like "*$FakeName*"
          }
-         Mock Invoke-RestMethod { Open-SampleFile 'Get-VSTeamWorkItemTag.json' -Index 0 } -ParameterFilter { 
-            $Uri -like "*$FakeId*" 
+         Mock Invoke-RestMethod { Open-SampleFile 'Get-VSTeamWorkItemTag.json' -Index 0 } -ParameterFilter {
+            $Uri -like "*$FakeId*"
          }
       }
-      
+
       It 'Project name parameter should return all work item tags for the selected project' {
          ## Act
          Get-VSTeamWorkItemTag -ProjectName $FakeProject
 
          ## Assert
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
-            $Uri -eq "https://dev.azure.com/$($FakeOrg)/$($FakeProject)/_apis/wit/tags?api-version=$(_getApiVersion Work Item Tracking)"            
+            $Uri -eq "https://dev.azure.com/$($FakeOrg)/$($FakeProject)/_apis/wit/tags?api-version=$(_getApiVersion WorkItemTracking)"
          }
-      }      
+      }
 
       It 'Passing a name should return work item tag details' {
          ## Act
@@ -41,7 +41,7 @@ Describe 'VSTeamWorkItemTag' {
 
          ## Assert
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
-            $Uri -eq "https://dev.azure.com/$($FakeOrg)/$($FakeProject)/_apis/wit/tags/$($FakeName)?api-version=$(_getApiVersion Work Item Tracking)"           
+            $Uri -eq "https://dev.azure.com/$($FakeOrg)/$($FakeProject)/_apis/wit/tags/$($FakeName)?api-version=$(_getApiVersion WorkItemTracking)"
          }
       }
 
@@ -52,7 +52,7 @@ Describe 'VSTeamWorkItemTag' {
 
          ## Assert
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
-            $Uri -eq "https://dev.azure.com/$($FakeOrg)/$($FakeProject)/_apis/wit/tags/$($FakeId)?api-version=$(_getApiVersion Work Item Tracking)"           
+            $Uri -eq "https://dev.azure.com/$($FakeOrg)/$($FakeProject)/_apis/wit/tags/$($FakeId)?api-version=$(_getApiVersion WorkItemTracking)"
          }
       }
    }

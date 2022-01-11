@@ -1,0 +1,12 @@
+{
+   "count": 2,
+   "value": [{
+      "id": "fd3e6a65-7c0e-4603-8fcd-b9ef83802be5",
+      "name": "NewTagName",
+      "url": "https://dev.azure.com/myOrg/60379aa7-e8ee-45c3-ab98-74824f2f6d22/_apis/wit/tags/fd3e6a65-7c0e-4603-8fcd-b9ef83802be5"
+   }, {
+      "id": "5090a9ee-a6fa-4b46-9348-3c9fc8e26ebf",
+      "name": "tag2",
+      "url": "https://dev.azure.com/myOrg/60379aa7-e8ee-45c3-ab98-74824f2f6d22/_apis/wit/tags/5090a9ee-a6fa-4b46-9348-3c9fc8e26ebf"
+   }]
+}

@@ -1,7 +1,7 @@
 function Get-VSTeamWorkItemTag {
    [CmdletBinding(HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Get-VSTeamWorkItemTag')]
    param (
-      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+      [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true)]
       [Alias('TagName')]
       [Alias('TagId')]
       [string] $TagIdOrName,
@@ -12,22 +12,22 @@ function Get-VSTeamWorkItemTag {
       [string] $ProjectName
    )
    process {
-      $commonArgs = @{         
+      $commonArgs = @{
          area        = 'wit'
          resource    = 'tags'
          projectName = $ProjectName
          version     = $(_getApiVersion WorkItemTracking)
       }
 
-      if ($TagIdOrName) { # TagIdOrName was specified, fetch a specific tag    
-         $resp = _callAPI @commonArgs -id $TagIdOrName         
-         Write-Output $resp         
+      if ($TagIdOrName) { # TagIdOrName was specified, fetch a specific tag
+         $resp = _callAPI @commonArgs -id $TagIdOrName
+         Write-Output $resp
       }
       else { # TagIdOrName not specified, list all tags
-         $listurl = _buildRequestURI @commonArgs         
+         $listurl = _buildRequestURI @commonArgs
          $resp = _callAPI -url $listurl
          $objs = @()
-         foreach ($item in $resp.value) {         
+         foreach ($item in $resp.value) {
             $objs += $item
          }
          Write-Output $objs

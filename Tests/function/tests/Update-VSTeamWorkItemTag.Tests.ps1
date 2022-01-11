@@ -10,7 +10,7 @@ Describe "VSTeamWorkItemTag" {
       Context "services" {
          BeforeAll {
             Mock _getInstance { return 'https://dev.azure.com/test' }
-            Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Work Item Tracking' }
+            Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'WorkItemTracking' }
             Mock Invoke-RestMethod { Open-SampleFile 'Get-VSTeamWorkItemTag.json' -Index 0 }
             Mock Get-VSTeam { return New-Object -TypeName PSObject -Prop @{
                   projectname = "TestProject"
@@ -20,8 +20,6 @@ Describe "VSTeamWorkItemTag" {
          }
 
          It 'Should update the tag with new tag name' {
-            ## Arrange
-            $expectedBody = '{ "name": "NewTagName" }'
 
             ## Act
             $tag = Update-VSTeamWorkItemTag -ProjectName "TestProject" -TagIdOrName "OldTagName" -NewTagName "NewTagName"
@@ -30,9 +28,9 @@ Describe "VSTeamWorkItemTag" {
             $tag.Name | Should -Be 'NewTagName' -Because 'Name should be set'
 
             Should -Invoke Invoke-RestMethod -Exactly 1 -ParameterFilter {
-               $Uri -eq "https://dev.azure.com/test/_apis/wit/tags/OldTagName?api-version=$(_getApiVersion Work Item Tracking)" -and
+               $Uri -eq "https://dev.azure.com/test/TestProject/_apis/wit/tags/OldTagName?api-version=$(_getApiVersion WorkItemTracking)" -and
                $Method -eq "Patch" -and
-               $Body -eq $expectedBody
+               $Body -like '*NewTagName*'
             }
          }
       }
