@@ -1,1 +1,1 @@
-Update a work item tag
+Removes a work item tag

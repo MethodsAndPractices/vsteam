@@ -1,1 +1,1 @@
-Get a work item tag
+Gets a work item tag
