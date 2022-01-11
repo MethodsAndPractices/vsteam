@@ -15,7 +15,7 @@ Specifies the version to use. The acceptable values for this parameter are:
 - VSTS
 - AzD
 
-If you are on AzD it will default to Azd otherwise it will default to TFS2017.
+If you are on AzD it will default to AzD otherwise it will default to TFS2017.
 
 ```yaml
 Type: String

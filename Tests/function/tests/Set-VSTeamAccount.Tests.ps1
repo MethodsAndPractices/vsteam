@@ -13,7 +13,7 @@ Describe 'VSTeamAccount' {
       Remove-VSTeamAccount
    }
 
-   Context 'You cannot use -UseWindowsAuthentication with Azd' {
+   Context 'You cannot use -UseWindowsAuthentication with AzD' {
       BeforeAll {
          # This is only supported on a Windows machine. So we have
          # to Mock the call to _isOnWindows so you can develop on a

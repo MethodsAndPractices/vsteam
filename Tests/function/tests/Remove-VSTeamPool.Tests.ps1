@@ -14,7 +14,7 @@ Describe 'VSTeamPool' {
 
    Context 'Remove-VSTeamPool with parameters' {
       BeforeAll {
-         Mock Invoke-RestMethod { Write-Host $ return $null }
+         Mock Invoke-RestMethod { return $null }
       }
 
       it 'with ID should be called' {

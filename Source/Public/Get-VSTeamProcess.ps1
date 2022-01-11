@@ -34,7 +34,7 @@ function Get-VSTeamProcess {
       $commonArgs = @{
          # In later APIs you can get the process templates from the 'work'
          # area. For older APIs the process templates are in the 'processes'
-         # area. Default to the newer way of accessing process templates.
+         # area. Defaults to the newer way of accessing process templates.
          # Get-VSTeamOption -area 'work' -resource 'processes' returns nothing
          # this is odd but the call works.
          area      = 'work'

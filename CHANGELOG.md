@@ -1,36 +1,42 @@
 # Changelog
 
+## 7.6.0
+
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/418) from [Sander Holvoet](https://github.com/smholvoet) which included the following:
+
+- Added `Get-VSTeamWorkItemTag`, `Update-VSTeamWorkItemTag` and `Remove-VSTeamWorkItemTag` cmdlets which  allow you to [manage work item tags]([#419](https://github.com/MethodsAndPractices/vsteam/issues/419).
+
 ## 7.5.0
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/414) from [Guillermo Diaz](https://github.com/gm0d) which included the following:
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/414) from [Guillermo Diaz](https://github.com/gm0d) which included the following:
 
 - Added Get-VSTeamWiki, Add-VSTeamWiki, Remove-VSTeamWiki, for interacting with Wikis
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/430) from [thahif Diaz](https://github.com/thahif) which included the following:
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/430) from [thahif Diaz](https://github.com/thahif) which included the following:
 
 - Updated Update-VSTeamUserEntitlement to correctly use contentype application/json-patch+json
- 
+
 ## 7.4.0
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/400) from [Sebastian Schütze](https://github.com/SebastianSchuetze) which included the following:
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/400) from [Sebastian Schütze](https://github.com/SebastianSchuetze) which included the following:
 
-- Fixes ambiguity of parameter sets in VSTeamUserEntitlement cmdlets [#393](https://github.com/DarqueWarrior/vsteam/issues/393)
+- Fixes ambiguity of parameter sets in VSTeamUserEntitlement cmdlets [#393](https://github.com/MethodsAndPractices/vsteam/issues/393)
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/406) from [Sebastian Schütze](https://github.com/SebastianSchuetze) which included the following:
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/406) from [Sebastian Schütze](https://github.com/SebastianSchuetze) which included the following:
 
-- Fixes Get-VSTeamWiql with only one work item expanded causing and exception [#392](https://github.com/DarqueWarrior/vsteam/issues/392)
+- Fixes Get-VSTeamWiql with only one work item expanded causing and exception [#392](https://github.com/MethodsAndPractices/vsteam/issues/392)
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/408) from [Sebastian Schütze](https://github.com/SebastianSchuetze) which included the following:
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/408) from [Sebastian Schütze](https://github.com/SebastianSchuetze) which included the following:
 
 - Added `Set-VSTeamPipelineAuthorization` to set pipeline authorizations.
 
 ## 7.3.0
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/396) from [Markus Blaschke](https://github.com/mblaschke) which included the following:
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/396) from [Markus Blaschke](https://github.com/mblaschke) which included the following:
 
 - Fixed the problem of JSON serialization with the message "WARNING: Resulting JSON is truncated as serialization has exceeded the set depth of 2" for most the cmdlets that post complex json bodies.
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/384) from [Sebastian Schütze](https://github.com/SebastianSchuetze) which included the following:
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/384) from [Sebastian Schütze](https://github.com/SebastianSchuetze) which included the following:
 
 - Add-VSTeamPool, Remove-VSTeamPool and Update-VSTeampool for handling agent pools on Azure DevOps
 
@@ -43,19 +49,19 @@ $buildId = Get-VSTeamBuild -Top 1
 Get-VSTeamRelease -artifactVersionId $buildId.Id
 ```
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/386) from [Sebastian Schütze](https://github.com/SebastianSchuetze) which included the following:
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/386) from [Sebastian Schütze](https://github.com/SebastianSchuetze) which included the following:
 
 - added the cmdlet Add-VSTeamBuildPermission following the other cmdlet like Add-VSTeamProjectPermission
 - changed internal permission (ACL) functions to not have deny or allow permissions to be mandatory, because this caused not to be able to only add allow or deny permissions.
 - allowed to handle user accounts from typ 'srv' which are service accounts of Azure DevOps. Now these can be permitted as well to all functions using ACLs
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/397) from [Sebastian Schütze](https://github.com/SebastianSchuetze) which included the following:
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/397) from [Sebastian Schütze](https://github.com/SebastianSchuetze) which included the following:
 
-- Fixes encoding problem with special charcters on Add-VSTeamWorkItem, Update-VSTeamWorkItem, Update-VSTeamUserEntitlement [#397](https://github.com/DarqueWarrior/vsteam/issues/365)
+- Fixes encoding problem with special charcters on Add-VSTeamWorkItem, Update-VSTeamWorkItem, Update-VSTeamUserEntitlement [#397](https://github.com/MethodsAndPractices/vsteam/issues/365)
 
 ## 7.2.0
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/371) and (https://github.com/DarqueWarrior/vsteam/pull/389) from [Sebastian Schütze](https://github.com/SebastianSchuetze) which included the following:
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/371) and (https://github.com/MethodsAndPractices/vsteam/pull/389) from [Sebastian Schütze](https://github.com/SebastianSchuetze) which included the following:
 
 - Added Set-VSTeamPipelineBilling to buy or release Microsoft-hosted and self-hosted agents
 - Added Get-VSTeamAccounts to get the organizations where the user has access. Where the given user is either a member or an owner
@@ -72,7 +78,7 @@ Fixed issue #376
 
 ## 7.1.3
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/350) from [Daniel Silva](https://github.com/DanielSSilva) which included the following:
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/350) from [Daniel Silva](https://github.com/DanielSSilva) which included the following:
 
 - Fixed exception thrown by the Update-VSTeamPullRequest when status is set to "completed", by adding the missing "lastMergeSourceCommit" property to body.
 
@@ -81,9 +87,9 @@ Also added Clear-VSTeamDefaultProjectCount and Set-VSTeamDefaultProjectCount to 
 
 ## 7.1.2
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/366) from [Jhoneill](https://github.com/jhoneill) which included the following:
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/366) from [Jhoneill](https://github.com/jhoneill) which included the following:
 
-- Fix Query Cache [#365](https://github.com/DarqueWarrior/vsteam/issues/365)
+- Fix Query Cache [#365](https://github.com/MethodsAndPractices/vsteam/issues/365)
 
 Changed Get-VSTeamProject to return all projects by default instead of just the top 100. This change was made to address issue #363. If your project name was not in the top 100 projects validation would fail. Returning all projects can have performance issues. You can set the value for top used by setting a PowerShell default value:
 
@@ -108,7 +114,7 @@ Added:
 
 ## 7.0.1
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/354)
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/354)
 
 - Fixed bug [353](https://github.com/MethodsAndPractices/vsteam/issues/353)
 - Added TriggerInfo to vsteam_lib.Build class
@@ -195,7 +201,7 @@ Added examples to all the help files.
 Fixed bug [337](https://github.com/MethodsAndPractices/vsteam/issues/337)
 Fixed bug [345](https://github.com/MethodsAndPractices/vsteam/issues/345)
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/335) from [Sebastian Schütze](https://github.com/SebastianSchuetze) which included the following:
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/335) from [Sebastian Schütze](https://github.com/SebastianSchuetze) which included the following:
 
 - Fixed bug [326](https://github.com/MethodsAndPractices/vsteam/issues/326)
 
@@ -213,23 +219,23 @@ The versions for Azure DevOps were also updated to 6.0-preview where supported.
 Requires Pester 5.x
 All the tests have been upgraded to use Pester 5.
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/315) from [Jhoneill](https://github.com/jhoneill) which included the following:
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/315) from [Jhoneill](https://github.com/jhoneill) which included the following:
 
-- Fix Get-VSTeamWiql [#314](https://github.com/DarqueWarrior/vsteam/issues/314)
+- Fix Get-VSTeamWiql [#314](https://github.com/MethodsAndPractices/vsteam/issues/314)
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/317) from [Brittan DeYoung](https://github.com/brittandeyoung) which included the following:
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/317) from [Brittan DeYoung](https://github.com/brittandeyoung) which included the following:
 
 - Adds a new function Stop-VSTeamBuild which allows cancelling a build using the build id
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/322) from [Jhoneill](https://github.com/jhoneill) which included the following:
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/322) from [Jhoneill](https://github.com/jhoneill) which included the following:
 
 - Enhance Get-VSTeamProcess
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/328) from [Sebastian Schütze](https://github.com/SebastianSchuetze) which included the following:
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/328) from [Sebastian Schütze](https://github.com/SebastianSchuetze) which included the following:
 
 - Run unit tests in Docker containers Locally
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/333) from [Daniel Sturm](https://github.com/danstur) which included the following:
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/333) from [Daniel Sturm](https://github.com/danstur) which included the following:
 
 - Adds -IncludeCommits switch to Get-VSTeamPullRequest
 
@@ -237,7 +243,7 @@ Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/333) from [Da
 
 You can now tab complete Area and Resource of Invoke-VSTeamRequest.
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/286) from [Sebastian Schütze](https://github.com/SebastianSchuetze) which included the following:
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/286) from [Sebastian Schütze](https://github.com/SebastianSchuetze) which included the following:
 
 - Added cmdlets for add, get and remove for classification nodes, iterations and areas
 
@@ -247,14 +253,14 @@ Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/286) from [Se
 
 Addressed following issues:
 
-- Do not change the strict mode setting for the user's PowerShell session [#296](https://github.com/DarqueWarrior/vsteam/issues/296)
-- Consider reducing the scope of the default parameter "Project" from "_" to "_-VsTeam\*" [#297](https://github.com/DarqueWarrior/vsteam/issues/297)
+- Do not change the strict mode setting for the user's PowerShell session [#296](https://github.com/MethodsAndPractices/vsteam/issues/296)
+- Consider reducing the scope of the default parameter "Project" from "_" to "_-VsTeam\*" [#297](https://github.com/MethodsAndPractices/vsteam/issues/297)
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/275) from [Jhoneill](https://github.com/jhoneill) which included the following:
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/275) from [Jhoneill](https://github.com/jhoneill) which included the following:
 
 - Removing Dynamic parameters for completer and validator attributes.
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/283) from [Sebastian Schütze](https://github.com/SebastianSchuetze) which included the following:
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/283) from [Sebastian Schütze](https://github.com/SebastianSchuetze) which included the following:
 
 - Added Get-VSTeamBuildTimeline to get timeline of a build
 
@@ -266,90 +272,90 @@ Corrected a display issue were the List view was being used by default instead o
 
 All unit test now pass consistently.
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/265) from [Michel Zehnder](https://github.com/MichelZ) which included the following:
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/265) from [Michel Zehnder](https://github.com/MichelZ) which included the following:
 
 - Simplify merging of files
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/272) from [Sebastian Schütze](https://github.com/SebastianSchuetze) which included the following:
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/272) from [Sebastian Schütze](https://github.com/SebastianSchuetze) which included the following:
 
 - Add Test-VSTeamYamlPipeline to preview check changes for YAML pipelines. [See release sprint 165](https://docs.microsoft.com/azure/devops/release-notes/2020/sprint-165-update#azure-pipelines-1).
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/273) from [Lukas Wöhrl](https://github.com/woehrl01) which included the following:
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/273) from [Lukas Wöhrl](https://github.com/woehrl01) which included the following:
 
 - Adds a new function Update-VSTeamAgent which allows to update the agent version
 
 ## 6.4.4
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/257) from [Michel Zehnder](https://github.com/MichelZ) which included the following:
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/257) from [Michel Zehnder](https://github.com/MichelZ) which included the following:
 
 - Fix bug in Get-VSTeamBuildArtifact with additional "properties" property
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/245) from [Michel Zehnder](https://github.com/MichelZ) which included the following:
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/245) from [Michel Zehnder](https://github.com/MichelZ) which included the following:
 
 - Add Get-VSTeamGitStats to retrieve statistics about branches
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/244) from [Michel Zehnder](https://github.com/MichelZ) which included the following:
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/244) from [Michel Zehnder](https://github.com/MichelZ) which included the following:
 
 - Add support for licensingSource and msdnLicenseType to Add-VSTeamUserEntitlement / Update-VSTeamUserEntitlement
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/243) from [Michel Zehnder](https://github.com/MichelZ) which included the following:
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/243) from [Michel Zehnder](https://github.com/MichelZ) which included the following:
 
 - Add additional filtering capabilities to Get-VSTeamPullRequest
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/242) from [Michel Zehnder](https://github.com/MichelZ) which included the following:
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/242) from [Michel Zehnder](https://github.com/MichelZ) which included the following:
 
 - Added "-and" operator to the Membership tests
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/241) from [Michel Zehnder](https://github.com/MichelZ) which included the following:
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/241) from [Michel Zehnder](https://github.com/MichelZ) which included the following:
 
 - Added Update-VSTeamPullRequest to manipulate some basics about Pull Requests
 - Added Add-VSTeamPullRequest to create Pull Requests
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/240) from [Michel Zehnder](https://github.com/MichelZ) which included the following:
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/240) from [Michel Zehnder](https://github.com/MichelZ) which included the following:
 
 - Add option to add additional headers (-AdditionalHeaders) to the request generated by the `Invoke-VSTeamRequest` call
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/239) from [Michel Zehnder](https://github.com/MichelZ) which included the following:
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/239) from [Michel Zehnder](https://github.com/MichelZ) which included the following:
 
 - Added ;charset=utf-8 to POST/PUT JSON requests
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/238) from [Michel Zehnder](https://github.com/MichelZ) which included the following:
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/238) from [Michel Zehnder](https://github.com/MichelZ) which included the following:
 
 - Added Get-VSTeamGitCommit to retrieve commits
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/237) from [Michel Zehnder](https://github.com/MichelZ) which included the following:
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/237) from [Michel Zehnder](https://github.com/MichelZ) which included the following:
 
 - Add -Filter, -FilterContains, -Top and -ContinuationToken to Get-VSTeamGitRefs
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/232) from [Mark Wragg](https://github.com/markwragg) which included the following:
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/232) from [Mark Wragg](https://github.com/markwragg) which included the following:
 
 - Bug fix in Get-VSTeamBuildArtifact where an error is returned because the API returns an extra record along with the list of artifacts that is called 'build.sourceLabel' and contains a URL but no "properties" object.
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/231) from [Dave Neeley](https://github.com/daveneeley) which included the following:
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/231) from [Dave Neeley](https://github.com/daveneeley) which included the following:
 
 - Removed a trailing slash from resource URIs generated by `_BuildRequestURI` when the ID parameter is not included in the function call.
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/225) from [Cadacious](https://github.com/Cadacious) which included the following:
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/225) from [Cadacious](https://github.com/Cadacious) which included the following:
 
 - Added Get/Set-VSTeamPermissionInheritance
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/224) from [Cadacious](https://github.com/Cadacious) which included the following:
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/224) from [Cadacious](https://github.com/Cadacious) which included the following:
 
 - Adds Remove-VSTeamAccessControlEntry
 
 ## 6.4.3
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/229) from [Asif Mithawala](https://github.com/asifma) which included the following:
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/229) from [Asif Mithawala](https://github.com/asifma) which included the following:
 
 Added additional property checks in VSTeamJobRequest
 
 ## 6.4.2
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/226) from [Asif Mithawala](https://github.com/asifma) which included the following:
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/226) from [Asif Mithawala](https://github.com/asifma) which included the following:
 
 Added property checks in VSTeamJobRequest
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/227) from [Sebastian Schütze](https://github.com/SebastianSchuetze) which included the following:
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/227) from [Sebastian Schütze](https://github.com/SebastianSchuetze) which included the following:
 
 Added Remove-VSTeamWorkItem to delete work items
 
@@ -360,35 +366,35 @@ Added Remove-VSTeamWorkItem to delete work items
 
 ## 6.4.1
 
-Fixed issue [Description on variable groups is not a required field #208](https://github.com/DarqueWarrior/vsteam/issues/208).
+Fixed issue [Description on variable groups is not a required field #208](https://github.com/MethodsAndPractices/vsteam/issues/208).
 
 ## 6.4.0
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/214) from [Louis Tourtellotte](https://github.com/quintessential5) which included the following:
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/214) from [Louis Tourtellotte](https://github.com/quintessential5) which included the following:
 
 Add/Update Var Group: Support for Body Param, so that json can be directly provided rather than a hashtable of variables. See the example in the documentation for more use case details.
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/213) from [Louis Tourtellotte](https://github.com/quintessential5) which included the following:
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/213) from [Louis Tourtellotte](https://github.com/quintessential5) which included the following:
 
 Get-VSTeamVariableGroup fixes
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/212) from [Louis Tourtellotte](https://github.com/quintessential5) which included the following:
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/212) from [Louis Tourtellotte](https://github.com/quintessential5) which included the following:
 
 Support for task groups
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/211) from [Dick van de Meulengraaf](https://github.com/dickvdm) which included the following:
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/211) from [Dick van de Meulengraaf](https://github.com/dickvdm) which included the following:
 
 AzD2019 configuration, being Azure DevOps Server (on-prem) 2019 (17.143.28912.1)
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/209) from [Sebastian Schütze](https://github.com/SebastianSchuetze) which included the following:
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/209) from [Sebastian Schütze](https://github.com/SebastianSchuetze) which included the following:
 
 Added Remove-VSTeamWorkItem to delete work items
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/204) from [Jeroen Janssen](https://github.com/japj) which included the following:
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/204) from [Jeroen Janssen](https://github.com/japj) which included the following:
 
 maxParallelism to Disable/Enable-VSTeamAgent
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/205) from [Sebastian Schütze](https://github.com/SebastianSchuetze) which included the following:
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/205) from [Sebastian Schütze](https://github.com/SebastianSchuetze) which included the following:
 
 Get-VSTeamWiql to get work items via [WIQL](https://docs.microsoft.com/rest/api/azure/devops/wit/wiql?view=azure-devops-rest-5.1&WT.mc_id=-github-dbrown) and also to expand the returned work items with all fields selected.
 
@@ -398,7 +404,7 @@ Changed signature of Get-VSTeamWorkItem to only have Id of type int[] instead of
 
 ## 6.3.6
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/200) from [Chris Gardner](https://github.com/ChrisLGardner) which included the following:
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/200) from [Chris Gardner](https://github.com/ChrisLGardner) which included the following:
 
 Get-VSTeamPullRequest documentation was linking to Get-VSTeamWorkItem documentation
 
@@ -407,13 +413,13 @@ Get-VSTeamPullRequest documentation was linking to Get-VSTeamWorkItem documentat
 Updated Build-Module.ps1 to support static code analysis and running unit tests.
 Updated Merge-File.ps1 to clean trailing white-space.
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/199) from [Sebastian Schütze](https://github.com/SebastianSchuetze) which included the following:
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/199) from [Sebastian Schütze](https://github.com/SebastianSchuetze) which included the following:
 
 bug fix for update and add workItem
 
 ## 6.3.4
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/193) from [Sebastian Schütze](https://github.com/SebastianSchuetze) which included the following:
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/193) from [Sebastian Schütze](https://github.com/SebastianSchuetze) which included the following:
 
 Rename:
 VSTS --> AzD
@@ -421,25 +427,25 @@ VSTS --> AzD
 
 ## 6.3.3
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/191) from [Louis Tourtellotte](https://github.com/quintessential5) which included the following:
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/191) from [Louis Tourtellotte](https://github.com/quintessential5) which included the following:
 
 Get-VSTeamVariableGroup: support for getting by name as well as by ID.
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/190) from [Sebastian Schütze](https://github.com/SebastianSchuetze) which included the following:
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/190) from [Sebastian Schütze](https://github.com/SebastianSchuetze) which included the following:
 
 Updated Add-VSTeamWorkItem and Update-VSTeamWorkItem to support any work item field, also custom ones.
 
 ## 6.3.2
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/182) from [eosfor](https://github.com/eosfor) which included the following:
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/182) from [eosfor](https://github.com/eosfor) which included the following:
 
 Invalidate cache on account change
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/181) from [Michael Erpenbeck](https://github.com/GitMje) which included the following:
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/181) from [Michael Erpenbeck](https://github.com/GitMje) which included the following:
 
 Fixed typo in README.md file for better readability
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/179) from [Jim W](https://github.com/Seekatar) which included the following:
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/179) from [Jim W](https://github.com/Seekatar) which included the following:
 
 Add PSDrive support for memberships
 
@@ -451,7 +457,7 @@ Add PSDrive support for memberships
 
 ## 6.3.1
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/178) from [Jim W](https://github.com/Seekatar) which included the following:
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/178) from [Jim W](https://github.com/Seekatar) which included the following:
 
 - Add-VSTeamMembership
 - Remove-VSTeamMembership
@@ -470,7 +476,7 @@ Release definitions was added to the SHiPS provider.
 
 ## 6.2.9
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/176) from [Carlo Wahlstedt](https://github.com/carlowahlstedt) which included the following:
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/176) from [Carlo Wahlstedt](https://github.com/carlowahlstedt) which included the following:
 
 Updated help to refer to Add-VSTeamProfile instead of Set-VSTeamProfile
 
@@ -495,7 +501,7 @@ $b = Get-VSTeamBuildDefinition 12 -Raw
 Add-VSTeamBuildDefinition -InFile $b
 ```
 
-Also merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/170) from [Ignacio Galarza, Jr.](https://github.com/ignatz42) which included the following:
+Also merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/170) from [Ignacio Galarza, Jr.](https://github.com/ignatz42) which included the following:
 
 Added functions to deal with variable groups
 
@@ -529,23 +535,23 @@ Added code to log error if -UseWindowsAuthentication is used to connect to Azure
 
 ## 6.2.3
 
-Fixes issue [Get-VSTeamAccessControlList -IncludeExtendedInfo. Cannot convert value PSCustomObject to type Hashtable #159](https://github.com/DarqueWarrior/vsteam/issues/159)
+Fixes issue [Get-VSTeamAccessControlList -IncludeExtendedInfo. Cannot convert value PSCustomObject to type Hashtable #159](https://github.com/MethodsAndPractices/vsteam/issues/159)
 
 ## 6.2.2
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/158) from [Ryan](https://github.com/RPhay) which included the following:
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/158) from [Ryan](https://github.com/RPhay) which included the following:
 
-Fixes issue [Get-VSTeamBuildDefinition fails #155](https://github.com/DarqueWarrior/vsteam/issues/155)
+Fixes issue [Get-VSTeamBuildDefinition fails #155](https://github.com/MethodsAndPractices/vsteam/issues/155)
 
 ## 6.2.1
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/156) from [Daniel Sturm](https://github.com/danstur) which included the following:
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/156) from [Daniel Sturm](https://github.com/danstur) which included the following:
 
 Corrects error creating VSTeamBuildDefinitionProcessPhase object in later versions of Azure DevOps Server (TFS).
 
 ## 6.2.0
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/144) from [Michel Zehnder](https://github.com/MichelZ) which included the following:
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/144) from [Michel Zehnder](https://github.com/MichelZ) which included the following:
 
 Added functions to deal with Security
 Note: Some of these are only supported in Azure DevOps (Online), not TFS and Azure DevOps Server due to unavailable APIs
@@ -577,7 +583,7 @@ Fixed issued with version 5.0 REST API JSON object for build definition. jobCanc
 
 ## 6.1.1
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/147) from [Joakim Bick](https://github.com/minimoe) which included the following:
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/147) from [Joakim Bick](https://github.com/minimoe) which included the following:
 
 Fix interacting with large GIT repositories without hitting integer overflow.
 
@@ -585,7 +591,7 @@ Fix interacting with large GIT repositories without hitting integer overflow.
 
 The AzD API now defaults to the 5.x versions.
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/140) from [Michel Zehnder](https://github.com/MichelZ) which included the following:
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/140) from [Michel Zehnder](https://github.com/MichelZ) which included the following:
 
 Added Get-VSTeamGroup to retrieve Groups
 Added Get-VSTeamDescriptor to resolve ID's to Descriptors
@@ -621,13 +627,13 @@ Changing the PAT parameter to SecurePersonalAccessToken of Set-VSTeamAccount.
 
 ## 5.0.2
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/129) from [Adam Murray](https://github.com/muzzar78) which included the following:
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/129) from [Adam Murray](https://github.com/muzzar78) which included the following:
 
 - Added ParentId parameter to Add-VSTeamWorkItem to allow the parent work item to be set
 
 ## 5.0.1
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/128) from [Fifth Street Partners](https://github.com/fifthstreetpartners) which included the following:
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/128) from [Fifth Street Partners](https://github.com/fifthstreetpartners) which included the following:
 
 - Added Get-VSTeamProcess
 - Modified Add-VSTeamProcess to allow for any Process Template to be used
@@ -665,15 +671,15 @@ Fixed bug where Get-VSTeamGitRepository was failing if you did not provide a pro
 
 ## 4.0.11
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/111) from [Brian Schmitt](https://github.com/brianschmitt) which included the following:
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/111) from [Brian Schmitt](https://github.com/brianschmitt) which included the following:
 
 - Adding better error handling when response is null
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/108) from [Richard Diphoorn](https://github.com/rdtechie) which included the following:
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/108) from [Richard Diphoorn](https://github.com/rdtechie) which included the following:
 
 - Added description, iteration path and assigned to, on Work items
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/110) from [Guillaume Pugnet](https://github.com/GPugnet) which included the following:
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/110) from [Guillaume Pugnet](https://github.com/GPugnet) which included the following:
 
 - Add-VSTeamExtension
 - Get-VSTeamExtension
@@ -686,32 +692,32 @@ Fixed bug where you could not add a build by build definition name.
 
 ## 4.0.9
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/102) from [Brian Schmitt](https://github.com/brianschmitt) which included the following:
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/102) from [Brian Schmitt](https://github.com/brianschmitt) which included the following:
 
 - Get-VSTeamPullRequest
 - Show-VSTeamPullRequest
 
 ## 4.0.8
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/93) from [Kai Walter](https://github.com/KaiWalter) which included the following:
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/93) from [Kai Walter](https://github.com/KaiWalter) which included the following:
 
 - replaced {accountName}.visualStudio.com with dev.azure.com/{accountName}
 
 ## 4.0.7
 
-Setting the Top to 10,000 when searching by email in Update-VSTeamUser. If you have a large number of users you should use by ID instead of by email. This addresses issue [90](https://github.com/DarqueWarrior/vsteam/issues/90).
+Setting the Top to 10,000 when searching by email in Update-VSTeamUser. If you have a large number of users you should use by ID instead of by email. This addresses issue [90](https://github.com/MethodsAndPractices/vsteam/issues/90).
 
 ## 4.0.6
 
 Fixed bug where you could not Tab complete the build definition name when calling Add-VSTeamBuild.
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/92) from [Olivier](https://github.com/hangar18rip) which included the following:
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/92) from [Olivier](https://github.com/hangar18rip) which included the following:
 
 - Added the Demands property to the VSTeamBuildDefinition type
 
 ## 4.0.5
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/89) from [Guillaume Pugnet](https://github.com/GPugnet) which included the following:
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/89) from [Guillaume Pugnet](https://github.com/GPugnet) which included the following:
 
 - old license was not populated when updating a user by id
 
@@ -721,11 +727,11 @@ Fixed bug where the version would not be saved when storing account at User or A
 
 ## 4.0.3
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/84) from [Kai Walter](https://github.com/KaiWalter) which included the following:
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/84) from [Kai Walter](https://github.com/KaiWalter) which included the following:
 
 - converted VSTeamQueue from format/type to class
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/86) from [Denny](https://github.com/dvankleef) which included the following:
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/86) from [Denny](https://github.com/dvankleef) which included the following:
 
 - Added update User. Currently only can update license type
 
@@ -733,7 +739,7 @@ Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/86) from [Den
 
 Added Remove-VSTeamFeed
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/82) from [Kai Walter](https://github.com/KaiWalter) which included the following:
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/82) from [Kai Walter](https://github.com/KaiWalter) which included the following:
 
 - removed output of objects returned from API to avoid misleading outputs for consumers
 - added GitRepository object to BuildDefinition
@@ -752,7 +758,7 @@ The @VSTeamVersionTable was removed and replaced with a static VSTeamVersions cl
 
 Due to this breaking change _Get-VSTeamAPIVersion_ was added to review the current version being used.
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/77) from [Kai Walter](https://github.com/KaiWalter) which included the following:
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/77) from [Kai Walter](https://github.com/KaiWalter) which included the following:
 
 - Build Definition / Process / Phases / Steps are broken down into separate objects
 
@@ -773,12 +779,12 @@ Added Update-VSTeamProfile to allow easy updating of the PAT for each profile.
 
 ## 3.0.5
 
-Merged [Pull Request 70](https://github.com/DarqueWarrior/vsteam/pull/70) and [Pull Request 72](https://github.com/DarqueWarrior/vsteam/pull/72) from [Geert van der Cruijsen](https://github.com/Geertvdc) which included the following:
+Merged [Pull Request 70](https://github.com/MethodsAndPractices/vsteam/pull/70) and [Pull Request 72](https://github.com/MethodsAndPractices/vsteam/pull/72) from [Geert van der Cruijsen](https://github.com/Geertvdc) which included the following:
 
 - Added a function to remove vsts agents from a pool by calling Remove-Agent or Remove-VSTeamAgent
 - Disable & Enable agents in pool
 
-Add [Pull Request 70](https://github.com/DarqueWarrior/vsteam/pull/71) from [Kai Walter](https://github.com/KaiWalter) which included the following:
+Add [Pull Request 70](https://github.com/MethodsAndPractices/vsteam/pull/71) from [Kai Walter](https://github.com/KaiWalter) which included the following:
 
 - Integration tests for Build Definitions
 
@@ -788,7 +794,7 @@ The ProjectName dynamic parameter that enables Tab Complete of project names was
 
 ## 3.0.3
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/66) from [Kai Walter](https://github.com/KaiWalter) which included the following:
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/66) from [Kai Walter](https://github.com/KaiWalter) which included the following:
 
 - Updated integration tests to account for the new hosted agent pool.
 
@@ -899,7 +905,7 @@ Additional change in this release include more unit tests which resulted in much
 
 ## 2.1.13
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/50) from [Markus Blaschke](https://github.com/mblaschke) which included the following:
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/50) from [Markus Blaschke](https://github.com/mblaschke) which included the following:
 
 - Added functions for handling of service endpoints:
   - Add-VSTeamKubernetesEndpoint
@@ -908,7 +914,7 @@ Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/50) from [Mar
 
 ## 2.1.12
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/51) from [Steve Croxford](https://github.com/CodedBeard) which included the following:
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/51) from [Steve Croxford](https://github.com/CodedBeard) which included the following:
 
 - Added support for creating service fabric endpoints.
 
@@ -918,47 +924,47 @@ Updated the delete confirmation message for Remove-VSTeamUser to show the user n
 
 ## 2.1.10
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/46) from [Michal Karpinski](https://github.com/karpis) which included the following:
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/46) from [Michal Karpinski](https://github.com/karpis) which included the following:
 
 - Added -SourceBranch parameter to Add-VSTeamBuild
 
 ## 2.1.9
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/44) from [Michal Karpinski](https://github.com/karpis) which included the following:
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/44) from [Michal Karpinski](https://github.com/karpis) which included the following:
 
 - Added functions for querying TFVC branches:
   - Get-VSTeamTfvcRootBranch
   - Get-VSTeamTfvcBranch
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/45) from [Michal Karpinski](https://github.com/karpis) which included the following:
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/45) from [Michal Karpinski](https://github.com/karpis) which included the following:
 
 - Added ability to pass parameters when queueing builds
 
 ## 2.1.8
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/38) from [Jeffrey Opdam](https://github.com/jeffrey-opdam) which included the following:
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/38) from [Jeffrey Opdam](https://github.com/jeffrey-opdam) which included the following:
 
 - Added support for assigner to be a group, when requesting approvals for a group
 
 ## 2.1.7
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/42) from [Michal Karpinski](https://github.com/karpis) which included the following:
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/42) from [Michal Karpinski](https://github.com/karpis) which included the following:
 
 - Added a function for updating an existing build definition from an input json file
 
 ## 2.1.6
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/39) from [Francisco Cabral](https://github.com/franciscocabral) which included the following:
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/39) from [Francisco Cabral](https://github.com/franciscocabral) which included the following:
 
 - Fix GET Approval filter by release ids
 
 ## 2.1.5
 
-Fixed issue [#40](https://github.com/DarqueWarrior/vsteam/issues/40) so adding a SonarQube or AzureRM Service Endpoint returns the endpoint.
+Fixed issue [#40](https://github.com/MethodsAndPractices/vsteam/issues/40) so adding a SonarQube or AzureRM Service Endpoint returns the endpoint.
 
 ## 2.1.4
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/37) from [David Roberts](https://github.com/davidroberts63) which included the following:
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/37) from [David Roberts](https://github.com/davidroberts63) which included the following:
 
 - Add functions to get/edit code policies
 
@@ -969,7 +975,7 @@ Updated the ValidateSet for StatusFilter of Approvals
 
 ## 2.1.2
 
-Fixed issue [#36](https://github.com/DarqueWarrior/vsteam/issues/36) so all git repositories are returned when you do not provide an project.
+Fixed issue [#36](https://github.com/MethodsAndPractices/vsteam/issues/36) so all git repositories are returned when you do not provide an project.
 
 ## 2.1.1
 
@@ -1020,7 +1026,7 @@ You can update the version so try new versions of APIs. See Set-VSTeamAPIVersion
 
 Added support for Show-VSTeam that opens the configured TFS or VSTS in default browser.
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/26) from [Michel Perfetti](https://github.com/miiitch) which included the following:
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/26) from [Michel Perfetti](https://github.com/miiitch) which included the following:
 
 - Remove deadlock when endpoint creation failed
 
@@ -1055,7 +1061,7 @@ The variable to test if you are on Mac OS changed from IsOSX to IsMacOS. Because
 
 ## 0.1.32
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/16) from [Fergal](https://github.com/ObsidianPhoenix) which included the following:
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/16) from [Fergal](https://github.com/ObsidianPhoenix) which included the following:
 
 - Added Support for Build Tags
 - Added the ability to update KeepForever, and the Build Number
@@ -1063,19 +1069,19 @@ Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/16) from [Fer
 
 ## 0.1.31
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/17) from [Kees Verhaar](https://github.com/KeesV) which included the following:
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/17) from [Kees Verhaar](https://github.com/KeesV) which included the following:
 
 - Add ProjectName as a property on team member so it can be used further down the pipeline
 
 ## 0.1.30
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/15) from [Kees Verhaar](https://github.com/KeesV) which included the following:
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/15) from [Kees Verhaar](https://github.com/KeesV) which included the following:
 
 - Add support for teams
 
 ## 0.1.29
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/12) from [Andy Neillans](https://github.com/aneillans) which included the following:
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/12) from [Andy Neillans](https://github.com/aneillans) which included the following:
 
 - Fixed for on-premise URLS being incorrectly classed as VSTS accounts
 - Fixed for projects validation if you have more than 100 projects
@@ -1090,7 +1096,7 @@ Clearing code analysis warnings
 
 ## 0.1.26
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/10) from [Roberto Peña](https://github.com/eulesv) which included the following:
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/10) from [Roberto Peña](https://github.com/eulesv) which included the following:
 
 - Adding a regular expression to validate VSTS account
 
@@ -1104,7 +1110,7 @@ Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/10) from [Rob
 
 ## 0.1.23
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/8) from [Michel Perfetti](https://github.com/miiitch) which included the following:
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/8) from [Michel Perfetti](https://github.com/miiitch) which included the following:
 
 - Support for the [SonarQube extension](https://marketplace.visualstudio.com/items?itemName=SonarSource.sonarqube)
 
@@ -1116,7 +1122,7 @@ Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/8) from [Mich
 
 - Added Get-VSTeamBuildLog that returns the logs of the provided build
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/6)from [Michel Perfetti](https://github.com/miiitch) which included the following:
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/6)from [Michel Perfetti](https://github.com/miiitch) which included the following:
 
 - Added serviceEndpoint parameters to Add-VSTeamAzureRMServiceEndpoint cmdlet: if the serviceEndPoint parameters are not specified, the Automatic mode is used
 - The \_trackProgress function was changed too to reflect the return code of the api [endpoints](https://www.visualstudio.com/docs/integrate/api/endpoints/endpoints?WT.mc_id=-github-dbrown)
@@ -1128,19 +1134,19 @@ Removed test folder from module
 
 ## 0.1.18
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/5) from [Christopher Mank](https://github.com/ChristopherMank) which included the following:
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/5) from [Christopher Mank](https://github.com/ChristopherMank) which included the following:
 
 - Created new function in the release module named 'Add-VSTeamReleaseEnvironment'. New function deploys an environment from an existing release.
 
 ## 0.1.16
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/4) from [Andy Neillans](https://github.com/aneillans) which included the following:
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/4) from [Andy Neillans](https://github.com/aneillans) which included the following:
 
 - Bug fix for broken PAT code handling.
 
 ## 0.1.15
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/3) from [Andy Neillans](https://github.com/aneillans) which included the following:
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/3) from [Andy Neillans](https://github.com/aneillans) which included the following:
 
 - Corrected typos in help files.
 - Refactored location of common methods.

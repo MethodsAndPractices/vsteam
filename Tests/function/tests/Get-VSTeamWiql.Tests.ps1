@@ -114,7 +114,7 @@ Describe 'VSTeamWiql' {
       }
 
       It 'Get work items with query that returns only 1 work item and Expand' {
-         Mock Invoke-RestMethod { Write-Host $args; Open-SampleFile 'Get-VSTeamWiql-OneWorkItem.json' }
+         Mock Invoke-RestMethod { Open-SampleFile 'Get-VSTeamWiql-OneWorkItem.json' }
 
          Get-VSTeamWiql -ProjectName "test" -Team "test team" -Id 1 -Expand
 
