@@ -26,7 +26,7 @@ Describe 'VSTeamWorkItemTag' {
 
          ## Assert
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
-            $Uri -eq "https://dev.azure.com/$($FakeOrg)/_apis/wit/tags/$($FakeTagId)?api-version=$(_getApiVersion WorkItemTracking)" -and
+            $Uri -eq "https://dev.azure.com/$($FakeOrg)/test/_apis/wit/tags/$($FakeTagId)?api-version=$(_getApiVersion WorkItemTracking)" -and
             $Method -eq 'DELETE'
          }
       }
@@ -37,7 +37,7 @@ Describe 'VSTeamWorkItemTag' {
 
          ## Assert
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
-            $Uri -eq "https://dev.azure.com/$($FakeOrg)/_apis/wit/tags/$($FakeTagName)?api-version=$(_getApiVersion WorkItemTracking)"  -and
+            $Uri -eq "https://dev.azure.com/$($FakeOrg)/test/_apis/wit/tags/$($FakeTagName)?api-version=$(_getApiVersion WorkItemTracking)"  -and
             $Method -eq 'DELETE'
          }
       }
