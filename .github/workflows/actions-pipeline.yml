@@ -201,7 +201,7 @@ jobs:
     - name: Module test installation
       shell: pwsh
       run: |
-        ./Test-InstallFromLocalFeed.ps1 -GitHubToken $env:GITHUB_TOKEN -RunnerTempPath $RUNNER_TEMP
+        ./Test-InstallFromLocalFeed.ps1 -GitHubToken $env:GITHUB_TOKEN -RunnerTempPath '${{ runner.temp }}'
       env:
         GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
       working-directory: './tools/scripts'
