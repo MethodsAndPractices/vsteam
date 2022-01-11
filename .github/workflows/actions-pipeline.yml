@@ -5,6 +5,8 @@ on:
   push:
     branches:
       - trunk
+      - feature/*
+      - hotfix/*
   pull_request:
     branches:
       - trunk
@@ -126,11 +128,8 @@ jobs:
   package-stage:
     name: Package Management
     needs: build-stage
-    # run from here only if it's not a a forked repo
-    # head.repo.full_name would be the forked repo name and 'github.repository' is equal to our repository
-    if: |
-      github.event.pull_request.head.repo.full_name == github.repository ||
-      github.ref == 'refs/heads/trunk'
+    # run from here only if it's not a pull request
+    if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     steps:
     - name: Download module
