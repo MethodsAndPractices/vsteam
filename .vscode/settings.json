@@ -1,9 +1,12 @@
 {
    "files.exclude": {
-      "**/.vscode": true,
       "**/.vs": true,
       "**/docs": true,
       "**/package-lock.json": true
+   },
+   "files.associations": {
+      "*.yml": "yaml",
+      "*.yaml": "yaml",
    },
    "editor.tabSize": 3,
    "editor.detectIndentation": false,
