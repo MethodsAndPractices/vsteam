@@ -49,7 +49,7 @@ Test-VSTeamYamlPipeline -Project DemoProject -PipelineId 24 - Branch 'refs/heads
 
 This example checks the YAML in the remote repository connected to the pipeline with ID 24 for consistency on Azure DevOps. It will take the file for the branch ref 'refs/heads/feature/test'.
 
-### Example 3
+### Example 5
 
 ```powershell
 Test-VSTeamYamlPipeline -Project DemoProject -PipelineId 24
