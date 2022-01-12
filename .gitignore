@@ -1,16 +1,9 @@
-/commnetbase.txt
-/sampleHelp.txt
-/temp.txt
-/pub.ps1
-test/sample.txt
 /src/.vs
 /node_modules
-**/docs
-Tests/integration/prime.ps1
-integration/test/test-results.xml
-/Debugscript.txt
+/dist
 .docs/files.md
-.vs/slnx.sqlite
+docs/**
+integration/test/test-results.xml
 unit/results.xml
 en-US/VSTeam-Help.xml
 Source/Classes/classes.ps1
@@ -20,11 +13,10 @@ Source/formats/vsteam.format.ps1xml
 Source/Public/vsteam.public.ps1
 Source/Private/vsteam.private.ps1
 Source/Classes/vsteam.classes.ps1
-/dist
+
 test-results.xml
 coverage.xml
 .editorconfig
-.vscode/*
 .DS_Store
 ._.DS_Store
 **/.DS_Store
@@ -33,8 +25,6 @@ coverage.xml
 vsteam_Linux_ps7_tests_result.xml
 vsteam_wcore1903_ps5_tests_result.xml
 vsteam_wcore1903_ps7_tests_result.xml
-integration/fullRun.ps1
-integration/Start-PSCountdown.ps1
 integrationTest-results.xml
 .vs/*
 
