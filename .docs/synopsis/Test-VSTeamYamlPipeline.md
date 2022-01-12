@@ -1,1 +1,1 @@
-Tests the commited YAML pipeline files to check for inconsitencies like syntax, references etc.. Now, you can try out a YAML pipeline without committing it to a repo or running it. Given an existing pipeline and an optional new YAML payload, this function will give you back the full YAML pipeline.
+Validates the local YAML pipeline against Azure DevOps.
