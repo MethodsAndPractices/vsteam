@@ -74,7 +74,7 @@ At first it will feel odd to write the help and test first but the more you do i
 
 Because I will not be over your shoulder you could write the tests and even the help after. **Just know if your pull request does not have tests and help it will be rejected.**
 
-**Note**: The pipeline uses a static code analysis tool for scanning the code for credentials. Please read the page [about the credential scanner](../build/CredScanTask.md)
+**Note**: GitHub secret scanner is actiaved on this repository. We will not merge Pull Request which have real secrets committed. Exceptions are fake secrets for testing.
 
 ### Code the function
 
