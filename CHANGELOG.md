@@ -6,6 +6,10 @@ Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/418) fr
 
 - Added `Get-VSTeamWorkItemTag`, `Update-VSTeamWorkItemTag` and `Remove-VSTeamWorkItemTag` cmdlets which  allow you to [manage work item tags]([#419](https://github.com/MethodsAndPractices/vsteam/issues/419).
 
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/437) from [Sebastian Schütze](https://github.com/SebastianSchuetze) which included the following:
+
+- Added Parameter `Branch` to `Test-VSTeamYamlPipeline` to test yaml for a specific branch [manage work item tags]([#428](https://github.com/MethodsAndPractices/vsteam/issues/428).
+
 ## 7.5.0
 
 Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/414) from [Guillermo Diaz](https://github.com/gm0d) which included the following:

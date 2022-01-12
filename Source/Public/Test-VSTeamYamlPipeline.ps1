@@ -1,14 +1,15 @@
 function Test-VSTeamYamlPipeline {
    [CmdletBinding(DefaultParameterSetName = 'WithFilePath',
-    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Test-VSTeamYamlPipeline')]
+      HelpUri = 'https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Test-VSTeamYamlPipeline')]
    param(
-      [Parameter(ParameterSetName = 'WithFilePath', Mandatory = $true, ValueFromPipelineByPropertyName = $true, Position = 1)]
-      [Parameter(ParameterSetName = 'WithYamlOverride', Mandatory = $true, ValueFromPipelineByPropertyName = $true, Position = 1)]
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, Position = 1)]
       [Int32] $PipelineId,
       [Parameter(ParameterSetName = 'WithFilePath', Mandatory = $false)]
       [string] $FilePath,
       [Parameter(ParameterSetName = 'WithYamlOverride', Mandatory = $false)]
-      [string] $YamlOverride
+      [string] $YamlOverride,
+      [Parameter(Mandatory = $false)]
+      [string] $Branch
    )
    DynamicParam {
       _buildProjectNameDynamicParam
@@ -27,6 +28,25 @@ function Test-VSTeamYamlPipeline {
       }
       elseif ($YamlOverride) {
          $body.YamlOverride = $YamlOverride
+      }
+
+      if ($Branch) {
+         # if full branch name is given then remove the first part
+
+         $body.resources = @{
+            pipelines    = $null
+            repositories = @{
+               self = @{
+                  refName = ($Branch -replace 'refs/heads/', '')
+               }
+            }
+            builds       = $null
+            containers   = $null
+            packages     = $null
+         }
+      }
+      else {
+         Write-Warning "No branch specified, Azure DevOps api is using 'ref/heads/main' always as default. Specify a branch name to prevent errors (for details see: https://developercommunity.visualstudio.com/t/API-to-preview-pipeline-run-takes-non-ex/1635377)."
       }
 
       try {
