@@ -238,9 +238,6 @@ project.lock.json
 # Rider
 .idea/
 
-# Visual Studio Code
-.vscode/
-
 # Output folder used by Webpack or other FE stuff
 **/node_modules/*
 **/wwwroot/*
