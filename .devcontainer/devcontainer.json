@@ -1,50 +1,47 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
 // https://github.com/microsoft/vscode-dev-containers/tree/v0.209.6/containers/powershell
 {
-	"name": "VSTeam",
-	"dockerFile": "Dockerfile",
-
-	// Set *default* container specific settings.json values on container create.
-	"settings": {
-		"terminal.integrated.defaultProfile.linux": "pwsh"
-	},
-
-	// Add the IDs of extensions you want installed when the container is created.
-	"extensions": [
-		"anseki.vscode-color",
-		"fabianlauer.vs-code-xml-format",
-		"gruntfuggly.todo-tree",
-		"hbenl.vscode-test-explorer",
-		"louiswt.regexp-preview",
-		"ms-vscode.powershell",
-		"usernamehw.errorlens",
-		"vscode-icons-team.vscode-icons",
-		"yzhang.markdown-all-in-one",
-		"redhat.vscode-yaml",
-		"oderwat.indent-rainbow",
-		"richie5um2.vscode-sort-json",
-		"tylerleonhardt.vscode-pester-test-adapter",
-		"ms-dotnettools.csharp",
-		"github.vscode-pull-request-github",
-		"github.remotehub",
-		"cschleiden.vscode-github-actions",
-		"github.copilot-nightly",
-		"ms-vsliveshare.vsliveshare-pack",
-		"ms-azuretools.vscode-docker",
-		"rangav.vscode-thunder-client",
-		"tylerleonhardt.vscode-inline-values-powershell"
-	],
-
-	// Use 'forwardPorts' to make a list of ports inside the container available locally.
-	// "forwardPorts": [],
-
-	// Uncomment the next line to run commands after the container is created. This gets run in bash which is why we call `pwsh`.
-	//"postCreateCommand": "pwsh ",
-	// Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
-	//"remoteUser": "vscode",
-	"build": {
-		"args": {
-			"UPGRADE_PACKAGES": "true"
-		}
-	}
+   "name": "VSTeam",
+   "dockerFile": "Dockerfile",
+   // Set *default* container specific settings.json values on container create.
+   "settings": {
+      "terminal.integrated.defaultProfile.linux": "pwsh"
+   },
+   // Add the IDs of extensions you want installed when the container is created.
+   "extensions": [
+      "anseki.vscode-color",
+      "fabianlauer.vs-code-xml-format",
+      "gruntfuggly.todo-tree",
+      "hbenl.vscode-test-explorer",
+      "louiswt.regexp-preview",
+      "ms-vscode.powershell",
+      "usernamehw.errorlens",
+      "vscode-icons-team.vscode-icons",
+      "yzhang.markdown-all-in-one",
+      "redhat.vscode-yaml",
+      "oderwat.indent-rainbow",
+      "richie5um2.vscode-sort-json",
+      "tylerleonhardt.vscode-pester-test-adapter",
+      "ms-dotnettools.csharp",
+      "github.vscode-pull-request-github",
+      "github.remotehub",
+      "cschleiden.vscode-github-actions",
+      "github.copilot-nightly",
+      "ms-vsliveshare.vsliveshare-pack",
+      "ms-azuretools.vscode-docker",
+      "rangav.vscode-thunder-client",
+      "tylerleonhardt.vscode-inline-values-powershell",
+      "devonray.snippet"
+   ],
+   // Use 'forwardPorts' to make a list of ports inside the container available locally.
+   // "forwardPorts": [],
+   // Uncomment the next line to run commands after the container is created. This gets run in bash which is why we call `pwsh`.
+   //"postCreateCommand": "pwsh ",
+   // Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
+   //"remoteUser": "vscode",
+   "build": {
+      "args": {
+         "UPGRADE_PACKAGES": "true"
+      }
+   }
 }
