@@ -1,43 +1,3 @@
-/commnetbase.txt
-/sampleHelp.txt
-/temp.txt
-/pub.ps1
-test/sample.txt
-/src/.vs
-/node_modules
-**/docs
-Tests/integration/prime.ps1
-integration/test/test-results.xml
-/Debugscript.txt
-.docs/files.md
-.vs/slnx.sqlite
-unit/results.xml
-en-US/VSTeam-Help.xml
-Source/Classes/classes.ps1
-Source/formats/formats.ps1xml
-Source/types/vsteam.types.ps1xml
-Source/formats/vsteam.format.ps1xml
-Source/Public/vsteam.public.ps1
-Source/Private/vsteam.private.ps1
-Source/Classes/vsteam.classes.ps1
-/dist
-test-results.xml
-coverage.xml
-.editorconfig
-.vscode/*
-.DS_Store
-._.DS_Store
-**/.DS_Store
-**/._.DS_Store
-.gdn
-vsteam_Linux_ps7_tests_result.xml
-vsteam_wcore1903_ps5_tests_result.xml
-vsteam_wcore1903_ps7_tests_result.xml
-integration/fullRun.ps1
-integration/Start-PSCountdown.ps1
-integrationTest-results.xml
-.vs/*
-
 # The following command works for downloading when using Git for Windows:
 # curl -LOf http://gist.githubusercontent.com/kmorcinek/2710267/raw/.gitignore
 #
@@ -248,9 +208,6 @@ project.lock.json
 # Rider
 .idea/
 
-# Visual Studio Code
-.vscode/
-
 # Output folder used by Webpack or other FE stuff
 **/node_modules/*
 **/wwwroot/*
@@ -264,4 +221,32 @@ project.lock.json
 # End of core ignore list, below put you custom 'per project' settings (patterns or path)
 #####
 Source/en-US/VSTeam-Help.xml
-.devcontainer/*
+/src/.vs
+/node_modules
+/dist
+.docs/files.md
+docs/**
+integration/test/test-results.xml
+unit/results.xml
+en-US/VSTeam-Help.xml
+Source/Classes/classes.ps1
+Source/formats/formats.ps1xml
+Source/types/vsteam.types.ps1xml
+Source/formats/vsteam.format.ps1xml
+Source/Public/vsteam.public.ps1
+Source/Private/vsteam.private.ps1
+Source/Classes/vsteam.classes.ps1
+
+test-results.xml
+coverage.xml
+.editorconfig
+.DS_Store
+._.DS_Store
+**/.DS_Store
+**/._.DS_Store
+.gdn
+vsteam_Linux_ps7_tests_result.xml
+vsteam_wcore1903_ps5_tests_result.xml
+vsteam_wcore1903_ps7_tests_result.xml
+integrationTest-results.xml
+.vs/*
