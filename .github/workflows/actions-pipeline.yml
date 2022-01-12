@@ -5,6 +5,19 @@ on:
   push:
     branches:
       - trunk
+    paths:
+      - 'src/'
+      - 'Tests/'
+      - '.docs/'
+      - '.github/'
+      - '!.github/images/'
+      - '!.github/*.md'
+      - '!.vscode/**'
+      - '!.devContainer/**'
+      - '!tools/**'
+      - '!.gitignore'
+      - '!LICENSE'
+      - '!*.md'
   pull_request:
     branches:
       - trunk
