@@ -1126,7 +1126,7 @@ function _checkForModuleUpdates {
             $ghReleaseRes = Invoke-WebRequest "https://api.github.com/repos/MethodsAndPractices/vsteam/releases/latest"
             $ghLatestRelease = $ghReleaseRes | ConvertFrom-Json -Depth 20
             [version]$latestVersion = $ghLatestRelease.tag_name -replace "v", ""
-            [version]$currentVersion = [vsteam_lib.Versions]::ModuleVersion
+            [version]$currentVersion = $ModuleVersion
 
             if ($currentVersion -lt $latestVersion) {
                Write-Information "New version available: $latestVersion" -InformationAction Continue
