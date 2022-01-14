@@ -200,7 +200,7 @@ function _getApiVersion {
          'DistributedTaskReleased', 'VariableGroups', 'Tfvc',
          'Packaging', 'MemberEntitlementManagement',
          'ExtensionsManagement', 'ServiceEndpoints', 'Graph',
-         'TaskGroups', 'Policy', 'Processes', 'HierarchyQuery', 'Pipelines', 'Billing', 'Wiki','WorkItemTracking')]
+         'TaskGroups', 'Policy', 'Processes', 'HierarchyQuery', 'Pipelines', 'Billing', 'Wiki', 'WorkItemTracking')]
       [string] $Service,
 
       [parameter(ParameterSetName = 'Target')]
@@ -1050,9 +1050,9 @@ function _getBillingToken {
    param (
       #billing token can have different scopes. They are defined by named token ids.
       #They should be validated to be specific by it's name
-      [Parameter(Mandatory=$true)]
+      [Parameter(Mandatory = $true)]
       [string]
-      [ValidateSet('AzCommDeploymentProfile','CommerceDeploymentProfile')]
+      [ValidateSet('AzCommDeploymentProfile', 'CommerceDeploymentProfile')]
       $NamedTokenId
    )
 
@@ -1073,4 +1073,70 @@ function _getBillingToken {
       -body ($sessionToken | ConvertTo-Json -Depth 50 -Compress)
 
    return $billingToken
+}
+
+function _showModuleLoadingMessages {
+   [CmdletBinding()]
+   param (
+
+   )
+
+   process {
+      # check if client has online access
+      Write-Verbose "Checking if client is online"
+      $pingGh = [System.Net.NetworkInformation.Ping]::new()
+      [System.Net.NetworkInformation.PingReply]$reply = $pingGh.Send('github.com', 150)
+      if ($reply.Status -eq [System.Net.NetworkInformation.IPStatus]::Success) {
+         # catch if web request fails. Invoke-WebRequest does not have a ErrorAction parameter
+         try {
+            Write-Verbose "Checking if module is up to date"
+            #$ghReleaseRes = Invoke-WebRequest "https://raw.githubusercontent.com/MethodsAndPractices/vsteam/master/.gthub/module-messages.json"
+            #$moduleMessagesRes = Get-Content .github/moduleMessages.json | ConvertFrom-Json
+
+
+         }
+         catch {
+            Write-Debug "Error: $_"
+         }
+      }
+   }
+}
+
+function _checkForModuleUpdates {
+   [CmdletBinding()]
+   param (
+      # version of the module
+      [Parameter(Mandatory = $true)]
+      [version]
+      $ModuleVersion
+   )
+
+   process {
+
+      # check if client has online access
+      Write-Verbose "Checking if client is online"
+      $pingGh = [System.Net.NetworkInformation.Ping]::new()
+      [System.Net.NetworkInformation.PingReply]$reply = $pingGh.Send('github.com', 150)
+
+      if ($reply.Status -eq [System.Net.NetworkInformation.IPStatus]::Success) {
+
+         # catch if web request fails. Invoke-WebRequest does not have a ErrorAction parameter
+         try {
+            Write-Verbose "Checking if module is up to date"
+            $ghReleaseRes = Invoke-WebRequest "https://api.github.com/repos/MethodsAndPractices/vsteam/releases/latest"
+            $ghLatestRelease = $ghReleaseRes | ConvertFrom-Json -Depth 20
+            [version]$latestVersion = $ghLatestRelease.tag_name -replace "v", ""
+            [version]$currentVersion = [vsteam_lib.Versions]::ModuleVersion
+
+            if ($currentVersion -lt $latestVersion) {
+               Write-Information "New version available: $latestVersion" -InformationAction Continue
+               Write-Information "Run: Update-Module -Name VSTeam -RequiredVersion $latestVersion" -InformationAction Continue
+            }
+         }
+         catch {
+            Write-Debug "Error: $_"
+         }
+      }
+   }
+
 }
