@@ -1090,9 +1090,27 @@ function _showModuleLoadingMessages {
          # catch if web request fails. Invoke-WebRequest does not have a ErrorAction parameter
          try {
             Write-Verbose "Checking if module is up to date"
-            #$ghReleaseRes = Invoke-WebRequest "https://raw.githubusercontent.com/MethodsAndPractices/vsteam/master/.gthub/module-messages.json"
-            #$moduleMessagesRes = Get-Content .github/moduleMessages.json | ConvertFrom-Json
+            #$moduleMessagesRes = Invoke-WebRequest "https://raw.githubusercontent.com/MethodsAndPractices/vsteam/master/.gthub/module-messages.json"
+            $moduleMessagesRes = Get-Content .github/moduleMessages.json | ConvertFrom-Json
 
+            [version] $moduleVersion = _getModuleVersion
+            [version] $moduleDisplayFrom = $moduleMessagesRes.displayFromVersion
+
+            # don't show messages if module is up to date
+            if ($moduleVersion -lt $moduleDisplayFrom) {
+               return
+            }
+
+            # dont show messages if display until date is in the past
+            $currentDate = Get-Date
+            $displayToDate = Get-Date -Date ($moduleMessagesRes.toDate)
+            $displayFromDate = Get-Date -Date ($moduleMessagesRes.fromDate)
+            if ($displayToDate -lt $currentDate -or $displayFromDate -gt $currentDate ) {
+               return
+            }
+
+            $message = "{0}: {1}"
+            Write-Output ($message -f $moduleMessagesRes.type.ToUpper(), $moduleMessagesRes.msg)
 
          }
          catch {
