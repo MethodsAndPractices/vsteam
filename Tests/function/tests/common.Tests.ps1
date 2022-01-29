@@ -346,4 +346,20 @@ Describe 'Common' {
          }
       }
    }
+
+   Context '_showModuleLoadingMessages' {
+      BeforeAll {
+         Mock Invoke-RestMethod { Open-SampleFile 'moduleMessages.json' }  -ParameterFilter { $Uri -like 'moduleMessages.json' }
+         Mock _getApiVersion { return '1.0-unitTests' }
+         Mock _getInstance { return 'https://dev.azure.com' }
+      }
+
+      It 'should show module loading messages' {
+
+         _showModuleLoadingMessages
+
+         Should -InvokeVerifiable
+      }
+
+   }
 }
