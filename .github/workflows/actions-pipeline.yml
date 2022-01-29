@@ -79,7 +79,7 @@ jobs:
         $pesterArgs.TestResult.OutputFormat = 'JUnitXml'
         $pesterArgs.TestResult.OutputPath = 'test-results.xml'
 
-        $env:VSTEAM_NO_UPDATE_MESSAGES = $true
+        $env:VSTEAM_NO_UPDATE_MESSAGE = $true
 
         Invoke-Pester -Configuration $pesterArgs
 
@@ -237,7 +237,7 @@ jobs:
         $pesterArgs.TestResult.OutputFormat = 'JUnitXml'
         $pesterArgs.TestResult.OutputPath = 'test-results.xml'
 
-        $env:VSTEAM_NO_UPDATE_MESSAGES = $true
+        $env:VSTEAM_NO_UPDATE_MESSAGE = $true
 
         Invoke-Pester -Configuration $pesterArgs
       shell: pwsh

@@ -16,7 +16,8 @@
 Set-VSTeamAPIVersion -Target $([vsteam_lib.Versions]::Version)
 
 #compare versions and notify user
-if(($env:VSTEAM_NO_UPDATE_MESSAGES -eq $false) -or ($null -eq $env:VSTEAM_NO_UPDATE_MESSAGES)) {
+# new versions for the module are only checked if $env:VSTEAM_NO_UPDATE_MESSAGE is not set
+if(($env:VSTEAM_NO_UPDATE_MESSAGE -eq $false) -or ($null -eq $env:VSTEAM_NO_UPDATE_MESSAGE)) {
    _checkForModuleUpdates -ModuleVersion ([version][vsteam_lib.Versions]::ModuleVersion) -ErrorAction Continue
 }
 
