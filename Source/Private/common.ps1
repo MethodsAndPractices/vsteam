@@ -1090,14 +1090,14 @@ function _showModuleLoadingMessages {
          # catch if web request fails. Invoke-WebRequest does not have a ErrorAction parameter
          try {
             Write-Verbose "Checking if module is up to date"
-            #$moduleMessagesRes = Invoke-WebRequest "https://raw.githubusercontent.com/MethodsAndPractices/vsteam/master/.gthub/module-messages.json"
-            $moduleMessagesRes = Get-Content .github/moduleMessages.json | ConvertFrom-Json
+            $moduleMessagesRes = (Invoke-WebRequest "https://raw.githubusercontent.com/MethodsAndPractices/vsteam/topic/addModuleLoadingNotifications/.github/moduleMessages.json").Content | ConvertFrom-Json
+            #$moduleMessagesRes = Get-Content .github/moduleMessages.json | ConvertFrom-Json
 
             [version] $moduleVersion = _getModuleVersion
-            [version] $moduleDisplayFrom = $moduleMessagesRes.displayFromVersion
+            [version] $displayFromVersion = $moduleMessagesRes.displayFromVersion
 
             # don't show messages if module is up to date
-            if ($moduleVersion -lt $moduleDisplayFrom) {
+            if ($moduleVersion -lt $displayFromVersion) {
                return
             }
 
@@ -1141,7 +1141,7 @@ function _checkForModuleUpdates {
          # catch if web request fails. Invoke-WebRequest does not have a ErrorAction parameter
          try {
             Write-Verbose "Checking if module is up to date"
-            $ghReleaseRes = Invoke-WebRequest "https://api.github.com/repos/MethodsAndPractices/vsteam/releases/latest"
+            $ghReleaseRes = Invoke-RestMethod "https://api.github.com/repos/MethodsAndPractices/vsteam/releases/latest"
             $ghLatestRelease = $ghReleaseRes | ConvertFrom-Json -Depth 20
             [version]$latestVersion = $ghLatestRelease.tag_name -replace "v", ""
             [version]$currentVersion = $ModuleVersion
