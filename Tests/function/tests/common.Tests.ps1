@@ -352,30 +352,26 @@ Describe 'Common' {
          Mock Invoke-RestMethod {
             Open-SampleFile 'moduleMessages.json'
          }  -ParameterFilter { $Uri -like '*moduleMessages.json' }
-         Mock _pinpGithub { return [System.Net.NetworkInformation.IPStatus]::Success}
+         Mock _pinpGithub { return [System.Net.NetworkInformation.IPStatus]::Success }
       }
 
       It 'should show module loading messages' {
 
-         Mock _getModuleVersion { return '7.4.0' }
-
          $dateString = 'Sunday, 30 January 2022 11:48:16'
          Mock Get-Date { return [DateTime]::Parse($dateString) }
 
-         $output = _showModuleLoadingMessages
+         $output = _showModuleLoadingMessages -ModuleVersion '7.4.0'
 
          $output.Count | Should -BeGreaterThan 0
       }
 
       It 'should show only message for module 7.0.0 or bigger' {
 
-         Mock _getModuleVersion { return '7.0.0' }
-
          Mock Get-Date {
             return [DateTime]::Parse('Sunday, 30 January 2022 11:48:16')
          }
 
-         $output = _showModuleLoadingMessages
+         $output = _showModuleLoadingMessages -ModuleVersion '7.0.0'
 
          ($output | Where-Object { $_ -like '*Message for minimum version 7.0.0' } ).Count | Should -BeExactly 1
          ($output | Where-Object { $_ -like '*Message for minimum version 7.6.0' } ).Count | Should -BeExactly 1
@@ -389,12 +385,43 @@ Describe 'Common' {
 
          Mock Get-Date { return [DateTime]::Parse($dateString) }
 
-         $output = _showModuleLoadingMessages
+         $output = _showModuleLoadingMessages -ModuleVersion '0.0.0'
 
          $output.Count | Should -BeExactly 2
          ($output | Where-Object { $_ -like '*Message for minimum version 7.0.0' } ).Count | Should -BeExactly 1
          ($output | Where-Object { $_ -like '*Message for minimum version 7.6.0' } ).Count | Should -BeExactly 1
       }
 
+      It 'should thow when not version number' {
+         { _showModuleLoadingMessages -ModuleVersion 'notaversion' } | Should -Throw -ExpectedMessage '*Cannot convert value "notaversion" to type "System.Version*'
+      }
+
+   }
+
+   Context '_checkForModuleUpdates' {
+      BeforeAll {
+         Mock Invoke-RestMethod { Open-SampleFile 'githubLatestRelease.json' } `
+            -ParameterFilter { $Uri -eq 'https://api.github.com/repos/MethodsAndPractices/vsteam/releases/latest' }
+
+         Mock _pinpGithub { return [System.Net.NetworkInformation.IPStatus]::Success }
+      }
+
+      It 'should show module update message when not' {
+
+         $output = _checkForModuleUpdates -ModuleVersion '7.3.0'
+
+         $output.Count | Should -BeExactly 2
+      }
+
+      It 'should not show module update message when up-to-date' {
+
+         $output = _checkForModuleUpdates -ModuleVersion '7.5.0'
+
+         $output.Count | Should -BeExactly 0
+      }
+
+      It 'should thow when not version number' {
+         { _checkForModuleUpdates -ModuleVersion 'notaversion' } | Should -Throw -ExpectedMessage '*Cannot convert value "notaversion" to type "System.Version*'
+      }
    }
 }

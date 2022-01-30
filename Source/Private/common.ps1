@@ -1086,7 +1086,10 @@ function _pinpGithub {
 function _showModuleLoadingMessages {
    [CmdletBinding()]
    param (
-
+      # version of the module
+      [Parameter(Mandatory = $true)]
+      [version]
+      $ModuleVersion
    )
 
    process {
@@ -1096,10 +1099,8 @@ function _showModuleLoadingMessages {
 
             $moduleMessagesRes = (Invoke-RestMethod "https://raw.githubusercontent.com/MethodsAndPractices/vsteam/topic/addModuleLoadingNotifications/.github/moduleMessages.json")
 
-            [version] $moduleVersion = _getModuleVersion
-
             # don't show messages if module has not the specified version
-            $filteredMessages = $moduleMessagesRes | Where-Object { ([version]$_.displayFromVersion) -ge $moduleVersion }
+            $filteredMessages = $moduleMessagesRes | Where-Object { ([version]$_.displayFromVersion) -ge $ModuleVersion }
 
             # dont show messages if display until date is in the past
             $currentDate = Get-Date
@@ -1123,7 +1124,7 @@ function _showModuleLoadingMessages {
             Write-Debug "Error: $_"
          }
       }else{
-         Write-Debug "Client is offline. Skipping module loading messages"
+         Write-Debug "Client is offline. Skipping module messages"
       }
    }
 }
@@ -1140,28 +1141,26 @@ function _checkForModuleUpdates {
    process {
 
       # check if client has online access
-      Write-Verbose "Checking if client is online"
-      $pingGh = [System.Net.NetworkInformation.Ping]::new()
-      [System.Net.NetworkInformation.PingReply]$reply = $pingGh.Send('github.com', 150)
-
-      if ($reply.Status -eq [System.Net.NetworkInformation.IPStatus]::Success) {
+      if ((_pinpGithub) -eq [System.Net.NetworkInformation.IPStatus]::Success) {
 
          # catch if web request fails. Invoke-WebRequest does not have a ErrorAction parameter
          try {
             Write-Verbose "Checking if module is up to date"
-            $ghReleaseRes = Invoke-RestMethod "https://api.github.com/repos/MethodsAndPractices/vsteam/releases/latest"
-            $ghLatestRelease = $ghReleaseRes | ConvertFrom-Json -Depth 20
+            $ghLatestRelease = Invoke-RestMethod "https://api.github.com/repos/MethodsAndPractices/vsteam/releases/latest"
+
             [version]$latestVersion = $ghLatestRelease.tag_name -replace "v", ""
             [version]$currentVersion = $ModuleVersion
 
             if ($currentVersion -lt $latestVersion) {
-               Write-Information "New version available: $latestVersion" -InformationAction Continue
-               Write-Information "Run: Update-Module -Name VSTeam -RequiredVersion $latestVersion" -InformationAction Continue
+               Write-Output "New version available: $latestVersion"
+               Write-Output "Run: Update-Module -Name VSTeam -RequiredVersion $latestVersion"
             }
          }
          catch {
             Write-Debug "Error: $_"
          }
+      }else{
+         Write-Debug "Client is offline. Skipping module updates check"
       }
    }
 
