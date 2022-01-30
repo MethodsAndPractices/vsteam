@@ -1075,6 +1075,14 @@ function _getBillingToken {
    return $billingToken
 }
 
+# pin if github is availabe and client has access to github
+function _pinpGithub {
+   Write-Verbose "Checking if client is online"
+   $pingGh = [System.Net.NetworkInformation.Ping]::new()
+   [System.Net.NetworkInformation.PingReply]$reply = $pingGh.Send('github.com', 150)
+   return $reply.Status
+}
+
 function _showModuleLoadingMessages {
    [CmdletBinding()]
    param (
@@ -1082,35 +1090,36 @@ function _showModuleLoadingMessages {
    )
 
    process {
-      # check if client has online access
-      Write-Verbose "Checking if client is online"
-      $pingGh = [System.Net.NetworkInformation.Ping]::new()
-      [System.Net.NetworkInformation.PingReply]$reply = $pingGh.Send('github.com', 150)
-      if ($reply.Status -eq [System.Net.NetworkInformation.IPStatus]::Success) {
+      if ((_pinpGithub) -eq [System.Net.NetworkInformation.IPStatus]::Success) {
          # catch if web request fails. Invoke-WebRequest does not have a ErrorAction parameter
          try {
-            Write-Verbose "Checking if module is up to date"
-            $moduleMessagesRes = (Invoke-WebRequest "https://raw.githubusercontent.com/MethodsAndPractices/vsteam/topic/addModuleLoadingNotifications/.github/moduleMessages.json").Content | ConvertFrom-Json
+
+            $moduleMessagesRes = (Invoke-RestMethod "https://raw.githubusercontent.com/MethodsAndPractices/vsteam/topic/addModuleLoadingNotifications/.github/moduleMessages.json")
             #$moduleMessagesRes = Get-Content .github/moduleMessages.json | ConvertFrom-Json
 
-            [version] $moduleVersion = _getModuleVersion
-            [version] $displayFromVersion = $moduleMessagesRes.displayFromVersion
 
-            # don't show messages if module is up to date
-            if ($moduleVersion -lt $displayFromVersion) {
-               return
-            }
+            [version] $moduleVersion = _getModuleVersion
+
+            # don't show messages if module has not the specified version
+            $filteredMessages = $moduleMessagesRes | Where-Object { ([version]$_.displayFromVersion) -ge $moduleVersion }
 
             # dont show messages if display until date is in the past
             $currentDate = Get-Date
-            $displayToDate = Get-Date -Date ($moduleMessagesRes.toDate)
-            $displayFromDate = Get-Date -Date ($moduleMessagesRes.fromDate)
-            if ($displayToDate -lt $currentDate -or $displayFromDate -gt $currentDate ) {
+            $filteredMessages = $filteredMessages | Where-Object {
+               ($currentDate -ge ([DateTime]::Parse($_.fromDate)) -and $currentDate -le ([DateTime]::Parse($_.toDate)))
+            }
+
+            # stop processing if no messages left
+            if ($null -eq $filteredMessages -or $filteredMessages.Count -eq 0) {
                return
             }
 
-            $message = "{0}: {1}"
-            Write-Output ($message -f $moduleMessagesRes.type.ToUpper(), $moduleMessagesRes.msg)
+            $filteredMessages | ForEach-Object {
+               $messageFormat = "{0}: {1}"
+               Write-Output ($messageFormat -f $_.type.ToUpper(), $_.msg)
+            }
+
+
 
          }
          catch {
