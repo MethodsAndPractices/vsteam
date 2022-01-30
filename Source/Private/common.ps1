@@ -1095,8 +1095,6 @@ function _showModuleLoadingMessages {
          try {
 
             $moduleMessagesRes = (Invoke-RestMethod "https://raw.githubusercontent.com/MethodsAndPractices/vsteam/topic/addModuleLoadingNotifications/.github/moduleMessages.json")
-            #$moduleMessagesRes = Get-Content .github/moduleMessages.json | ConvertFrom-Json
-
 
             [version] $moduleVersion = _getModuleVersion
 
@@ -1105,8 +1103,7 @@ function _showModuleLoadingMessages {
 
             # dont show messages if display until date is in the past
             $currentDate = Get-Date
-            $filteredMessages = $filteredMessages | Where-Object {
-               ($currentDate -ge ([DateTime]::Parse($_.fromDate)) -and $currentDate -le ([DateTime]::Parse($_.toDate)))
+            $filteredMessages = $filteredMessages | Where-Object {$currentDate -le ([DateTime]::Parse($_.toDate))
             }
 
             # stop processing if no messages left
@@ -1125,6 +1122,8 @@ function _showModuleLoadingMessages {
          catch {
             Write-Debug "Error: $_"
          }
+      }else{
+         Write-Debug "Client is offline. Skipping module loading messages"
       }
    }
 }

@@ -381,19 +381,19 @@ Describe 'Common' {
          ($output | Where-Object { $_ -like '*Message for minimum version 7.6.0' } ).Count | Should -BeExactly 1
       }
 
-      It 'should show only message from 2021' {
+      It 'should show only messages after 2021' {
 
          Mock _getModuleVersion { return '0.0.0' }
 
-         $dateString = '2021-12-31 23:59:59Z'
+         $dateString = '2022-01-01 00:00:00Z'
 
          Mock Get-Date { return [DateTime]::Parse($dateString) }
 
          $output = _showModuleLoadingMessages
 
-         $output.Count | Should -BeExactly 1
-         ($output | Where-Object { $_ -like '*Message for minimum version 6.9.0' } ).Count | Should -BeExactly 1
-
+         $output.Count | Should -BeExactly 2
+         ($output | Where-Object { $_ -like '*Message for minimum version 7.0.0' } ).Count | Should -BeExactly 1
+         ($output | Where-Object { $_ -like '*Message for minimum version 7.6.0' } ).Count | Should -BeExactly 1
       }
 
    }
