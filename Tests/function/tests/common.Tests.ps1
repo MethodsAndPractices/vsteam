@@ -349,16 +349,51 @@ Describe 'Common' {
 
    Context '_showModuleLoadingMessages' {
       BeforeAll {
-         Mock Invoke-RestMethod { Open-SampleFile 'moduleMessages.json' }  -ParameterFilter { $Uri -like 'moduleMessages.json' }
-         Mock _getApiVersion { return '1.0-unitTests' }
-         Mock _getInstance { return 'https://dev.azure.com' }
+         Mock Invoke-RestMethod {
+            Open-SampleFile 'moduleMessages.json'
+         }  -ParameterFilter { $Uri -like '*moduleMessages.json' }
+         Mock _pinpGithub { return [System.Net.NetworkInformation.IPStatus]::Success}
       }
 
       It 'should show module loading messages' {
 
-         _showModuleLoadingMessages
+         Mock _getModuleVersion { return '7.4.0' }
 
-         Should -InvokeVerifiable
+         $dateString = 'Sunday, 30 January 2022 11:48:16'
+         Mock Get-Date { return [DateTime]::Parse($dateString) }
+
+         $output = _showModuleLoadingMessages
+
+         $output.Count | Should -BeGreaterThan 0
+      }
+
+      It 'should show only message for module 7.0.0 or bigger' {
+
+         Mock _getModuleVersion { return '7.0.0' }
+
+         Mock Get-Date {
+            return [DateTime]::Parse('Sunday, 30 January 2022 11:48:16')
+         }
+
+         $output = _showModuleLoadingMessages
+
+         ($output | Where-Object { $_ -like '*Message for minimum version 7.0.0' } ).Count | Should -BeExactly 1
+         ($output | Where-Object { $_ -like '*Message for minimum version 7.6.0' } ).Count | Should -BeExactly 1
+      }
+
+      It 'should show only message from 2021' {
+
+         Mock _getModuleVersion { return '0.0.0' }
+
+         $dateString = '2021-12-31 23:59:59Z'
+
+         Mock Get-Date { return [DateTime]::Parse($dateString) }
+
+         $output = _showModuleLoadingMessages
+
+         $output.Count | Should -BeExactly 1
+         ($output | Where-Object { $_ -like '*Message for minimum version 6.9.0' } ).Count | Should -BeExactly 1
+
       }
 
    }

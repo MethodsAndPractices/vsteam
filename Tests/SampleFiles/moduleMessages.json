@@ -1,9 +1,25 @@
 [
    {
-      "msg": "Hello, world!",
-      "fromDate": "13/01/2022 23:41:51",
-      "toDate": "14/02/2022 23:41:51",
+      "msg": "Message for minimum version 7.6.0",
+      "fromDate": "2022-01-14 13:36:17Z",
+      "toDate": "2022-02-14 13:36:17Z",
       "displayFromVersion": "7.6.0",
       "type": "info"
+   },
+   {
+      "msg": "Message for minimum version 7.0.0",
+      "fromDate": "2022-01-13 13:36:17Z",
+      "toDate": "2022-02-13 13:36:17Z",
+      "displayFromVersion": "7.0.0",
+      "type": "warning"
+   },
+   {
+      "msg": "Message for minimum version 6.9.0",
+      "fromDate": "2021-01-1 00:00:00Z",
+      "toDate": "2021-12-31 23:59:59Z",
+      "displayFromVersion": "6.9.0",
+      "type": "warning"
    }
+
+
 ]
