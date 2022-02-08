@@ -56,7 +56,13 @@ body:
         - Azure DevOps Services
         - Azure DevOps Server 2020
         - Azure DevOps Server 2019
-        - other
+        - other (specify)
+  - type: input
+    id: other-server
+    attributes:
+      label: 'Other server version'
+      description: If you chose 'other' for server specify the version here. Please be aware that we do not support all versions and the bug might get closed.
+      placeholder: 'Specify the version'
   - type: textarea
     id: vsteam-api-output
     attributes:
