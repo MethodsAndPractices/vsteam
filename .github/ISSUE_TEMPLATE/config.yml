@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: VSTeam docs
+    url: https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/index
+    about: RTFM
+  - name: VSTeam Q&A
+    url: https://github.com/MethodsAndPractices/vsteam/discussions
+    about: This is for general questions / discussions without bugs or requests.
