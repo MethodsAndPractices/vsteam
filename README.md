@@ -5,10 +5,11 @@
   <br>VSTeam<br>
 </h1>
 
-<h4 align="center">
-  PowerShell module to automate Azure DevOps
-</h4>
-
+ <p align="center">
+    PowerShell module to automate Azure DevOps
+    <br />
+    <a href="https://methodsandpractices.github.io/vsteam-docs"><strong>Explore the docs »</strong></a>
+  </p>
 <p align="center">
 
   <a href="https://github.com/MethodsAndPractices/vsteam/actions/workflows/actions-pipeline.yml">
@@ -39,8 +40,7 @@
 
 
 <p align="center">
-  <a href="https://methodsandpractices.github.io/vsteam-docs/">Documentation</a> |
-  <a href="#introduction">Introduction</a> |
+  <a href="#introduction">About the project</a> |
   <a href="#requirements">Requirements</a> |
   <a href="#install">Install</a> |
   <a href="CHANGELOG.md">Change Log</a> |
@@ -56,7 +56,7 @@
   <img alt="VSTeam Install Example" src=".github/images/cli-example.gif" height="400" />
 </p>
 
-## Introduction
+## About The Project
 
 VSTeam is a PowerShell module with commands for accessing your [Azure DevOps Server](https://cda.ms/Bf) and [Azure DevOps Services)](https://cda.ms/Bf).
 
