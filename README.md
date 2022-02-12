@@ -43,11 +43,11 @@
   <a href="#introduction">Introduction</a> |
   <a href="#requirements">Requirements</a> |
   <a href="#install">Install</a> |
-  <a href="#change-log">Change Log</a> |
+  <a href="CHANGELOG.md">Change Log</a> |
 
 </p>
 <p align="center">
-  <a href="#contribute">Contribute</a> |
+  <a href="github/CONTRIBUTING.md">Contribute</a> |
   <a href="#buildin-gmodule">Building Module</a> |
   <a href="#mantainers">Maintainers</a>
 </p>
