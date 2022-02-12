@@ -40,7 +40,7 @@
 
 
 <p align="center">
-  <a href="#introduction">About the project</a> |
+  <a href="#about-the-project">About the project</a> |
   <a href="#requirements">Requirements</a> |
   <a href="#install">Install</a> |
   <a href="CHANGELOG.md">Change Log</a> |
