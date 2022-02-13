@@ -1100,7 +1100,20 @@ function _showModuleLoadingMessages {
             $moduleMessagesRes = (Invoke-RestMethod "https://raw.githubusercontent.com/MethodsAndPractices/vsteam/topic/addModuleLoadingNotifications/.github/moduleMessages.json")
 
             # don't show messages if module has not the specified version
-            $filteredMessages = $moduleMessagesRes | Where-Object { ([version]$_.displayFromVersion) -ge $ModuleVersion }
+            $filteredMessages = $moduleMessagesRes | Where-Object {
+
+               $returnMessage = $true
+
+               if (-not [String]::IsNullOrEmpty($_.displayFromVersion)) {
+                  $returnMessage = ([version]$_.displayFromVersion) -le $ModuleVersion
+               }
+
+               if (-not [String]::IsNullOrEmpty($_.displayToVersion) -and $returnMessage -eq $true) {
+                  $returnMessage = ([version]$_.displayToVersion) -ge $ModuleVersion
+               }
+
+               return $returnMessage
+            }
 
             # dont show messages if display until date is in the past
             $currentDate = Get-Date
