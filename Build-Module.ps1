@@ -237,12 +237,21 @@ if ($ipmo.IsPresent -or $analyzeScript.IsPresent -or $runIntegrationTests.IsPres
 # run PSScriptAnalyzer
 if ($analyzeScript.IsPresent) {
    Write-Output "Starting static code analysis..."
-   if ($null -eq $(Get-Module -Name PSScriptAnalyzer)) {
+   if ($null -eq $(Get-Module -Name PSScriptAnalyzer -ListAvailable)) {
       Install-Module -Name PSScriptAnalyzer -Repository PSGallery -Force -Scope CurrentUser
    }
 
+
    $r = Invoke-ScriptAnalyzer -Path $output -Recurse
-   $r | ForEach-Object { Write-Host "##vso[task.logissue type=$($_.Severity);sourcepath=$($_.ScriptPath);linenumber=$($_.Line);columnnumber=$($_.Column);]$($_.Message)" }
+   $r | ForEach-Object {
+
+      $severity = ([string]$_.Severity).ToLower()
+      if ($severity -eq 'information') {
+         $severity = "notice"
+      }
+
+      Write-Host "::$severity file=$($_.ScriptPath),line=$($_.Line),col=$($_.Column)::$($_.Message)"
+   }
    Write-Output "Static code analysis complete."
 }
 
