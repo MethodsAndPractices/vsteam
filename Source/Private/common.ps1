@@ -1084,7 +1084,7 @@ function _pinpGithub {
 }
 
 function _showModuleLoadingMessages {
-   [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSReviewUnusedParameter', 'ModuleVersion',
+   [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSReviewUnusedParameter', '',
    Justification = 'False positive. Parameter is being used, but not catched when used in script blocks. see: https://github.com/PowerShell/PSScriptAnalyzer/issues/1472')]
    [CmdletBinding()]
    param (
@@ -1145,7 +1145,7 @@ function _showModuleLoadingMessages {
 }
 
 function _checkForModuleUpdates {
-   [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSReviewUnusedParameter', 'ModuleVersion',
+   [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSReviewUnusedParameter', '',
    Justification = 'False positive. Parameter is being used, but not catched when used in script blocks. see: https://github.com/PowerShell/PSScriptAnalyzer/issues/1472')]
    [CmdletBinding()]
    param (
