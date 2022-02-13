@@ -80,7 +80,7 @@ jobs:
         $pesterArgs.TestResult.OutputPath = 'test-results.xml'
 
         $env:VSTEAM_NO_UPDATE_MESSAGE = $true
-        §env:VSTEAM_NO_MODULE_MESSAGES = $true
+        $env:VSTEAM_NO_MODULE_MESSAGES = $true
 
         Invoke-Pester -Configuration $pesterArgs
 
@@ -239,7 +239,7 @@ jobs:
         $pesterArgs.TestResult.OutputPath = 'test-results.xml'
 
         $env:VSTEAM_NO_UPDATE_MESSAGE = $true
-        §env:VSTEAM_NO_MODULE_MESSAGES = $true
+        $env:VSTEAM_NO_MODULE_MESSAGES = $true
 
         Invoke-Pester -Configuration $pesterArgs
       shell: pwsh
