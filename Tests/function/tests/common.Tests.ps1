@@ -374,7 +374,18 @@ Describe 'Common' {
          $output = _showModuleLoadingMessages -ModuleVersion '7.0.0'
 
          ($output | Where-Object { $_ -like '*Message for minimum version 7.0.0' } ).Count | Should -BeExactly 1
-         ($output | Where-Object { $_ -like '*Message for minimum version 7.6.0' } ).Count | Should -BeExactly 1
+         ($output | Where-Object { $_ -like '*Message for minimum version 5.6.0' } ).Count | Should -BeExactly 1
+      }
+
+      It 'should show only message for module between 7.8.0 and 8.0.0' {
+
+         Mock Get-Date {
+            return [DateTime]::Parse('Sunday, 30 January 2022 11:48:16')
+         }
+
+         $output = _showModuleLoadingMessages -ModuleVersion '7.9.0'
+
+         ($output | Where-Object { $_ -like '*Message for minimum version 7.8.0 to maximum version 8.0.0' } ).Count | Should -BeExactly 1
       }
 
       It 'should show only messages after 2021' {
@@ -385,11 +396,11 @@ Describe 'Common' {
 
          Mock Get-Date { return [DateTime]::Parse($dateString) }
 
-         $output = _showModuleLoadingMessages -ModuleVersion '0.0.0'
+         $output = _showModuleLoadingMessages -ModuleVersion '7.6.0'
 
          $output.Count | Should -BeExactly 2
          ($output | Where-Object { $_ -like '*Message for minimum version 7.0.0' } ).Count | Should -BeExactly 1
-         ($output | Where-Object { $_ -like '*Message for minimum version 7.6.0' } ).Count | Should -BeExactly 1
+         ($output | Where-Object { $_ -like '*Message for minimum version 5.6.0' } ).Count | Should -BeExactly 1
       }
 
       It 'should thow when not version number' {

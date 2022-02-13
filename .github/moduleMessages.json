@@ -2,7 +2,8 @@
    {
       "msg": "Module Version 8.0.0 will stop supporting all TFS (2017,2018) versions. In the future it will also only keep the newest server versions in the support.",
       "toDate": "14/02/2022 23:41:51",
-      "displayFromVersion": "7.6.0",
+      "displayFromVersion": "7.4.0",
+      "displayToVersion": "8.0.0",
       "type": "warning"
    }
 ]
