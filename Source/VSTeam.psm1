@@ -23,7 +23,7 @@ if(($env:VSTEAM_NO_UPDATE_MESSAGE -eq $false) -or ($null -eq $env:VSTEAM_NO_UPDA
 
 # display custom message if set and not $true
 if(($env:VSTEAM_NO_MODULE_MESSAGES -eq $false) -or ($null -eq $env:VSTEAM_NO_MODULE_MESSAGES)) {
-   _checkForModuleMessages -ModuleVersion ([version][vsteam_lib.Versions]::ModuleVersion) -ErrorAction Continue
+   _showModuleLoadingMessages -ModuleVersion ([version][vsteam_lib.Versions]::ModuleVersion) -ErrorAction Continue
 }
 
 # Check to see if the user stored the default project in an environment variable
