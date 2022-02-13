@@ -1166,7 +1166,7 @@ function _checkForModuleUpdates {
 
             if ($currentVersion -lt $latestVersion) {
                Write-Output "New version available: $latestVersion"
-               Write-Output "Run: Update-Module -Name VSTeam -RequiredVersion $latestVersion"
+               Write-Output "Run to update: Update-Module -Name VSTeam -RequiredVersion $latestVersion `n"
             }
          }
          catch {
