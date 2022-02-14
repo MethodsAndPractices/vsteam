@@ -53,7 +53,7 @@
 </p>
 
 <p align="center">
-  <img alt="VSTeam Install Example" src=".github/images/cli-example.gif" height="400" />
+  <img alt="VSTeam Install Example" src=".github/images/cli-example.gif" />
 </p>
 
 ## About The Project
