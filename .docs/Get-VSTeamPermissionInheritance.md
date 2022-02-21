@@ -67,7 +67,7 @@ Required: True
 
 ## RELATED LINKS
 
-<!-- #include "./common/related.md" -->
+
 
 [Add-VSTeamPolicy](Add-VSTeamPolicy.md)
 

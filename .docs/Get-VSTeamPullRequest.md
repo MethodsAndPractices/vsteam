@@ -186,7 +186,7 @@ Parameter Sets: IncludeCommits
 
 ## RELATED LINKS
 
-<!-- #include "./common/related.md" -->
+
 
 [Show-VSTeamPullRequest](Show-VSTeamPullRequest.md)
 [Add-VSTeamPullRequest](Add-VSTeamPullRequest.md)

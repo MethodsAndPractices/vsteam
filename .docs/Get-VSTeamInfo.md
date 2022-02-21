@@ -33,5 +33,3 @@ This will display your current account and default project
 <!-- #include "./common/prerequisites.md" -->
 
 ## RELATED LINKS
-
-<!-- #include "./common/related.md" -->

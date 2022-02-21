@@ -82,5 +82,3 @@ Required: True
 [Remove-VSTeamPool](Remove-VSTeamPool.md)
 [Update-VSTeamPool](Update-VSTeamPool.md)
 [Get-VSTeamPool](Get-VSTeamPool.md)
-
-<!-- #include "./common/related.md" -->

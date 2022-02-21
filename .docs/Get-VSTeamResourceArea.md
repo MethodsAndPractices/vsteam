@@ -33,5 +33,3 @@ This will display all the areas of supported APIs for your account.
 <!-- #include "./common/prerequisites.md" -->
 
 ## RELATED LINKS
-
-<!-- #include "./common/related.md" -->

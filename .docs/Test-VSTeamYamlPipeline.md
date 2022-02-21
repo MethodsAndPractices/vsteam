@@ -110,6 +110,6 @@ This cmdlet is not starting a pipeline run, but rather trying to resolve the ful
 
 ## RELATED LINKS
 
-<!-- #include "./common/related.md" -->
+
 
 [Get-VSTeamBuildDefinition](Get-VSTeamBuildDefinition.md)

@@ -55,5 +55,3 @@ To read system capabilities that contain dots you have to use the PSObject Prope
 <!-- #include "./common/prerequisites.md" -->
 
 ## RELATED LINKS
-
-<!-- #include "./common/related.md" -->

@@ -154,7 +154,7 @@ Accept pipeline input: true (ByPropertyName)
 
 ## RELATED LINKS
 
-<!-- #include "./common/related.md" -->
+
 
 [Get-VSTeamServiceEndpoint](Get-VSTeamServiceEndpoint.md)
 

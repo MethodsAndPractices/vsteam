@@ -78,7 +78,7 @@ System.String
 
 ## RELATED LINKS
 
-<!-- #include "./common/related.md" -->
+
 
 [Add-VSTeamVariableGroup](Add-VSTeamVariableGroup.md)
 

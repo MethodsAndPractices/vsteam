@@ -107,7 +107,7 @@ However, this function is called by the Project cache which is used by the proje
 
 ## RELATED LINKS
 
-<!-- #include "./common/related.md" -->
+
 
 [Add-VSTeamProject](Add-VSTeamProject.md)
 

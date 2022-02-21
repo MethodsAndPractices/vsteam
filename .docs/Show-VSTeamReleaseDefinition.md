@@ -52,7 +52,7 @@ You can pipe the release definition ID to this function.
 
 ## RELATED LINKS
 
-<!-- #include "./common/related.md" -->
+
 
 [Add-VSTeamReleaseDefinition](Add-VSTeamReleaseDefinition.md)
 

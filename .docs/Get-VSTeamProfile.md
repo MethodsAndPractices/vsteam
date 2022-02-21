@@ -52,6 +52,6 @@ Required: True
 
 ## RELATED LINKS
 
-<!-- #include "./common/related.md" -->
+
 
 [Add-VSTeamProfile](Add-VSTeamProfile.md)

@@ -51,7 +51,7 @@ Accept pipeline input: true (ByPropertyName)
 
 ## RELATED LINKS
 
-<!-- #include "./common/related.md" -->
+
 
 [Add-VSTeamServiceEndpoint](Add-VSTeamServiceEndpoint.md)
 

@@ -35,5 +35,3 @@ Adds a tag to a build.
 <!-- #include "./common/prerequisites.md" -->
 
 ## RELATED LINKS
-
-<!-- #include "./common/related.md" -->

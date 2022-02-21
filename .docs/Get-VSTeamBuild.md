@@ -198,7 +198,7 @@ You can pipe build IDs to this function.
 
 ## RELATED LINKS
 
-<!-- #include "./common/related.md" -->
+
 
 [Add-VSTeamBuild](Add-VSTeamBuild.md)
 

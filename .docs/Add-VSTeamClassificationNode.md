@@ -94,7 +94,7 @@ This function is the base function for Add-VSTeamArea and Add-VSTeamIteration.
 
 ## RELATED LINKS
 
-<!-- #include "./common/related.md" -->
+
 
 [Add-VSTeamArea](Add-VSTeamArea.md)
 

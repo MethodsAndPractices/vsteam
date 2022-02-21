@@ -41,5 +41,3 @@ This command will delete all builds that are not marked retain indefinitely.
 <!-- #include "./common/prerequisites.md" -->
 
 ## RELATED LINKS
-
-<!-- #include "./common/related.md" -->

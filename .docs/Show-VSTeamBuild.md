@@ -66,7 +66,7 @@ You can pipe the build ID to this function.
 
 ## RELATED LINKS
 
-<!-- #include "./common/related.md" -->
+
 
 [Add-VSTeamBuild](Add-VSTeamBuild.md)
 
