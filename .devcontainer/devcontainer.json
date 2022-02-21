@@ -1,5 +1,5 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
-// https://github.com/microsoft/vscode-dev-containers/tree/v0.209.6/containers/powershell
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.217.4/containers/powershell
 {
    "name": "VSTeam",
    "dockerFile": "Dockerfile",
@@ -36,9 +36,9 @@
    // Use 'forwardPorts' to make a list of ports inside the container available locally.
    // "forwardPorts": [],
    // Uncomment the next line to run commands after the container is created. This gets run in bash which is why we call `pwsh`.
-   //"postCreateCommand": "pwsh ",
-   // Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
-   //"remoteUser": "vscode",
+   // "postCreateCommand": "pwsh -c '$PSVersionTable'",
+   // Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
+   "remoteUser": "vscode",
    "build": {
       "args": {
          "UPGRADE_PACKAGES": "true"
