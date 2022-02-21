@@ -1129,7 +1129,7 @@ function _showModuleLoadingMessages {
 
             $filteredMessages | ForEach-Object {
                $messageFormat = "{0}: {1}"
-               Write-Output ($messageFormat -f $_.type.ToUpper(), $_.msg)
+               Write-Information ($messageFormat -f $_.type.ToUpper(), $_.msg) -InformationAction Continue
             }
 
 
@@ -1169,8 +1169,8 @@ function _checkForModuleUpdates {
             [version]$currentVersion = $ModuleVersion
 
             if ($currentVersion -lt $latestVersion) {
-               Write-Output "New version available: $latestVersion"
-               Write-Output "Run to update: Update-Module -Name VSTeam -RequiredVersion $latestVersion `n"
+               Write-Information "New version available: $latestVersion" -InformationAction Continue
+               Write-Information "Run to update: Update-Module -Name VSTeam -RequiredVersion $latestVersion `n" -InformationAction Continue
             }
          }
          catch {
