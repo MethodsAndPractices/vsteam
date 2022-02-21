@@ -5,10 +5,11 @@ Describe 'VSTeamWorkItemTag' {
       $FakeOrg = 'myOrg'
 
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
+      . "$baseFolder/Source/Public/Get-VSTeamProject.ps1"
 
       Mock _getInstance { return "https://dev.azure.com/$($FakeOrg)" }
       Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'WorkItemTracking' }
-      Mock Get-VSTeamProject {return Open-SampleFile 'Get-VSTeamProject.json' }
+      Mock Get-VSTeamProject { return Open-SampleFile 'Get-VSTeamProject.json' }
    }
 
    Context 'Remove-VSTeamWorkItemTag' {
@@ -37,7 +38,7 @@ Describe 'VSTeamWorkItemTag' {
 
          ## Assert
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
-            $Uri -eq "https://dev.azure.com/$($FakeOrg)/test/_apis/wit/tags/$($FakeTagName)?api-version=$(_getApiVersion WorkItemTracking)"  -and
+            $Uri -eq "https://dev.azure.com/$($FakeOrg)/test/_apis/wit/tags/$($FakeTagName)?api-version=$(_getApiVersion WorkItemTracking)" -and
             $Method -eq 'DELETE'
          }
       }
