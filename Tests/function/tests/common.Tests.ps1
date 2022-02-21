@@ -353,6 +353,8 @@ Describe 'Common' {
             Open-SampleFile 'moduleMessages.json'
          }  -ParameterFilter { $Uri -like '*moduleMessages.json' }
          Mock _pinpGithub { return [System.Net.NetworkInformation.IPStatus]::Success }
+
+         Mock Write-Information { return "Message" }
       }
 
       It 'should show module loading messages' {
@@ -360,9 +362,9 @@ Describe 'Common' {
          $dateString = 'Sunday, 30 January 2022 11:48:16'
          Mock Get-Date { return [DateTime]::Parse($dateString) }
 
-         $output = _showModuleLoadingMessages -ModuleVersion '7.4.0'
+         $null = _showModuleLoadingMessages -ModuleVersion '7.4.0'
 
-         $output.Count | Should -BeGreaterThan 0
+         Should -Invoke Write-Information -Exactly -Scope It -Times 2
       }
 
       It 'should show only message for module 7.0.0 or bigger' {
@@ -371,10 +373,16 @@ Describe 'Common' {
             return [DateTime]::Parse('Sunday, 30 January 2022 11:48:16')
          }
 
-         $output = _showModuleLoadingMessages -ModuleVersion '7.0.0'
+         $null = _showModuleLoadingMessages -ModuleVersion '7.0.0'
 
-         ($output | Where-Object { $_ -like '*Message for minimum version 7.0.0' } ).Count | Should -BeExactly 1
-         ($output | Where-Object { $_ -like '*Message for minimum version 5.6.0' } ).Count | Should -BeExactly 1
+         Should -Invoke Write-Information -Exactly -Scope It -Times 1 -ParameterFilter {
+            $Message -like '*Message for minimum version 7.0.0'
+         }
+
+         Should -Invoke Write-Information -Exactly -Scope It -Times 1 -ParameterFilter {
+            $Message -like '*Message for minimum version 5.6.0'
+         }
+
       }
 
       It 'should show only message for module between 7.8.0 and 8.0.0' {
@@ -383,9 +391,12 @@ Describe 'Common' {
             return [DateTime]::Parse('Sunday, 30 January 2022 11:48:16')
          }
 
-         $output = _showModuleLoadingMessages -ModuleVersion '7.9.0'
+         $null = _showModuleLoadingMessages -ModuleVersion '7.9.0'
 
-         ($output | Where-Object { $_ -like '*Message for minimum version 7.8.0 to maximum version 8.0.0' } ).Count | Should -BeExactly 1
+         Should -Invoke Write-Information -Exactly -Scope It -Times 1 -ParameterFilter {
+            $Message -like '*Message for minimum version 7.8.0 to maximum version 8.0.0'
+         }
+
       }
 
       It 'should show only messages after 2021' {
@@ -398,9 +409,15 @@ Describe 'Common' {
 
          $output = _showModuleLoadingMessages -ModuleVersion '7.6.0'
 
-         $output.Count | Should -BeExactly 2
-         ($output | Where-Object { $_ -like '*Message for minimum version 7.0.0' } ).Count | Should -BeExactly 1
-         ($output | Where-Object { $_ -like '*Message for minimum version 5.6.0' } ).Count | Should -BeExactly 1
+
+         Should -Invoke Write-Information -Exactly -Scope It -Times 1 -ParameterFilter {
+            $Message -like '*Message for minimum version 7.0.0'
+         }
+
+         Should -Invoke Write-Information -Exactly -Scope It -Times 1 -ParameterFilter {
+            $Message -like '*Message for minimum version 5.6.0'
+         }
+
       }
 
       It 'should thow when not version number' {
@@ -415,20 +432,23 @@ Describe 'Common' {
             -ParameterFilter { $Uri -eq 'https://api.github.com/repos/MethodsAndPractices/vsteam/releases/latest' }
 
          Mock _pinpGithub { return [System.Net.NetworkInformation.IPStatus]::Success }
+
+         Mock Write-Information { return "Message" }
       }
 
       It 'should show module update message when not' {
 
-         $output = _checkForModuleUpdates -ModuleVersion '7.3.0'
+         $null = _checkForModuleUpdates -ModuleVersion '7.3.0'
 
-         $output.Count | Should -BeExactly 2
+         Should -Invoke Write-Information -Exactly -Scope It -Times 2
+
       }
 
       It 'should not show module update message when up-to-date' {
 
-         $output = _checkForModuleUpdates -ModuleVersion '7.5.0'
+         $null = _checkForModuleUpdates -ModuleVersion '7.5.0'
+         Should -Invoke Write-Information -Exactly -Scope It -Times 0
 
-         $output.Count | Should -BeExactly 0
       }
 
       It 'should thow when not version number' {
