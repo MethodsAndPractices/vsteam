@@ -12,7 +12,7 @@
    RootModule           = 'VSTeam.psm1'
 
    # Version number of this module.
-   ModuleVersion        = '7.5.0'
+   ModuleVersion        = '7.6.0'
 
    # Supported PSEditions
    CompatiblePSEditions = @('Core', 'Desktop')
@@ -21,13 +21,13 @@
    GUID                 = '210e95b1-50bb-44da-a993-f567f4574214'
 
    # Author of this module
-   Author               = '@DonovanBrown'
+   Author               = 'Donovan Brown (@DonovanBrown), Sebastian Schütze (RazorSPoint)'
 
    # Company or vendor of this module
    CompanyName          = ''
 
    # Copyright statement for this module
-   Copyright            = '(c) 2020 Donovan Brown. All rights reserved.'
+   Copyright            = '(c) 2022 Donovan Brown. All rights reserved.'
 
    # Description of the functionality provided by this module
    Description          = 'Adds functionality for working with Azure DevOps and Team Foundation Server.'
