@@ -40,7 +40,7 @@ Removes Test User from the Endpoint Administrators group.
 
 ## RELATED LINKS
 
-<!-- #include "./common/related.md" -->
+
 
 [Get-VsTeamUser](Get-VsTeamUser.md)
 

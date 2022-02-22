@@ -64,7 +64,7 @@ Position: 1
 
 ## RELATED LINKS
 
-<!-- #include "./common/related.md" -->
+
 
 [Get-VSTeam](Get-VSTeam.md)
 

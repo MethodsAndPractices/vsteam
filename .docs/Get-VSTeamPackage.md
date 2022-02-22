@@ -156,5 +156,3 @@ Parameter Sets: List
 ## RELATED LINKS
 
 [Add-VSTeamFeed](Add-VSTeamFeed.md)
-
-<!-- #include "./common/related.md" -->

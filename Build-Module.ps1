@@ -127,14 +127,7 @@ Merge-File -inputFile ./config.json -outputDir $output
 # Build the help
 if ($buildHelp.IsPresent) {
    Write-Output 'Processing: External help file'
-   Push-Location
-   Set-Location ./.docs
-   Try {
-      ./gen-help.ps1
-   }
-   Finally {
-      Pop-Location
-   }
+   ./tools/scripts/Update-Help.ps1 -DocsInputPath '.docs' -OutputPath 'docs'  -HelpFilePath 'dist/en-US/'
 }
 
 Write-Output 'Publishing: About help files'

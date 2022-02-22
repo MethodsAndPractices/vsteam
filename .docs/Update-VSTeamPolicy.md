@@ -80,7 +80,7 @@ Required: True
 
 ## RELATED LINKS
 
-<!-- #include "./common/related.md" -->
+
 
 [Get-VSTeamPolicy](Get-VSTeamPolicy.md)
 

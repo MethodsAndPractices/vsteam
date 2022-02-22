@@ -66,7 +66,7 @@ System.String
 
 ## RELATED LINKS
 
-<!-- #include "./common/related.md" -->
+
 
 [Add-VSTeamTaskGroup](Add-VSTeamTaskGroup.md)
 

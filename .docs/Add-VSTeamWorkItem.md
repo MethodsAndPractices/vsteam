@@ -140,5 +140,3 @@ Any of the basic work item parameters defined in this method, will cause an exce
 <!-- #include "./common/prerequisites.md" -->
 
 ## RELATED LINKS
-
-<!-- #include "./common/related.md" -->

@@ -140,7 +140,7 @@ Accept wildcard characters: False
 
 ## RELATED LINKS
 
-<!-- #include "./common/related.md" -->
+
 
 [Add-VSTeamTaskGroup](Add-VSTeamTaskGroup.md)
 

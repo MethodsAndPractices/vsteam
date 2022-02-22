@@ -48,7 +48,7 @@ Parameter Sets: ByIdentifier
 
 ## RELATED LINKS
 
-<!-- #include "./common/related.md" -->
+
 
 [Get-VSTeamWorkItemTag](Get-VSTeamWorkItemTag.md)
 

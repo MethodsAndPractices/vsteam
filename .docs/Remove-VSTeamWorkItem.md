@@ -76,5 +76,3 @@ If you do not set the default project by called Set-VSTeamDefaultProject before 
 <!-- #include "./common/prerequisites.md" -->
 
 ## RELATED LINKS
-
-<!-- #include "./common/related.md" -->

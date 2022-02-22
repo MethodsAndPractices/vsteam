@@ -83,7 +83,7 @@ Beware that these operations are potentially producing costs. This is why you ne
 
 ## RELATED LINKS
 
-<!-- #include "./common/related.md" -->
+
 
 [Get-VSTeamUserProfile](Get-VSTeamUserProfile.md)
 

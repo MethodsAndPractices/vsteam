@@ -50,7 +50,7 @@ You can pipe the WorkItem ID to this function.
 
 ## RELATED LINKS
 
-<!-- #include "./common/related.md" -->
+
 
 [Add-VSTeamWorkItem](Add-VSTeamWorkItem.md)
 

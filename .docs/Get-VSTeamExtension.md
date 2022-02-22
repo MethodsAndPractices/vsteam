@@ -73,7 +73,7 @@ Parameter Sets: List
 
 ## RELATED LINKS
 
-<!-- #include "./common/related.md" -->
+
 
 [Add-VSTeamExtension](Add-VSTeamExtension.md)
 

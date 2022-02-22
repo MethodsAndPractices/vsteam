@@ -64,6 +64,6 @@ Required: True
 
 ## RELATED LINKS
 
-<!-- #include "./common/related.md" -->
+
 
 [Get-VSTeamUserEntitlement](Get-VSTeamUserEntitlement.md)

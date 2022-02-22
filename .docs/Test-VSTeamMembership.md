@@ -32,7 +32,7 @@
 
 ## RELATED LINKS
 
-<!-- #include "./common/related.md" -->
+
 
 [Get-VsTeamUser](Get-VsTeamUser.md)
 

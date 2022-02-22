@@ -1,11 +1,11 @@
-Prerequisites: 
+Prerequisites:
 
-Set the account and version that all calls will use with Set-VSTeamAccount. If you do not set the version it will default to 3.0, TFS2017. Using the default could limit API functionality.
+Set the account and version that all calls will use with Set-VSTeamAccount.
+Default version sets to API version 3.0 (TFS2017) if not manually set.
 
-You can check what version of the API that will be called with Get-VSTeamAPIVersion, or Get-VSTeamInfo.
+tips:
 
-You can also use Set-VSTeamDefaultProject so you do not have to provide the -ProjectName parameter with the rest of the calls in the module. However, the -ProjectName parameter is dynamic and you can use tab completion to cycle through all the projects.
-
-Use Set-VSTeamDefaultAPITimeout to change the default timeout of 60 seconds for all calls.
-
-You can also use Profiles to load an account and the correct version.
+* check called version of the API with Get-VSTeamAPIVersion or Get-VSTeamInfo
+* use Set-VSTeamDefaultProject to set default project for every call
+* use Set-VSTeamDefaultAPITimeout to change the default timeout of 60 seconds for all calls.
+* use Profiles to load an account and the correct version

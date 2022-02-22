@@ -199,7 +199,7 @@ System.Collections.Hashtable
 
 ## RELATED LINKS
 
-<!-- #include "./common/related.md" -->
+
 
 [Update-VSTeamVariableGroup](Update-VSTeamVariableGroup.md)
 

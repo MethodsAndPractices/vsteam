@@ -46,7 +46,7 @@ Required: True
 
 ## RELATED LINKS
 
-<!-- #include "./common/related.md" -->
+
 
 [Add-VSTeamExtension](Add-VSTeamExtension.md)
 

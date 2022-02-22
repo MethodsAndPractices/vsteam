@@ -101,6 +101,6 @@ You can pipe build IDs to this function.
 
 ## RELATED LINKS
 
-<!-- #include "./common/related.md" -->
+
 
 [Get-VSTeamBuild](Get-VSTeamBuild.md)

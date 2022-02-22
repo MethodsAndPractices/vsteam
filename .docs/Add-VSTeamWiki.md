@@ -89,7 +89,7 @@ Parameter Sets: codeWiki
 
 ## RELATED LINKS
 
-<!-- #include "./common/related.md" -->
+
 
 [Get-VSTeamWiki](Get-VSTeamWiki.md)
 

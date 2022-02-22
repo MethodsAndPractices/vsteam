@@ -60,7 +60,7 @@ Required: true
 
 ## RELATED LINKS
 
-<!-- #include "./common/related.md" -->
+
 
 [Get-VSTeamUserProfile](Get-VSTeamUserProfile.md)
 
