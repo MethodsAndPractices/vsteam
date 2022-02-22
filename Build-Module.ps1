@@ -140,7 +140,7 @@ Write-Output '  Updating: Functions To Export'
 $newValue = ((Get-ChildItem -Path "./Source/Public" -Filter '*.ps1').BaseName |
    ForEach-Object -Process { Write-Output "'$_'" }) -join ','
 
-(Get-Content "./Source/VSTeam.psd1") -Replace ("FunctionsToExport.+", "FunctionsToExport = ($newValue)") | Set-Content "$output/VSTeam.psd1"
+(Get-Content "./Source/VSTeam.psd1") -Replace ("FunctionsToExport.+", "FunctionsToExport = ($newValue)") | Set-Content "$output/VSTeam.psd1" -Encoding utf8BOM
 
 if (-not $skipLibBuild.IsPresent) {
    Write-Output "  Building: C# project ($configuration config)"
