@@ -2,13 +2,38 @@
 
 ## 7.6.0
 
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/452) from [Sebastian Schütze](https://github.com/SebastianSchuetze) the following:
+
+- Reworked the notes and related links section of every cmdlet to improve help [#436](https://github.com/MethodsAndPractices/vsteam/issues/436).
+
+
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/451) from [Sebastian Schütze](https://github.com/SebastianSchuetze) the following:
+
+- Fixed unit tests not running locally [#450](https://github.com/MethodsAndPractices/vsteam/issues/450).
+
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/440) from [Sebastian Schütze](https://github.com/SebastianSchuetze) the following:
+
+- Added breaking change warning and new version notification on module load [#438](https://github.com/MethodsAndPractices/vsteam/issues/450). 
+
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/448) from [Sebastian Schütze](https://github.com/SebastianSchuetze) the following:
+
+- Improved project readme to improve readability and presentation
+
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/445) from [Sebastian Schütze](https://github.com/SebastianSchuetze) the following:
+
+- Added new issue templates for feature requests and bug reports
+
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/439) from [Sebastian Schütze](https://github.com/SebastianSchuetze) the following:
+
+- Added .devContainer for vscode for project
+
 Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/418) from [Sander Holvoet](https://github.com/smholvoet) which included the following:
 
-- Added `Get-VSTeamWorkItemTag`, `Update-VSTeamWorkItemTag` and `Remove-VSTeamWorkItemTag` cmdlets which  allow you to [manage work item tags]([#419](https://github.com/MethodsAndPractices/vsteam/issues/419).
+- Added `Get-VSTeamWorkItemTag`, `Update-VSTeamWorkItemTag` and `Remove-VSTeamWorkItemTag` cmdlets which  allow you to manage work item tags [#419](https://github.com/MethodsAndPractices/vsteam/issues/419).
 
 Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/437) from [Sebastian Schütze](https://github.com/SebastianSchuetze) which included the following:
 
-- Added Parameter `Branch` to `Test-VSTeamYamlPipeline` to test yaml for a specific branch [manage work item tags]([#428](https://github.com/MethodsAndPractices/vsteam/issues/428).
+- Added Parameter `Branch` to `Test-VSTeamYamlPipeline` to test yaml for a specific branch [#428](https://github.com/MethodsAndPractices/vsteam/issues/428).
 
 ## 7.5.0
 
