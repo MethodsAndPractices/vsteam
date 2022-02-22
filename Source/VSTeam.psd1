@@ -21,7 +21,7 @@
    GUID                 = '210e95b1-50bb-44da-a993-f567f4574214'
 
    # Author of this module
-   Author               = 'Donovan Brown (@DonovanBrown), Sebastian Schütze (RazorSPoint)'
+   Author               = 'Donovan Brown (@DonovanBrown), Sebastian Schütze (@RazorSPoint)'
 
    # Company or vendor of this module
    CompanyName          = ''
