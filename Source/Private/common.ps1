@@ -1085,7 +1085,7 @@ function _pinpGithub {
 
 function _showModuleLoadingMessages {
    [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSReviewUnusedParameter', '',
-   Justification = 'False positive. Parameter is being used, but not catched when used in script blocks. see: https://github.com/PowerShell/PSScriptAnalyzer/issues/1472')]
+      Justification = 'False positive. Parameter is being used, but not catched when used in script blocks. see: https://github.com/PowerShell/PSScriptAnalyzer/issues/1472')]
    [CmdletBinding()]
    param (
       # version of the module
@@ -1099,7 +1099,7 @@ function _showModuleLoadingMessages {
          # catch if web request fails. Invoke-WebRequest does not have a ErrorAction parameter
          try {
 
-            $moduleMessagesRes = (Invoke-RestMethod "https://raw.githubusercontent.com/MethodsAndPractices/vsteam/topic/addModuleLoadingNotifications/.github/moduleMessages.json")
+            $moduleMessagesRes = (Invoke-RestMethod "https://raw.githubusercontent.com/MethodsAndPractices/vsteam/trunk/.github/moduleMessages.json")
 
             # don't show messages if module has not the specified version
             $filteredMessages = $moduleMessagesRes | Where-Object {
@@ -1119,7 +1119,7 @@ function _showModuleLoadingMessages {
 
             # dont show messages if display until date is in the past
             $currentDate = Get-Date
-            $filteredMessages = $filteredMessages | Where-Object {$currentDate -le ([DateTime]::Parse($_.toDate))
+            $filteredMessages = $filteredMessages | Where-Object { $currentDate -le ([DateTime]::Parse($_.toDate))
             }
 
             # stop processing if no messages left
@@ -1131,14 +1131,12 @@ function _showModuleLoadingMessages {
                $messageFormat = "{0}: {1}"
                Write-Information ($messageFormat -f $_.type.ToUpper(), $_.msg) -InformationAction Continue
             }
-
-
-
          }
          catch {
             Write-Debug "Error: $_"
          }
-      }else{
+      }
+      else {
          Write-Debug "Client is offline. Skipping module messages"
       }
    }
@@ -1146,7 +1144,7 @@ function _showModuleLoadingMessages {
 
 function _checkForModuleUpdates {
    [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSReviewUnusedParameter', '',
-   Justification = 'False positive. Parameter is being used, but not catched when used in script blocks. see: https://github.com/PowerShell/PSScriptAnalyzer/issues/1472')]
+      Justification = 'False positive. Parameter is being used, but not catched when used in script blocks. see: https://github.com/PowerShell/PSScriptAnalyzer/issues/1472')]
    [CmdletBinding()]
    param (
       # version of the module
@@ -1176,7 +1174,8 @@ function _checkForModuleUpdates {
          catch {
             Write-Debug "Error: $_"
          }
-      }else{
+      }
+      else {
          Write-Debug "Client is offline. Skipping module updates check"
       }
    }
