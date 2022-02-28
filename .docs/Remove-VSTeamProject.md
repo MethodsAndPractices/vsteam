@@ -56,6 +56,6 @@ This will remove all projects
 
 ## RELATED LINKS
 
-<!-- #include "./common/related.md" -->
+
 
 [Add-VSTeamProject](Add-VSTeamProject.md)

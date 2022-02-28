@@ -48,7 +48,7 @@ You can pipe the release ID to this function.
 
 ## RELATED LINKS
 
-<!-- #include "./common/related.md" -->
+
 
 [Add-VSTeamRelease](Add-VSTeamRelease.md)
 

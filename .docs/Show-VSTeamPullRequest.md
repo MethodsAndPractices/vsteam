@@ -55,6 +55,6 @@ You can pipe the pull request ID to this function.
 
 ## RELATED LINKS
 
-<!-- #include "./common/related.md" -->
+
 
 [Get-VSTeamPullRequest](Get-VSTeamPullRequest.md)

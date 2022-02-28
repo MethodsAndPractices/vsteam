@@ -15,6 +15,17 @@
 # Load the correct version of the environment variable
 Set-VSTeamAPIVersion -Target $([vsteam_lib.Versions]::Version)
 
+#compare versions and notify user
+# new versions for the module are only checked if $env:VSTEAM_NO_UPDATE_MESSAGE is not set
+if(($env:VSTEAM_NO_UPDATE_MESSAGE -eq $false) -or ($null -eq $env:VSTEAM_NO_UPDATE_MESSAGE)) {
+   _checkForModuleUpdates -ModuleVersion ([version][vsteam_lib.Versions]::ModuleVersion) -ErrorAction Continue
+}
+
+# display custom message if set and not $true
+if(($env:VSTEAM_NO_MODULE_MESSAGES -eq $false) -or ($null -eq $env:VSTEAM_NO_MODULE_MESSAGES)) {
+   _showModuleLoadingMessages -ModuleVersion ([version][vsteam_lib.Versions]::ModuleVersion) -ErrorAction Continue
+}
+
 # Check to see if the user stored the default project in an environment variable
 if ($null -ne $env:TEAM_PROJECT) {
    # Make sure the value in the environment variable still exisits.

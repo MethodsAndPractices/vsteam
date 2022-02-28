@@ -73,7 +73,7 @@ This function is a wrapper of the base function Add-VSTeamClassificationNode.
 
 ## RELATED LINKS
 
-<!-- #include "./common/related.md" -->
+
 
 [Add-VSTeamClassificationNode](Add-VSTeamClassificationNode.md)
 

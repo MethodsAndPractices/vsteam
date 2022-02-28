@@ -54,7 +54,7 @@ This is a wrapper function for Get-VSTeamClassificationNode
 
 ## RELATED LINKS
 
-<!-- #include "./common/related.md" -->
+
 
 [Get-VSTeamClassificationNode](Get-VSTeamClassificationNode.md)
 

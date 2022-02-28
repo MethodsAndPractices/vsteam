@@ -71,7 +71,7 @@ This function is a wrapper of the base function Remove-VSTeamClassificationNode.
 
 ## RELATED LINKS
 
-<!-- #include "./common/related.md" -->
+
 
 [Remove-VSTeamClassificationNode](Remove-VSTeamClassificationNode.md)
 

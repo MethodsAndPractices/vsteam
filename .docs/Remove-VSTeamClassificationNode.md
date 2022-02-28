@@ -75,7 +75,7 @@ This function is the base function for Remove-VSTeamArea and Remove-VSTeamIterat
 
 ## RELATED LINKS
 
-<!-- #include "./common/related.md" -->
+
 
 [Remove-VSTeamArea](Remove-VSTeamArea.md)
 

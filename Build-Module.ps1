@@ -127,14 +127,7 @@ Merge-File -inputFile ./config.json -outputDir $output
 # Build the help
 if ($buildHelp.IsPresent) {
    Write-Output 'Processing: External help file'
-   Push-Location
-   Set-Location ./.docs
-   Try {
-      ./gen-help.ps1
-   }
-   Finally {
-      Pop-Location
-   }
+   ./tools/scripts/Update-Help.ps1 -DocsInputPath '.docs' -OutputPath 'docs'  -HelpFilePath 'dist/en-US/'
 }
 
 Write-Output 'Publishing: About help files'
@@ -147,7 +140,7 @@ Write-Output '  Updating: Functions To Export'
 $newValue = ((Get-ChildItem -Path "./Source/Public" -Filter '*.ps1').BaseName |
    ForEach-Object -Process { Write-Output "'$_'" }) -join ','
 
-(Get-Content "./Source/VSTeam.psd1") -Replace ("FunctionsToExport.+", "FunctionsToExport = ($newValue)") | Set-Content "$output/VSTeam.psd1"
+(Get-Content "./Source/VSTeam.psd1") -Replace ("FunctionsToExport.+", "FunctionsToExport = ($newValue)") | Set-Content "$output/VSTeam.psd1" -Encoding utf8BOM
 
 if (-not $skipLibBuild.IsPresent) {
    Write-Output "  Building: C# project ($configuration config)"
@@ -237,12 +230,21 @@ if ($ipmo.IsPresent -or $analyzeScript.IsPresent -or $runIntegrationTests.IsPres
 # run PSScriptAnalyzer
 if ($analyzeScript.IsPresent) {
    Write-Output "Starting static code analysis..."
-   if ($null -eq $(Get-Module -Name PSScriptAnalyzer)) {
+   if ($null -eq $(Get-Module -Name PSScriptAnalyzer -ListAvailable)) {
       Install-Module -Name PSScriptAnalyzer -Repository PSGallery -Force -Scope CurrentUser
    }
 
+
    $r = Invoke-ScriptAnalyzer -Path $output -Recurse
-   $r | ForEach-Object { Write-Host "##vso[task.logissue type=$($_.Severity);sourcepath=$($_.ScriptPath);linenumber=$($_.Line);columnnumber=$($_.Column);]$($_.Message)" }
+   $r | ForEach-Object {
+
+      $severity = ([string]$_.Severity).ToLower()
+      if ($severity -eq 'information') {
+         $severity = "notice"
+      }
+
+      Write-Host "::$severity file=$($_.ScriptPath),line=$($_.Line),col=$($_.Column)::$($_.Message)"
+   }
    Write-Output "Static code analysis complete."
 }
 

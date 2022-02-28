@@ -82,7 +82,7 @@ This function is a wrapper of the base function Add-VSTeamClassificationNode.
 
 ## RELATED LINKS
 
-<!-- #include "./common/related.md" -->
+
 
 [Add-VSTeamArea](Add-VSTeamArea.md)
 

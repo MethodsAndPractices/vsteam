@@ -210,7 +210,7 @@ function _getApiVersion {
          'DistributedTaskReleased', 'VariableGroups', 'Tfvc',
          'Packaging', 'MemberEntitlementManagement',
          'ExtensionsManagement', 'ServiceEndpoints', 'Graph',
-         'TaskGroups', 'Policy', 'Processes', 'HierarchyQuery', 'Pipelines', 'Billing', 'Wiki','WorkItemTracking')]
+         'TaskGroups', 'Policy', 'Processes', 'HierarchyQuery', 'Pipelines', 'Billing', 'Wiki', 'WorkItemTracking')]
       [string] $Service,
 
       [parameter(ParameterSetName = 'Target')]
@@ -1060,9 +1060,9 @@ function _getBillingToken {
    param (
       #billing token can have different scopes. They are defined by named token ids.
       #They should be validated to be specific by it's name
-      [Parameter(Mandatory=$true)]
+      [Parameter(Mandatory = $true)]
       [string]
-      [ValidateSet('AzCommDeploymentProfile','CommerceDeploymentProfile')]
+      [ValidateSet('AzCommDeploymentProfile', 'CommerceDeploymentProfile')]
       $NamedTokenId
    )
 
@@ -1083,4 +1083,112 @@ function _getBillingToken {
       -body ($sessionToken | ConvertTo-Json -Depth 50 -Compress)
 
    return $billingToken
+}
+
+# pin if github is availabe and client has access to github
+function _pinpGithub {
+   Write-Verbose "Checking if client is online"
+   $pingGh = [System.Net.NetworkInformation.Ping]::new()
+   [System.Net.NetworkInformation.PingReply]$reply = $pingGh.Send('github.com', 150)
+   return $reply.Status
+}
+
+function _showModuleLoadingMessages {
+   [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSReviewUnusedParameter', '',
+   Justification = 'False positive. Parameter is being used, but not catched when used in script blocks. see: https://github.com/PowerShell/PSScriptAnalyzer/issues/1472')]
+   [CmdletBinding()]
+   param (
+      # version of the module
+      [Parameter(Mandatory = $true)]
+      [version]
+      $ModuleVersion
+   )
+
+   process {
+      if ((_pinpGithub) -eq [System.Net.NetworkInformation.IPStatus]::Success) {
+         # catch if web request fails. Invoke-WebRequest does not have a ErrorAction parameter
+         try {
+
+            $moduleMessagesRes = (Invoke-RestMethod "https://raw.githubusercontent.com/MethodsAndPractices/vsteam/topic/addModuleLoadingNotifications/.github/moduleMessages.json")
+
+            # don't show messages if module has not the specified version
+            $filteredMessages = $moduleMessagesRes | Where-Object {
+
+               $returnMessage = $true
+
+               if (-not [String]::IsNullOrEmpty($_.displayFromVersion)) {
+                  $returnMessage = ([version]$_.displayFromVersion) -le $ModuleVersion
+               }
+
+               if (-not [String]::IsNullOrEmpty($_.displayToVersion) -and $returnMessage -eq $true) {
+                  $returnMessage = ([version]$_.displayToVersion) -ge $ModuleVersion
+               }
+
+               return $returnMessage
+            }
+
+            # dont show messages if display until date is in the past
+            $currentDate = Get-Date
+            $filteredMessages = $filteredMessages | Where-Object {$currentDate -le ([DateTime]::Parse($_.toDate))
+            }
+
+            # stop processing if no messages left
+            if ($null -eq $filteredMessages -or $filteredMessages.Count -eq 0) {
+               return
+            }
+
+            $filteredMessages | ForEach-Object {
+               $messageFormat = "{0}: {1}"
+               Write-Information ($messageFormat -f $_.type.ToUpper(), $_.msg) -InformationAction Continue
+            }
+
+
+
+         }
+         catch {
+            Write-Debug "Error: $_"
+         }
+      }else{
+         Write-Debug "Client is offline. Skipping module messages"
+      }
+   }
+}
+
+function _checkForModuleUpdates {
+   [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSReviewUnusedParameter', '',
+   Justification = 'False positive. Parameter is being used, but not catched when used in script blocks. see: https://github.com/PowerShell/PSScriptAnalyzer/issues/1472')]
+   [CmdletBinding()]
+   param (
+      # version of the module
+      [Parameter(Mandatory = $true)]
+      [version]
+      $ModuleVersion
+   )
+
+   process {
+
+      # check if client has online access
+      if ((_pinpGithub) -eq [System.Net.NetworkInformation.IPStatus]::Success) {
+
+         # catch if web request fails. Invoke-WebRequest does not have a ErrorAction parameter
+         try {
+            Write-Verbose "Checking if module is up to date"
+            $ghLatestRelease = Invoke-RestMethod "https://api.github.com/repos/MethodsAndPractices/vsteam/releases/latest"
+
+            [version]$latestVersion = $ghLatestRelease.tag_name -replace "v", ""
+            [version]$currentVersion = $ModuleVersion
+
+            if ($currentVersion -lt $latestVersion) {
+               Write-Information "New version available: $latestVersion" -InformationAction Continue
+               Write-Information "Run to update: Update-Module -Name VSTeam -RequiredVersion $latestVersion `n" -InformationAction Continue
+            }
+         }
+         catch {
+            Write-Debug "Error: $_"
+         }
+      }else{
+         Write-Debug "Client is offline. Skipping module updates check"
+      }
+   }
+
 }

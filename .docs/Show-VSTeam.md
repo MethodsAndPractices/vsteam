@@ -33,5 +33,3 @@ This will open a browser to the TFS or AzD site
 <!-- #include "./common/prerequisites.md" -->
 
 ## RELATED LINKS
-
-<!-- #include "./common/related.md" -->

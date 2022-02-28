@@ -62,7 +62,7 @@ This function is the base function for Get-VSTeamArea and Get-VSTeamIteration.
 
 ## RELATED LINKS
 
-<!-- #include "./common/related.md" -->
+
 
 [Get-VSTeamArea](Get-VSTeamArea.md)
 

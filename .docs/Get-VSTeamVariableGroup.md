@@ -88,7 +88,7 @@ Accept wildcard characters: False
 
 ## RELATED LINKS
 
-<!-- #include "./common/related.md" -->
+
 
 [Add-VSTeamVariableGroup](Add-VSTeamVariableGroup.md)
 

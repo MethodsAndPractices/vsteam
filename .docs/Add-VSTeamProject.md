@@ -82,7 +82,7 @@ Type: SwitchParameter
 
 ## RELATED LINKS
 
-<!-- #include "./common/related.md" -->
+
 
 [Remove-VSTeamProject](Remove-VSTeamProject.md)
 

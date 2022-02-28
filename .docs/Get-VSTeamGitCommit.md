@@ -239,5 +239,3 @@ You can pipe a repository ID to this function.
 <!-- #include "./common/prerequisites.md" -->
 
 ## RELATED LINKS
-
-<!-- #include "./common/related.md" -->

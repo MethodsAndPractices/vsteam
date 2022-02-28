@@ -96,7 +96,7 @@ You can pipe build definition IDs to this function.
 
 ## RELATED LINKS
 
-<!-- #include "./common/related.md" -->
+
 
 [Add-VSTeamBuildDefinition](Add-VSTeamBuildDefinition.md)
 

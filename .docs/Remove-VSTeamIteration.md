@@ -68,7 +68,7 @@ This function is a wrapper of the base function Remove-VSTeamClassificationNode.
 
 ## RELATED LINKS
 
-<!-- #include "./common/related.md" -->
+
 
 [Remove-VSTeamArea](Add-VSTeamArea.md)
 

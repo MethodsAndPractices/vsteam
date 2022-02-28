@@ -1,0 +1,25 @@
+name: Feature request 🚀
+description: Suggest an idea for this project
+labels: ["feature request"]
+body:
+- type: textarea
+  id: proposal
+  attributes:
+    label: Proposal
+    description: "What would you like to have as a feature (cmdlet or improved cmdlet)?"
+    placeholder: "A clear and concise description of what you want to happen."
+  validations:
+    required: true
+- type: textarea
+  id: solved-problem
+  attributes:
+    label: Solved Problem
+    description: "How would this help you with your automation?"
+    placeholder: "Tell us more what you'd like to achieve."
+  validations:
+    required: false
+- type: textarea
+  id: other
+  attributes:
+    label: Additional info / code snippets?
+    description: "Anything that does not exactly fit like already suggested code snippets for the feature or your research that might help to get started."

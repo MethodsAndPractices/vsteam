@@ -78,5 +78,3 @@ Accept pipeline input: false
 ## RELATED LINKS
 
 [Add-VSTeamFeed](Add-VSTeamFeed.md)
-
-<!-- #include "./common/related.md" -->

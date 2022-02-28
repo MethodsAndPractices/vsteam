@@ -64,7 +64,12 @@ Every new function must have help that explains how to use it. The help can be a
 
 I have found writing the help before I start to write the function saves me a lot of time. This forces me to think of all the use cases of the function and which parameters I plan to support. It also allows me to get the boring part out of the way so I end on a high note writing the code.
 
-You can run gen-help.ps1 from the .docs folder to make sure you can generate the help file.
+You can run the snippet below to make sure you can generate the help file.
+
+```powershell
+#only generates the help files. This is an incomplete build
+.\Build-Module.ps1 -buildHelp -skipLibBuild
+```
 
 ### Write Unit Test
 

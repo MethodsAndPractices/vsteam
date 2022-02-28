@@ -79,6 +79,9 @@ jobs:
         $pesterArgs.TestResult.OutputFormat = 'JUnitXml'
         $pesterArgs.TestResult.OutputPath = 'test-results.xml'
 
+        $env:VSTEAM_NO_UPDATE_MESSAGE = $true
+        $env:VSTEAM_NO_MODULE_MESSAGES = $true
+
         Invoke-Pester -Configuration $pesterArgs
 
     # - name: Publish PowerShell test results
@@ -234,6 +237,9 @@ jobs:
         $pesterArgs.TestResult.Enabled = $true
         $pesterArgs.TestResult.OutputFormat = 'JUnitXml'
         $pesterArgs.TestResult.OutputPath = 'test-results.xml'
+
+        $env:VSTEAM_NO_UPDATE_MESSAGE = $true
+        $env:VSTEAM_NO_MODULE_MESSAGES = $true
 
         Invoke-Pester -Configuration $pesterArgs
       shell: pwsh

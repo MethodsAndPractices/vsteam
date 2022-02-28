@@ -66,7 +66,7 @@ Accept pipeline input: true (ByValue, ByPropertyName)
 
 ## RELATED LINKS
 
-<!-- #include "./common/related.md" -->
+
 
 [Get-VSTeamPackage](Get-VSTeamPackage.md)
 
