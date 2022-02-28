@@ -117,6 +117,10 @@ Equality operators relating to searching user entitlements seperated by and clau
 
 A valid query could be: (licenseId eq 'Account-Stakeholder' or (licenseId eq 'Account-Express' and licenseStatus eq 'Disabled')) and name eq 'test' and userType eq 'guest'.
 
+Currently, filter names and values must match exactly the case. i.e.:
+* LicenseID will throw Invalid filter message. 
+* licenseId eq 'account-stakeholder' will return an empty list
+
 ```yaml
 Type: string
 Parameter Sets: PagedFilter
@@ -129,11 +133,12 @@ Default value: None
 Filters based on license assignment using license names
 
 The acceptable values for this parameter are:
-- Stakeholder: Stakeholder
-- Express: Basic
-- Advanced: Basic + Test Plans
+- Account-Stakeholder: Stakeholder
+- Account-Express: Basic
+- Account-Advanced: Basic + Test Plans
 
 Other licenses which source (licenseSource) is MSDN cannot be filtered here
+Parameter values are case sensitive
 
 ```yaml
 Type: string
@@ -147,8 +152,10 @@ Default value: None
 Filters based on user type
 
 The acceptable values for this parameter are:
-- Member
-- Guest
+- member
+- guest
+
+Parameter values are case sensitive
 
 ```yaml
 Type: string

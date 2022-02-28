@@ -175,9 +175,19 @@ function _supportsSecurityNamespace {
 }
 
 function _supportsMemberEntitlementManagement {
+   [CmdletBinding()]
+   param(
+      [string]$expression = $null
+   )
    _hasAccount
-   if (-not $(_getApiVersion MemberEntitlementManagement)) {
+   $apiVer = _getApiVersion MemberEntitlementManagement
+   if (-not $apiVer) {
       throw 'This account does not support Member Entitlement.'
+   } elseif ($null -ne $expression) {
+      $isMatch = Invoke-Expression "'$apiVer' $expression"
+      if (-not $isMatch) {
+         throw "EntitlementManagemen version must match $expression for this call, current value $apiVer"
+      }
    }
 }
 
