@@ -1,7 +1,7 @@
 Prerequisites:
 
 Set the account and version that all calls will use with Set-VSTeamAccount.
-Default version sets to API version 3.0 (TFS2017) if not manually set.
+Default version sets to API version 3.0 (AzD2019) if not manually set.
 
 tips:
 

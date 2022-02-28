@@ -10,7 +10,7 @@
 
 ## DESCRIPTION
 
-The cmdlet adds a new connection between TFS/AzD and a Kubernetes cluster using kubeconfig json.
+The cmdlet adds a new connection between Azure DevOps and a Kubernetes cluster using kubeconfig json.
 
 This is only used when using the Kubernetes tasks.
 

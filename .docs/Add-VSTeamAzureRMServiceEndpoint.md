@@ -10,7 +10,7 @@
 
 ## DESCRIPTION
 
-The cmdlet adds a new connection between TFS/AzD and Azure using the Azure Resource Manager connection type.
+The cmdlet adds a new connection between Azure DevOps and Azure using the Azure Resource Manager connection type.
 
 ## EXAMPLES
 

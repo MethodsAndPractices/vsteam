@@ -55,7 +55,7 @@ Required: True
 
 ### PersonalAccessToken
 
-The personal access token from AzD/TFS to use to access this account.
+The personal access token from Azure DevOps to use to access this account.
 
 ```yaml
 Type: String

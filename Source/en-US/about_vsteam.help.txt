@@ -2,8 +2,7 @@ TOPIC
     VSTeam
 
 SHORT DESCRIPTION
-    Provides access to your Azure DevOps (AzD) and Team
-    Foundation Server (TFS) from macOS, Linux and Windows.
+    Provides access to your Azure DevOps (AzD) and Azure DevOps Server from macOS, Linux and Windows.
 
 LONG DESCRIPTION
     Add an account using Set-VSTeamAccount and then you can call the rest of the
@@ -41,7 +40,7 @@ LONG DESCRIPTION
     Graph
     Tfvc                           3.0
     VariableGroups
-    Version                        TFS2017
+    Version                        AzD2019
     MemberEntitlementManagement
 
     To use different API versions you can update the version in the version table.
@@ -49,9 +48,9 @@ LONG DESCRIPTION
     PS C:\> Set-VSTeamAPIVersion -Service Build -Version '4.0'
 
     You can also use Set-VSTeamAPIVersion to set all the API versions for either
-    TFS2017, TFS2017U1, TFS2017U2, TFS2017U3, TFS2018, TFS2018U1, TFS2018U2, TFS2018U3, AzD2019, AzD2019U1 or AzD. TFS2017 is the default.
+    AzD2019, AzD2019U1 or AzD.
 
-    PS C:\> Set-VSTeamAPIVersion TFS2018U3
+    PS C:\> Set-VSTeamAPIVersion AzD2019
 
 
 EXAMPLES
@@ -61,10 +60,10 @@ EXAMPLES
 
     Get-VSTeamProject | Remove-VSTeamProject -Force
 
-    This will delete all the projects in your AzD for TFS. Use with caution.
+    This will delete all the projects in your Azure DevOps. Use with caution.
 
 KEYWORDS
-    Team Services, VSTS, TFS, VSO, TFS, Azure DevOps Server, Azure DevOps Services, AzDO, AzD
+    Azure DevOps Server, Azure DevOps Services, AzDO, AzD, Team Services, VSTS, TFS, VSO
 
 SEE ALSO
     Set-VSTeamAccount

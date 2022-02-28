@@ -1,1 +1,1 @@
-Opens TFS or AzD site in the default browser.
+Opens Azure DevOps site in the default browser.

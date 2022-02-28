@@ -34,7 +34,7 @@ This command gets a list of all Azure subscriptions associated with the Team Ser
 
 ## NOTES
 
-This function currently is not supported in TFS.
+This function currently is not supported in Azure DevOps.
 
 <!-- #include "./common/prerequisites.md" -->
 

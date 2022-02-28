@@ -20,7 +20,7 @@
 Show-VSTeam
 ```
 
-This will open a browser to the TFS or AzD site
+This will open a browser to the Azure DevOps site
 
 ## PARAMETERS
 

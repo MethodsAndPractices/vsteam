@@ -10,7 +10,7 @@
 
 ## DESCRIPTION
 
-The cmdlet adds a new connection between TFS/AzD and a NuGet server using the NuGet connection type.
+The cmdlet adds a new connection between Azure DevOps and a NuGet server using the NuGet connection type.
 
 This is only used when using the NuGet tasks.
 

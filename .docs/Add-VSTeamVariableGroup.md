@@ -118,7 +118,7 @@ Accept wildcard characters: False
 
 ### ProviderData
 
-The variable group ProviderData.  This parameter is not available in TFS2017. This should be $null for Vsts types.
+The variable group ProviderData. This should be $null for Vsts types.
 
 ```yaml
 Type: Hashtable
@@ -134,7 +134,7 @@ Accept wildcard characters: False
 
 ### Type
 
-The variable group type.  This parameter is not available in TFS2017; all variable groups are type Vsts in this case.
+The variable group type. All variable groups are type Vsts in this case.
 
 ```yaml
 Type: String

@@ -23,7 +23,7 @@ You will be prompted for the account name and personal access token.
 ### Example 2
 
 ```powershell
-Add-VSTeamProfile -Account mydemos -PersonalAccessToken 7a8ilh6db4aforlrnrqmdrxdztkjvcc4uhlh5vgbteserp3mziwnga -Version TFS2018
+Add-VSTeamProfile -Account mydemos -PersonalAccessToken 7a8ilh6db4aforlrnrqmdrxdztkjvcc4uhlh5vgbteserp3mziwnga -Version AzD2019
 ```
 
 Allows you to provide all the information on the command line.
@@ -34,7 +34,7 @@ Allows you to provide all the information on the command line.
 Add-VSTeamProfile -Account http://localtfs:8080/tfs/DefaultCollection -UseWindowsAuthentication
 ```
 
-On Windows, allows you use to use Windows authentication against a local TFS server.
+On Windows, allows you use to use Windows authentication against a local Azure DevOps server.
 
 ## PARAMETERS
 
@@ -47,7 +47,7 @@ Just the portion after dev.azure.com. For example in the
 following url mydemos is the account name.
 <https://dev.azure.com/mydemos>
 or
-The full Team Foundation Server (TFS) url including the collection.
+The full Team Foundation Server (Azure DevOps) url including the collection.
 <http://localhost:8080/tfs/DefaultCollection>
 
 ```yaml
@@ -74,7 +74,7 @@ Required: True
 
 ### PersonalAccessToken
 
-The personal access token from AzD/TFS to use to access this account.
+The personal access token from Azure DevOps to use to access this account.
 
 ```yaml
 Type: String
@@ -85,7 +85,7 @@ Position: 2
 
 ### UseWindowsAuthentication
 
-Allows the use of the current user's Windows credentials to authenticate against a local TFS.
+Allows the use of the current user's Windows credentials to authenticate against a local Azure DevOps.
 
 ```yaml
 Type: SwitchParameter

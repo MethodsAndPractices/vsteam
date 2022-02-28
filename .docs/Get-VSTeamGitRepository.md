@@ -20,7 +20,7 @@ Get-VSTeamGitRepository gets all the repositories in your Azure DevOps or Team F
 Get-VSTeamGitRepository
 ```
 
-This command returns all the Git repositories for your TFS or Team Services account.
+This command returns all the Git repositories for your Azure DevOps account.
 
 ### Example 2
 

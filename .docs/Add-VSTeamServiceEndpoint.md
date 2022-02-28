@@ -10,7 +10,7 @@
 
 ## DESCRIPTION
 
-The cmdlet adds a new generic connection between TFS/AzD and a third party service (see AzD for available connections).
+The cmdlet adds a new generic connection between Azure DevOps and a third party service (see AzD for available connections).
 
 ## EXAMPLES
 

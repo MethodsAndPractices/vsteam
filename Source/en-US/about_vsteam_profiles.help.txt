@@ -32,7 +32,7 @@ EXAMPLES
     This will add the account https://dev.azure.com/demonstrations/
 
 KEYWORDS
-    Team Services, VSTS, TFS, VSO, TFS, DevOps
+    Azure DevOps Server, Azure DevOps Services, AzDO, AzD, Team Services, VSTS, TFS, VSO
 
 SEE ALSO
     Set-VSTeamAccount

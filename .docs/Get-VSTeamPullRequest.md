@@ -20,7 +20,7 @@
 Get-VSTeamPullRequest
 ```
 
-This command returns all the open pull requests for your TFS or Team Services account.
+This command returns all the open pull requests for your Azure DevOps.
 
 ### Example 2
 
