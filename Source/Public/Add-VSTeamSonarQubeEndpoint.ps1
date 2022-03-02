@@ -9,7 +9,7 @@
 
 function Add-VSTeamSonarQubeEndpoint {
    [CmdletBinding(DefaultParameterSetName = 'Secure',
-    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Add-VSTeamSonarQubeEndpoint')]
+      HelpUri = 'https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Add-VSTeamSonarQubeEndpoint')]
    param(
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [string] $endpointName,
@@ -63,7 +63,7 @@ function Add-VSTeamSonarQubeEndpoint {
             $errorDetails = ConvertFrom-Json $_.ErrorDetails
             $message = $errorDetails.message
 
-            # The error message is different on TFS and VSTS
+            # The error message is different on Azure DevOps
             if ($message.StartsWith("Endpoint type couldn't be recognized 'sonarqube'") -or
                $message.StartsWith("Unable to find service endpoint type 'sonarqube'")) {
                Write-Error -Message 'The Sonarqube extension not installed. Please install from https://marketplace.visualstudio.com/items?itemName=SonarSource.sonarqube'

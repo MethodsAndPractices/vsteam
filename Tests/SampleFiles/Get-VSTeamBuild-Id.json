@@ -44,7 +44,7 @@
       "project": {
          "id": "00000000-0000-0000-0000-000000000000",
          "name": "Team Module",
-         "description": "This is a PowerShell module named Team for using TFS and VSTS from PowerShell.  The code is Open source in GitHub.",
+         "description": "This is a PowerShell module.  The code is Open source in GitHub.",
          "url": "https://dev.azure.com/LoECDA/_apis/projects/00000000-0000-0000-0000-000000000000",
          "state": "wellFormed",
          "revision": 357,
@@ -55,7 +55,7 @@
    "project": {
       "id": "00000000-0000-0000-0000-000000000000",
       "name": "Team Module",
-      "description": "This is a PowerShell module named Team for using TFS and VSTS from PowerShell.  The code is Open source in GitHub.",
+      "description": "This is a PowerShell module.  The code is Open source in GitHub.",
       "url": "https://dev.azure.com/LoECDA/_apis/projects/00000000-0000-0000-0000-000000000000",
       "state": "wellFormed",
       "revision": 357,

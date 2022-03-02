@@ -99,7 +99,7 @@ Describe 'VSTeamBuild' {
             Mock Get-VSTeamBuildDefinition { return @{ name = "MyBuildDef" } }
          }
 
-         It 'should add build by id on TFS local auth' {
+         It 'should add build by id on Azure DevOps local auth' {
             ## Act
             Add-VSTeamBuild -projectName project `
                -BuildDefinitionId 2 `
@@ -114,7 +114,7 @@ Describe 'VSTeamBuild' {
             }
          }
 
-         It 'should add build with parameters on TFS local auth' {
+         It 'should add build with parameters on Azure DevOps local auth' {
             ## Act
             Add-VSTeamBuild -projectName project `
                -BuildDefinitionId 2 `
@@ -131,7 +131,7 @@ Describe 'VSTeamBuild' {
             }
          }
 
-         It 'should add build with source branch on TFS local auth' {
+         It 'should add build with source branch on Azure DevOps local auth' {
             ## Act
             Add-VSTeamBuild -projectName project `
                -BuildDefinitionId 2 `

@@ -3,14 +3,7 @@
 # resource name: processes
 # route template: _apis/work/{resource}/{processTypeId}
 #
-# First appears in TFS 2017 U2 with same values in TFS 2017 U3:
-# resourceVersion : 1
-# minVersion      : 2.1
-# maxVersion      : 3.2
-# releasedVersion : 0.0
-# However, I was unable to get any combination of versions to work.
-#
-# TFS 2018 U1 returns values
+# e.g. TFS 2018 U1 returns values
 # resourceVersion : 1
 # minVersion      : 2.1
 # maxVersion      : 4.0
@@ -18,7 +11,7 @@
 
 function Get-VSTeamProcess {
    [CmdletBinding(DefaultParameterSetName = 'List',
-    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Get-VSTeamProcess')]
+      HelpUri = 'https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Get-VSTeamProcess')]
    [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSReviewUnusedParameter', '')]
    param(
       [Parameter(ParameterSetName = 'ByName', Position = 0)]
