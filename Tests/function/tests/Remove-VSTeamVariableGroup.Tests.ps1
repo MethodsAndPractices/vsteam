@@ -4,7 +4,7 @@ Describe 'VSTeamVariableGroup' {
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
       . "$baseFolder/Source/Public/Set-VSTeamAPIVersion.ps1"
-      
+
       Mock Invoke-RestMethod
    }
 
@@ -29,7 +29,7 @@ Describe 'VSTeamVariableGroup' {
 
       Context 'Server' {
          BeforeAll {
-            Set-VSTeamAPIVersion -Target TFS2017
+            Set-VSTeamAPIVersion -Target AzD2019
             Mock _getInstance { return 'http://localhost:8080/tfs/defaultcollection' } -Verifiable
             Mock _getApiVersion { return '3.2-preview.1' } -ParameterFilter { $Service -eq 'VariableGroups' }
          }

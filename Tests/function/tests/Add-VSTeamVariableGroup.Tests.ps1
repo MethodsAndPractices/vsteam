@@ -43,8 +43,8 @@ Describe 'VSTeamVariableGroup' {
 
             Add-VSTeamVariableGroup @testParameters
 
-            Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter { 
-               $Method -eq 'Post' 
+            Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+               $Method -eq 'Post'
             }
          }
 
@@ -67,7 +67,7 @@ Describe 'VSTeamVariableGroup' {
 
             Mock _getInstance { return 'http://localhost:8080/tfs/defaultcollection' } -Verifiable
 
-            Set-VSTeamAPIVersion -Target TFS2017
+            Set-VSTeamAPIVersion -Target AzD2019
 
             Mock Invoke-RestMethod { return $sampleFile2017.value[0] }
          }
@@ -82,12 +82,13 @@ Describe 'VSTeamVariableGroup' {
                      value = "value"
                   }
                }
+               Type        = "Vsts"
             }
 
             Add-VSTeamVariableGroup @testParameters
 
-            Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter { 
-               $Method -eq 'Post' 
+            Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+               $Method -eq 'Post'
             }
          }
       }

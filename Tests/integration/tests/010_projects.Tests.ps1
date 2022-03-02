@@ -3,9 +3,9 @@ Set-StrictMode -Version Latest
 # Controls if some tests get skipped based on API version or platform
 
 $global:skippedOnTFS = ($env:ACCT -like "http://*")
-$global:skipVariableGroups = ($env:API_VERSION -eq 'TFS2017')
-$global:skipReleaseDefs = ($env:API_VERSION -eq 'TFS2017')
-$global:skip2017Bugs = ($env:API_VERSION -eq 'TFS2017')
+$global:skipVariableGroups = ($env:API_VERSION -eq 'AzD2019')
+$global:skipReleaseDefs = ($env:API_VERSION -eq 'AzD2019')
+$global:skip2017Bugs = ($env:API_VERSION -eq 'AzD2019')
 
 Describe 'VSTeam Integration Tests' -Tag 'integration' {
    BeforeAll {
@@ -529,7 +529,7 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
             }
          }
 
-         if ($api -ne 'TFS2017') {
+         if ($api -ne 'AzD2019') {
             $parameters.Add("Type", "Vsts")
          }
 
@@ -563,7 +563,7 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
                }
             }
          }
-         if ($api -ne 'TFS2017') {
+         if ($api -ne 'AzD2019') {
             $parameters.Add("Type", "Vsts")
          }
 
@@ -725,20 +725,11 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
          $newProjectName = Get-ProjectName
       }
 
-      It 'Set-VSTeamAPIVersion to TFS2018' {
-         Set-VSTeamAPIVersion TFS2018
-
+      It 'Set-VSTeamAPIVersion to AzD2019' {
+         Set-VSTeamAPIVersion AzD2019
          $info = Get-VSTeamInfo
 
-         $info.Version | Should -Be 'TFS2018'
-      }
-
-      It 'Set-VSTeamAPIVersion to TFS2017' {
-         Set-VSTeamAPIVersion TFS2017
-
-         $info = Get-VSTeamInfo
-
-         $info.Version | Should -Be 'TFS2017'
+         $info.Version | Should -Be 'AzD2019'
       }
 
       It 'Clear-VSTeamDefaultProject should clear project' {

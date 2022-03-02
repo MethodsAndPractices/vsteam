@@ -4,7 +4,7 @@ Describe 'VSTeamUser' {
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
    }
-   
+
    Context "Get-VSTeamUser" {
       Context "Server" {
          BeforeAll {
@@ -13,7 +13,7 @@ Describe 'VSTeamUser' {
 
          Context 'Get-VSTeamUser' {
             BeforeAll {
-               Mock _getApiVersion { return 'TFS2017' }
+               Mock _getApiVersion { return 'AzD2019' }
                Mock _callAPI { throw 'Should not be called' }
                Mock _getApiVersion { return '' } -ParameterFilter { $Service -eq 'Graph' }
             }
@@ -38,7 +38,7 @@ Describe 'VSTeamUser' {
             BeforeAll {
                Mock Invoke-RestMethod { Open-SampleFile 'users.json' }
             }
-            
+
             It 'Should list users' {
                Get-VSTeamUser
 
@@ -53,7 +53,7 @@ Describe 'VSTeamUser' {
                   $Uri -like "*api-version=$(_getApiVersion Graph)*"
                }
             }
-            
+
             It 'Should return users by subjectTypes' {
                Get-VSTeamUser -SubjectTypes vss, aad
 

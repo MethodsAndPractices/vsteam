@@ -20,7 +20,7 @@ Describe "VSTeamSecurityNamespace" {
 
             Mock Invoke-RestMethod { Open-SampleFile 'securityNamespaces.json' }
             Mock Invoke-RestMethod { Open-SampleFile 'securityNamespace.single.json' } -ParameterFilter {
-               $Uri -like "*58450c49-b02d-465a-ab12-59ae512d6531*" 
+               $Uri -like "*58450c49-b02d-465a-ab12-59ae512d6531*"
             }
          }
 
@@ -53,7 +53,7 @@ Describe "VSTeamSecurityNamespace" {
          It 'by name should return namespace' {
             ## Act
             Get-VSTeamSecurityNamespace -Name "WorkItemTracking"
-       
+
             ## Assert
             Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
                $Uri -like "https://dev.azure.com/test/_apis/securitynamespaces*" -and
@@ -64,12 +64,12 @@ Describe "VSTeamSecurityNamespace" {
          It 'by list and localOnly should return namespaces' {
             ## Act
             Get-VSTeamSecurityNamespace -LocalOnly
-            
+
             ## Assert
             # With PowerShell core the order of the query string is not the
             # same from run to run!  So instead of testing the entire string
             # matches I have to search for the portions I expect but can't
-            # assume the order.          
+            # assume the order.
             Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
                $Uri -like "https://dev.azure.com/test/_apis/securitynamespaces*" -and
                $Uri -like "*api-version=$(_getApiVersion Core)*" -and
@@ -85,7 +85,7 @@ Describe "VSTeamSecurityNamespace" {
             Mock _getInstance { return 'http://localhost:8080/tfs/defaultcollection' }
 
             Mock _callAPI { throw 'Should not be called' } -Verifiable
-            Mock _getApiVersion { return 'TFS2017' }
+            Mock _getApiVersion { return 'AzD2019' }
             Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Core' }
          }
 

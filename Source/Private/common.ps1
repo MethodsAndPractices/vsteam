@@ -3,8 +3,8 @@ $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseDeclaredVarsMoreThanAssignments", "It is used in other files")]
 $profilesPath = "$HOME/vsteam_profiles.json"
 
-# This is the main function for calling TFS and VSTS. It handels the auth and format of the route.
-# If you need to call TFS or VSTS this is the function to use.
+# This is the main function for calling Azure DevOps. It handels the auth and format of the route.
+# If you need to call Azure DevOps this is the function to use.
 function _callAPI {
    [CmdletBinding()]
    param(
@@ -381,7 +381,7 @@ function _getVSTeamAPIVersion {
          return 'VSTS'
       }
       else {
-         return 'TFS2017'
+         return 'AzD2019'
       }
    }
 }
@@ -545,7 +545,7 @@ function _buildProjectNameDynamicParam {
    }
 
    $ParameterAttribute.ValueFromPipelineByPropertyName = $true
-   $ParameterAttribute.HelpMessage = "The name of the project.  You can tab complete from the projects in your Team Services or TFS account when passed on the command line."
+   $ParameterAttribute.HelpMessage = "The name of the project.  You can tab complete from the projects in your Azure DevOps account when passed on the command line."
 
    # Add the attributes to the attributes collection
    $AttributeCollection.Add($ParameterAttribute)
@@ -574,7 +574,7 @@ function _buildProjectNameDynamicParam {
 
    <#
    Builds a dynamic parameter that can be used to tab complete the ProjectName
-   parameter of functions from a list of projects from the added TFS Account.
+   parameter of functions from a list of projects from the added Azure DevOps Account.
    You must call Set-VSTeamAccount before trying to use any function that relies
    on this dynamic parameter or you will get an error.
 
@@ -621,7 +621,7 @@ function _buildProcessNameDynamicParam {
    }
 
    $ParameterAttribute.ValueFromPipelineByPropertyName = $true
-   $ParameterAttribute.HelpMessage = "The name of the process.  You can tab complete from the processes in your Team Services or TFS account when passed on the command line."
+   $ParameterAttribute.HelpMessage = "The name of the process. You can tab complete from the processes in your Azure DevOps account when passed on the command line."
 
    # Add the attributes to the attributes collection
    $AttributeCollection.Add($ParameterAttribute)
@@ -650,7 +650,7 @@ function _buildProcessNameDynamicParam {
 
    <#
    Builds a dynamic parameter that can be used to tab complete the ProjectName
-   parameter of functions from a list of projects from the added TFS Account.
+   parameter of functions from a list of projects from the added Azure DevOps Account.
    You must call Set-VSTeamAccount before trying to use any function that relies
    on this dynamic parameter or you will get an error.
 
@@ -1085,7 +1085,7 @@ function _pinpGithub {
 
 function _showModuleLoadingMessages {
    [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSReviewUnusedParameter', '',
-   Justification = 'False positive. Parameter is being used, but not catched when used in script blocks. see: https://github.com/PowerShell/PSScriptAnalyzer/issues/1472')]
+      Justification = 'False positive. Parameter is being used, but not catched when used in script blocks. see: https://github.com/PowerShell/PSScriptAnalyzer/issues/1472')]
    [CmdletBinding()]
    param (
       # version of the module
@@ -1119,7 +1119,7 @@ function _showModuleLoadingMessages {
 
             # dont show messages if display until date is in the past
             $currentDate = Get-Date
-            $filteredMessages = $filteredMessages | Where-Object {$currentDate -le ([DateTime]::Parse($_.toDate))
+            $filteredMessages = $filteredMessages | Where-Object { $currentDate -le ([DateTime]::Parse($_.toDate))
             }
 
             # stop processing if no messages left
@@ -1138,7 +1138,8 @@ function _showModuleLoadingMessages {
          catch {
             Write-Debug "Error: $_"
          }
-      }else{
+      }
+      else {
          Write-Debug "Client is offline. Skipping module messages"
       }
    }
@@ -1146,7 +1147,7 @@ function _showModuleLoadingMessages {
 
 function _checkForModuleUpdates {
    [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSReviewUnusedParameter', '',
-   Justification = 'False positive. Parameter is being used, but not catched when used in script blocks. see: https://github.com/PowerShell/PSScriptAnalyzer/issues/1472')]
+      Justification = 'False positive. Parameter is being used, but not catched when used in script blocks. see: https://github.com/PowerShell/PSScriptAnalyzer/issues/1472')]
    [CmdletBinding()]
    param (
       # version of the module
@@ -1176,7 +1177,8 @@ function _checkForModuleUpdates {
          catch {
             Write-Debug "Error: $_"
          }
-      }else{
+      }
+      else {
          Write-Debug "Client is offline. Skipping module updates check"
       }
    }

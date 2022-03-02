@@ -6,7 +6,7 @@ Describe "VSTeamGroup" {
       . "$baseFolder/Source/Public/Get-VSTeamProject.ps1"
       . "$baseFolder/Source/Public/Get-VSTeamDescriptor.ps1"
    }
-   
+
    Context 'Get-VSTeamGroup' {
       Context 'Services' {
          BeforeAll {
@@ -24,7 +24,7 @@ Describe "VSTeamGroup" {
             }
          }
 
-         It 'should return groups by project' {            
+         It 'should return groups by project' {
             Mock Get-VSTeamDescriptor { return [vsteam_lib.Descriptor]::new($(Open-SampleFile 'descriptor.scope.TestProject.json')) }
 
             Get-VSTeamGroup -ProjectName "Test Project Public"
@@ -103,7 +103,7 @@ Describe "VSTeamGroup" {
          Mock _getInstance { return 'http://localhost:8080/tfs/defaultcollection' }
          Mock _callAPI
 
-         Mock _getApiVersion { return 'TFS2017' }
+         Mock _getApiVersion { return 'AzD2019' }
          Mock _getApiVersion { return '' } -ParameterFilter { $Service -eq 'Graph' }
 
          # The Graph API is not supported on TFS
@@ -119,4 +119,3 @@ Describe "VSTeamGroup" {
       }
    }
 }
-

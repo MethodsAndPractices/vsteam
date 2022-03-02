@@ -6,14 +6,9 @@ Describe 'VSTeamAPIVersion' {
    }
 
    Context 'Set-VSTeamAPIVersion' {
-      It 'Should default to TFS2017' {
+      It 'Should default to AzD2019' {
          Set-VSTeamAPIVersion
-         [vsteam_lib.Versions]::Version | Should -Be 'TFS2017'
-      }
-
-      It 'Should return TFS2018' {
-         Set-VSTeamAPIVersion -Target TFS2018
-         [vsteam_lib.Versions]::Version | Should -Be 'TFS2018'
+         [vsteam_lib.Versions]::Version | Should -Be 'AzD2019'
       }
 
       It 'Should return AzD2019' {
