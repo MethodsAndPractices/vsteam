@@ -119,7 +119,7 @@ Describe "VSTeamUserEntitlement" -Tag 'VSTeamUserEntitlement' {
 
                # Make sure it was called with the correct URI parameters
                Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
-                  $Uri -eq "https://vsaex.dev.azure.com/test/_apis/userentitlements?api-version=$(_getApiVersion MemberEntitlementManagement)&filter=name eq 'Math'"
+                  $Uri -eq "https://vsaex.dev.azure.com/test/_apis/userentitlements?api-version=$(_getApiVersion MemberEntitlementManagement)&`$filter=name eq 'Math'"
                }
             }
 
@@ -128,7 +128,7 @@ Describe "VSTeamUserEntitlement" -Tag 'VSTeamUserEntitlement' {
 
                # Make sure it was called with the correct URI parameters. Filter parameter names are case sensitive
                Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
-                  $Uri -eq "https://vsaex.dev.azure.com/test/_apis/userentitlements?api-version=$(_getApiVersion MemberEntitlementManagement)&filter=name eq 'Math' and licenseId eq 'Account-Advanced' and userType eq 'member'"
+                  $Uri -eq "https://vsaex.dev.azure.com/test/_apis/userentitlements?api-version=$(_getApiVersion MemberEntitlementManagement)&`$filter=name eq 'Math' and licenseId eq 'Account-Advanced' and userType eq 'member'"
                }
             }
    
