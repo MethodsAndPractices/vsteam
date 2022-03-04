@@ -47,13 +47,12 @@ function Get-VSTeamUserEntitlement {
       $paramCounter = _countParameters -BoundParameters $PSBoundParameters
       $paramset = 'PagedParams', 'PagedFilter'
       if ($paramCounter -eq 0) {
-         $memberEntitlementManagementRequirement = $null
+         _supportsMemberEntitlementManagement
       } elseif ($paramset -contains $PSCmdlet.ParameterSetName) {
-         $memberEntitlementManagementRequirement = "-ge '6.0'"
+         _supportsMemberEntitlementManagement -Onwards '6.0'
       } else {
-         $memberEntitlementManagementRequirement = "-le '5.1'"
+         _supportsMemberEntitlementManagement -UpTo '5.1'
       }
-      _supportsMemberEntitlementManagement $memberEntitlementManagementRequirement
 
 
       $apiVersion = _getApiVersion MemberEntitlementManagement
@@ -74,6 +73,8 @@ function Get-VSTeamUserEntitlement {
       }
       else {
          # use the appropiate syntax depending on the API version
+         $useContinuationToken = ($paramCounter -eq 0 -and $apiVersion -gt '6.0') -or ($paramset -contains $PSCmdlet.ParameterSetName)
+
          $useContinuationToken = $false
          if ($paramCounter -eq 0) {
             if ($apiVersion -gt '6.0') {

@@ -175,19 +175,22 @@ function _supportsSecurityNamespace {
 }
 
 function _supportsMemberEntitlementManagement {
-   [CmdletBinding()]
+   [CmdletBinding(DefaultParameterSetName="upto")]
    param(
-      [string]$expression = $null
+      [parameter(ParameterSetName="upto")]
+      [string]$UpTo = $null,
+      [parameter(ParameterSetName="onwards")]
+      [string]$Onwards = $null
+
    )
    _hasAccount
    $apiVer = _getApiVersion MemberEntitlementManagement
    if (-not $apiVer) {
       throw 'This account does not support Member Entitlement.'
-   } elseif ($null -ne $expression) {
-      $isMatch = Invoke-Expression "'$apiVer' $expression"
-      if (-not $isMatch) {
-         throw "EntitlementManagemen version must match $expression for this call, current value $apiVer"
-      }
+   } elseif (-not [string]::IsNullOrEmpty($UpTo) -and $apiVer -gt $UpTo) {
+      throw "EntitlementManagemen version must be equal or lower than $UpTo for this call, current value $apiVer"
+   } elseif (-not [string]::IsNullOrEmpty($Onwards) -and $apiVer -lt $Onwards) {
+      throw "EntitlementManagemen version must be equal or greater than $Onwards for this call, current value $apiVer"
    }
 }
 
