@@ -85,9 +85,12 @@ Describe "VSTeamUserEntitlement" -Tag 'VSTeamUserEntitlement' {
          Context 'Get-VSTeamUserEntitlement_Version6.0_Onwards' {
             BeforeAll {
                Mock _getApiVersion { return '6.0-unitTests' } -ParameterFilter { $Service -eq 'MemberEntitlementManagement' }
-               # Mock Invoke-RestMethod { Open-SampleFile 'Get-VSTeamUserEntitlement.json' } -ParameterFilter {
-               #    $Uri -like "*filter=*"
-               # }   
+               Mock Invoke-RestMethod { Open-SampleFile 'Get-VSTeamUserEntitlement-ContinuationToken.json' } -ParameterFilter {
+                  $Uri -match "filter=userType eq 'guest'$"
+               }
+               Mock Invoke-RestMethod { Open-SampleFile 'Get-VSTeamUserEntitlement.json' } -ParameterFilter {
+                  $Uri -like "*filter=userType eq 'guest'&continuationToken=*"
+               }
             }
 
             It 'should throw by ID and version 6.0 onwards' {
@@ -130,6 +133,13 @@ Describe "VSTeamUserEntitlement" -Tag 'VSTeamUserEntitlement' {
                Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
                   $Uri -eq "https://vsaex.dev.azure.com/test/_apis/userentitlements?api-version=$(_getApiVersion MemberEntitlementManagement)&`$filter=name eq 'Math' and licenseId eq 'Account-Advanced' and userType eq 'member'"
                }
+            }
+
+            It 'with many matches continuationToken is used' {
+               $users = Get-VSTeamUserEntitlement -UserType guest
+               $users.Count | Should -Be 6
+
+               Should -Invoke Invoke-RestMethod -Exactly -Times 2
             }
    
          }
