@@ -1,5 +1,10 @@
 # Changelog
 
+## 7.6.1
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/456) from [Sebastian Schütze](https://github.com/SebastianSchuetze) the following:
+
+- Fixed a problem with module messages causing a 404 and letting PSDrive fail [#455](https://github.com/MethodsAndPractices/vsteam/issues/455).
+
 ## 7.6.0
 
 Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/452) from [Sebastian Schütze](https://github.com/SebastianSchuetze) the following:
@@ -13,7 +18,7 @@ Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/451) fr
 
 Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/440) from [Sebastian Schütze](https://github.com/SebastianSchuetze) the following:
 
-- Added breaking change warning and new version notification on module load [#438](https://github.com/MethodsAndPractices/vsteam/issues/450). 
+- Added breaking change warning and new version notification on module load [#438](https://github.com/MethodsAndPractices/vsteam/issues/450).
 
 Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/448) from [Sebastian Schütze](https://github.com/SebastianSchuetze) the following:
 
