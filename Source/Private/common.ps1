@@ -121,6 +121,50 @@ function _callAPI {
    }
 }
 
+
+function _callAPIContinuationToken {
+   [CmdletBinding()]
+   param(
+      [string]$Url,
+      [switch]$UseHeader,
+      [string]$ContinuationTokenName,
+      [string]$PropertyName,
+      [int]$MaxPages
+   )
+
+   if ($MaxPages -le 0){
+      $MaxPages = [int32]::MaxValue
+   }
+   if ([string]::IsNullOrEmpty($ContinuationTokenName)) {
+      if ($UseHeader.IsPresent) {
+         $ContinuationTokenName = "X-MS-ContinuationToken"
+      } else {
+         $ContinuationTokenName = "continuationToken"
+      }
+   }
+   $i = 0
+   $obj = @()
+   $apiParameters = $url
+   do {
+      if ($UseHeader.IsPresent) {
+         throw "Continuation token from response headers not supported in this version"
+      } else {
+         $resp = _callAPI -url $apiParameters
+         $continuationToken = $resp."$ContinuationTokenName"
+         $i++
+         Write-Verbose "page $i"
+         $obj += $resp."$PropertyName"
+         if (-not [String]::IsNullOrEmpty($continuationToken)) {
+            $continuationToken = [uri]::EscapeDataString($continuationToken)
+            $apiParameters = "${url}&continuationToken=$continuationToken"
+         }
+      }
+   } while (-not [String]::IsNullOrEmpty($continuationToken) -and $i -lt $MaxPages)
+
+   return $obj
+}
+
+
 # Not all versions support the name features.
 
 function _supportsGraph {

@@ -75,17 +75,6 @@ function Get-VSTeamUserEntitlement {
          # use the appropiate syntax depending on the API version
          $useContinuationToken = ($paramCounter -eq 0 -and $apiVersion -gt '6.0') -or ($paramset -contains $PSCmdlet.ParameterSetName)
 
-         $useContinuationToken = $false
-         if ($paramCounter -eq 0) {
-            if ($apiVersion -gt '6.0') {
-               $useContinuationToken = $true
-            }
-         } else {
-            if ($paramset -contains $PSCmdlet.ParameterSetName) {
-               $useContinuationToken = $true
-            }
-         }
-
          $listurl = _buildRequestURI @commonArgs
          $objs = @()
          Write-Verbose "Use continuation token: $useContinuationToken"
@@ -108,26 +97,11 @@ function Get-VSTeamUserEntitlement {
             $listurl += _appendQueryString -name "select" -value ($select -join ",")
 
             # Call the REST API
-            if ($MaxPages -le 0){
-               $MaxPages = [int32]::MaxValue
-            }
-            $i = 0
-            $apiParameters = $listurl
             Write-Verbose "API params: $listurl"
-            do {
-               $resp = _callAPI -url $apiParameters
-               $continuationToken = $resp.continuationToken
-               $i++
-               Write-Verbose "page $i"
-               foreach ($item in $resp.members) {
-                  $objs += [vsteam_lib.UserEntitlement]::new($item)
-               }
-               if (-not [String]::IsNullOrEmpty($continuationToken)) {
-                  $continuationToken = [uri]::EscapeDataString($continuationToken)
-                  $apiParameters = "${listurl}&continuationToken=$continuationToken"
-               }
-            } while (-not [String]::IsNullOrEmpty($continuationToken) -and $i -lt $MaxPages)
-
+            $items = _callAPIContinuationToken -Url $listurl -PropertyName "members"
+            foreach ($item in $items) {
+               $objs += [vsteam_lib.UserEntitlement]::new($item)
+            }
          } else {
             $listurl += _appendQueryString -name "top" -value $top -retainZero
             $listurl += _appendQueryString -name "skip" -value $skip -retainZero
