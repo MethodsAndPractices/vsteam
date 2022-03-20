@@ -40,7 +40,7 @@ Describe "VSTeamUserEntitlement" -Tag 'VSTeamUserEntitlement' {
             }
          }
 
-         Context 'Get-VSTeamUserEntitlement_UpToVersion6.0' {
+         Context 'Get-VSTeamUserEntitlement up to version 6.0' {
             BeforeAll {
                Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'MemberEntitlementManagement' }
             }
@@ -82,7 +82,7 @@ Describe "VSTeamUserEntitlement" -Tag 'VSTeamUserEntitlement' {
 
          }
 
-         Context 'Get-VSTeamUserEntitlement_Version6.0_Onwards' {
+         Context 'Get-VSTeamUserEntitlement version 6.0 onwards' {
             BeforeAll {
                Mock _getApiVersion { return '6.0-unitTests' } -ParameterFilter { $Service -eq 'MemberEntitlementManagement' }
                Mock Invoke-RestMethod { Open-SampleFile 'Get-VSTeamUserEntitlement-ContinuationToken.json' } -ParameterFilter {
