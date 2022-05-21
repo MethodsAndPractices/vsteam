@@ -19,6 +19,9 @@ function Add-VSTeamBuild {
 
       [Parameter(Mandatory = $false)]
       [hashtable] $BuildParameters,
+      
+      [Parameter(Mandatory = $false)]
+      [hashtable] $TemplateParameters,
 
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [vsteam_lib.ProjectValidateAttribute($false)]
@@ -75,6 +78,10 @@ function Add-VSTeamBuild {
 
       if ($BuildParameters) {
          $body.Add('parameters', ($BuildParameters | ConvertTo-Json -Depth 100 -Compress))
+      }
+      
+      if ($templateParameters) {
+         $body.Add('templateParameters', $TemplateParameters)
       }
 
       $resp = _callAPI -Method POST -ProjectName $ProjectName `
