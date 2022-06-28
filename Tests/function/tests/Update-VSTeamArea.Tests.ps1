@@ -14,7 +14,8 @@ Describe 'VSTeamArea' {
       It 'area should return Nodes' {
          ## Act
          Update-VSTeamArea -ProjectName "Public Demo" `
-            -Name "MyClassificationNodeName"
+            -Name "MyClassificationNodeName" `
+            -Path "SubPath"
 
          ## Assert
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
@@ -37,24 +38,6 @@ Describe 'VSTeamArea' {
          ## Assert
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Uri -like "https://dev.azure.com/test/Public Demo/_apis/wit/classificationnodes/areas/$Path*" -and
-            $Uri -like "*api-version=$(_getApiVersion Core)*" -and
-            $Body -like '*"name":*"MyClassificationNodeName"*'
-         }
-      }
-
-      It 'with empty Path "<Path>" should return Nodes' -TestCases @(
-         @{ Path = "" }
-         @{ Path = $null }
-      ) {
-         param ($Path)
-         ## Act
-         Update-VSTeamArea -ProjectName "Public Demo" `
-            -Name "MyClassificationNodeName" `
-            -Path $Path
-
-         ## Assert
-         Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
-            $Uri -like "https://dev.azure.com/test/Public Demo/_apis/wit/classificationnodes/areas?*" -and
             $Uri -like "*api-version=$(_getApiVersion Core)*" -and
             $Body -like '*"name":*"MyClassificationNodeName"*'
          }

@@ -17,7 +17,7 @@
 ### Example 1
 
 ```powershell
-Add-VSTeamClassificationNode -ProjectName Demo -Name "NewIteration" -StructureGroup "iteration" -Path "MyIteration/Path"
+Add-VSTeamClassificationNode -ProjectName Demo -Name "NewIteration" -StructureGroup "iterations" -Path "MyIteration/Path"
 ```
 
 This command adds a new iteration named NewIteration to the Demo project under the iteration path MyIteration/Path.

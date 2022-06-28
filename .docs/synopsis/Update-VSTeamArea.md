@@ -1,0 +1,1 @@
+Updates the area name in a project

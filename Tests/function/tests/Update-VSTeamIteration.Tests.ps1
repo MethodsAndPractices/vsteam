@@ -14,7 +14,9 @@ Describe 'VSTeamIteration' {
    Context 'Update-VSTeamIteration' {
       It 'iteration should return Nodes' {
          ## Act
-         Update-VSTeamIteration -ProjectName "Public Demo" -Name "MyClassificationNodeName"
+         Update-VSTeamIteration -ProjectName "Public Demo" `
+            -Name "MyClassificationNodeName" `
+            -Path "SubPath"
 
          ## Assert
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
@@ -30,27 +32,13 @@ Describe 'VSTeamIteration' {
       ) {
          param ($Path)
          ## Act
-         Update-VSTeamIteration -ProjectName "Public Demo" -Name "MyClassificationNodeName" -Path $Path
+         Update-VSTeamIteration -ProjectName "Public Demo" `
+            -Name "MyClassificationNodeName" `
+            -Path $Path
 
          ## Assert
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Uri -like "https://dev.azure.com/test/Public Demo/_apis/wit/classificationnodes/iterations/$Path*" -and
-            $Uri -like "*api-version=$(_getApiVersion Core)*" -and
-            $Body -like '*"name":*"MyClassificationNodeName"*'
-         }
-      }
-
-      It 'with empty Path "<Path>" should return Nodes' -TestCases @(
-         @{ Path = "" }
-         @{ Path = $null; StartDate = '2014-10-27T00:00:00Z'; FinishDate = '2014-10-31T00:00:00Z' }
-      ) {
-         param ($Path)
-         ## Act
-         Update-VSTeamIteration -ProjectName "Public Demo" -Name "MyClassificationNodeName" -Path $Path
-
-         ## Assert
-         Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
-            $Uri -like "https://dev.azure.com/test/Public Demo/_apis/wit/classificationnodes/iterations?*" -and
             $Uri -like "*api-version=$(_getApiVersion Core)*" -and
             $Body -like '*"name":*"MyClassificationNodeName"*'
          }

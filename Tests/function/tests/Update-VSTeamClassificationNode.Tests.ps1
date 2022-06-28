@@ -22,7 +22,8 @@ Describe 'VSTeamClassificationNode' {
          ## Act
          Update-VSTeamClassificationNode -ProjectName "Public Demo" `
             -StructureGroup $StructureGroup `
-            -Name "MyClassificationNodeName"
+            -Name "MyClassificationNodeName" `
+            -Path "SubPath"
 
          ## Assert
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
@@ -48,27 +49,6 @@ Describe 'VSTeamClassificationNode' {
          ## Assert
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Uri -like "https://dev.azure.com/test/Public Demo/_apis/wit/classificationnodes/$StructureGroup/$Path*" -and
-            $Uri -like "*api-version=$(_getApiVersion Core)*" -and
-            $Body -like '*"name":*"MyClassificationNodeName"*'
-         }
-      }
-
-      It 'should return Nodes with StructureGroup "<StructureGroup>" by empty Path "<Path>"' -TestCases @(
-         @{ StructureGroup = "areas"; Path = "" }
-         @{ StructureGroup = "areas"; Path = $null }
-         @{ StructureGroup = "iterations"; Path = "" }
-         @{ StructureGroup = "iterations"; Path = $null }
-      ) {
-         param ($StructureGroup, $Path)
-         ## Act
-         Update-VSTeamClassificationNode -ProjectName "Public Demo" `
-            -StructureGroup $StructureGroup `
-            -Name "MyClassificationNodeName" `
-            -Path $Path
-
-         ## Assert
-         Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
-            $Uri -like "https://dev.azure.com/test/Public Demo/_apis/wit/classificationnodes/$StructureGroup?*" -and
             $Uri -like "*api-version=$(_getApiVersion Core)*" -and
             $Body -like '*"name":*"MyClassificationNodeName"*'
          }

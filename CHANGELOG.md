@@ -1,5 +1,14 @@
 # Changelog
 
+## 7.7.0
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/470) from [Joshua Davis](https://github.com/a11smiles) the following:
+
+- Added Update-VSTeamArea and Update-VSTeamIteration wrappers and their base function Update-VSTeamClassificationNodes to allow updates to classification nodes.
+
+- Updated StartTime and FinishTime to be _nullable_ for iterations, which includes the base classification nodes functions.
+
+- Updated the ClassificationNode object to provide a direct reference to an iteration's start and finish date, if provided, rather than being required to access them through the InternalObject.
+
 ## 7.6.1
 Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/456) from [Sebastian Schütze](https://github.com/SebastianSchuetze) the following:
 

@@ -10,14 +10,14 @@
 function Update-VSTeamClassificationNode {
    [CmdletBinding(HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Update-VSTeamClassificationNode')]
    param(
-      [Parameter(Mandatory = $true)]
+      [Parameter(Mandatory = $false)]
       [string] $Name,
 
       [ValidateSet("areas", "iterations")]
       [Parameter(Mandatory = $true)]
       [string] $StructureGroup,
 
-      [Parameter(Mandatory = $false)]
+      [Parameter(Mandatory = $true)]
       [string] $Path = $null,
 
       [Parameter(Mandatory = $false)]

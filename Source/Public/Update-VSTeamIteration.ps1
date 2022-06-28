@@ -10,10 +10,10 @@
 function Update-VSTeamIteration {
    [CmdletBinding(HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Update-VSTeamIteration')]
    param(
-      [Parameter(Mandatory = $true)]
+      [Parameter(Mandatory = $false)]
       [string] $Name,
 
-      [Parameter(Mandatory = $false)]
+      [Parameter(Mandatory = $true)]
       [string] $Path,
 
       [Parameter(Mandatory = $false)]

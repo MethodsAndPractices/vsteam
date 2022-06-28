@@ -10,10 +10,10 @@
 function Update-VSTeamArea {
    [CmdletBinding(HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Update-VSTeamArea')]
    param(
-      [Parameter(Mandatory = $true, Position = 0)]
+      [Parameter(Mandatory = $false)]
       [string] $Name,
 
-      [Parameter(Mandatory = $false)]
+      [Parameter(Mandatory = $true)]
       [string] $Path,
 
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
