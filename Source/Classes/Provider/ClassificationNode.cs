@@ -14,6 +14,7 @@ namespace vsteam_lib
       public bool HasChildren { get; set; }
       public string StructureType { get; set; }
       public string ParentUrl => this.Links?.Parent;
+      public ClassificationNodeAttributes Attributes { get; }
       public IList<ClassificationNode> Children { get; }
       public int NodeId => int.Parse(this.Id);
 
@@ -23,6 +24,11 @@ namespace vsteam_lib
          if (obj.HasValue("_links"))
          {
             this.Links = new Link(obj);
+         }
+
+         if (obj.HasValue("attributes"))
+         {
+            this.Attributes = new ClassificationNodeAttributes(obj);
          }
 
          if (obj.HasValue("children"))

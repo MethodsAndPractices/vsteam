@@ -12,6 +12,10 @@
          "structureType": "iteration",
          "hasChildren": false,
          "path": "\\Demo Public\\Iteration\\Sprint 1",
+         "attributes": {
+            "startDate": "2014-10-27T00:00:00Z",
+            "finishDate": "2014-10-31T00:00:00Z"
+          },
          "url": "https://dev.azure.com/test/53e2997d-3723-4c1c-aa62-a0194cb65a29/_apis/wit/classificationNodes/Iterations/Sprint%201"
       },
       {

@@ -1,14 +1,14 @@
-# Create new classification node.
+# Update an existing classification node.
 #
 # Get-VSTeamOption 'wit' 'classificationNodes'
 # id              : 5a172953-1b41-49d3-840a-33f79c3ce89f
 # area            : wit
 # resourceName    : classificationNodes
 # routeTemplate   : {project}/_apis/{area}/{resource}/{structureGroup}/{*path}
-# https://bit.ly/Add-VSTeamClassificationNode
+# https://bit.ly/Update-VSTeamClassificationNode
 
-function Add-VSTeamClassificationNode {
-   [CmdletBinding(HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Add-VSTeamClassificationNode')]
+function Update-VSTeamClassificationNode {
+   [CmdletBinding(HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Update-VSTeamClassificationNode')]
    param(
       [Parameter(Mandatory = $true)]
       [string] $Name,
@@ -57,7 +57,7 @@ function Add-VSTeamClassificationNode {
       $bodyAsJson = $body | ConvertTo-Json -Compress -Depth 100
 
       # Call the REST API
-      $resp = _callAPI -Method POST -ProjectName $ProjectName `
+      $resp = _callAPI -Method PATCH -ProjectName $ProjectName `
          -Area "wit" `
          -Resource "classificationnodes" `
          -id $id `

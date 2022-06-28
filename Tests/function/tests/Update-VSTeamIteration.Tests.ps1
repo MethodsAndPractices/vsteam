@@ -3,7 +3,7 @@ Set-StrictMode -Version Latest
 Describe 'VSTeamIteration' {
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath      
-      . "$baseFolder/Source/Public/Add-VSTeamClassificationNode"
+      . "$baseFolder/Source/Public/Update-VSTeamClassificationNode"
 
       ## Arrange
       Mock _getInstance { return 'https://dev.azure.com/test' }
@@ -11,10 +11,10 @@ Describe 'VSTeamIteration' {
       Mock _getApiVersion { return '5.0-unitTests' } -ParameterFilter { $Service -eq 'Core' }
    }
 
-   Context 'Add-VSTeamIteration' {
+   Context 'Update-VSTeamIteration' {
       It 'iteration should return Nodes' {
          ## Act
-         Add-VSTeamIteration -ProjectName "Public Demo" -Name "MyClassificationNodeName"
+         Update-VSTeamIteration -ProjectName "Public Demo" -Name "MyClassificationNodeName"
 
          ## Assert
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
@@ -30,7 +30,7 @@ Describe 'VSTeamIteration' {
       ) {
          param ($Path)
          ## Act
-         Add-VSTeamIteration -ProjectName "Public Demo" -Name "MyClassificationNodeName" -Path $Path
+         Update-VSTeamIteration -ProjectName "Public Demo" -Name "MyClassificationNodeName" -Path $Path
 
          ## Assert
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
@@ -46,7 +46,7 @@ Describe 'VSTeamIteration' {
       ) {
          param ($Path)
          ## Act
-         Add-VSTeamIteration -ProjectName "Public Demo" -Name "MyClassificationNodeName" -Path $Path
+         Update-VSTeamIteration -ProjectName "Public Demo" -Name "MyClassificationNodeName" -Path $Path
 
          ## Assert
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
