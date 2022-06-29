@@ -16,6 +16,7 @@ Describe 'VSTeamArea' {
          Update-VSTeamArea -ProjectName "Public Demo" `
             -Name "MyClassificationNodeName" `
             -Path "SubPath"
+            -Force
 
          ## Assert
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
@@ -34,6 +35,7 @@ Describe 'VSTeamArea' {
          Update-VSTeamArea -ProjectName "Public Demo" `
             -Name "MyClassificationNodeName" `
             -Path $Path
+            -Force
 
          ## Assert
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {

@@ -8,7 +8,8 @@
 # https://bit.ly/Update-VSTeamClassificationNode
 
 function Update-VSTeamArea {
-   [CmdletBinding(HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Update-VSTeamArea')]
+   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Medium",
+      HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Update-VSTeamArea')]
    param(
       [Parameter(Mandatory = $false)]
       [string] $Name,
@@ -16,17 +17,23 @@ function Update-VSTeamArea {
       [Parameter(Mandatory = $true)]
       [string] $Path,
 
+      [swtich] $Force,
+
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [vsteam_lib.ProjectValidateAttribute($false)]
       [ArgumentCompleter([vsteam_lib.ProjectCompleter])]
       [string] $ProjectName
    )
    process {
-      $resp = Update-VSTeamClassificationNode -ProjectName $ProjectName `
-         -Name $Name `
-         -StructureGroup areas `
-         -Path $Path
 
-      Write-Output $resp
+      if ($Force -or $pscmdlet.ShouldProcess('', "Update Area")) {
+
+         $resp = Update-VSTeamClassificationNode -ProjectName $ProjectName `
+            -Name $Name `
+            -StructureGroup areas `
+            -Path $Path
+
+         Write-Output $resp
+      }
    }
 }

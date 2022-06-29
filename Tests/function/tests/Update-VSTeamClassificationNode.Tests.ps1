@@ -24,6 +24,7 @@ Describe 'VSTeamClassificationNode' {
             -StructureGroup $StructureGroup `
             -Name "MyClassificationNodeName" `
             -Path "SubPath"
+            -Force
 
          ## Assert
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
@@ -45,6 +46,7 @@ Describe 'VSTeamClassificationNode' {
             -StructureGroup $StructureGroup `
             -Name "MyClassificationNodeName" `
             -Path $Path
+            -Force
 
          ## Assert
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {

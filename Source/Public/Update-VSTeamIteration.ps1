@@ -8,7 +8,8 @@
 # https://bit.ly/Update-VSTeamClassificationNode
 
 function Update-VSTeamIteration {
-   [CmdletBinding(HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Update-VSTeamIteration')]
+   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Medium",
+      HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Update-VSTeamIteration')]
    param(
       [Parameter(Mandatory = $false)]
       [string] $Name,
@@ -22,6 +23,8 @@ function Update-VSTeamIteration {
       [Parameter(Mandatory = $false)]
       [Nullable[datetime]] $FinishDate,
 
+      [switch] $Force,
+
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [vsteam_lib.ProjectValidateAttribute($false)]
       [ArgumentCompleter([vsteam_lib.ProjectCompleter])]
@@ -29,13 +32,18 @@ function Update-VSTeamIteration {
    )
 
    process {
-      $resp = Update-VSTeamClassificationNode -ProjectName $ProjectName `
-         -Name $Name `
-         -StructureGroup iterations `
-         -Path $Path `
-         -StartDate $StartDate `
-         -FinishDate $FinishDate
 
-      Write-Output $resp
+      if ($Force -or $pscmdlet.ShouldProcess('', "Update Iteration")) {
+
+         $resp = Update-VSTeamClassificationNode -ProjectName $ProjectName `
+            -Name $Name `
+            -StructureGroup iterations `
+            -Path $Path `
+            -StartDate $StartDate `
+            -FinishDate $FinishDate `
+            -Force $Force
+
+         Write-Output $resp
+      }
    }
 }

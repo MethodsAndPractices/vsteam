@@ -8,7 +8,8 @@
 # https://bit.ly/Update-VSTeamClassificationNode
 
 function Update-VSTeamClassificationNode {
-   [CmdletBinding(HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Update-VSTeamClassificationNode')]
+   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Medium",
+      HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Update-VSTeamClassificationNode')]
    param(
       [Parameter(Mandatory = $false)]
       [string] $Name,
@@ -25,6 +26,8 @@ function Update-VSTeamClassificationNode {
 
       [Parameter(Mandatory = $false)]
       [Nullable[datetime]] $FinishDate,
+
+      [switch] $Force,
 
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [vsteam_lib.ProjectValidateAttribute($false)]
@@ -56,16 +59,19 @@ function Update-VSTeamClassificationNode {
 
       $bodyAsJson = $body | ConvertTo-Json -Compress -Depth 100
 
-      # Call the REST API
-      $resp = _callAPI -Method PATCH -ProjectName $ProjectName `
-         -Area "wit" `
-         -Resource "classificationnodes" `
-         -id $id `
-         -body $bodyAsJson `
-         -Version $(_getApiVersion Core)
+      if ($Force -or $pscmdlet.ShouldProcess('', "Update Classification Node")) {
 
-      $resp = [vsteam_lib.ClassificationNode]::new($resp, $ProjectName)
+         # Call the REST API
+         $resp = _callAPI -Method PATCH -ProjectName $ProjectName `
+            -Area "wit" `
+            -Resource "classificationnodes" `
+            -id $id `
+            -body $bodyAsJson `
+            -Version $(_getApiVersion Core)
 
-      Write-Output $resp
+         $resp = [vsteam_lib.ClassificationNode]::new($resp, $ProjectName)
+
+         Write-Output $resp
+      }
    }
 }
