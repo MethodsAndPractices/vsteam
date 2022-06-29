@@ -17,7 +17,7 @@ function Update-VSTeamArea {
       [Parameter(Mandatory = $true)]
       [string] $Path,
 
-      [swtich] $Force,
+      [switch] $Force,
 
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [vsteam_lib.ProjectValidateAttribute($false)]
