@@ -41,7 +41,7 @@ function Update-VSTeamIteration {
             -Path $Path `
             -StartDate $StartDate `
             -FinishDate $FinishDate `
-            -Force $Force
+            -Force
 
          Write-Output $resp
       }

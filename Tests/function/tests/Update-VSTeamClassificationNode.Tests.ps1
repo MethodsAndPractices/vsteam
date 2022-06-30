@@ -23,7 +23,7 @@ Describe 'VSTeamClassificationNode' {
          Update-VSTeamClassificationNode -ProjectName "Public Demo" `
             -StructureGroup $StructureGroup `
             -Name "MyClassificationNodeName" `
-            -Path "SubPath"
+            -Path "SubPath" `
             -Force
 
          ## Assert
@@ -45,7 +45,7 @@ Describe 'VSTeamClassificationNode' {
          Update-VSTeamClassificationNode -ProjectName "Public Demo" `
             -StructureGroup $StructureGroup `
             -Name "MyClassificationNodeName" `
-            -Path $Path
+            -Path $Path `
             -Force
 
          ## Assert

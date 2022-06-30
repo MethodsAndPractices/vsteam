@@ -15,7 +15,7 @@ Describe 'VSTeamArea' {
          ## Act
          Update-VSTeamArea -ProjectName "Public Demo" `
             -Name "MyClassificationNodeName" `
-            -Path "SubPath"
+            -Path "SubPath" `
             -Force
 
          ## Assert
@@ -34,7 +34,7 @@ Describe 'VSTeamArea' {
          ## Act
          Update-VSTeamArea -ProjectName "Public Demo" `
             -Name "MyClassificationNodeName" `
-            -Path $Path
+            -Path $Path `
             -Force
 
          ## Assert

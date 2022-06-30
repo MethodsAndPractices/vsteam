@@ -31,7 +31,8 @@ function Update-VSTeamArea {
          $resp = Update-VSTeamClassificationNode -ProjectName $ProjectName `
             -Name $Name `
             -StructureGroup areas `
-            -Path $Path
+            -Path $Path `
+            -Force
 
          Write-Output $resp
       }

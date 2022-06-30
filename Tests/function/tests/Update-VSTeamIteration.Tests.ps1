@@ -16,7 +16,7 @@ Describe 'VSTeamIteration' {
          ## Act
          Update-VSTeamIteration -ProjectName "Public Demo" `
             -Name "MyClassificationNodeName" `
-            -Path "SubPath"
+            -Path "SubPath" `
             -Force
 
          ## Assert
@@ -35,7 +35,7 @@ Describe 'VSTeamIteration' {
          ## Act
          Update-VSTeamIteration -ProjectName "Public Demo" `
             -Name "MyClassificationNodeName" `
-            -Path $Path
+            -Path $Path `
             -Force
 
          ## Assert
