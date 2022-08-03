@@ -26,7 +26,7 @@ Describe 'VSTeamArea' {
          }
       }
 
-      It 'with Path "<Path>" should return Nodes' -TestCases @(
+      It 'with Path "<Path>" should update Nodes' -TestCases @(
          @{ Path = "SubPath" }
          @{ Path = "Path/SubPath" }
       ) {
