@@ -11,7 +11,7 @@ Describe 'VSTeamArea' {
    }
 
    Context 'Update-VSTeamArea' -Tag "Add" {
-      It 'area should return Nodes' {
+      It 'area should update Nodes' {
          ## Act
          Update-VSTeamArea -ProjectName "Public Demo" `
             -Name "MyClassificationNodeName" `
