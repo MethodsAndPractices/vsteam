@@ -34,7 +34,7 @@ Describe 'VSTeamClassificationNode' {
          }
       }
 
-      It 'should return Nodes with StructureGroup "<StructureGroup>" by Path "<Path>"' -TestCases @(
+      It 'should update Nodes with StructureGroup "<StructureGroup>" by Path "<Path>"' -TestCases @(
          @{ StructureGroup = "areas"; Path = "SubPath" }
          @{ StructureGroup = "areas"; Path = "Path/SubPath" }
          @{ StructureGroup = "iterations"; Path = "SubPath" }
