@@ -27,7 +27,7 @@ Describe 'VSTeamIteration' {
          }
       }
 
-      It 'with Path "<Path>" should return Nodes' -TestCases @(
+      It 'with Path "<Path>" should update Nodes' -TestCases @(
          @{ Path = 'SubPath' }
          @{ Path = 'Path/SubPath'; StartDate = '2014-10-27T00:00:00Z'; FinishDate = '2014-10-31T00:00:00Z' }
       ) {
