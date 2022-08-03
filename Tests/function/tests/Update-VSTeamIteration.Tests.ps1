@@ -12,7 +12,7 @@ Describe 'VSTeamIteration' {
    }
 
    Context 'Update-VSTeamIteration' {
-      It 'iteration should return Nodes' {
+      It 'iteration should update Nodes' {
          ## Act
          Update-VSTeamIteration -ProjectName "Public Demo" `
             -Name "MyClassificationNodeName" `
