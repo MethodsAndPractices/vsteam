@@ -14,7 +14,7 @@ Describe 'VSTeamClassificationNode' {
          Mock Invoke-RestMethod { Open-SampleFile 'classificationNodeResult.json' }
       }
 
-      It 'should return Nodes with StructureGroup "<StructureGroup>"' -TestCases @(
+      It 'should update Nodes with StructureGroup "<StructureGroup>"' -TestCases @(
          @{ StructureGroup = "areas" }
          @{ StructureGroup = "iterations" }
       ) {
