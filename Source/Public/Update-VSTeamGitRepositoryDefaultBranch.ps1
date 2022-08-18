@@ -5,9 +5,9 @@
 # area            : git
 # resourceName    : repositories
 # routeTemplate   : {project}/_apis/{area}/{resource}/{repositoryId}
-# http://bit.ly/Add-VSTeamGitRepository
+# https://docs.microsoft.com/en-us/rest/api/azure/devops/git/repositories/update?view=azure-devops-rest-6.1&tabs=HTTP
 function Update-VSTeamGitRepositoryDefaultBranch {
-   [CmdletBinding()]
+   [CmdletBinding(HelpUri = 'https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Update-VSTeamGitRepositoryDefaultBranch')]
    param(
       [parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [string] $Name,
@@ -20,12 +20,7 @@ function Update-VSTeamGitRepositoryDefaultBranch {
    )
    begin {
       try {
-         # $Repo = Get-VSTeamGitRepository -Name $Name -ProjectName $ProjectName
-         $Repo = _callAPI -Method Get -ProjectName $ProjectName `
-            -Area "git" `
-            -Resource "repositories" `
-            -id $Name `
-            -Version $(_getApiVersion Git)
+         $Repo = Get-VSTeamGitRepository -Name $Name -ProjectName $ProjectName
       } catch {
          Write-Warning "A repo named $Name could not be found in the project $ProjectName..."
          throw $PSItem.Exception.Message
@@ -35,24 +30,17 @@ function Update-VSTeamGitRepositoryDefaultBranch {
       }
    }
    process {
-      
-      
       $body = @{  
-         # name          = $Name
          defaultBranch = "refs/head/$DefaultBranch"
       }
       try {
-         # Call the REST API
+         # Call the REST API 
          $resp = _callAPI -Method PATCH -ProjectName $ProjectName `
             -Area "git" `
             -Resource "repositories" `
             -id $Repo.Id `
             -Body $body `
             -Version $(_getApiVersion Git)
-         # Storing the object before you return it cleaned up the pipeline.
-         # When I just write the object from the constructor each property
-         # seemed to be written
-         # $repo = [vsteam_lib.GitRepository]::new($resp, $ProjectName)
          Write-Output $resp   
       } catch {
          _handleException $_
