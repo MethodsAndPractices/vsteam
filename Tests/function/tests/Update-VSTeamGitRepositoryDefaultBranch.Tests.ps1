@@ -3,8 +3,21 @@ Set-StrictMode -Version Latest
 Describe "VSTeamGitRepository" {
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
-      . "$PSScriptRoot\..\..\..\Source\Private\common.ps1"
-
+      
+      # Without adding this call, an exception is thrown stating that Get-VSTeamGitRepository is a part of VSTeam but the module could not be loaded. Because we're not testing this function, but it is used in the function we are testing I created it here to facilitate the tests. 
+      function Get-VSTeamGitRepository {
+         param(
+            $Name,
+            $ProjectName
+         )
+         $Repo = _callAPI -Method Get -ProjectName $ProjectName `
+            -Area "git" `
+            -Resource "repositories" `
+            -id $Name `
+            -Version $(_getApiVersion Git)
+         $Repo
+      }
+      
       Mock Invoke-RestMethod { Open-SampleFile 'Get-VSTeamGitRepository.json' }
       Mock Invoke-RestMethod { Open-SampleFile 'Get-VSTeamGitRepository-ProjectNamePeopleTracker-NamePeopleTracker.json' } -ParameterFilter {
          $Uri -like "*00000000-0000-0000-0000-000000000000*" -or $URI -like "*Peopletracker*"
@@ -29,8 +42,6 @@ Describe "VSTeamGitRepository" {
 
             ## Assert
             Should -Invoke Invoke-RestMethod -ParameterFilter {
-               Write-Debug "Method : $Method"
-               Write-Debug "Uri : $Uri"
                $Method -eq 'Patch' -and $Uri -eq "https://dev.azure.com/Test/PeopleTracker/_apis/git/repositories/00000000-0000-0000-0000-000000000000?api-version=$(_getApiVersion Git)"
             }
          }
@@ -39,24 +50,5 @@ Describe "VSTeamGitRepository" {
             { Update-VSTeamGitRepositoryDefaultBranch -id 00000000-0000-0000-0000-000000000101  -projectname PeopleTracker -DefaultBranch 'develop' } | Should -Throw
          }
       }
-
-      # Context 'Server' {
-      #    BeforeAll {
-      #       ## Arrange
-      #       Mock _getInstance { return 'https://localhost:8080/tfs' }
-      #    }
-
-      #    It "by name should update Git repo's default branch" {
-      #       ## Act
-      #       Update-VSTeamGitRepositoryDefaultBranch -Name PeopleTracker -projectname PeopleTracker -DefaultBranch 'develop'
-
-      #       ## Assert
-      #       Should -Invoke Invoke-RestMethod -ParameterFilter {
-      #          Write-Debug "Method : $Method"
-      #          Write-Debug "Uri : $Uri"
-      #          $Method -eq 'Patch' -and $Uri -eq "https://localhost:8080/tfs/PeopleTracker/PeopleTracker/_apis/git/repositories/00000000-0000-0000-0000-000000000000?api-version=$(_getApiVersion Git)"
-      #       }
-      #    }
-      # }
    }
 }

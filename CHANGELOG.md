@@ -1,7 +1,10 @@
 # Changelog
 
-- Added Update-VSTeamGitRepositoryDefaultBranch to allow for changing the default branch of a repository.
+## 7.8.0
+- Added Update-VSTeamGitRepositoryDefaultBranch to allow for changing the default branch of a repository
 - Fixed bad link in README.md
+- Bumped manifest version
+- Cleaned up comments/debug messages
 
 ## 7.7.0
 Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/470) from [Joshua Davis](https://github.com/a11smiles) the following:
