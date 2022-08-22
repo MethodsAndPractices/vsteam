@@ -7,7 +7,7 @@
 # routeTemplate   : {project}/_apis/{area}/{resource}/{repositoryId}
 # https://docs.microsoft.com/en-us/rest/api/azure/devops/git/repositories/update?view=azure-devops-rest-6.1&tabs=HTTP
 function Update-VSTeamGitRepositoryDefaultBranch {
-   [CmdletBinding(HelpUri = 'https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Update-VSTeamGitRepositoryDefaultBranch')]
+   [CmdletBinding(HelpUri = 'https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Update-VSTeamGitRepositoryDefaultBranch', SupportsShouldProcess = $true)]
    param(
       [parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [string] $Name,
@@ -19,31 +19,46 @@ function Update-VSTeamGitRepositoryDefaultBranch {
       [string] $DefaultBranch
    )
    begin {
+      if ($DefaultBranch -notlike "*refs/heads*") {
+         $DefaultBranch = 'refs/heads/{0}' -f $DefaultBranch
+      }
       try {
          $Repo = Get-VSTeamGitRepository -Name $Name -ProjectName $ProjectName
       } catch {
          Write-Warning "A repo named $Name could not be found in the project $ProjectName..."
          throw $PSItem.Exception.Message
       }
-      if ($DefaultBranch -notlike "*refs/head*") {
-         $DefaultBranch = 'refs/head/{0}' -f $DefaultBranch
+      $Refs = Get-VSTeamGitRef -RepositoryID $Repo.Id -ProjectName $ProjectName
+      $BranchNames = $Refs.Name
+      if ($DefaultBranch -notin $BranchNames) {
+         $rawDefaultBranch = $DefaultBranch.replace('refs/heads/', $null)
+         throw "No branch named $rawDefaultBranch was found..." 
       }
    }
    process {
       $body = @{  
-         defaultBranch = "refs/head/$DefaultBranch"
-      }
+         defaultBranch = "$DefaultBranch"
+      } | ConvertTo-Json -Compress
       try {
          # Call the REST API 
-         $resp = _callAPI -Method PATCH -ProjectName $ProjectName `
-            -Area "git" `
-            -Resource "repositories" `
-            -id $Repo.Id `
-            -Body $body `
-            -Version $(_getApiVersion Git)
-         Write-Output $resp   
+         if ($PSCmdlet.ShouldProcess("$ProjectName", "Setting default branch to $DefaultBranch")) {
+            $Parameters = @{
+               Method      = 'PATCH'
+               ProjectName = $ProjectName
+               Area        = "git"
+               Resource    = "repositories"
+               id          = $Repo.Id
+               Body        = $body
+               Version     = $(_getApiVersion Git)
+            }
+            $resp = _callApi @Parameters
+            
+         }
       } catch {
          _handleException $_
       }
+   }
+   end {
+      Write-Output $resp
    }
 }
