@@ -18,6 +18,9 @@ Describe "VSTeamGitRepository" {
          $Repo
       }
       
+      Mock Get-VSTeamGitRef { (Open-SampleFile 'Get-VSTeamGitRef_for_Update-VSTeamGitRepositoryDefaultBranch.json').value } -ParameterFilter {
+         $ProjectName -like "*Peopletracker*"
+      }
       Mock Invoke-RestMethod { Open-SampleFile 'Get-VSTeamGitRepository.json' }
       Mock Invoke-RestMethod { Open-SampleFile 'Get-VSTeamGitRepository-ProjectNamePeopleTracker-NamePeopleTracker.json' } -ParameterFilter {
          $Uri -like "*00000000-0000-0000-0000-000000000000*" -or $URI -like "*Peopletracker*"
@@ -38,7 +41,7 @@ Describe "VSTeamGitRepository" {
 
          It "by name should update Git repo's default branch" {
             ## Act
-            Update-VSTeamGitRepositoryDefaultBranch -Name PeopleTracker -projectname PeopleTracker -DefaultBranch 'develop'
+            Update-VSTeamGitRepositoryDefaultBranch -Name PeopleTracker -projectname PeopleTracker -DefaultBranch 'master'
 
             ## Assert
             Should -Invoke Invoke-RestMethod -ParameterFilter {
@@ -48,6 +51,9 @@ Describe "VSTeamGitRepository" {
 
          It 'by id should throw' {
             { Update-VSTeamGitRepositoryDefaultBranch -id 00000000-0000-0000-0000-000000000101  -projectname PeopleTracker -DefaultBranch 'develop' } | Should -Throw
+         }
+         It 'should throw if the branch does not exist' {
+            { Update-VSTeamGitRepositoryDefaultBranch -id 00000000-0000-0000-0000-000000000101  -projectname PeopleTracker -DefaultBranch 'notarealbranch' } | Should -Throw
          }
       }
    }
