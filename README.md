@@ -48,7 +48,7 @@
 </p>
 <p align="center">
   <a href="github/CONTRIBUTING.md">Contribute</a> |
-  <a href="#buildin-gmodule">Building Module</a> |
+  <a href="#building-module">Building Module</a> |
   <a href="#mantainers">Maintainers</a>
 </p>
 

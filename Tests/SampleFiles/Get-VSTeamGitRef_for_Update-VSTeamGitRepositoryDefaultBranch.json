@@ -1,0 +1,41 @@
+{
+	"value": [
+		{
+			"name": "refs/heads/master",
+			"objectId": "0e129ba8-aef1-41d7-ba08-0febf7da4a1d",
+			"creator": {
+				"displayName": "Test User",
+				"url": "https://spsprodcus3.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+				"_links": {
+					"avatar": {
+						"href": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/redacted"
+					}
+				},
+				"id": "00000000-0000-0000-0000-000000000000",
+				"uniqueName": "test@test.com",
+				"imageUrl": "https://dev.azure.com/Test/_api/_common/identityImage?id=00000000-0000-0000-0000-000000000000",
+				"descriptor": "redacted"
+			},
+			"url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/git/repositories/00000000-0000-0000-0000-000000000000/refs?filter=heads%2Fmaster"
+		},
+		{
+			"name": "refs/heads/develop",
+			"objectId": "0e129ba8-aef1-41d7-ba08-0febf7da4a1d",
+			"creator": {
+				"displayName": "Test User",
+				"url": "https://spsprodcus3.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+				"_links": {
+					"avatar": {
+						"href": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/redacted"
+					}
+				},
+				"id": "00000000-0000-0000-0000-000000000000",
+				"uniqueName": "test@test.com",
+				"imageUrl": "https://dev.azure.com/Test/_api/_common/identityImage?id=00000000-0000-0000-0000-000000000000",
+				"descriptor": "redacted"
+			},
+			"url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/git/repositories/00000000-0000-0000-0000-000000000000/refs?filter=heads%2Fdevelop"
+		}
+	],
+	"count": 1
+}
