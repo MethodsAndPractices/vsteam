@@ -28,10 +28,10 @@ function Get-VSTeamUserEntitlement {
       [Parameter(ParameterSetName = 'PagedParams')]
       [ValidateSet('Account-Stakeholder', 'Account-Express', 'Account-Advanced', IgnoreCase = $false)]
       [Alias('License')]
-      [string] $LicenseId,                                                            #license name is case sensitive
+      [string] $LicenseId,
 
       [Parameter(ParameterSetName = 'PagedParams')]
-      [ValidateSet('guest', 'member', IgnoreCase = $false)]                            #userType is case sensitive: values in lowercase
+      [ValidateSet('guest', 'member', IgnoreCase = $false)]
       [string] $UserType,
 
       [Parameter(ParameterSetName = 'PagedParams')]
@@ -42,9 +42,10 @@ function Get-VSTeamUserEntitlement {
 
 
    process {
-      # This will throw if this account does not support MemberEntitlementManagement 
+      # This will throw if this account does not support MemberEntitlementManagement
       # or supported version is not correct with the type of API call
       $paramCounter = _countParameters -BoundParameters $PSBoundParameters
+
       $paramset = 'PagedParams', 'PagedFilter'
       if ($paramCounter -eq 0) {
          _supportsMemberEntitlementManagement
@@ -86,7 +87,7 @@ function Get-VSTeamUserEntitlement {
                }
                if ($LicenseId) {
 
-                  $filter += "licenseId eq '$LicenseId' and " 
+                  $filter += "licenseId eq '$LicenseId' and "
                }
                if ($UserType) {
                   $filter += "userType eq '$UserType' and "
@@ -119,20 +120,4 @@ function Get-VSTeamUserEntitlement {
 
       }
    }
-}
-
-
-function _countParameters() {
-   param(
-      $BoundParameters
-   )
-   $counter = 0
-   $advancedPameters = @('Verbose', 'Debug', 'ErrorAction', 'WarningAction', 'InformationAction', 'ErrorVariable', 'WarningVariable', 'InformationVariable', 'OutVariable', 'OutBuffer', 'PipelineVariable')
-   foreach($p in $BoundParameters.GetEnumerator()) {
-      if ($p.Key -notin $advancedPameters) {
-         $counter++
-      }
-   }
-   Write-Verbose "Found $counter parameters"
-   $counter
 }
