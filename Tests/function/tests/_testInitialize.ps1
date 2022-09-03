@@ -11,8 +11,18 @@ Import-Module SHiPS
 
 $baseFolder = "$PSScriptRoot/../../.."
 $sampleFiles = "$PSScriptRoot/../../SampleFiles"
-      
-Add-Type -Path "$baseFolder/dist/bin/vsteam-lib.dll"
+
+# Changed to only import this type if the dll is missing and exists in the path, since PS throws an exception when trying to import a dll already in memory
+$vsTeamDllPath = "$baseFolder/dist/bin/vsteam-lib.dll"
+if (Test-Path -Path $vsTeamDllPath) {
+   try {
+      Add-Type -Path $vsTeamDllPath -ErrorAction SilentlyContinue
+   } catch {
+      if ($PSItem.Exception.Message -ne 'Assembly with same name is already loaded') {
+         throw $PSItem.Exception.Message
+      }
+   }
+}
 
 $sut = (Split-Path -Leaf $testPath).Replace(".Tests.", ".")
 
@@ -21,8 +31,7 @@ $sut = (Split-Path -Leaf $testPath).Replace(".Tests.", ".")
 
 if ($private.IsPresent) {
    . "$baseFolder/Source/Private/$sut"
-}
-else {   
+} else {   
    . "$baseFolder/Source/Public/$sut"
 }
 
@@ -50,12 +59,10 @@ function Open-SampleFile {
    
    if ($ReturnValue.IsPresent) {
       return $(Get-Content "$sampleFiles\$file" -Raw | ConvertFrom-Json).value
-   }
-   else {
+   } else {
       if ($index -eq -1) {
          return $(Get-Content "$sampleFiles\$file" -Raw | ConvertFrom-Json)
-      }
-      else {
+      } else {
          return $(Get-Content "$sampleFiles\$file" -Raw | ConvertFrom-Json).value[$index]
       }
    }

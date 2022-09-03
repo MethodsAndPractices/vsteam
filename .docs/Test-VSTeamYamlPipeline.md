@@ -36,7 +36,7 @@ This example checks the YAML pipeline with ID 24 and the content of a yaml file 
 ### Example 3
 
 ```powershell
-Test-VSTeamYamlPipeline -Project DemoProject -PipelineId 24 - Branch 'main'
+Test-VSTeamYamlPipeline -Project DemoProject -PipelineId 24 -Branch 'main'
 ```
 
 This example checks the YAML in the remote repository connected to the pipeline with ID 24 for consistency on Azure DevOps. It will take the file for the branch 'main'.
