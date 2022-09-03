@@ -19,7 +19,7 @@ function Add-VSTeamBuild {
 
       [Parameter(Mandatory = $false)]
       [hashtable] $BuildParameters,
-      
+
       [Parameter(Mandatory = $false)]
       [hashtable] $TemplateParameters,
 
@@ -79,8 +79,8 @@ function Add-VSTeamBuild {
       if ($BuildParameters) {
          $body.Add('parameters', ($BuildParameters | ConvertTo-Json -Depth 100 -Compress))
       }
-      
-      if ($templateParameters) {
+
+      if ($TemplateParameters) {
          $body.Add('templateParameters', $TemplateParameters)
       }
 

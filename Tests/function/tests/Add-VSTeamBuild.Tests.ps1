@@ -80,6 +80,27 @@ Describe 'VSTeamBuild' {
                $Uri -eq "https://dev.azure.com/test/project/_apis/build/builds?api-version=$(_getApiVersion Build)"
             }
          }
+
+         It 'should add build with templateParameters' {
+            ## Act
+            Add-VSTeamBuild -ProjectName project `
+               -BuildDefinitionId 2 `
+               -TemplateParameters @{
+                  'Param1' = 'Val1'
+                  'Param2' = 'Val2'
+               }
+
+            ## Assert
+            # Call to queue build.
+            Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
+               $Body -like "*2*" -and
+               $Body -like "*Param1*" -and
+               $Body -like "*Param2*" -and
+               $Body -like "*Val2*" -and
+               $Body -like "*Val1*" -and
+               $Uri -eq "https://dev.azure.com/test/project/_apis/build/builds?api-version=$(_getApiVersion Build)"
+            }
+         }
       }
 
       Context 'Server' -Tag "Server" {
