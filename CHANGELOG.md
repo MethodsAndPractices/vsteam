@@ -1,6 +1,11 @@
 # Changelog
 
+## 7.9.0
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/468) from [Michael19842](https://github.com/Michael19842) the following:
+- Added parameter `Templateparameter` for queue new build with custom template parameters
+
 ## 7.8.0
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/475) from [rbleattler](https://github.com/rbleattler) the following:
 - Added Update-VSTeamGitRepositoryDefaultBranch to allow for changing the default branch of a repository
 
 ## 7.7.0
