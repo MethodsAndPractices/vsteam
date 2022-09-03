@@ -4,6 +4,13 @@
 Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/468) from [Michael19842](https://github.com/Michael19842) the following:
 - Added parameter `Templateparameter` for queue new build with custom template parameters
 
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/459) from [Miguel Nieto](https://github.com/mnieto) the following:
+
+- Enable API version 6.0 calls in Get-VSTeamUserEntitlement. This add new parameters only available starting from version 6.0.
+  - Top and Skip parameters are still valid on versions up to 5.1. But will throw if called from version 6.0. This preservers backwards compability, but can be a breaking change if you do not pay attention to the API version in your scripts
+  - New parameters will throw if called from version 5.1
+  - Function behaviour can be changed from Set-VSTeamAPIVersion -Service MemberEntitlementManagement -Version $yourVersion
+
 ## 7.8.0
 Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/475) from [rbleattler](https://github.com/rbleattler) the following:
 - Added Update-VSTeamGitRepositoryDefaultBranch to allow for changing the default branch of a repository
