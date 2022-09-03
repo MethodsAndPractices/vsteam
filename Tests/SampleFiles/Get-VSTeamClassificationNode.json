@@ -16,6 +16,10 @@
       "name": "PeopleTracker",
       "structureType": "iteration",
       "hasChildren": true,
+      "attributes": {
+         "startDate": "2014-10-27",
+         "finishDate": "2014-10-31"
+      },
       "children": [
         {
           "id": 84,
