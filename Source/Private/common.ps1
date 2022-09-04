@@ -1150,8 +1150,16 @@ function _getBillingToken {
 function _pinpGithub {
    Write-Verbose "Checking if client is online"
    $pingGh = [System.Net.NetworkInformation.Ping]::new()
-   [System.Net.NetworkInformation.PingReply]$reply = $pingGh.Send('github.com', 150)
-   return $reply.Status
+   $replyStatus = $null
+   try {
+      [System.Net.NetworkInformation.PingReply]$reply = $pingGh.Send('github.com', 150)
+      $replyStatus = $reply.Status
+   }
+   catch {
+      $replyStatus = [System.Net.NetworkInformation.IPStatus]::Unknown
+      Write-Debug $_.Exception.InnerException
+   }
+   return $replyStatus
 }
 
 function _showModuleLoadingMessages {
@@ -1208,7 +1216,7 @@ function _showModuleLoadingMessages {
          }
       }
       else {
-         Write-Debug "Client is offline. Skipping module messages"
+         Write-Information "Client is offline or blocked by a firewall. Skipping module messages"
       }
    }
 }
@@ -1247,7 +1255,7 @@ function _checkForModuleUpdates {
          }
       }
       else {
-         Write-Debug "Client is offline. Skipping module updates check"
+         Write-Information "Client is offline or blocked by a firewall. Skipping module updates check"
       }
    }
 
