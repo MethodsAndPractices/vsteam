@@ -2,6 +2,9 @@
 
 ## 7.9.0
 
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/481) from [Sebastian Schütze](https://github.com/SebastianSchuetze) the following:
+- fixed a bug that prevented the module to load when the user has no access to the internet.[#466](https://github.com/MethodsAndPractices/vsteam/issues/466)
+
 Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/480) from [Sebastian Schütze](https://github.com/SebastianSchuetze) the following:
 - fixed a problem that prevented the module to load [#467](https://github.com/MethodsAndPractices/vsteam/issues/467)
 
