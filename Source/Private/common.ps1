@@ -269,7 +269,7 @@ function _getApiVersion {
       [parameter(ParameterSetName = 'Service', Mandatory = $true, Position = 0)]
       [ValidateSet('Build', 'Release', 'Core', 'Git', 'DistributedTask',
          'DistributedTaskReleased', 'VariableGroups', 'Tfvc',
-         'Packaging', 'MemberEntitlementManagement',
+         'Packaging', 'MemberEntitlementManagement','Version',
          'ExtensionsManagement', 'ServiceEndpoints', 'Graph',
          'TaskGroups', 'Policy', 'Processes', 'HierarchyQuery', 'Pipelines', 'Billing', 'Wiki', 'WorkItemTracking')]
       [string] $Service,
