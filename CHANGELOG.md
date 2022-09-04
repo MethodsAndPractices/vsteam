@@ -1,6 +1,10 @@
 # Changelog
 
 ## 7.9.0
+
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/480) from [Sebastian Schütze](https://github.com/SebastianSchuetze) the following:
+- fixed a problem that prevented the module to load [#467](https://github.com/MethodsAndPractices/vsteam/issues/467)
+
 Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/468) from [Michael19842](https://github.com/Michael19842) the following:
 - Added parameter `Templateparameter` for queue new build with custom template parameters
 
