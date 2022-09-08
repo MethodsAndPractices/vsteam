@@ -46,8 +46,8 @@ function Get-VSTeamUserEntitlement {
       # or supported version is not correct with the type of API call
       $paramCounter = _countParameters -BoundParameters $PSBoundParameters
 
-      $paramset = 'PagedParams', 'PagedFilter','ById'
-      if ($paramCounter -eq 0) {
+      $paramset = 'PagedParams', 'PagedFilter'
+      if ($paramCounter -eq 0 -or $PSCmdlet.ParameterSetName -eq 'ByID') {
          _supportsMemberEntitlementManagement
       } elseif ($paramset -contains $PSCmdlet.ParameterSetName) {
          _supportsMemberEntitlementManagement -Onwards '6.0'

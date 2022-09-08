@@ -40,6 +40,17 @@ Describe "VSTeamUserEntitlement" -Tag 'VSTeamUserEntitlement' {
             }
          }
 
+         It 'by Id should return users with projects' {
+            $user = Get-VSTeamUserEntitlement -Id '00000000-0000-0000-0000-000000000000'
+
+            $user.Email | Should -Be 'test@test.com' -Because 'email is from type'
+            $user.userName | Should -Be 'Donovan Brown' -Because 'userName is from type'
+
+            Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
+               $Uri -eq "https://vsaex.dev.azure.com/test/_apis/userentitlements/00000000-0000-0000-0000-000000000000?api-version=$(_getApiVersion MemberEntitlementManagement)"
+            }
+         }
+
          Context 'Get-VSTeamUserEntitlement up to version 6.0' {
             BeforeAll {
                Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'MemberEntitlementManagement' }
@@ -57,17 +68,6 @@ Describe "VSTeamUserEntitlement" -Tag 'VSTeamUserEntitlement' {
                }
             }
    
-            It 'by Id should return users with projects' {
-               $user = Get-VSTeamUserEntitlement -Id '00000000-0000-0000-0000-000000000000'
-   
-               $user.Email | Should -Be 'test@test.com' -Because 'email is from type'
-               $user.userName | Should -Be 'Donovan Brown' -Because 'userName is from type'
-   
-               Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
-                  $Uri -eq "https://vsaex.dev.azure.com/test/_apis/userentitlements/00000000-0000-0000-0000-000000000000?api-version=$(_getApiVersion MemberEntitlementManagement)"
-               }
-            }
-
             It 'with select for projects should return users with projects' {
                Get-VSTeamUserEntitlement -Select Projects
    
@@ -93,10 +93,6 @@ Describe "VSTeamUserEntitlement" -Tag 'VSTeamUserEntitlement' {
                }
             }
 
-            It 'should throw by ID and version 6.0 onwards' {
-               { Get-VSTeamUserEntitlement -Id '00000000-0000-0000-0000-000000000000' } | Should -Throw
-            }
-            
             It "with incorrect case in license parameter should throw" {
                { Get-VSTeamUserEntitlement -License account-Advanced} | Should -Throw
             }
