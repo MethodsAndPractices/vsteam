@@ -1,1 +1,1 @@
-Returns all the versions of supported APIs of your TFS or AzD.
+Returns all the versions of supported APIs of your Azure DevOps.

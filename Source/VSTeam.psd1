@@ -12,7 +12,7 @@
    RootModule           = 'VSTeam.psm1'
 
    # Version number of this module.
-   ModuleVersion        = '7.6.0'
+   ModuleVersion        = '7.9.0'
 
    # Supported PSEditions
    CompatiblePSEditions = @('Core', 'Desktop')
@@ -30,7 +30,7 @@
    Copyright            = '(c) 2022 Donovan Brown. All rights reserved.'
 
    # Description of the functionality provided by this module
-   Description          = 'Adds functionality for working with Azure DevOps and Team Foundation Server.'
+   Description          = 'Adds functionality for working with Azure DevOps and Azure DevOps Server.'
 
    # Minimum version of the Windows PowerShell engine required by this module
    PowerShellVersion    = '5.1'
@@ -96,7 +96,7 @@
       PSData = @{
 
          # Tags applied to this module. These help with module discovery in online galleries.
-         Tags         = @('VSTS', 'TFS', 'DevOps', 'VisualStudio', 'TeamServices', 'Team', 'AzureDevOps', 'Pipelines', 'Boards', 'Artifacts', 'TestPlans', 'Repos', 'AzD', 'ADO', 'AzDO')
+         Tags         = @('AzureDevOps', 'DevOps', 'AzD', 'ADO', 'AzDO', 'Pipelines', 'Boards', 'Artifacts', 'TestPlans', 'Repos', 'VSTS', 'TFS', 'VisualStudio', 'TeamServices', 'Team')
 
          # If you use this you don't need SHiPS in your private repository but the user
          # has to install SHiPS manually.  If you don't add this SHiPS will be installed

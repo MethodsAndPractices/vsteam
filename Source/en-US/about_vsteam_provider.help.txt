@@ -2,7 +2,7 @@ TOPIC
     VSTeam Provider
 
 SHORT DESCRIPTION
-    The VSTeamAccount SHiPS provider allows you to navigate your TFS/AzD
+    The VSTeamAccount SHiPS provider allows you to navigate your Azure DevOps
     as a file system using the following tree:
 
    Account
@@ -65,7 +65,7 @@ EXAMPLES
    New-PSDrive -Name driveName -PSProvider SHiPS -Root 'VSTeam#VSTeamAccount'
 
 KEYWORDS
-    Team Services, VSTS, TFS, VSO, TFS, DevOps
+    Azure DevOps Server, Azure DevOps Services, AzDO, AzD, Team Services, VSTS, TFS, VSO
 
 SEE ALSO
     Set-VSTeamAccount

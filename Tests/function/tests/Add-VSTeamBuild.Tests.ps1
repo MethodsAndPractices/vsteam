@@ -80,6 +80,27 @@ Describe 'VSTeamBuild' {
                $Uri -eq "https://dev.azure.com/test/project/_apis/build/builds?api-version=$(_getApiVersion Build)"
             }
          }
+
+         It 'should add build with templateParameters' {
+            ## Act
+            Add-VSTeamBuild -ProjectName project `
+               -BuildDefinitionId 2 `
+               -TemplateParameters @{
+                  'Param1' = 'Val1'
+                  'Param2' = 'Val2'
+               }
+
+            ## Assert
+            # Call to queue build.
+            Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
+               $Body -like "*2*" -and
+               $Body -like "*Param1*" -and
+               $Body -like "*Param2*" -and
+               $Body -like "*Val2*" -and
+               $Body -like "*Val1*" -and
+               $Uri -eq "https://dev.azure.com/test/project/_apis/build/builds?api-version=$(_getApiVersion Build)"
+            }
+         }
       }
 
       Context 'Server' -Tag "Server" {
@@ -99,7 +120,7 @@ Describe 'VSTeamBuild' {
             Mock Get-VSTeamBuildDefinition { return @{ name = "MyBuildDef" } }
          }
 
-         It 'should add build by id on TFS local auth' {
+         It 'should add build by id on Azure DevOps local auth' {
             ## Act
             Add-VSTeamBuild -projectName project `
                -BuildDefinitionId 2 `
@@ -114,7 +135,7 @@ Describe 'VSTeamBuild' {
             }
          }
 
-         It 'should add build with parameters on TFS local auth' {
+         It 'should add build with parameters on Azure DevOps local auth' {
             ## Act
             Add-VSTeamBuild -projectName project `
                -BuildDefinitionId 2 `
@@ -131,7 +152,7 @@ Describe 'VSTeamBuild' {
             }
          }
 
-         It 'should add build with source branch on TFS local auth' {
+         It 'should add build with source branch on Azure DevOps local auth' {
             ## Act
             Add-VSTeamBuild -projectName project `
                -BuildDefinitionId 2 `

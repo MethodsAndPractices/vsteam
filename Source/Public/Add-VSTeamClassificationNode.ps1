@@ -1,4 +1,4 @@
-# Create new or update an existing classification node.
+# Create new classification node.
 #
 # Get-VSTeamOption 'wit' 'classificationNodes'
 # id              : 5a172953-1b41-49d3-840a-33f79c3ce89f
@@ -21,10 +21,10 @@ function Add-VSTeamClassificationNode {
       [string] $Path = $null,
 
       [Parameter(Mandatory = $false)]
-      [datetime] $StartDate,
+      [Nullable[datetime]] $StartDate,
 
       [Parameter(Mandatory = $false)]
-      [datetime] $FinishDate,
+      [Nullable[datetime]] $FinishDate,
 
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [vsteam_lib.ProjectValidateAttribute($false)]

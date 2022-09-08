@@ -26,7 +26,7 @@ Describe 'VSTeamIteration' {
 
       It 'with Path "<Path>" should return Nodes' -TestCases @(
          @{ Path = 'SubPath' }
-         @{ Path = 'Path/SubPath' }
+         @{ Path = 'Path/SubPath'; StartDate = '2014-10-27T00:00:00Z'; FinishDate = '2014-10-31T00:00:00Z' }
       ) {
          param ($Path)
          ## Act
@@ -42,7 +42,7 @@ Describe 'VSTeamIteration' {
 
       It 'with empty Path "<Path>" should return Nodes' -TestCases @(
          @{ Path = "" }
-         @{ Path = $null }
+         @{ Path = $null; StartDate = '2014-10-27T00:00:00Z'; FinishDate = '2014-10-31T00:00:00Z' }
       ) {
          param ($Path)
          ## Act

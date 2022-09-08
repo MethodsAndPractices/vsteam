@@ -142,7 +142,7 @@ namespace vsteam_lib
       [ExcludeFromCodeCoverage]
       public static string DefaultProject { get; set; } = System.Environment.GetEnvironmentVariable("TEAM_PROJECT");
       [ExcludeFromCodeCoverage]
-      public static string Version { get; set; } = System.Environment.GetEnvironmentVariable("TEAM_VERSION") ?? "TFS2017";
+      public static string Version { get; set; } = System.Environment.GetEnvironmentVariable("TEAM_VERSION") ?? "AzD2019";
       [ExcludeFromCodeCoverage]
       public static string ModuleVersion { get; set; } = null;
 

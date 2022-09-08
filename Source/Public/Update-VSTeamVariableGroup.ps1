@@ -1,6 +1,6 @@
 function Update-VSTeamVariableGroup {
    [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Medium",
-    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Update-VSTeamVariableGroup')]
+      HelpUri = 'https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Update-VSTeamVariableGroup')]
    param(
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [string] $Id,
@@ -14,6 +14,13 @@ function Update-VSTeamVariableGroup {
       [Parameter(ParameterSetName = 'ByHashtable', Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [hashtable] $Variables,
 
+      [Parameter(ParameterSetName = 'ByHashtable', Mandatory = $true)]
+      [ValidateSet('Vsts', 'AzureKeyVault')]
+      [string] $Type,
+
+      [Parameter(ParameterSetName = 'ByHashtable', Mandatory = $false)]
+      [hashtable] $ProviderData,
+
       [Parameter(ParameterSetName = 'ByBody', Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [string] $Body,
 
@@ -25,38 +32,17 @@ function Update-VSTeamVariableGroup {
       [string] $ProjectName
    )
 
-   DynamicParam {
-      $dp = New-Object System.Management.Automation.RuntimeDefinedParameterDictionary
-
-      if ($(_getApiVersion -Target) -ne "TFS2017" -and $PSCmdlet.ParameterSetName -eq "ByHashtable") {
-         $ParameterName = 'Type'
-         $rp = _buildDynamicParam -ParameterName $ParameterName -arrSet ('Vsts', 'AzureKeyVault') -Mandatory $true
-         $dp.Add($ParameterName, $rp)
-
-         $ParameterName = 'ProviderData'
-         $rp = _buildDynamicParam -ParameterName $ParameterName -Mandatory $false -ParameterType ([hashtable])
-         $dp.Add($ParameterName, $rp)
-      }
-
-      return $dp
-   }
-
    Process {
       if ([string]::IsNullOrWhiteSpace($Body)) {
          $bodyAsHashtable = @{
             name        = $Name
             description = $Description
             variables   = $Variables
+            type        = $Type
          }
 
-         if ([vsteam_lib.Versions]::Version -ne "TFS2017") {
-            $Type = $PSBoundParameters['Type']
-            $bodyAsHashtable.Add("type", $Type)
-
-            $ProviderData = $PSBoundParameters['ProviderData']
-            if ($null -ne $ProviderData) {
-               $bodyAsHashtable.Add("providerData", $ProviderData)
-            }
+         if ($null -ne $ProviderData) {
+            $bodyAsHashtable.Add("providerData", $ProviderData)
          }
 
          $body = $bodyAsHashtable | ConvertTo-Json -Depth 100

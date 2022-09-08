@@ -1,20 +1,18 @@
 function Set-VSTeamAPIVersion {
    [CmdletBinding(DefaultParameterSetName = 'Target', SupportsShouldProcess = $true, ConfirmImpact = "Low",
-    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Set-VSTeamAPIVersion')]
+      HelpUri = 'https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Set-VSTeamAPIVersion')]
    param(
       [parameter(ParameterSetName = 'Target', Mandatory = $false, Position = 0)]
-      [ValidateSet('TFS2017', 'TFS2018', 'AzD2019', 'VSTS', 'AzD', 'TFS2017U1',
-                   'TFS2017U2', 'TFS2017U3', 'TFS2018U1', 'TFS2018U2',
-                   'TFS2018U3', 'AzD2019U1')]
-      [string] $Target = 'TFS2017',
+      [ValidateSet('AzD2019', 'VSTS', 'AzD', 'AzD2019U1')]
+      [string] $Target = 'AzD2019',
 
       [parameter(ParameterSetName = 'Service', Mandatory = $true, Position = 0)]
       [ValidateSet('Build', 'Release', 'Core', 'Git', 'DistributedTask',
-                   'DistributedTaskReleased', 'VariableGroups', 'Tfvc',
-                   'Packaging', 'MemberEntitlementManagement',
-                   'ExtensionsManagement', 'ServiceEndpoints', 'Graph',
-                   'TaskGroups', 'Policy', 'Processes', 'HierarchyQuery',
-                   'Pipelines', 'Billing', 'Wiki', 'WorkItemTracking')]
+         'DistributedTaskReleased', 'VariableGroups', 'Tfvc',
+         'Packaging', 'MemberEntitlementManagement',
+         'ExtensionsManagement', 'ServiceEndpoints', 'Graph',
+         'TaskGroups', 'Policy', 'Processes', 'HierarchyQuery',
+         'Pipelines', 'Billing', 'Wiki', 'WorkItemTracking')]
       [string] $Service,
 
       [parameter(ParameterSetName = 'Service', Mandatory = $true, Position = 1)]
@@ -77,127 +75,6 @@ function Set-VSTeamAPIVersion {
                [vsteam_lib.Versions]::Billing = ''
                [vsteam_lib.Versions]::Wiki = '5.1'
                [vsteam_lib.Versions]::WorkItemTracking = '5.1-preview'
-            }
-            { $_ -eq 'TFS2018' -or $_ -eq 'TFS2018U1' } {
-               [vsteam_lib.Versions]::Version = 'TFS2018'
-               [vsteam_lib.Versions]::Git = '4.0'
-               [vsteam_lib.Versions]::Core = '4.0'
-               [vsteam_lib.Versions]::Build = '4.0'
-               [vsteam_lib.Versions]::Release = '4.0-preview'
-               [vsteam_lib.Versions]::DistributedTask = '4.0-preview'
-               [vsteam_lib.Versions]::DistributedTaskReleased = ''
-               [vsteam_lib.Versions]::Pipelines = ''
-               [vsteam_lib.Versions]::HierarchyQuery = ''
-               [vsteam_lib.Versions]::VariableGroups = '4.0-preview'
-               [vsteam_lib.Versions]::Tfvc = '4.0'
-               [vsteam_lib.Versions]::Packaging = '4.0-preview'
-               [vsteam_lib.Versions]::TaskGroups = '4.0-preview'
-               [vsteam_lib.Versions]::MemberEntitlementManagement = ''
-               [vsteam_lib.Versions]::ServiceEndpoints = '4.0-preview'
-               [vsteam_lib.Versions]::ExtensionsManagement = '4.0-preview'
-               [vsteam_lib.Versions]::Graph = ''
-               [vsteam_lib.Versions]::Policy = '4.0'
-               [vsteam_lib.Versions]::Processes = '4.0-preview'
-               [vsteam_lib.Versions]::Billing = ''
-               [vsteam_lib.Versions]::Wiki = ''
-               [vsteam_lib.Versions]::WorkItemTracking = '4.0-preview'
-            }
-            { $_ -eq 'TFS2018U2' -or $_ -eq 'TFS2018U3' } {
-               [vsteam_lib.Versions]::Version = 'TFS2018'
-               [vsteam_lib.Versions]::Git = '4.1'
-               [vsteam_lib.Versions]::Core = '4.1'
-               [vsteam_lib.Versions]::Build = '4.1'
-               [vsteam_lib.Versions]::Release = '4.1-preview'
-               [vsteam_lib.Versions]::DistributedTask = '4.1-preview'
-               [vsteam_lib.Versions]::DistributedTaskReleased = ''
-               [vsteam_lib.Versions]::Pipelines = ''
-               [vsteam_lib.Versions]::HierarchyQuery = ''
-               [vsteam_lib.Versions]::VariableGroups = '4.1-preview'
-               [vsteam_lib.Versions]::Tfvc = '4.1'
-               [vsteam_lib.Versions]::Packaging = '4.1-preview'
-               [vsteam_lib.Versions]::TaskGroups = '4.1-preview'
-               [vsteam_lib.Versions]::MemberEntitlementManagement = ''
-               [vsteam_lib.Versions]::ServiceEndpoints = '4.1-preview'
-               [vsteam_lib.Versions]::ExtensionsManagement = '4.1-preview'
-               [vsteam_lib.Versions]::Graph = ''
-               [vsteam_lib.Versions]::Policy = '4.1'
-               [vsteam_lib.Versions]::Processes = '4.1-preview'
-               [vsteam_lib.Versions]::Billing = ''
-               [vsteam_lib.Versions]::Wiki = '4.1'
-               [vsteam_lib.Versions]::WorkItemTracking = '4.1-preview.1'
-            }
-            'TFS2017' {
-               [vsteam_lib.Versions]::Version = 'TFS2017'
-               [vsteam_lib.Versions]::Git = '3.0'
-               [vsteam_lib.Versions]::Core = '3.0'
-               [vsteam_lib.Versions]::Build = '3.0'
-               [vsteam_lib.Versions]::Release = '3.0-preview'
-               [vsteam_lib.Versions]::DistributedTask = '3.0-preview'
-               [vsteam_lib.Versions]::DistributedTaskReleased = ''
-               [vsteam_lib.Versions]::Pipelines = ''
-               [vsteam_lib.Versions]::HierarchyQuery = ''
-               [vsteam_lib.Versions]::VariableGroups = '' # Was introduced in Update 1
-               [vsteam_lib.Versions]::TaskGroups = '3.0-preview'
-               [vsteam_lib.Versions]::ServiceEndpoints = '3.0-preview'
-               [vsteam_lib.Versions]::Tfvc = '3.0'
-               [vsteam_lib.Versions]::Packaging = '3.0-preview'
-               [vsteam_lib.Versions]::MemberEntitlementManagement = ''
-               [vsteam_lib.Versions]::ExtensionsManagement = '3.0-preview'
-               [vsteam_lib.Versions]::Graph = ''
-               [vsteam_lib.Versions]::Policy = '3.0'
-               [vsteam_lib.Versions]::Processes = ''
-               [vsteam_lib.Versions]::Billing = ''
-               [vsteam_lib.Versions]::Wiki = ''
-               [vsteam_lib.Versions]::WorkItemTracking = '3.0'
-            }
-            'TFS2017U1' {
-               [vsteam_lib.Versions]::Version = 'TFS2017'
-               [vsteam_lib.Versions]::Git = '3.1'
-               [vsteam_lib.Versions]::Core = '3.1'
-               [vsteam_lib.Versions]::Build = '3.1'
-               [vsteam_lib.Versions]::Release = '3.1-preview'
-               [vsteam_lib.Versions]::DistributedTask = '3.1-preview'
-               [vsteam_lib.Versions]::DistributedTaskReleased = ''
-               [vsteam_lib.Versions]::Pipelines = ''
-               [vsteam_lib.Versions]::HierarchyQuery = ''
-               [vsteam_lib.Versions]::VariableGroups = '3.1-preview' # Resource of DistributedTask area
-               [vsteam_lib.Versions]::TaskGroups = '3.1-preview' # Resource of DistributedTask area
-               [vsteam_lib.Versions]::ServiceEndpoints = '3.1-preview' # The serviceendpoints resource of DistributedTask area
-               [vsteam_lib.Versions]::Tfvc = '3.1'
-               [vsteam_lib.Versions]::Packaging = '3.1-preview'
-               [vsteam_lib.Versions]::MemberEntitlementManagement = '' # SubDomain vsaex
-               [vsteam_lib.Versions]::ExtensionsManagement = '3.1-preview' # Actual area is extensionmanagement
-               [vsteam_lib.Versions]::Graph = '' # SubDomain vssps
-               [vsteam_lib.Versions]::Policy = '3.1'
-               [vsteam_lib.Versions]::Processes = ''
-               [vsteam_lib.Versions]::Billing = ''
-               [vsteam_lib.Versions]::Wiki = ''
-               [vsteam_lib.Versions]::WorkItemTracking = '3.1'
-            }
-            # Update 3 of TFS 2017 did not introduce a new API Version
-            { $_ -eq 'TFS2017U2' -or $_ -eq 'TFS2017U3' } {
-               [vsteam_lib.Versions]::Version = 'TFS2017'
-               [vsteam_lib.Versions]::Git = '3.2'
-               [vsteam_lib.Versions]::Core = '3.2'
-               [vsteam_lib.Versions]::Build = '3.2'
-               [vsteam_lib.Versions]::Release = '3.2-preview'
-               [vsteam_lib.Versions]::DistributedTask = '3.2-preview'
-               [vsteam_lib.Versions]::DistributedTaskReleased = ''
-               [vsteam_lib.Versions]::Pipelines = ''
-               [vsteam_lib.Versions]::HierarchyQuery = ''
-               [vsteam_lib.Versions]::VariableGroups = '3.2-preview' # Resource of DistributedTask area
-               [vsteam_lib.Versions]::TaskGroups = '3.2-preview' # Resource of DistributedTask area
-               [vsteam_lib.Versions]::ServiceEndpoints = '3.2-preview' # The serviceendpoints resource of DistributedTask area
-               [vsteam_lib.Versions]::Tfvc = '3.2'
-               [vsteam_lib.Versions]::Packaging = '3.2-preview'
-               [vsteam_lib.Versions]::MemberEntitlementManagement = '' # SubDomain vsaex
-               [vsteam_lib.Versions]::ExtensionsManagement = '3.2-preview' # Actual area is extensionmanagement
-               [vsteam_lib.Versions]::Graph = '' # SubDomain vssps
-               [vsteam_lib.Versions]::Policy = '3.2'
-               [vsteam_lib.Versions]::Processes = ''
-               [vsteam_lib.Versions]::Billing = ''
-               [vsteam_lib.Versions]::Wiki = ''
-               [vsteam_lib.Versions]::WorkItemTracking = '3.2'
             }
             # AZD, VSTS
             Default {

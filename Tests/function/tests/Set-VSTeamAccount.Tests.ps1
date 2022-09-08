@@ -65,8 +65,8 @@ Describe 'VSTeamAccount' {
 
          # Make sure set env vars was called with the correct parameters
          Should -Invoke _setEnvironmentVariables -Exactly -Scope It -Times 1 -ParameterFilter {
-            $Level -eq 'Process' -and 
-            $Pat -eq 'OndrejR0ZHpwbDM3bXUycGt5c3hm' -and 
+            $Level -eq 'Process' -and
+            $Pat -eq 'OndrejR0ZHpwbDM3bXUycGt5c3hm' -and
             $Acct -eq 'https://dev.azure.com/test'
          }
       }
@@ -92,8 +92,8 @@ Describe 'VSTeamAccount' {
 
          # Make sure set env vars was called with the correct parameters
          Should -Invoke _setEnvironmentVariables -Exactly -Scope It -Times 1 -ParameterFilter {
-            $Level -eq 'Process' -and 
-            $Pat -eq 'OndrejR0ZHpwbDM3bXUycGt5c3hm' -and 
+            $Level -eq 'Process' -and
+            $Pat -eq 'OndrejR0ZHpwbDM3bXUycGt5c3hm' -and
             $Acct -eq 'https://dev.azure.com/test'
          }
       }
@@ -138,8 +138,8 @@ Describe 'VSTeamAccount' {
 
          # Make sure set env vars was called with the correct parameters
          Should -Invoke _setEnvironmentVariables -Exactly -Scope It -Times 1 -ParameterFilter {
-            $Level -eq 'Process' -and 
-            $Pat -eq 'OjEyMzQ1' -and 
+            $Level -eq 'Process' -and
+            $Pat -eq 'OjEyMzQ1' -and
             $Acct -eq 'https://dev.azure.com/mydemos'
          }
       }
@@ -161,8 +161,8 @@ Describe 'VSTeamAccount' {
 
          # Make sure set env vars was called with the correct parameters
          Should -Invoke _setEnvironmentVariables -Exactly -Scope It -Times 1 -ParameterFilter {
-            $Level -eq 'Process' -and 
-            $Pat -eq '' -and 
+            $Level -eq 'Process' -and
+            $Pat -eq '' -and
             $BearerToken -eq 12345 -and
             $Acct -eq 'https://dev.azure.com/mydemos'
          }
@@ -187,8 +187,8 @@ Describe 'VSTeamAccount' {
 
          # Make sure set env vars was called with the correct parameters
          Should -Invoke _setEnvironmentVariables -Exactly -Scope It -Times 1 -ParameterFilter {
-            $Level -eq 'Process' -and 
-            $Pat -eq 'OjEyMzQ1' -and 
+            $Level -eq 'Process' -and
+            $Pat -eq 'OjEyMzQ1' -and
             $Acct -eq 'https://dev.azure.com/mydemos'
          }
       }
@@ -265,7 +265,7 @@ Describe 'VSTeamAccount' {
          Set-VSTeamAccount -a http://localhost:8080/tfs/defaultcollection -UseWindowsAuthentication
 
          Should -Invoke Set-VSTeamAPIVersion -Exactly -Scope It -Times 1 -ParameterFilter {
-            $Target -eq 'TFS2017'
+            $Target -eq 'AzD2019'
          }
 
          # Make sure set env vars was called with the correct parameters
@@ -292,7 +292,7 @@ Describe 'VSTeamAccount' {
          Set-VSTeamAccount -a http://localhost:8080/tfs/defaultcollection -pe 12345
 
          Should -Invoke Set-VSTeamAPIVersion -Exactly -Scope It -Times 1 -ParameterFilter {
-            $Target -eq 'TFS2017'
+            $Target -eq 'AzD2019'
          }
 
          # Make sure set env vars was called with the correct parameters

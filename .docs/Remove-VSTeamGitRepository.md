@@ -20,7 +20,7 @@ Remove-VSTeamGitRepository removes the Git repository from your Azure DevOps or 
 Remove-VSTeamGitRepository -Id 687c53f8-1a82-4e89-9a86-13d51bc4a8d5
 ```
 
-This command removes all the Git repositories for your TFS or Team Services account.
+This command removes all the Git repositories for your Azure DevOps.
 
 ## PARAMETERS
 

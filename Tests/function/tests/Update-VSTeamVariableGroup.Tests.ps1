@@ -68,7 +68,7 @@ Describe 'VSTeamVariableGroup' {
          BeforeAll {
             $sampleFile2017 = Open-SampleFile 'variableGroupSamples2017.json'
 
-            Mock _getApiVersion { return 'TFS2017' }
+            Mock _getApiVersion { return 'AzD2019' }
             Mock _getApiVersion { return '3.2-preview.1-unitTests' }
             Mock _getInstance { return 'http://localhost:8080/tfs/defaultcollection' } -Verifiable
 

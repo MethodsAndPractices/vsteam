@@ -14,9 +14,9 @@ Describe "VSTeamDescriptor" {
             # Set the account to use for testing. A normal user would do this
             # using the Set-VSTeamAccount function.
             Mock _getInstance { return 'https://dev.azure.com/test' }
-            
+
             Mock Invoke-RestMethod { Open-SampleFile 'descriptor.scope.TestProject.json' }
-            
+
             # You have to set the version or the api-version will not be added when versions = ''
             Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Graph' }
          }
@@ -39,7 +39,7 @@ Describe "VSTeamDescriptor" {
             Mock _callAPI { throw 'Should not be called' } -Verifiable
 
             # It is not supported on 2017
-            Mock _getApiVersion { return 'TFS2017' }
+            Mock _getApiVersion { return 'AzD2019' }
             Mock _getApiVersion { return '' } -ParameterFilter { $Service -eq 'Graph' }
          }
 

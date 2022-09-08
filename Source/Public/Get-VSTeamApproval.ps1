@@ -1,5 +1,5 @@
 function Get-VSTeamApproval {
-   [CmdletBinding(HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Get-VSTeamApproval')]
+   [CmdletBinding(HelpUri = 'https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Get-VSTeamApproval')]
    param(
       [ValidateSet('Approved', 'ReAssigned', 'Rejected', 'Canceled', 'Pending', 'Rejected', 'Skipped', 'Undefined')]
       [string] $StatusFilter,
@@ -20,7 +20,7 @@ function Get-VSTeamApproval {
          # Build query string and determine if the includeMyGroupApprovals should be added.
          $queryString = @{statusFilter = $StatusFilter; assignedtoFilter = $AssignedToFilter; releaseIdsFilter = ($ReleaseId -join ',') }
 
-         # The support in TFS and VSTS are not the same.
+         # The support in on-premise and cloud versions are not the same.
          $instance = $(_getInstance)
          if (_isVSTS $instance) {
             if ([string]::IsNullOrEmpty($AssignedToFilter) -eq $false) {
@@ -28,7 +28,7 @@ function Get-VSTeamApproval {
             }
          }
          else {
-            # For TFS all three parameters must be set before you can add
+            # For on-premise versions all three parameters must be set before you can add
             # includeMyGroupApprovals.
             if ([string]::IsNullOrEmpty($AssignedToFilter) -eq $false -and
                [string]::IsNullOrEmpty($ReleaseId) -eq $false -and

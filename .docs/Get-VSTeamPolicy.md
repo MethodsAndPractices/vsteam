@@ -20,7 +20,7 @@
 Get-VSTeamPolicy -ProjectName Demo
 ```
 
-This command returns all the policies for the Demo project in your TFS or Team Services account.
+This command returns all the policies for the Demo project in your Azure DevOps.
 
 ### Example 2
 

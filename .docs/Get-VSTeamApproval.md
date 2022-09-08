@@ -16,7 +16,7 @@ With just a project name, this function gets all of the pending approvals for th
 
 When using with AzD "IncludeMyGroupApprovals" will be added to the request when Assigned To Filter is not empty.
 
-When using with TFS "IncludeMyGroupApprovals" will be added to the request when Assigned To Filter, Release Id Filter are not empty and Status Filter equals Pending.
+When using with Azure DevOps "IncludeMyGroupApprovals" will be added to the request when Assigned To Filter, Release Id Filter are not empty and Status Filter equals Pending.
 
 The vsteam_lib.Approval type has three custom table formats:
 

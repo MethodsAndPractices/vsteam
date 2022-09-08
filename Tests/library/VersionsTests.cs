@@ -28,7 +28,7 @@ namespace vsteam_lib.Test
       [DataRow("Billing", APIs.Billing)]
       [DataRow("HierarchyQuery", APIs.HierarchyQuery)]
       [DataRow("ProcessesV1", APIs.Processes)]
-      [DataRow("TFS2017", APIs.Version)]
+      [DataRow("AzD2019", APIs.Version)]
       public void Versions_ChangeServiceVersions(string expected, APIs version)
       {
          // Arrange

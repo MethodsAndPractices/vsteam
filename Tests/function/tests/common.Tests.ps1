@@ -37,6 +37,33 @@ Describe 'Common' {
       }
    }
 
+   Context '_callAPIContinuationToken' {
+      BeforeAll {
+         Mock _callAPI { Open-SampleFile 'Get-VSTeamUserEntitlement-ContinuationToken.json' } -ParameterFilter {
+            $Url -match "filter=userType eq 'guest'$"
+         }
+         Mock _callAPI { Open-SampleFile 'Get-VSTeamUserEntitlement.json' } -ParameterFilter {
+            $Url -like "*filter=userType eq 'guest'&continuationToken=*"
+         }
+      }
+
+      # TODO: To be removed when support to manage X-MS-ContinuationToken header is added and replace it with specific tests
+      It 'not supported should throw with UseHeader parameter' {
+         { _callAPIContinuationToken -UseHeader } | Should -Throw
+      }
+
+      It 'When MaxPages has default value, all pages are returned' {
+         _callAPIContinuationToken -Url "https://vsaex.dev.azure.com/test/_apis/userentitlements?`$filter=userType eq 'guest'" -PropertyName 'members'
+         Should -Invoke _callAPI -Exactly -Times 2
+      }
+
+      It 'When number of pages are greater than MaxMages, only MaxPages are returned' {
+         _callAPIContinuationToken -Url "https://vsaex.dev.azure.com/test/_apis/userentitlements?`$filter=userType eq 'guest'" -PropertyName 'members' -MaxPages 1
+         Should -Invoke _callAPI -Exactly -Times 1
+      }
+
+   }
+
    Context '_getPermissionInheritanceInfo' {
       BeforeAll {
          Mock Get-VSTeamBuildDefinition { Open-SampleFile 'Get-BuildDefinition_AzD.json' -ReturnValue }

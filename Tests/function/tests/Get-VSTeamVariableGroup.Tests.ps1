@@ -38,7 +38,7 @@ Describe 'VSTeamVariableGroup' {
 
       Context 'Server' {
          BeforeAll {
-            Mock _getApiVersion { return 'TFS2017' }
+            Mock _getApiVersion { return 'AzD2019' }
             Mock _getInstance { return 'http://localhost:8080/tfs/defaultcollection' }
 
             Mock Invoke-RestMethod { Open-SampleFile 'variableGroupSamples2017.json' }

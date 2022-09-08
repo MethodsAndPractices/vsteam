@@ -37,10 +37,10 @@ Allows you to provide all the information on the command line.
 ### Example 3
 
 ```powershell
-Set-VSTeamAccount -Account http://localtfs:8080/tfs/DefaultCollection -UseWindowsAuthentication
+Set-VSTeamAccount -Account http://localazdo:8080/tfs/DefaultCollection -UseWindowsAuthentication
 ```
 
-On Windows, allows you use to use Windows authentication against a local TFS server.
+On Windows, allows you use to use Windows authentication against a local Azure DevOps server.
 
 ### Example 4
 
@@ -89,7 +89,7 @@ Just the portion after dev.azure.com. For example in the
 following url mydemos is the account name.
 <https://dev.azure.com/mydemos>
 or
-The full Team Foundation Server (TFS) url including the collection.
+The full Azure DevOps Server url including the collection.
 <http://localhost:8080/tfs/DefaultCollection>
 
 ```yaml
@@ -128,7 +128,7 @@ Parameter Sets: Secure, Plain, Windows
 
 ### PersonalAccessToken
 
-The personal access token from AzD/TFS to use to access this account.
+The personal access token from Azure DevOps to use to access this account.
 
 ```yaml
 Type: String

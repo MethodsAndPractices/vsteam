@@ -3,7 +3,7 @@ Set-StrictMode -Version Latest
 Describe 'VSTeamProfile' {
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
-      
+
       . "$baseFolder/Source/Public/Get-VSTeamProfile"
 
       $expectedPath = "$HOME/vsteam_profiles.json"
@@ -61,15 +61,15 @@ Describe 'VSTeamProfile' {
       }
 
       It 'Should save profile to disk' {
-         Add-VSTeamProfile -Account demos -PersonalAccessToken 12345 -Version TFS2018
+         Add-VSTeamProfile -Account demos -PersonalAccessToken 12345 -Version AzD2019
 
          Should -Invoke Set-Content -Exactly -Scope It -Times 1 -ParameterFilter {
-            $Path -eq $expectedPath -and $Value -like "*https://dev.azure.com/demos*" -and $Value -like "*https://dev.azure.com/test*" -and $Value -like "*TFS2018*"
+            $Path -eq $expectedPath -and $Value -like "*https://dev.azure.com/demos*" -and $Value -like "*https://dev.azure.com/test*" -and $Value -like "*AzD2019*"
          }
       }
    }
 
-   Context 'Add-VSTeamProfile TFS defaults to TFS2017 with Windows Auth' {
+   Context 'Add-VSTeamProfile TFS defaults to AzD2019 with Windows Auth' {
       BeforeAll {
          Mock _isOnWindows { return $true }
          Mock Get-VSTeamProfile { return '[{"Name":"test","URL":"https://dev.azure.com/test/","Type":"Pat","Pat":"12345","Version":"VSTS"}]' | ConvertFrom-Json | ForEach-Object { $_ } }
@@ -79,12 +79,12 @@ Describe 'VSTeamProfile' {
          Add-VSTeamProfile -Account http://localhost:8080/tfs/defaultcollection -UseWindowsAuthentication
 
          Should -Invoke Set-Content -Exactly -Scope It -Times 1 -ParameterFilter {
-            $Path -eq $expectedPath -and $Value -like "*OnPremise*" -and $Value -like "*http://localhost:8080/tfs/defaultcollection*" -and $Value -like "*TFS2017*"
+            $Path -eq $expectedPath -and $Value -like "*OnPremise*" -and $Value -like "*http://localhost:8080/tfs/defaultcollection*" -and $Value -like "*AzD2019*"
          }
       }
    }
 
-   Context 'Add-VSTeamProfile TFS defaults to TFS2017' {
+   Context 'Add-VSTeamProfile TFS defaults to AzD2019' {
       BeforeAll {
          Mock Get-VSTeamProfile { return '[{"Name":"test","URL":"https://dev.azure.com/test/","Type":"Pat","Pat":"12345","Version":"VSTS"}]' | ConvertFrom-Json | ForEach-Object { $_ } }
       }
@@ -93,7 +93,7 @@ Describe 'VSTeamProfile' {
          Add-VSTeamProfile -Account http://localhost:8080/tfs/defaultcollection -PersonalAccessToken 678910
 
          Should -Invoke Set-Content -Exactly -Scope It -Times 1 -ParameterFilter {
-            $Path -eq $expectedPath -and $Value -like "*OjY3ODkxMA==*" -and $Value -like "*http://localhost:8080/tfs/defaultcollection*" -and $Value -like "*TFS2017*"
+            $Path -eq $expectedPath -and $Value -like "*OjY3ODkxMA==*" -and $Value -like "*http://localhost:8080/tfs/defaultcollection*" -and $Value -like "*AzD2019*"
          }
       }
    }

@@ -1,6 +1,6 @@
 function Set-VSTeamAccount {
    [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Low", DefaultParameterSetName = 'Secure',
-    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Set-VSTeamAccount')]
+      HelpUri = 'https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Set-VSTeamAccount')]
    param(
       [parameter(ParameterSetName = 'Windows', Mandatory = $true, Position = 1)]
       [parameter(ParameterSetName = 'Secure', Mandatory = $true, Position = 1)]
@@ -18,7 +18,7 @@ function Set-VSTeamAccount {
       [parameter(ParameterSetName = 'Windows')]
       [parameter(ParameterSetName = 'Secure')]
       [Parameter(ParameterSetName = 'Plain')]
-      [ValidateSet('TFS2017', 'TFS2018', 'AzD2019', 'VSTS', 'AzD', 'TFS2017U1', 'TFS2017U2', 'TFS2017U3', 'TFS2018U1', 'TFS2018U2', 'TFS2018U3', 'AzD2019U1')]
+      [ValidateSet('AzD2019', 'VSTS', 'AzD', 'AzD2019U1')]
       [string] $Version,
 
       [string] $Drive,
