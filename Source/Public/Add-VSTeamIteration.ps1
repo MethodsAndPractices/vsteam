@@ -1,4 +1,4 @@
-# Create new or update an existing classification node.
+# Create new classification node.
 #
 # Get-VSTeamOption 'wit' 'classificationNodes'
 # id              : 5a172953-1b41-49d3-840a-33f79c3ce89f
@@ -17,10 +17,10 @@ function Add-VSTeamIteration {
       [string] $Path,
 
       [Parameter(Mandatory = $false)]
-      [datetime] $StartDate,
+      [Nullable[datetime]] $StartDate,
 
       [Parameter(Mandatory = $false)]
-      [datetime] $FinishDate,
+      [Nullable[datetime]] $FinishDate,
 
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [vsteam_lib.ProjectValidateAttribute($false)]
@@ -29,20 +29,12 @@ function Add-VSTeamIteration {
    )
 
    process {
-      $params = @{}
-
-      if ($StartDate) {
-         $params.StartDate = $StartDate
-      }
-
-      if ($FinishDate) {
-         $params.FinishDate = $FinishDate
-      }
-
-      $resp = Add-VSTeamClassificationNode @params -ProjectName $ProjectName `
+      $resp = Add-VSTeamClassificationNode -ProjectName $ProjectName `
          -Name $Name `
          -StructureGroup iterations `
-         -Path $Path
+         -Path $Path `
+         -StartDate $StartDate `
+         -FinishDate $FinishDate
 
       Write-Output $resp
    }

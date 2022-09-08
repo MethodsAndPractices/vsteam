@@ -1,5 +1,41 @@
 # Changelog
 
+## 7.9.0
+
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/481) from [Sebastian Schütze](https://github.com/SebastianSchuetze) the following:
+- fixed a bug that prevented the module to load when the user has no access to the internet.[#466](https://github.com/MethodsAndPractices/vsteam/issues/466)
+
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/480) from [Sebastian Schütze](https://github.com/SebastianSchuetze) the following:
+- fixed a problem that prevented the module to load [#467](https://github.com/MethodsAndPractices/vsteam/issues/467)
+
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/468) from [Michael19842](https://github.com/Michael19842) the following:
+- Added parameter `Templateparameter` for queue new build with custom template parameters
+
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/459) from [Miguel Nieto](https://github.com/mnieto) the following:
+
+- Enable API version 6.0 calls in Get-VSTeamUserEntitlement. This add new parameters only available starting from version 6.0.
+  - Top and Skip parameters are still valid on versions up to 5.1. But will throw if called from version 6.0. This preservers backwards compability, but can be a breaking change if you do not pay attention to the API version in your scripts
+  - New parameters will throw if called from version 5.1
+  - Function behaviour can be changed from Set-VSTeamAPIVersion -Service MemberEntitlementManagement -Version $yourVersion
+
+## 7.8.0
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/475) from [rbleattler](https://github.com/rbleattler) the following:
+- Added Update-VSTeamGitRepositoryDefaultBranch to allow for changing the default branch of a repository
+
+## 7.7.0
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/470) from [Joshua Davis](https://github.com/a11smiles) the following:
+
+- Added Update-VSTeamArea and Update-VSTeamIteration wrappers and their base function Update-VSTeamClassificationNodes to allow updates to classification nodes.
+
+- Updated StartTime and FinishTime to be _nullable_ for iterations, which includes the base classification nodes functions.
+
+- Updated the ClassificationNode object to provide a direct reference to an iteration's start and finish date, if provided, rather than being required to access them through the InternalObject.
+
+## 7.6.1
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/456) from [Sebastian Schütze](https://github.com/SebastianSchuetze) the following:
+
+- Fixed a problem with module messages causing a 404 and letting PSDrive fail [#455](https://github.com/MethodsAndPractices/vsteam/issues/455).
+
 ## 7.6.0
 
 Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/452) from [Sebastian Schütze](https://github.com/SebastianSchuetze) the following:
@@ -13,7 +49,7 @@ Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/451) fr
 
 Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/440) from [Sebastian Schütze](https://github.com/SebastianSchuetze) the following:
 
-- Added breaking change warning and new version notification on module load [#438](https://github.com/MethodsAndPractices/vsteam/issues/450). 
+- Added breaking change warning and new version notification on module load [#438](https://github.com/MethodsAndPractices/vsteam/issues/450).
 
 Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/448) from [Sebastian Schütze](https://github.com/SebastianSchuetze) the following:
 

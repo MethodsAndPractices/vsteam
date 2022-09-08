@@ -1,1 +1,1 @@
-Get User Entitlement for a user.
+Get User Entitlement for a user, or a paged list of users matching the specified filter
