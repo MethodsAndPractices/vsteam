@@ -4,7 +4,12 @@ function Get-VSTeamFeed {
    param (
       [Parameter(ParameterSetName = 'ByID', Position = 0)]
       [Alias('FeedId')]
-      [string[]] $Id
+      [string[]] $Id,
+
+      [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true)]
+      [vsteam_lib.ProjectValidateAttribute($false)]
+      [ArgumentCompleter([vsteam_lib.ProjectCompleter])]
+      [string] $ProjectName
    )
 
    process {
@@ -12,8 +17,13 @@ function Get-VSTeamFeed {
          subDomain = 'feeds'
          area      = 'packaging'
          resource  = 'feeds'
-         NoProject = $true
          version   = $(_getApiVersion Packaging)
+      }
+
+      if ($ProjectName) {
+         $commonArgs.ProjectName = $ProjectName
+      }else{
+         $commonArgs.NoProject = $true
       }
 
       if ($id) {
