@@ -38,6 +38,14 @@ Get-VSTeamPackage -feedName vsteam -Top 1 -Skip 1
 
 This command returns the second package from the feed named vsteam
 
+### Example 4: Return only packages and versions from project
+
+```powershell
+Get-VSTeamPackage -feedId 1a2b3c4d-5e6f-7a8b-9c0d-1e2f3a4b5c6d -projectName MyProject
+```
+
+This command returns all the packages and versions for the feedId in the project.
+
 ## PARAMETERS
 
 ### FeedId

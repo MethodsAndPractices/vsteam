@@ -31,6 +31,15 @@ Get-VSTeamPackageVersion -feedId $($p.FeedId) -packageId $($p.Id)
 
 This command returns all the versions for the packageId.
 
+### Example 3: Get version from package in project feed
+
+```powershell
+Get-VSTeamPackageVersion -feedId 1a2b3c4d-5e6f-7a8b-9c0d-1e2f3a4b5c6d -packageId 1a2b3c4d-5e6f-7a8b-9c0d-1e2f3a4b5c6d -projectName MyProject
+```
+
+This command returns all the versions for the packageId in the project feed.
+
+
 ## PARAMETERS
 
 ### FeedId
