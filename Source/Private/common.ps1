@@ -65,6 +65,7 @@ function _callAPI {
       }
 
       $params = $PSBoundParameters
+      Write-Verbose "Calling: $Url"
       $params.Add('Uri', $Url)
       $params.Add('UserAgent', (_getUserAgent))
       $params.Add('TimeoutSec', (_getDefaultTimeout))
