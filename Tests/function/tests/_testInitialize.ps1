@@ -31,7 +31,7 @@ $sut = (Split-Path -Leaf $testPath).Replace(".Tests.", ".")
 
 if ($private.IsPresent) {
    . "$baseFolder/Source/Private/$sut"
-} else {   
+} else {
    . "$baseFolder/Source/Public/$sut"
 }
 
@@ -40,9 +40,12 @@ if ($doNotPrimeCache.IsPresent) {
 }
 
 # Prime the project cache with an empty list. This will make sure
-# any project name used will pass validation and Get-VSTeamProject 
+# any project name used will pass validation and Get-VSTeamProject
 # will not need to be called.
 [vsteam_lib.ProjectCache]::Update([string[]]@(), 120)
+
+# clear default project, since it is cached from previous tests and it creates side effects
+Clear-VSTeamDefaultProject
 
 function Open-SampleFile {
    param(
@@ -50,13 +53,13 @@ function Open-SampleFile {
       [string] $file,
       [switch] $ReturnValue,
       # The index of the value array to return
-      [int] $index = -1, 
+      [int] $index = -1,
       [switch] $Json
    )
    if ($Json.IsPresent) {
       return $(Get-Content "$sampleFiles\$file" -Raw | ConvertTo-Json)
    }
-   
+
    if ($ReturnValue.IsPresent) {
       return $(Get-Content "$sampleFiles\$file" -Raw | ConvertFrom-Json).value
    } else {
