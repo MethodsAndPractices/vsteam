@@ -2,11 +2,11 @@ function Get-VSTeamPackage {
    [CmdletBinding(DefaultParameterSetName = 'List',
       HelpUri = 'https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Get-VSTeamPackage')]
    param(
-      [Parameter(Position = 0, Mandatory, ValueFromPipeline, ValueFromPipelineByPropertyName)]
+      [Parameter(Position = 0, Mandatory = $true, ValueFromPipeline, ValueFromPipelineByPropertyName)]
       [Alias("feedName")]
       [string] $feedId,
 
-      [Parameter(Position = 1, Mandatory, ParameterSetName = 'ById')]
+      [Parameter(Position = 1, Mandatory= $true, ParameterSetName = 'ById')]
       [Alias("id")]
       [guid] $packageId,
 
@@ -28,7 +28,12 @@ function Get-VSTeamPackage {
       [int] $Top,
 
       [Parameter(ParameterSetName = 'List')]
-      [int] $Skip
+      [int] $Skip,
+
+      [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true)]
+      [vsteam_lib.ProjectValidateAttribute($false)]
+      [ArgumentCompleter([vsteam_lib.ProjectCompleter])]
+      [string] $ProjectName
    )
    process {
       # Build query string
@@ -50,13 +55,23 @@ function Get-VSTeamPackage {
          $qs.includeUrls = 'false'
       }
 
+      $commonArgs = @{
+         subDomain = 'feeds'
+         area      = 'packaging'
+         resource  = 'feeds'
+         Id = "$feedId/Packages/$packageId"
+         QueryString = $qs
+         version   = $(_getApiVersion Packaging)
+      }
+
+      if ($ProjectName) {
+         $commonArgs.ProjectName = $ProjectName
+      }else{
+         $commonArgs.NoProject = $true
+      }
+
       # Call the REST API
-      $resp = _callAPI -Subdomain 'feeds' -NoProject `
-         -Area 'Packaging' `
-         -Resource 'Feeds' `
-         -Id "$feedId/Packages/$packageId" `
-         -QueryString $qs `
-         -Version $(_getApiVersion packaging)
+      $resp = _callAPI @commonArgs
 
       if ($null -ne $packageId) {
          return [vsteam_lib.Package]::new($resp, $feedId)

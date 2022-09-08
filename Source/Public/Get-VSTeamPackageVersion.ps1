@@ -9,7 +9,12 @@ function Get-VSTeamPackageVersion {
       [Alias("id")]
       [guid] $packageId,
 
-      [switch] $hideUrls
+      [switch] $hideUrls,
+
+      [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true)]
+      [vsteam_lib.ProjectValidateAttribute($false)]
+      [ArgumentCompleter([vsteam_lib.ProjectCompleter])]
+      [string] $ProjectName
    )
    process {
       # Build query string
@@ -23,16 +28,25 @@ function Get-VSTeamPackageVersion {
          $qs.includeUrls = 'false'
       }
 
+      $commonArgs = @{
+         SubDomain = 'feeds'
+         Area      = 'packaging'
+         Resource  = 'feeds'
+         Id = "$feedId/Packages/$packageId/versions"
+         QueryString = $qs
+         Version   = $(_getApiVersion Packaging)
+      }
+
+      if ($ProjectName) {
+         $commonArgs.ProjectName = $ProjectName
+      }else{
+         $commonArgs.NoProject = $true
+      }
+
       # Call the REST API
-      $resp = _callAPI -Subdomain 'feeds' -NoProject `
-         -Area 'Packaging' `
-         -Resource 'Feeds' `
-         -Id "$feedId/Packages/$packageId/versions" `
-         -QueryString $qs `
-         -Version $(_getApiVersion packaging)
+      $resp = _callAPI @commonArgs
 
       $objs = @()
-
       foreach ($item in $resp.value) {
          $objs += [vsteam_lib.PackageVersion]::new($item)
       }
