@@ -1,5 +1,12 @@
 # Changelog
 
+## 7.10.0
+
+
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/485) from [Sebastian Schütze](https://github.com/SebastianSchuetze) the following:
+- Added possibility to create, get and delete azure artifacts for projects [#379](https://github.com/MethodsAndPractices/vsteam/issues/379)
+
+
 ## 7.9.0
 
 Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/481) from [Sebastian Schütze](https://github.com/SebastianSchuetze) the following:

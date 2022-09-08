@@ -250,3 +250,7 @@ vsteam_wcore1903_ps5_tests_result.xml
 vsteam_wcore1903_ps7_tests_result.xml
 integrationTest-results.xml
 .vs/*
+
+# Default storage of Azurite
+azurite-testdrive
+__azurite_db_*__.json

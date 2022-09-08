@@ -18,7 +18,12 @@ function Add-VSTeamFeed {
 
       [switch] $EnableUpstreamSources,
 
-      [switch] $showDeletedPackageVersions
+      [switch] $showDeletedPackageVersions,
+
+      [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true)]
+      [vsteam_lib.ProjectValidateAttribute($false)]
+      [ArgumentCompleter([vsteam_lib.ProjectCompleter])]
+      [string] $ProjectName
    )
 
    process {
@@ -54,12 +59,26 @@ function Add-VSTeamFeed {
 
       $bodyAsJson = $body | ConvertTo-Json -Compress -Depth 100
 
+
+
+      $commonArgs = @{
+         Method = 'POST'
+         subDomain  = 'feeds'
+         Area = 'packaging'
+         Resource = 'feeds'
+         body = $bodyAsJson
+         Id = $item
+         Version = $(_getApiVersion Packaging)
+      }
+
+      if ($ProjectName) {
+         $commonArgs.ProjectName = $ProjectName
+      }else{
+         $commonArgs.NoProject = $true
+      }
+
       # Call the REST API
-      $resp = _callAPI -Method POST -subDomain "feeds" `
-         -Area "packaging" `
-         -Resource "feeds" `
-         -body $bodyAsJson `
-         -Version $(_getApiVersion Packaging)
+      $resp = _callAPI @commonArgs
 
       Write-Output [vsteam_lib.Feed]::new($resp)
    }

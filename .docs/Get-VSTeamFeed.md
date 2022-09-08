@@ -22,6 +22,14 @@ Get-VSTeamFeed
 
 This command returns all the package feeds for the account.
 
+### Example 2
+
+```powershell
+Get-VSTeamFeed -ProjectName 'MyProject'
+```
+
+This command returns all the package feeds for the project.
+
 ## PARAMETERS
 
 ### FeedId
@@ -33,6 +41,8 @@ Type: Guid
 Aliases: ID
 Accept pipeline input: true (ByPropertyName)
 ```
+
+<!-- #include "./params/projectName.md" -->
 
 ## INPUTS
 

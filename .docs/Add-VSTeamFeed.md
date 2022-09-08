@@ -22,6 +22,14 @@ Add-VSTeamFeed -Name test -Description 'Test Description'
 
 This command adds a new package feed to the account.
 
+### Example 2
+
+```powershell
+Add-VSTeamFeed -Name test -Description 'Test Description' -ProjectName 'MyProject'
+```
+
+This command adds a new package feed to the project.
+
 ## PARAMETERS
 
 ### Name
@@ -56,6 +64,8 @@ The feed will show deleted version in the feed
 ```yaml
 Type: SwitchParameter
 ```
+
+<!-- #include "./params/projectName.md" -->
 
 ## INPUTS
 
