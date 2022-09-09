@@ -15,6 +15,9 @@ function Add-VSTeamProject {
 
       [string] $Description,
 
+      [validateset('private','public')]
+      [string] $Visibility = 'private',
+
       [switch] $TFVC,
 
       [vsteam_lib.ProcessTemplateValidateAttribute()]
@@ -51,6 +54,7 @@ function Add-VSTeamProject {
                templateTypeId = $templateTypeId
             }
          }
+         visibility = $Visibility
       }
 
       try {
@@ -63,7 +67,7 @@ function Add-VSTeamProject {
          _trackProjectProgress -resp $resp -title 'Creating team project' -msg "Name: $($ProjectName), Template: $($processTemplate), Src: $($srcCtrl)"
 
          # Invalidate any cache of projects.
-         [vsteam_lib.ProjectCache]::Invalidate()
+         _invalidate
          Start-Sleep -Seconds 5
 
          return Get-VSTeamProject $ProjectName

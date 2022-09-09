@@ -34,17 +34,6 @@ template and TFVC source control.
 
 ## PARAMETERS
 
-### ProjectName
-
-The name of the project to create.
-
-```yaml
-Type: String
-Aliases: Name
-Required: True
-Position: 0
-```
-
 ### ProcessTemplate
 
 The name of the process template to use for the project.
@@ -71,6 +60,17 @@ Switches the source control from Git to TFVC.
 ```yaml
 Type: SwitchParameter
 ```
+
+### Visibility
+
+The visibility of the project.
+
+```yaml
+Type: String
+Accepted values: private, public
+```
+
+<!-- #include "./params/projectName.md" -->
 
 ## INPUTS
 

@@ -22,6 +22,14 @@ Update-VSTeamProject -Name Demo -NewName aspDemo
 
 This command changes the name of your project from Demo to aspDemo.
 
+### Example 2: Make a project public
+
+```powershell
+Update-VSTeamProject -Name Demo -Visibility public
+```
+
+This command makes your project public.
+
 ## PARAMETERS
 
 ### NewName
@@ -49,6 +57,15 @@ Type: String
 Parameter Sets: (ByID)
 Aliases: ProjectId
 Accept pipeline input: true (ByPropertyName)
+```
+
+### Visibility
+
+The visibility of the project.
+
+```yaml
+Type: String
+Accepted values: private, public
 ```
 
 <!-- #include "./params/projectName.md" -->

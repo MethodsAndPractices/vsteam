@@ -1276,3 +1276,7 @@ function _countParameters() {
    Write-Verbose "Found $counter parameters"
    $counter
 }
+
+function _invalidate() {
+   [vsteam_lib.ProjectCache]::Invalidate()
+}

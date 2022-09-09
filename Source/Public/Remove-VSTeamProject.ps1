@@ -25,7 +25,7 @@ function Remove-VSTeamProject {
          _trackProjectProgress -resp $resp -title 'Deleting team project' -msg "Deleting $ProjectName"
 
          # Invalidate any cache of projects.
-         [vsteam_lib.ProjectCache]::Invalidate()
+         _invalidate
 
          Write-Output "Deleted $ProjectName"
       }
