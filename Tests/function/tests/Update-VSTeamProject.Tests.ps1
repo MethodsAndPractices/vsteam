@@ -13,9 +13,7 @@ Describe 'VSTeamProject' {
    Context 'Update-VSTeamProject' {
       BeforeAll {
 
-         Mock Get-VSTeamProject {
-            Open-SampleFile 'Get-VSTeamProject-NamePeopleTracker.json'
-         }
+         Mock Get-VSTeamProject { Open-SampleFile 'Get-VSTeamProject-NamePeopleTracker.json' }
 
          Mock Invoke-RestMethod {
             return @{ status = 'inProgress'; url = 'https://someplace.com' }
