@@ -46,6 +46,18 @@ Describe 'VSTeamProject' {
          }
       }
 
+      It 'should create public project' {
+         Add-VSTeamProject -Name Test -Visibility public
+
+
+         Should -Invoke Invoke-RestMethod -Times 1 -Scope It  -ParameterFilter {
+            $Method -eq 'Post' -and
+            $Uri -eq "https://dev.azure.com/test/_apis/projects?api-version=$(_getApiVersion Core)" -and
+            $Body -like '*"name":*"Test"*' -and
+            $Body -like '*"visibility":*public*'
+         }
+      }
+
       It 'with tfvc should create project with tfvc' {
          Add-VSTeamProject -Name Test -tfvc
 

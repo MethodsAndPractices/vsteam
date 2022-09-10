@@ -28,6 +28,7 @@ $sut = (Split-Path -Leaf $testPath).Replace(".Tests.", ".")
 
 . "$baseFolder/Source/Private/common.ps1"
 . "$baseFolder/Source/Private/applyTypes.ps1"
+. "$baseFolder/Source/Public/Clear-VSTeamDefaultProject.ps1"
 
 if ($private.IsPresent) {
    . "$baseFolder/Source/Private/$sut"

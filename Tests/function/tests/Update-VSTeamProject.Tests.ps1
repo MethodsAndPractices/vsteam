@@ -7,16 +7,18 @@ Describe 'VSTeamProject' {
 
       Mock _getApiVersion { return '1.0-unitTests' }
       Mock _getInstance { return 'https://dev.azure.com/test' }
+      Mock _invalidate
    }
 
    Context 'Update-VSTeamProject' {
       BeforeAll {
-         Mock Invoke-RestMethod { Open-SampleFile 'Get-VSTeamProject-NamePeopleTracker.json' }
-         
+
+         Mock Get-VSTeamProject { Open-SampleFile 'Get-VSTeamProject-NamePeopleTracker.json' }
+
          Mock Invoke-RestMethod {
             return @{ status = 'inProgress'; url = 'https://someplace.com' }
          } -ParameterFilter {
-            $Method -eq 'Patch' 
+            $Method -eq 'Patch'
          }
 
          Mock _trackProjectProgress
@@ -24,25 +26,25 @@ Describe 'VSTeamProject' {
 
       It 'with no op by id should not call Invoke-RestMethod' {
          ## Act
-         Update-VSTeamProject -id '123-5464-dee43'
+         Update-VSTeamProject -id '99081ca0-ec76-4a6b-840f-e70344e8784f' -Force
 
          ## Assert
-         Should -Invoke Invoke-RestMethod -Exactly 0
+         Should -Invoke Invoke-RestMethod -Exactly 1 -Scope It
       }
 
       It 'with newName should change name' {
          ## Act
-         Update-VSTeamProject -ProjectName Test -newName Testing123 -Force
+.         Update-VSTeamProject -ProjectName Test -newName Testing123 -Force
 
          ## Assert
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
-            $Uri -eq "https://dev.azure.com/test/_apis/projects/Test?api-version=$(_getApiVersion Core)" 
+            $Uri -eq "https://dev.azure.com/test/_apis/projects/00000000-0000-0000-0000-000000000000?api-version=$(_getApiVersion Core)"
          }
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
-            $Method -eq 'Patch' -and $Body -eq '{"name": "Testing123"}' 
+            $Method -eq 'Patch' -and $Body -like '*"name"*"Testing123"*'
          }
-         Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter { 
-            $Uri -eq "https://dev.azure.com/test/_apis/projects/Testing123?api-version=$(_getApiVersion Core)" 
+         Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
+            $Uri -eq "https://dev.azure.com/test/_apis/projects/00000000-0000-0000-0000-000000000000?api-version=$(_getApiVersion Core)"
          }
       }
 
@@ -51,11 +53,11 @@ Describe 'VSTeamProject' {
          Update-VSTeamProject -ProjectName Test -newDescription Testing123 -Force
 
          ## Assert
-         Should -Invoke Invoke-RestMethod -Exactly -Times 2 -Scope It -ParameterFilter { 
-            $Uri -eq "https://dev.azure.com/test/_apis/projects/Test?api-version=$(_getApiVersion Core)" 
+         Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
+            $Uri -eq "https://dev.azure.com/test/_apis/projects/00000000-0000-0000-0000-000000000000?api-version=$(_getApiVersion Core)"
          }
-         Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter { 
-            $Method -eq 'Patch' -and $Body -eq '{"description": "Testing123"}' 
+         Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
+            $Method -eq 'Patch' -and $Body -like '*"description"*"Testing123"*'
          }
       }
 
@@ -64,14 +66,25 @@ Describe 'VSTeamProject' {
          Update-VSTeamProject -ProjectName Test -newName Testing123 -newDescription Testing123 -Force
 
          ## Assert
-         Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter { 
-            $Uri -eq "https://dev.azure.com/test/_apis/projects/Test?api-version=$(_getApiVersion Core)" 
+         Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
+            $Uri -eq "https://dev.azure.com/test/_apis/projects/00000000-0000-0000-0000-000000000000?api-version=$(_getApiVersion Core)"
          }
-         Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter { 
-            $Method -eq 'Patch' 
+         Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
+            $Method -eq 'Patch'
          }
-         Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter { 
-            $Uri -eq "https://dev.azure.com/test/_apis/projects/Testing123?api-version=$(_getApiVersion Core)" 
+         Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
+            $Uri -eq "https://dev.azure.com/test/_apis/projects/00000000-0000-0000-0000-000000000000?api-version=$(_getApiVersion Core)"
+         }
+      }
+
+      It 'should change to public project' {
+         ## Act
+         Update-VSTeamProject -ProjectName Test -Visibility public -Force
+
+         ## Assert
+         Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
+            $Uri -eq "https://dev.azure.com/test/_apis/projects/00000000-0000-0000-0000-000000000000?api-version=$(_getApiVersion Core)" -and
+            $Method -eq 'Patch' -and $Body -like '*"visibility"*"public"}'
          }
       }
    }

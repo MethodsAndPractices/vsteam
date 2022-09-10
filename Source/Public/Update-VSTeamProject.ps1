@@ -6,6 +6,9 @@ function Update-VSTeamProject {
 
       [string] $NewDescription = '',
 
+      [validateset('private','public')]
+      [string] $Visibility = '',
+
       [switch] $Force,
 
       [Parameter(ParameterSetName = 'ByID', ValueFromPipelineByPropertyName = $true)]
@@ -25,43 +28,45 @@ function Update-VSTeamProject {
          $id = (Get-VSTeamProject $ProjectName).id
       }
 
-      if ($newName -eq '' -and $newDescription -eq '') {
-         # There is nothing to do
-         Write-Verbose 'Nothing to update'
-         return
-      }
-
       if ($Force -or $pscmdlet.ShouldProcess($ProjectName, "Update Project")) {
          # At the end we return the project and need it's name
          # this is used to track the final name.
          $finalName = $ProjectName
 
-         if ($newName -ne '' -and $newDescription -ne '') {
-            $finalName = $newName
+         $body = @{}
+
+         if ($NewName -ne '' -and $NewDescription -ne '') {
+            $finalName = $NewName
             $msg = "Changing name and description"
-            $body = '{"name": "' + $newName + '", "description": "' + $newDescription + '"}'
+            $body.name = $NewName
+            $body.description = $NewDescription
          }
-         elseif ($newName -ne '') {
-            $finalName = $newName
+         elseif ($NewName -ne '') {
+            $finalName = $NewName
             $msg = "Changing name"
-            $body = '{"name": "' + $newName + '"}'
+            $body.name = $NewName
          }
          else {
             $msg = "Changing description"
-            $body = '{"description": "' + $newDescription + '"}'
+            $body.description = $newDescription
+         }
+
+         if ($Visibility -ne '') {
+            $msg += " and visibility"
+            $body.visibility = $Visibility
          }
 
          # Call the REST API
          $resp = _callAPI -Method PATCH -NoProject `
             -Resource projects `
             -id $id `
-            -body $body `
+            -body ($body | ConvertTo-Json -Compress -Depth 100) `
             -Version $(_getApiVersion Core)
 
          _trackProjectProgress -resp $resp -title 'Updating team project' -msg $msg
 
          # Invalidate any cache of projects.
-         [vsteam_lib.ProjectCache]::Invalidate()
+         _invalidate
 
          # Return the project now that it has been updated
          return Get-VSTeamProject -Id $finalName
