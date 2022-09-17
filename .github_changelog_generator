@@ -1,0 +1,5 @@
+user=MethodsAndPractices
+project=vsteam
+since_tag=v7.9.0
+unreleased=false
+base=CHANGELOG.archive.md

@@ -14,8 +14,7 @@ I am truly grateful for all the support developing VSTeam. It means a lot that y
 8. Code the function.
 9. *If needed:* Add type file.
 10. *If needed:* Add format file.
-11. Update the CHANGELOG.md file.
-12. Goto 4 for next function.
+11. Goto 4 for next function.
 
 ## Running Integration tests
 
@@ -98,7 +97,3 @@ See PowerShell documentation for more explanation: https://docs.microsoft.com/en
 Format files go in the formats folder.
 
 See PowerShell documentation for more explanation: https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_format.ps1xml?view=powershell-6
-
-### Update CHANGELOG.md
-
-Update the CHANGELOG.md file with your changes.
