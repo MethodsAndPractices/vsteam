@@ -14,13 +14,42 @@ Describe 'VSTeamFeed' {
       Mock Invoke-RestMethod { Open-SampleFile 'Get-VSTeamFeed.json' -Index 0 } -ParameterFilter {
          $Uri -like "*00000000-0000-0000-0000-000000000000*"
       }
+
    }
 
-   Context 'Get-VSTeamFeed for organization' {
+   Context 'Get-VSTeamFeed for whole organization' {
 
       It 'with no parameters should return all the Feeds' {
          ## Act
          Get-VSTeamFeed
+
+         ## Assert
+         Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+            $Uri -eq "https://feeds.dev.azure.com/test/_apis/packaging/feeds?api-version=$(_getApiVersion packaging)"
+         }
+      }
+
+      It 'with no parameters should return only organization feeds' {
+         ## Act
+         $feeds = Get-VSTeamFeed -Scope organization
+
+         $feeds | ForEach-Object {
+            $_.Url | Should -BeLike 'https://feeds.dev.azure.com/test/_apis/Packaging'
+         }
+
+         ## Assert
+         Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+            $Uri -eq "https://feeds.dev.azure.com/test/_apis/packaging/feeds?api-version=$(_getApiVersion packaging)"
+         }
+      }
+
+      It 'with no parameters should return only project feeds' {
+         ## Act
+         $feeds = Get-VSTeamFeed -Scope project
+
+         $feeds | ForEach-Object {
+            $_.Url | Should -BeLike ''
+         }
 
          ## Assert
          Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {

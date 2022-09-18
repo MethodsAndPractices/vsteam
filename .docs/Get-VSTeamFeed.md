@@ -39,7 +39,18 @@ Specifies the ID of the feed.
 ```yaml
 Type: Guid
 Aliases: ID
+Parameter Sets: ByID
 Accept pipeline input: true (ByPropertyName)
+```
+
+### Scope
+
+Specifies the scope of the feed. Valid values are 'organization' or 'project'.
+
+```yaml
+Type: String
+Parameter Sets: ByScope
+Accepted values: organization, project
 ```
 
 <!-- #include "./params/projectName.md" -->
