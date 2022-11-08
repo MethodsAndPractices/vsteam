@@ -375,8 +375,12 @@ function _buildRequestURI {
          $sb.Append("/$id") | Out-Null
       }
 
+      if ($version -or $queryString) {
+         $sb.Append("?") | Out-Null
+      }
+
       if ($version) {
-         $sb.Append("?api-version=$version") | Out-Null
+         $sb.Append("api-version=$version") | Out-Null
       }
 
       $url = $sb.ToString()
