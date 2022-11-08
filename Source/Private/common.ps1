@@ -375,21 +375,26 @@ function _buildRequestURI {
          $sb.Append("/$id") | Out-Null
       }
 
-      if ($version -or $queryString) {
-         $sb.Append("?") | Out-Null
-      }
-
+      $QSParams = [System.Collections.ArrayList]@()
       if ($version) {
-         $sb.Append("api-version=$version") | Out-Null
+         $QSParams.Add("api-version=$version") | Out-Null
       }
-
-      $url = $sb.ToString()
 
       if ($queryString) {
          foreach ($key in $queryString.keys) {
-            $Url += _appendQueryString -name $key -value $queryString[$key]
+            $value = $queryString[$key]
+            if($value) {
+               $QSParams.Add("$key=$value") | Out-Null
+            }
          }
       }
+
+      if($QSParams.Count) {
+         $sb.Append("?") | Out-Null
+         $sb.Append($QSParams -join "&") | Out-Null
+      }
+
+      $url = $sb.ToString()
 
       return $url
    }
