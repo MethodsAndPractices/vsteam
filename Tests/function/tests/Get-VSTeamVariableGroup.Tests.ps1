@@ -34,6 +34,14 @@ Describe 'VSTeamVariableGroup' {
                $Uri -eq "https://dev.azure.com/test/project/_apis/distributedtask/variablegroups/$($projectID)?api-version=$(_getApiVersion VariableGroups)"
             }
          }
+
+         It 'list should return the variable group with the given name' {
+            Get-VSTeamVariableGroup -projectName project -name theGroup
+
+            Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+               $Uri -eq "https://dev.azure.com/test/project/_apis/distributedtask/variablegroups?api-version=$(_getApiVersion VariableGroups)&groupName=theGroup"
+            }
+         }
       }
 
       Context 'Server' {
