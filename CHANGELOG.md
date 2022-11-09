@@ -1,5 +1,8 @@
 # Changelog
 
+Added the command Set-VSTeamVariableGroupVariable, which assigns a value to a single variable in a variable group,
+creating one if needed.
+
 ## 7.10.0
 
 Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/486) from [Sebastian Schütze](https://github.com/SebastianSchuetze) the following:
