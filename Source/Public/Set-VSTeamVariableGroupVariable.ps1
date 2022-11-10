@@ -35,15 +35,10 @@ function Set-VSTeamVariableGroupVariable {
                   }
                }
                else {
-                  $Vars = @{}
-                  foreach($v in $g.variables.PSObject.Properties) {
-                     $Vars[$v.Name] = $v.Value
-                  }
-                  $Vars[$Name] = @{value=$Value}
-                  $g.variables = New-Object PSObject -Property $Vars
+                  Add-Member -InputObject $g.variables -MemberType NoteProperty -Name $Name -Value ([pscustomobject]@{value=$Value})
                }
-               $Body = $g | ConvertTo-Json -Depth 20 -Compress
-               Update-VSTeamVariableGroup -ProjectName $ProjectName -Id $g.Id -Body $Body -Force | Out-Null
+               $body = $g | ConvertTo-Json -Depth 20 -Compress
+               Update-VSTeamVariableGroup -ProjectName $ProjectName -Id $g.Id -Body $body -Force | Out-Null
             }
             else {
                Write-Error "Group $GroupName was not found."
