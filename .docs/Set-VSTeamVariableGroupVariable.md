@@ -17,62 +17,14 @@
 ### Example 1
 
 ```powershell
-$methodParameters = @{
-   ProjectName              = "some_project_name"
-   GroupName        = "some_variable_group"
-   Name = "MyVariable"
-   Value = "Foo"
-}
 
+# In project MyProject, variable group MyVarGroup, set the value of Foo to Hello. The variable
+# called Foo will be created if it doesn't already exist.
+
+Set-VSTeamVariableGroupVariable -ProjectName MyProject -GroupName MyVarGroup -Name Foo -Value Hello
 ```
 
 ## PARAMETERS
-
-### Confirm
-
-Prompts you for confirmation before running the cmdlet.
-
-```yaml
-Type: SwitchParameter
-Aliases: cf
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### Force
-
-Does not prompt
-
-```yaml
-Type: SwitchParameter
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### WhatIf
-
-Shows what would happen if the cmdlet runs.
-The cmdlet is not run.
-
-```yaml
-Type: SwitchParameter
-Aliases: wi
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### GroupName
 
