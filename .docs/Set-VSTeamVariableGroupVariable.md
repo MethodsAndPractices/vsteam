@@ -127,6 +127,8 @@ Accept wildcard characters: False
 
 ## NOTES
 
+Secret variable updating or creation is not currently supported.
+
 <!-- #include "./common/prerequisites.md" -->
 
 ## RELATED LINKS
