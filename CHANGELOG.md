@@ -10,6 +10,8 @@ Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/485) fr
 
 -Fixed a regresion introduced in [#467](https://github.com/MethodsAndPractices/vsteam/issues/467) that prevens to recover configuration from `Set-VSTeamAccount -Account myOrganization -PersonalAccessToken myToken -Version AzD -Level User` next time `import-module VSTeam` is invoked
 
+-Updated test library project to .net 6.0. Builds fail in Github actions because windows-latest no longer contains netcore 3.1 SDK.
+
 ## 7.9.0
 
 Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/481) from [Sebastian Schütze](https://github.com/SebastianSchuetze) the following:
