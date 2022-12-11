@@ -8,6 +8,9 @@ Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/486) fr
 Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/485) from [Sebastian Schütze](https://github.com/SebastianSchuetze) the following:
 - Added possibility to create, get and delete azure artifacts for projects [#379](https://github.com/MethodsAndPractices/vsteam/issues/379)
 
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/502) from [Miguel Nieto](https://github.com/mnieto) the following:
+- Updated test c# project to .NET 6.0
+- Fixed test fail on ubuntu-latest
 
 ## 7.9.0
 
