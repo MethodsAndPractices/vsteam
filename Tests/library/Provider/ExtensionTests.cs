@@ -27,7 +27,7 @@ namespace vsteam_lib.Test.Provider
          Assert.AreEqual("none", actual.InstallState.Flags, "InstallState.Flags");
          Assert.IsNotNull(actual.InstallState.InternalObject, "InstallState.InternalObject");
          Assert.IsTrue(actual.InstallState.ToString().StartsWith("Flags: none, Last Updated: "), "InstallState.ToString()");
-         Assert.AreEqual("8/10/2020 8:31:07 pm", actual.InstallState.LastUpdated.ToString("M/d/yyyy h:mm:ss tt").ToLower(), "InstallState.LastUpdated");
+         Assert.AreEqual("8/10/2020 8:31:07 pm", actual.InstallState.LastUpdated.ToString("M/d/yyyy h:mm:ss tt", System.Globalization.CultureInfo.InvariantCulture).ToLower(), "InstallState.LastUpdated");
       }
    }
 }

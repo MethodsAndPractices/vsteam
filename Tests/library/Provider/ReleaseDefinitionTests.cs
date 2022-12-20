@@ -43,8 +43,8 @@ namespace vsteam_lib.Test.Provider
          Assert.AreEqual("", actual.ReleaseNameFormat, "ReleaseNameFormat");
          Assert.AreEqual("Chuck Reinhart", actual.CreatedByUser, "CreatedByUser");
          Assert.AreEqual("ReleaseDefinition", actual.ResourceType, "ResourceType");
-         Assert.AreEqual("12/11/2018 4:48:42 am", actual.CreatedOn.ToString("M/d/yyyy h:mm:ss tt").ToLower(), "CreatedOn");
-         Assert.AreEqual("12/11/2018 4:48:42 am", actual.ModifiedOn.ToString("M/d/yyyy h:mm:ss tt").ToLower(), "ModifiedOn");
+         Assert.AreEqual("12/11/2018 4:48:42 am", actual.CreatedOn.ToString("M/d/yyyy h:mm:ss tt", System.Globalization.CultureInfo.InvariantCulture).ToLower(), "CreatedOn");
+         Assert.AreEqual("12/11/2018 4:48:42 am", actual.ModifiedOn.ToString("M/d/yyyy h:mm:ss tt", System.Globalization.CultureInfo.InvariantCulture).ToLower(), "ModifiedOn");
          Assert.AreEqual("https://vsrm.dev.azure.com/fabrikam/00000000-0000-0000-0000-000000000000/_apis/Release/definitions/40", actual.Url, "Url");
       }
 
@@ -82,8 +82,8 @@ namespace vsteam_lib.Test.Provider
          Assert.AreEqual(null, actual.Description, "Description");
          Assert.AreEqual("Donovan Brown", actual.CreatedByUser, "CreatedByUser");
          Assert.AreEqual("Release-$(rev:r)", actual.ReleaseNameFormat, "ReleaseNameFormat");
-         Assert.AreEqual("3/24/2019 4:46:08 pm", actual.CreatedOn.ToString("M/d/yyyy h:mm:ss tt").ToLower(), "CreatedOn");
-         Assert.AreEqual("9/16/2019 2:32:37 pm", actual.ModifiedOn.ToString("M/d/yyyy h:mm:ss tt").ToLower(), "ModifiedOn");
+         Assert.AreEqual("3/24/2019 4:46:08 pm", actual.CreatedOn.ToString("M/d/yyyy h:mm:ss tt", System.Globalization.CultureInfo.InvariantCulture).ToLower(), "CreatedOn");
+         Assert.AreEqual("9/16/2019 2:32:37 pm", actual.ModifiedOn.ToString("M/d/yyyy h:mm:ss tt", System.Globalization.CultureInfo.InvariantCulture).ToLower(), "ModifiedOn");
          Assert.AreEqual("https://vsrm.dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/Release/definitions/2", actual.Url, "Url");
       }
    }

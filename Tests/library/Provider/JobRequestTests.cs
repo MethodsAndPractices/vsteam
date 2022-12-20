@@ -27,10 +27,10 @@ namespace vsteam_lib.Test.Provider
          Assert.AreEqual("PTracker-CD", target.Pipeline, "Pipeline");
          Assert.AreEqual("------", target.DisplayMode, "DisplayMode");
          Assert.AreEqual(TimeSpan.Parse("00:10:58"), target.Duration, "Duration");
-         Assert.AreEqual("11/14/2019 12:56:12 am", target.QueueTime.ToString("M/d/yyyy h:mm:ss tt").ToLower(), "QueueTime");
-         Assert.AreEqual("11/14/2019 12:56:15 am", target.StartTime?.ToString("M/d/yyyy h:mm:ss tt").ToLower(), "StartTime");
-         Assert.AreEqual("11/14/2019 1:07:13 am", target.FinishTime?.ToString("M/d/yyyy h:mm:ss tt").ToLower(), "FinishTime");
-         Assert.AreEqual("11/14/2019 12:56:12 am", target.AssignedTime?.ToString("M/d/yyyy h:mm:ss tt").ToLower(), "AssignedTime");
+         Assert.AreEqual("11/14/2019 12:56:12 am", target.QueueTime.ToString("M/d/yyyy h:mm:ss tt", System.Globalization.CultureInfo.InvariantCulture).ToLower(), "QueueTime");
+         Assert.AreEqual("11/14/2019 12:56:15 am", target.StartTime?.ToString("M/d/yyyy h:mm:ss tt", System.Globalization.CultureInfo.InvariantCulture).ToLower(), "StartTime");
+         Assert.AreEqual("11/14/2019 1:07:13 am", target.FinishTime?.ToString("M/d/yyyy h:mm:ss tt", System.Globalization.CultureInfo.InvariantCulture).ToLower(), "FinishTime");
+         Assert.AreEqual("11/14/2019 12:56:12 am", target.AssignedTime?.ToString("M/d/yyyy h:mm:ss tt", System.Globalization.CultureInfo.InvariantCulture).ToLower(), "AssignedTime");
       }
 
       [TestMethod]
