@@ -31,18 +31,32 @@ if ($null -ne $env:TEAM_PROJECT) {
 
 
    # if not account and pat is set, then do not try to set the default project
-   if ($null -eq $env:TEAM_PAT -and $null -eq $env:TEAM_ACCT) {
-      Write-Warning "No PAT or Account set. You must set the environment variables TEAM_PAT or TEAM_ACCT before loading the module to use the default project."
+   if (($null -eq $env:TEAM_PAT -and $null -eq $env:TEAM_TOKEN) -and $null -eq $env:TEAM_ACCT) {
+      Write-Warning "No PAT or Account set. You must set the environment variables (TEAM_PAT or TEAM_TOKEN) and TEAM_ACCT before loading the module to use the default project."
    }
    else {
       # set vsteam account to initialize given variables properly
-      Set-VSTeamAccount -Account $env:TEAM_ACCT -PersonalAccessToken $env:TEAM_PAT
+      $commonArgs = @{
+         Account = $env:TEAM_ACCT
+         Version = $env:TEAM_VERSION
+      }
+
+      if (_useBearerToken) {
+         $commonArgs.Add("UseBearerToken", $true)
+         $commonArgs.Add("PersonalAccessToken", $env:TEAM_TOKEN)
+      } else {
+         $pat = [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($env:TEAM_PAT))   #decode base64 stored pat
+         $pat = $pat.Substring(1)                                                                           #remove the leading :
+         $commonArgs.Add("PersonalAccessToken", $pat)
+      }
+      $defaultProject = $env:TEAM_PROJECT                                                                   #save temporary defalt project because it's removed during Set-VSTeamAccount call
+      Set-VSTeamAccount @commonArgs
       # Make sure the value in the environment variable still exisits.
-      if (Get-VSTeamProject | Where-Object ProjectName -eq $env:TEAM_PROJECT) {
-         Set-VSTeamDefaultProject -Project $env:TEAM_PROJECT
+      if (Get-VSTeamProject | Where-Object ProjectName -eq $defaultProject) {
+         Set-VSTeamDefaultProject -Project $defaultProject
       }
       else {
-         Write-Warning "The default project '$env:TEAM_PROJECT' stored in the environment variable TEAM_PROJECT does not exist."
+         Write-Warning "The default project '$defaultProject' stored in the environment variable TEAM_PROJECT does not exist."
       }
    }
 
