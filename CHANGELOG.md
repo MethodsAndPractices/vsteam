@@ -12,6 +12,10 @@ Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/502) fr
 - Updated test c# project to .NET 6.0
 - Fixed test fail on ubuntu-latest
 
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/508) from [Miguel Nieto](https://github.com/mnieto) the following:
+- Fix import-module vsteam loses previously stored configuration: [issue #493](https://github.com/MethodsAndPractices/vsteam/issues/493)
+- Fixed test Versions fail on local machine
+
 ## 7.9.0
 
 Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/481) from [Sebastian Schütze](https://github.com/SebastianSchuetze) the following:
