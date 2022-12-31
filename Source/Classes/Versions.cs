@@ -79,6 +79,9 @@ namespace vsteam_lib
             case APIs.WorkItemTracking:
                WorkItemTracking = version;
                break;
+            case APIs.Version:
+               Version = version;
+               break;
          }
       }
 
