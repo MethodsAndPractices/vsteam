@@ -14,6 +14,13 @@ Describe 'Common' {
          Mock Invoke-RestMethod
          Mock _getApiVersion { return '1.0-unitTests' }
          Mock _getInstance { return 'https://dev.azure.com/test' }
+
+         Mock _callAPI { Open-SampleFile 'Get-VSTeamUserEntitlement-ContinuationToken.json' } -ParameterFilter {
+            $Url -match "filter=userType eq 'guest'$"
+         }
+         Mock _callAPI { Open-SampleFile 'Get-VSTeamUserEntitlement.json' } -ParameterFilter {
+            $Url -like "*filter=userType eq 'guest'&continuationToken=*"
+         }
       }
 
       It 'Disable-VSTeamAgent' {
@@ -35,6 +42,17 @@ Describe 'Common' {
             $Uri -eq "https://dev.azure.com/test/_apis/distributedtask/pools/36/agents/950?api-version=$(_getApiVersion DistributedTaskReleased)"
          }
       }
+
+      It 'ContinuationToken in body, when MaxPages has default value, all pages are returned' {
+         _callAPIContinuationToken -Url "https://vsaex.dev.azure.com/test/_apis/userentitlements?`$filter=userType eq 'guest'" -PropertyName 'members'
+         Should -Invoke _callAPI -Exactly -Times 2
+      }
+
+      It 'ContinuationToken in body, when number of pages are greater than MaxMages, only MaxPages are returned' {
+         _callAPIContinuationToken -Url "https://vsaex.dev.azure.com/test/_apis/userentitlements?`$filter=userType eq 'guest'" -PropertyName 'members' -MaxPages 1
+         Should -Invoke _callAPI -Exactly -Times 1
+      }
+
    }
 
    Context '_callAPIContinuationToken' {
