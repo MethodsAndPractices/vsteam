@@ -170,62 +170,6 @@ function _callAPI {
 }
 
 
-# General function to manage API Calls that involve a paged response,
-# either with a ContinuationToken property in the body payload or
-# with a X-MS-ContinuationToken header
-# TODO: Add functionality to manage paged responses based on X-MS-ContinuationToken header
-# TODO: This would need to be integrated probably into the _callAPI function?
-function _callAPIContinuationToken {
-   [CmdletBinding()]
-   param(
-      [string]$Url,
-      # If present, or $true, the function will manage the pages using the header
-      # specified in $ContinuationTokenName.
-      # If not present, or $false, the function will manage the pages using the
-      # continuationToken property specified in $ContinuationTokenName.
-      [switch]$UseHeader,
-      # Allows to specify a header or continuation token property different of the default values.
-      # If this parameter is not specified, the default value is X-MS-ContinuationToken or continuationToken
-      # depending if $UseHeader is present or not, respectively
-      [string]$ContinuationTokenName,
-      # Property in the response body payload that contains the collecion of objects to return to the calling function
-      [string]$PropertyName,
-      # Number of pages to be retrieved. If 0, or not specified, it will return all the available pages
-      [int]$MaxPages
-   )
-
-   if ($MaxPages -le 0){
-      $MaxPages = [int32]::MaxValue
-   }
-   if ([string]::IsNullOrEmpty($ContinuationTokenName)) {
-      if ($UseHeader.IsPresent) {
-         $ContinuationTokenName = "X-MS-ContinuationToken"
-      } else {
-         $ContinuationTokenName = "continuationToken"
-      }
-   }
-   $i = 0
-   $obj = @()
-   $apiParameters = $url
-   do {
-      if ($UseHeader.IsPresent) {
-         throw "Continuation token from response headers not supported in this version"
-      } else {
-         $resp = _callAPI -url $apiParameters
-         $continuationToken = $resp."$ContinuationTokenName"
-         $i++
-         Write-Verbose "page $i"
-         $obj += $resp."$PropertyName"
-         if (-not [String]::IsNullOrEmpty($continuationToken)) {
-            $continuationToken = [uri]::EscapeDataString($continuationToken)
-            $apiParameters = "${url}&continuationToken=$continuationToken"
-         }
-      }
-   } while (-not [String]::IsNullOrEmpty($continuationToken) -and $i -lt $MaxPages)
-
-   return $obj
-}
-
 
 # Not all versions support the name features.
 
