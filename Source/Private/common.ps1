@@ -45,8 +45,6 @@ function _callAPI {
       # some APIs do not have an account in their API uri because
       # they are not account specific in the url path itself. (e.g. user profile, pipeline billing)
       [switch]$NoAccount,
-
-
       [ValidateSet('None', 'Header', 'Body')]
       [string]$UseContinuationToken = 'None',
       # Allows to specify a header or continuation token property different of the default values.
@@ -58,7 +56,7 @@ function _callAPI {
       [int]$MaxPages = 0,
       # When using continuationToken, it is neccesary expand a specific property to get the real
       # collection of objects. Ignored if $UseContinuationToken -eq 'None'
-      [string]$ColectionPropertyName
+      [string]$CollectionPropertyName
 
    )
 
@@ -95,18 +93,12 @@ function _callAPI {
       # do not use header when requested. Then bearer must be provided with additional headers
       $params.Add('Headers', @{ })
 
-      # # add response headers, if neccesary
-      # if (-not [string]::IsNullOrEmpty($ResponseHeadersVariable)) {
-      #    $params.Add('ResponseHeadersVariable', 'ResponseHeaders')
-      # }
       # configure continuationToken management
-      if ($UseContinuationToken -ne 'None') {
-         if ([strting]::IsNullOrEmpty($ContinuationTokenName)) {
-            if ($UseContinuationToken -eq 'Body') {
-               $ContinuationTokenName = 'continuationToken'
-            } else {
-               $ContinuationTokenName = 'X-MS-ContinuationToken'
-            }
+      if ($UseContinuationToken -ne 'None' -and [string]::IsNullOrEmpty($ContinuationTokenName)) {
+         if ($UseContinuationToken -eq 'Body') {
+            $ContinuationTokenName = 'continuationToken'
+         } else {
+            $ContinuationTokenName = 'X-MS-ContinuationToken'
          }
       }
       if ($UseContinuationToken -eq 'Header') {
@@ -137,7 +129,7 @@ function _callAPI {
       # We have to remove any extra parameters not used by Invoke-RestMethod
       $extra = 'NoAccount', 'NoProject', 'UseProjectId', 'Area', 'Resource', 'SubDomain', 'Id', 'Version', 'JSON', 'ProjectName', 
                'Team', 'Url', 'QueryString', 'AdditionalHeaders', 'CustomBearer', 'UseContinuationToken', 'ContinuationTokenName', 
-               'MaxPages', 'ColectionPropertyName'
+               'MaxPages', 'CollectionPropertyName'
 
       foreach ($e in $extra) { $params.Remove($e) | Out-Null }
 
@@ -156,27 +148,23 @@ function _callAPI {
                $continuationToken = $resp."$ContinuationTokenName"
                $continuationToken = [uri]::EscapeDataString($continuationToken)
                $params['Uri'] = "${requestUri}&continuationToken=$continuationToken"
-               $obj += $resp."$ColectionPropertyName"
+               $obj += $resp."$CollectionPropertyName"
             } elseif ($UseContinuationToken -eq 'Header') {
                $continuationToken = $ResponseHeaders[$ContinuationTokenName]
                $params['Uri'] = "${requestUri}&continuationToken=$continuationToken"
-               $obj += $resp."$ColectionPropertyName"
-               $obj += $resp
+               $obj += $resp."$CollectionPropertyName"
             } else {
                return $resp
             }
             $page++
             Write-Verbose "page $page"
-            # if (-not [string]::IsNullOrEmpty($ResponseHeadersVariable)) {
-            #    New-Variable -Name $ResponseHeadersVariable -Value $ResponseHeaders -Scope 1 -Force # scope 1 creates the variable in the parent scope
-            # }
          }
          catch {
             _handleException $_
 
             throw
          }
-      } while (-not [String]::IsNullOrEmpty($continuationToken) -and $i -lt $MaxPages)
+      } while (-not [string]::IsNullOrEmpty($continuationToken) -and $i -lt $MaxPages)
       return $obj
    }
 }
