@@ -25,6 +25,9 @@ function _callAPI {
       [string]$Url,
       [object]$QueryString,
       [hashtable]$AdditionalHeaders = @{ },
+      # Name of the output variable that will content the response headers
+      # Specify the name of the variable without the $ prefix
+      [string]$ResponseHeadersVariable,
       # Some API calls require the Project ID and not the project name.
       # However, the dynamic project name parameter only shows you names
       # and not the Project IDs. Using this flag the project name provided
@@ -41,7 +44,20 @@ function _callAPI {
       # This flag makes sure that no specific account is used
       # some APIs do not have an account in their API uri because
       # they are not account specific in the url path itself. (e.g. user profile, pipeline billing)
-      [switch]$NoAccount
+      [switch]$NoAccount,
+      [ValidateSet('None', 'Header', 'Body')]
+      [string]$UseContinuationToken = 'None',
+      # Allows to specify a header or continuation token property different of the default values.
+      # If this parameter is not specified, the default value is X-MS-ContinuationToken or continuationToken
+      # depending if $UseHeader is present or not, respectively. Ignored if $UseContinuationToken -eq 'None'
+      [string]$ContinuationTokenName,
+      # Number of pages to be retrieved. If 0, or not specified, it will return all the available pages.
+      # Ignored if $UseContinuationToken -eq 'None'
+      [int]$MaxPages = 0,
+      # When using continuationToken, it is neccesary expand a specific property to get the real
+      # collection of objects. Ignored if $UseContinuationToken -eq 'None'
+      [string]$CollectionPropertyName
+
    )
 
    process {
@@ -77,6 +93,18 @@ function _callAPI {
       # do not use header when requested. Then bearer must be provided with additional headers
       $params.Add('Headers', @{ })
 
+      # configure continuationToken management
+      if ($UseContinuationToken -ne 'None' -and [string]::IsNullOrEmpty($ContinuationTokenName)) {
+         if ($UseContinuationToken -eq 'Body') {
+            $ContinuationTokenName = 'continuationToken'
+         } else {
+            $ContinuationTokenName = 'X-MS-ContinuationToken'
+         }
+      }
+      if ($UseContinuationToken -eq 'Header') {
+         $params.Add('ResponseHeadersVariable', 'ResponseHeaders')
+      }
+
       # checking if an authorization token is provided already with the additional headers
       # use case: sometimes other tokens for certain APIs have to be used (buying pipelines) in order to work
       # some parts of internal APIs use their own token based on the PAT
@@ -99,27 +127,49 @@ function _callAPI {
       }
 
       # We have to remove any extra parameters not used by Invoke-RestMethod
-      $extra = 'NoAccount', 'NoProject', 'UseProjectId', 'Area', 'Resource', 'SubDomain', 'Id', 'Version', 'JSON', 'ProjectName', 'Team', 'Url', 'QueryString', 'AdditionalHeaders', 'CustomBearer'
+      $extra = 'NoAccount', 'NoProject', 'UseProjectId', 'Area', 'Resource', 'SubDomain', 'Id', 'Version', 'JSON', 'ProjectName', 
+               'Team', 'Url', 'QueryString', 'AdditionalHeaders', 'CustomBearer', 'UseContinuationToken', 'ContinuationTokenName', 
+               'MaxPages', 'CollectionPropertyName'
 
       foreach ($e in $extra) { $params.Remove($e) | Out-Null }
 
-      try {
-         $resp = Invoke-RestMethod @params
+      $page = 0
+      $obj = @()
+      $requestUri = $params['Uri']
+      do {
+         try {
+            $resp = Invoke-RestMethod @params
 
-         if ($resp) {
-            Write-Verbose "return type: $($resp.gettype())"
-            Write-Verbose $resp
+            if ($resp) {
+               Write-Verbose "return type: $($resp.gettype())"
+               Write-Verbose $resp
+            }
+            if ($UseContinuationToken -eq 'Body') {
+               $continuationToken = $resp."$ContinuationTokenName"
+               $continuationToken = [uri]::EscapeDataString($continuationToken)
+               $params['Uri'] = "${requestUri}&continuationToken=$continuationToken"
+               $obj += $resp."$CollectionPropertyName"
+            } elseif ($UseContinuationToken -eq 'Header') {
+               $continuationToken = $ResponseHeaders[$ContinuationTokenName]
+               $params['Uri'] = "${requestUri}&continuationToken=$continuationToken"
+               $obj += $resp."$CollectionPropertyName"
+            } else {
+               return $resp
+            }
+            $page++
+            Write-Verbose "page $page"
          }
+         catch {
+            _handleException $_
 
-         return $resp
-      }
-      catch {
-         _handleException $_
-
-         throw
-      }
+            throw
+         }
+      } while (-not [string]::IsNullOrEmpty($continuationToken) -and $i -lt $MaxPages)
+      return $obj
    }
 }
+
+
 
 # Not all versions support the name features.
 
@@ -175,9 +225,22 @@ function _supportsSecurityNamespace {
 }
 
 function _supportsMemberEntitlementManagement {
+   [CmdletBinding(DefaultParameterSetName="upto")]
+   param(
+      [parameter(ParameterSetName="upto")]
+      [string]$UpTo = $null,
+      [parameter(ParameterSetName="onwards")]
+      [string]$Onwards = $null
+
+   )
    _hasAccount
-   if (-not $(_getApiVersion MemberEntitlementManagement)) {
+   $apiVer = _getApiVersion MemberEntitlementManagement
+   if (-not $apiVer) {
       throw 'This account does not support Member Entitlement.'
+   } elseif (-not [string]::IsNullOrEmpty($UpTo) -and $apiVer -gt $UpTo) {
+      throw "EntitlementManagemen version must be equal or lower than $UpTo for this call, current value $apiVer"
+   } elseif (-not [string]::IsNullOrEmpty($Onwards) -and $apiVer -lt $Onwards) {
+      throw "EntitlementManagemen version must be equal or greater than $Onwards for this call, current value $apiVer"
    }
 }
 
@@ -1181,4 +1244,19 @@ function _checkForModuleUpdates {
       }
    }
 
+}
+
+function _countParameters() {
+   param(
+      $BoundParameters
+   )
+   $counter = 0
+   $advancedPameters = @('Verbose', 'Debug', 'ErrorAction', 'WarningAction', 'InformationAction', 'ErrorVariable', 'WarningVariable', 'InformationVariable', 'OutVariable', 'OutBuffer', 'PipelineVariable')
+   foreach($p in $BoundParameters.GetEnumerator()) {
+      if ($p.Key -notin $advancedPameters) {
+         $counter++
+      }
+   }
+   Write-Verbose "Found $counter parameters"
+   $counter
 }
