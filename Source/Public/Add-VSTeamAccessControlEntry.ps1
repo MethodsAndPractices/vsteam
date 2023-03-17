@@ -37,18 +37,18 @@ function Add-VSTeamAccessControlEntry {
       [int] $DenyMask,
       
       [Parameter(Mandatory = $false)]
-      [switch] $OverrideMask = $false
+      [switch] $OverwriteMask = $false
    )
    process {
 
-      if ($AllowMask -eq 0 -and $DenyMask -eq 0 -and $OverrideMask -eq $false) {
+      if ($AllowMask -eq 0 -and $DenyMask -eq 0 -and $OverwriteMask -eq $false) {
          Write-Warning "Permission masks for Allow and Deny do not inlude any permission. No Permission will change!"
       }
 
       if ($SecurityNamespace) {
          $SecurityNamespaceId = $SecurityNamespace.ID
       }
-      $merge = !$OverrideMask
+      $merge = !$OverwriteMask
       $body =
       @"
    {
