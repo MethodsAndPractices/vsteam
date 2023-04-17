@@ -1,5 +1,10 @@
 # Changelog
 
+## 7.11.0
+
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/) from [Arturo Polanco](https://github.com/arturopolanco) the following:
+- Added option to add a description to the Azure RM Service Connecstions.
+
 ## 7.10.0
 
 Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/486) from [Sebastian Schütze](https://github.com/SebastianSchuetze) the following:
