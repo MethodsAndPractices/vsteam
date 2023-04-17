@@ -23,7 +23,7 @@ Describe 'VSTeamKubernetesEndpoint' {
             -SubscriptionId 'SubscriptionId' `
             -SubscriptionTenantId '00000000-0000-0000-0000-000000000000' `
             -ServicePrincipalId '00000000-0000-0000-0000-000000000000' `
-            -ServicePrincipalKey (ConvertFrom-SecureString 'clientsecret' -AsPlainText) `
+            -ServicePrincipalKey 'clientsecret' `
             -EndpointName 'AzureRMTest' `
             -Description 'description here'
 
