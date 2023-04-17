@@ -28,6 +28,7 @@ function Add-VSTeamAzureRMServiceEndpoint {
       [string] $servicePrincipalKey,
 
       [string] $endpointName,
+      [string] $description,
 
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [vsteam_lib.ProjectValidateAttribute($false)]
@@ -61,6 +62,7 @@ function Add-VSTeamAzureRMServiceEndpoint {
             creationMode     = $creationMode
          }
          url           = 'https://management.azure.com/'
+         description = $description
       }
 
       return Add-VSTeamServiceEndpoint -ProjectName $ProjectName `
