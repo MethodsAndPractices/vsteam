@@ -1,6 +1,6 @@
 Set-StrictMode -Version Latest
 
-Describe 'VSTeamKubernetesEndpoint' {
+Describe 'VSTeamAzureRMServiceEndpoint' {
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
       . "$baseFolder/Source/Public/Add-VSTeamAzureRMServiceEndpoint.ps1"
