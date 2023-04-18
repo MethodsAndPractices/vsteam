@@ -4,7 +4,6 @@ Describe 'VSTeamAzureRMServiceEndpoint' {
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
       . "$baseFolder/Source/Public/Add-VSTeamAzureRMServiceEndpoint.ps1"
-      . "$baseFolder/Source/Public/Get-VSTeamAzureRMServiceEndpoint.ps1"
    }
 
    Context 'Add-VSTeamAzureRMServiceEndpoint' {
