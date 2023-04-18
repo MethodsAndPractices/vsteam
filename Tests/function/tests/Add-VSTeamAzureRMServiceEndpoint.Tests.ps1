@@ -13,21 +13,11 @@ Describe 'Add-VSTeamAzureRMServiceEndpoint' {
          Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'ServiceEndpoints' }
 
          Mock Write-Progress
-         Mock Invoke-VSTeamRequest {return @{Id = "7093115d-0000-0000-012b95b3d489"}} `
-                 -ParameterFilter { $area -eq "securityroles/scopes/$scopeId/roleassignments/resources"}
-         Mock Set-VSTeamAccount { return $null }
-         Mock Set-VSTeamDefaultProject  { return $null }
-         Mock Get-VSTeamProject { return @{
-                         Id = "2c01ff81-274b-4831-b001-c894cfb795bb" }}
          Mock Invoke-RestMethod { _trackProcess }
          Mock Invoke-RestMethod { return @{id = '23233-2342' } } -ParameterFilter { $Method -eq 'Post' }
       }
 
       It 'should create a new Azure RM Serviceendpoint' {
-         $projectName = 'project'
-         Set-VSTeamAccount -Account "DB-AG" -PersonalAccessToken 'pat' 
-         Set-VSTeamDefaultProject -Project $projectName
-         $null =  Get-VSTeamProject -Name $projectName
          Add-VSTeamAzureRMServiceEndpoint -projectName $projectName `
             -SubscriptionName 'SubscriptionName' `
             -SubscriptionId 'SubscriptionId' `
