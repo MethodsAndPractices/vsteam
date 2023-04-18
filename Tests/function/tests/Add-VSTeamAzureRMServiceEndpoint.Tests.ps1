@@ -18,7 +18,7 @@ Describe 'Add-VSTeamAzureRMServiceEndpoint' {
       }
 
       It 'should create a new Azure RM Serviceendpoint' {
-         Add-VSTeamAzureRMServiceEndpoint -projectName $projectName `
+         Add-VSTeamAzureRMServiceEndpoint -projectName 'projectName'`
             -SubscriptionName 'SubscriptionName' `
             -SubscriptionId 'SubscriptionId' `
             -SubscriptionTenantId '00000000-0000-0000-0000-000000000000' `
