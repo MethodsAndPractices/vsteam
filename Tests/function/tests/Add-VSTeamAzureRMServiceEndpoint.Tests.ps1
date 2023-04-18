@@ -3,7 +3,8 @@ Set-StrictMode -Version Latest
 Describe 'Add-VSTeamAzureRMServiceEndpoint' {
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
-      . "$baseFolder/Source/Public/Add-VSTeamAzureRMServiceEndpoint.ps1"
+      . "$baseFolder/Source/Public/Add-VSTeamServiceEndpoint.ps1"
+      . "$baseFolder/Source/Public/Get-VSTeamServiceEndpoint.ps1"
    }
 
    Context 'Add-VSTeamAzureRMServiceEndpoint' {
