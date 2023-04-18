@@ -34,7 +34,7 @@ jobs:
       checks: write
     steps:
     - name: Clone repo
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: .NET Restore
       shell: pwsh
@@ -120,21 +120,21 @@ jobs:
 
     - name: Publish Module
       if: ${{ matrix.os == 'windows-latest' && github.event_name != 'pull_request' }}
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: module
         path: "./staging/VSTeam"
 
     - name: Publish unit tests
       if: ${{ matrix.os == 'windows-latest'  && github.event_name != 'pull_request' }}
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: test
         path: "./staging/test"
 
     - name: Publish pipeline scripts
       if: ${{ matrix.os == 'windows-latest' && github.event_name != 'pull_request' }}
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: pipeline-scripts
         path: "./staging/tools"
@@ -178,7 +178,7 @@ jobs:
       working-directory: './tools/scripts'
 
     - name: Upload nuget package as artifact
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: VSTeamPackage
         path: ./dist/*.nupkg
