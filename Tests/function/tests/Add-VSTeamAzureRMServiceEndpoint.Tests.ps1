@@ -12,12 +12,11 @@ Describe 'Add-VSTeamAzureRMServiceEndpoint' {
          Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'ServiceEndpoints' }
 
          Mock Write-Progress
-         Mock Invoke-VSTeamRequest `
-                 -ModuleName $moduleName {return @{Id = "7093115d-0000-0000-012b95b3d489"}} `
+         Mock Invoke-VSTeamRequest {return @{Id = "7093115d-0000-0000-012b95b3d489"}} `
                  -ParameterFilter { $area -eq "securityroles/scopes/$scopeId/roleassignments/resources"}
-         Mock Set-VSTeamAccount -ModuleName $moduleName { return $null }
-         Mock Set-VSTeamDefaultProject -ModuleName $moduleName { return $null }
-         Mock Get-VSTeamProject -ModuleName $moduleName { return @{
+         Mock Set-VSTeamAccount { return $null }
+         Mock Set-VSTeamDefaultProject  { return $null }
+         Mock Get-VSTeamProject { return @{
                          Id = "2c01ff81-274b-4831-b001-c894cfb795bb" }}
          Mock Invoke-RestMethod { _trackProcess }
          Mock Invoke-RestMethod { return @{id = '23233-2342' } } -ParameterFilter { $Method -eq 'Post' }
