@@ -1,5 +1,16 @@
 # Changelog
 
+## 7.12.0
+
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/495) from [Seva Alekseyev](https://github.com/sevaa) the following:
+- Added the command Set-VSTeamVariableGroupVariable, which assigns a value to a single variable in a variable group,
+creating one if needed. [#423](https://github.com/MethodsAndPractices/vsteam/issues/423)
+
+## 7.11.0
+
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/516) from [Arturo Polanco](https://github.com/arturopolanco) the following:
+- Added option to add a description to the Azure RM Service Connecstions.
+
 ## 7.10.0
 
 Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/486) from [Sebastian Schütze](https://github.com/SebastianSchuetze) the following:
@@ -8,6 +19,9 @@ Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/486) fr
 Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/485) from [Sebastian Schütze](https://github.com/SebastianSchuetze) the following:
 - Added possibility to create, get and delete azure artifacts for projects [#379](https://github.com/MethodsAndPractices/vsteam/issues/379)
 
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/502) from [Miguel Nieto](https://github.com/mnieto) the following:
+- Updated test c# project to .NET 6.0
+- Fixed test fail on ubuntu-latest
 
 ## 7.9.0
 
