@@ -15,7 +15,7 @@ Describe 'VSTeamClassificationNode' {
       BeforeAll {
          Mock Invoke-RestMethod { Open-SampleFile 'classificationNodeResult.json' }
          Mock Invoke-RestMethod { Open-SampleFile 'withoutChildNode.json' } -ParameterFilter {
-            $Uri -like "*Ids=43,44*" 
+            $Uri -like "*Ids=43%2c44*" 
          }
       }
 
@@ -63,7 +63,7 @@ Describe 'VSTeamClassificationNode' {
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Uri -like "https://dev.azure.com/test/Public Demo/_apis/wit/classificationnodes*" -and
             $Uri -like "*api-version=$(_getApiVersion Core)*" -and
-            $Uri -like "*Ids=1,2,3,4*"
+            $Uri -like "*Ids=1%2c2%2c3%2c4*"
          }
       }
 

@@ -27,7 +27,7 @@ Describe 'VSTeamWorkItem' {
          Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
             $Uri -like "*https://dev.azure.com/test/_apis/wit/workitems*" -and
             $Uri -like "*api-version=$(_getApiVersion Core)*" -and
-            $Uri -like "*ids=47,48*" -and
+            $Uri -like "*ids=47%2c48*" -and
             $Uri -like "*`$Expand=None*" -and
             $Uri -like "*errorPolicy=omit*"
          }

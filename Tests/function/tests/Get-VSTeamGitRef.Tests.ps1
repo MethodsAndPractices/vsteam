@@ -72,7 +72,7 @@ Describe "VSTeamGitRef" {
          
          ## Assert
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
-            $Uri -like "*filter=/refs/heads*" -and
+            $Uri -like "*filter=%2Frefs%2Fheads*" -and
             $Uri -like "*`$top=500*" -and
             $Uri -like "*filterContains=test*"
          }
