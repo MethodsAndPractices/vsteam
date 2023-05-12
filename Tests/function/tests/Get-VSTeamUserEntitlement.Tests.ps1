@@ -86,10 +86,10 @@ Describe "VSTeamUserEntitlement" -Tag 'VSTeamUserEntitlement' {
             BeforeAll {
                Mock _getApiVersion { return '6.0-unitTests' } -ParameterFilter { $Service -eq 'MemberEntitlementManagement' }
                Mock Invoke-RestMethod { Open-SampleFile 'Get-VSTeamUserEntitlement-ContinuationToken.json' } -ParameterFilter {
-                  $Uri -match "filter=userType+eq+%27guest%27$"
+                  $Uri -like "*filter=userType+eq+%27guest%27"
                }
                Mock Invoke-RestMethod { Open-SampleFile 'Get-VSTeamUserEntitlement.json' } -ParameterFilter {
-                  $Uri -like "*filter=userType+eq+27guest%27&continuationToken=*"
+                  $Uri -like "*filter=userType+eq+%27guest%27&continuationToken=*"
                }
             }
 
