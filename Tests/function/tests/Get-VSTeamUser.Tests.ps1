@@ -60,7 +60,7 @@ Describe 'VSTeamUser' {
                Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope Context -ParameterFilter {
                   $Uri -like "https://vssps.dev.azure.com/test/_apis/graph/users*" -and
                   $Uri -like "*api-version=$(_getApiVersion Graph)*" -and
-                  $Uri -like "*subjectTypes=vss,aad*"
+                  $Uri -like "*subjectTypes=vss%2caad*"
                }
             }
          }

@@ -112,7 +112,7 @@ Describe 'VSTeamPullRequest' {
          Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
             $Uri -like "*api-version=$(_getApiVersion Git)*" -and
             $Uri -like "*Test/_apis/git*" -and
-            $Uri -like "*searchCriteria.sourceRefName=refs/heads/mybranch*"
+            $Uri -like "*searchCriteria.sourceRefName=refs%2fheads%2fmybranch*"
          }
       }
 
@@ -122,7 +122,7 @@ Describe 'VSTeamPullRequest' {
          Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
             $Uri -like "*api-version=$(_getApiVersion Git)*" -and
             $Uri -like "*Test/_apis/git*" -and
-            $Uri -like "*searchCriteria.targetRefName=refs/heads/mybranch*"
+            $Uri -like "*searchCriteria.targetRefName=refs%2fheads%2fmybranch*"
          }
       }
 
