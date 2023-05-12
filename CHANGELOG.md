@@ -1,5 +1,10 @@
 # Changelog
 
+## 7.12.0
+
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/506) from [Miguel Nieto](https://github.com/mnieto) the following:
+- fix tests that involve dates fail when OS culture has 24 hours format
+
 ## 7.10.0
 
 Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/486) from [Sebastian Schütze](https://github.com/SebastianSchuetze) the following:
@@ -11,9 +16,6 @@ Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/485) fr
 Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/502) from [Miguel Nieto](https://github.com/mnieto) the following:
 - Updated test c# project to .NET 6.0
 - Fixed test fail on ubuntu-latest
-
-Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/506) from [Miguel Nieto](https://github.com/mnieto) the following:
-- fix tests that involve dates fail when OS culture has 24 hours format
 
 ## 7.9.0
 
