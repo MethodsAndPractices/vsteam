@@ -103,7 +103,11 @@ function Get-VSTeamUserEntitlement {
             }
 
             # Call the REST API
-            $listurl += $qs.ToString()
+            # TODO: will break with blank API version
+            if($qs.HasKeys()){
+                $listurl += "&" + $qs.ToString()
+            }
+
             Write-Verbose "API params: $listurl"
             $items = _callAPIContinuationToken -Url $listurl -PropertyName "members"
             foreach ($item in $items) {
@@ -117,7 +121,8 @@ function Get-VSTeamUserEntitlement {
             }
 
             # Call the REST API
-            $listurl += $qs.ToString()
+            # TODO: will break with blank API version
+            $listurl += "&" + $qs.ToString()
             Write-Verbose "API params: $listurl"
             $resp = _callAPI -url $listurl
 

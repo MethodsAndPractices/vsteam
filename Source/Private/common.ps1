@@ -63,13 +63,15 @@ function _callAPI {
                 $qs.Add($key, $QueryString[$key])
             }
          }
-         # Do not assume that Url already contains a query string
-         # Crude check, but this will do
-         if($Url.IndexOf('?') -gt 0) {
-            $Url += "&" + $qs.ToString()
-         }
-         else {
-            $Url += "?" + $qs.ToString()
+         if($qs.HasKeys()) {
+            # Do not assume that Url already contains a query string
+            # Crude check, but this will do
+            if($Url.IndexOf('?') -gt 0) {
+               $Url += "&" + $qs.ToString()
+            }
+            else {
+               $Url += "?" + $qs.ToString()
+            }
          }
       }
 
