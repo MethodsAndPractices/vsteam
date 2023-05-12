@@ -86,10 +86,10 @@ Describe "VSTeamUserEntitlement" -Tag 'VSTeamUserEntitlement' {
             BeforeAll {
                Mock _getApiVersion { return '6.0-unitTests' } -ParameterFilter { $Service -eq 'MemberEntitlementManagement' }
                Mock Invoke-RestMethod { Open-SampleFile 'Get-VSTeamUserEntitlement-ContinuationToken.json' } -ParameterFilter {
-                  $Uri -match "filter=userType%20eq%20%27guest%27$"
+                  $Uri -match "filter=userType+eq+%27guest%27$"
                }
                Mock Invoke-RestMethod { Open-SampleFile 'Get-VSTeamUserEntitlement.json' } -ParameterFilter {
-                  $Uri -like "*filter=userType%20eq%20%27guest%27&continuationToken=*"
+                  $Uri -like "*filter=userType+eq+27guest%27&continuationToken=*"
                }
             }
 
@@ -118,7 +118,7 @@ Describe "VSTeamUserEntitlement" -Tag 'VSTeamUserEntitlement' {
 
                # Make sure it was called with the correct URI parameters
                Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
-                  $Uri -eq "https://vsaex.dev.azure.com/test/_apis/userentitlements?api-version=$(_getApiVersion MemberEntitlementManagement)&`$filter=name eq 'Math'"
+                  $Uri -eq "https://vsaex.dev.azure.com/test/_apis/userentitlements?api-version=$(_getApiVersion MemberEntitlementManagement)&`$filter=name+eq+%27Math%27"
                }
             }
 
@@ -127,7 +127,7 @@ Describe "VSTeamUserEntitlement" -Tag 'VSTeamUserEntitlement' {
 
                # Make sure it was called with the correct URI parameters. Filter parameter names are case sensitive
                Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
-                  $Uri -eq "https://vsaex.dev.azure.com/test/_apis/userentitlements?api-version=$(_getApiVersion MemberEntitlementManagement)&`$filter=name eq 'Math' and licenseId eq 'Account-Advanced' and userType eq 'member'"
+                  $Uri -eq "https://vsaex.dev.azure.com/test/_apis/userentitlements?api-version=$(_getApiVersion MemberEntitlementManagement)&`$filter=name+eq+%27Math%27+and+licenseId+eq+%27Account-Advanced%27+and+userType+eq+%27member%27"
                }
             }
 
