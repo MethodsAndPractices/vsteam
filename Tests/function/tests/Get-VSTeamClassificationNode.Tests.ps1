@@ -75,7 +75,7 @@ Describe 'VSTeamClassificationNode' {
          Should -Invoke Invoke-RestMethod -Exactly 1 -ParameterFilter {
             $Uri -like "https://dev.azure.com/test/Public Demo/_apis/wit/classificationnodes*" -and
             $Uri -like "*api-version=$(_getApiVersion Core)*" -and
-            $Uri -like "*Ids=43,44*"
+            $Uri -like "*Ids=43%2c44*"
          }
       }
    }
