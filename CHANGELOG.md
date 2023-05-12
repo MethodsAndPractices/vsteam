@@ -5,6 +5,15 @@
 Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/506) from [Miguel Nieto](https://github.com/mnieto) the following:
 - fix tests that involve dates fail when OS culture has 24 hours format
 
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/495) from [Seva Alekseyev](https://github.com/sevaa) the following:
+- Added the command Set-VSTeamVariableGroupVariable, which assigns a value to a single variable in a variable group,
+creating one if needed. [#423](https://github.com/MethodsAndPractices/vsteam/issues/423)
+
+## 7.11.0
+
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/516) from [Arturo Polanco](https://github.com/arturopolanco) the following:
+- Added option to add a description to the Azure RM Service Connecstions.
+
 ## 7.10.0
 
 Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/486) from [Sebastian Schütze](https://github.com/SebastianSchuetze) the following:
