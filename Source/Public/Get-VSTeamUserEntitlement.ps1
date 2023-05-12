@@ -79,6 +79,7 @@ function Get-VSTeamUserEntitlement {
          $listurl = _buildRequestURI @commonArgs
          $objs = @()
          Write-Verbose "Use continuation token: $useContinuationToken"
+         $qs = [System.Web.HttpUtility]::ParseQueryString('')
          if ($useContinuationToken) {
             if ($psCmdLet.ParameterSetName -eq 'PagedParams') {
                #parameter names must be lowercase, parameter values depends on the parameter
@@ -94,21 +95,29 @@ function Get-VSTeamUserEntitlement {
                }
                $filter = $filter.SubString(0, $filter.Length - 5)
             }
-            $listurl += _appendQueryString -name "`$filter" -value $filter
-            $listurl += _appendQueryString -name "select" -value ($select -join ",")
+            if($filter){
+                $qs.Add("`$filter", $filter)
+            }
+            if($select) {
+                $qs.Add("select", $select -join ",")
+            }
 
             # Call the REST API
+            $listurl += $qs.ToString()
             Write-Verbose "API params: $listurl"
             $items = _callAPIContinuationToken -Url $listurl -PropertyName "members"
             foreach ($item in $items) {
                $objs += [vsteam_lib.UserEntitlement]::new($item)
             }
          } else {
-            $listurl += _appendQueryString -name "top" -value $top -retainZero
-            $listurl += _appendQueryString -name "skip" -value $skip -retainZero
-            $listurl += _appendQueryString -name "select" -value ($select -join ",")
+            $qs.Add("top", $top)
+            $qs.Add("skip", $skip)
+            if($select) {
+               $qs.Add("select", $select -join ",")
+            }
 
             # Call the REST API
+            $listurl += $qs.ToString()
             Write-Verbose "API params: $listurl"
             $resp = _callAPI -url $listurl
 

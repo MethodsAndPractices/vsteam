@@ -3,6 +3,8 @@ $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseDeclaredVarsMoreThanAssignments", "It is used in other files")]
 $profilesPath = "$HOME/vsteam_profiles.json"
 
+Add-Type -AssemblyName System.Web
+
 # This is the main function for calling TFS and VSTS. It handels the auth and format of the route.
 # If you need to call TFS or VSTS this is the function to use.
 function _callAPI {
@@ -55,8 +57,19 @@ function _callAPI {
       elseif ($QueryString) {
          # If the caller provided the URL and QueryString we need
          # to add the querystring now
+         $qs = [System.Web.HttpUtility]::ParseQueryString('')
          foreach ($key in $QueryString.keys) {
-            $Url += _appendQueryString -name $key -value $QueryString[$key]
+            if($QueryString[$key]) {
+                $qs.Add($key, $QueryString[$key])
+            }
+         }
+         # Do not assume that Url already contains a query string
+         # Crude check, but this will do
+         if($Url.IndexOf('?') -gt 0) {
+            $Url += "&" + $qs.ToString()
+         }
+         else {
+            $Url += "?" + $qs.ToString()
          }
       }
 
@@ -335,6 +348,8 @@ function _buildRequestURI {
 
       $sb = New-Object System.Text.StringBuilder
 
+      $qs = [System.Web.HttpUtility]::ParseQueryString('')
+
       $instance = "https://dev.azure.com"
       if ($NoAccount.IsPresent -eq $false) {
          $instance = _getInstance
@@ -376,16 +391,24 @@ function _buildRequestURI {
       }
 
       if ($version) {
-         $sb.Append("?api-version=$version") | Out-Null
+         $qs.Add("api-version", "$version")
       }
-
-      $url = $sb.ToString()
 
       if ($queryString) {
          foreach ($key in $queryString.keys) {
-            $Url += _appendQueryString -name $key -value $queryString[$key]
+            if($QueryString[$key]) {
+                $qs.Add($key, $queryString[$key])
+            }
          }
       }
+
+      if($qs.HasKeys())
+      {
+         $url.Append('?') | Out-Null
+         $url.Append($qs.ToString()) | Out-Null
+      }
+
+      $url = $sb.ToString()
 
       return $url
    }
@@ -475,28 +498,6 @@ function _addSubDomain {
    }
 
    return $instance
-}
-
-function _appendQueryString {
-   param(
-      $name,
-      $value,
-      # When provided =0 will be outputed otherwise zeros will not be
-      # added. I had to add this for the userentitlements that is the only
-      # VSTS API I have found that requires Top and Skip to be passed in.
-      [Switch]$retainZero
-   )
-
-   if ($retainZero.IsPresent) {
-      if ($null -ne $value) {
-         return "&$name=$value"
-      }
-   }
-   else {
-      if ($value) {
-         return "&$name=$value"
-      }
-   }
 }
 
 function _getUserAgent {
