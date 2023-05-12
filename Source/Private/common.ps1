@@ -391,7 +391,7 @@ function _buildRequestURI {
       }
 
       if ($version) {
-         $qs.Add("api-version", "$version")
+         $qs.Add("api-version", $version)
       }
 
       if ($queryString) {
