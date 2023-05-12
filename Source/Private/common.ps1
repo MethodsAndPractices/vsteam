@@ -404,8 +404,8 @@ function _buildRequestURI {
 
       if($qs.HasKeys())
       {
-         $url.Append('?') | Out-Null
-         $url.Append($qs.ToString()) | Out-Null
+         $sb.Append('?') | Out-Null
+         $sb.Append($qs.ToString()) | Out-Null
       }
 
       $url = $sb.ToString()
