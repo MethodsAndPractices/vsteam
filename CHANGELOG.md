@@ -2,6 +2,9 @@
 
 ## 7.12.0
 
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/508) from [Miguel Nieto](https://github.com/mnieto) the following:
+- Fix import-module loses previously stored configuration [493](https://github.com/MethodsAndPractices/vsteam/issues/493)
+
 Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/506) from [Miguel Nieto](https://github.com/mnieto) the following:
 - fix tests that involve dates fail when OS culture has 24 hours format
 

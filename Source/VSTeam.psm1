@@ -31,7 +31,7 @@ if ($null -ne $env:TEAM_PROJECT) {
 
 
    # if not account and pat is set, then do not try to set the default project
-   if (($null -eq $env:TEAM_PAT -and $null -eq $env:TEAM_TOKEN) -and $null -eq $env:TEAM_ACCT) {
+   if (($null -eq $env:TEAM_PAT -or $null -eq $env:TEAM_TOKEN) -and $null -eq $env:TEAM_ACCT) {
       Write-Warning "No PAT or Account set. You must set the environment variables (TEAM_PAT or TEAM_TOKEN) and TEAM_ACCT before loading the module to use the default project."
    }
    else {
