@@ -30,7 +30,7 @@ namespace vsteam_lib.Test.Provider
          Assert.IsNotNull(target.Committer, "Committer");
          Assert.AreEqual("Donovan Brown", target.Committer.Name, "Committer.Name");
          Assert.AreEqual("Test@Test.com", target.Committer.Email, "Committer.Email");
-         Assert.AreEqual("8/8/2019 8:58:58 pm", target.Committer.Date.ToString("M/d/yyyy h:mm:ss tt").ToLower(), "Committer.Date");
+         Assert.AreEqual("8/8/2019 8:58:58 pm", target.Committer.Date.ToString("M/d/yyyy h:mm:ss tt", System.Globalization.CultureInfo.InvariantCulture).ToLower(), "Committer.Date");
       }
    }
 }

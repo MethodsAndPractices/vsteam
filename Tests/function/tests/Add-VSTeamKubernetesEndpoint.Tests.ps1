@@ -11,7 +11,10 @@ Describe 'VSTeamKubernetesEndpoint' {
       BeforeAll {
          Mock _getInstance { return 'https://dev.azure.com/test' }
          Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'ServiceEndpoints' }
-
+         Mock Set-VSTeamAccount -ModuleName $moduleName { return $null }
+         Mock Set-VSTeamDefaultProject -ModuleName $moduleName { return $null }
+         Mock Get-VSTeamProject -ModuleName $moduleName { return @{
+                 Id = "2c01ff81-274b-4831-b001-c894cfb795bb" }}
          Mock Write-Progress
          Mock Invoke-RestMethod { _trackProcess }
          Mock Invoke-RestMethod { return @{id = '23233-2342' } } -ParameterFilter { $Method -eq 'Post' }
