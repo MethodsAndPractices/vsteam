@@ -2,6 +2,9 @@
 
 ## 7.12.0
 
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/506) from [Miguel Nieto](https://github.com/mnieto) the following:
+- fix tests that involve dates fail when OS culture has 24 hours format
+
 Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/495) from [Seva Alekseyev](https://github.com/sevaa) the following:
 - Added the command Set-VSTeamVariableGroupVariable, which assigns a value to a single variable in a variable group,
 creating one if needed. [#423](https://github.com/MethodsAndPractices/vsteam/issues/423)

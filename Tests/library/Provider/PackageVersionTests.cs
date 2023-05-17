@@ -26,7 +26,7 @@ namespace vsteam_lib.Test.Provider
          Assert.AreEqual("@DonovanBrown", actual.Author, "author");
          Assert.AreEqual(expectedDesc, actual.Description, "Description");
          Assert.AreEqual("998abe34-23de-0000-9668b73891e2dada", actual.Id, "Id");
-         Assert.AreEqual("9/7/2018 1:33:39 pm", actual.PublishDate.ToString("M/d/yyyy h:mm:ss tt").ToLower(), "PublishDate");
+         Assert.AreEqual("9/7/2018 1:33:39 pm", actual.PublishDate.ToString("M/d/yyyy h:mm:ss tt", System.Globalization.CultureInfo.InvariantCulture).ToLower(), "PublishDate");
       }
    }
 }
