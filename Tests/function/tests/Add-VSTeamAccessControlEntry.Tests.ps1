@@ -113,7 +113,7 @@ Describe 'VSTeamAccessControlEntry' {
             -Token xyz `
             -AllowMask 12 `
             -DenyMask 15 `
-            -OverwriteMask $true
+            -OverwriteMask
 
             ## Assert
             Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
