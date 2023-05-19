@@ -104,5 +104,30 @@ Describe 'VSTeamAccessControlEntry' {
                -AllowMask 12 `
                -DenyMask 15 } | Should -Throw
       }
+
+      It 'should handle OverwriteMask' {
+
+            ## Act
+            Add-VSTeamAccessControlEntry -SecurityNamespaceId 5a27515b-ccd7-42c9-84f1-54c998f03866 `
+            -Descriptor abc `
+            -Token xyz `
+            -AllowMask 12 `
+            -DenyMask 15 `
+            -OverwriteMask $true
+
+            ## Assert
+            Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
+               $Uri -like "https://dev.azure.com/test/_apis/accesscontrolentries/5a27515b-ccd7-42c9-84f1-54c998f03866*" -and
+               $Uri -like "*api-version=$(_getApiVersion Core)*" -and
+               $Body -like "*`"token`": `"xyz`",*" -and
+               $Body -like "*`"descriptor`": `"abc`",*" -and
+               $Body -like "*`"allow`": 12,*" -and
+               $Body -like "*`"deny`": 15,*" -and
+               $Body -like "*`"merge`": false,*" -and
+               $Method -eq "Post"
+            }
+
+      }
+
    }
 }
