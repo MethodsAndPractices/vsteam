@@ -1,25 +1,25 @@
 [
    {
       "msg": "Message for minimum version 5.6.0",
-      "toDate": "2099-02-14 13:36:17Z",
+      "toDate": "14/02/2099 13:36:17",
       "displayFromVersion": "5.6.0",
       "type": "info"
    },
    {
       "msg": "Message for minimum version 7.0.0",
-      "toDate": "2099-02-13 13:36:17Z",
+      "toDate": "13/02/2099 13:36:17",
       "displayFromVersion": "7.0.0",
       "type": "warning"
    },
    {
       "msg": "Message for minimum version 6.9.0",
-      "toDate": "2021-12-31 23:59:59Z",
+      "toDate": "31/12/2021 23:59:59",
       "displayFromVersion": "6.9.0",
       "type": "warning"
    },
    {
       "msg": "Message for minimum version 7.8.0 to maximum version 8.0.0",
-      "toDate": "2099-12-31 23:59:59Z",
+      "toDate": "31/12/2099 23:59:59",
       "displayFromVersion": "7.8.0",
       "displayToVersion": "8.0.0",
       "type": "warning"

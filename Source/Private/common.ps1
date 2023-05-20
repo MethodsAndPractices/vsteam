@@ -1199,7 +1199,7 @@ function _showModuleLoadingMessages {
 
             # dont show messages if display until date is in the past
             $currentDate = Get-Date
-            $filteredMessages = $filteredMessages | Where-Object { $currentDate -le ([DateTime]::Parse($_.toDate))
+            $filteredMessages = $filteredMessages | Where-Object { $currentDate -le ([DateTime]::ParseExact($_.toDate, "dd/MM/yyyy HH:mm:ss", [cultureInfo]::InvariantCulture))
             }
 
             # stop processing if no messages left

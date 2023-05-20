@@ -27,7 +27,7 @@ namespace vsteam_lib.Test.Provider
          Assert.AreEqual("Math lastName", target.DisplayName, "DisplayName");
          Assert.AreEqual("mlastName@test.com", target.UniqueName, "UniqueName");
          Assert.AreEqual("Early Adopter", target.AccessLevelName, "AccessLevelName");
-         Assert.AreEqual("9/9/2020 6:43:29 am", target.LastAccessedDate.ToString("M/d/yyyy h:mm:ss tt").ToLower(), "LastAccessedDate");
+         Assert.AreEqual("9/9/2020 6:43:29 am", target.LastAccessedDate.ToString("M/d/yyyy h:mm:ss tt", System.Globalization.CultureInfo.InvariantCulture).ToLower(), "LastAccessedDate");
       }
 
       [TestMethod]

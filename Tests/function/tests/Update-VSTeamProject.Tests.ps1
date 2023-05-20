@@ -84,7 +84,7 @@ Describe 'VSTeamProject' {
          ## Assert
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Uri -eq "https://dev.azure.com/test/_apis/projects/00000000-0000-0000-0000-000000000000?api-version=$(_getApiVersion Core)" -and
-            $Method -eq 'Patch' -and $Body -like '*"visibility"*"public"*'
+            $Method -eq 'Patch' -and ($Body | ConvertFrom-JSON).visibility -eq "public"
          }
       }
    }

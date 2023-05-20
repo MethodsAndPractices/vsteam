@@ -1,0 +1,1 @@
+Adds a variable to an existing variable group, or changes its value if the variable is already present.
