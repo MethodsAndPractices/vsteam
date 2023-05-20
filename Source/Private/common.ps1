@@ -153,14 +153,14 @@ function _queryStringAppender {
       [Collections.Specialized.NameValueCollection]$QueryString
    )
 
-   if ($qs.HasKeys()) {
+   if ($QueryString.HasKeys()) {
       # Do not assume that Url already contains a query string
       # Crude check, but this will do
       if ($Url.IndexOf('?') -gt 0) {
-         $Url += '&' + $qs.ToString()
+         $Url += '&' + $QueryString.ToString()
       }
       else {
-         $Url += '?' + $qs.ToString()
+         $Url += '?' + $QueryString.ToString()
       }
    }
 
