@@ -1,6 +1,15 @@
 # Changelog
 
+## 7.13.0
+
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/515) from [mrwalters1988](https://github.com/mrwalters1988) the following:
+- feat: added parameter for Add-VSTeamAccessControlEntry to choose whether to merge the Bits or to Overwrite the bits.
+
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/508) from [Miguel Nieto](https://github.com/mnieto) the following:
+- Fix import-module loses previously stored configuration [493](https://github.com/MethodsAndPractices/vsteam/issues/493)
+
 ## 7.12.0
+
 
 Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/506) from [Miguel Nieto](https://github.com/mnieto) the following:
 - fix tests that involve dates fail when OS culture has 24 hours format
@@ -25,6 +34,10 @@ Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/485) fr
 Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/502) from [Miguel Nieto](https://github.com/mnieto) the following:
 - Updated test c# project to .NET 6.0
 - Fixed test fail on ubuntu-latest
+
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/508) from [Miguel Nieto](https://github.com/mnieto) the following:
+- Fix import-module vsteam loses previously stored configuration: [issue #493](https://github.com/MethodsAndPractices/vsteam/issues/493)
+- Fixed test Versions fail on local machine
 
 ## 7.9.0
 
