@@ -17,8 +17,6 @@ jobs:
 
     - uses: ncipollo/release-action@v1
       with:
-        artifacts: 'nuget/*'
-        artifactErrorsFailBuild: false
         allowUpdates: true
         commit: trunk
         tag: "v${{ env.module_version }}"
