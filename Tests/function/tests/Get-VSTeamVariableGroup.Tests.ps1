@@ -70,6 +70,15 @@ Describe 'VSTeamVariableGroup' {
                $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/distributedtask/variablegroups?api-version=$(_getApiVersion VariableGroups)&groupName=$varGroupName"
             }
          }
+
+         It 'by name should support ampersend in name' {
+            $varGroupName = "Foo&Bar"
+            Get-VSTeamVariableGroup -projectName project -Name $varGroupName
+
+            Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+               $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/distributedtask/variablegroups?api-version=$(_getApiVersion VariableGroups)&groupName=" + [System.Web.HttpUtility]::URLEncode($varGroupName)
+            }
+         }
       }
    }
 }

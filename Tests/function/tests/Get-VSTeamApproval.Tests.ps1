@@ -49,7 +49,7 @@ Describe 'VSTeamApproval' -Tag 'unit', 'approvals' {
                -ParameterFilter {
                $Uri -like "*https://vsrm.dev.azure.com/test/project/_apis/release/approvals*" -and
                $Uri -like "*api-version=$(_getApiVersion Release)*" -and
-               $Uri -like "*assignedtoFilter=Test User*" -and
+               $Uri -like "*assignedtoFilter=Test+User*" -and
                $Uri -like "*includeMyGroupApprovals=true*"
             }
          }
@@ -80,7 +80,7 @@ Describe 'VSTeamApproval' -Tag 'unit', 'approvals' {
                $Uri -like "*http://localhost:8080/tfs/defaultcollection/project/_apis/release/approvals*" -and
                $Uri -like "*api-version=$(_getApiVersion Release)*" -and
                $Uri -like "*statusFilter=Pending*" -and
-               $Uri -like "*assignedtoFilter=Test User*" -and
+               $Uri -like "*assignedtoFilter=Test+User*" -and
                $Uri -like "*includeMyGroupApprovals=true*" -and
                $Uri -like "*releaseIdsFilter=1*"
             }

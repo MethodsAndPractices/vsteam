@@ -49,9 +49,11 @@ function Get-VSTeamUserEntitlement {
       $paramset = 'PagedParams', 'PagedFilter'
       if ($paramCounter -eq 0 -or $PSCmdlet.ParameterSetName -eq 'ByID') {
          _supportsMemberEntitlementManagement
-      } elseif ($paramset -contains $PSCmdlet.ParameterSetName) {
+      }
+      elseif ($paramset -contains $PSCmdlet.ParameterSetName) {
          _supportsMemberEntitlementManagement -Onwards '6.0'
-      } else {
+      }
+      else {
          _supportsMemberEntitlementManagement -UpTo '5.1'
       }
 
@@ -79,6 +81,7 @@ function Get-VSTeamUserEntitlement {
          $listurl = _buildRequestURI @commonArgs
          $objs = @()
          Write-Verbose "Use continuation token: $useContinuationToken"
+         $qs = [System.Web.HttpUtility]::ParseQueryString('')
          if ($useContinuationToken) {
             if ($psCmdLet.ParameterSetName -eq 'PagedParams') {
                #parameter names must be lowercase, parameter values depends on the parameter
@@ -94,22 +97,34 @@ function Get-VSTeamUserEntitlement {
                }
                $filter = $filter.SubString(0, $filter.Length - 5)
             }
-            $listurl += _appendQueryString -name "`$filter" -value $filter
-            $listurl += _appendQueryString -name "select" -value ($select -join ",")
+            if ($filter) {
+               $qs.Add("`$filter", $filter)
+            }
+            if ($select) {
+               $qs.Add('select', $select -join ',')
+            }
+
+
+            $listurl = _queryStringAppender -Url $listurl -QueryString $qs
 
             # Call the REST API
             Write-Verbose "API params: $listurl"
-            $items = _callAPIContinuationToken -Url $listurl -PropertyName "members"
+            $items = _callAPIContinuationToken -Url $listurl -PropertyName 'members'
             foreach ($item in $items) {
                $objs += [vsteam_lib.UserEntitlement]::new($item)
             }
-         } else {
-            $listurl += _appendQueryString -name "top" -value $top -retainZero
-            $listurl += _appendQueryString -name "skip" -value $skip -retainZero
-            $listurl += _appendQueryString -name "select" -value ($select -join ",")
+         }
+         else {
+            $qs.Add('top', $top)
+            $qs.Add('skip', $skip)
+            if ($select) {
+               $qs.Add('select', $select -join ',')
+            }
+
+            $listurl = _queryStringAppender -Url $listurl -QueryString $qs
+            Write-Verbose "API params: $listurl"
 
             # Call the REST API
-            Write-Verbose "API params: $listurl"
             $resp = _callAPI -url $listurl
 
             foreach ($item in $resp.members) {

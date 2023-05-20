@@ -48,8 +48,8 @@ Describe "VSTeamGitCommit" {
          ## Assert
          Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
             $Uri -like "*repositories/06E176BE-D3D2-41C2-AB34-5F4D79AEC86B/commits*" -and
-            $Uri -like "*searchCriteria.fromDate=2020-01-01T00:00:00Z*" -and
-            $Uri -like "*searchCriteria.toDate=2020-03-01T00:00:00Z*" -and
+            $Uri -like "*searchCriteria.fromDate=2020-01-01T00%3a00%3a00Z*" -and
+            $Uri -like "*searchCriteria.toDate=2020-03-01T00%3a00%3a00Z*" -and
             $Uri -like "*searchCriteria.itemVersion.versionType=commit*" -and
             $Uri -like "*searchCriteria.itemVersion.version=abcdef1234567890abcdef1234567890*" -and
             $Uri -like "*searchCriteria.itemVersion.versionOptions=previousChange*" -and

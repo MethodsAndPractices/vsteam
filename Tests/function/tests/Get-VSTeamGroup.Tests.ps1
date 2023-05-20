@@ -58,7 +58,7 @@ Describe "VSTeamGroup" {
             Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
                $Uri -like "https://vssps.dev.azure.com/test/_apis/graph/groups*" -and
                $Uri -like "*api-version=$(_getApiVersion Graph)*" -and
-               $Uri -like "*subjectTypes=vssgp,aadgp*"
+               $Uri -like "*subjectTypes=vssgp%2caadgp*"
             }
          }
 
@@ -68,7 +68,7 @@ Describe "VSTeamGroup" {
             Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
                $Uri -like "https://vssps.dev.azure.com/test/_apis/graph/groups*" -and
                $Uri -like "*api-version=$(_getApiVersion Graph)*" -and
-               $Uri -like "*subjectTypes=vssgp,aadgp*" -and
+               $Uri -like "*subjectTypes=vssgp%2caadgp*" -and
                $Uri -like "*scopeDescriptor=scp.ZGU5ODYwOWEtZjRiMC00YWEzLTgzOTEtODI4ZDU2MDI0MjU2*"
             }
          }
