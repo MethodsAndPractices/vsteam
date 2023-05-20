@@ -32,6 +32,7 @@ jobs:
       fail-fast: true
     permissions:
       checks: write
+      packages: write
     steps:
     - name: Clone repo
       uses: actions/checkout@v3
@@ -268,6 +269,10 @@ jobs:
     runs-on: ubuntu-latest
     env:
       module_version: ""
+    permissions:
+      repository-projects: write
+      discussions: write
+      packages: write
     steps:
     - name: Download PS module artifact
       uses: actions/download-artifact@v2
