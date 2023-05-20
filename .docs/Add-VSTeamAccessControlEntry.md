@@ -149,6 +149,14 @@ Bitmask for Deny Permissions
 Type: Int
 Required: True
 ```
+### OverwriteMask
+
+Switch to overwrite the mask values rather than merge them. 
+
+```yaml
+Type: Switch
+Required: False
+```
 
 <!-- #include "./params/projectName.md" -->
 
