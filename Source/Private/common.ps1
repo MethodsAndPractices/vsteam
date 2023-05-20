@@ -1,6 +1,6 @@
 $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 
-[Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseDeclaredVarsMoreThanAssignments", "It is used in other files")]
+[Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseDeclaredVarsMoreThanAssignments', 'It is used in other files')]
 $profilesPath = "$HOME/vsteam_profiles.json"
 
 Add-Type -AssemblyName System.Web
@@ -49,9 +49,11 @@ function _callAPI {
    process {
       # If the caller did not provide a Url build it.
       if (-not $Url) {
-         $buildUriParams = @{ } + $PSBoundParameters;
+         $buildUriParams = @{ } + $PSBoundParameters
          $extra = 'method', 'body', 'InFile', 'OutFile', 'ContentType', 'AdditionalHeaders'
-         foreach ($x in $extra) { $buildUriParams.Remove($x) | Out-Null }
+         foreach ($x in $extra) {
+            $buildUriParams.Remove($x) | Out-Null
+         }
          $Url = _buildRequestURI @buildUriParams
       }
       elseif ($QueryString) {
@@ -59,20 +61,12 @@ function _callAPI {
          # to add the querystring now
          $qs = [System.Web.HttpUtility]::ParseQueryString('')
          foreach ($key in $QueryString.keys) {
-            if($QueryString[$key]) {
-                $qs.Add($key, $QueryString[$key])
+            if ($QueryString[$key]) {
+               $qs.Add($key, $QueryString[$key])
             }
          }
-         if($qs.HasKeys()) {
-            # Do not assume that Url already contains a query string
-            # Crude check, but this will do
-            if($Url.IndexOf('?') -gt 0) {
-               $Url += "&" + $qs.ToString()
-            }
-            else {
-               $Url += "?" + $qs.ToString()
-            }
-         }
+
+         $Url = _queryStringAppender -Url $Url -QueryString $qs
       }
 
       if ($body) {
@@ -86,7 +80,7 @@ function _callAPI {
       $params.Add('TimeoutSec', (_getDefaultTimeout))
 
       # always use utf8 and json as default content type instead of xml
-      if ($false -eq $PSBoundParameters.ContainsKey("ContentType")) {
+      if ($false -eq $PSBoundParameters.ContainsKey('ContentType')) {
          $params.Add('ContentType', 'application/json; charset=utf-8')
       }
 
@@ -96,19 +90,19 @@ function _callAPI {
       # checking if an authorization token is provided already with the additional headers
       # use case: sometimes other tokens for certain APIs have to be used (buying pipelines) in order to work
       # some parts of internal APIs use their own token based on the PAT
-      if (!$AdditionalHeaders.ContainsKey("Authorization")) {
+      if (!$AdditionalHeaders.ContainsKey('Authorization')) {
          if (_useWindowsAuthenticationOnPremise) {
             $params.Add('UseDefaultCredentials', $true)
          }
          elseif (_useBearerToken) {
-            $params['Headers'].Add("Authorization", "Bearer $env:TEAM_TOKEN")
+            $params['Headers'].Add('Authorization', "Bearer $env:TEAM_TOKEN")
          }
          else {
-            $params['Headers'].Add("Authorization", "Basic $env:TEAM_PAT")
+            $params['Headers'].Add('Authorization', "Basic $env:TEAM_PAT")
          }
       }
 
-      if ($AdditionalHeaders -and $AdditionalHeaders.PSObject.Properties.name -match "Keys") {
+      if ($AdditionalHeaders -and $AdditionalHeaders.PSObject.Properties.name -match 'Keys') {
          foreach ($key in $AdditionalHeaders.Keys) {
             $params['Headers'].Add($key, $AdditionalHeaders[$key])
          }
@@ -117,7 +111,9 @@ function _callAPI {
       # We have to remove any extra parameters not used by Invoke-RestMethod
       $extra = 'NoAccount', 'NoProject', 'UseProjectId', 'Area', 'Resource', 'SubDomain', 'Id', 'Version', 'JSON', 'ProjectName', 'Team', 'Url', 'QueryString', 'AdditionalHeaders', 'CustomBearer'
 
-      foreach ($e in $extra) { $params.Remove($e) | Out-Null }
+      foreach ($e in $extra) {
+         $params.Remove($e) | Out-Null
+      }
 
       try {
          $resp = Invoke-RestMethod @params
@@ -137,6 +133,39 @@ function _callAPI {
    }
 }
 
+<#
+.SYNOPSIS
+   appends a query string to a url
+.DESCRIPTION
+   appends a query string to a url
+.PARAMETER Url
+   the url to append the query string to
+.PARAMETER QueryString
+   the query string to append
+.EXAMPLE
+   _queryStringAppender -Url 'https://dev.azure.com/contoso/MyFirstProject/_apis/build/builds' -QueryString @{ definition = 1; statusFilter = 'completed' }
+#>
+function _queryStringAppender {
+   param(
+      [Parameter(Mandatory = $true)]
+      [string]$Url,
+      [Parameter(Mandatory = $true)]
+      [HttpQSCollection]$QueryString
+   )
+
+   if ($qs.HasKeys()) {
+      # Do not assume that Url already contains a query string
+      # Crude check, but this will do
+      if ($Url.IndexOf('?') -gt 0) {
+         $Url += '&' + $qs.ToString()
+      }
+      else {
+         $Url += '?' + $qs.ToString()
+      }
+   }
+
+   return $Url
+}
 
 # General function to manage API Calls that involve a paged response,
 # either with a ContinuationToken property in the body payload or
@@ -162,14 +191,15 @@ function _callAPIContinuationToken {
       [int]$MaxPages
    )
 
-   if ($MaxPages -le 0){
+   if ($MaxPages -le 0) {
       $MaxPages = [int32]::MaxValue
    }
    if ([string]::IsNullOrEmpty($ContinuationTokenName)) {
       if ($UseHeader.IsPresent) {
-         $ContinuationTokenName = "X-MS-ContinuationToken"
-      } else {
-         $ContinuationTokenName = "continuationToken"
+         $ContinuationTokenName = 'X-MS-ContinuationToken'
+      }
+      else {
+         $ContinuationTokenName = 'continuationToken'
       }
    }
    $i = 0
@@ -177,8 +207,9 @@ function _callAPIContinuationToken {
    $apiParameters = $url
    do {
       if ($UseHeader.IsPresent) {
-         throw "Continuation token from response headers not supported in this version"
-      } else {
+         throw 'Continuation token from response headers not supported in this version'
+      }
+      else {
          $resp = _callAPI -url $apiParameters
          $continuationToken = $resp."$ContinuationTokenName"
          $i++
@@ -243,17 +274,17 @@ function _testVariableGroupsSupport {
 
 function _supportsSecurityNamespace {
    _hasAccount
-   if (([vsteam_lib.Versions]::Version -ne "VSTS") -and ([vsteam_lib.Versions]::Version -ne "AzD")) {
+   if (([vsteam_lib.Versions]::Version -ne 'VSTS') -and ([vsteam_lib.Versions]::Version -ne 'AzD')) {
       throw 'Security Namespaces are currently only supported in Azure DevOps Service (Online)'
    }
 }
 
 function _supportsMemberEntitlementManagement {
-   [CmdletBinding(DefaultParameterSetName="upto")]
+   [CmdletBinding(DefaultParameterSetName = 'upto')]
    param(
-      [parameter(ParameterSetName="upto")]
+      [parameter(ParameterSetName = 'upto')]
       [string]$UpTo = $null,
-      [parameter(ParameterSetName="onwards")]
+      [parameter(ParameterSetName = 'onwards')]
       [string]$Onwards = $null
 
    )
@@ -261,9 +292,11 @@ function _supportsMemberEntitlementManagement {
    $apiVer = _getApiVersion MemberEntitlementManagement
    if (-not $apiVer) {
       throw 'This account does not support Member Entitlement.'
-   } elseif (-not [string]::IsNullOrEmpty($UpTo) -and $apiVer -gt $UpTo) {
+   }
+   elseif (-not [string]::IsNullOrEmpty($UpTo) -and $apiVer -gt $UpTo) {
       throw "EntitlementManagemen version must be equal or lower than $UpTo for this call, current value $apiVer"
-   } elseif (-not [string]::IsNullOrEmpty($Onwards) -and $apiVer -lt $Onwards) {
+   }
+   elseif (-not [string]::IsNullOrEmpty($Onwards) -and $apiVer -lt $Onwards) {
       throw "EntitlementManagemen version must be equal or greater than $Onwards for this call, current value $apiVer"
    }
 }
@@ -285,7 +318,7 @@ function _getApiVersion {
       [parameter(ParameterSetName = 'Service', Mandatory = $true, Position = 0)]
       [ValidateSet('Build', 'Release', 'Core', 'Git', 'DistributedTask',
          'DistributedTaskReleased', 'VariableGroups', 'Tfvc',
-         'Packaging', 'MemberEntitlementManagement','Version',
+         'Packaging', 'MemberEntitlementManagement', 'Version',
          'ExtensionsManagement', 'ServiceEndpoints', 'Graph',
          'TaskGroups', 'Policy', 'Processes', 'HierarchyQuery', 'Pipelines', 'Billing', 'Wiki', 'WorkItemTracking')]
       [string] $Service,
@@ -295,7 +328,7 @@ function _getApiVersion {
    )
 
    if ($Target.IsPresent) {
-      return [vsteam_lib.Versions]::GetApiVersion("Version")
+      return [vsteam_lib.Versions]::GetApiVersion('Version')
    }
    else {
       return [vsteam_lib.Versions]::GetApiVersion($Service)
@@ -307,8 +340,8 @@ function _getInstance {
 }
 
 function _getDefaultTimeout {
-   if ($Global:PSDefaultParameterValues["*-vsteam*:vsteamApiTimeout"]) {
-      return $Global:PSDefaultParameterValues["*-vsteam*:vsteamApiTimeout"]
+   if ($Global:PSDefaultParameterValues['*-vsteam*:vsteamApiTimeout']) {
+      return $Global:PSDefaultParameterValues['*-vsteam*:vsteamApiTimeout']
    }
    else {
       return 60
@@ -316,7 +349,7 @@ function _getDefaultTimeout {
 }
 
 function _getDefaultProject {
-   return $Global:PSDefaultParameterValues["*-vsteam*:projectName"]
+   return $Global:PSDefaultParameterValues['*-vsteam*:projectName']
 }
 
 function _hasAccount {
@@ -352,7 +385,7 @@ function _buildRequestURI {
 
       $qs = [System.Web.HttpUtility]::ParseQueryString('')
 
-      $instance = "https://dev.azure.com"
+      $instance = 'https://dev.azure.com'
       if ($NoAccount.IsPresent -eq $false) {
          $instance = _getInstance
       }
@@ -378,7 +411,7 @@ function _buildRequestURI {
          $sb.Append("/$team") | Out-Null
       }
 
-      $sb.Append("/_apis") | Out-Null
+      $sb.Append('/_apis') | Out-Null
 
       if ($area) {
          $sb.Append("/$area") | Out-Null
@@ -393,19 +426,18 @@ function _buildRequestURI {
       }
 
       if ($version) {
-         $qs.Add("api-version", $version)
+         $qs.Add('api-version', $version)
       }
 
       if ($queryString) {
          foreach ($key in $queryString.keys) {
-            if($QueryString[$key]) {
-                $qs.Add($key, $queryString[$key])
+            if ($QueryString[$key]) {
+               $qs.Add($key, $queryString[$key])
             }
          }
       }
 
-      if($qs.HasKeys())
-      {
+      if ($qs.HasKeys()) {
          $sb.Append('?') | Out-Null
          $sb.Append($qs.ToString()) | Out-Null
       }
@@ -426,7 +458,7 @@ function _handleException {
 
    if ($ex.Exception.PSObject.Properties.Match('Response').count -gt 0 -and
       $null -ne $ex.Exception.Response -and
-      $ex.Exception.Response.StatusCode -ne "BadRequest") {
+      $ex.Exception.Response.StatusCode -ne 'BadRequest') {
       $handled = $true
       $msg = "An error occurred: $($ex.Exception.Message)"
       Write-Warning -Message $msg
@@ -460,7 +492,7 @@ function _isVSTS {
       [parameter(Mandatory = $true)]
       [string] $instance
    )
-   return $instance -like "*.visualstudio.com*" -or $instance -like "https://dev.azure.com/*"
+   return $instance -like '*.visualstudio.com*' -or $instance -like 'https://dev.azure.com/*'
 }
 
 function _getVSTeamAPIVersion {
@@ -516,7 +548,7 @@ function _getUserAgent {
 }
 
 function _useWindowsAuthenticationOnPremise {
-   return (_isOnWindows) -and (!$env:TEAM_PAT) -and -not ($(_getInstance) -like "*visualstudio.com") -and -not ($(_getInstance) -like "https://dev.azure.com/*")
+   return (_isOnWindows) -and (!$env:TEAM_PAT) -and -not ($(_getInstance) -like '*visualstudio.com') -and -not ($(_getInstance) -like 'https://dev.azure.com/*')
 }
 
 function _useBearerToken {
@@ -570,17 +602,17 @@ function _buildLevelDynamicParam {
       # Create and set the parameters' attributes
       $ParameterAttribute = New-Object System.Management.Automation.ParameterAttribute
       $ParameterAttribute.Mandatory = $false
-      $ParameterAttribute.HelpMessage = "On Windows machines allows you to store the default project at the process, user or machine level. Not available on other platforms."
+      $ParameterAttribute.HelpMessage = 'On Windows machines allows you to store the default project at the process, user or machine level. Not available on other platforms.'
 
       # Add the attributes to the attributes collection
       $AttributeCollection.Add($ParameterAttribute)
 
       # Generate and set the ValidateSet
       if (_testAdministrator) {
-         $arrSet = "Process", "User", "Machine"
+         $arrSet = 'Process', 'User', 'Machine'
       }
       else {
-         $arrSet = "Process", "User"
+         $arrSet = 'Process', 'User'
       }
 
       $ValidateSetAttribute = New-Object System.Management.Automation.ValidateSetAttribute($arrSet)
@@ -620,7 +652,7 @@ function _buildProjectNameDynamicParam {
    }
 
    $ParameterAttribute.ValueFromPipelineByPropertyName = $true
-   $ParameterAttribute.HelpMessage = "The name of the project.  You can tab complete from the projects in your Team Services or TFS account when passed on the command line."
+   $ParameterAttribute.HelpMessage = 'The name of the project.  You can tab complete from the projects in your Team Services or TFS account when passed on the command line.'
 
    # Add the attributes to the attributes collection
    $AttributeCollection.Add($ParameterAttribute)
@@ -696,7 +728,7 @@ function _buildProcessNameDynamicParam {
    }
 
    $ParameterAttribute.ValueFromPipelineByPropertyName = $true
-   $ParameterAttribute.HelpMessage = "The name of the process.  You can tab complete from the processes in your Team Services or TFS account when passed on the command line."
+   $ParameterAttribute.HelpMessage = 'The name of the process.  You can tab complete from the processes in your Team Services or TFS account when passed on the command line.'
 
    # Add the attributes to the attributes collection
    $AttributeCollection.Add($ParameterAttribute)
@@ -892,12 +924,12 @@ function _trackServiceEndpointProgress {
       $statusTracking = _callAPI -ProjectName $projectName -Area 'distributedtask' -Resource 'serviceendpoints' -Id $resp.id  `
          -Version $(_getApiVersion ServiceEndpoints)
 
-      $isReady = $statusTracking.isReady;
+      $isReady = $statusTracking.isReady
 
       if (-not $isReady) {
          $state = $statusTracking.operationStatus.state
 
-         if ($state -eq "Failed") {
+         if ($state -eq 'Failed') {
             throw $statusTracking.operationStatus.statusMessage
          }
       }
@@ -923,9 +955,9 @@ function _getModuleVersion {
 }
 
 function _setEnvironmentVariables {
-   [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseDeclaredVarsMoreThanAssignments", "")]
+   [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseDeclaredVarsMoreThanAssignments', '')]
    param (
-      [string] $Level = "Process",
+      [string] $Level = 'Process',
       [string] $Pat,
       [string] $Acct,
       [string] $BearerToken,
@@ -942,31 +974,31 @@ function _setEnvironmentVariables {
    [vsteam_lib.Versions]::Account = $Acct
 
    # This is so it can be loaded by default in the next session
-   if ($Level -ne "Process") {
-      [System.Environment]::SetEnvironmentVariable("TEAM_PAT", $Pat, $Level)
-      [System.Environment]::SetEnvironmentVariable("TEAM_ACCT", $Acct, $Level)
-      [System.Environment]::SetEnvironmentVariable("TEAM_VERSION", $Version, $Level)
+   if ($Level -ne 'Process') {
+      [System.Environment]::SetEnvironmentVariable('TEAM_PAT', $Pat, $Level)
+      [System.Environment]::SetEnvironmentVariable('TEAM_ACCT', $Acct, $Level)
+      [System.Environment]::SetEnvironmentVariable('TEAM_VERSION', $Version, $Level)
    }
 }
 
 # If you remove an account the current default project needs to be cleared as well.
 function _clearEnvironmentVariables {
-   [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseDeclaredVarsMoreThanAssignments", "")]
+   [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseDeclaredVarsMoreThanAssignments', '')]
    param (
-      [string] $Level = "Process"
+      [string] $Level = 'Process'
    )
 
    $env:TEAM_PROJECT = $null
    $env:TEAM_TIMEOUT = $null
    [vsteam_lib.Versions]::DefaultProject = ''
    [vsteam_lib.Versions]::DefaultTimeout = ''
-   $Global:PSDefaultParameterValues.Remove("*-vsteam*:projectName")
-   $Global:PSDefaultParameterValues.Remove("*-vsteam*:vsteamApiTimeout")
+   $Global:PSDefaultParameterValues.Remove('*-vsteam*:projectName')
+   $Global:PSDefaultParameterValues.Remove('*-vsteam*:vsteamApiTimeout')
 
    # This is so it can be loaded by default in the next session
-   if ($Level -ne "Process") {
-      [System.Environment]::SetEnvironmentVariable("TEAM_PROJECT", $null, $Level)
-      [System.Environment]::SetEnvironmentVariable("TEAM_TIMEOUT", $null, $Level)
+   if ($Level -ne 'Process') {
+      [System.Environment]::SetEnvironmentVariable('TEAM_PROJECT', $null, $Level)
+      [System.Environment]::SetEnvironmentVariable('TEAM_TIMEOUT', $null, $Level)
    }
 
    _setEnvironmentVariables -Level $Level -Pat '' -Acct '' -UseBearerToken '' -Version ''
@@ -981,7 +1013,7 @@ function _convertToHex() {
 
    $bytes = $Value | Format-Hex -Encoding Unicode
    $hexString = ($bytes.Bytes | ForEach-Object ToString X2) -join ''
-   return $hexString.ToLowerInvariant();
+   return $hexString.ToLowerInvariant()
 }
 
 function _getVSTeamIdFromDescriptor {
@@ -996,10 +1028,18 @@ function _getVSTeamIdFromDescriptor {
    # We need to Pad the string for FromBase64String to work reliably (AzD Descriptors are not padded)
    $ModulusValue = ($identifier.length % 4)
    Switch ($ModulusValue) {
-      '0' { $Padded = $identifier }
-      '1' { $Padded = $identifier.Substring(0, $identifier.Length - 1) }
-      '2' { $Padded = $identifier + ('=' * (4 - $ModulusValue)) }
-      '3' { $Padded = $identifier + ('=' * (4 - $ModulusValue)) }
+      '0' {
+         $Padded = $identifier
+      }
+      '1' {
+         $Padded = $identifier.Substring(0, $identifier.Length - 1)
+      }
+      '2' {
+         $Padded = $identifier + ('=' * (4 - $ModulusValue))
+      }
+      '3' {
+         $Padded = $identifier + ('=' * (4 - $ModulusValue))
+      }
    }
 
    return [System.Text.Encoding]::ASCII.GetString([System.Convert]::FromBase64String($Padded))
@@ -1023,47 +1063,47 @@ function _getPermissionInheritanceInfo {
    $projectId = (Get-VSTeamProject -Name $projectName | Select-Object -ExpandProperty id)
 
    Switch ($resourceType) {
-      "Repository" {
-         $securityNamespaceID = "2e9eb7ed-3c0a-47d4-87c1-0ffdd275fd87"
+      'Repository' {
+         $securityNamespaceID = '2e9eb7ed-3c0a-47d4-87c1-0ffdd275fd87'
 
-         $repositoryId = (Get-VSTeamGitRepository -Name "$resourceName" -projectName $projectName | Select-Object -ExpandProperty id )
+         $repositoryId = (Get-VSTeamGitRepository -Name "$resourceName" -ProjectName $projectName | Select-Object -ExpandProperty id )
 
          if ($null -eq $repositoryId) {
-            Write-Error "Unable to retrieve repository information. Ensure that the resourceName provided matches a repository name exactly."
+            Write-Error 'Unable to retrieve repository information. Ensure that the resourceName provided matches a repository name exactly.'
             return
          }
 
          $token = "repoV2/$($projectId)/$repositoryId"
       }
 
-      "BuildDefinition" {
-         $securityNamespaceID = "33344d9c-fc72-4d6f-aba5-fa317101a7e9"
+      'BuildDefinition' {
+         $securityNamespaceID = '33344d9c-fc72-4d6f-aba5-fa317101a7e9'
 
-         $buildDefinitionId = (Get-VSTeamBuildDefinition -projectName $projectName | Where-Object name -eq "$resourceName" | Select-Object -ExpandProperty id)
+         $buildDefinitionId = (Get-VSTeamBuildDefinition -ProjectName $projectName | Where-Object name -EQ "$resourceName" | Select-Object -ExpandProperty id)
 
          if ($null -eq $buildDefinitionId) {
-            Write-Error "Unable to retrieve build definition information. Ensure that the resourceName provided matches a build definition name exactly."
+            Write-Error 'Unable to retrieve build definition information. Ensure that the resourceName provided matches a build definition name exactly.'
             return
          }
 
          $token = "$($projectId)/$buildDefinitionId"
       }
 
-      "ReleaseDefinition" {
-         $securityNamespaceID = "c788c23e-1b46-4162-8f5e-d7585343b5de"
+      'ReleaseDefinition' {
+         $securityNamespaceID = 'c788c23e-1b46-4162-8f5e-d7585343b5de'
 
-         $releaseDefinition = (Get-VSTeamReleaseDefinition -projectName $projectName | Where-Object -Property name -eq "$resourceName")
+         $releaseDefinition = (Get-VSTeamReleaseDefinition -ProjectName $projectName | Where-Object -Property name -EQ "$resourceName")
 
          if ($null -eq $releaseDefinition) {
-            Write-Error "Unable to retrieve release definition information. Ensure that the resourceName provided matches a release definition name exactly."
+            Write-Error 'Unable to retrieve release definition information. Ensure that the resourceName provided matches a release definition name exactly.'
             return
          }
 
-         if (($releaseDefinition).path -eq "/") {
+         if (($releaseDefinition).path -eq '/') {
             $token = "$($projectId)/$($releaseDefinition.id)"
          }
          else {
-            $token = "$($projectId)" + "$($releaseDefinition.path -replace "\\","/")" + "/$($releaseDefinition.id)"
+            $token = "$($projectId)" + "$($releaseDefinition.path -replace '\\','/')" + "/$($releaseDefinition.id)"
          }
       }
    }
@@ -1078,16 +1118,16 @@ function _getPermissionInheritanceInfo {
 function _getDescriptorForACL {
    [cmdletbinding()]
    param(
-      [parameter(Mandatory = $true, ParameterSetName = "ByUser")]
+      [parameter(Mandatory = $true, ParameterSetName = 'ByUser')]
       [vsteam_lib.User]$User,
 
-      [parameter(MAndatory = $true, ParameterSetName = "ByGroup")]
+      [parameter(MAndatory = $true, ParameterSetName = 'ByGroup')]
       [vsteam_lib.Group]$Group
    )
 
    if ($User) {
       switch ($User.Origin) {
-         "vsts" {
+         'vsts' {
             $sid = _getVSTeamIdFromDescriptor -Descriptor $User.Descriptor
 
             if ($User.Descriptor.StartsWith('svc.')) {
@@ -1097,20 +1137,24 @@ function _getDescriptorForACL {
                $descriptor = "Microsoft.TeamFoundation.Identity;$sid"
             }
          }
-         "aad" {
+         'aad' {
             $descriptor = "Microsoft.IdentityModel.Claims.ClaimsIdentity;$($User.Domain)\\$($User.PrincipalName)"
          }
-         default { throw "User type not handled yet for ACL. Please report this as an issue on the VSTeam Repository: https://github.com/MethodsAndPractices/vsteam/issues" }
+         default {
+            throw 'User type not handled yet for ACL. Please report this as an issue on the VSTeam Repository: https://github.com/MethodsAndPractices/vsteam/issues'
+         }
       }
    }
 
    if ($Group) {
       switch ($Group.Origin) {
-         "vsts" {
+         'vsts' {
             $sid = _getVSTeamIdFromDescriptor -Descriptor $Group.Descriptor
             $descriptor = "Microsoft.TeamFoundation.Identity;$sid"
          }
-         default { throw "Group type not handled yet for Add-VSTeamGitRepositoryPermission. Please report this as an issue on the VSTeam Repository: https://github.com/MethodsAndPractices/vsteam/issues" }
+         default {
+            throw 'Group type not handled yet for Add-VSTeamGitRepositoryPermission. Please report this as an issue on the VSTeam Repository: https://github.com/MethodsAndPractices/vsteam/issues'
+         }
       }
    }
 
@@ -1141,9 +1185,9 @@ function _getBillingToken {
    $billingToken = _callAPI `
       -NoProject `
       -method POST `
-      -ContentType "application/json" `
-      -area "WebPlatformAuth" `
-      -resource "SessionToken" `
+      -ContentType 'application/json' `
+      -area 'WebPlatformAuth' `
+      -resource 'SessionToken' `
       -version '3.2-preview.1' `
       -body ($sessionToken | ConvertTo-Json -Depth 50 -Compress)
 
@@ -1152,7 +1196,7 @@ function _getBillingToken {
 
 # pin if github is availabe and client has access to github
 function _pinpGithub {
-   Write-Verbose "Checking if client is online"
+   Write-Verbose 'Checking if client is online'
    $pingGh = [System.Net.NetworkInformation.Ping]::new()
    $replyStatus = $null
    try {
@@ -1182,7 +1226,7 @@ function _showModuleLoadingMessages {
          # catch if web request fails. Invoke-WebRequest does not have a ErrorAction parameter
          try {
 
-            $moduleMessagesRes = (Invoke-RestMethod "https://raw.githubusercontent.com/MethodsAndPractices/vsteam/trunk/.github/moduleMessages.json")
+            $moduleMessagesRes = (Invoke-RestMethod 'https://raw.githubusercontent.com/MethodsAndPractices/vsteam/trunk/.github/moduleMessages.json')
 
             # don't show messages if module has not the specified version
             $filteredMessages = $moduleMessagesRes | Where-Object {
@@ -1202,7 +1246,7 @@ function _showModuleLoadingMessages {
 
             # dont show messages if display until date is in the past
             $currentDate = Get-Date
-            $filteredMessages = $filteredMessages | Where-Object { $currentDate -le ([DateTime]::ParseExact($_.toDate, "dd/MM/yyyy HH:mm:ss", [cultureInfo]::InvariantCulture))
+            $filteredMessages = $filteredMessages | Where-Object { $currentDate -le ([DateTime]::ParseExact($_.toDate, 'dd/MM/yyyy HH:mm:ss', [cultureInfo]::InvariantCulture))
             }
 
             # stop processing if no messages left
@@ -1211,7 +1255,7 @@ function _showModuleLoadingMessages {
             }
 
             $filteredMessages | ForEach-Object {
-               $messageFormat = "{0}: {1}"
+               $messageFormat = '{0}: {1}'
                Write-Information ($messageFormat -f $_.type.ToUpper(), $_.msg) -InformationAction Continue
             }
          }
@@ -1220,7 +1264,7 @@ function _showModuleLoadingMessages {
          }
       }
       else {
-         Write-Information "Client is offline or blocked by a firewall. Skipping module messages"
+         Write-Information 'Client is offline or blocked by a firewall. Skipping module messages'
       }
    }
 }
@@ -1243,10 +1287,10 @@ function _checkForModuleUpdates {
 
          # catch if web request fails. Invoke-WebRequest does not have a ErrorAction parameter
          try {
-            Write-Verbose "Checking if module is up to date"
-            $ghLatestRelease = Invoke-RestMethod "https://api.github.com/repos/MethodsAndPractices/vsteam/releases/latest"
+            Write-Verbose 'Checking if module is up to date'
+            $ghLatestRelease = Invoke-RestMethod 'https://api.github.com/repos/MethodsAndPractices/vsteam/releases/latest'
 
-            [version]$latestVersion = $ghLatestRelease.tag_name -replace "v", ""
+            [version]$latestVersion = $ghLatestRelease.tag_name -replace 'v', ''
             [version]$currentVersion = $ModuleVersion
 
             if ($currentVersion -lt $latestVersion) {
@@ -1259,7 +1303,7 @@ function _checkForModuleUpdates {
          }
       }
       else {
-         Write-Information "Client is offline or blocked by a firewall. Skipping module updates check"
+         Write-Information 'Client is offline or blocked by a firewall. Skipping module updates check'
       }
    }
 
@@ -1271,7 +1315,7 @@ function _countParameters() {
    )
    $counter = 0
    $advancedPameters = @('Verbose', 'Debug', 'ErrorAction', 'WarningAction', 'InformationAction', 'ErrorVariable', 'WarningVariable', 'InformationVariable', 'OutVariable', 'OutBuffer', 'PipelineVariable')
-   foreach($p in $BoundParameters.GetEnumerator()) {
+   foreach ($p in $BoundParameters.GetEnumerator()) {
       if ($p.Key -notin $advancedPameters) {
          $counter++
       }

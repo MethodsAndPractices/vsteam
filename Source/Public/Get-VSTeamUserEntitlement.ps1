@@ -49,9 +49,11 @@ function Get-VSTeamUserEntitlement {
       $paramset = 'PagedParams', 'PagedFilter'
       if ($paramCounter -eq 0 -or $PSCmdlet.ParameterSetName -eq 'ByID') {
          _supportsMemberEntitlementManagement
-      } elseif ($paramset -contains $PSCmdlet.ParameterSetName) {
+      }
+      elseif ($paramset -contains $PSCmdlet.ParameterSetName) {
          _supportsMemberEntitlementManagement -Onwards '6.0'
-      } else {
+      }
+      else {
          _supportsMemberEntitlementManagement -UpTo '5.1'
       }
 
@@ -95,35 +97,34 @@ function Get-VSTeamUserEntitlement {
                }
                $filter = $filter.SubString(0, $filter.Length - 5)
             }
-            if($filter){
-                $qs.Add("`$filter", $filter)
+            if ($filter) {
+               $qs.Add("`$filter", $filter)
             }
-            if($select) {
-                $qs.Add("select", $select -join ",")
+            if ($select) {
+               $qs.Add('select', $select -join ',')
             }
+
+
+            $listurl = _queryStringAppender -Url $listurl -QueryString $qs
 
             # Call the REST API
-            # TODO: will break with blank API version
-            if($qs.HasKeys()){
-                $listurl += "&" + $qs.ToString()
-            }
-
             Write-Verbose "API params: $listurl"
-            $items = _callAPIContinuationToken -Url $listurl -PropertyName "members"
+            $items = _callAPIContinuationToken -Url $listurl -PropertyName 'members'
             foreach ($item in $items) {
                $objs += [vsteam_lib.UserEntitlement]::new($item)
             }
-         } else {
-            $qs.Add("top", $top)
-            $qs.Add("skip", $skip)
-            if($select) {
-               $qs.Add("select", $select -join ",")
+         }
+         else {
+            $qs.Add('top', $top)
+            $qs.Add('skip', $skip)
+            if ($select) {
+               $qs.Add('select', $select -join ',')
             }
 
-            # Call the REST API
-            # TODO: will break with blank API version
-            $listurl += "&" + $qs.ToString()
+            $listurl = _queryStringAppender -Url $listurl -QueryString $qs
             Write-Verbose "API params: $listurl"
+
+            # Call the REST API
             $resp = _callAPI -url $listurl
 
             foreach ($item in $resp.members) {
