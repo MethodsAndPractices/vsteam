@@ -314,6 +314,8 @@ jobs:
         artifacts: 'nuget/*'
         artifactErrorsFailBuild: true
         allowUpdates: true
+        makeLatest: true
+        replacesArtifacts: true
         commit: trunk
         tag: "v${{ env.module_version }}"
         discussionCategory: "Announcements"
