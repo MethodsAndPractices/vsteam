@@ -9,10 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       module_version: "10.0.0"
-    permissions:
-      repository-projects: write
-      discussions: write
-      packages: write
+    permissions: write-all
     steps:
 
     - uses: ncipollo/release-action@v1
