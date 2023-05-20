@@ -451,6 +451,14 @@ Describe 'Common' {
          { _showModuleLoadingMessages -ModuleVersion 'notaversion' } | Should -Throw -ExpectedMessage '*Cannot convert value "notaversion" to type "System.Version*'
       }
 
+      It 'should have correct datetime format' {
+         $moduleMessagesRes = Open-SampleFile 'moduleMessages.json'
+         $moduleMessagesRes | ForEach-Object {
+            $outDate = [datetime]::Now
+            [datetime]::TryParseExact($_.toDate, "dd/MM/yyyy HH:mm:ss", [cultureInfo]::InvariantCulture, [System.Globalization.DateTimeStyles]::None, [ref] $outDate) | Should -BeTrue
+         }
+      }
+
    }
 
    Context '_checkForModuleUpdates' {

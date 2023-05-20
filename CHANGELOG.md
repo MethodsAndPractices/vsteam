@@ -1,5 +1,11 @@
 # Changelog
 
+## 7.13.0
+
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/515) from [mrwalters1988](https://github.com/mrwalters1988) the following:
+
+- feat: added parameter for Add-VSTeamAccessControlEntry to choose whether to merge the Bits or to Overwrite the bits.
+
 ## 7.12.0
 
 Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/508) from [Miguel Nieto](https://github.com/mnieto) the following:
