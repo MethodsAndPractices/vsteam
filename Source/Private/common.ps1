@@ -150,7 +150,7 @@ function _queryStringAppender {
       [Parameter(Mandatory = $true)]
       [string]$Url,
       [Parameter(Mandatory = $true)]
-      [HttpQSCollection]$QueryString
+      [Collections.Specialized.NameValueCollection]$QueryString
    )
 
    if ($qs.HasKeys()) {
