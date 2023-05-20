@@ -1,8 +1,7 @@
-name: 'build module'
+name: 'test publish'
 
 on:
   workflow_dispatch:
-
 
 jobs:
   publish-stage:
