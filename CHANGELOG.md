@@ -8,6 +8,9 @@ Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/515) fr
 Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/508) from [Miguel Nieto](https://github.com/mnieto) the following:
 - Fix import-module loses previously stored configuration [493](https://github.com/MethodsAndPractices/vsteam/issues/493)
 
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/523) from [Seva Alekseyev](https://github.com/sevaa) the following:
+- Fix import-module loses previously stored configuration [442](https://github.com/MethodsAndPractices/vsteam/issues/442)[517](https://github.com/MethodsAndPractices/vsteam/issues/517)
+
 ## 7.12.0
 
 
