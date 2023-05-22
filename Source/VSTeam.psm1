@@ -38,7 +38,9 @@ if ($null -ne $env:TEAM_PROJECT) {
       # set vsteam account to initialize given variables properly
       $commonArgs = @{
          Account = $env:TEAM_ACCT
-         Version = $env:TEAM_VERSION
+      }
+      if (-not [string]::IsNullOrEmpty($env:TEAM_VERSION)) {
+         $commonArgs["Version"] = $env:TEAM_VERSION
       }
 
       if (_useBearerToken) {
