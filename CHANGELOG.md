@@ -1,5 +1,10 @@
 # Changelog
 
+## 7.13.1
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/532) from [Miguel Nieto](https://github.com/mnieto) the following:
+- Fix Set-VSTeamAccount Error on Module Import [531](https://github.com/MethodsAndPractices/vsteam/issues/531)
+
+
 ## 7.13.0
 
 Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/515) from [mrwalters1988](https://github.com/mrwalters1988) the following:
