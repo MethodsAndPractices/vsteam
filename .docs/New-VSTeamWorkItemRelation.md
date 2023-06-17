@@ -107,10 +107,9 @@ Accept pipeline input: true
 Intended for fluent pipeline (see Example 2)
 
 ```yaml
-Type: String[]
+Type: String
 Parameter Sets: ByRelation
 Required: True
-Accept pipeline input: true (ByPropertyName)
 ```
 
 ### RelationType
@@ -135,6 +134,15 @@ Default value: Add
 Accepted values: Add, Remove, Replace
 ```
 
+### Comment
+
+Add a comment to the relation
+
+```yaml
+Type: string
+Required: False
+```
+
 ## OUTPUTS
 
 ### vsteam_lib.WorkItemRelation
@@ -147,6 +155,6 @@ This CmdLet do not modify any work item, just generates a JSON Patch compatible 
 
 ## RELATED LINKS
 
-- [Get-VSTeamWorkItemRelationType](Get-VSTeamWorkItemRelationType.md)
-- [Get-VSTeamWorkItem](Get-VSTeamWorkItem.md)
-- [Update-VSTeamWorkItem](Update-VSTeamWorkItem.md)
+[Get-VSTeamWorkItemRelationType](Get-VSTeamWorkItemRelationType.md)
+[Get-VSTeamWorkItem](Get-VSTeamWorkItem.md)
+[Update-VSTeamWorkItem](Update-VSTeamWorkItem.md)
