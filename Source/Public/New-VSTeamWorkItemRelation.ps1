@@ -1,4 +1,5 @@
 function New-VSTeamWorkItemRelation {
+   [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseShouldProcessForStateChangingFunctions', '', Scope="Function", Justification='We still are not doing any persistent changes')]   
    [CmdletBinding(DefaultParameterSetName="ById", HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/New-VSTeamWorkItemRelation')]
    param(
       [Parameter(Mandatory, ValueFromPipeline, ParameterSetName="ByObject")]
