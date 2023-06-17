@@ -1,0 +1,110 @@
+[
+   {
+     "name": "Affects",
+     "referenceName": "Microsoft.VSTS.Common.Affects-Forward",
+     "Usage": "workItemLink",
+     "Topology": "dependency"
+   },
+   {
+     "name": "Affected By",
+     "referenceName": "Microsoft.VSTS.Common.Affects-Reverse",
+     "Usage": "workItemLink",
+     "Topology": "dependency"
+   },
+   {
+     "name": "Produces For",
+     "referenceName": "System.LinkTypes.Remote.Dependency-Forward",
+     "Usage": "workItemLink",
+     "Topology": "dependency"
+   },
+   {
+     "name": "Consumes From",
+     "referenceName": "System.LinkTypes.Remote.Dependency-Reverse",
+     "Usage": "workItemLink",
+     "Topology": "dependency"
+   },
+   {
+     "name": "Referenced By",
+     "referenceName": "Microsoft.VSTS.TestCase.SharedParameterReferencedBy-Forward",
+     "Usage": "workItemLink",
+     "Topology": "dependency"
+   },
+   {
+     "name": "References",
+     "referenceName": "Microsoft.VSTS.TestCase.SharedParameterReferencedBy-Reverse",
+     "Usage": "workItemLink",
+     "Topology": "dependency"
+   },
+   {
+     "name": "Tested By",
+     "referenceName": "Microsoft.VSTS.Common.TestedBy-Forward",
+     "Usage": "workItemLink",
+     "Topology": "dependency"
+   },
+   {
+     "name": "Tests",
+     "referenceName": "Microsoft.VSTS.Common.TestedBy-Reverse",
+     "Usage": "workItemLink",
+     "Topology": "dependency"
+   },
+   {
+     "name": "Test Case",
+     "referenceName": "Microsoft.VSTS.TestCase.SharedStepReferencedBy-Forward",
+     "Usage": "workItemLink",
+     "Topology": "dependency"
+   },
+   {
+     "name": "Shared Steps",
+     "referenceName": "Microsoft.VSTS.TestCase.SharedStepReferencedBy-Reverse",
+     "Usage": "workItemLink",
+     "Topology": "dependency"
+   },
+   {
+     "name": "Duplicate",
+     "referenceName": "System.LinkTypes.Duplicate-Forward",
+     "Usage": "workItemLink",
+     "Topology": "tree"
+   },
+   {
+     "name": "Duplicate Of",
+     "referenceName": "System.LinkTypes.Duplicate-Reverse",
+     "Usage": "workItemLink",
+     "Topology": "tree"
+   },
+   {
+     "name": "Successor",
+     "referenceName": "System.LinkTypes.Dependency-Forward",
+     "Usage": "workItemLink",
+     "Topology": "dependency"
+   },
+   {
+     "name": "Predecessor",
+     "referenceName": "System.LinkTypes.Dependency-Reverse",
+     "Usage": "workItemLink",
+     "Topology": "dependency"
+   },
+   {
+     "name": "Child",
+     "referenceName": "System.LinkTypes.Hierarchy-Forward",
+     "Usage": "workItemLink",
+     "Topology": "tree"
+   },
+   {
+     "name": "Parent",
+     "referenceName": "System.LinkTypes.Hierarchy-Reverse",
+     "Usage": "workItemLink",
+     "Topology": "tree"
+   },
+   {
+     "name": "Related",
+     "referenceName": "System.LinkTypes.Related",
+     "Usage": "workItemLink",
+     "Topology": "network"
+   },
+   {
+     "name": "Remote Related",
+     "referenceName": "System.LinkTypes.Remote.Related",
+     "Usage": "workItemLink",
+     "Topology": "network"
+   }
+ ]

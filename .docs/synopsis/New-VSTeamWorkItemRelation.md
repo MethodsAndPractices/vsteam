@@ -1,0 +1,1 @@
+Helper cmdlet that creates an in-memory Relation object to facilitate building the -Relations parameter in Update-VSTeamWorkItem
