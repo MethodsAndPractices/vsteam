@@ -105,7 +105,7 @@ function Add-VSTeamGitRepositoryPermission {
          -Descriptor $Descriptor `
          -Token $token `
          -AllowMask ([int]$Allow) `
-         -DenyMask ([int]$Deny)
+         -DenyMask ([int]$Deny) `
          -OverwriteMask $OverwriteMask
    }
 }
