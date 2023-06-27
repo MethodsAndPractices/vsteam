@@ -61,6 +61,6 @@ function Add-VSTeamProjectPermission {
          -Token $token `
          -AllowMask ([int]$Allow) `
          -DenyMask ([int]$Deny) `
-         -OverwriteMask $OverwriteMask
+         -OverwriteMask:$OverwriteMask.IsPresent
    }
 }
