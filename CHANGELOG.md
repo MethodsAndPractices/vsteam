@@ -1,5 +1,10 @@
 # Changelog
 
+## 7.13.2
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/536) from [Sebastian Schütze](https://github.com/SebastianSchuetze) the following:
+- Fix missing switch OverwriteMask to all cmdlets who are dependant to Add-VSTeamAccessControlList
+
+
 ## 7.13.1
 Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/532) from [Miguel Nieto](https://github.com/mnieto) the following:
 - Fix Set-VSTeamAccount Error on Module Import [531](https://github.com/MethodsAndPractices/vsteam/issues/531)
