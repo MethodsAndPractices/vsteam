@@ -81,7 +81,7 @@ Type: Switch
 Required: False
 ```
 
-<!-- #include "./common/header.md" -->
+<!-- #include "./params/projectName.md" -->
 
 ## INPUTS
 
