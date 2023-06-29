@@ -56,7 +56,10 @@ function Add-VSTeamGitRepositoryPermission {
       [vsteam_lib.GitRepositoryPermissions]$Allow,
 
       [parameter(Mandatory = $false)]
-      [vsteam_lib.GitRepositoryPermissions]$Deny
+      [vsteam_lib.GitRepositoryPermissions]$Deny,
+
+      [Parameter(Mandatory = $false)]
+      [switch] $OverwriteMask
    )
 
    process {
@@ -102,6 +105,7 @@ function Add-VSTeamGitRepositoryPermission {
          -Descriptor $Descriptor `
          -Token $token `
          -AllowMask ([int]$Allow) `
-         -DenyMask ([int]$Deny)
+         -DenyMask ([int]$Deny) `
+         -OverwriteMask:$OverwriteMask.IsPresent
    }
 }
