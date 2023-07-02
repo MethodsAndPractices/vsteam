@@ -76,5 +76,11 @@ Describe 'VSTeamWorkItemRelation' {
             $actual[0].PSObject.TypeNames | Should -Contain "vsteam_lib.WorkItemRelation"
             $actual[1].PSObject.TypeNames | Should -Contain "vsteam_lib.WorkItemRelation"
          }
+
+         It 'With Index paramter ID nor RelationType are needed' {
+            $actual = New-VSTeamWorkItemRelation -Index 0 -Operation Remove 
+            $actual.Id | Should -BeNullOrEmpty
+            $actual.RelationType | Should -BeNullOrEmpty
+         }
       }
 }

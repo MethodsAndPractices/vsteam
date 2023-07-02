@@ -20,6 +20,9 @@ function Update-VSTeamWorkItem {
       [Parameter(Mandatory = $false)]
       [hashtable]$AdditionalFields,
 
+      [Parameter(Mandatory = $false)]
+      [PSCustomObject[]]$Relations,
+
       [switch] $Force
    )
 
@@ -67,6 +70,38 @@ function Update-VSTeamWorkItem {
             }
          }
       }
+
+      foreach ($relation in $Relations) {
+         switch ($relation.Operation) {
+            "add" {
+                  $body += @{
+                     op = $relation.Operation
+                     path = "/relations/-"
+                     value = @{
+                        rel = $relation.RelationType
+                        url = _buildRequestURI -area "wit" -resource "workItems" -id $relation.Id
+                        attributes = @{
+                           comment = $relation.Comment
+                        }
+                     } 
+                  }
+            }
+            "remove" {
+               $body += @{
+                  op = $relation.Operation
+                  path = "/relations/$($relation.Index)"
+               }
+            }
+            "replace" {
+               $body += @{
+                  op = $relation.Operation
+                  path = "/relations/$($relation.Index)/attributes/comment"
+                  value = $relation.Comment
+               } 
+            }
+         }
+      }
+
 
       # It is very important that even if the user only provides
       # a single value above that the item is an array and not

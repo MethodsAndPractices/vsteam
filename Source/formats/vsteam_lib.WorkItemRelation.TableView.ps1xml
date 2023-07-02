@@ -18,6 +18,9 @@
                   <Label>Operation</Label>
                </TableColumnHeader>
                <TableColumnHeader>
+                  <Label>Index</Label>
+               </TableColumnHeader>
+               <TableColumnHeader>
                   <Label>Comment</Label>
                </TableColumnHeader>
             </TableHeaders>
@@ -32,6 +35,9 @@
                      </TableColumnItem>
                      <TableColumnItem>
                         <PropertyName>Operation</PropertyName>
+                     </TableColumnItem>
+                     <TableColumnItem>
+                        <PropertyName>Index</PropertyName>
                      </TableColumnItem>
                      <TableColumnItem>
                         <PropertyName>Comment</PropertyName>

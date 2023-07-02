@@ -5,41 +5,69 @@ function New-VSTeamWorkItemRelation {
       [Parameter(Mandatory, ValueFromPipeline, ParameterSetName="ByObject")]
       [PSCustomObject[]]$ImputObject,
       [Parameter(Mandatory, ValueFromPipeline, ValueFromPipelineByPropertyName, ParameterSetName="ById")]
-      [Parameter(Mandatory, ParameterSetName="ByObject")]
+      [Parameter(ParameterSetName="ByObject")]
       [int[]]$Id,
       [ArgumentCompleter([vsteam_lib.WorkItemRelationTypeCompleter])]
       [vsteam_lib.RelationTypeToReferenceNameAttribute()]
-      [Parameter(Mandatory)]
+      [Parameter(Mandatory, ParameterSetName="ById")]
+      [Parameter(ParameterSetName="ByObject")]
       [string]$RelationType,
-      [ValidateSet('Add', 'Remove', 'Replace')]
-      [string]$Operation = 'Add',
+      [ValidateSet('Remove', 'Replace')]
+      [Parameter(Mandatory, ParameterSetName="ByIndex")]
+      [Parameter(ParameterSetName="ByObject")]
+      [string]$Operation,
+      [Parameter(Mandatory, ParameterSetName="ByIndex")]
+      [Parameter(ParameterSetName="ByObject")]
+      [int]$Index,
       [string]$Comment
    )
 
    process {
       if ($PSCmdlet.ParameterSetName -eq "ByObject") {
          $ImputObject
-      } else {
+      } elseif ($PSCmdlet.ParameterSetName -eq "ById") {
          foreach ($item in $Id) {
             $result = [PSCustomObject]@{
                Id = $item
                RelationType = $RelationType
-               Operation = $Operation.ToLower()
+               Operation = 'add'
                Comment = $Comment
+               Index = '-'
             }
             _applyTypesToWorkItemRelation $result
             $result
          }
+      } else {
+         $result = [PSCustomObject]@{
+            Id = $null
+            RelationType = $RelationType
+            Operation = $Operation.ToLower()
+            Comment = $Comment
+            Index = $index
+         }
+         _applyTypesToWorkItemRelation $result
+         $result
       }
    }
 
    end {
       if ($PSCmdlet.ParameterSetName -eq "ByObject") {
-         $result = [PSCustomObject]@{
-            Id = $Id[0]
-            RelationType = $RelationType
-            Operation = $Operation.ToLower()
-            Comment = $Comment
+         if ($null -eq $PSBoundParameters.Index) {
+            $result = [PSCustomObject]@{
+               Id = $Id[0]
+               RelationType = $RelationType
+               Operation = "add"
+               Comment = $Comment
+               Index = "-"
+            }
+         } else {
+            $result = [PSCustomObject]@{
+               Id = $null
+               RelationType = $null
+               Operation = $Operation.ToLower()
+               Comment = $Comment
+               Index = $PSBoundParameters.Index
+            }
          }
          _applyTypesToWorkItemRelation $result
          $result

@@ -17,53 +17,55 @@
 ### Example 1
 
 ```powershell
-New-VSTeamWorkItemRelation -RelationType Duplicate -Id 55 -Operation Remove -Comment "not needed"
+New-VSTeamWorkItemRelation -RelationType Duplicate -Id 55 -Comment "My comment"
 
-Id RelationType                       Operation Comment
--- ------------                       --------- -------
-55 System.LinkTypes.Duplicate-Forward remove    not needed
+ID RelationType                       Operation Index Comment
+-- ------------                       --------- ----- -------
+55 System.LinkTypes.Hierarchy-Reverse add       -     My comment
 ```
-
 Simple invocation, returns a Relation object.
 
 
 ### Example 2
 
 ```powershell
-$relations = New-VSTeamWorkItemRelation -RelationType Related -Operation Remove -Id 55 |
-    New-VSTeamWorkItemRelation -RelationType Related -Operation Remove -Id 66 |
-    New-VSTeamWorkItemRelation -RelationType Related -Operation Remove -Id 77 |
+$relations = New-VSTeamWorkItemRelation -Operation Remove -Index 0 |
+             New-VSTeamWorkItemRelation -Operation Remove -Index 1 
 Update-VSTeamWorkItem -Id 30 -Relations $relations
 ```
-Removes work items 55, 66 and 77 relations from work item 30
+Removes work first 2 links from work item 30
 
 ### Example 3
 
 ```powershell
 $relations =@()
-$relations += New-VSTeamWorkItemRelation -RelationType Related -Id 55 -Operation Remove
-$relations += New-VSTeamWorkItemRelation -RelationType Related -Id 66 -Operation Add
+$relations += New-VSTeamWorkItemRelation -Operation Remove -Index 0
+$relations += New-VSTeamWorkItemRelation -RelationType Related -Id 66
 Update-VSTeamWorkItem -Id 30 -Relations $relations
 ```
 Similar to example 2, but managing the relations collection directly
+Pay attention that the first relation, for Operation Remove, only the Index parameter is provided.
+In the second relation, when provided the Id, it's necessary to provide the RealationType. The operation will be always Add.
 
 ### Example 4
 
 ```powershell
-$relations = 55,66 | New-VSTeamWorkItemRelation -RelationType Child -Operation Add
+$relations = 55,66 | New-VSTeamWorkItemRelation -RelationType Child
 Update-VSTeamWorkItem -Id 30 -Relations $relations
 
 ```
 Adds work items 55 and 56 as children of 30
+Pay attention that this use case, passing a list of IDs from pipeline, has sense only for 'Add' operation, and because this is the defaut operation value, we can ommit the Operation parameter
 
 ### Example 5
 
 ```powershell
-$relations = Get-VSTeamWorkItem -Id 55 | New-VSTeamWorkItemRelation -RelationType Duplicate -Operation Add -Comment "is it dupllicate?"
+$relations = Get-VSTeamWorkItem -Id 55 | New-VSTeamWorkItemRelation -RelationType Duplicate -Comment "is it dupllicate?"
 Update-VSTeamWorkItem -Id 30 -Relations $relations
 
 ```
 Adds work items 55 as duplicate of 30
+Pay attention that this use case, passing a list of work items from pipeline, has sense only for 'Add' operation, and because this is the defaut operation value and the Operation parameter is not allowed when you provide the Id
 
 ### Example 6
 
@@ -74,6 +76,26 @@ $relations = Get-VSTeamWiql -Id "f87b028b-0528-47d6-b517-2d82af680295" |
 Update-VSTeamWorkItem -Id 30 -Relations $relations
 ```
 Adds all work items returned by a query as related to work item 30
+Pay attention that this use case, passing a list of work items from pipeline, has sense only for 'Add' operation, and because this is the defaut operation value, we can ommit the Operation parameter
+
+### Example 7
+```powershell
+$relation = New-VSTeamWorkItemRelation -RelationType Related -Operation Replace -Comment "updated comment"
+Update-VSTeamWorkItem -Id 30 -Relations $relations
+```
+Updates the comment of a relation. The replace operation only supports comment update. 
+If you really need to change a relation, like re-parent a work item, you need to create two relations: first, remove and then add operations.
+
+### Example 8
+```powershell
+$relations =@()
+$id = Get-VSTeamWorkItem -id 30 -Expand Relation
+for ($i=0; $i -lt $id.relations.Count; $i++) { 
+  $relations += New-VSTeamWorkItemRelation -Operation Remove -Index $i
+}
+Update-VSTeamWorkItem -Id 30 -Relations $relations
+```
+Removes all the links from work item 30
 
 ## PARAMETERS
 
@@ -104,39 +126,31 @@ Accept pipeline input: true
 
 ### RelationType
 
-Intended for fluent pipeline (see Example 2)
+Specify the relation type. The relation name is translated to the technical name.
+You can tab complete from a list of available relation types. Also you can get a list of relation types using the Get-VSTeamWorkItemRelationType CmdLet
+Not allowed when you specify an index in the remove or replace operations
 
 ```yaml
 Type: String
-Parameter Sets: ByRelation
-Required: True
-```
-
-### RelationType
-
-Relation type name
-
-You can tab complete from a list of available relation types. Also you can get a list of relation types using the Get-VSTeamWorkItemRelationType CmdLet
-
-```yaml
-Type: string
-Required: True
+Parameter Sets: ByID,ByRelation
+Required: True (in ByID parameterset)
 ```
 
 ### Operation
 
-Add a relation or Remove a relation or Replace a relation
+Remove or Replace a relation
+The Add operation is implicit when the Id parameter is used. So this parameter is only valid when Index is specified
 
 ```yaml
 Type: string
+Parameter Sets: ByIndex,ByRelation
 Required: False
-Default value: Add
-Accepted values: Add, Remove, Replace
+Accepted values: Remove, Replace
 ```
 
 ### Comment
 
-Add a comment to the relation
+Add (or edit -with Replace operation-) a comment to the relation
 
 ```yaml
 Type: string
