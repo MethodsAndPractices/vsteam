@@ -76,5 +76,5 @@ Position: 3
 
 ## RELATED LINKS
 
-[Get-VSTeam](Get-VSTeamUpdateWorkItem.md)
-[Remove-VSTeam](New-VSTeamWorkItemRelation.md)
+[Update-VSTeamWorkItem](Update-VSTeamWorkItem.md)
+[New-VSTeamWorkItemRelation](New-VSTeamWorkItemRelation.md)
