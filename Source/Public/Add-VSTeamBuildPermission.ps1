@@ -35,7 +35,10 @@ function Add-VSTeamBuildPermission {
       [vsteam_lib.BuildPermissions]$Allow,
 
       [parameter(Mandatory = $false)]
-      [vsteam_lib.BuildPermissions]$Deny
+      [vsteam_lib.BuildPermissions]$Deny,
+
+      [Parameter(Mandatory = $false)]
+      [switch] $OverwriteMask
    )
 
    process {
@@ -66,6 +69,7 @@ function Add-VSTeamBuildPermission {
          -Descriptor $Descriptor `
          -Token $token `
          -AllowMask ([int]$Allow) `
-         -DenyMask ([int]$Deny)
+         -DenyMask ([int]$Deny) `
+         -OverwriteMask:$OverwriteMask.IsPresent
    }
 }

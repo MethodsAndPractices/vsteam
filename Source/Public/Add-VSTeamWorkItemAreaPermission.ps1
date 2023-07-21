@@ -45,7 +45,10 @@ function Add-VSTeamWorkItemAreaPermission {
       [vsteam_lib.WorkItemAreaPermissions]$Allow,
 
       [parameter(Mandatory = $false)]
-      [vsteam_lib.WorkItemAreaPermissions]$Deny
+      [vsteam_lib.WorkItemAreaPermissions]$Deny,
+
+      [Parameter(Mandatory = $false)]
+      [switch] $OverwriteMask
    )
 
    process {
@@ -106,6 +109,7 @@ function Add-VSTeamWorkItemAreaPermission {
          -Descriptor $Descriptor `
          -Token $token `
          -AllowMask ([int]$Allow) `
-         -DenyMask ([int]$Deny)
+         -DenyMask ([int]$Deny) `
+         -OverwriteMask:$OverwriteMask.IsPresent
    }
 }
