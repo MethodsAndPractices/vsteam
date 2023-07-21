@@ -1,5 +1,9 @@
 # Changelog
 
+## 7.13.3
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/539) from [Erik Sijnja](https://github.com/esijnja) the following:
+- Send valid json body with Add-VSTeamAccessControlEntity
+
 ## 7.13.2
 Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/536) from [Sebastian Schütze](https://github.com/SebastianSchuetze) the following:
 - Fix missing switch OverwriteMask to all cmdlets who are dependant to Add-VSTeamAccessControlList
