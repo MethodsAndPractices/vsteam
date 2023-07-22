@@ -123,11 +123,11 @@ Describe 'VSTeamAccessControlEntry' {
                $Body -like "*`"descriptor`": `"abc`",*" -and
                $Body -like "*`"allow`": 12,*" -and
                $Body -like "*`"deny`": 15,*" -and
-               $Body -like "*`"merge`": false,*" -and
+               $Body -cmatch "`"merge`": false," -and
                $Method -eq "Post"
             }
 
       }
-
+      
    }
 }

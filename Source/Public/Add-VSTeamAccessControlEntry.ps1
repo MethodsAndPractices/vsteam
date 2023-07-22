@@ -48,7 +48,8 @@ function Add-VSTeamAccessControlEntry {
       if ($SecurityNamespace) {
          $SecurityNamespaceId = $SecurityNamespace.ID
       }
-      $merge = !$OverwriteMask
+      [string]$merge = (!$OverwriteMask)
+      $merge = $merge.ToLowerInvariant()
       $body =
       @"
    {
