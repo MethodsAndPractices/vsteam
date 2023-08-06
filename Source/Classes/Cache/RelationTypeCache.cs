@@ -63,6 +63,9 @@ namespace vsteam_lib
 
       public static string GetReferenceName(string name)
       {
+         if (ReferenceNames.Keys.Count == 0) {
+            Update(null);
+         }
          return ReferenceNames[name];
       }
    }
