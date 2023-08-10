@@ -29,7 +29,7 @@ Describe "PS Drive Full exercise" {
       }
 
       It 'Should list Agent Pools' {
-         Push-Location         
+         Push-Location
          Set-Location 'Agent Pools'
          $items = Get-ChildItem
          Pop-Location
@@ -38,7 +38,7 @@ Describe "PS Drive Full exercise" {
       }
 
       It 'Should list Extensions' {
-         Push-Location         
+         Push-Location
          Set-Location 'Extensions'
          $items = Get-ChildItem
          Pop-Location
@@ -46,16 +46,12 @@ Describe "PS Drive Full exercise" {
          $items | Should -Not -Be $null
       }
 
-      # The point of this tests is to make sure no exceptions
-      # are thrown when calling Get-ChildItem
-      It 'Should list Feeds' -Skip:$skippedOnTFS {
-         Push-Location         
+      # The point of this test is to make sure no exceptions are thrown when calling Get-ChildItem
+      It 'Should not throw exceptions when listing Feeds' -Skip:$skippedOnTFS {
+         Push-Location
          Set-Location 'Feeds'
-         $items = Get-ChildItem
+         { Get-ChildItem } | Should -Not -Throw
          Pop-Location
-
-         # There are no feeds on this account
-         $items | Should -Be $null
       }
 
       It 'Should list projects' {
@@ -71,7 +67,7 @@ Describe "PS Drive Full exercise" {
       }
 
       It 'Should list Queues' {
-         Push-Location         
+         Push-Location
          Set-Location 'Queues'
          $items = Get-ChildItem
          Pop-Location
@@ -80,7 +76,7 @@ Describe "PS Drive Full exercise" {
       }
 
       It 'Should list Repositories' {
-         Push-Location         
+         Push-Location
          Set-Location 'Repositories'
          $repos = Get-ChildItem
          Pop-Location
