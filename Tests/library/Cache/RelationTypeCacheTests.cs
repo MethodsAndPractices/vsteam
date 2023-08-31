@@ -135,7 +135,10 @@ namespace vsteam_lib.Test
       public void RelationTypeCache_Get_ReferenceName_Throws_When_Not_Found()
       {
          // Arrange
-         RelationTypeCache.Update(new Dictionary<string, string>());
+         RelationTypeCache.Update(new Dictionary<string, string>() {
+                { "key1", "value1"},
+                { "key2", "value2"}
+            });
 
          // Act
          var actual = RelationTypeCache.GetReferenceName("NonExistingName");
