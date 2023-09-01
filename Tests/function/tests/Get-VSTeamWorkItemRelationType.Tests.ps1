@@ -25,7 +25,7 @@ Describe 'VSTeamWorkItemRelationType' {
          $relationTypes = Get-VSTeamWorkItemRelationType -Usage All
 
          ## Assert
-         $relationTypes | Select-Object Usage -Unique | Should -HaveCount 2
+         $relationTypes | Select-Object -ExpandProperty attributes | Select-Object Usage -Unique | Should -HaveCount 2
       }
    }
 }

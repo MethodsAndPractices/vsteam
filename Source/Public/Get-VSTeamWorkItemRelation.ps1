@@ -4,7 +4,7 @@ function Get-VSTeamWorkItemRelation {
       [int]$Id
    )
 
-   $relations = Get-VSTeamWorkItem -Id $Id -Expand Relations -Verbose | Select-Object -ExpandProperty Relations
+   $relations = Get-VSTeamWorkItem -Id $Id -Expand Relations | Select-Object -ExpandProperty Relations
    $i = 0
    foreach ($relation in $relations) {
       $relatedId = $relation.Url.split("/")[-1]

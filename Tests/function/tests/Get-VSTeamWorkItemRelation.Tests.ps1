@@ -5,11 +5,15 @@ Describe 'VSTeamWorkItemRelation' {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
       . "$baseFolder/Source/Public/New-VSTeamWorkItemRelation.ps1"
       . "$baseFolder/Source/Public/Get-VSTeamWorkItem.ps1"
+      . "$baseFolder/Source/Public/Get-VSTeamWorkItemRelationType.ps1"
 
 
       Mock _getInstance { return 'https://dev.azure.com/test' }
       Mock Invoke-RestMethod { Open-SampleFile 'Get-VSTeamWorkItem-Id55-After.json' }
       Mock _getApiVersion { return '5.0-unitTests' } -ParameterFilter { $Service -eq 'Core' }
+      Mock New-VSTeamWorkItemRelation { return [PSCustomObject]@{ Id = 80; RelationType = 'System.LinkTypes.Hierarchy-Reverse'; Operation = 'add'; Index = '-'; Comment = 'Added from AzFunction' }} -ParameterFilter { $id -eq 80 }
+
+
    }
 
    Context 'Get-VSTeamWorkItemRelation' {
