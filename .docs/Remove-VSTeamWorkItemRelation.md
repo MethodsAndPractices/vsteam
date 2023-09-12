@@ -52,7 +52,6 @@ Required: True
 ## INPUTS
 
 ## OUTPUTS
-PSObject with the updated work item identified by the Id parameter
 
 ## NOTES
 
