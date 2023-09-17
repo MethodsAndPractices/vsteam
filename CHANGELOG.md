@@ -1,5 +1,17 @@
 # Changelog
 
+## 7.14.0
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/535) from [Miguel Nieto](https://github.com/mnieto) the following:
+- Feat: added work ittems relationship management with the below new/modified CmdLets
+  - Add-VSTeamWorkItemRelation: Adds a relationship between different workitems
+  - Get-VSTeamWorkItemRelation: Retrieves a list of relations from a single work item
+  - Get-VSTeamWorkItemRelationType: Returns a list of the different relation types between work items and links inside the same work item
+  - New-VSTeamWorkItemRelation: Helper cmdlet that creates an in-memory Relation object to facilitate relationship management
+  - Remove-VSTeamWorkItemRelation: Removes the relation from one or more workitems and one or more related workitems
+  - Switch-VSTeamWorkItemParent: Replaces the parent of one or more work items
+  - Update-VSTeamWorkItem: Added -Relations parameter
+
+
 ## 7.13.1
 Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/532) from [Miguel Nieto](https://github.com/mnieto) the following:
 - Fix Set-VSTeamAccount Error on Module Import [531](https://github.com/MethodsAndPractices/vsteam/issues/531)
