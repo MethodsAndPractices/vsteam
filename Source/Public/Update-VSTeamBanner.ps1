@@ -1,5 +1,5 @@
 function Update-VSTeamBanner {
-   [CmdletBinding()]
+   [CmdletBinding(SupportsShouldProcess=$true)]
    param(
       [Parameter(Mandatory = $true)]
       [string]$Id,
@@ -23,6 +23,8 @@ function Update-VSTeamBanner {
          }
       } | ConvertTo-Json -Depth 3
 
-      Invoke-VSTeamRequest -method PATCH -area 'settings' -resource 'entries/host' -version '3.2-preview' -body $bannerBody
+      if ($PSCmdlet.ShouldProcess("Updating banner with ID $Id")) {
+         Invoke-VSTeamRequest -method PATCH -area 'settings' -resource 'entries/host' -version '3.2-preview' -body $bannerBody
+      }
    }
 }
