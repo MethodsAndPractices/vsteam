@@ -8,15 +8,13 @@
 
 ## SYNTAX
 
-```powershell
-Update-VSTeamBanner -Level <String> -Message <String> -ExpirationDate <String> -BannerId <String>
-```
-
 ## DESCRIPTION
 
 <!-- #include "./synopsis/Update-VSTeamBanner.md" -->
 
 ## EXAMPLES
+
+### Example 1
 
 ```powershell
 Update-VSTeamBanner -Level warning -Message 'Updated Message' -ExpirationDate '2024-01-01T05:00' -BannerId '9547ed55-66e1-403d-95aa-9e628726861c'

@@ -4,7 +4,7 @@
 
 ## SYNOPSIS
 
-<!-- #include "./synopsis/Get-VSTeamBuildDefinition.txt" -->
+<!-- #include "./synopsis/Get-VSTeamBuildDefinition.md" -->
 
 ## SYNTAX
 

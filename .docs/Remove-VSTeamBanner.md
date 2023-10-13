@@ -9,15 +9,13 @@
 
 ## SYNTAX
 
-```powershell
-Remove-VSTeamBanner -BannerId <String>
-```
-
 ## DESCRIPTION
 
 <!-- #include "./synopsis/Remove-VSTeamBanner.md" -->
 
 ## EXAMPLES
+
+### Example 1
 
 ```powershell
 Remove-VSTeamBanner -BannerId '9547ed55-66e1-403d-95aa-9e628726861c'

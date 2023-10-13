@@ -4,13 +4,9 @@
 
 ## SYNOPSIS
 
-<!-- #include "./synopsi s/Get-VSTeamBanner.md" -->
+<!-- #include "./synopsis/Get-VSTeamBanner.md" -->
 
 ## SYNTAX
-
-```powershell
-Get-VSTeamBanner [-Id] <string> [<CommonParameters>]
-```
 
 ## DESCRIPTION
 
