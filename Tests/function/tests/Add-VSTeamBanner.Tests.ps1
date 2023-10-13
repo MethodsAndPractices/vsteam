@@ -4,30 +4,26 @@ Describe "VSTeamBanner" {
     }
 
     Context 'Add-VSTeamBanner' {
-        BeforeAll {
-            [vsteam_lib.Versions]::ModuleVersion = '0.0.0'
+      BeforeAll {
+         [vsteam_lib.Versions]::ModuleVersion = '0.0.0'
 
-            Mock _callAPI
-            Mock _getApiVersion { return 'VSTS' }
-            Mock _getInstance { return 'https://dev.azure.com/test' }
-        }
+         Mock Invoke-VSTeamRequest
+         Mock _getInstance { return 'https://dev.azure.com/test' }
+      }
 
         It 'Should add a banner' {
+         Add-VSTeamBanner -Id 'test-id' `
+            -Message 'Test Message' `
+            -ExpirationDate (Get-Date '2024-01-01T04:00:00') `
+            -Level 'info'
 
-            $date = [datetime]::ParseExact('2024-01-01T04:00:00', 's', $null)
-
-            Add-VSTeamBanner -Level info `
-               -Message 'Test Message' `
-               -ExpirationDate $date `
-               -BannerId '9547ed55-66e1-403d-95aa-9e628726861c'
-
-            Should -Invoke _callAPI -ParameterFilter {
-                $Method -eq 'PATCH' -and
-                $SubDomain -eq 'settings' -and
-                $Body -like '*"expirationDate":*"2024-01-01T04:00:00"*' -and
-                $Body -like '*"level":*"info"*' -and
-                $Body -like '*"message":*"Test Message"*'
-            }
-        }
+         Should -Invoke Invoke-VSTeamRequest -ParameterFilter {
+            $Method -eq 'PATCH' -and
+            $area -eq 'settings' -and
+            $Body -like '*"expirationDate":*"2024-01-02T04:00:00"*'
+            $resource -eq 'entries/host' -and
+            $Body -like '*"GlobalMessageBanners/test-id"*'
+         }
+      }
     }
 }
