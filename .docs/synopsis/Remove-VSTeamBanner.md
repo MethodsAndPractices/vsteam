@@ -1,0 +1,1 @@
+Removes a banner message from an Azure DevOps organization by its identifier.
