@@ -1,0 +1,1 @@
+Retrieves a banner from Azure DevOps based on its ID.
