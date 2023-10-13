@@ -1,1 +1,1 @@
-Retrieves the details of a specified banner in Azure DevOps based on its ID.
+Retrieves a banner from Azure DevOps based on its ID.

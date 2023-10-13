@@ -1,35 +1,34 @@
-```markdown
 <!-- #include "./common/header.md" -->
 
 # Get-VSTeamBanner
 
 ## SYNOPSIS
 
-<!-- #include "./synopsis/Get-VSTeamBanner.md" -->
+<!-- #include "./synopsi s/Get-VSTeamBanner.md" -->
 
 ## SYNTAX
 
 ```powershell
-Get-VSTeamBanner [-Id] <String> [<CommonParameters>]
+Get-VSTeamBanner [-Id] <string> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
 
-<!-- #include "./description/Get-VSTeamBanner.md" -->
+<!-- #include "./synopsis/Get-VSTeamBanner.md" -->
 
 ## EXAMPLES
 
-### Example 1: Get a banner by ID
-
+### Example 1
 ```powershell
-Get-VSTeamBanner -Id '9547ed55-66e1-403d-95aa-9e628726861c'
+Get-VSTeamBanner -Id '12345'
 ```
+Returns the banner with the specified ID.
 
 ## PARAMETERS
 
 ### Id
 
-The ID of the banner to retrieve.
+The ID of the banner.
 
 ```yaml
 Type: String
@@ -40,9 +39,7 @@ Required: True
 
 ## OUTPUTS
 
-### System.Object
-
-The banner object returned from Azure DevOps.
+### PSCustomObject
 
 ## NOTES
 
