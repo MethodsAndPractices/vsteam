@@ -12,7 +12,7 @@ function Update-VSTeamBanner {
       [DateTime]$ExpirationDate
    )
    process {
-      $existingBanner = (Invoke-VSTeamRequest -method GET -area 'settings' -resource "entries/host/GlobalMessageBanners/$Id" -version '3.2-preview').value
+      $existingBanner = Get-VSTeamBanner -Id $Id
       if ($null -eq $existingBanner) { throw "No banner found with ID $Id" }
 
       $bannerBody = @{

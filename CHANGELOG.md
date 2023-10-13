@@ -2,7 +2,7 @@
 
 ## 7.14.0
 Merged [Pull Request #545](https://github.com/MethodsAndPractices/vsteam/pull/545) from [Sebastian Schütze](https://github.com/SebastianSchuetze) the following:
-- Added new cmdlets for banner management: `Add-VSTeamBanner`, `Update-VSTeamBanner`, and `Remove-VSTeamBanner`.
+- Added new cmdlets for banner management: `Add-VSTeamBanner`, `Update-VSTeamBanner`, `Get-VSTeamBanner` and `Remove-VSTeamBanner`.
 
 ## 7.13.3
 Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/539) from [Erik Sijnja](https://github.com/esijnja) the following:

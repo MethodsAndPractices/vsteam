@@ -1,14 +1,12 @@
 Describe "VSTeamBanner" {
     BeforeAll {
         . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
+        . "$baseFolder/Source/Public/Invoke-VSTeamRequest.ps1"
     }
 
     Context 'Add-VSTeamBanner' {
       BeforeAll {
-         [vsteam_lib.Versions]::ModuleVersion = '0.0.0'
-
          Mock Invoke-VSTeamRequest
-         Mock _getInstance { return 'https://dev.azure.com/test' }
       }
 
         It 'Should add a banner' {
