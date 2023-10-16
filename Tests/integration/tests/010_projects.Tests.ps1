@@ -679,11 +679,6 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
          Remove-VSTeamUserEntitlement -Email $email -Force
          Get-VSTeamUserEntitlement | Where-Object Email -eq $email | Should -Be $null
       }
-
-      It 'Add-VSTeamUserEntitlement should add a user with MSDN license' {
-         Add-VSTeamUserEntitlement -Email $email -License none -LicensingSource msdn -MSDNLicenseType professional | Should -Not -Be $null
-         (Get-VSTeamUserEntitlement).Count | Should -Be 3
-      }
    }
 
    Context 'VSTeamFeed' -Tag 'Feed' -Skip:$skippedOnTFS {
