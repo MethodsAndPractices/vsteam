@@ -1,13 +1,14 @@
 function Remove-VSTeamDirectAssignments {
-   [CmdletBinding()]
+   [CmdletBinding(SupportsShouldProcess)]
    param (
       [Parameter(Mandatory = $false)]
-      [string[]] $UserIds = @('d0452e2f-da3d-61c8-93a7-ef669552f409','74f96e3d-355c-66c6-9136-b400c79e1e54'),
+      [string[]] $UserIds = @('d0452e2f-da3d-61c8-93a7-ef669552f409', '74f96e3d-355c-66c6-9136-b400c79e1e54'),
 
       [switch] $Preview
    )
 
    process {
+
       $queryString = @{
          'api-version' = '5.0-preview.1'
          'ruleOption'  = $Preview ? '1' : '0'
@@ -20,6 +21,7 @@ function Remove-VSTeamDirectAssignments {
          # No chunking for preview
          $body = $UserIds | ConvertTo-Json
 
+
          $response = Invoke-VSTeamRequest `
             -subDomain 'vsaex' `
             -area 'MEMInternal' `
@@ -27,6 +29,7 @@ function Remove-VSTeamDirectAssignments {
             -method 'POST' `
             -body $body `
             -QueryString $queryString
+
 
          $results += $response.value
       }
@@ -43,13 +46,15 @@ function Remove-VSTeamDirectAssignments {
 
             $body = $currentChunk | ConvertTo-Json
 
-            $response = Invoke-VSTeamRequest `
-               -subDomain 'vsaex' `
-               -area 'MEMInternal' `
-               -resource 'RemoveExplicitAssignment' `
-               -method 'POST' `
-               -body $body `
-               -QueryString $queryString
+            if ($PSCmdlet.ShouldProcess('Remove Direct Assignments', "UserIds: $($UserIds -join ', ')")) {
+               $response = Invoke-VSTeamRequest `
+                  -subDomain 'vsaex' `
+                  -area 'MEMInternal' `
+                  -resource 'RemoveExplicitAssignment' `
+                  -method 'POST' `
+                  -body $body `
+                  -QueryString $queryString
+            }
 
             $results += $response.value
          }
@@ -57,4 +62,5 @@ function Remove-VSTeamDirectAssignments {
 
       return $results
    }
+
 }
