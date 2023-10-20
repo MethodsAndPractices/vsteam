@@ -5,15 +5,18 @@ function Get-VSTeamBanner {
       [string]$Id
    )
    process {
+      $allBanners = (Invoke-VSTeamRequest -method GET -area 'settings' -resource 'entries/host/GlobalMessageBanners' -version '3.2-preview').value
 
-      $existingBanners = $null
-      if($null -ne $Id){
-         $existingBanners = (Invoke-VSTeamRequest -method GET -area 'settings' -resource "entries/host/GlobalMessageBanners/$Id" -version '3.2-preview').value
-         if ($null -eq $existingBanners) { throw "No banner found with ID $Id" }
-      }else{
-         $existingBanners = (Invoke-VSTeamRequest -method GET -area 'settings' -resource "entries/host/GlobalMessageBanners" -version '3.2-preview').value
+      if (-not [string]::IsNullOrEmpty($Id)) {
+         $filteredBanner = $allBanners[$Id]
+
+         if ($null -eq $filteredBanner) {
+            throw "No banner found with ID $Id"
+         }
+
+         return $filteredBanner
       }
 
-      return $existingBanners
+      return $allBanners
    }
 }

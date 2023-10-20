@@ -1,4 +1,4 @@
-Describe "VSTeamBanner" {
+Describe 'VSTeamBanner' {
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
       . "$baseFolder/Source/Public/Invoke-VSTeamRequest.ps1"
@@ -6,34 +6,43 @@ Describe "VSTeamBanner" {
 
    Context 'Get-VSTeamBanner' {
       BeforeAll {
-         Mock Invoke-VSTeamRequest { return @{ value = @{ bannerId = '12345' } } }
+         Mock Invoke-VSTeamRequest {
+            return @{
+               count = 2
+               value = @{
+                  '1234424' = @{ level = 'Info'; message = '' }
+                  '574745'  = @{ level = 'Info'; message = '' }
+               }
+            }
+         }
       }
 
-      It 'Should get a banner' {
-         $result = Get-VSTeamBanner -Id '12345'
+      It 'Should get a banner by ID' {
+         $result = Get-VSTeamBanner -Id '1234424'
 
          Should -Invoke Invoke-VSTeamRequest -ParameterFilter {
             $Method -eq 'GET' -and
             $Area -eq 'settings' -and
-            $Resource -eq 'entries/host/GlobalMessageBanners/12345' -and
+            $Resource -eq 'entries/host/GlobalMessageBanners' -and
             $Version -eq '3.2-preview'
          }
-
-         $result.bannerId | Should -Be '12345'
+         $result | Should -Not -Be $null
+         $result.level | Should -Be 'Info'
       }
 
-      It "Should return all existing banners" {
-            # Mock des Invoke-VSTeamRequest, um ein vorher definiertes Ergebnis zurückzugeben
-            Mock Invoke-VSTeamRequest { return @{ value = @('Banner1', 'Banner2') } }
+      It 'Should throw exception for non-existent ID' {
+         { Get-VSTeamBanner -Id 'NonExistentID' } | Should -Throw 'No banner found with ID NonExistentID'
+      }
 
-            # Ausführung der Funktion
-            $result = Get-VSTeamBanner
+      It 'Should return all existing banners' {
 
-            # Überprüfung, ob das Ergebnis wie erwartet ist
-            $result | Should -Be @('Banner1', 'Banner2')
+         $result = Get-VSTeamBanner
 
-            # Überprüfung, ob der Mock korrekt aufgerufen wurde
-            Assert-MockCalled Invoke-VSTeamRequest -Exactly 1 -Scope It
+         $result.Keys | Should -Contain @('574745')
+         $result.Keys | Should -Contain @('1234424')
+         $result.Count | Should -Be 2
+
+         Assert-MockCalled Invoke-VSTeamRequest -Exactly 1 -Scope It
       }
    }
 }
