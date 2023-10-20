@@ -1,4 +1,6 @@
-Describe "VSTeamBanner" {
+Set-StrictMode -Version Latest
+
+Describe 'VSTeamBanner' {
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
       . "$baseFolder/Source/Public/Invoke-VSTeamRequest.ps1"

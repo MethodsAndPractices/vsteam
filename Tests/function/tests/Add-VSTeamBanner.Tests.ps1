@@ -1,15 +1,17 @@
-Describe "VSTeamBanner" {
-    BeforeAll {
-        . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
-        . "$baseFolder/Source/Public/Invoke-VSTeamRequest.ps1"
-    }
+Set-StrictMode -Version Latest
 
-    Context 'Add-VSTeamBanner' {
+Describe 'VSTeamBanner' {
+   BeforeAll {
+      . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
+      . "$baseFolder/Source/Public/Invoke-VSTeamRequest.ps1"
+   }
+
+   Context 'Add-VSTeamBanner' {
       BeforeAll {
          Mock Invoke-VSTeamRequest
       }
 
-        It 'Should add a banner' {
+      It 'Should add a banner' {
          Add-VSTeamBanner -Id 'test-id' `
             -Message 'Test Message' `
             -ExpirationDate (Get-Date '2024-01-01T04:00:00') `
@@ -23,5 +25,5 @@ Describe "VSTeamBanner" {
             $Body -like '*"GlobalMessageBanners/test-id"*'
          }
       }
-    }
+   }
 }

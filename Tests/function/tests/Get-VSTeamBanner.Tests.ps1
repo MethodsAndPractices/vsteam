@@ -1,3 +1,5 @@
+Set-StrictMode -Version Latest
+
 Describe 'VSTeamBanner' {
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
