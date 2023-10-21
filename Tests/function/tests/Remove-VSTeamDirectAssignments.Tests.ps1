@@ -1,6 +1,6 @@
 Set-StrictMode -Version Latest
 
-Describe 'VSTeamDirectAssignments' {
+Describe 'VSTeamDirectAssignment' {
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
       . "$baseFolder/Source/Public/Invoke-VSTeamRequest.ps1"
@@ -12,7 +12,7 @@ Describe 'VSTeamDirectAssignments' {
          Mock Invoke-VSTeamRequest { return @{ value = 'preview-response' } }
 
          # Act
-         $result = Remove-VSTeamDirectAssignments -Preview
+         $result = Remove-VSTeamDirectAssignment -Preview
 
          # Assert
          $result | Should -Be 'preview-response'
@@ -29,7 +29,7 @@ Describe 'VSTeamDirectAssignments' {
          Mock Invoke-VSTeamRequest { return @{ value = 'non-preview-response' } }
 
          # Act
-         $result = Remove-VSTeamDirectAssignments
+         $result = Remove-VSTeamDirectAssignment
 
          # Assert
          $result | Should -Be 'non-preview-response'
@@ -45,7 +45,7 @@ Describe 'VSTeamDirectAssignments' {
          Mock Invoke-VSTeamRequest { return @{ value = 'chunk-response' } }
 
          # Act
-         $result = Remove-VSTeamDirectAssignments -UserIds $userIds
+         $result = Remove-VSTeamDirectAssignment -UserIds $userIds
 
          # Assert
          $result | Should -Be @('chunk-response', 'chunk-response', 'chunk-response')
@@ -58,7 +58,7 @@ Describe 'VSTeamDirectAssignments' {
          Mock Invoke-VSTeamRequest { return @{ value = 'small-chunk-response' } }
 
          # Act
-         $result = Remove-VSTeamDirectAssignments -UserIds $userIds
+         $result = Remove-VSTeamDirectAssignment -UserIds $userIds
 
          # Assert
          $result | Should -Be 'small-chunk-response'

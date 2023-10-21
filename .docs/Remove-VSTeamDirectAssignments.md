@@ -1,31 +1,31 @@
-Certainly, here's how your markdown document for `Remove-VSTeamDirectAssignments` would look, adhering to your given structure:
+Certainly, here's how your markdown document for `Remove-VSTeamDirectAssignment` would look, adhering to your given structure:
 
 ```markdown
 <!-- #include "./common/header.md" -->
 
-# Remove-VSTeamDirectAssignments
+# Remove-VSTeamDirectAssignment
 
 ## SYNOPSIS
 
-<!-- #include "./synopsis/Remove-VSTeamDirectAssignments.md" -->
+<!-- #include "./synopsis/Remove-VSTeamDirectAssignment.md" -->
 
 ## SYNTAX
 
 ## DESCRIPTION
 
-<!-- #include "./synopsis/Remove-VSTeamDirectAssignments.md" -->
+<!-- #include "./synopsis/Remove-VSTeamDirectAssignment.md" -->
 
 ## EXAMPLES
 
 ### Example 1
 ```powershell
-Remove-VSTeamDirectAssignments -UserIds '12345','67890' -Preview
+Remove-VSTeamDirectAssignment -UserIds '12345','67890' -Preview
 ```
 Removes the explicit assignments for the users with the specified IDs in preview mode.
 
 ### Example 2
 ```powershell
-Remove-VSTeamDirectAssignments -UserIds '12345','67890'
+Remove-VSTeamDirectAssignment -UserIds '12345','67890'
 ```
 Removes the explicit assignments for the users with the specified IDs.
 

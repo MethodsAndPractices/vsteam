@@ -1,4 +1,4 @@
-function Remove-VSTeamDirectAssignments {
+function Remove-VSTeamDirectAssignment {
    [CmdletBinding(SupportsShouldProcess)]
    param (
       [Parameter(Mandatory = $false)]
