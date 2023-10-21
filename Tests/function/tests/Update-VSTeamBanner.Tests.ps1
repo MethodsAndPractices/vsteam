@@ -1,25 +1,27 @@
-Describe "VSTeamBanner" {
+Set-StrictMode -Version Latest
+
+Describe 'VSTeamBanner' {
    BeforeAll {
-         . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
-         . "$baseFolder/Source/Public/Invoke-VSTeamRequest.ps1"
-         . "$baseFolder/Source/Public/Get-VSTeamBanner.ps1"
+      . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
+      . "$baseFolder/Source/Public/Invoke-VSTeamRequest.ps1"
+      . "$baseFolder/Source/Public/Get-VSTeamBanner.ps1"
    }
 
-    Context 'Update-VSTeamBanner' {
+   Context 'Update-VSTeamBanner' {
       BeforeAll {
          Mock Invoke-VSTeamRequest { return @{
-            message = 'Updated Message'
-            level = 'info'
-            expirationDate = '2023-12-31T23:59:59'
-            id = '12345'
-         } }
+               message        = 'Updated Message'
+               level          = 'info'
+               expirationDate = '2023-12-31T23:59:59'
+               id             = '12345'
+            } }
 
          Mock Get-VSTeamBanner { return @{
-            message = 'Old Message'
-            level = 'warning'
-            expirationDate = '2023-10-01T00:00:00'
-            id = '12345'
-         } }
+               message        = 'Old Message'
+               level          = 'warning'
+               expirationDate = '2023-10-01T00:00:00'
+               id             = '12345'
+            } }
       }
 
       It 'Should update a banner' {
@@ -38,7 +40,7 @@ Describe "VSTeamBanner" {
 
          $result | Should -Not -BeNullOrEmpty
          $result.message | Should -Be 'Updated Message'
-     }
+      }
 
-    }
+   }
 }
