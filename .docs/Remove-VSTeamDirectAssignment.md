@@ -1,6 +1,3 @@
-Certainly, here's how your markdown document for `Remove-VSTeamDirectAssignment` would look, adhering to your given structure:
-
-```markdown
 <!-- #include "./common/header.md" -->
 
 # Remove-VSTeamDirectAssignment
