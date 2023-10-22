@@ -124,12 +124,6 @@ $output = [System.IO.Path]::GetFullPath($output)
 
 Merge-File -inputFile ./config.json -outputDir $output
 
-# Build the help
-if ($buildHelp.IsPresent) {
-   Write-Output 'Processing: External help file'
-   ./tools/scripts/Update-Help.ps1 -DocsInputPath '.docs' -OutputPath 'docs'  -HelpFilePath 'dist/en-US/'
-}
-
 Write-Output 'Publishing: About help files'
 Copy-Item -Path ./Source/en-US -Destination "$output/" -Recurse -Force
 
@@ -230,6 +224,12 @@ if ($ipmo.IsPresent -or $analyzeScript.IsPresent -or $runIntegrationTests.IsPres
 
    Import-Module "$output/VSTeam.psd1" -Force
    Set-VSTeamAlias
+}
+
+# Build the help
+if ($buildHelp.IsPresent) {
+   Write-Output 'Processing: External help file'
+   ./tools/scripts/Update-Help.ps1 -DocsInputPath '.docs' -OutputPath 'docs'  -HelpFilePath 'dist/en-US/' -ModulePath "$output/VSTeam.psd1"
 }
 
 # Run this last so the results can be seen even if tests were also run
