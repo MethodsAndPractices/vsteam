@@ -52,12 +52,13 @@ Parameter Sets: ByName
 Position: 0
 ```
 
-### TeamId
+### Id
 
 The id of the team to retrieve.
 
 ```yaml
 Type: String[]
+Aliases: TeamId
 Parameter Sets: ByID
 ```
 

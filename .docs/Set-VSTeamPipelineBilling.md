@@ -71,6 +71,8 @@ Type: int
 Required: true
 ```
 
+<!-- #include "./params/forcegroup.md" -->
+
 ## INPUTS
 
 ## OUTPUTS

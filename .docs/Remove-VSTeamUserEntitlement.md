@@ -16,14 +16,14 @@
 
 ## PARAMETERS
 
-### UserId
+### Id
 
 The id of the user to remove.
 
 ```yaml
 Type: String
 Parameter Sets: ByID
-Aliases: name
+Aliases: UserId
 Required: True
 Accept pipeline input: true (ByPropertyName)
 ```

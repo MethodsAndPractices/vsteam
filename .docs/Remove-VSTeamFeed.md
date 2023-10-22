@@ -32,17 +32,19 @@ This command remove the package feed from the project.
 
 ## PARAMETERS
 
-### FeedId
+### Id
 
 Specifies the ID of the feed.
 
 ```yaml
 Type: Guid
-Aliases: ID
+Aliases: FeedId
 Accept pipeline input: true (ByPropertyName)
 ```
 
 <!-- #include "./params/projectName.md" -->
+
+<!-- #include "./params/forcegroup.md" -->
 
 ## INPUTS
 

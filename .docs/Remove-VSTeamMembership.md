@@ -30,6 +30,8 @@ Removes Test User from the Endpoint Administrators group.
 
 <!-- #include "./params/containerDescriptor.md" -->
 
+<!-- #include "./params/forcegroup.md" -->
+
 ## INPUTS
 
 ## OUTPUTS

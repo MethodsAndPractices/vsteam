@@ -61,11 +61,13 @@ function Test-HelpFileDocumentation {
 
       foreach ($cmdlet in $missingSpecificParameters.Keys) {
          $paramsList = $missingSpecificParameters[$cmdlet] -join ', '
-         Write-Host "$cmdlet has missing parameter documentation for: $paramsList"
+         $filePath = ".docs/$cmdlet.md"
+         Write-Host "Issue in [$filePath]: Missing parameter documentation for: $paramsList"
       }
 
       foreach ($cmdlet in $missingExamples) {
-         Write-Host "$cmdlet is missing examples."
+         $filePath = ".docs/$cmdlet.md"
+         Write-Host "Issue in [$filePath]: Missing examples."
       }
 
       throw $errorMessage

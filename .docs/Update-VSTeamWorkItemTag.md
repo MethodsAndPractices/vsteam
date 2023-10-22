@@ -26,7 +26,7 @@ This will update a specific work item tag within the current project
 
 <!-- #include "./params/projectName.md" -->
 
-### NameOrTagId
+### TagIdOrName
 
 Name or ID of the tag to return
 
@@ -34,9 +34,13 @@ Name or ID of the tag to return
 Type: String
 Required: True
 Position: named
-Aliases: TagName, TagId
-Parameter Sets: ByIdentifier
 ```
+
+### NewTagName
+
+New name for the tag
+
+<!-- #include "./params/forcegroup.md" -->
 
 ## INPUTS
 
