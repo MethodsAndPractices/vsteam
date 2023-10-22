@@ -43,7 +43,7 @@ Sets the concurrent jobs for private agents on the current set organization for 
 
 ## PARAMETERS
 
-### -Type
+### Type
 
 The type of billing to be set.
 
@@ -53,7 +53,7 @@ Accepted values: HostedPipeline, PrivatePipeline
 Required: true
 ```
 
-### -OrganizationId
+### OrganizationId
 
 The organization to be billed.
 
@@ -62,7 +62,7 @@ Type: string
 Required: true
 ```
 
-### -Quantity
+### Quantity
 
 The quantity to which the billing should be set. E.g. for Microsoft-hosted pipelines you would set the concurred jobs.
 

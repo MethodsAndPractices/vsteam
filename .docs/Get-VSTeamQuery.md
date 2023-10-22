@@ -57,6 +57,11 @@ Position: Named
 Accept pipeline input: false
 ```
 
+### Expand
+
+How much of the information returned about the query is expanded.
+
+
 <!-- #include "./params/projectName.md" -->
 
 ## INPUTS

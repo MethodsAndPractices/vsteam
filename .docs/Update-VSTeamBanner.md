@@ -17,7 +17,7 @@
 ### Example 1
 
 ```powershell
-Update-VSTeamBanner -Level warning -Message 'Updated Message' -ExpirationDate '2024-01-01T05:00' -BannerId '9547ed55-66e1-403d-95aa-9e628726861c'
+Update-VSTeamBanner -Level warning -Message 'Updated Message' -ExpirationDate '2024-01-01T05:00' -Id '9547ed55-66e1-403d-95aa-9e628726861c'
 ```
 
 ## PARAMETERS
@@ -53,7 +53,7 @@ Type: String
 Required: True
 ```
 
-### BannerId
+### Id
 
 The unique identifier for the banner.
 

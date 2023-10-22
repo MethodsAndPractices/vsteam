@@ -30,7 +30,7 @@ $orgs = Get-VSTeamAccounts -OwnerId $myProfile.id
 
 ## PARAMETERS
 
-### -MemberId
+### MemberId
 
 Gets all organizations where the user is a member.
 
@@ -40,7 +40,7 @@ Parameter sets: MemberId
 Required: true
 ```
 
-### -OwnerId
+### OwnerId
 
 Gets all organizations where the user is the owner.
 

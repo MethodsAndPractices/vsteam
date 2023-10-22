@@ -76,6 +76,8 @@ Position: named
 Accept pipeline input: false
 ```
 
+<!-- #include "./params/projectName.md" -->
+
 ## INPUTS
 
 ## OUTPUTS

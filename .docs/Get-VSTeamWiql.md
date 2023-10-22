@@ -52,6 +52,10 @@ Parameter Sets: ByQuery
 Required: True
 ```
 
+### Team
+
+Team ID or team name.
+
 ### Top
 
 The max number of results to return.
@@ -77,6 +81,8 @@ The expand the work items with the selected attributes in the WIQL query.
 ```yaml
 Type: Switch
 ```
+
+<!-- #include "./params/projectName.md" -->
 
 ## INPUTS
 
