@@ -14,6 +14,48 @@
 
 ## EXAMPLES
 
+### Example 1
+
+```powershell
+Add-VSTeamAccessControlEntry -SecurityNamespaceId "2bf24a2b-70ba-43d3-ad97-3d9e1f75622f" -Token "MySecurityToken" -AllowMask 15 -DenyMask 2 -ProjectName "MyProject"
+```
+
+This command adds an Access Control Entry (ACE) for the provided token in the project named "MyProject" using the specified security namespace identifier. The ACE has an allow mask of 15 and a deny mask of 2.
+
+### Example 2
+
+```powershell
+Add-VSTeamAccessControlEntry -SecurityNamespace "vsteam_lib.SecurityNamespace" -Token "MySecurityToken" -AllowMask 7 -DenyMask 0 -OverwriteMask -ProjectName "MyProject"
+```
+
+This example adds an ACE using a `vsteam_lib.SecurityNamespace` object instead of a security namespace identifier. The allow mask is set to 7, and the deny mask is set to 0. The `-OverwriteMask` switch is used, which means the mask values will be overwritten rather than merged.
+
+### Example 3
+
+```powershell
+$aceParams = @{
+    SecurityNamespaceId = "2bf24a2b-70ba-43d3-ad97-3d9e1f75622f";
+    Token = "MySecurityToken";
+    AllowMask = 31;
+    DenyMask = 8;
+    ProjectName = "MyProject";
+}
+Add-VSTeamAccessControlEntry @aceParams
+```
+
+This example uses a hashtable to define the parameters for the `Add-VSTeamAccessControlEntry` cmdlet. The ACE is added with an allow mask of 31 and a deny mask of 8 for the provided token in the project "MyProject".
+
+### Example 4
+
+```powershell
+$namespace = Get-VSTeamSecurityNamespace -Name "VersionControlItems"
+Add-VSTeamAccessControlEntry -SecurityNamespace $namespace -Token "MyToken" -AllowMask 3 -DenyMask 1 -ProjectName "MyProject"
+```
+
+This example first retrieves the security namespace object for "VersionControlItems" and then uses this object to add an ACE. The ACE is added with an allow mask of 3 and a deny mask of 1 for the token "MyToken" in the project "MyProject".
+
+Remember, managing permissions and access control entries in a DevOps environment is a crucial task, ensuring that users and services have the appropriate permissions for their roles and responsibilities. Always be careful when modifying permissions to avoid unintentionally giving or restricting access to critical resources.
+
 ## PARAMETERS
 
 ### SecurityNamespace
@@ -151,7 +193,7 @@ Required: True
 ```
 ### OverwriteMask
 
-Switch to overwrite the mask values rather than merge them. 
+Switch to overwrite the mask values rather than merge them.
 
 ```yaml
 Type: Switch
