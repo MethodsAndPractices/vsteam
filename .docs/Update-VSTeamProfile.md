@@ -38,7 +38,7 @@ This will update all but the first AzD profile
 
 ## PARAMETERS
 
-### PAT
+### SecurePersonalAccessToken
 
 A secured string to capture your personal access token.
 

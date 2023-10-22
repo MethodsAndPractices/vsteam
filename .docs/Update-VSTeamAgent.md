@@ -14,6 +14,28 @@
 
 ## EXAMPLES
 
+### Example 1
+```powershell
+Update-VSTeamAgent -PoolId 101 -Id 2021
+```
+
+Updates the agent with ID `2021` in the pool with ID `101`.
+
+### Example 2
+```powershell
+$agentIds = 2021, 2022, 2023
+Update-VSTeamAgent -PoolId 101 -Id $agentIds
+```
+
+Updates multiple agents with IDs `2021`, `2022`, and `2023` in the pool with ID `101`.
+
+### Example 3
+```powershell
+Update-VSTeamAgent -PoolId 101 -Id 2021 -Force
+```
+
+Updates the agent with ID `2021` in the pool with ID `101` and forces the update without any confirmation prompts.
+
 ## PARAMETERS
 
 ### PoolId

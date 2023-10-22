@@ -21,7 +21,7 @@ This command updates an iteration with the specified path to the name NewIterati
 ### Example 2
 
 ```powershell
-Update-VSTeamArea -Name "NewIterationName" -Path "MyIteration/Path" -FinishDate "31.01.2020" -StartDate "01.01.2020" 
+Update-VSTeamArea -Name "NewIterationName" -Path "MyIteration/Path" -FinishDate "31.01.2020" -StartDate "01.01.2020"
 ```
 
 This command updates an area with the specified path to the name NewIterationName (which will change the path) in the default project with the start date 01.01.2020 and finish date 31.01.2020.
@@ -69,6 +69,8 @@ Required: false
 ```
 
 <!-- #include "./params/projectName.md" -->
+
+<!-- #include "./params/forcegroup.md" -->
 
 ## INPUTS
 

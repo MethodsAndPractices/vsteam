@@ -153,6 +153,8 @@ Type: Int32
 Parameter Sets: List
 ```
 
+<!-- #include "./params/projectName.md" -->
+
 ## INPUTS
 
 ## OUTPUTS

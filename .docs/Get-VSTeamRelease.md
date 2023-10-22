@@ -84,9 +84,18 @@ Parameter Sets: List
 Default value: 0
 ```
 
+### SearchText
+
+Releases with names containing searchText.
+
+```yaml
+Type: String
+Parameter Sets: List
+```
+
 ### ArtifactVersionId
 
-Id of the artifact version. Returns the particular release pertaining to given artifact version Id.
+Releases with given artifactVersionId will be returned. E.g. in case of Build artifactType, it is buildId.
 
 ```yaml
 Type: String

@@ -14,6 +14,34 @@
 
 ## EXAMPLES
 
+### Example 1
+```powershell
+Get-VSTeamServiceEndpointType
+```
+
+Returns all available service endpoint types.
+
+### Example 2
+```powershell
+Get-VSTeamServiceEndpointType -Type "AzureRM"
+```
+
+Returns the service endpoint type with the name "AzureRM".
+
+### Example 3
+```powershell
+Get-VSTeamServiceEndpointType -Scheme "OAuth"
+```
+
+Returns service endpoint types that use the "OAuth" scheme.
+
+### Example 4
+```powershell
+Get-VSTeamServiceEndpointType -Type "GitHub" -Scheme "PersonalAccessToken"
+```
+
+Returns the service endpoint type with the name "GitHub" and scheme "PersonalAccessToken".
+
 ## PARAMETERS
 
 ### Id

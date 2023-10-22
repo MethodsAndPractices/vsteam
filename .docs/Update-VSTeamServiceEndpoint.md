@@ -14,6 +14,48 @@
 
 ## EXAMPLES
 
+### Example 1
+```powershell
+$endpointPayload = @{
+    name     = "MyNewEndpoint";
+    type     = "generic";
+    url      = "https://api.endpoint.com";
+    isShared = $false
+}
+
+Update-VSTeamServiceEndpoint -Id "12345678-abcd-1234-abcd-1234567890ab" -Object $endpointPayload
+```
+
+Updates the service endpoint with ID `12345678-abcd-1234-abcd-1234567890ab` with the specified properties in the `$endpointPayload` hashtable.
+
+### Example 2
+```powershell
+$endpointPayload = @{
+    name     = "MyNewEndpoint";
+    type     = "generic";
+    url      = "https://api.endpoint.com";
+    isShared = $false
+}
+
+Update-VSTeamServiceEndpoint -Id "12345678-abcd-1234-abcd-1234567890ab" -Object $endpointPayload -ProjectName "MyProject"
+```
+
+Updates the service endpoint within the "MyProject" project with ID `12345678-abcd-1234-abcd-1234567890ab` with the specified properties in the `$endpointPayload` hashtable.
+
+### Example 3
+```powershell
+$endpointPayload = @{
+    name     = "MyNewEndpoint";
+    type     = "generic";
+    url      = "https://api.endpoint.com";
+    isShared = $false
+}
+
+Update-VSTeamServiceEndpoint -Id "12345678-abcd-1234-abcd-1234567890ab" -Object $endpointPayload -Force
+```
+
+Updates the service endpoint with ID `12345678-abcd-1234-abcd-1234567890ab` with the specified properties in the `$endpointPayload` hashtable and forces the update without any confirmation prompts.
+
 ## PARAMETERS
 
 ### Id

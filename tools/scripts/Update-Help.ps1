@@ -13,8 +13,13 @@ param (
    $OutputPath,
    [Parameter(Mandatory = $true)]
    [string]
-   $HelpFilePath
+   $HelpFilePath,
+   [Parameter(Mandatory =$true)]
+   [string]
+   $ModulePath
 )
+
+. $PSScriptRoot\Test-HelpFileDocumentation.ps1
 
 Write-Verbose 'Clearing old files'
 
@@ -29,7 +34,10 @@ if (-not (Get-Module Trackyon.Markdown -ListAvailable)) {
    Install-Module Trackyon.Markdown -Scope CurrentUser -Force
 }
 
-merge-markdown $DocsInputPath $OutputPath
+Merge-Markdown $DocsInputPath $OutputPath
+
+
+Test-HelpFileDocumentation -MarkdownOutputPath $OutputPath -ModulePath $ModulePath
 
 Write-Verbose 'Creating new file'
 

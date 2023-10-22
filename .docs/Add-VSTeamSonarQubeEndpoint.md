@@ -18,6 +18,48 @@ Using SonarQube with the Maven tasks uses a Generic Connection type.
 
 ## EXAMPLES
 
+### Example 1
+
+```powershell
+Add-VSTeamSonarQubeEndpoint -SonarQubeUrl "https://sonarqube.example.com" -PersonalAccessToken "your_token_here" -EndpointName "SonarQube-Prod" -ProjectName "WebAppProject"
+```
+
+This command creates a new SonarQube service endpoint named "SonarQube-Prod" for the "WebAppProject" project. The SonarQube server's URL is "https://sonarqube.example.com", and authentication is done using the provided personal access token.
+
+### Example 2
+
+```powershell
+$SecureToken = ConvertTo-SecureString "your_token_here" -AsPlainText -Force
+Add-VSTeamSonarQubeEndpoint -SonarQubeUrl "https://sonarqube.example.com" -SecurePersonalAccessToken $SecureToken -EndpointName "SonarQube-Dev" -ProjectName "BackendServices"
+```
+
+In this example, a secure string is created first to hold the personal access token. The SonarQube service endpoint named "SonarQube-Dev" for the "BackendServices" project is then created using this secure string. The SonarQube server's URL is "https://sonarqube.example.com".
+
+### Example 3
+
+```powershell
+Add-VSTeamSonarQubeEndpoint -SonarQubeUrl "https://sonar.example.org" -PersonalAccessToken "another_token_here" -EndpointName "SonarQube-Staging" -ProjectName "MobileAppProject"
+```
+
+This command sets up a SonarQube service endpoint named "SonarQube-Staging" for the "MobileAppProject". The SonarQube server's URL is "https://sonar.example.org", and it authenticates using the specified personal access token.
+
+### Example 4
+
+```powershell
+$Token = ConvertTo-SecureString "unique_token_here" -AsPlainText -Force
+Add-VSTeamSonarQubeEndpoint -SonarQubeUrl "https://sonarqube.example.net" -SecurePersonalAccessToken $Token -EndpointName "SonarQube-Test" -ProjectName "FrontendUI"
+```
+
+Here, a secure string is made initially to house the personal access token. The SonarQube service endpoint named "SonarQube-Test" for the "FrontendUI" project is subsequently created using this secure token. The URL for the SonarQube server is "https://sonarqube.example.net".
+
+### Example 5
+
+```powershell
+Add-VSTeamSonarQubeEndpoint -SonarQubeUrl "https://sonarqube.example.co" -PersonalAccessToken "different_token_here" -EndpointName "SonarQube-Alpha" -ProjectName "DataAnalytics"
+```
+
+This command constructs a SonarQube service endpoint named "SonarQube-Alpha" for the project "DataAnalytics". The URL for the SonarQube server is "https://sonarqube.example.co", and authentication is achieved using the given personal access token.
+
 ## PARAMETERS
 
 ### SonarQubeUrl

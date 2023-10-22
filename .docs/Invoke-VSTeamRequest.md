@@ -32,6 +32,39 @@ This command will return the releases for a project.
 
 ## PARAMETERS
 
+
+### Url
+
+Full api url without querystring.  If this parameter is used the -Area, -Resource, -Version, and -SubDomain are ignored.
+
+```yaml
+Type: String
+```
+
+### QueryString
+
+Querystring to add to the end of the url.  If this parameter is used the -Area, -Resource, -Version, and -SubDomain are ignored.
+
+```yaml
+Type: String
+```
+
+### Team
+
+The team name to find the resource.
+
+```yaml
+Type: String
+```
+
+### NoProject
+
+Do not add the project name to the URI.
+
+```yaml
+Type: Switch
+```
+
 ### ContentType
 
 Specifies the content type of the request.

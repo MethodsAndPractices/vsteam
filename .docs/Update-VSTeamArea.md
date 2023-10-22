@@ -52,6 +52,8 @@ Required: True
 
 <!-- #include "./params/projectName.md" -->
 
+<!-- #include "./params/forcegroup.md" -->
+
 ## INPUTS
 
 ## OUTPUTS

@@ -14,6 +14,13 @@
 
 ## EXAMPLES
 
+### Example 1
+```powershell
+Set-VSTeamAlias -Force
+```
+
+Activates the alias names and forces the update without any confirmation prompts.
+
 ## PARAMETERS
 
 <!-- #include "./params/forcegroup.md" -->
