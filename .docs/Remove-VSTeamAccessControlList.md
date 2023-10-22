@@ -83,6 +83,8 @@ Type: Switch
 Required: True
 ```
 
+<!-- #include "./params/forcegroup.md" -->
+
 ## INPUTS
 
 ## OUTPUTS

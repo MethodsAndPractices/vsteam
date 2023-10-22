@@ -2,22 +2,22 @@ function Invoke-VSTeamRequest {
    [CmdletBinding(HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Invoke-VSTeamRequest')]
    param(
       [ArgumentCompleter([vsteam_lib.InvokeCompleter])]
-      [string] $resource,
+      [string] $Resource,
 
       [ArgumentCompleter([vsteam_lib.InvokeCompleter])]
-      [string] $area,
+      [string] $Area,
 
-      [string] $id,
+      [string] $Id,
 
-      [string] $version,
+      [string] $Version,
 
-      [string] $subDomain,
+      [string] $SubDomain,
 
       [ValidateSet('Get', 'Post', 'Patch', 'Delete', 'Options', 'Put', 'Default', 'Head', 'Merge', 'Trace')]
-      [string] $method,
+      [string] $Method,
 
       [Parameter(ValueFromPipeline = $true)]
-      [object] $body,
+      [object] $Body,
 
       [string] $InFile,
 

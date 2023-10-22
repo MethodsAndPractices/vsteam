@@ -165,6 +165,15 @@ Parameter Sets: ByNamespaceId
 Required: True
 ```
 
+### Descriptor
+
+Descriptor of the token to be added.
+
+```yaml
+Type: String
+Required: True
+```
+
 ### Token
 
 The security Token

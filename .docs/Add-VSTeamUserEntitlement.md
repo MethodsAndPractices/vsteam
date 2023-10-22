@@ -51,6 +51,16 @@ This command adds a user to the "DataAnalytics" project without assigning any sp
 
 ## PARAMETERS
 
+### Email
+
+Email address of the user to add.
+
+```yaml
+Type: String
+Required: True
+Aliases: UserEmail
+```
+
 ### License
 
 Type of Account License. The acceptable values for this parameter are:

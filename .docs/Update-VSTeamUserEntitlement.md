@@ -68,6 +68,40 @@ Type: String
 Required: True
 ```
 
+### LicensingSource
+
+Source of the license. The acceptable values for this parameter are:
+- account
+- auto
+- msdn
+- none
+- profile
+- trial
+
+```yaml
+Type: String
+Required: False
+Parameter Sets: ById, ByEmail
+```
+
+### MSDNLicenseType
+
+MSDN license type. The acceptable values for this parameter are:
+- eligible
+- enterprise
+- none
+- platforms
+- premium
+- professional
+- testProfessional
+- ultimate
+
+```yaml
+Type: String
+Required: False
+Parameter Sets: ById, ByEmail
+```
+
 <!-- #include "./params/forcegroup.md" -->
 
 ## INPUTS

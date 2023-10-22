@@ -124,6 +124,14 @@ Type: String
 Position: 4
 ```
 
+### Description
+
+Description of the service endpoint.
+
+```yaml
+Type: String
+```
+
 <!-- #include "./params/projectName.md" -->
 
 ## INPUTS

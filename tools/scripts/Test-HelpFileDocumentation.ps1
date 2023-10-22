@@ -62,8 +62,9 @@ function Test-HelpFileDocumentation {
       foreach ($cmdlet in $missingSpecificParameters.Keys) {
          $paramsList = $missingSpecificParameters[$cmdlet] -join ', '
          $filePath = Join-Path $MarkdownOutputPath "$cmdlet.md"
-         $sourcePath = Join-Path ".docs" "$cmdlet.md"
-         Write-Host "Issue in [$filePath](source:[$sourcePath]): Missing parameters: $paramsList"
+         $mdSourcePath = Join-Path ".docs" "$cmdlet.md"
+         $ps1SourcePath = Join-Path "Source/Public" "$cmdlet.ps1"
+         Write-Host "Issue in [$filePath](source:[$mdSourcePath], ps1:[$ps1SourcePath]): Missing parameters: $paramsList"
       }
 
       foreach ($cmdlet in $missingExamples) {

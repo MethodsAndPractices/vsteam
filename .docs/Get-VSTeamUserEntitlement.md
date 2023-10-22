@@ -153,6 +153,22 @@ Required: False
 Default value: None
 ```
 
+### LicenseId
+
+Filters based on license id.
+
+The acceptable values for this parameter are:
+- Account-Stakeholder (Stakeholder)
+- Account-Express (Basic)
+- Account-Advanced (Basic + Test Plans)
+
+```yaml
+Type: string
+Parameter Sets: PagedParams
+Required: False
+Default value: None
+```
+
 ### UserType
 
 Filters based on user type
