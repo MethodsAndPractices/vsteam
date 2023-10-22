@@ -57,17 +57,19 @@ function Test-HelpFileDocumentation {
    # Generate error messages and output
    $totalErrors = $missingSpecificParameters.Count + $missingExamples.Count
    if ($totalErrors -gt 0) {
-      $errorMessage = "Total cmdlets with issues: $totalErrors`n"
+      $errorMessage = "Total cmdlets with missing $($missingExamples.Count) examples and missing $($missingSpecificParameters.Count) parameters `n"
 
       foreach ($cmdlet in $missingSpecificParameters.Keys) {
          $paramsList = $missingSpecificParameters[$cmdlet] -join ', '
-         $filePath = ".docs/$cmdlet.md"
-         Write-Host "Issue in [$filePath]: Missing parameter documentation for: $paramsList"
+         $filePath = Join-Path $MarkdownOutputPath "$cmdlet.md"
+         $sourcePath = Join-Path ".docs" "$cmdlet.md"
+         Write-Host "Issue in [$filePath](source:[$sourcePath]): Missing parameters: $paramsList"
       }
 
       foreach ($cmdlet in $missingExamples) {
-         $filePath = ".docs/$cmdlet.md"
-         Write-Host "Issue in [$filePath]: Missing examples."
+         $filePath = Join-Path $MarkdownOutputPath "$cmdlet.md"
+         $sourcePath = Join-Path ".docs" "$cmdlet.md"
+         Write-Host "Issue in [$filePath](source:[$sourcePath]): Missing examples."
       }
 
       throw $errorMessage

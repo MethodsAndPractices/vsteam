@@ -14,6 +14,30 @@
 
 ## EXAMPLES
 
+### Example 1
+
+```powershell
+$UserDescriptor = 'aad.OTcyOTJkNzYtMjc3Yi03OTgxLWIzNDMtNTkzYmM3ODZkYjlj'
+$GroupDescriptor = 'vssgp.Uy0xLTktMTU1MTM3NDI0NS04NTYwMDk3MjYtNDE5MzQ0MjExNy0yMzkwNzU2MTEwLTI3NDAxNjE4MjEtMC0wLTAtMC0x'
+Test-VSTeamMembership -MemberDescriptor $UserDescriptor -ContainerDescriptor $GroupDescriptor
+```
+Tests if the user with the email $UserDescriptor is a member of the group $GroupDescriptor.
+
+### Example 2
+
+```powershell
+$UserDescriptor = 'aad.OTcyOTJkNzYtMjc3Yi03OTgxLWIzNDMtNTkzYmM3ODZkYjlj'
+$GroupDescriptor = 'vssgp.Uy0xLTktMTU1MTM3NDI0NS04NTYwMDk3MjYtNDE5MzQ0MjExNy0yMzkwNzU2MTEwLTI3NDAxNjE4MjEtMC0wLTAtMC0x'
+$membershipExists = Test-VSTeamMembership -MemberDescriptor $UserDescriptor -ContainerDescriptor $GroupDescriptor
+if ($membershipExists) {
+    Write-Output "User is a member of the group."
+} else {
+    Write-Output "User is not a member of the group."
+}
+```
+
+Tests if the user with the $UserDescriptor is a member of the group $GroupDescriptor and outputs a message based on the result.
+
 ## PARAMETERS
 
 <!-- #include "./params/memberDescriptor.md" -->

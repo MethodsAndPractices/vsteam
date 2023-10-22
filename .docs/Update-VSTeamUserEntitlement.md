@@ -14,6 +14,22 @@
 
 ## EXAMPLES
 
+### EXAMPLE 1
+
+```powershell
+Update-VSTeamUserEntitlement -Id "12345" -License "Professional"
+```
+
+This example updates the license type of a user with ID "12345" to "Professional".
+
+### EXAMPLE 2
+
+```powershell
+Update-VSTeamUserEntitlement -Email "user@example.com" -License "StakeHolder"
+```
+
+This example updates the license type of a user with email "user@example.com" to "StakeHolder".
+
 ## PARAMETERS
 
 ### Id

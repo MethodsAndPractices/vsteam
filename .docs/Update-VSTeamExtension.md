@@ -14,6 +14,27 @@
 
 ## EXAMPLES
 
+### Example 1
+```powershell
+Update-VSTeamExtension -PublisherId "Contoso" -ExtensionId "MyExtension" -ExtensionState "disabled"
+```
+
+Disables the extension "MyExtension" from the publisher "Contoso".
+
+### Example 2
+```powershell
+Update-VSTeamExtension -PublisherId "Contoso" -ExtensionId "MyExtension" -ExtensionState "none"
+```
+
+Sets the extension state to "none" for the extension "MyExtension" from the publisher "Contoso".
+
+### Example 3
+```powershell
+Update-VSTeamExtension -PublisherId "Contoso" -ExtensionId "MyExtension" -ExtensionState "disabled" -Force
+```
+
+Disables the extension "MyExtension" from the publisher "Contoso" and forces the update without any confirmation prompts.
+
 ## PARAMETERS
 
 ### PublisherId

@@ -14,6 +14,34 @@
 
 ## EXAMPLES
 
+### Example 1
+```powershell
+Update-VSTeam -Name "OldTeamName" -NewTeamName "NewTeamName"
+```
+
+Updates the team name from "OldTeamName" to "NewTeamName".
+
+### Example 2
+```powershell
+Update-VSTeam -Name "TeamName" -Description "Updated Team Description"
+```
+
+Updates the description of the team named "TeamName" to "Updated Team Description".
+
+### Example 3
+```powershell
+Update-VSTeam -Name "TeamName" -NewTeamName "NewTeamName" -ProjectName "MyProject"
+```
+
+Updates the team name within the "MyProject" project from "TeamName" to "NewTeamName".
+
+### Example 4
+```powershell
+Update-VSTeam -Name "TeamName" -NewTeamName "NewTeamName" -Force
+```
+
+Updates the team name from "TeamName" to "NewTeamName" and forces the update without any confirmation prompts.
+
 ## PARAMETERS
 
 ### Name

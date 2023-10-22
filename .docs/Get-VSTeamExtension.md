@@ -14,6 +14,41 @@
 
 ## EXAMPLES
 
+### Example 1
+```powershell
+Get-VSTeamExtension -PublisherId 'PublisherA' -ExtensionId 'Ext123'
+```
+
+This command retrieves the details of the extension with the id 'Ext123' from the publisher with id 'PublisherA'.
+
+### Example 2
+```powershell
+Get-VSTeamExtension -IncludeInstallationIssues
+```
+
+This command retrieves all installed extensions and includes those with installation issues in the results.
+
+### Example 3
+```powershell
+Get-VSTeamExtension -IncludeDisabledExtensions
+```
+
+This command retrieves all installed extensions, including those that are currently disabled.
+
+### Example 4
+```powershell
+Get-VSTeamExtension -IncludeErrors
+```
+
+This command retrieves all installed extensions and includes those with errors in the results.
+
+### Example 5
+```powershell
+Get-VSTeamExtension | Where-Object { $_.PublisherId -eq 'PublisherA' }
+```
+
+This command retrieves all installed extensions and then filters out to display only those from the publisher with id 'PublisherA'.
+
 ## PARAMETERS
 
 ### PublisherId

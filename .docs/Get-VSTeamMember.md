@@ -14,6 +14,41 @@
 
 ## EXAMPLES
 
+### Example 1
+```powershell
+Get-VSTeamMember -TeamId 'DevOpsTeam'
+```
+
+Returns all members of the team with the id "DevOpsTeam".
+
+### Example 2
+```powershell
+Get-VSTeamMember -TeamId 'DevOpsTeam' -Top 10
+```
+
+Returns the top 10 members of the team with the id "DevOpsTeam".
+
+### Example 3
+```powershell
+Get-VSTeamMember -TeamId 'DevOpsTeam' -Skip 5 -Top 10
+```
+
+Skips the first 5 members and then returns the next 10 members of the team with the id "DevOpsTeam".
+
+### Example 4
+```powershell
+Get-VSTeamMember -TeamId 'DevOpsTeam' | Where-Object { $_.DisplayName -like "*Smith*" }
+```
+
+Returns members of the team with the id "DevOpsTeam" whose display name contains "Smith".
+
+### Example 5
+```powershell
+Get-VSTeamMember -TeamId 'DevOpsTeam' -ProjectName 'ProjectX'
+```
+
+Returns members of the team with the id "DevOpsTeam" that are part of 'ProjectX'.
+
 ## PARAMETERS
 
 ### Skip

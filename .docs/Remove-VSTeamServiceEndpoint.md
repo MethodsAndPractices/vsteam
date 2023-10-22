@@ -14,6 +14,27 @@
 
 ## EXAMPLES
 
+### Example 1
+```powershell
+Remove-VSTeamServiceEndpoint -Id "12345678-abcd-1234-abcd-1234567890ab"
+```
+
+Removes the service endpoint with ID `12345678-abcd-1234-abcd-1234567890ab`.
+
+### Example 2
+```powershell
+Remove-VSTeamServiceEndpoint -Id "12345678-abcd-1234-abcd-1234567890ab" -ProjectName "MyProject"
+```
+
+Removes the service endpoint with ID `12345678-abcd-1234-abcd-1234567890ab` within the "MyProject" project.
+
+### Example 3
+```powershell
+Remove-VSTeamServiceEndpoint -Id "12345678-abcd-1234-abcd-1234567890ab" -Force
+```
+
+Removes the service endpoint with ID `12345678-abcd-1234-abcd-1234567890ab` and forces the removal without any confirmation prompts.
+
 ## PARAMETERS
 
 ### Id

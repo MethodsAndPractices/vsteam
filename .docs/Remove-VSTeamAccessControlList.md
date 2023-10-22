@@ -14,6 +14,35 @@
 
 ## EXAMPLES
 
+### Example 1
+```powershell
+$namespace = Get-VSTeamSecurityNamespace -NamespaceId "abcdef12-1234-5678-9abc-def123456789"
+Remove-VSTeamAccessControlList -SecurityNamespace $namespace -Tokens "token1,token2"
+```
+
+Removes access control lists for the specified tokens "token1" and "token2" from the security namespace retrieved using the provided `NamespaceId`.
+
+### Example 2
+```powershell
+Remove-VSTeamAccessControlList -SecurityNamespaceId "abcdef12-1234-5678-9abc-def123456789" -Tokens "token1" -Recurse
+```
+
+Recursively removes the access control list for the specified token "token1" from the security namespace with the given `SecurityNamespaceId`.
+
+### Example 3
+```powershell
+Remove-VSTeamAccessControlList -SecurityNamespaceId "abcdef12-1234-5678-9abc-def123456789" -Tokens "token1" -Force
+```
+
+Removes the access control list for the specified token "token1" from the security namespace with the given `SecurityNamespaceId` and forces the removal without any confirmation prompts.
+
+### Example 4
+```powershell
+Remove-VSTeamAccessControlList -SecurityNamespaceId "abcdef12-1234-5678-9abc-def123456789" -Tokens "token1" -Recurse -WhatIf
+```
+
+Shows what would happen if the command runs to recursively remove the access control list for the specified token "token1" from the security namespace with the given `SecurityNamespaceId`, without actually executing the command.
+
 ## PARAMETERS
 
 ### SecurityNamespace
@@ -53,8 +82,6 @@ If true and this is a hierarchical namespace, also remove child ACLs of the spec
 Type: Switch
 Required: True
 ```
-
-<!-- #include "./params/forcegroup.md" -->
 
 ## INPUTS
 

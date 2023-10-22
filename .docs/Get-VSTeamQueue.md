@@ -14,6 +14,41 @@
 
 ## EXAMPLES
 
+### Example 1
+```powershell
+Get-VSTeamQueue -ProjectName "MyProject"
+```
+
+Returns a list of all agent queues for the specified project "MyProject".
+
+### Example 2
+```powershell
+Get-VSTeamQueue -QueueName "BuildQueue" -ProjectName "MyProject"
+```
+
+Returns the agent queue with the name "BuildQueue" for the specified project "MyProject".
+
+### Example 3
+```powershell
+Get-VSTeamQueue -Id "12345" -ProjectName "MyProject"
+```
+
+Returns the agent queue with the specified `Id` "12345" for the project "MyProject".
+
+### Example 4
+```powershell
+Get-VSTeamQueue -ActionFilter "Manage" -ProjectName "MyProject"
+```
+
+Returns the agent queues for the project "MyProject" where the action filter is set to "Manage".
+
+### Example 5
+```powershell
+Get-VSTeamQueue -ProjectName "MyProject" | Where-Object { $_.QueueName -like "*Test*" }
+```
+
+Returns all agent queues for the project "MyProject" where the queue name contains the word "Test".
+
 ## PARAMETERS
 
 ### QueueName
