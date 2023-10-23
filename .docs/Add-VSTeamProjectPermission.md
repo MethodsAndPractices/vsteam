@@ -66,12 +66,16 @@ This command allows the user "robert.jones@example.net" to "EditDesigns" and den
 
 ### Descriptor
 
+Descriptor of the user or group to add permissions for.
+
 ```yaml
 Type: String
 Required: True
 ```
 
 ### User
+
+User descriptor to add permissions for.
 
 ```yaml
 Type: VSTeamUser
@@ -80,6 +84,8 @@ Required: True
 
 ### Group
 
+Group descriptor to add permissions for.
+
 ```yaml
 Type: VSTeamGroup
 Required: True
@@ -87,12 +93,16 @@ Required: True
 
 ### Allow
 
+Allow permissions to add.
+
 ```yaml
 Type: VSTeamProjectPermissions
 Required: True
 ```
 
 ### Deny
+
+Deny permissions to add.
 
 ```yaml
 Type: VSTeamProjectPermissions

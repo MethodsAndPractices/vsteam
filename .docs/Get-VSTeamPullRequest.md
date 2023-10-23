@@ -176,6 +176,8 @@ Type: Switch
 Parameter Sets: IncludeCommits
 ```
 
+<!-- #include "./params/projectName.md" -->
+
 ## INPUTS
 
 ## OUTPUTS

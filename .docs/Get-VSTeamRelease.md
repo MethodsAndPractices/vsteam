@@ -114,12 +114,16 @@ Default value: 0
 
 ### CreatedBy
 
+Creator of the release.
+
 ```yaml
 Type: String
 Parameter Sets: List
 ```
 
 ### MinCreatedTime
+
+Minimum creation time of releases to be returned.
 
 ```yaml
 Type: DateTime
@@ -128,6 +132,8 @@ Parameter Sets: List
 
 ### MaxCreatedTime
 
+Maximum creation time of releases to be returned.
+
 ```yaml
 Type: DateTime
 Parameter Sets: List
@@ -135,12 +141,16 @@ Parameter Sets: List
 
 ### QueryOrder
 
+Order of the results.
+
 ```yaml
 Type: String
 Parameter Sets: List
 ```
 
 ### ContinuationToken
+
+ContinuationToken is used when retrieving more results than can be returned in one response.
 
 ```yaml
 Type: String
