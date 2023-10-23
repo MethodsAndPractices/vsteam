@@ -18,12 +18,16 @@
 
 ### IterationID
 
+Iteration ID for which the permissions are to be set.
+
 ```yaml
 Type: Int32
 Required: True
 ```
 
 ### IterationPath
+
+Iteration path for which the permissions are to be set.
 
 ```yaml
 Type: String
@@ -32,12 +36,16 @@ Required: True
 
 ### Descriptor
 
+Descriptor of the user or group to add permissions for.
+
 ```yaml
 Type: String
 Required: True
 ```
 
 ### User
+
+User descriptor to add permissions for.
 
 ```yaml
 Type: VSTeamUser
@@ -46,6 +54,8 @@ Required: True
 
 ### Group
 
+Group descriptor to add permissions for.
+
 ```yaml
 Type: VSTeamGroup
 Required: True
@@ -53,12 +63,16 @@ Required: True
 
 ### Allow
 
+Allow permissions to add.
+
 ```yaml
 Type: VSTeamWorkItemIterationPermissions
 Required: True
 ```
 
 ### Deny
+
+Deny permissions to add.
 
 ```yaml
 Type: VSTeamWorkItemIterationPermissions
