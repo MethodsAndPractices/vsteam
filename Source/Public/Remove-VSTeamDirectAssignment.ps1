@@ -11,7 +11,7 @@ function Remove-VSTeamDirectAssignment {
 
       $queryString = @{
          'api-version' = '5.0-preview.1'
-         'ruleOption'  = $Preview ? '1' : '0'
+         'ruleOption'  = if($Preview) {'1'} else {'0'}
          'select'      = 'grouprules'
       }
 
