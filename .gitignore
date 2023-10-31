@@ -225,7 +225,7 @@ Source/en-US/VSTeam-Help.xml
 /node_modules
 /dist
 .docs/files.md
-docs/**
+/docs
 integration/test/test-results.xml
 unit/results.xml
 en-US/VSTeam-Help.xml
