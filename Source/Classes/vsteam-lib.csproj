@@ -4,6 +4,7 @@
       <TargetFramework>netstandard2.0</TargetFramework>
       <RootNamespace>vsteam_lib</RootNamespace>
       <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+      <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
       <!--Use the VS configuration when you are using Visual Studio and
      need the PostBuild event to copy the files into the dist folder of VSTeam.
      When not in VS the Build-Module.ps1 files takes care of it because it works

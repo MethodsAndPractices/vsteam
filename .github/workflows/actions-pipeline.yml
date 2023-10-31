@@ -6,9 +6,9 @@ on:
     branches:
       - trunk
     paths:
-      - 'src/'
-      - 'Tests/'
-      - '.docs/'
+      - 'src/**'
+      - 'Tests/**'
+      - '.docs/**'
       - '.github/'
       - '!.github/images/'
       - '!.github/*.md'
@@ -36,6 +36,14 @@ jobs:
     - name: Clone repo
       uses: actions/checkout@v3
 
+    - name: Cache NuGet packages
+      uses: actions/cache@v3
+      with:
+        path: ~/.nuget/packages
+        key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-nuget-
+
     - name: .NET Restore
       shell: pwsh
       run: dotnet restore --no-cache # have to use no cache of the build will fail on Windows
@@ -52,7 +60,7 @@ jobs:
 
     - name: Run C# unit tests
       shell: pwsh
-      run: dotnet test --logger "trx;LogFileName=test-results.trx" --logger "console;verbosity=detailed"
+      run: dotnet test --logger "trx;LogFileName=test-results.trx" --logger "console;verbosity=detailed" --no-build
 
     # - name: Publish C# test results
     #   if: success() || failure()
@@ -61,7 +69,6 @@ jobs:
     #     name: C# tests results (${{ matrix.os }})
     #     path: '**/test-results.trx'
     #     reporter: dotnet-trx
-
 
     - name: Run PowerShell unit tests
       shell: pwsh
