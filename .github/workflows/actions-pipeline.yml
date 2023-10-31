@@ -36,15 +36,6 @@ jobs:
     - name: Clone repo
       uses: actions/checkout@v3
 
-    - name: Cache NuGet packages
-      id: cache-nuget-packages
-      uses: actions/cache@v3
-      with:
-        path: ~/.nuget/packages
-        key: ${{ runner.os }}-nuget-${{ hashFiles('Source/Classes/packages.lock.json') }}
-        restore-keys: |
-          ${{ runner.os }}-nuget-
-
     - name: Install and cache PowerShell modules
       id: psmodulecache
       uses: potatoqualitee/psmodulecache@v5.2
@@ -52,7 +43,6 @@ jobs:
         modules-to-cache: Pester, PSScriptAnalyzer, SHiPS, Trackyon.Utils, Trackyon.Markdown, Metadata, platyPS
 
     - name: .NET Restore
-      if: steps.cache-nuget-packages.outputs.cache-hit != 'true'
       shell: pwsh
       run: dotnet restore --no-cache # have to use no cache of the build will fail on Windows
 
@@ -162,12 +152,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Download module
-      uses: actions/download-artifact@v2
+      uses: actions/download-artifact@v3
       with:
         name: module
 
     - name: Download pipeline scripts
-      uses: actions/download-artifact@v2
+      uses: actions/download-artifact@v3
       with:
         name: pipeline-scripts
         path: ./tools
@@ -209,19 +199,19 @@ jobs:
     steps:
 
     - name: Download nuget package artifact
-      uses: actions/download-artifact@v2
+      uses: actions/download-artifact@v3
       with:
         name: VSTeamPackage
         path: ./module
 
     - name: Download integration tests
-      uses: actions/download-artifact@v2
+      uses: actions/download-artifact@v3
       with:
         name: test
         path: ./test
 
     - name: Download pipeline scripts
-      uses: actions/download-artifact@v2
+      uses: actions/download-artifact@v3
       with:
         name: pipeline-scripts
         path: ./tools
@@ -285,19 +275,19 @@ jobs:
       module_version: ""
     steps:
     - name: Download PS module artifact
-      uses: actions/download-artifact@v2
+      uses: actions/download-artifact@v3
       with:
         name: module
         path: ./module
 
     - name: Download nuget package artifact
-      uses: actions/download-artifact@v2
+      uses: actions/download-artifact@v3
       with:
         name: VSTeamPackage
         path: ./nuget
 
     - name: Download pipeline scripts
-      uses: actions/download-artifact@v2
+      uses: actions/download-artifact@v3
       with:
         name: pipeline-scripts
         path: ./tools
