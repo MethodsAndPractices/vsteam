@@ -103,11 +103,6 @@ jobs:
         Copy-Item -Path "./tools/scripts/" -Destination ./staging/tools/scripts -Recurse -Force
         Copy-Item -Path "./dist/*.psd1" -Destination ./staging/test/dist -Recurse -Force
 
-    - name: Install PSScriptAnalyzer
-      if: ${{ matrix.os == 'ubuntu-latest'}}
-      shell: pwsh
-      run: Install-Module -Name PSScriptAnalyzer -Repository PSGallery -Force -Scope CurrentUser -Verbose
-
     - name: Run Static Code Analysis
       if: ${{ matrix.os == 'ubuntu-latest'}}
       shell: pwsh
