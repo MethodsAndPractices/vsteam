@@ -51,12 +51,12 @@ jobs:
       run: dotnet restore --no-cache # have to use no cache of the build will fail on Windows
 
     - name: Build module with help
-      if: ${{ matrix.os == 'windows-latest'}}
+      if: ${{ matrix.os == 'ubuntu-latest'}}
       shell: pwsh
       run: ./Build-Module.ps1 -installDep -configuration Release -buildHelp
 
     - name: Build module without help
-      if: ${{ matrix.os != 'windows-latest'}}
+      if: ${{ matrix.os != 'ubuntu-latest'}}
       shell: pwsh
       run: ./Build-Module.ps1 -installDep -configuration Release
 
@@ -101,7 +101,7 @@ jobs:
     #     reporter: jest-junit
 
     - name: Copy files to staging folders
-      if: ${{ matrix.os == 'windows-latest'}}
+      if: ${{ matrix.os == 'ubuntu-latest'}}
       shell: pwsh
       run: |
         Copy-Item -Path "./dist/" -Destination ./staging/VSTeam/dist/ -Recurse -Force
@@ -128,21 +128,21 @@ jobs:
         if($count -ne 0) { throw "Static Code Analysis with error count = $count" }
 
     - name: Publish Module
-      if: ${{ matrix.os == 'windows-latest' && github.event_name != 'pull_request' }}
+      if: ${{ matrix.os == 'ubuntu-latest' && github.event_name != 'pull_request' }}
       uses: actions/upload-artifact@v3
       with:
         name: module
         path: "./staging/VSTeam"
 
     - name: Publish unit tests
-      if: ${{ matrix.os == 'windows-latest'  && github.event_name != 'pull_request' }}
+      if: ${{ matrix.os == 'ubuntu-latest'  && github.event_name != 'pull_request' }}
       uses: actions/upload-artifact@v3
       with:
         name: test
         path: "./staging/test"
 
     - name: Publish pipeline scripts
-      if: ${{ matrix.os == 'windows-latest' && github.event_name != 'pull_request' }}
+      if: ${{ matrix.os == 'ubuntu-latest' && github.event_name != 'pull_request' }}
       uses: actions/upload-artifact@v3
       with:
         name: pipeline-scripts
