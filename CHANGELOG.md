@@ -252,7 +252,7 @@ Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/354)
 
 All classes are moved to a new C# class library.
 
-You must have [.netCore](dot.net) installed to build the class lib on macOS, Linux and Windows.
+You must have [.netCore](https://dot.net) installed to build the class lib on macOS, Linux and Windows.
 
 All types were changed from 'Team.' to 'vsteam_lib.' this will make it easy when moving types from PowerShell to C#.
 
@@ -870,7 +870,7 @@ Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/82) fro
 
 - removed output of objects returned from API to avoid misleading outputs for consumers
 - added GitRepository object to BuildDefinition
-- had to add a [VSTeamProjectCache]::timestamp = -1 to VSTeamAccount constructor after experiencing blocking with New-PSDrive -Name V -PSProvider SHiPS -Root 'VSTeam#VSTeamAccount' -Verbose; Get-VSTeamBuildDefinition -ProjectName someProject
+- had to add a \[VSTeamProjectCache\]::timestamp = -1 to VSTeamAccount constructor after experiencing blocking with New-PSDrive -Name V -PSProvider SHiPS -Root 'VSTeam#VSTeamAccount' -Verbose; Get-VSTeamBuildDefinition -ProjectName someProject
 
 ## 4.0.1
 
@@ -1252,8 +1252,8 @@ Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/8) from
 Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/6)from [Michel Perfetti](https://github.com/miiitch) which included the following:
 
 - Added serviceEndpoint parameters to Add-VSTeamAzureRMServiceEndpoint cmdlet: if the serviceEndPoint parameters are not specified, the Automatic mode is used
-- The \_trackProgress function was changed too to reflect the return code of the api [endpoints](https://www.visualstudio.com/docs/integrate/api/endpoints/endpoints?WT.mc_id=-github-dbrown)
-- The URL in the payload changed to [https://management.azure.com](https://management.azure.com)
+- The \_trackProgress function was changed too to reflect the return code of the api endpoints
+- The URL in the payload changed to https://management.azure.com
 
 ## 0.1.19
 
