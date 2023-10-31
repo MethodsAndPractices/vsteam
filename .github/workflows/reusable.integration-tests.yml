@@ -1,0 +1,89 @@
+on:
+  workflow_call:
+    inputs:
+      pesterVersion:
+        type: string
+        description: 'The version of Pester to install'
+        required: true
+        default: '5.5.0'
+    secrets:
+      ghToken:
+        required: true
+        description: 'The GitHub token to use for publishing artifacts'
+
+jobs:
+  testing-stage:
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        api_version: [VSTS]
+      fail-fast: true
+    steps:
+
+    - name: Download nuget package artifact
+      uses: actions/download-artifact@v3
+      with:
+        name: VSTeamPackage
+        path: ./module
+
+    - name: Download integration tests
+      uses: actions/download-artifact@v3
+      with:
+        name: test
+        path: ./test
+
+    - name: Download pipeline scripts
+      uses: actions/download-artifact@v3
+      with:
+        name: pipeline-scripts
+        path: ./tools
+
+    - name: Module test installation
+      shell: pwsh
+      run: |
+        ./Test-InstallFromLocalFeed.ps1 -GitHubToken $env:GITHUB_TOKEN -RunnerTempPath '${{ runner.temp }}'
+      env:
+        GITHUB_TOKEN: ${{secrets.ghToken}}
+      working-directory: './tools/scripts'
+
+    - name: Install Pester
+      run: Install-Module -Name Pester -Repository PSGallery -Force -AllowPrerelease -MinimumVersion "${{ inputs.pesterVersion }}" -Scope CurrentUser -AllowClobber -SkipPublisherCheck
+      shell: pwsh
+
+    - name: Run Integration Tests
+      run: |
+
+        Import-Module VSTeam
+
+        #This loads [PesterConfiguration] into scope
+        Import-Module Pester
+        $pesterArgs = [PesterConfiguration]::Default
+        $pesterArgs.Run.Exit = $true
+        $pesterArgs.Run.PassThru = $true
+        $pesterArgs.Output.Verbosity = 'None'
+        $pesterArgs.TestResult.Enabled = $true
+        $pesterArgs.TestResult.OutputFormat = 'JUnitXml'
+        $pesterArgs.TestResult.OutputPath = 'test-results.xml'
+
+        $env:VSTEAM_NO_UPDATE_MESSAGE = $true
+        $env:VSTEAM_NO_MODULE_MESSAGES = $true
+
+        Invoke-Pester -Configuration $pesterArgs
+      shell: pwsh
+      env:
+        PAT: ${{ secrets.RSAZDOPAT }}
+        EMAIL: ${{ secrets.RSEMAIL }}
+        API_VERSION: ${{ matrix.api_version }}
+        ACCT: ${{ secrets.RSORG }}
+      working-directory: './test/Tests/integration'
+
+    - name: Prepare test result publishing
+      run: git init
+      shell: pwsh
+
+    - name: Publish PowerShell test results
+      uses: dorny/test-reporter@v1
+      with:
+        name: PS integration-tests results - (${{ matrix.api_version }})
+        path: '**/test-results.xml'
+        reporter: jest-junit

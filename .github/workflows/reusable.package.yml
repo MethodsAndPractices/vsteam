@@ -1,0 +1,43 @@
+on:
+  workflow_call:
+    secrets:
+      ghToken:
+        required: true
+
+jobs:
+  package-stage:
+    # run from here only if it's not a pull request
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+    - name: Download module
+      uses: actions/download-artifact@v3
+      with:
+        name: module
+
+    - name: Download pipeline scripts
+      uses: actions/download-artifact@v3
+      with:
+        name: pipeline-scripts
+        path: ./tools
+
+    - name: Install NuGet 5.2.0
+      uses: nuget/setup-nuget@v1
+      with:
+        nuget-version: '5.2.0'
+
+    - name: Pack and push module
+      shell: pwsh
+      run: |
+        ./Install-ModuleDependencies -ModulePath "./../../dist"
+        $version = ./Get-VersionNumber.ps1 -RevisionNumber ${{ github.run_number }} -ModulePath "./../../"
+        ./Invoke-PublishModule.ps1 -GitHubToken $env:GITHUB_TOKEN -Version $version -ModulePath "./../../"
+      env:
+        GITHUB_TOKEN: ${{secrets.ghToken}}
+      working-directory: './tools/scripts'
+
+    - name: Upload nuget package as artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: VSTeamPackage
+        path: ./dist/*.nupkg
