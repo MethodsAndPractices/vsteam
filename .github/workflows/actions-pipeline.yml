@@ -46,7 +46,7 @@ jobs:
       shell: pwsh
       run: dotnet restore --no-cache # have to use no cache of the build will fail on Windows
 
-    - name: Build module conditionally
+    - name: Build module
       shell: pwsh
       run: |
         if ("${{ matrix.os }}" -eq 'ubuntu-latest') {
@@ -140,6 +140,12 @@ jobs:
         name: pipeline-scripts
         path: "./staging/tools"
 
+  package-stage2:
+      uses: ./.github/workflows/package.reusable.yml
+      needs: build-stage
+      secrets:
+        envPAT: ${{ secrets.GITHUB_TOKEN }}
+
   package-stage:
     name: Package Management
     needs: build-stage
@@ -163,15 +169,10 @@ jobs:
       with:
         nuget-version: '5.2.0'
 
-    - name: Install Module Dependencies
-      shell: pwsh
-      run: |
-        ./Install-ModuleDependencies -ModulePath "./../../dist"
-      working-directory: './tools/scripts'
-
     - name: Pack and push module
       shell: pwsh
       run: |
+        ./Install-ModuleDependencies -ModulePath "./../../dist"
         $version = ./Set-VersionNumber.ps1 -RevisionNumber ${{ github.run_number }} -ModulePath "./../../"
         ./Invoke-PublishModule.ps1 -GitHubToken $env:GITHUB_TOKEN -Version $version -ModulePath "./../../"
       env:
