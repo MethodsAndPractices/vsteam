@@ -45,6 +45,12 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-nuget-
 
+    - name: Install and cache PowerShell modules
+      id: psmodulecache
+      uses: potatoqualitee/psmodulecache@v5.2
+      with:
+        modules-to-cache: Pester, PSScriptAnalyzer, SHiPS, Trackyon.Utils, Trackyon.Markdown, Metadata, platyPS
+
     - name: .NET Restore
       if: steps.cache-nuget-packages.outputs.cache-hit != 'true'
       shell: pwsh
@@ -53,12 +59,12 @@ jobs:
     - name: Build module with help
       if: ${{ matrix.os == 'ubuntu-latest'}}
       shell: pwsh
-      run: ./Build-Module.ps1 -installDep -configuration Release -buildHelp
+      run: ./Build-Module.ps1 -configuration Release -buildHelp
 
     - name: Build module without help
       if: ${{ matrix.os != 'ubuntu-latest'}}
       shell: pwsh
-      run: ./Build-Module.ps1 -installDep -configuration Release
+      run: ./Build-Module.ps1 -configuration Release
 
     - name: Run C# unit tests
       shell: pwsh
@@ -83,7 +89,7 @@ jobs:
         $pesterArgs.Run.Throw = $true
         $pesterArgs.Run.PassThru = $false
         $pesterArgs.TestResult.Enabled = $true
-        $pesterArgs.Output.Verbosity = 'Minimal'
+        $pesterArgs.Output.Verbosity = 'None'
         $pesterArgs.Run.Path = './Tests/function'
         $pesterArgs.TestResult.OutputFormat = 'JUnitXml'
         $pesterArgs.TestResult.OutputPath = 'test-results.xml'
@@ -242,7 +248,7 @@ jobs:
         $pesterArgs = [PesterConfiguration]::Default
         $pesterArgs.Run.Exit = $true
         $pesterArgs.Run.PassThru = $true
-        $pesterArgs.Output.Verbosity = "Minimal"
+        $pesterArgs.Output.Verbosity = 'None'
         $pesterArgs.TestResult.Enabled = $true
         $pesterArgs.TestResult.OutputFormat = 'JUnitXml'
         $pesterArgs.TestResult.OutputPath = 'test-results.xml'
