@@ -8,7 +8,7 @@ function Get-VSTeamBanner {
       $allBanners = (Invoke-VSTeamRequest -method GET -area 'settings' -resource 'entries/host/GlobalMessageBanners' -version '3.2-preview').value
 
       if (-not [string]::IsNullOrEmpty($Id)) {
-         $filteredBanner = $allBanners[$Id]
+         $filteredBanner = $allBanners."$Id"
 
          if ($null -eq $filteredBanner) {
             throw "No banner found with ID $Id"
