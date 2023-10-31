@@ -32,7 +32,7 @@ jobs:
       shell: pwsh
       run: |
         ./Install-ModuleDependencies -ModulePath "./../../dist"
-        $version = ./Set-VersionNumber.ps1 -RevisionNumber ${{ github.run_number }} -ModulePath "./../../"
+        $version = ./Get-VersionNumber.ps1 -RevisionNumber ${{ github.run_number }} -ModulePath "./../../"
         ./Invoke-PublishModule.ps1 -GitHubToken $env:GITHUB_TOKEN -Version $version -ModulePath "./../../"
       env:
         GITHUB_TOKEN: ${{secrets.ghToken}}
