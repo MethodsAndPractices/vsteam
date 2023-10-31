@@ -1,6 +1,6 @@
 # Contributing to VSTeam
 
-I am truly grateful for all the support developing VSTeam. It means a lot that you spend your time to help improve this module.
+We are truly grateful for all the support developing VSTeam. It means a lot that you spend your time to help improve this module.
 
 ## Steps to contribute
 
