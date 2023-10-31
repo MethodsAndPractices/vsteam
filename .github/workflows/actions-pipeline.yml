@@ -83,7 +83,7 @@ jobs:
         $pesterArgs.Run.Throw = $true
         $pesterArgs.Run.PassThru = $false
         $pesterArgs.TestResult.Enabled = $true
-        $pesterArgs.Output.Verbosity = 'Normal'
+        $pesterArgs.Output.Verbosity = 'Minimal'
         $pesterArgs.Run.Path = './Tests/function'
         $pesterArgs.TestResult.OutputFormat = 'JUnitXml'
         $pesterArgs.TestResult.OutputPath = 'test-results.xml'
@@ -242,7 +242,7 @@ jobs:
         $pesterArgs = [PesterConfiguration]::Default
         $pesterArgs.Run.Exit = $true
         $pesterArgs.Run.PassThru = $true
-        $pesterArgs.Output.Verbosity = "Detailed"
+        $pesterArgs.Output.Verbosity = "Minimal"
         $pesterArgs.TestResult.Enabled = $true
         $pesterArgs.TestResult.OutputFormat = 'JUnitXml'
         $pesterArgs.TestResult.OutputPath = 'test-results.xml'
