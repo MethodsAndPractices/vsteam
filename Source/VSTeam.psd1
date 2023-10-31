@@ -21,13 +21,13 @@
    GUID                 = '210e95b1-50bb-44da-a993-f567f4574214'
 
    # Author of this module
-   Author               = 'Donovan Brown (@DonovanBrown), Sebastian Schütze (@RazorSPoint)'
+   Author               = 'Donovan Brown (@DonovanBrown), Sebastian Schütze (Twitter: @RazorSPoint)'
 
    # Company or vendor of this module
    CompanyName          = ''
 
    # Copyright statement for this module
-   Copyright            = '(c) 2022 Donovan Brown. All rights reserved.'
+   Copyright            = '(c) 2023 Donovan Brown and Sebastian Schütze. All rights reserved.'
 
    # Description of the functionality provided by this module
    Description          = 'Adds functionality for working with Azure DevOps and Team Foundation Server.'
@@ -110,17 +110,17 @@
          ProjectUri   = 'https://github.com/MethodsAndPractices/vsteam'
 
          # A URL to an icon representing this module.
-         # IconUri = ''
+         IconUri = 'https://methodsandpractices.github.io/vsteam-docs/img/startpage_vsteam_api.svg'
 
          # ReleaseNotes of this module
-         ReleaseNotes = 'https://github.com/MethodsAndPractices/vsteam/blob/trunk/CHANGELOG.md'
+         ReleaseNotes = 'https://github.com/MethodsAndPractices/vsteam/releases'
 
       } # End of PSData hashtable
 
    } # End of PrivateData hashtable
 
    # HelpInfo URI of this module
-   # HelpInfoURI = ''
+   HelpInfoURI = 'https://methodsandpractices.github.io/vsteam-docs'
 
    # Default prefix for commands exported from this module. Override the default prefix using Import-Module -Prefix.
    # DefaultCommandPrefix = ''
