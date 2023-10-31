@@ -142,7 +142,7 @@ jobs:
 
   package-stage:
       name: Package
-      uses: ./.github/workflows/package.reusable.yml
+      uses: ./.github/workflows/reusable.package.yml
       needs: build-stage
       secrets:
         ghToken: ${{ secrets.GITHUB_TOKEN }}
@@ -150,7 +150,7 @@ jobs:
   testing-stage:
       name: Testing API
       uses: ./.github/workflows/reusable.integration-tests.yml
-      needs: build-stage
+      needs: package-stage
       with:
         pesterVersion: '5.2.0'
       secrets:
