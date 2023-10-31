@@ -1,3 +1,5 @@
+**NOTE**: Changelog file will not be updated anymore. Changes can be seeen in the [GitHub releases](https://github.com/MethodsAndPractices/vsteam/releases)
+
 # Changelog
 
 ## 7.14.0
