@@ -46,15 +46,11 @@ jobs:
       shell: pwsh
       run: dotnet restore --no-cache # have to use no cache of the build will fail on Windows
 
-    - name: Build module with help
-      if: ${{ matrix.os == 'ubuntu-latest'}}
+    - name: Build module
       shell: pwsh
-      run: ./Build-Module.ps1 -configuration Release -buildHelp
-
-    - name: Build module without help
-      if: ${{ matrix.os != 'ubuntu-latest'}}
-      shell: pwsh
-      run: ./Build-Module.ps1 -configuration Release
+      run: |
+        $params = "${{ matrix.os }}" -eq 'ubuntu-latest' ? '-buildHelp' : ''
+        ./Build-Module.ps1 -configuration Release $params
 
     - name: Run C# unit tests
       shell: pwsh
@@ -116,12 +112,14 @@ jobs:
       if: ${{ matrix.os == 'ubuntu-latest'}}
       shell: pwsh
       run: |
-        $manifest = Import-PowerShellDataFile ./dist/*.psd1
-        $manifest.RequiredModules | ForEach-Object { Import-Module -Name $_ }
-        $count = 0
+        Import-PowerShellDataFile ./dist/*.psd1 | Select-Object -ExpandProperty RequiredModules | Import-Module
         $r = Invoke-ScriptAnalyzer -Path ./dist -Recurse | Where-Object severity -ne "Information"
-        $r | ForEach-Object { Write-Host "::error file=$($_.ScriptPath),line=$($_.Line),col=$($_.Column)::$($_.Message)"; $count++ }
-        if($count -ne 0) { throw "Static Code Analysis with error count = $count" }
+        $count = 0
+        $r | ForEach-Object {
+            Write-Host "::error file=$($_.ScriptPath),line=$($_.Line),col=$($_.Column)::$($_.Message)"
+            $count++
+        }
+        if ($count -ne 0) { throw "Static Code Analysis with error count = $count" }
 
     - name: Publish Module
       if: ${{ matrix.os == 'ubuntu-latest' && github.event_name != 'pull_request' }}
