@@ -46,11 +46,14 @@ jobs:
       shell: pwsh
       run: dotnet restore --no-cache # have to use no cache of the build will fail on Windows
 
-    - name: Build module
+    - name: Build module conditionally
       shell: pwsh
       run: |
-        $params = "${{ matrix.os }}" -eq 'ubuntu-latest' ? '-buildHelp' : ''
-        ./Build-Module.ps1 -configuration Release $params
+        if ("${{ matrix.os }}" -eq 'ubuntu-latest') {
+          ./Build-Module.ps1 -configuration Release -buildHelp
+        } else {
+          ./Build-Module.ps1 -configuration Release
+        }
 
     - name: Run C# unit tests
       shell: pwsh
