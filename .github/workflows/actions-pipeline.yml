@@ -6,9 +6,9 @@ on:
     branches:
       - trunk
     paths:
-      - 'src/'
-      - 'Tests/'
-      - '.docs/'
+      - 'src/**'
+      - 'Tests/**'
+      - '.docs/**'
       - '.github/'
       - '!.github/images/'
       - '!.github/*.md'
@@ -36,19 +36,35 @@ jobs:
     - name: Clone repo
       uses: actions/checkout@v3
 
+    - name: Cache NuGet packages
+      id: cache-nuget-packages
+      uses: actions/cache@v3
+      with:
+        path: ~/.nuget/packages
+        key: ${{ runner.os }}-nuget-${{ hashFiles('Source/Classes/packages.lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-nuget-
+
+    - name: Install and cache PowerShell modules
+      id: psmodulecache
+      uses: potatoqualitee/psmodulecache@v5.2
+      with:
+        modules-to-cache: Pester, PSScriptAnalyzer, SHiPS, Trackyon.Utils, Trackyon.Markdown, Metadata, platyPS
+
     - name: .NET Restore
+      if: steps.cache-nuget-packages.outputs.cache-hit != 'true'
       shell: pwsh
       run: dotnet restore --no-cache # have to use no cache of the build will fail on Windows
 
     - name: Build module with help
-      if: ${{ matrix.os == 'windows-latest'}}
+      if: ${{ matrix.os == 'ubuntu-latest'}}
       shell: pwsh
-      run: ./Build-Module.ps1 -installDep -configuration Release -buildHelp
+      run: ./Build-Module.ps1 -configuration Release -buildHelp
 
     - name: Build module without help
-      if: ${{ matrix.os != 'windows-latest'}}
+      if: ${{ matrix.os != 'ubuntu-latest'}}
       shell: pwsh
-      run: ./Build-Module.ps1 -installDep -configuration Release
+      run: ./Build-Module.ps1 -configuration Release
 
     - name: Run C# unit tests
       shell: pwsh
@@ -62,7 +78,6 @@ jobs:
     #     path: '**/test-results.trx'
     #     reporter: dotnet-trx
 
-
     - name: Run PowerShell unit tests
       shell: pwsh
       run: |
@@ -74,7 +89,7 @@ jobs:
         $pesterArgs.Run.Throw = $true
         $pesterArgs.Run.PassThru = $false
         $pesterArgs.TestResult.Enabled = $true
-        $pesterArgs.Output.Verbosity = 'Normal'
+        $pesterArgs.Output.Verbosity = 'None'
         $pesterArgs.Run.Path = './Tests/function'
         $pesterArgs.TestResult.OutputFormat = 'JUnitXml'
         $pesterArgs.TestResult.OutputPath = 'test-results.xml'
@@ -92,7 +107,7 @@ jobs:
     #     reporter: jest-junit
 
     - name: Copy files to staging folders
-      if: ${{ matrix.os == 'windows-latest'}}
+      if: ${{ matrix.os == 'ubuntu-latest'}}
       shell: pwsh
       run: |
         Copy-Item -Path "./dist/" -Destination ./staging/VSTeam/dist/ -Recurse -Force
@@ -119,21 +134,21 @@ jobs:
         if($count -ne 0) { throw "Static Code Analysis with error count = $count" }
 
     - name: Publish Module
-      if: ${{ matrix.os == 'windows-latest' && github.event_name != 'pull_request' }}
+      if: ${{ matrix.os == 'ubuntu-latest' && github.event_name != 'pull_request' }}
       uses: actions/upload-artifact@v3
       with:
         name: module
         path: "./staging/VSTeam"
 
     - name: Publish unit tests
-      if: ${{ matrix.os == 'windows-latest'  && github.event_name != 'pull_request' }}
+      if: ${{ matrix.os == 'ubuntu-latest'  && github.event_name != 'pull_request' }}
       uses: actions/upload-artifact@v3
       with:
         name: test
         path: "./staging/test"
 
     - name: Publish pipeline scripts
-      if: ${{ matrix.os == 'windows-latest' && github.event_name != 'pull_request' }}
+      if: ${{ matrix.os == 'ubuntu-latest' && github.event_name != 'pull_request' }}
       uses: actions/upload-artifact@v3
       with:
         name: pipeline-scripts
@@ -233,7 +248,7 @@ jobs:
         $pesterArgs = [PesterConfiguration]::Default
         $pesterArgs.Run.Exit = $true
         $pesterArgs.Run.PassThru = $true
-        $pesterArgs.Output.Verbosity = "Detailed"
+        $pesterArgs.Output.Verbosity = 'None'
         $pesterArgs.TestResult.Enabled = $true
         $pesterArgs.TestResult.OutputFormat = 'JUnitXml'
         $pesterArgs.TestResult.OutputPath = 'test-results.xml'

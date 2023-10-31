@@ -9,10 +9,11 @@ Describe 'VSTeamBanner' {
    Context 'Get-VSTeamBanner' {
       BeforeAll {
          Mock Invoke-VSTeamRequest {
+            $firstId = '1234424'
             return @{
                count = 2
                value = @{
-                  '1234424' = @{ level = 'Info'; message = '' }
+                  "$firstId" = @{ level = 'Info'; message = "This message has the ID $firstId" }
                   '574745'  = @{ level = 'Info'; message = '' }
                }
             }
@@ -30,10 +31,13 @@ Describe 'VSTeamBanner' {
          }
          $result | Should -Not -Be $null
          $result.level | Should -Be 'Info'
+         $result.message | Should -Be "This message has the ID 1234424"
       }
 
       It 'Should throw exception for non-existent ID' {
-         { Get-VSTeamBanner -Id 'NonExistentID' } | Should -Throw 'No banner found with ID NonExistentID'
+
+         $nonExistentId = 'NonExistentID'
+         { Get-VSTeamBanner -Id $nonExistentId } | Should -Throw "No banner found with ID $nonExistentId"
       }
 
       It 'Should return all existing banners' {

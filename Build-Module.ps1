@@ -109,7 +109,7 @@ if ($installDep.IsPresent -or $analyzeScript.IsPresent) {
 
    # Install each module
    if ($manifest.RequiredModules) {
-      $manifest.RequiredModules | ForEach-Object { if (-not (get-module $_ -ListAvailable)) { Write-Host "Installing $_"; Install-Module -SkipPublisherCheck -Name $_ -Repository PSGallery -F -Scope CurrentUser } }
+      $manifest.RequiredModules | ForEach-Object { if (-not (Get-Module $_ -ListAvailable)) { Write-Host "Installing $_"; Install-Module -SkipPublisherCheck -Name $_ -Repository PSGallery -F -Scope CurrentUser } }
    }
 }
 

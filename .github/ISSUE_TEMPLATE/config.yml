@@ -1,7 +1,7 @@
 blank_issues_enabled: false
 contact_links:
   - name: VSTeam docs
-    url: https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/index
+    url: https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam
     about: RTFM
   - name: VSTeam Q&A
     url: https://github.com/MethodsAndPractices/vsteam/discussions

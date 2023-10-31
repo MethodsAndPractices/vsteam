@@ -153,7 +153,7 @@ Required: True
 
 ### Drive
 
-The name of the drive you want to mount to this account. The command you need to run will be presented. Simply copy and paste the command to mount the drive. To use the drive run Set-Location [driveName]:
+The name of the drive you want to mount to this account. The command you need to run will be presented. Simply copy and paste the command to mount the drive. To use the drive run Set-Location `\[driveName\]:`
 
 ```yaml
 Type: String
