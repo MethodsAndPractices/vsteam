@@ -60,7 +60,7 @@ jobs:
 
     - name: Run C# unit tests
       shell: pwsh
-      run: dotnet test --logger "trx;LogFileName=test-results.trx" --logger "console;verbosity=detailed" --no-build
+      run: dotnet test --logger "trx;LogFileName=test-results.trx" --logger "console;verbosity=detailed"
 
     # - name: Publish C# test results
     #   if: success() || failure()
