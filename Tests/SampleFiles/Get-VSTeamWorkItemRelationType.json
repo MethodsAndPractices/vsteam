@@ -1,0 +1,273 @@
+{
+   "count": 18,
+   "value": [
+     {
+       "attributes": {
+         "usage": "workItemLink",
+         "editable": true,
+         "enabled": true,
+         "acyclic": true,
+         "directional": true,
+         "singleTarget": true,
+         "topology": "dependency",
+         "isForward": true,
+         "oppositeEndReferenceName": "Microsoft.VSTS.Common.Affects-Reverse"
+       },
+       "referenceName": "Microsoft.VSTS.Common.Affects-Forward",
+       "name": "Affects",
+       "url": "https://dev.azure.com/test/_apis/wit/workItemRelationTypes/Microsoft.VSTS.Common.Affects-Forward"
+     },
+     {
+       "attributes": {
+         "usage": "workItemLink",
+         "editable": true,
+         "enabled": true,
+         "acyclic": true,
+         "directional": true,
+         "singleTarget": true,
+         "topology": "dependency",
+         "isForward": false,
+         "oppositeEndReferenceName": "Microsoft.VSTS.Common.Affects-Forward"
+       },
+       "referenceName": "Microsoft.VSTS.Common.Affects-Reverse",
+       "name": "Affected By",
+       "url": "https://dev.azure.com/test/_apis/wit/workItemRelationTypes/Microsoft.VSTS.Common.Affects-Reverse"
+     },
+     {
+       "attributes": {
+         "usage": "workItemLink",
+         "editable": true,
+         "enabled": true,
+         "acyclic": true,
+         "directional": true,
+         "singleTarget": true,
+         "topology": "dependency",
+         "isForward": true,
+         "oppositeEndReferenceName": "Microsoft.VSTS.TestCase.SharedParameterReferencedBy-Reverse"
+       },
+       "referenceName": "Microsoft.VSTS.TestCase.SharedParameterReferencedBy-Forward",
+       "name": "Referenced By",
+       "url": "https://dev.azure.com/test/_apis/wit/workItemRelationTypes/Microsoft.VSTS.TestCase.SharedParameterReferencedBy-Forward"
+     },
+     {
+       "attributes": {
+         "usage": "workItemLink",
+         "editable": true,
+         "enabled": true,
+         "acyclic": true,
+         "directional": true,
+         "singleTarget": true,
+         "topology": "dependency",
+         "isForward": false,
+         "oppositeEndReferenceName": "Microsoft.VSTS.TestCase.SharedParameterReferencedBy-Forward"
+       },
+       "referenceName": "Microsoft.VSTS.TestCase.SharedParameterReferencedBy-Reverse",
+       "name": "References",
+       "url": "https://dev.azure.com/test/_apis/wit/workItemRelationTypes/Microsoft.VSTS.TestCase.SharedParameterReferencedBy-Reverse"
+     },
+     {
+       "attributes": {
+         "usage": "workItemLink",
+         "editable": true,
+         "enabled": true,
+         "acyclic": true,
+         "directional": true,
+         "singleTarget": true,
+         "topology": "dependency",
+         "isForward": true,
+         "oppositeEndReferenceName": "Microsoft.VSTS.Common.TestedBy-Reverse"
+       },
+       "referenceName": "Microsoft.VSTS.Common.TestedBy-Forward",
+       "name": "Tested By",
+       "url": "https://dev.azure.com/test/_apis/wit/workItemRelationTypes/Microsoft.VSTS.Common.TestedBy-Forward"
+     },
+     {
+       "attributes": {
+         "usage": "workItemLink",
+         "editable": true,
+         "enabled": true,
+         "acyclic": true,
+         "directional": true,
+         "singleTarget": true,
+         "topology": "dependency",
+         "isForward": false,
+         "oppositeEndReferenceName": "Microsoft.VSTS.Common.TestedBy-Forward"
+       },
+       "referenceName": "Microsoft.VSTS.Common.TestedBy-Reverse",
+       "name": "Tests",
+       "url": "https://dev.azure.com/test/_apis/wit/workItemRelationTypes/Microsoft.VSTS.Common.TestedBy-Reverse"
+     },
+     {
+       "attributes": {
+         "usage": "workItemLink",
+         "editable": true,
+         "enabled": true,
+         "acyclic": true,
+         "directional": true,
+         "singleTarget": true,
+         "topology": "dependency",
+         "isForward": true,
+         "oppositeEndReferenceName": "Microsoft.VSTS.TestCase.SharedStepReferencedBy-Reverse"
+       },
+       "referenceName": "Microsoft.VSTS.TestCase.SharedStepReferencedBy-Forward",
+       "name": "Test Case",
+       "url": "https://dev.azure.com/test/_apis/wit/workItemRelationTypes/Microsoft.VSTS.TestCase.SharedStepReferencedBy-Forward"
+     },
+     {
+       "attributes": {
+         "usage": "workItemLink",
+         "editable": true,
+         "enabled": true,
+         "acyclic": true,
+         "directional": true,
+         "singleTarget": true,
+         "topology": "dependency",
+         "isForward": false,
+         "oppositeEndReferenceName": "Microsoft.VSTS.TestCase.SharedStepReferencedBy-Forward"
+       },
+       "referenceName": "Microsoft.VSTS.TestCase.SharedStepReferencedBy-Reverse",
+       "name": "Shared Steps",
+       "url": "https://dev.azure.com/test/_apis/wit/workItemRelationTypes/Microsoft.VSTS.TestCase.SharedStepReferencedBy-Reverse"
+     },
+     {
+       "attributes": {
+         "usage": "workItemLink",
+         "editable": false,
+         "enabled": true,
+         "acyclic": true,
+         "directional": true,
+         "singleTarget": false,
+         "topology": "tree",
+         "isForward": true,
+         "oppositeEndReferenceName": "System.LinkTypes.Duplicate-Reverse"
+       },
+       "referenceName": "System.LinkTypes.Duplicate-Forward",
+       "name": "Duplicate",
+       "url": "https://dev.azure.com/test/_apis/wit/workItemRelationTypes/System.LinkTypes.Duplicate-Forward"
+     },
+     {
+       "attributes": {
+         "usage": "workItemLink",
+         "editable": false,
+         "enabled": true,
+         "acyclic": true,
+         "directional": true,
+         "singleTarget": false,
+         "topology": "tree",
+         "isForward": false,
+         "oppositeEndReferenceName": "System.LinkTypes.Duplicate-Forward"
+       },
+       "referenceName": "System.LinkTypes.Duplicate-Reverse",
+       "name": "Duplicate Of",
+       "url": "https://dev.azure.com/test/_apis/wit/workItemRelationTypes/System.LinkTypes.Duplicate-Reverse"
+     },
+     {
+       "attributes": {
+         "usage": "workItemLink",
+         "editable": false,
+         "enabled": true,
+         "acyclic": true,
+         "directional": true,
+         "singleTarget": true,
+         "topology": "dependency",
+         "isForward": true,
+         "oppositeEndReferenceName": "System.LinkTypes.Dependency-Reverse"
+       },
+       "referenceName": "System.LinkTypes.Dependency-Forward",
+       "name": "Successor",
+       "url": "https://dev.azure.com/test/_apis/wit/workItemRelationTypes/System.LinkTypes.Dependency-Forward"
+     },
+     {
+       "attributes": {
+         "usage": "workItemLink",
+         "editable": false,
+         "enabled": true,
+         "acyclic": true,
+         "directional": true,
+         "singleTarget": true,
+         "topology": "dependency",
+         "isForward": false,
+         "oppositeEndReferenceName": "System.LinkTypes.Dependency-Forward"
+       },
+       "referenceName": "System.LinkTypes.Dependency-Reverse",
+       "name": "Predecessor",
+       "url": "https://dev.azure.com/test/_apis/wit/workItemRelationTypes/System.LinkTypes.Dependency-Reverse"
+     },
+     {
+       "attributes": {
+         "usage": "workItemLink",
+         "editable": false,
+         "enabled": true,
+         "acyclic": true,
+         "directional": true,
+         "singleTarget": false,
+         "topology": "tree",
+         "isForward": true,
+         "oppositeEndReferenceName": "System.LinkTypes.Hierarchy-Reverse"
+       },
+       "referenceName": "System.LinkTypes.Hierarchy-Forward",
+       "name": "Child",
+       "url": "https://dev.azure.com/test/_apis/wit/workItemRelationTypes/System.LinkTypes.Hierarchy-Forward"
+     },
+     {
+       "attributes": {
+         "usage": "workItemLink",
+         "editable": false,
+         "enabled": true,
+         "acyclic": true,
+         "directional": true,
+         "singleTarget": false,
+         "topology": "tree",
+         "isForward": false,
+         "oppositeEndReferenceName": "System.LinkTypes.Hierarchy-Forward"
+       },
+       "referenceName": "System.LinkTypes.Hierarchy-Reverse",
+       "name": "Parent",
+       "url": "https://dev.azure.com/test/_apis/wit/workItemRelationTypes/System.LinkTypes.Hierarchy-Reverse"
+     },
+     {
+       "attributes": {
+         "usage": "workItemLink",
+         "editable": false,
+         "enabled": true,
+         "acyclic": false,
+         "directional": false,
+         "singleTarget": true,
+         "topology": "network"
+       },
+       "referenceName": "System.LinkTypes.Related",
+       "name": "Related",
+       "url": "https://dev.azure.com/test/_apis/wit/workItemRelationTypes/System.LinkTypes.Related"
+     },
+     {
+       "attributes": {
+         "usage": "resourceLink",
+         "editable": false,
+         "enabled": true
+       },
+       "referenceName": "AttachedFile",
+       "name": "Attached File",
+       "url": "https://dev.azure.com/test/_apis/wit/workItemRelationTypes/AttachedFile"
+     },
+     {
+       "attributes": {
+         "usage": "resourceLink",
+         "editable": false,
+         "enabled": true
+       },
+       "referenceName": "Hyperlink",
+       "name": "Hyperlink",
+       "url": "https://dev.azure.com/test/_apis/wit/workItemRelationTypes/Hyperlink"
+     },
+     {
+       "attributes": {
+         "usage": "resourceLink",
+         "editable": false,
+         "enabled": true
+       },
+       "referenceName": "ArtifactLink",
+       "name": "Artifact Link",
+       "url": "https://dev.azure.com/test/_apis/wit/workItemRelationTypes/ArtifactLink"
+     }
+   ]
+ }

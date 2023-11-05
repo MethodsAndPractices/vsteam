@@ -18,6 +18,9 @@ function Update-VSTeamWorkItem {
       [string]$AssignedTo,
 
       [Parameter(Mandatory = $false)]
+      [PSCustomObject[]]$Relations,
+
+      [Parameter(Mandatory = $false)]
       [hashtable]$AdditionalFields,
 
       [switch] $Force
@@ -48,6 +51,36 @@ function Update-VSTeamWorkItem {
             value = $AssignedTo
          }) | Where-Object { $_.value }
 
+      foreach ($relation in $Relations) {
+         switch ($relation.Operation) {
+            "add" {
+                  $body += @{
+                     op = $relation.Operation
+                     path = "/relations/-"
+                     value = @{
+                        rel = $relation.RelationType
+                        url = _buildRequestURI -area "wit" -resource "workItems" -id $relation.Id
+                        attributes = @{
+                           comment = $relation.Comment
+                        }
+                     }
+                  }
+            }
+            "remove" {
+               $body += @{
+                  op = $relation.Operation
+                  path = "/relations/$($relation.Index)"
+               }
+            }
+            "replace" {
+               $body += @{
+                  op = $relation.Operation
+                  path = "/relations/$($relation.Index)/attributes/comment"
+                  value = $relation.Comment
+               }
+            }
+         }
+      }
 
       #this loop must always come after the main work item fields defined in the function parameters
       if ($AdditionalFields) {
