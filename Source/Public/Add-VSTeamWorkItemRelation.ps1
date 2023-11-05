@@ -10,10 +10,10 @@ function Add-VSTeamWorkItemRelation {
       [int]$OfRelatedId,
       [switch]$Force
    )
-   
+
    process {
       $relations = $Id | New-VSTeamWorkItemRelation -RelationType $RelationType
-      if ($Force -or $pscmdlet.ShouldProcess($Id, "Update-WorkItem")) {
+      if ($Force -or $pscmdlet.ShouldProcess($Id, "add relations to work items")) {
          Update-VSTeamWorkItem -Id $OfRelatedId -Relations $relations
       }
    }

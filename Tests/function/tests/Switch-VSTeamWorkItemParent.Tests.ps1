@@ -18,7 +18,7 @@ Describe "VSTeamWorkItemParent" {
       Mock New-VSTeamWorkItemRelation { return @(
          [PSCustomObject]@{ Operation = 'remove'; Index = 0 }
          [PSCustomObject]@{ Id = 80; RelationType = 'System.LinkTypes.Hierarchy-Reverse'; Operation = 'add'; Index = '-' }
-      )} -ParameterFilter { $id -eq 80 -and $ImputObject -ne $null}
+      )} -ParameterFilter { $id -eq 80 -and $InputObject -ne $null}
    }
 
    Context 'Switch-VSTeamWorkItemParent' {

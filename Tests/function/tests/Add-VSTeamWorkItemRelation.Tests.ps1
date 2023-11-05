@@ -7,7 +7,7 @@ Describe "VSTeamWorkItemRelation" {
       . "$baseFolder/Source/Public/New-VSTeamWorkItemRelation.ps1"
 
       Mock _getInstance { return 'https://dev.azure.com/test' }
-      Mock _getApiVersion { return '1.0-unitTests' } #-ParameterFilter { $Service -eq 'Core' }
+      Mock _getApiVersion { return '1.0-unitTests' }
       Mock Invoke-RestMethod { Open-SampleFile 'Add-VSTeamWorkItemRelation-Id55.json' } -ParameterFilter { $Uri -like '*/_apis/wit/workitems/55*' -and $Method -eq 'Patch' }
       Mock New-VSTeamWorkItemRelation { return [PSCustomObject]@{ Id = 70; RelationType = 'System.LinkTypes.Hierarchy-Reverse'; Operation = 'add'; Index = '-' }} -ParameterFilter { $id -eq 70 }
    }

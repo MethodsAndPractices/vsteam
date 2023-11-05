@@ -30,7 +30,7 @@ Simple invocation, returns a Relation object.
 
 ```powershell
 $relations = New-VSTeamWorkItemRelation -Operation Remove -Index 0 |
-             New-VSTeamWorkItemRelation -Operation Remove -Index 1 
+             New-VSTeamWorkItemRelation -Operation Remove -Index 1
 Update-VSTeamWorkItem -Id 30 -Relations $relations
 ```
 Removes work first 2 links from work item 30
@@ -70,7 +70,7 @@ Pay attention that this use case, passing a list of work items from pipeline, ha
 ### Example 6
 
 ```powershell
-$relations = Get-VSTeamWiql -Id "f87b028b-0528-47d6-b517-2d82af680295" | 
+$relations = Get-VSTeamWiql -Id "f87b028b-0528-47d6-b517-2d82af680295" |
   Select-Object -ExpandProperty WorkItems |
   New-VSTeamWorkItemRelation -RelationType Related
 Update-VSTeamWorkItem -Id 30 -Relations $relations
@@ -83,14 +83,14 @@ Pay attention that this use case, passing a list of work items from pipeline, ha
 $relation = New-VSTeamWorkItemRelation -RelationType Related -Operation Replace -Comment "updated comment"
 Update-VSTeamWorkItem -Id 30 -Relations $relations
 ```
-Updates the comment of a relation. The replace operation only supports comment update. 
+Updates the comment of a relation. The replace operation only supports comment update.
 If you really need to change a relation, like re-parent a work item, you need to create two relations: first, remove and then add operations.
 
 ### Example 8
 ```powershell
 $relations =@()
 $id = Get-VSTeamWorkItem -id 30 -Expand Relation
-for ($i=0; $i -lt $id.relations.Count; $i++) { 
+for ($i=0; $i -lt $id.relations.Count; $i++) {
   $relations += New-VSTeamWorkItemRelation -Operation Remove -Index $i
 }
 Update-VSTeamWorkItem -Id 30 -Relations $relations
@@ -99,7 +99,7 @@ Removes all the links from work item 30
 
 ## PARAMETERS
 
-### ImputObject
+### InputObject
 
 Operation: Intended for fluent syntax (see Example 2)
 

@@ -17,9 +17,9 @@
                <PropertySet>
                   <Name>DefaultDisplayPropertySet</Name>
                   <ReferencedProperties>
-                     <Name>name</Name>
-                     <Name>referenceName</Name>
-                     <Name>usage</Name>
+                     <Name>Name</Name>
+                     <Name>ReferenceName</Name>
+                     <Name>Usage</Name>
                      <Name>Topology</Name>
                   </ReferencedProperties>
                </PropertySet>

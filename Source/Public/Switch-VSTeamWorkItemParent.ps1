@@ -8,41 +8,57 @@ function Switch-VSTeamWorkItemParent {
       [switch]$AddParent,
       [switch]$Force
    )
-   
+
    process {
+
+      $workItem = $null
+
       foreach($item in $Id) {
          $ParentNeeded = $false
-         $wi = Get-VSTeamWorkItem -Id $item -Expand Relations
-         if ($null -eq $wi.Relations -and $AddParent) {
+         $workItem = Get-VSTeamWorkItem -Id $item -Expand Relations
+
+         if ($null -eq $workItem.Relations -and $AddParent) {
             $ParentNeeded = $true
-         } else {
-            if ($wi.Relations) {
-               $relations = $wi | Select-Object -ExpandProperty Relations
-               $index = 0
-               $hasParent = $false
-               foreach($relation in $relations) {
-                  if ($relation.rel -eq 'System.LinkTypes.Hierarchy-Reverse') {
-                        $hasParent = $true
-                        if ($relation.url.split('/')[-1] -ne $ParentId) {
-                           $patch = New-VSTeamWorkItemRelation -Index $index -Operation Remove | New-VSTeamWorkItemRelation -Id $ParentId -RelationType Parent
-                           if ($Force -or $pscmdlet.ShouldProcess($item, "Update-WorkItem")) {
-                              $wi = Update-VSTeamWorkItem -Id $item -Relations $patch
+         }
+         elseif ($workItem.Relations) {
+
+                  $relations = $workItem | Select-Object -ExpandProperty Relations
+                  $index = 0
+                  $hasParent = $false
+
+                  foreach($relation in $relations) {
+
+                     if ($relation.rel -eq 'System.LinkTypes.Hierarchy-Reverse') {
+                           $hasParent = $true
+                           if ($relation.url.split('/')[-1] -ne $ParentId) {
+
+                              $patch = New-VSTeamWorkItemRelation -Index $index -Operation Remove | New-VSTeamWorkItemRelation -Id $ParentId -RelationType Parent
+
+                              if ($Force -or $pscmdlet.ShouldProcess($item, "Update-WorkItem")) {
+                                 $workItem = Update-VSTeamWorkItem -Id $item -Relations $patch
+                              }
+
+                              break
                            }
-                           break
-                        }
+                     }
+                     $index++
+
                   }
-                  $index++
+
+                  if (-not $hasParent -and $AddParent) {
+                     $ParentNeeded = $true
+                  }
                }
-               if (-not $hasParent -and $AddParent) {
-                  $ParentNeeded = $true
-               }
-            }
+
+
+         if ($ParentNeeded -and ($Foce -or $pscmdlet.ShouldProcess($Id, "Updates the parent work item"))) {
+
+            $newRelation = New-VSTeamWorkItemRelation -Id $ParentId -RelationType Parent
+            $workItem = Update-VSTeamWorkItem -Id $item -Relations $newRelation
+
          }
 
-         if ($ParentNeeded -and ($Foce -or $pscmdlet.ShouldProcess($Id, "Update-WorkItem"))) {
-            $wi = Update-VSTeamWorkItem -Id $item -Relations (New-VSTeamWorkItemRelation -Id $ParentId -RelationType Parent)
-         }
-         $wi
+         return $workItem
       }
    }
 }
