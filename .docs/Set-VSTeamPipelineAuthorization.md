@@ -43,7 +43,7 @@ Authorize all pipelines to access the resource with id $resourceId of type Repos
 
 ## PARAMETERS
 
-### -Authorize
+### Authorize
 Allows given pipelines to use the named resource
 
 ```yaml
@@ -58,7 +58,7 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -AuthorizeAll
+### AuthorizeAll
 Removes any authorization restrictions for the given resource
 
 ```yaml
@@ -73,7 +73,7 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -PipelineIds
+### PipelineIds
 List of pipeline Ids to authorize
 
 ```yaml
@@ -88,7 +88,7 @@ Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
-### -ResourceId
+### ResourceId
 Resource which the pipelines are authorized to use.
 
 ```yaml
@@ -103,7 +103,7 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ResourceType
+### ResourceType
 Resource type to authorize the pipeline on
 
 ```yaml

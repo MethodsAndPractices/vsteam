@@ -35,9 +35,9 @@ function Add-VSTeamAccessControlEntry {
       [Parameter(Mandatory = $true)]
       [ValidateRange(0, [int]::MaxValue)]
       [int] $DenyMask,
-      
+
       [Parameter(Mandatory = $false)]
-      [switch] $OverwriteMask = $false
+      [switch] $OverwriteMask
    )
    process {
 
@@ -48,7 +48,8 @@ function Add-VSTeamAccessControlEntry {
       if ($SecurityNamespace) {
          $SecurityNamespaceId = $SecurityNamespace.ID
       }
-      $merge = !$OverwriteMask
+      [string]$merge = (!$OverwriteMask)
+      $merge = $merge.ToLowerInvariant()
       $body =
       @"
    {

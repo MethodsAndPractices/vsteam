@@ -32,13 +32,13 @@ This command returns all the package feeds for the project.
 
 ## PARAMETERS
 
-### FeedId
+### Id
 
 Specifies the ID of the feed.
 
 ```yaml
 Type: Guid
-Aliases: ID
+Aliases: FeedId
 Accept pipeline input: true (ByPropertyName)
 ```
 

@@ -23,7 +23,7 @@ Updates the pool with id 13 with the name new "UpdatedTestPoolName" that is auto
 
 ## PARAMETERS
 
-### -Id
+### Id
 
 Id of the pool to return.
 
@@ -35,7 +35,7 @@ Required: True
 Accept pipeline input: true (ByPropertyName)
 ```
 
-### -Name
+### Name
 
 Name of the pool to update.
 
@@ -44,7 +44,7 @@ Type: string
 Required: True
 ```
 
-### -Description
+### Description
 
 Description of the pool to update.
 
@@ -53,7 +53,7 @@ Type: string
 Required: False
 ```
 
-### -AutoProvision
+### AutoProvision
 
 Auto-provision this agent pool in new projects.
 
@@ -62,7 +62,7 @@ Type: string
 Required: True
 ```
 
-### -NoAutoUpdates
+### NoAutoUpdates
 
 Turn off automatic updates of agents in the pool. Default is turned on.
 

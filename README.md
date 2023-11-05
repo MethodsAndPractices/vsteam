@@ -95,9 +95,9 @@ Check the [Guidelines](.github/CONTRIBUTING.md) if you want to contribute.
 To run build the script Build-Module.ps1. The script has the following parameters:
 
 * `-outputDir 'C:\outputdir'`: The final module is stored in a dist folder by default. You can override this folder by using the parameter
-* `-buildHelp`: Building help is skipped by default to speed your inner loop. Use this flag to include building the help
+* `-buildHelp`: Building help is skipped by default to speed up your inner loop. Use this flag to include building the help
 * `-installDep`: By default the build will not install dependencies unless this switch is used
-* `-ipmo`: build module will be imported into session. IF a loaded module exist, it will be overwritten with the build version.
+* `-ipmo`: build module will be imported into session. IF a loaded module exists, it will be overwritten with the build version.
 * `-analyzeScript`: run the static code analyzer for the scripts with PSScriptAnalyzer
 * `-runTests`: runs the unit tests
 * `-testName 'tests to filter'`: can be used to filter the unit test parts that should be run. Wildcards can be used! See [the Pester documentation](https://github.com/pester/Pester/wiki/Invoke%E2%80%90Pester#testname-alias-name) for a more elaborate explanation.
@@ -155,7 +155,7 @@ Runs all unit tests and executes the static code analysis.
 .\Build-Module.ps1 -runTests -codeCoverage -analyzeScript
 ```
 
-Runs the tests, but executes only the unit tests that have the description "workitems" for the logical grouped unit tests. This can be used if you only want to test a portion of your unit tests.
+Runs the tests, but executes only the unit tests that have the description "workitems" for the logically grouped unit tests. This can be used if you only want to test a portion of your unit tests.
 ```powershell
 .\Build-Module.ps1 -runTests -testName workitems
 ```

@@ -1,8 +1,6 @@
 {
    "files.exclude": {
       "**/.vs": true,
-      "**/docs": true,
-      "**/package-lock.json": true
    },
    "files.associations": {
       "*.yml": "yaml",
@@ -17,10 +15,27 @@
       "workbench.action.files.newUntitled"
    ],
    "powershell.pester.useLegacyCodeLens": false,
-   "powershell.pester.outputVerbosity": "Detailed",
+   "powershell.pester.outputVerbosity": "Minimal",
    "powershell.codeFormatting.addWhitespaceAroundPipe": true,
    "gitdoc.enabled": false,
    "github-actions.workflows.pinned.workflows": [
       ".github/workflows/actions-pipeline.yml"
-   ]
+   ],
+   "sarif-viewer.connectToGithubCodeScanning": "off",
+   "powershell.buttons.showPanelMovementButtons": true,
+   "powershell.buttons.showRunButtons": true,
+   "powershell.integratedConsole.startInBackground": true,
+   "powershell.integratedConsole.suppressStartupBanner": true,
+   "powershell.codeFormatting.whitespaceBetweenParameters": true,
+   "powershell.codeFormatting.whitespaceBeforeOpenParen": true,
+   "powershell.codeFormatting.useCorrectCasing": true,
+   "powershell.codeFormatting.useConstantStrings": true,
+   "powershell.codeFormatting.trimWhitespaceAroundPipe": true,
+   "powershell.codeFormatting.pipelineIndentationStyle": "IncreaseIndentationForFirstPipeline",
+   "powershell.codeFormatting.avoidSemicolonsAsLineTerminators": true,
+   "powershell.enableReferencesCodeLens": true,
+   "powershell.pester.codeLens": false,
+   "pester.suppressCodeLensNotice": true,
+   "pester.runTestsInNewProcess": true,
+   "powershell.pester.debugOutputVerbosity": "Minimal"
 }

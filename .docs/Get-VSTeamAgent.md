@@ -14,6 +14,40 @@
 
 ## EXAMPLES
 
+### Example 1
+
+```powershell
+Get-VSTeamAgent -PoolId 5
+```
+
+This command retrieves all agents within the pool with the ID 5.
+
+### Example 2
+
+```powershell
+Get-VSTeamAgent -PoolId 3 -Id 42
+```
+
+This example fetches the agent with the ID 42 within the pool with the ID 3.
+
+### Example 3
+
+```powershell
+$agent = Get-VSTeamAgent -PoolId 1 -Id 91
+$agent.systemCapabilities.PSObject.Properties['Agent.OS'].Value
+```
+
+In this example, the agent with the ID 91 in the pool with the ID 1 is fetched. Afterwards, the system capability 'Agent.OS' of the agent is displayed.
+
+### Example 4
+
+```powershell
+$agents = Get-VSTeamAgent -PoolId 2
+$agents | Where-Object { $_.status -eq "Online" }
+```
+
+This command retrieves all agents in the pool with the ID 2 and then filters to show only those agents that are currently online.
+
 ## PARAMETERS
 
 ### PoolId

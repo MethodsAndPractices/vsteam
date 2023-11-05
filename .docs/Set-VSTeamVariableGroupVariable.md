@@ -73,6 +73,8 @@ Accept wildcard characters: False
 
 <!-- #include "./params/projectName.md" -->
 
+<!-- #include "./params/forcegroup.md" -->
+
 ## INPUTS
 
 ## OUTPUTS

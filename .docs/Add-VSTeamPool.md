@@ -24,7 +24,7 @@ It's creating an agent pool with the name "TestPool" that is auto provisioning t
 
 ## PARAMETERS
 
-### -Name
+### Name
 
 Name of the pool to create.
 
@@ -33,7 +33,7 @@ Type: string
 Required: True
 ```
 
-### -Description
+### Description
 
 Description of the pool to create.
 
@@ -42,7 +42,7 @@ Type: string
 Required: False
 ```
 
-### -AutoProvision
+### AutoProvision
 
 Auto-provision this agent pool in new projects.
 
@@ -51,7 +51,7 @@ Type: string
 Required: True
 ```
 
-### -AutoAuthorize
+### AutoAuthorize
 
 Grant access permission to all pipelines.
 
@@ -60,7 +60,7 @@ Type: string
 Required: True
 ```
 
-### -NoAutoUpdates
+### NoAutoUpdates
 
 Turn off automatic updates of agents in the pool. Default is turned on.
 

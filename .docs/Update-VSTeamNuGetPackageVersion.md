@@ -54,6 +54,12 @@ Aliases: Version
 Accept pipeline input: true (ByValue, ByPropertyName)
 ```
 
+### IsListed
+
+Indicates the listing state of a package.
+
+<!-- #include "./params/projectName.md" -->
+
 <!-- #include "./params/forcegroup.md" -->
 
 ## INPUTS

@@ -84,6 +84,14 @@ branch name of the remote repository where the YAML file should be checked
 Type: String
 ```
 
+### YamlOverride
+
+YAML content that should be checked
+
+```yaml
+Type: String
+```
+
 <!-- #include "./params/projectName.md" -->
 
 ## INPUTS

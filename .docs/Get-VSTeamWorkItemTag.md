@@ -44,7 +44,7 @@ This will return a specific work item tag
 
 <!-- #include "./params/projectName.md" -->
 
-### NameOrTagId
+### TagIdOrName
 
 Name or ID of the tag to return
 

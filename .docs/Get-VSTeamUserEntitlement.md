@@ -68,12 +68,13 @@ Type: Int32
 Parameter Sets: List
 ```
 
-### UserId
+### Id
 
 The id of the user to retrieve.
 
 ```yaml
 Type: String[]
+Aliases: UserId
 Parameter Sets: ByID
 ```
 
@@ -114,16 +115,16 @@ Default value: $null
 
 ### Filter
 
-Equality operators relating to searching user entitlements seperated by and clauses. Valid filters include: licenseId, licenseStatus, userType, and name. 
+Equality operators relating to searching user entitlements seperated by and clauses. Valid filters include: licenseId, licenseStatus, userType, and name.
 - licenseId: filters based on license assignment using license names. i.e. licenseId eq 'Account-Stakeholder' or licenseId eq 'Account-Express'.
-- licenseStatus: filters based on license status. currently only supports disabled. i.e. licenseStatus eq 'Disabled'. To get disabled basic licenses, you would pass (licenseId eq 'Account-Express' and licenseStatus eq 'Disabled') 
-- userType: filters off identity type. Suppored types are member or guest i.e. userType eq 'member'. 
-- name: filters on if the user's display name or email contians given input. i.e. get all users with "test" in email or displayname is "name eq 'test'". 
+- licenseStatus: filters based on license status. currently only supports disabled. i.e. licenseStatus eq 'Disabled'. To get disabled basic licenses, you would pass (licenseId eq 'Account-Express' and licenseStatus eq 'Disabled')
+- userType: filters off identity type. Suppored types are member or guest i.e. userType eq 'member'.
+- name: filters on if the user's display name or email contians given input. i.e. get all users with "test" in email or displayname is "name eq 'test'".
 
 A valid query could be: (licenseId eq 'Account-Stakeholder' or (licenseId eq 'Account-Express' and licenseStatus eq 'Disabled')) and name eq 'test' and userType eq 'guest'.
 
 Currently, filter names and values must match exactly the case. i.e.:
-* LicenseID will throw Invalid filter message. 
+* LicenseID will throw Invalid filter message.
 * licenseId eq 'account-stakeholder' will return an empty list
 
 ```yaml
@@ -144,6 +145,22 @@ The acceptable values for this parameter are:
 
 Other licenses which source (licenseSource) is MSDN cannot be filtered here
 Parameter values are case sensitive
+
+```yaml
+Type: string
+Parameter Sets: PagedParams
+Required: False
+Default value: None
+```
+
+### LicenseId
+
+Filters based on license id.
+
+The acceptable values for this parameter are:
+- Account-Stakeholder (Stakeholder)
+- Account-Express (Basic)
+- Account-Advanced (Basic + Test Plans)
 
 ```yaml
 Type: string

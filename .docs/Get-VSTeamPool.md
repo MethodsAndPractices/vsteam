@@ -14,6 +14,34 @@
 
 ## EXAMPLES
 
+### Example 1
+```powershell
+Get-VSTeamPool
+```
+
+Returns a list of all agent pools.
+
+### Example 2
+```powershell
+Get-VSTeamPool -Id 12345
+```
+
+Returns the agent pool with the specified `Id` "12345".
+
+### Example 3
+```powershell
+Get-VSTeamPool | Where-Object { $_.Name -eq "Default" }
+```
+
+Returns the agent pool with the name "Default".
+
+### Example 4
+```powershell
+Get-VSTeamPool | Sort-Object Name
+```
+
+Returns all agent pools sorted by their name in ascending order.
+
 ## PARAMETERS
 
 ### Id

@@ -45,7 +45,10 @@ function Add-VSTeamWorkItemIterationPermission {
       [vsteam_lib.WorkItemIterationPermissions]$Allow,
 
       [parameter(Mandatory = $false)]
-      [vsteam_lib.WorkItemIterationPermissions]$Deny
+      [vsteam_lib.WorkItemIterationPermissions]$Deny,
+
+      [Parameter(Mandatory = $false)]
+      [switch] $OverwriteMask
    )
 
    process {
@@ -106,6 +109,7 @@ function Add-VSTeamWorkItemIterationPermission {
          -Descriptor $Descriptor `
          -Token $token `
          -AllowMask ([int]$Allow) `
-         -DenyMask ([int]$Deny)
+         -DenyMask ([int]$Deny) `
+         -OverwriteMask:$OverwriteMask.IsPresent
    }
 }

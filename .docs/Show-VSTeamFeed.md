@@ -24,14 +24,14 @@ This command will open a web browser with this feed showing.
 
 ## PARAMETERS
 
-### Id
+### Name
 
 Specifies feed by ID or Name.
 
 ```yaml
 Type: Int32
 Parameter Sets:
-Aliases: Name
+Aliases: Id
 Required: True
 Accept pipeline input: true (ByPropertyName)
 ```

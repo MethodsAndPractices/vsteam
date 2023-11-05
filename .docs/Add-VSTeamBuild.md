@@ -98,6 +98,10 @@ Which source branch to use for this build. Overrides default branch in build def
 Type: String
 ```
 
+### TemplateParameters
+
+ Allows the user to pass in dynamic values to the build pipeline when queuing a new build, potentially influencing how the build runs based on the values of these parameters.
+
 ### BuildParameters
 
 A hashtable with build parameters.

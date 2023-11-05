@@ -32,7 +32,10 @@ function Add-VSTeamProjectPermission {
       [vsteam_lib.ProjectPermissions]$Allow,
 
       [parameter(Mandatory = $false)]
-      [vsteam_lib.ProjectPermissions]$Deny
+      [vsteam_lib.ProjectPermissions]$Deny,
+
+      [Parameter(Mandatory = $false)]
+      [switch] $OverwriteMask
    )
 
    process {
@@ -57,6 +60,7 @@ function Add-VSTeamProjectPermission {
          -Descriptor $Descriptor `
          -Token $token `
          -AllowMask ([int]$Allow) `
-         -DenyMask ([int]$Deny)
+         -DenyMask ([int]$Deny) `
+         -OverwriteMask:$OverwriteMask.IsPresent
    }
 }

@@ -47,6 +47,10 @@ Allows the user 'test@testuser.com' to the build with ID 5 to destry builds and 
 
 ## PARAMETERS
 
+### ProjectID
+
+ID of the project.
+
 ### BuildID
 
 The build ID of the build pipeline to permit the identity object to.
@@ -99,6 +103,15 @@ Permissions that should be denied. If no permissions are needed, then leave this
 ```yaml
 Type: VSTeamProjectPermissions
 Required: True
+```
+
+### OverwriteMask
+
+Switch to overwrite the mask values rather than merge them.
+
+```yaml
+Type: Switch
+Required: False
 ```
 
 <!-- #include "./params/projectName.md" -->

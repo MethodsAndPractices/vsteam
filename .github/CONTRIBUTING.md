@@ -1,6 +1,6 @@
 # Contributing to VSTeam
 
-I am truly grateful for all the support developing VSTeam. It means a lot that you spend your time to help improve this module.
+We are truly grateful for all the support developing VSTeam. It means a lot that you spend your time to help improve this module.
 
 ## Steps to contribute
 
@@ -58,18 +58,42 @@ This confirms that we know how to build a complete request to the service. This 
 
 Now it is time to get your hands on VSTeam. Fork this repository, clone it to your development machine and create a branch for your work.
 
+Certainly, here's the updated text for the "### Write Help" section and a new "### Troubleshooting Help Errors" section:
+
+---
+
 ### Write Help
 
-Every new function must have help that explains how to use it. The help can be authored using Markdown in the .docs folder. The help is generated using a combination of [platyPS](https://github.com/PowerShell/platyPS) and [markdown-include](https://github.com/sethen/markdown-include). platyPS enables the authoring of External Help with Markdown.  When creating help for a PowerShell module you will find yourself writing a lot of the same Markdown multiple times. markdown-include enables reuse of the Markdown by allowing you to include markdown files into other markdown files using a C style include syntax.
+Every new function must have help that explains how to use it. The help can be authored using Markdown in the .docs folder. The help is generated using a combination of [platyPS](https://github.com/PowerShell/platyPS) and [markdown-include](https://github.com/sethen/markdown-include).
 
-I have found writing the help before I start to write the function saves me a lot of time. This forces me to think of all the use cases of the function and which parameters I plan to support. It also allows me to get the boring part out of the way so I end on a high note writing the code.
+- **platyPS**: Enables the authoring of External Help with Markdown.
+- **markdown-include**: Provides the capability to reuse Markdown content by allowing inclusion of markdown files into other markdown files using a C style include syntax.
 
-You can run the snippet below to make sure you can generate the help file.
+Writing the help documentation before starting with the function can be a beneficial approach. This strategy ensures:
+- Consideration of all potential use cases for the function.
+- Identification of the necessary parameters to support.
+- Efficient time management by handling the more tedious task of documentation first, allowing you to focus on the exciting coding part later.
+
+To ensure your documentation is correctly formatted and complete, run the snippet below. This will generate the help files and allow you to verify their accuracy.
 
 ```powershell
 #only generates the help files. This is an incomplete build
 .\Build-Module.ps1 -buildHelp -skipLibBuild
 ```
+
+#### Troubleshooting Help Errors
+
+If you encounter errors during the help generation, consider the following common issues and their resolutions:
+
+- **Missing Examples**: Ensure that every cmdlet has at least one example under the "## EXAMPLES" section.
+
+- **Undocumented Parameters**: Confirm that all parameters for a cmdlet are documented under the "## Parameters" section. Standard parameters like "Verbose", "Debug", and "OutBuffer" are usually auto-documented and might not need explicit documentation.
+
+- **Case Sensitivity**: While PowerShell cmdlet and parameter names are case-insensitive, ensure consistency in your documentation for clarity.
+
+- **Invalid Markdown Syntax**: Check for incorrect or incomplete Markdown formatting, which might lead to generation errors.
+
+Remember, the goal is to provide clear and comprehensive documentation to guide users effectively. Following the established guidelines ensures that users can understand and use the functions with ease.
 
 ### Write Unit Test
 

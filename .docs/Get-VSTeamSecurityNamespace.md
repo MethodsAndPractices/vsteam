@@ -14,6 +14,34 @@
 
 ## EXAMPLES
 
+### Example 1
+```powershell
+Get-VSTeamSecurityNamespace
+```
+
+Returns a list of all security namespaces.
+
+### Example 2
+```powershell
+Get-VSTeamSecurityNamespace -Id "abcdef12-1234-5678-9abc-def123456789"
+```
+
+Returns the security namespace with the specified `Id`.
+
+### Example 3
+```powershell
+Get-VSTeamSecurityNamespace -Name "Project"
+```
+
+Returns the security namespace with the name "Project".
+
+### Example 4
+```powershell
+Get-VSTeamSecurityNamespace -LocalOnly
+```
+
+Returns only the local security namespaces.
+
 ## PARAMETERS
 
 ### Id

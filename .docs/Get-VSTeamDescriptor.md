@@ -14,6 +14,22 @@
 
 ## EXAMPLES
 
+### Example 1
+
+```powershell
+Get-VSTeamDescriptor -StorageKey "a1b2c3d4-e5f6-g7h8-i9j0-k1l2m3n4o5p6"
+```
+
+This command retrieves the descriptor associated with the provided storage key.
+
+### Example 2
+
+```powershell
+"a1b2c3d4-e5f6-g7h8-i9j0-k1l2m3n4o5p6" | Get-VSTeamDescriptor
+```
+
+This example demonstrates how to pipe a storage key string directly to `Get-VSTeamDescriptor` to obtain the corresponding descriptor.
+
 ## PARAMETERS
 
 ### StorageKey

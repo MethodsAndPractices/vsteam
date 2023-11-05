@@ -2,6 +2,7 @@
 param (
    # version number that should be used when publishing to github
    [Parameter(Mandatory = $true, ParameterSetName = "PublishGithub")]
+   [Parameter(Mandatory = $true, ParameterSetName = "PublishPSGallery")]
    [version]
    $Version,
    #github token
@@ -46,7 +47,6 @@ if ($PsCmdlet.ParameterSetName -eq "PublishGithub") {
 }
 elseif ($PsCmdlet.ParameterSetName -eq "PublishPSGallery" -or $PsCmdlet.ParameterSetName -eq "TestPublishPSGallery") {
 
-
    $DestinationPath = "$ModulePath/VSTeam"
 
    Copy-Item -Path "$ModulePath/dist" -Destination $DestinationPath -Recurse -WhatIf:$false
@@ -74,9 +74,9 @@ elseif ($PsCmdlet.ParameterSetName -eq "PublishPSGallery" -or $PsCmdlet.Paramete
    }
 
    if ($PSCmdlet.ShouldProcess("Module publishing to PS gallery")) {
-      Publish-Module -NuGetApiKey $PSGalleryApiKey -Path $DestinationPath
+      Publish-Module -NuGetApiKey $PSGalleryApiKey -Path $DestinationPath -RequiredVersion $Version
    }
    else {
-      Publish-Module -NuGetApiKey $PSGalleryApiKey -Path $DestinationPath -WhatIf
+      Publish-Module -NuGetApiKey $PSGalleryApiKey -Path $DestinationPath -RequiredVersion $Version -WhatIf
    }
 }

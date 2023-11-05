@@ -5,47 +5,47 @@ function Get-VSTeamRelease {
       [Parameter(Position = 0, Mandatory = $true, ParameterSetName = 'ByIdRaw')]
       [Parameter(Position = 0, Mandatory = $true, ParameterSetName = 'ByID', ValueFromPipelineByPropertyName = $true)]
       [Alias('ReleaseID')]
-      [int[]] $id,
+      [int[]] $Id,
 
       [Parameter(ParameterSetName = 'List')]
-      [string] $searchText,
+      [string] $SearchText,
 
       [Parameter(ParameterSetName = 'List')]
       [ValidateSet('Draft', 'Active', 'Abandoned')]
-      [string] $statusFilter,
+      [string] $StatusFilter,
 
       [ValidateSet('environments', 'artifacts', 'approvals', 'none')]
-      [string] $expand,
+      [string] $Expand,
 
       [Parameter(ParameterSetName = 'List')]
-      [int] $definitionId,
+      [int] $DefinitionId,
 
       [Parameter(ParameterSetName = 'List')]
-      [string] $artifactVersionId,
+      [string] $ArtifactVersionId,
 
       [Parameter(ParameterSetName = 'List')]
-      [int] $top,
+      [int] $Top,
 
       [Parameter(ParameterSetName = 'List')]
-      [string] $createdBy,
+      [string] $CreatedBy,
 
       [Parameter(ParameterSetName = 'List')]
-      [DateTime] $minCreatedTime,
+      [DateTime] $MinCreatedTime,
 
       [Parameter(ParameterSetName = 'List')]
-      [DateTime] $maxCreatedTime,
+      [DateTime] $MaxCreatedTime,
 
       [Parameter(ParameterSetName = 'List')]
       [ValidateSet('ascending', 'descending')]
-      [string] $queryOrder,
+      [string] $QueryOrder,
 
       [Parameter(ParameterSetName = 'List')]
-      [string] $continuationToken,
+      [string] $ContinuationToken,
 
       [switch] $JSON,
 
       [Parameter(Mandatory = $true, ParameterSetName = 'ByIdRaw')]
-      [switch] $raw,
+      [switch] $Raw,
 
       [Parameter(Position = 1, ValueFromPipelineByPropertyName = $true)]
       [vsteam_lib.ProjectValidateAttribute($false)]
@@ -61,8 +61,8 @@ function Get-VSTeamRelease {
          version   = $(_getApiVersion Release)
       }
 
-      if ($id) {
-         foreach ($item in $id) {
+      if ($Id) {
+         foreach ($item in $Id) {
             $resp = _callAPI @commonArgs -ProjectName $ProjectName -id $item
 
             if ($JSON.IsPresent) {
@@ -87,17 +87,17 @@ function Get-VSTeamRelease {
          }
 
          $queryString = @{
-            '$top'              = $top
-            '$expand'           = $expand
-            'createdBy'         = $createdBy
-            'queryOrder'        = $queryOrder
-            'searchText'        = $searchText
-            'statusFilter'      = $statusFilter
-            'definitionId'      = $definitionId
-            'minCreatedTime'    = $minCreatedTime
-            'maxCreatedTime'    = $maxCreatedTime
-            'continuationToken' = $continuationToken
-            'artifactVersionId' = $artifactVersionId
+            '$top'              = $Top
+            '$expand'           = $Expand
+            'createdBy'         = $CreatedBy
+            'queryOrder'        = $QueryOrder
+            'searchText'        = $SearchText
+            'statusFilter'      = $StatusFilter
+            'definitionId'      = $DefinitionId
+            'minCreatedTime'    = $MinCreatedTime
+            'maxCreatedTime'    = $MaxCreatedTime
+            'continuationToken' = $ContinuationToken
+            'artifactVersionId' = $ArtifactVersionId
          }
 
          # Call the REST API

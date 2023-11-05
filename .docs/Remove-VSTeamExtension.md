@@ -14,6 +14,20 @@
 
 ## EXAMPLES
 
+### Example 1
+```powershell
+Remove-VSTeamExtension -PublisherId "Contoso" -ExtensionId "MyExtension"
+```
+
+Removes the extension "MyExtension" from the publisher "Contoso".
+
+### Example 2
+```powershell
+Remove-VSTeamExtension -PublisherId "Contoso" -ExtensionId "MyExtension" -Force
+```
+
+Removes the extension "MyExtension" from the publisher "Contoso" and forces the removal without any confirmation prompts.
+
 ## PARAMETERS
 
 ### PublisherId

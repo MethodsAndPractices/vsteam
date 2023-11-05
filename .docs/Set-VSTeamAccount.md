@@ -80,24 +80,7 @@ Will add the account and use the OAuth Token provided by AzD when you check the 
 
 ## PARAMETERS
 
-### Account
-
-The Azure DevOps (AzD) account name to use.
-DO NOT enter the entire URL.
-
-Just the portion after dev.azure.com. For example in the
-following url mydemos is the account name.
-<https://dev.azure.com/mydemos>
-or
-The full Team Foundation Server (TFS) url including the collection.
-<http://localhost:8080/tfs/DefaultCollection>
-
-```yaml
-Type: String
-Parameter Sets: Secure, Plain, Windows
-Required: True
-Position: 1
-```
+<!-- #include "./params/account.md" -->
 
 ### SecurePersonalAccessToken
 
@@ -170,7 +153,7 @@ Required: True
 
 ### Drive
 
-The name of the drive you want to mount to this account. The command you need to run will be presented. Simply copy and paste the command to mount the drive. To use the drive run Set-Location [driveName]:
+The name of the drive you want to mount to this account. The command you need to run will be presented. Simply copy and paste the command to mount the drive. To use the drive run Set-Location `\[driveName\]:`
 
 ```yaml
 Type: String

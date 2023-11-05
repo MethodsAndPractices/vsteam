@@ -1,16 +1,19 @@
+**NOTE**: Changelog file will not be updated anymore. Changes can be seeen in the [GitHub releases](https://github.com/MethodsAndPractices/vsteam/releases)
+
 # Changelog
 
 ## 7.14.0
-Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/535) from [Miguel Nieto](https://github.com/mnieto) the following:
-- Feat: added work ittems relationship management with the below new/modified CmdLets
-  - Add-VSTeamWorkItemRelation: Adds a relationship between different workitems
-  - Get-VSTeamWorkItemRelation: Retrieves a list of relations from a single work item
-  - Get-VSTeamWorkItemRelationType: Returns a list of the different relation types between work items and links inside the same work item
-  - New-VSTeamWorkItemRelation: Helper cmdlet that creates an in-memory Relation object to facilitate relationship management
-  - Remove-VSTeamWorkItemRelation: Removes the relation from one or more workitems and one or more related workitems
-  - Switch-VSTeamWorkItemParent: Replaces the parent of one or more work items
-  - Update-VSTeamWorkItem: Added -Relations parameter
 
+Merged [Pull Request #545](https://github.com/MethodsAndPractices/vsteam/pull/545) from [Sebastian Schütze](https://github.com/SebastianSchuetze) the following:
+- Added new cmdlets for banner management: `Add-VSTeamBanner`, `Update-VSTeamBanner`, `Get-VSTeamBanner` and `Remove-VSTeamBanner`.
+
+## 7.13.3
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/539) from [Erik Sijnja](https://github.com/esijnja) the following:
+- Send valid json body with Add-VSTeamAccessControlEntity [538](https://github.com/MethodsAndPractices/vsteam/issues/538)
+
+## 7.13.2
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/536) from [Sebastian Schütze](https://github.com/SebastianSchuetze) the following:
+- Fix missing switch OverwriteMask to all cmdlets who are dependant to Add-VSTeamAccessControlList
 
 ## 7.13.1
 Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/532) from [Miguel Nieto](https://github.com/mnieto) the following:
@@ -249,7 +252,7 @@ Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/354)
 
 All classes are moved to a new C# class library.
 
-You must have [.netCore](dot.net) installed to build the class lib on macOS, Linux and Windows.
+You must have [.netCore](https://dot.net) installed to build the class lib on macOS, Linux and Windows.
 
 All types were changed from 'Team.' to 'vsteam_lib.' this will make it easy when moving types from PowerShell to C#.
 
@@ -867,7 +870,7 @@ Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/82) fro
 
 - removed output of objects returned from API to avoid misleading outputs for consumers
 - added GitRepository object to BuildDefinition
-- had to add a [VSTeamProjectCache]::timestamp = -1 to VSTeamAccount constructor after experiencing blocking with New-PSDrive -Name V -PSProvider SHiPS -Root 'VSTeam#VSTeamAccount' -Verbose; Get-VSTeamBuildDefinition -ProjectName someProject
+- had to add a \[VSTeamProjectCache\]::timestamp = -1 to VSTeamAccount constructor after experiencing blocking with New-PSDrive -Name V -PSProvider SHiPS -Root 'VSTeam#VSTeamAccount' -Verbose; Get-VSTeamBuildDefinition -ProjectName someProject
 
 ## 4.0.1
 
@@ -1249,8 +1252,8 @@ Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/8) from
 Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/6)from [Michel Perfetti](https://github.com/miiitch) which included the following:
 
 - Added serviceEndpoint parameters to Add-VSTeamAzureRMServiceEndpoint cmdlet: if the serviceEndPoint parameters are not specified, the Automatic mode is used
-- The \_trackProgress function was changed too to reflect the return code of the api [endpoints](https://www.visualstudio.com/docs/integrate/api/endpoints/endpoints?WT.mc_id=-github-dbrown)
-- The URL in the payload changed to [https://management.azure.com](https://management.azure.com)
+- The \_trackProgress function was changed too to reflect the return code of the api endpoints
+- The URL in the payload changed to https://management.azure.com
 
 ## 0.1.19
 

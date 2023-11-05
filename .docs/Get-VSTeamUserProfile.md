@@ -28,7 +28,7 @@ $myProfile = Get-VSTeamUserProfile -MyProfile
 
 ## PARAMETERS
 
-### -Id
+### Id
 
 Gets the user profile with the given id.
 
@@ -38,7 +38,7 @@ Parameter sets: Id
 Required: true
 ```
 
-### -MyProfile
+### MyProfile
 
 Gets all organizations where the user is the owner.
 

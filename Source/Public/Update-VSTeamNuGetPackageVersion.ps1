@@ -14,7 +14,7 @@ function Update-VSTeamNuGetPackageVersion {
       [string[]] $PackageVersion,
 
       [parameter(Mandatory = $true)]
-      [bool] $isListed,
+      [bool] $IsListed,
 
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [vsteam_lib.ProjectValidateAttribute($false)]
@@ -28,7 +28,7 @@ function Update-VSTeamNuGetPackageVersion {
          if ($Force -or $pscmdlet.ShouldProcess($item, "update version")) {
 
             $obj = @{
-               listed = $isListed
+               listed = $IsListed
             }
 
             $body = $obj | ConvertTo-Json -Compress -Depth 100

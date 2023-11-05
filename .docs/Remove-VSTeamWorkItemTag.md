@@ -26,7 +26,7 @@ This will remove a specific work item tag within the current project
 
 <!-- #include "./params/projectName.md" -->
 
-### NameOrTagId
+### TagIdOrName
 
 Name or ID of the tag to return
 
@@ -37,6 +37,8 @@ Position: named
 Aliases: TagName, TagId
 Parameter Sets: ByIdentifier
 ```
+
+<!-- #include "./params/forcegroup.md" -->
 
 ## INPUTS
 

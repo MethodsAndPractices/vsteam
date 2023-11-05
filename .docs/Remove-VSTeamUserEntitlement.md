@@ -14,16 +14,37 @@
 
 ## EXAMPLES
 
+### Example 1
+```powershell
+Remove-VSTeamUserEntitlement -Id "12345678-abcd-1234-abcd-1234567890ab"
+```
+
+Removes the user entitlement with ID `12345678-abcd-1234-abcd-1234567890ab`.
+
+### Example 2
+```powershell
+Remove-VSTeamUserEntitlement -Email "user1@example.com"
+```
+
+Removes the user entitlement for the user with the email "user1@example.com".
+
+### Example 3
+```powershell
+Remove-VSTeamUserEntitlement -Id "12345678-abcd-1234-abcd-1234567890ab" -Force
+```
+
+Removes the user entitlement with ID `12345678-abcd-1234-abcd-1234567890ab` and forces the removal without any confirmation prompts.
+
 ## PARAMETERS
 
-### UserId
+### Id
 
 The id of the user to remove.
 
 ```yaml
 Type: String
 Parameter Sets: ByID
-Aliases: name
+Aliases: UserId
 Required: True
 Accept pipeline input: true (ByPropertyName)
 ```
