@@ -163,19 +163,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Download PS module artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4.1.7
         with:
           name: module
           path: ./module
 
       - name: Download nuget package artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4.1.7
         with:
           name: VSTeamPackage
           path: ./nuget
 
       - name: Download pipeline scripts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4.1.7
         with:
           name: pipeline-scripts
           path: ./tools

@@ -21,19 +21,19 @@ jobs:
     steps:
 
     - name: Download nuget package artifact
-      uses: actions/download-artifact@v3
+      uses: actions/download-artifact@v4.1.7
       with:
         name: VSTeamPackage
         path: ./module
 
     - name: Download integration tests
-      uses: actions/download-artifact@v3
+      uses: actions/download-artifact@v4.1.7
       with:
         name: test
         path: ./test
 
     - name: Download pipeline scripts
-      uses: actions/download-artifact@v3
+      uses: actions/download-artifact@v4.1.7
       with:
         name: pipeline-scripts
         path: ./tools
