@@ -188,3 +188,17 @@ function _applyTypesToAgentPoolMaintenance {
    param($item)
       $item.PSObject.TypeNames.Insert(0, 'vsteam_lib.AgentPoolMaintenance')
 }
+
+function _applyTypesToWorkItemRelationType {
+   [CmdletBinding()]
+   param ($item)
+
+   $item.PSObject.TypeNames.Insert(0, 'vsteam_lib.WorkItemRelationType')
+}
+
+function _applyTypesToWorkItemRelation {
+   [CmdletBinding()]
+   param ($item)
+
+   $item.PSObject.TypeNames.Insert(0, 'vsteam_lib.WorkItemRelation')
+}

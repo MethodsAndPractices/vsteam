@@ -106,6 +106,14 @@ Type: Hashtable
 Required: False
 ```
 
+### Relations
+Array of vsteam_lib.WorkItemRelation that describes the relations to be added, removed or updated in/from the work item
+
+```yaml
+Type: PSCustomObject[]
+Required: False
+```
+
 <!-- #include "./params/forcegroup.md" -->
 
 ## INPUTS
@@ -125,3 +133,5 @@ Any of the basic work item parameters defined in this method, will cause an exce
 <!-- #include "./common/prerequisites.md" -->
 
 ## RELATED LINKS
+
+[New-VSTeamWorkItemRelation](New-VSTeamWorkItemRelation.md)

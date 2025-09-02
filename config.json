@@ -128,7 +128,9 @@
          "vsteam_lib.Build.ListView.ps1xml",
          "vsteam_lib.ResourceArea.TableView.ps1xml",
          "vsteam_lib.PullRequest.TableView.ps1xml",
-         "vsteam_lib.Policy.TableView.ps1xml"
+         "vsteam_lib.Policy.TableView.ps1xml",
+         "vsteam_lib.WorkItemRelationType.TableView.ps1xml",
+         "vsteam_lib.WorkItemRelation.TableView.ps1xml"
       ]
    }
 }
